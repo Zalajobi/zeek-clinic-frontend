@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {axiosPostRequestNoAuth} from "../../lib/axios";
 import toast from 'react-hot-toast';
+import {CreateUserInput} from "../../types/superadmin/formTypes";
 
 export const useSuperadminCreateUser = () => {
   const [email, setEmail] = useState('Johndoe@gmail.com');
@@ -60,19 +61,8 @@ export const useSuperadminCreateUser = () => {
 
   const onUpdateEmail = (value:string) => setEmail(value)
 
-  const handleLogin = async () => {
-    const response = await axiosPostRequestNoAuth('/account/admin/login', {
-      email,
-      password
-    })
-
-    if (response?.success) {
-      toast.success(response?.message);
-    } else {
-      toast.error(response?.message)
-    }
-
-    console.log(response)
+  const handleCreateAdmin = async (data:CreateUserInput) => {
+    console.log(data)
   }
 
   return {
@@ -80,10 +70,10 @@ export const useSuperadminCreateUser = () => {
     firstName,
     email,
 
-    handleLogin,
     onUpdateEmail,
     onUpdateFirstName,
     onUpdateLastName,
+    handleCreateAdmin,
   }
 }
 
