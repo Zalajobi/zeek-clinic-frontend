@@ -1,12 +1,16 @@
-import React from "react";
+import React from 'react'
+import {useAdminChangePassword} from "../../../hooks/admin/useAdminChangePassword";
 import Text from "../../../components/global/Text";
-import {useAdminForgotPassword} from "../../../hooks/admin/useAdminForgotPassword";
 import TextInputLabel from "../../../components/inputs/TextInputLabel";
 import {Button} from "flowbite-react";
 import {ToasterConfig} from "../../../components/global/Toast";
 
-const ForgotPassword = () => {
-  const { setEmail, resetPassword } = useAdminForgotPassword()
+const ChangePassword = () => {
+  const {
+    onUpdateNewPassword,
+    onUpdateVerifyPassword,
+    handlePasswordSubmit,
+  } = useAdminChangePassword()
 
   return (
     <React.Fragment>
@@ -23,17 +27,28 @@ const ForgotPassword = () => {
               </div>
 
               <TextInputLabel
-                forItem={`email`}
-                labelText={`Email`}
-                type={`email`}
-                id={`email`}
-                handleChange={(e) => setEmail(e?.target?.value)}
+                forItem={`newPassword`}
+                labelText={`Enter Password`}
+                type={`password`}
+                id={`newPassword`}
+                handleChange={(e) => onUpdateNewPassword(e?.target?.value)}
                 required={true}
-                inputPlaceholder={`JohnDoe@gmail.com`}
+                inputPlaceholder={`********`}
                 inputClassName={`mt-2`}
               />
 
-              <Button onClick={resetPassword} className={`my-4`}>Reset Password</Button>
+              <TextInputLabel
+                forItem={`verifyPassword`}
+                labelText={`Verify Password`}
+                type={`password`}
+                id={`verifyPassword`}
+                handleChange={(e) => onUpdateVerifyPassword(e?.target?.value)}
+                required={true}
+                inputPlaceholder={`********`}
+                inputClassName={`mt-2`}
+              />
+
+              <Button onClick={handlePasswordSubmit} className={`my-4`}>Change Password</Button>
             </div>
           </div>
         </div>
@@ -44,4 +59,4 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword;
+export default ChangePassword

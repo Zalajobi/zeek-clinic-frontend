@@ -11,6 +11,7 @@ import AddProvider from "./pages/admin/addProvider";
 import AdminLayout from "./layout/AdminLayout";
 import AdminLogin from "./pages/admin/auth/AdminLogin";
 import ForgotPassword from "./pages/admin/auth/ForgotPassword";
+import ChangePassword from "./pages/admin/auth/ChangePassword";
 // import HomePage from "./pages/HomePage";
 
 const root = ReactDOM.createRoot(
@@ -29,13 +30,18 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/admin/auth/login',
+    path: '/admin/login',
     element: <AdminLogin/>
   },
 
   {
-    path: '/admin/auth/forgot-password',
+    path: '/admin/forgot-password',
     element: <ForgotPassword/>
+  },
+
+  {
+    path: '/admin/change-password',
+    element: <ChangePassword/>
   },
 
   {

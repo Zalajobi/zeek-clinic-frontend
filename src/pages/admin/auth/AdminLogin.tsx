@@ -70,7 +70,7 @@ const AdminLogin = () => {
                 <CheckBox checked={rememberMe} click={() => setRememberMe(!rememberMe)}/>
 
                 <div className={`flex justify-end`}>
-                  <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/auth/forgot-password">forgot password</a>
+                  <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/forgot-password">forgot password</a>
                 </div>
               </div>
 
