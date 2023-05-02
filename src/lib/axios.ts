@@ -15,3 +15,15 @@ export const axiosPostRequestNoAuth = async (url:string, data:any) => {
 
   return request.data
 }
+
+export const axiosPutRequestNoAuth = async (url:string, data:any) => {
+  const request = await instance.put(url, data)
+
+  return request.data
+}
+
+export const axiosGetRequestNoAuth = async (url:string) => {
+  const request = await instance.get(url)
+
+  return request.data
+}
