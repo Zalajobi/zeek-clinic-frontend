@@ -7,11 +7,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import AddProvider from "./pages/admin/addProvider";
-import AdminLayout from "./layout/AdminLayout";
+// import AddProvider from "./pages/admin/addProvider";
+// import AdminLayout from "./layout/AdminLayout";
 import AdminLogin from "./pages/admin/auth/AdminLogin";
 import ForgotPassword from "./pages/admin/auth/ForgotPassword";
 import ChangePassword from "./pages/admin/auth/ChangePassword";
+import AdminSignup from "./pages/admin/auth/AdminSignup";
+import CreateNewUser from "./pages/superadmin/CreateNewUser";
 // import HomePage from "./pages/HomePage";
 
 const root = ReactDOM.createRoot(
@@ -25,36 +27,58 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/admin/provider/add",
-    element: <AddProvider/>
-  },
-
-  {
-    path: '/admin/login',
-    element: <AdminLogin/>
-  },
-
-  {
-    path: '/admin/forgot-password',
-    element: <ForgotPassword/>
-  },
-
-  {
-    path: '/admin/change-password',
-    element: <ChangePassword/>
-  },
-
-  {
-    path: '/admin/dashboard',
-    element: <AdminLayout />,
+    path: '/admin',
     children: [
-      { element: <Navigate to="/" />, index: true },
-      // { path: 'app', element: <DashboardAppPage /> },
-      // { path: 'user', element: <UserPage /> },
-      // { path: 'products', element: <ProductsPage /> },
-      // { path: 'blog', element: <BlogPage /> },
-    ],
+      {
+        path: '/admin/login',
+        element: <AdminLogin/>
+      },
+
+      {
+        path: '/admin/signup',
+        element: <AdminSignup/>
+      },
+
+      {
+        path: '/admin/forgot-password',
+        element: <ForgotPassword/>
+      },
+
+      {
+        path: '/admin/change-password',
+        element: <ChangePassword/>
+      },
+    ]
   },
+
+  {
+    path: '/superadmin',
+    children: [
+      {
+        path: '/superadmin/create/new_admin',
+        element: <CreateNewUser/>
+      },
+    ]
+  },
+
+  // {
+  //   path: "/admin/provider/add",
+  //   element: <AddProvider/>
+  // },
+  //
+  // {
+  //   path: '/admin/dashboard',
+  //   element: <AdminLayout />,
+  //   children: [
+  //     { element: <Navigate to="/" />, index: true },
+  //     // { path: 'app', element: <DashboardAppPage /> },
+  //     // { path: 'user', element: <UserPage /> },
+  //     // { path: 'products', element: <ProductsPage /> },
+  //     // { path: 'blog', element: <BlogPage /> },
+  //   ],
+  // },
+
+
 ]);
 root.render(
   <React.StrictMode>

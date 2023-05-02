@@ -23,7 +23,7 @@ const AdminLogin = () => {
               <div className="flex flex-row w-full">
                 <Text text={`Don't have an account`} weight={500} size={"sm"} className={`text-[#6B7280] dark:text-white mr-2`}/>
 
-                <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/provider/add">Signup</a>
+                <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/signup">Signup</a>
               </div>
 
               <div className="grid grid-cols-2 gap-4 my-3">
