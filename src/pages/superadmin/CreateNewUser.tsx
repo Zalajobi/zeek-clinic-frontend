@@ -4,12 +4,15 @@ import Text from "../../components/global/Text";
 import {Button, Label, TextInput} from "flowbite-react";
 import LoginImage from "../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../components/global/Toast";
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { CreateUserInput } from '../../types/superadmin/formTypes';
-import * as yup from 'yup'
+import {CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
 
 const CreateNewUser = () => {
-  const { register, handleSubmit } = useForm<CreateUserInput>();
+  // const { register, handleSubmit } = useForm<CreateUserInput>();
+  const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
+    resolver: yupResolver(CreateUserInputSchema)
+  });
 
   const {
     // Values
@@ -48,6 +51,8 @@ const CreateNewUser = () => {
                     helperText={firstName?.length === 0 && <React.Fragment><span className="font-medium">Alright!</span>{' '}Username available!</React.Fragment>}
                     {...register("firstName")}
                   />
+
+                  <p>{errors.firstName?.message}</p>
                 </div>
 
                 <div>
