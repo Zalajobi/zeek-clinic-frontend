@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import {AllCountries, AllStatesAndCities, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
 
 const CreateNewUser = () => {
-  // const { register, handleSubmit } = useForm<CreateUserInput>();
   const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
     resolver: yupResolver(CreateUserInputSchema)
   });
@@ -20,6 +19,8 @@ const CreateNewUser = () => {
     phoneCode,
     allCountryStates,
     allStateCities,
+    allDepartments,
+    allRoles,
 
     // Functions
     handleCreateAdmin,
@@ -28,13 +29,11 @@ const CreateNewUser = () => {
     onUpdateCity,
   } = useSuperadminCreateAdminUser()
 
-  // console.log(watch("country"))
-
   return (
     <React.Fragment>
       <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
-        <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-20">
-          <form className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]" onSubmit={handleSubmit(handleCreateAdmin)}>
+        <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-cols-1 md:flex md:flex-row gap-4 p-20">
+          <form className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37] m-10" onSubmit={handleSubmit(handleCreateAdmin)}>
             <div className="flex flex-col w-full">
               <Text text={`Welcome back`} className={`text-[#111928] dark:text-white mb-4`} size="2xl" weight={700}/>
 
@@ -116,7 +115,6 @@ const CreateNewUser = () => {
                     {...register("username")}
                   />
                 </div>
-
               </div>
 
               {/*Email*/}
@@ -139,6 +137,111 @@ const CreateNewUser = () => {
                 />
               </div>
 
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
+                {/*Gender*/}
+                <div id="select_gender">
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="select_gender"
+                      value="Gender"
+                      color={errors.gender?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <Select
+                    id="state"
+                    required={false}
+                    helperText={<React.Fragment><span className="font-medium">{errors.gender?.message}</span></React.Fragment>}
+                    {...register("gender")}
+                    color={errors.gender?.message ? 'failure' : 'gray'}
+                  >
+                    <option>Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+
+                  </Select>
+                </div>
+
+                {/*DOB*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="dob"
+                      value="Date of birth"
+                      color={errors.dob?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="dob"
+                    required={false}
+                    type="date"
+                    color={errors.dob?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.dob?.message}</span></React.Fragment>}
+                    {...register("dob")}
+                  />
+                </div>
+
+                {/*Role*/}
+                <div id="select_role">
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="role"
+                      value="Select Role"
+                      color={errors.role?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <Select
+                    id="role"
+                    required={false}
+                    helperText={<React.Fragment><span className="font-medium">{errors.role?.message}</span></React.Fragment>}
+                    {...register("role")}
+                    color={errors.role?.message ? 'failure' : 'gray'}
+                  >
+                    <option>
+                      Select Role
+                    </option>
+                    {allRoles?.map((item:any, idx:number) => {
+                      return (
+                        <option key={idx}>
+                          {item?.replaceAll('_', ' ')}
+                        </option>
+                      )
+                    })}
+                  </Select>
+                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.role?.message}</p>
+                </div>
+
+                {/*Department*/}
+                <div id="select_dept">
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="select_dept"
+                      value="Select Department"
+                      color={errors.department?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <Select
+                    id="state"
+                    required={false}
+                    helperText={<React.Fragment><span className="font-medium">{errors.department?.message}</span></React.Fragment>}
+                    {...register("department")}
+                    color={errors.department?.message ? 'failure' : 'gray'}
+                  >
+                    <option>
+                      Select Department
+                    </option>
+                    {allDepartments?.map((item:any, idx:number) => {
+                      return (
+                        <option key={idx}>
+                          {item?.replaceAll('_', ' ')}
+                        </option>
+                      )
+                    })}
+                  </Select>
+                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.department?.message}</p>
+                </div>
+              </div>
+
+              {/*Address*/}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
                 <div id="select_country">
                   <div className="mb-2 block">
@@ -168,7 +271,6 @@ const CreateNewUser = () => {
                       )
                     })}
                   </Select>
-                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.country?.message}</p>
                 </div>
 
                 <div id="select_state">
@@ -199,7 +301,6 @@ const CreateNewUser = () => {
                       )
                     })}
                   </Select>
-                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.state?.message}</p>
                 </div>
 
                 {allStateCities?.length !== 0 ? (
@@ -231,7 +332,6 @@ const CreateNewUser = () => {
                         )
                       })}
                     </Select>
-                    <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.city?.message}</p>
                   </div>
                 ) : (
                   <div>
@@ -314,9 +414,9 @@ const CreateNewUser = () => {
             </div>
           </form>
 
-          <div className="w-full flex flex-row justify-center">
-            <img src={LoginImage} alt={`Login Page`}/>
-          </div>
+          {/*<div className="w-full flex flex-row justify-center md:w-[30%]">*/}
+          {/*  <img src={LoginImage} alt={`Login Page`}/>*/}
+          {/*</div>*/}
         </div>
       </div>
 

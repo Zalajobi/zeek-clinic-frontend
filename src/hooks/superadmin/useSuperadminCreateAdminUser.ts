@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
 import { Country, State, City} from 'country-state-city'
+import {axiosGetRequestNoAuth} from "../../lib/axios";
 
 export const useSuperadminCreateAdminUser = () => {
-    const [email, setEmail] = useState('Johndoe@gmail.com');
-  const [password, setPassword] = useState(``);
+  // const [email, setEmail] = useState('Johndoe@gmail.com');
+  // const [password, setPassword] = useState(``);
   // const [username, setUsername] = useState('');
   // const [firstName, setFirstName] = useState('');
   // const [phoneNumber, setPhoneNumber] = useState('');
@@ -13,24 +14,47 @@ export const useSuperadminCreateAdminUser = () => {
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
-  const [zipCode, setZipCode] = useState('');
-  const [role, setRole] = useState('');
-  const [gender, setGender] = useState('');
-  const [dob, setDob] = useState('');
-  const [title, setTitle] = useState('');
-  const [bio, setBio] = useState('');
-  const [address, setAddress] = useState('');
-  const [alternateAddress, setAlternateAddress] = useState('');
+  // const [zipCode, setZipCode] = useState('');
+  // const [role, setRole] = useState('');
+  // const [gender, setGender] = useState('');
+  // const [dob, setDob] = useState('');
+  // const [title, setTitle] = useState('');
+  // const [bio, setBio] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [alternateAddress, setAlternateAddress] = useState('');
   const [countryCode, setCountryCode] = useState('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
   const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
   const [allStateCities, setAllStateCities] = useState<AllStatesAndCities[] | null>(null);
+  const [allDepartments, setAllDepartments] = useState<string[]>([]);
+  const [allRoles, setAllRoles] = useState<string[]>([]);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
+    superadminGetRolesAndDepartments().then(r => console.log(`HELLO THERE`))
   }, []);
+
+
+  const superadminGetRolesAndDepartments = async () => {
+    const response = await axiosGetRequestNoAuth('/account/super-admin/create/roles_and_departments')
+    const allDepartments:string[] = []
+    const allRoles:string[] = []
+
+    if (response.success) {
+      for (const dept in response?.data?.department) {
+        allDepartments.push(dept)
+      }
+
+      for (const role in response?.data?.role)  {
+        allRoles.push(role)
+      }
+    }
+
+    setAllDepartments(allDepartments)
+    setAllRoles(allRoles)
+  }
 
 
     // const onUpdateCountryCode = (value:string) => setCountryCode(value)
@@ -62,7 +86,6 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateState = (value:string) => {
     setAllStateCities(City.getCitiesOfState(countryCode, value) as AllStatesAndCities[])
-    console.log(City.getCitiesOfState(countryCode, value))
     setState(value)
   }
 
@@ -93,6 +116,8 @@ export const useSuperadminCreateAdminUser = () => {
     phoneCode,
     allCountryStates,
     allStateCities,
+    allDepartments,
+    allRoles,
 
     // onUpdateEmail,
     // onUpdateFirstName,
