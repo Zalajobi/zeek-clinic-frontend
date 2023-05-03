@@ -102,26 +102,6 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="email"
-                      value="Email"
-                      color={errors.email?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="email"
-                    placeholder="john_doe@gmail.com"
-                    required={false}
-                    type="email"
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
-                    {...register("email")}
-                  />
-                </div>
-
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
                       htmlFor="username"
                       value="Username"
                       color={errors.username?.message ? 'failure' : 'gray'}
@@ -137,6 +117,29 @@ const CreateNewUser = () => {
                   />
                 </div>
 
+              </div>
+
+              {/*Email*/}
+              <div>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="email"
+                    value="Email"
+                    color={errors.email?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="email"
+                  placeholder="john_doe@gmail.com"
+                  required={false}
+                  type="email"
+                  color={errors.email?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                  {...register("email")}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
                 <div id="select_country">
                   <div className="mb-2 block">
                     <Label
@@ -269,7 +272,6 @@ const CreateNewUser = () => {
                     {...register("phoneNumber")}
                   />
                 </div>
-
               </div>
 
               <div className="flex flex-row w-full my-4 items-center">

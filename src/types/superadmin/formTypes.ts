@@ -36,9 +36,10 @@ export type CreateUserInput = {
   username: string
   country: string
   state: string
-  phoneNumber: string
   city: string
-  // zipCode: string
+  phoneNumber: string
+  countryCode?: string
+  zipCode: string
   // role: string
   // gender: string
   // dob: string
@@ -46,7 +47,6 @@ export type CreateUserInput = {
   // bio?: string
   // address: string
   // alternateAddress?: string
-  // countryCode?: string
 }
 
 export const CreateUserInputSchema = yup.object({
@@ -59,8 +59,8 @@ export const CreateUserInputSchema = yup.object({
   state: yup.string().required('State is required'),
   city: yup.string().required('Choose the city you reside in'),
   phoneNumber: yup.number().required('Phone number is required'),
-  // countryCode: yup.string().optional(),
-  // zipCode: yup.string().required('Zip code is required'),
+  countryCode: yup.string().optional(),
+  zipCode: yup.string().required('Zip code is required'),
   // role: yup.string().required('User role must be selected'),
   // gender: yup.string().required('Please choose a valid gender'),
   // dob: yup.string().required('Date of birth is required'),

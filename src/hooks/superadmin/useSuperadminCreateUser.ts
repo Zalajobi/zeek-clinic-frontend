@@ -56,7 +56,8 @@ export const useSuperadminCreateUser = () => {
     const countryInfo = <AllCountries>Country.getCountryByCode(value)
     setAllCountryStates(State.getStatesOfCountry(value) as AllStatesAndCities[])
     setCountry(countryInfo?.name)
-    setPhoneCode(countryInfo?.flag)
+    // setPhoneCode(countryInfo?.flag)
+    setPhoneCode(countryInfo?.phonecode)
     setCountryCode(countryInfo?.isoCode)
   }
 
