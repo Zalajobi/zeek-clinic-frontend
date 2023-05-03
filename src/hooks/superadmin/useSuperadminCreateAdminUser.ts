@@ -4,24 +4,9 @@ import { Country, State, City} from 'country-state-city'
 import {axiosGetRequestNoAuth} from "../../lib/axios";
 
 export const useSuperadminCreateAdminUser = () => {
-  // const [email, setEmail] = useState('Johndoe@gmail.com');
-  // const [password, setPassword] = useState(``);
-  // const [username, setUsername] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [phoneNumber, setPhoneNumber] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [middleName, setMiddleName] = useState('');
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
-  // const [zipCode, setZipCode] = useState('');
-  // const [role, setRole] = useState('');
-  // const [gender, setGender] = useState('');
-  // const [dob, setDob] = useState('');
-  // const [title, setTitle] = useState('');
-  // const [bio, setBio] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [alternateAddress, setAlternateAddress] = useState('');
   const [countryCode, setCountryCode] = useState('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
@@ -56,30 +41,10 @@ export const useSuperadminCreateAdminUser = () => {
     setAllRoles(allRoles)
   }
 
-
-    // const onUpdateCountryCode = (value:string) => setCountryCode(value)
-  //
-  // const onUpdateAlternateAddress = (value:string) => setAlternateAddress(value)
-  //
-  // const onUpdateAddress = (value:string) => setAddress(value)
-  //
-  // const onUpdateBio = (value:string) => setBio(value)
-  //
-  // const onUpdateTitle = (value:string) => setTitle(value)
-  //
-  // const onUpdateDob = (value:string) => setDob(value)
-  //
-  // const onUpdateGender = (value:string) => setGender(value)
-  //
-  // const onUpdateRole = (value:string) => setRole(value)
-  //
-  // const onUpdateZipCode = (value:string) => setZipCode(value)
-
   const onUpdateCountry = (value:string) => {
-    const countryInfo = <AllCountries>Country.getCountryByCode(value)
+    const countryInfo = Country.getCountryByCode(value) as AllCountries
     setAllCountryStates(State.getStatesOfCountry(value) as AllStatesAndCities[])
     setCountry(countryInfo?.name)
-    // setPhoneCode(countryInfo?.flag)
     setPhoneCode(countryInfo?.phonecode)
     setCountryCode(countryInfo?.isoCode)
   }
@@ -91,23 +56,16 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateCity = (value:string) => setCity(value ?? 'None')
 
-  // const onUpdateMiddleName = (value:string) => setMiddleName(value)
-  //
-  // const onUpdateLastName = (value:string) => setLastName(value)
-
-  // const onUpdatePhoneNumber = (value:string) => setPhoneNumber(value)
-
-  // const onUpdateFirstName = (value:string) => setFirstName(value)
-  //
-  // const onUpdateUsername = (value:string) => setUsername(value)
-  //
-  // const onUpdatePassword = (value:string) => setPassword(value)
-  //
-  // const onUpdateEmail = (value:string) => setEmail(value)
-
   const handleCreateAdmin = async (data:CreateUserInput) => {
+    const adminData = {
+      ...data,
+      country,
+      city,
+      state,
+      countryCode
+    }
     console.log("SUBMIT FORM HERE")
-    console.log(data)
+    console.log(adminData)
   }
 
   return {
@@ -119,9 +77,6 @@ export const useSuperadminCreateAdminUser = () => {
     allDepartments,
     allRoles,
 
-    // onUpdateEmail,
-    // onUpdateFirstName,
-    // onUpdateLastName,
     handleCreateAdmin,
     onUpdateCountry,
     onUpdateState,

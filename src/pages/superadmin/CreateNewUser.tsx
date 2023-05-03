@@ -241,24 +241,47 @@ const CreateNewUser = () => {
                 </div>
               </div>
 
-              {/*Email*/}
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="email"
-                    value="Email"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
+                {/*Email*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="email"
+                      value="Email"
+                      color={errors.email?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="email"
+                    placeholder="john_doe@gmail.com"
+                    required={false}
+                    type="email"
                     color={errors.email?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                    {...register("email")}
                   />
                 </div>
-                <TextInput
-                  id="email"
-                  placeholder="john_doe@gmail.com"
-                  required={false}
-                  type="email"
-                  color={errors.email?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
-                  {...register("email")}
-                />
+
+                {/*Short Bio*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="bio"
+                      value="Short Bio"
+                      color={errors.bio?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="bio"
+                    placeholder="Short Biography"
+                    required={false}
+                    type="text"
+                    color={errors.bio?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.bio?.message}</span></React.Fragment>}
+                    sizing={`lg`}
+                    {...register("bio")}
+                  />
+                </div>
               </div>
 
               {/*Address*/}
