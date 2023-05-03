@@ -1,22 +1,50 @@
 import * as yup from 'yup'
 
+export type AllCountries = {
+  currency: string
+  flag: string
+  isoCode: string
+  latitude: string
+  longitude: string
+  name: string
+  phonecode: string
+  timezones: TimeZones[]
+}
+
+export type AllStates = {
+  name: string
+  isoCode: string
+  countryCode: string
+  latitude: string
+  longitude: string
+}
+
+export type TimeZones = {
+  abbreviation: string
+  gmtOffset: number
+  gmtOffsetName: string
+  tzName:string
+  zoneName: string
+}
+
 export type CreateUserInput = {
   firstName: string
   lastName: string
   middleName: string
   username: string
-  phoneNumber: string
   country: string
   state: string
-  zipCode: string
-  role: string
-  gender: string
-  dob: string
-  title: string
-  bio?: string
-  address: string
-  alternateAddress?: string
-  countryCode?: string
+  phoneNumber: string
+  // city: string
+  // zipCode: string
+  // role: string
+  // gender: string
+  // dob: string
+  // title: string
+  // bio?: string
+  // address: string
+  // alternateAddress?: string
+  // countryCode?: string
 }
 
 export const CreateUserInputSchema = yup.object({
@@ -24,16 +52,17 @@ export const CreateUserInputSchema = yup.object({
   lastName: yup.string().required('Last name is required'),
   middleName: yup.string().optional(),
   username: yup.string().required().min(8, 'Username must be at least 8 characters long'),
-  phoneNumber: yup.string().required('Phone number is required'),
   country: yup.string().required('Choose the country you reside in'),
-  countryCode: yup.string().optional(),
   state: yup.string().required('State is required'),
-  zipCode: yup.string().required('Zip code is required'),
-  role: yup.string().required('User role must be selected'),
-  gender: yup.string().required('Please choose a valid gender'),
-  dob: yup.string().required('Date of birth is required'),
-  title: yup.string().required('User title is required'),
-  bio: yup.string().optional().min(100, 'Bio requires at least 100 characters'),
-  address: yup.string().required('User address is required').min(10, 'Address too short'),
-  alternateAddress: yup.string().optional().min(10, 'Address too short')
+  // city: yup.string().required('Choose the city you reside in'),
+  phoneNumber: yup.string().required('Phone number is required'),
+  // countryCode: yup.string().optional(),
+  // zipCode: yup.string().required('Zip code is required'),
+  // role: yup.string().required('User role must be selected'),
+  // gender: yup.string().required('Please choose a valid gender'),
+  // dob: yup.string().required('Date of birth is required'),
+  // title: yup.string().required('User title is required'),
+  // bio: yup.string().optional().min(100, 'Bio requires at least 100 characters'),
+  // address: yup.string().required('User address is required').min(10, 'Address too short'),
+  // alternateAddress: yup.string().optional().min(10, 'Address too short')
 }).required()

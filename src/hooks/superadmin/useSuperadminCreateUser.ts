@@ -1,7 +1,6 @@
-import {useState} from "react";
-import {axiosPostRequestNoAuth} from "../../lib/axios";
-import toast from 'react-hot-toast';
-import {CreateUserInput} from "../../types/superadmin/formTypes";
+import {useEffect, useState} from "react";
+import {AllCountries, AllStates, CreateUserInput} from "../../types/superadmin/formTypes";
+import { Country, State, City} from 'country-state-city'
 
 export const useSuperadminCreateUser = () => {
   const [email, setEmail] = useState('Johndoe@gmail.com');
@@ -23,57 +22,78 @@ export const useSuperadminCreateUser = () => {
   const [alternateAddress, setAlternateAddress] = useState('');
   const [countryCode, setCountryCode] = useState('');
 
+  const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
+  const [allCountryStates, setAllCountryStates] = useState<AllStates[] | null>(null);
+  const [phoneCode, setPhoneCode] = useState('');
+
+  useEffect(() => {
+    setAllCountries(Country.getAllCountries() as AllCountries[])
+  }, []);
 
 
-  const onUpdateCountryCode = (value:string) => setCountryCode(value)
 
-  const onUpdateAlternateAddress = (value:string) => setAlternateAddress(value)
+  // const onUpdateCountryCode = (value:string) => setCountryCode(value)
+  //
+  // const onUpdateAlternateAddress = (value:string) => setAlternateAddress(value)
+  //
+  // const onUpdateAddress = (value:string) => setAddress(value)
+  //
+  // const onUpdateBio = (value:string) => setBio(value)
+  //
+  // const onUpdateTitle = (value:string) => setTitle(value)
+  //
+  // const onUpdateDob = (value:string) => setDob(value)
+  //
+  // const onUpdateGender = (value:string) => setGender(value)
+  //
+  // const onUpdateRole = (value:string) => setRole(value)
+  //
+  // const onUpdateZipCode = (value:string) => setZipCode(value)
 
-  const onUpdateAddress = (value:string) => setAddress(value)
+  const onUpdateState = (value:string) => {
+    setState(value)
+  }
 
-  const onUpdateBio = (value:string) => setBio(value)
+  const onUpdateCountry = (value:string) => {
+    const countryInfo = <AllCountries>Country.getCountryByCode(value)
+    // setPhoneNumber(phoneNumber.replace(/[(0-9)]/g, countryInfo.phonecode))
+    setCountry(countryInfo?.name)
+    // setPhoneCode(`${countryInfo?.flag} ${countryInfo?.phonecode}`)
+    setPhoneCode(countryInfo?.flag)
+  }
 
-  const onUpdateTitle = (value:string) => setTitle(value)
-
-  const onUpdateDob = (value:string) => setDob(value)
-
-  const onUpdateGender = (value:string) => setGender(value)
-
-  const onUpdateRole = (value:string) => setRole(value)
-
-  const onUpdateZipCode = (value:string) => setZipCode(value)
-
-  const onUpdateState = (value:string) => setState(value)
-
-  const onUpdateCountry = (value:string) => setCountry(value)
-
-  const onUpdateMiddleName = (value:string) => setMiddleName(value)
-
-  const onUpdateLastName = (value:string) => setLastName(value)
+  // const onUpdateMiddleName = (value:string) => setMiddleName(value)
+  //
+  // const onUpdateLastName = (value:string) => setLastName(value)
 
   const onUpdatePhoneNumber = (value:string) => setPhoneNumber(value)
 
-  const onUpdateFirstName = (value:string) => setFirstName(value)
-
-  const onUpdateUsername = (value:string) => setUsername(value)
-
-  const onUpdatePassword = (value:string) => setPassword(value)
-
-  const onUpdateEmail = (value:string) => setEmail(value)
+  // const onUpdateFirstName = (value:string) => setFirstName(value)
+  //
+  // const onUpdateUsername = (value:string) => setUsername(value)
+  //
+  // const onUpdatePassword = (value:string) => setPassword(value)
+  //
+  // const onUpdateEmail = (value:string) => setEmail(value)
 
   const handleCreateAdmin = async (data:CreateUserInput) => {
+    console.log("SUBMIT FORM HERE")
     console.log(data)
   }
 
   return {
     // Values
-    firstName,
-    email,
+    allCountries,
+    phoneNumber,
+    phoneCode,
+    allCountryStates,
 
-    onUpdateEmail,
-    onUpdateFirstName,
-    onUpdateLastName,
+    // onUpdateEmail,
+    // onUpdateFirstName,
+    // onUpdateLastName,
     handleCreateAdmin,
+    onUpdateCountry,
+    onUpdatePhoneNumber,
   }
 }
 
