@@ -29,6 +29,7 @@ export type TimeZones = {
 }
 
 export type CreateUserInput = {
+  email: string
   firstName: string
   lastName: string
   middleName: string
@@ -49,6 +50,7 @@ export type CreateUserInput = {
 }
 
 export const CreateUserInputSchema = yup.object({
+  email: yup.string().required('Email field is required'),
   firstName: yup.string().required('First name is required'),
   lastName: yup.string().required('Last name is required'),
   middleName: yup.string().optional(),
@@ -56,7 +58,7 @@ export const CreateUserInputSchema = yup.object({
   country: yup.string().required('Choose the country you reside in'),
   state: yup.string().required('State is required'),
   city: yup.string().required('Choose the city you reside in'),
-  phoneNumber: yup.string().required('Phone number is required'),
+  phoneNumber: yup.number().required('Phone number is required'),
   // countryCode: yup.string().optional(),
   // zipCode: yup.string().required('Zip code is required'),
   // role: yup.string().required('User role must be selected'),

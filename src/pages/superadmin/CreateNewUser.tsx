@@ -17,7 +17,6 @@ const CreateNewUser = () => {
   const {
     // Values
     allCountries,
-    phoneNumber,
     phoneCode,
     allCountryStates,
     allStateCities,
@@ -25,7 +24,6 @@ const CreateNewUser = () => {
     // Functions
     handleCreateAdmin,
     onUpdateCountry,
-    onUpdatePhoneNumber,
     onUpdateState,
     onUpdateCity,
   } = useSuperadminCreateUser()
@@ -100,6 +98,26 @@ const CreateNewUser = () => {
                     {...register("middleName")}
                   />
                 </div>
+
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="email"
+                      value="Email"
+                      color={errors.email?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="email"
+                    placeholder="john_doe@gmail.com"
+                    required={false}
+                    type="email"
+                    color={errors.email?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                    {...register("email")}
+                  />
+                </div>
+
 
                 <div>
                   <div className="mb-2 block">
@@ -242,15 +260,13 @@ const CreateNewUser = () => {
                   </div>
                   <TextInput
                     id="phoneNumber"
-                    placeholder={phoneNumber}
+                    placeholder={`+234`}
                     required={false}
+                    type="tel"
                     color={errors.phoneNumber?.message ? 'failure' : 'gray'}
-                    // value={phoneNumber}
                     helperText={<React.Fragment><span className="font-medium">{errors.phoneNumber?.message}</span></React.Fragment>}
                     addon={phoneCode}
-                    {...register("phoneNumber", {
-                      onChange: (e) => onUpdatePhoneNumber(e.target.value)
-                    })}
+                    {...register("phoneNumber")}
                   />
                 </div>
 

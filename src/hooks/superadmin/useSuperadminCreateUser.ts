@@ -3,13 +3,13 @@ import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/sup
 import { Country, State, City} from 'country-state-city'
 
 export const useSuperadminCreateUser = () => {
-  const [email, setEmail] = useState('Johndoe@gmail.com');
+  // const [email, setEmail] = useState('Johndoe@gmail.com');
   const [password, setPassword] = useState(``);
-  const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [middleName, setMiddleName] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [phoneNumber, setPhoneNumber] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [middleName, setMiddleName] = useState('');
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
@@ -72,7 +72,7 @@ export const useSuperadminCreateUser = () => {
   //
   // const onUpdateLastName = (value:string) => setLastName(value)
 
-  const onUpdatePhoneNumber = (value:string) => setPhoneNumber(value)
+  // const onUpdatePhoneNumber = (value:string) => setPhoneNumber(value)
 
   // const onUpdateFirstName = (value:string) => setFirstName(value)
   //
@@ -90,7 +90,6 @@ export const useSuperadminCreateUser = () => {
   return {
     // Values
     allCountries,
-    phoneNumber,
     phoneCode,
     allCountryStates,
     allStateCities,
@@ -100,7 +99,6 @@ export const useSuperadminCreateUser = () => {
     // onUpdateLastName,
     handleCreateAdmin,
     onUpdateCountry,
-    onUpdatePhoneNumber,
     onUpdateState,
     onUpdateCity,
   }
