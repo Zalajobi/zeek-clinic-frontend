@@ -256,22 +256,42 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="phoneNumber"
-                      value="Phone Number"
-                      color={errors.phoneNumber?.message ? 'failure' : 'gray'}
+                      htmlFor="zipCode"
+                      value="Zip Code"
+                      color={errors.zipCode?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="phoneNumber"
+                    id="zipCode"
                     placeholder={`+234`}
                     required={false}
-                    type="tel"
-                    color={errors.phoneNumber?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.phoneNumber?.message}</span></React.Fragment>}
-                    addon={phoneCode}
-                    {...register("phoneNumber")}
+                    type="number"
+                    color={errors.zipCode?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.zipCode?.message}</span></React.Fragment>}
+                    {...register("zipCode")}
                   />
                 </div>
+              </div>
+
+              {/*phoneNumber*/}
+              <div>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="phoneNumber"
+                    value="Phone Number"
+                    color={errors.phoneNumber?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="phoneNumber"
+                  placeholder={`+234`}
+                  required={false}
+                  type="tel"
+                  color={errors.phoneNumber?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.phoneNumber?.message}</span></React.Fragment>}
+                  addon={phoneCode}
+                  {...register("phoneNumber")}
+                />
               </div>
 
               <div className="flex flex-row w-full my-4 items-center">
