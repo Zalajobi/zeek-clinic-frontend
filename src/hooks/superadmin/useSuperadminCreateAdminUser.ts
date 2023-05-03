@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
 import { Country, State, City} from 'country-state-city'
-import {axiosGetRequestNoAuth} from "../../lib/axios";
+import {axiosGetRequest} from "../../lib/axios";
 
 export const useSuperadminCreateAdminUser = () => {
   const [country, setCountry] = useState('');
@@ -23,7 +23,7 @@ export const useSuperadminCreateAdminUser = () => {
 
 
   const superadminGetRolesAndDepartments = async () => {
-    const response = await axiosGetRequestNoAuth('/account/super-admin/create/roles_and_departments')
+    const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
     const allDepartments:string[] = []
     const allRoles:string[] = []
 
