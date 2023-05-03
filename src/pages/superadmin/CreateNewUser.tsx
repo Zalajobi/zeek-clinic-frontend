@@ -1,6 +1,6 @@
 import React from 'react'
-import useSuperadminCreateUser from "../../hooks/superadmin/useSuperadminCreateUser";
 import Text from "../../components/global/Text";
+import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
 import {Button, Label, Select, TextInput} from "flowbite-react";
 import LoginImage from "../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../components/global/Toast";
@@ -26,7 +26,7 @@ const CreateNewUser = () => {
     onUpdateCountry,
     onUpdateState,
     onUpdateCity,
-  } = useSuperadminCreateUser()
+  } = useSuperadminCreateAdminUser()
 
   // console.log(watch("country"))
 
@@ -263,7 +263,7 @@ const CreateNewUser = () => {
                   </div>
                   <TextInput
                     id="zipCode"
-                    placeholder={`+234`}
+                    placeholder={`101241`}
                     required={false}
                     type="number"
                     color={errors.zipCode?.message ? 'failure' : 'gray'}
@@ -284,7 +284,7 @@ const CreateNewUser = () => {
                 </div>
                 <TextInput
                   id="phoneNumber"
-                  placeholder={`+234`}
+                  placeholder={`9189011920`}
                   required={false}
                   type="tel"
                   color={errors.phoneNumber?.message ? 'failure' : 'gray'}

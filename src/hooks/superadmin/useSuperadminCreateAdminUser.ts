@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
 import { Country, State, City} from 'country-state-city'
 
-export const useSuperadminCreateUser = () => {
-  // const [email, setEmail] = useState('Johndoe@gmail.com');
+export const useSuperadminCreateAdminUser = () => {
+    const [email, setEmail] = useState('Johndoe@gmail.com');
   const [password, setPassword] = useState(``);
   // const [username, setUsername] = useState('');
   // const [firstName, setFirstName] = useState('');
@@ -33,8 +33,7 @@ export const useSuperadminCreateUser = () => {
   }, []);
 
 
-
-  // const onUpdateCountryCode = (value:string) => setCountryCode(value)
+    // const onUpdateCountryCode = (value:string) => setCountryCode(value)
   //
   // const onUpdateAlternateAddress = (value:string) => setAlternateAddress(value)
   //
@@ -104,5 +103,3 @@ export const useSuperadminCreateUser = () => {
     onUpdateCity,
   }
 }
-
-export default useSuperadminCreateUser;
