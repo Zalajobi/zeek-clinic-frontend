@@ -2,7 +2,6 @@ import React from 'react'
 import Text from "../../components/global/Text";
 import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
 import {Button, Label, Select, TextInput} from "flowbite-react";
-import LoginImage from "../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../components/global/Toast";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
@@ -43,7 +42,27 @@ const CreateNewUser = () => {
                 <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/signup">Signup</a>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-3">
+                {/*Title*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="title"
+                      value="Title"
+                      color={errors.title?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="title"
+                    placeholder="Dr."
+                    required={false}
+                    color={errors.title?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.title?.message}</span></React.Fragment>}
+                    {...register("title")}
+                  />
+                </div>
+
+                {/*First Name*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
@@ -62,6 +81,7 @@ const CreateNewUser = () => {
                   />
                 </div>
 
+                {/*Last Name*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
@@ -80,6 +100,7 @@ const CreateNewUser = () => {
                   />
                 </div>
 
+                {/*Middle name*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
@@ -98,6 +119,7 @@ const CreateNewUser = () => {
                   />
                 </div>
 
+                {/*Username*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
@@ -115,29 +137,7 @@ const CreateNewUser = () => {
                     {...register("username")}
                   />
                 </div>
-              </div>
 
-              {/*Email*/}
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="email"
-                    value="Email"
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                  />
-                </div>
-                <TextInput
-                  id="email"
-                  placeholder="john_doe@gmail.com"
-                  required={false}
-                  type="email"
-                  color={errors.email?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
-                  {...register("email")}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
                 {/*Gender*/}
                 <div id="select_gender">
                   <div className="mb-2 block">
@@ -241,8 +241,29 @@ const CreateNewUser = () => {
                 </div>
               </div>
 
+              {/*Email*/}
+              <div>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="email"
+                    value="Email"
+                    color={errors.email?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="email"
+                  placeholder="john_doe@gmail.com"
+                  required={false}
+                  type="email"
+                  color={errors.email?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                  {...register("email")}
+                />
+              </div>
+
               {/*Address*/}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-3">
+                {/*Country*/}
                 <div id="select_country">
                   <div className="mb-2 block">
                     <Label
@@ -273,6 +294,7 @@ const CreateNewUser = () => {
                   </Select>
                 </div>
 
+                {/*State*/}
                 <div id="select_state">
                   <div className="mb-2 block">
                     <Label
@@ -303,6 +325,7 @@ const CreateNewUser = () => {
                   </Select>
                 </div>
 
+                {/*City*/}
                 {allStateCities?.length !== 0 ? (
                   <div id="select_city">
                     <div className="mb-2 block">
@@ -353,6 +376,43 @@ const CreateNewUser = () => {
                   </div>
                 )}
 
+                {/*Address*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="address"
+                      value="Address"
+                      color={errors.username?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="address"
+                    required={false}
+                    color={errors.address?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.address?.message}</span></React.Fragment>}
+                    {...register("address")}
+                  />
+                </div>
+
+                {/*AAlternate Address*/}
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="alternateAddress"
+                      value="Alternative Address"
+                      color={errors.alternateAddress?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="alternateAddress"
+                    required={false}
+                    color={errors.alternateAddress?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.alternateAddress?.message}</span></React.Fragment>}
+                    {...register("alternateAddress")}
+                  />
+                </div>
+
+                {/*Zipcode*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
@@ -372,6 +432,7 @@ const CreateNewUser = () => {
                   />
                 </div>
               </div>
+
 
               {/*phoneNumber*/}
               <div>
@@ -394,29 +455,9 @@ const CreateNewUser = () => {
                 />
               </div>
 
-              <div className="flex flex-row w-full my-4 items-center">
-                <div className="w-[45%] h-px bg-[#E5E7EB]"/>
-
-                <Text text={`or`} className={`w-10 text-center text-[#6B7280] dark:text-white`} size={`lg`}/>
-
-                <div className="w-[45%] h-px bg-[#E5E7EB]"/>
-              </div>
-
-              {/*<div className={`w-full grid grid-cols-2 gap-4 items-center my-2`}>*/}
-              {/*  <CheckBox checked={rememberMe} click={() => setRememberMe(!rememberMe)}/>*/}
-
-              {/*  <div className={`flex justify-end`}>*/}
-              {/*    <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/forgot-password">forgot password</a>*/}
-              {/*  </div>*/}
-              {/*</div>*/}
-
               <Button type={`submit`} onClick={handleSubmit(handleCreateAdmin)} className={`my-4`}>Submit</Button>
             </div>
           </form>
-
-          {/*<div className="w-full flex flex-row justify-center md:w-[30%]">*/}
-          {/*  <img src={LoginImage} alt={`Login Page`}/>*/}
-          {/*</div>*/}
         </div>
       </div>
 
