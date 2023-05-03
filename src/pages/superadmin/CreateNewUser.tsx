@@ -181,6 +181,57 @@ const CreateNewUser = () => {
                   <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.state?.message}</p>
                 </div>
 
+                {allStateCities?.length !== 0 ? (
+                  <div id="select_city">
+                    <div className="mb-2 block">
+                      <Label
+                        htmlFor="countries"
+                        value="City"
+                        color={errors.city?.message ? 'failure' : 'gray'}
+                      />
+                    </div>
+                    <Select
+                      id="state"
+                      required={false}
+                      helperText={<React.Fragment><span className="font-medium">{errors.city?.message}</span></React.Fragment>}
+                      {...register("city", {
+                        onChange: (e) => onUpdateCity(e?.target?.value)
+                      })}
+                      color={errors.state?.message ? 'failure' : 'gray'}
+                    >
+                      <option>
+                        Select City
+                      </option>
+                      {allStateCities?.map((item:AllStatesAndCities, idx:number) => {
+                        return (
+                          <option value={item?.name} key={idx}>
+                            {item?.name}
+                          </option>
+                        )
+                      })}
+                    </Select>
+                    <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.city?.message}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="mb-2 block">
+                      <Label
+                        htmlFor="city"
+                        value="City"
+                        color={errors.city?.message ? 'failure' : 'gray'}
+                      />
+                    </div>
+                    <TextInput
+                      id="city"
+                      placeholder="city"
+                      required={false}
+                      color={errors.username?.message ? 'failure' : 'gray'}
+                      helperText={<React.Fragment><span className="font-medium">{errors.city?.message}</span></React.Fragment>}
+                      {...register("city")}
+                    />
+                  </div>
+                )}
+
                 <div>
                   <div className="mb-2 block">
                     <Label
