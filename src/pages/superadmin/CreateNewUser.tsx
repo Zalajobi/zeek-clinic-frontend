@@ -6,7 +6,7 @@ import LoginImage from "../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../components/global/Toast";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import {AllCountries, AllStates, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
+import {AllCountries, AllStatesAndCities, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
 
 const CreateNewUser = () => {
   // const { register, handleSubmit } = useForm<CreateUserInput>();
@@ -20,12 +20,14 @@ const CreateNewUser = () => {
     phoneNumber,
     phoneCode,
     allCountryStates,
+    allStateCities,
 
     // Functions
     handleCreateAdmin,
     onUpdateCountry,
     onUpdatePhoneNumber,
     onUpdateState,
+    onUpdateCity,
   } = useSuperadminCreateUser()
 
   // console.log(watch("country"))
@@ -168,7 +170,7 @@ const CreateNewUser = () => {
                     <option>
                       Select State
                     </option>
-                    {allCountryStates?.map((item:AllStates, idx:number) => {
+                    {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
                       return (
                         <option value={item?.isoCode} key={idx}>
                           {item?.name}

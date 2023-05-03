@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {AllCountries, AllStates, CreateUserInput} from "../../types/superadmin/formTypes";
+import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
 import { Country, State, City} from 'country-state-city'
 
 export const useSuperadminCreateUser = () => {
@@ -12,6 +12,7 @@ export const useSuperadminCreateUser = () => {
   const [middleName, setMiddleName] = useState('');
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
+  const [city, setCity] = useState('None');
   const [zipCode, setZipCode] = useState('');
   const [role, setRole] = useState('');
   const [gender, setGender] = useState('');
@@ -23,7 +24,8 @@ export const useSuperadminCreateUser = () => {
   const [countryCode, setCountryCode] = useState('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
-  const [allCountryStates, setAllCountryStates] = useState<AllStates[] | null>(null);
+  const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
+  const [allStateCities, setAllStateCities] = useState<AllStatesAndCities[] | null>(null);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
@@ -50,17 +52,20 @@ export const useSuperadminCreateUser = () => {
   //
   // const onUpdateZipCode = (value:string) => setZipCode(value)
 
+  const onUpdateCountry = (value:string) => {
+    const countryInfo = <AllCountries>Country.getCountryByCode(value)
+    setAllCountryStates(State.getStatesOfCountry(value) as AllStatesAndCities[])
+    setCountry(countryInfo?.name)
+    setPhoneCode(countryInfo?.flag)
+    setCountryCode(countryInfo?.isoCode)
+  }
+
   const onUpdateState = (value:string) => {
-    console.log(value)
+    setAllStateCities(City.getCitiesOfState(countryCode, value) as AllStatesAndCities[])
     setState(value)
   }
 
-  const onUpdateCountry = (value:string) => {
-    const countryInfo = <AllCountries>Country.getCountryByCode(value)
-    setAllCountryStates(State.getStatesOfCountry(value) as AllStates[])
-    setCountry(countryInfo?.name)
-    setPhoneCode(countryInfo?.flag)
-  }
+  const onUpdateCity = (value:string) => setCity(value ?? 'None')
 
   // const onUpdateMiddleName = (value:string) => setMiddleName(value)
   //
@@ -87,6 +92,7 @@ export const useSuperadminCreateUser = () => {
     phoneNumber,
     phoneCode,
     allCountryStates,
+    allStateCities,
 
     // onUpdateEmail,
     // onUpdateFirstName,
@@ -95,6 +101,7 @@ export const useSuperadminCreateUser = () => {
     onUpdateCountry,
     onUpdatePhoneNumber,
     onUpdateState,
+    onUpdateCity,
   }
 }
 

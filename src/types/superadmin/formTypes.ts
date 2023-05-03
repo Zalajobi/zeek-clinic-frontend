@@ -11,10 +11,11 @@ export type AllCountries = {
   timezones: TimeZones[]
 }
 
-export type AllStates = {
+export type AllStatesAndCities = {
   name: string
   isoCode: string
   countryCode: string
+  stateCode: string
   latitude: string
   longitude: string
 }
