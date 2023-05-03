@@ -6,11 +6,11 @@ import LoginImage from "../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../components/global/Toast";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import {AllCountries, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
+import {AllCountries, AllStates, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
 
 const CreateNewUser = () => {
   // const { register, handleSubmit } = useForm<CreateUserInput>();
-  const { register, handleSubmit, formState: { errors }, watch } = useForm<CreateUserInput>({
+  const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
     resolver: yupResolver(CreateUserInputSchema)
   });
 
@@ -25,6 +25,7 @@ const CreateNewUser = () => {
     handleCreateAdmin,
     onUpdateCountry,
     onUpdatePhoneNumber,
+    onUpdateState,
   } = useSuperadminCreateUser()
 
   // console.log(watch("country"))
@@ -98,6 +99,24 @@ const CreateNewUser = () => {
                   />
                 </div>
 
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="username"
+                      value="Username"
+                      color={errors.username?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+                  <TextInput
+                    id="username"
+                    placeholder="john_doe"
+                    required={false}
+                    color={errors.username?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.username?.message}</span></React.Fragment>}
+                    {...register("username")}
+                  />
+                </div>
+
                 <div id="select_country">
                   <div className="mb-2 block">
                     <Label
@@ -133,23 +152,23 @@ const CreateNewUser = () => {
                   <div className="mb-2 block">
                     <Label
                       htmlFor="countries"
-                      value="Select your country"
+                      value="Select State"
                       color={errors.state?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <Select
-                    id="countries"
+                    id="state"
                     required={false}
                     helperText={<React.Fragment><span className="font-medium">{errors.state?.message}</span></React.Fragment>}
-                    {...register("country", {
-                      onChange: (e) => onUpdateCountry(e?.target?.value)
+                    {...register("state", {
+                      onChange: (e) => onUpdateState(e?.target?.value)
                     })}
                     color={errors.state?.message ? 'failure' : 'gray'}
                   >
                     <option>
-                      Select Country
+                      Select State
                     </option>
-                    {allCountries?.map((item:AllCountries, idx:number) => {
+                    {allCountryStates?.map((item:AllStates, idx:number) => {
                       return (
                         <option value={item?.isoCode} key={idx}>
                           {item?.name}
@@ -179,24 +198,6 @@ const CreateNewUser = () => {
                     {...register("phoneNumber", {
                       onChange: (e) => onUpdatePhoneNumber(e.target.value)
                     })}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="username"
-                      value="Username"
-                      color={errors.username?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="username"
-                    placeholder="john_doe"
-                    required={false}
-                    color={errors.username?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.username?.message}</span></React.Fragment>}
-                    {...register("username")}
                   />
                 </div>
 

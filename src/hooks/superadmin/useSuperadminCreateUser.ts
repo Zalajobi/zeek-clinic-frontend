@@ -51,14 +51,14 @@ export const useSuperadminCreateUser = () => {
   // const onUpdateZipCode = (value:string) => setZipCode(value)
 
   const onUpdateState = (value:string) => {
+    console.log(value)
     setState(value)
   }
 
   const onUpdateCountry = (value:string) => {
     const countryInfo = <AllCountries>Country.getCountryByCode(value)
-    // setPhoneNumber(phoneNumber.replace(/[(0-9)]/g, countryInfo.phonecode))
+    setAllCountryStates(State.getStatesOfCountry(value) as AllStates[])
     setCountry(countryInfo?.name)
-    // setPhoneCode(`${countryInfo?.flag} ${countryInfo?.phonecode}`)
     setPhoneCode(countryInfo?.flag)
   }
 
@@ -94,6 +94,7 @@ export const useSuperadminCreateUser = () => {
     handleCreateAdmin,
     onUpdateCountry,
     onUpdatePhoneNumber,
+    onUpdateState,
   }
 }
 
