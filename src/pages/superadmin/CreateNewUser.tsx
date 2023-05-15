@@ -66,18 +66,18 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="firstName"
+                      htmlFor="first_name"
                       value="First Name"
-                      color={errors.firstName?.message ? 'failure' : 'gray'}
+                      color={errors.first_name?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="firstName"
+                    id="first_name"
                     placeholder="John"
                     required={false}
-                    color={errors.firstName?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.firstName?.message}</span></React.Fragment>}
-                    {...register("firstName")}
+                    color={errors.first_name?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.first_name?.message}</span></React.Fragment>}
+                    {...register("first_name")}
                   />
                 </div>
 
@@ -85,18 +85,18 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="lastName"
+                      htmlFor="last_name"
                       value="Last Name"
-                      color={errors.lastName?.message ? 'failure' : 'gray'}
+                      color={errors.last_name?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="lastName"
+                    id="last_name"
                     placeholder="Doe"
                     required={false}
-                    color={errors.lastName?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.lastName?.message}</span></React.Fragment>}
-                    {...register("lastName")}
+                    color={errors.last_name?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.last_name?.message}</span></React.Fragment>}
+                    {...register("last_name")}
                   />
                 </div>
 
@@ -104,18 +104,18 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="middleName"
+                      htmlFor="other_name"
                       value="Other Name"
-                      color={errors.middleName?.message ? 'failure' : 'gray'}
+                      color={errors.other_name?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="middleName"
+                    id="other_name"
                     placeholder="Felix"
                     required={false}
-                    color={errors.middleName?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.middleName?.message}</span></React.Fragment>}
-                    {...register("middleName")}
+                    color={errors.other_name?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.other_name?.message}</span></React.Fragment>}
+                    {...register("other_name")}
                   />
                 </div>
 
@@ -340,7 +340,7 @@ const CreateNewUser = () => {
                     </option>
                     {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
                       return (
-                        <option value={item?.isoCode} key={idx}>
+                        <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
                           {item?.name}
                         </option>
                       )
@@ -421,60 +421,60 @@ const CreateNewUser = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="alternateAddress"
+                      htmlFor="address_two"
                       value="Alternative Address"
-                      color={errors.alternateAddress?.message ? 'failure' : 'gray'}
+                      color={errors.address_two?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="alternateAddress"
+                    id="address_two"
                     required={false}
-                    color={errors.alternateAddress?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.alternateAddress?.message}</span></React.Fragment>}
-                    {...register("alternateAddress")}
+                    color={errors.address_two?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.address_two?.message}</span></React.Fragment>}
+                    {...register("address_two")}
                   />
                 </div>
 
-                {/*Zipcode*/}
+                {/*zip_code*/}
                 <div>
                   <div className="mb-2 block">
                     <Label
-                      htmlFor="zipCode"
+                      htmlFor="zip_code"
                       value="Zip Code"
-                      color={errors.zipCode?.message ? 'failure' : 'gray'}
+                      color={errors.zip_code?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
-                    id="zipCode"
+                    id="zip_code"
                     placeholder={`101241`}
                     required={false}
                     type="number"
-                    color={errors.zipCode?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.zipCode?.message}</span></React.Fragment>}
-                    {...register("zipCode")}
+                    color={errors.zip_code?.message ? 'failure' : 'gray'}
+                    helperText={<React.Fragment><span className="font-medium">{errors.zip_code?.message}</span></React.Fragment>}
+                    {...register("zip_code")}
                   />
                 </div>
               </div>
 
 
-              {/*phoneNumber*/}
+              {/*phone_number*/}
               <div>
                 <div className="mb-2 block">
                   <Label
-                    htmlFor="phoneNumber"
+                    htmlFor="phone_number"
                     value="Phone Number"
-                    color={errors.phoneNumber?.message ? 'failure' : 'gray'}
+                    color={errors.phone_number?.message ? 'failure' : 'gray'}
                   />
                 </div>
                 <TextInput
-                  id="phoneNumber"
+                  id="phone_number"
                   placeholder={`9189011920`}
                   required={false}
                   type="tel"
-                  color={errors.phoneNumber?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.phoneNumber?.message}</span></React.Fragment>}
+                  color={errors.phone_number?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.phone_number?.message}</span></React.Fragment>}
                   addon={phoneCode}
-                  {...register("phoneNumber")}
+                  {...register("phone_number")}
                 />
               </div>
 

@@ -15,7 +15,6 @@ export const useAdminForgotPassword = () => {
 
     if (response?.success) {
       toast.success(response?.message);
-      localStorage.setItem('token', response.data.token)
     } else {
       toast.error(response?.message)
     }

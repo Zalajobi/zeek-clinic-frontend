@@ -18,10 +18,6 @@ const SuperadminLogin = () => {
             <div className="flex flex-col w-full">
               <Text text={`Welcome back`} className={`text-[#111928] dark:text-white mb-4`} size="2xl" weight={700}/>
 
-              <div className="flex flex-row w-full">
-                <Text text={`Don't have an account`} weight={500} size={"sm"} className={`text-[#6B7280] dark:text-white mr-2`}/>
-              </div>
-
               <div className="grid grid-cols-2 gap-4 my-3">
                 <TextInputLabel
                   forItem={`email`}

@@ -1,9 +1,12 @@
 import {useEffect, useState} from "react";
 import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
 import { Country, State, City} from 'country-state-city'
-import {axiosGetRequest} from "../../lib/axios";
+import {axiosGetRequest, axiosPostRequest} from "../../lib/axios";
+import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 
 export const useSuperadminCreateAdminUser = () => {
+  const navigate = useNavigate();
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
@@ -35,6 +38,9 @@ export const useSuperadminCreateAdminUser = () => {
       for (const role in response?.data?.role)  {
         allRoles.push(role)
       }
+    } else {
+      toast.error(response?.message)
+      navigate('/superadmin/login')
     }
 
     setAllDepartments(allDepartments)
@@ -43,14 +49,16 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateCountry = (value:string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries
-    setAllCountryStates(State.getStatesOfCountry(value) as AllStatesAndCities[])
+    setAllCountryStates(State.getStatesOfCountry(value) as unknown as AllStatesAndCities[])
+    console.log(State.getStatesOfCountry(value))
     setCountry(countryInfo?.name)
     setPhoneCode(countryInfo?.phonecode)
     setCountryCode(countryInfo?.isoCode)
   }
 
   const onUpdateState = (value:string) => {
-    setAllStateCities(City.getCitiesOfState(countryCode, value) as AllStatesAndCities[])
+    setAllStateCities(City.getCitiesOfState(countryCode, value) as unknown as AllStatesAndCities[])
+    console.log(value)
     setState(value)
   }
 
@@ -62,8 +70,13 @@ export const useSuperadminCreateAdminUser = () => {
       country,
       city,
       state,
-      countryCode
+      country_code: countryCode
     }
+
+    const response = await axiosPostRequest('/account/super-admin/create/admin', adminData)
+
+    console.log(response)
+      // super-admin/create/admin
     console.log("SUBMIT FORM HERE")
     console.log(adminData)
   }
