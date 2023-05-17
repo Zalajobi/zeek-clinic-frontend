@@ -70,7 +70,8 @@ export const useSuperadminCreateAdminUser = () => {
       country,
       city,
       state,
-      country_code: countryCode
+      country_code: countryCode,
+      call_code: phoneCode
     }
 
     const response = await axiosPostRequest('/account/super-admin/create/admin', adminData)
