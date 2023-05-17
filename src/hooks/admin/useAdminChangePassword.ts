@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast";
 import {matchLowerCaseRegex, matchNumbersRegex, matchUpperCaseRegex} from "../../lib/constants/constants";
-import {axiosGetRequestNoAuth, axiosPutRequestNoAuth} from "../../lib/axios";
+import {axiosGetRequest, axiosPutRequest} from "../../lib/axios";
 
 export const useAdminChangePassword = () => {
   const navigate = useNavigate();
@@ -14,12 +14,12 @@ export const useAdminChangePassword = () => {
   useEffect(() => {
     setAuthToken(searchParams.get('token') as string)
 
-    verifyToken(searchParams.get('token') as string)
+    verifyToken(searchParams.get('token') as string).then(r => console.log(r))
 
   }, [searchParams]);
 
   const verifyToken = async (token: string) => {
-    const response = await axiosGetRequestNoAuth(`/account/admin/jwt_token/verify?token=${token}`)
+    const response = await axiosGetRequest(`/account/admin/jwt_token/verify?token=${token}`)
 
     if (!response.success) {
       toast.error(response.message)
@@ -61,7 +61,7 @@ export const useAdminChangePassword = () => {
     }
 
 
-    const response = await axiosPutRequestNoAuth('/account/admin/reset_password', {
+    const response = await axiosPutRequest('/account/admin/reset_password', {
       password: newPassword,
       token: authToken
     })

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {axiosPostRequestNoAuth} from "../../lib/axios";
+import {axiosPostRequest} from "../../lib/axios";
 import toast from "react-hot-toast";
 
 export const useAdminForgotPassword = () => {
@@ -7,7 +7,7 @@ export const useAdminForgotPassword = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   const resetPassword = async () => {
-    const response = await axiosPostRequestNoAuth('/account/admin/password/reset-request', {
+    const response = await axiosPostRequest('/account/admin/password/reset-request', {
       email,
     })
 
