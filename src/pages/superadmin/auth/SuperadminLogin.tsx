@@ -1,16 +1,14 @@
-import React from 'react'
+import React from "react";
 import Text from "../../../components/global/Text";
 import TextInputLabel from "../../../components/inputs/TextInputLabel";
-import useAdminLogin from "../../../hooks/admin/useAdminLogin";
-import { Button } from 'flowbite-react';
-import { FcGoogle } from 'react-icons/fc'
-import { GrGithub } from 'react-icons/gr'
+import {Button} from "flowbite-react";
 import CheckBox from "../../../components/inputs/CheckBox";
-import LoginImage from '../../../assets/img/admin/login.png'
-import { ToasterConfig } from "../../../components/global/Toast";
+import LoginImage from "../../../assets/img/admin/login.png";
+import {ToasterConfig} from "../../../components/global/Toast";
+import useSuperdminLogin from "../../../hooks/superadmin/useSuperadminLogin";
 
-const AdminLogin = () => {
-  const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } = useAdminLogin()
+const SuperadminLogin = () => {
+  const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } = useSuperdminLogin()
 
   return (
     <React.Fragment>
@@ -19,12 +17,6 @@ const AdminLogin = () => {
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
             <div className="flex flex-col w-full">
               <Text text={`Welcome back`} className={`text-[#111928] dark:text-white mb-4`} size="2xl" weight={700}/>
-
-              <div className="flex flex-row w-full">
-                <Text text={`Don't have an account`} weight={500} size={"sm"} className={`text-[#6B7280] dark:text-white mr-2`}/>
-
-                <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/signup">Signup</a>
-              </div>
 
               <div className="grid grid-cols-2 gap-4 my-3">
                 <TextInputLabel
@@ -47,24 +39,6 @@ const AdminLogin = () => {
                   inputPlaceholder={`********`}
                 />
               </div>
-
-              <div className="flex flex-row w-full my-4 items-center">
-                <div className="w-[45%] h-px bg-[#E5E7EB]"/>
-
-                <Text text={`or`} className={`w-10 text-center text-[#6B7280] dark:text-white`} size={`lg`}/>
-
-                <div className="w-[45%] h-px bg-[#E5E7EB]"/>
-              </div>
-
-              <Button onClick={() => console.log('Sign up with Google')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
-                <FcGoogle size={20} className={`mr-2`}/>
-                Sign up with Google
-              </Button>
-
-              <Button onClick={() => console.log('Sign up with Github')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
-                <GrGithub size={20} className={`mr-2`}/>
-                Sign up with Github
-              </Button>
 
               <div className={`w-full grid grid-cols-2 gap-4 items-center my-2`}>
                 <CheckBox checked={rememberMe} click={() => setRememberMe(!rememberMe)}/>
@@ -89,4 +63,4 @@ const AdminLogin = () => {
   )
 }
 
-export default AdminLogin
+export default SuperadminLogin
