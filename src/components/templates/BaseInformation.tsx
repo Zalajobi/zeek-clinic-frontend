@@ -10,7 +10,7 @@ import Text from "../global/Text";
 const BaseInformation = () => {
   return (
     <React.Fragment>
-      <div className="ml-auto">
+      <div>
         <Menu as="div" className="relative inline-block text-left">
           <div className={`flex`}>
             <Menu.Button className="relative flex shrink-0 items-center flex-row text-grey justify-between items-center">

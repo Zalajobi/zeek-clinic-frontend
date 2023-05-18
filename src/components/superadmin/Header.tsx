@@ -1,6 +1,7 @@
 import React from "react";
 import Search from "../templates/Search";
 import BaseInformation from "../templates/BaseInformation";
+import NotificationIcon from "../templates/NotificationIcon";
 
 const Header = () => {
   return (
@@ -9,7 +10,11 @@ const Header = () => {
         <div className="container w-full grid grid-cols-2 gap-6 items-center">
           <Search/>
 
-          <BaseInformation/>
+          <div className={`flex flex-row justify-end`}>
+            <NotificationIcon/>
+
+            <BaseInformation/>
+          </div>
         </div>
       </nav>
     </React.Fragment>
