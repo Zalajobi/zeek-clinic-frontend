@@ -6,6 +6,7 @@ import Logo from '../../../assets/img/global/logo.png'
 import {RxDashboard} from "react-icons/rx";
 import {GiDoctorFace} from "react-icons/gi";
 import {TbFaceMask} from "react-icons/tb";
+import {MdOutlinePayments} from 'react-icons/md'
 import SidebarItem from "./SidebarItem";
 import {SidebarItemProps} from "../../../types/superadmin";
 
@@ -17,70 +18,62 @@ const Sidebar = () => {
       item: 'Dashboard',
       Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/superadmin',
-      showSidebar: showSidebar
+      showSidebar: showSidebar,
+      // child: null
     },
 
     {
       item: 'Doctor',
       Icon: <GiDoctorFace size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/doctor',
-      showSidebar: showSidebar
+      showSidebar: showSidebar,
+      // child: null
     },
 
     {
       item: 'Patient',
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
-      showSidebar: showSidebar
+      showSidebar: showSidebar,
+      // child: null
     },
 
     {
       item: 'Payment',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
-      showSidebar: showSidebar
+      showSidebar: showSidebar,
+      child: [
+        {
+          item: 'Invoice',
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+
+        {
+          item: 'Receipt',
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+      ]
     },
 
     {
-      item: 'Patient',
+      item: 'Pharmacy',
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
-      showSidebar: showSidebar
+      // showSidebar: showSidebar,
+      // child: null
     },
 
     {
-      item: 'Patient',
+      item: 'Store',
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
-      showSidebar: showSidebar
-    },
-
-    {
-      item: 'Patient',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      route: '/patient',
-      showSidebar: showSidebar
-    },
-
-    {
-      item: 'Patient',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      route: '/patient',
-      showSidebar: showSidebar
-    },
-
-    {
-      item: 'Patient',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      route: '/patient',
-      showSidebar: showSidebar
-    },
-
-    {
-      item: 'Patient',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      route: '/patient',
-      showSidebar: showSidebar
+      showSidebar: showSidebar,
+      // child: null
     },
   ] as SidebarItemProps[]
 
@@ -124,7 +117,9 @@ const Sidebar = () => {
         <div className="mt-2 flex md:flex-col">
           {SuperadminSidebar.length >= 1 && SuperadminSidebar.map((sidebar:SidebarItemProps, idx:number) => {
             return (
-              <SidebarItem item={sidebar?.item} route={sidebar?.route} Icon={sidebar?.Icon} showSidebar={showSidebar}/>
+              <>
+                <SidebarItem item={sidebar?.item} route={sidebar?.route} Icon={sidebar?.Icon} showSidebar={showSidebar} key={idx} child={sidebar?.child ? sidebar?.child : null}/>
+              </>
             )
           })}
         </div>
