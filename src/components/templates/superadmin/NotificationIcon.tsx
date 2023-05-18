@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import {Menu, Transition} from "@headlessui/react";
 import {TiMessages} from "react-icons/ti";
 import {MdOutlineNotificationsNone} from 'react-icons/md'
-import Text from "../global/Text";
+import Text from "../../global/Text";
 
 const NotificationIcon = () => {
   return (

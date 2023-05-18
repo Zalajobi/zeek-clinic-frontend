@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../superadmin/Header";
+import Header from "../../superadmin/Header";
 import Sidebar from "./Sidebar";
 
 const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {

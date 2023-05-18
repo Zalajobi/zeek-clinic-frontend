@@ -1,7 +1,7 @@
 import React from "react";
-import Search from "../templates/Search";
-import BaseInformation from "../templates/BaseInformation";
-import NotificationIcon from "../templates/NotificationIcon";
+import Search from "../templates/superadmin/Search";
+import BaseInformation from "../templates/superadmin/BaseInformation";
+import NotificationIcon from "../templates/superadmin/NotificationIcon";
 
 const Header = () => {
   return (

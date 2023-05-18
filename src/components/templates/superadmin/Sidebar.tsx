@@ -2,10 +2,30 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
-import Logo from '../../assets/img/global/logo.png'
+import Logo from '../../../assets/img/global/logo.png'
+import {RxDashboard} from "react-icons/rx";
+import {GiDoctorFace} from "react-icons/gi";
+import {TbFaceMask} from "react-icons/tb";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false)
+
+  const SuperadminSidebar = [
+    {
+      item: 'Dashboard',
+      icon: <RxDashboard/>
+    },
+
+    {
+      item: 'Doctor',
+      icon: <GiDoctorFace/>
+    },
+
+    {
+      item: 'Doctor',
+      icon: <TbFaceMask/>
+    },
+  ]
 
   return (
     <React.Fragment>
@@ -42,6 +62,10 @@ const Sidebar = () => {
               <MdKeyboardDoubleArrowLeft size={12}/>
             )}
           </button>
+        </div>
+
+        <div className="mt-2 flex md:flex-col px-2">
+          <h1>Dashboard</h1>
         </div>
       </aside>
     </React.Fragment>
