@@ -48,6 +48,7 @@ export type CreateUserInput = {
   bio?: string
   address: string
   address_two?: string
+  profile_img?: string
 }
 
 export const CreateUserInputSchema = yup.object({
@@ -67,7 +68,8 @@ export const CreateUserInputSchema = yup.object({
   gender: yup.string().required('Please choose a valid gender'),
   dob: yup.string().required('Date of birth is required'),
   title: yup.string().required('User title is required'),
-  bio: yup.string().optional().min(100, 'Bio requires at least 100 characters'),
+  bio: yup.string().optional().min(100, 'Bio requires at least 100 characters').max(1000, 'Cannot be more than 1000 characters'),
   address: yup.string().required('User address is required').min(10, 'Address too short'),
-  address_two: yup.string().optional().min(10, 'Address too short')
+  address_two: yup.string().optional().min(10, 'Address too short'),
+  profile_img: yup.string().optional()
 }).required()

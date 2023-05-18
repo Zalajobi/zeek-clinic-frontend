@@ -6,7 +6,7 @@ import axios from "axios";
 // }
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/api/v1/zeek-clinic',
+  baseURL: process.env.REACT_APP_DEV_BASE_URL,
   timeout: 7500,
   headers: {
     token: localStorage.getItem('token')
