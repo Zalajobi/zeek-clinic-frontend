@@ -2,7 +2,7 @@ import {ChangeEvent, useState} from "react";
 import { BiSearchAlt } from 'react-icons/bi'
 
 const Search = () => {
-  const [querySearch, setQuerySearch] = useState("");
+  const [, setQuerySearch] = useState("");
 
   const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
     setQuerySearch(event?.target?.value)
