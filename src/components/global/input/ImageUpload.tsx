@@ -5,10 +5,9 @@ const ImageUpload = () => {
   const [previewImageURL, setPreviewImageURL] = useState('');
   const updateImageChange = async (event:ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files as FileList;
+    console.log(selectedFiles[0])
 
     const url = await uploadProfileImage(selectedFiles[0],  selectedFiles[0]?.name)
-
-    console.log(url)
     setPreviewImageURL(url as string)
   }
 
@@ -25,8 +24,6 @@ const ImageUpload = () => {
           <input type="file" accept="image/*" className="hidden" onChange={updateImageChange}/>
         </label>
       </div>
-
-      <img src={previewImageURL} alt={`Preview profile`}/>
     </div>
   )
 }
