@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
+import Logo from '../../assets/img/global/logo.png'
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false)
@@ -18,12 +20,12 @@ const Sidebar = () => {
             { ["justify-center"]: showSidebar }
           )}
           >
-          <Link to="#">
+          <Link to="/">
             <img
-              src={`/img/sidebar/bask-logo-rounded-square.png`}
+              src={Logo}
               alt="Logo"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               className={clsx({ ["hidden"]: showSidebar })}
             />
           </Link>
@@ -34,14 +36,11 @@ const Sidebar = () => {
               setShowSidebar(!showSidebar)
             }}
           >
-            <img
-              src={`/img/sidebar/sidebar-${
-                showSidebar ? "collapsed" : "open"
-              }.svg`}
-              alt="Logo"
-              width={12}
-              height={12}
-            />
+            {showSidebar ? (
+              <MdKeyboardDoubleArrowRight size={12}/>
+            ) : (
+              <MdKeyboardDoubleArrowLeft size={12}/>
+            )}
           </button>
         </div>
       </aside>
