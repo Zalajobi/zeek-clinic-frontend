@@ -10,7 +10,7 @@ const Search = () => {
   }
 
   return (
-    <div className='max-w-md w-[300px] h-12 flex items-center justify-center'>
+    <div className='max-w-md w-[300px] h-12 flex items-center justify-center mr-auto'>
       <div
         className="w-full relative flex items-center border border-solid border-grey-500 rounded-lg bg-white overflow-hidden">
         <div className="grid place-items-center h-full w-12 text-gray-300">
