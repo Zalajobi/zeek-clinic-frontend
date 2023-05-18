@@ -16,6 +16,7 @@ import ChangePassword from "./pages/admin/auth/ChangePassword";
 import AdminSignup from "./pages/admin/auth/AdminSignup";
 import CreateNewUser from "./pages/superadmin/CreateNewUser";
 import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
+import SuperadminDashboard from "./pages/superadmin";
 // import HomePage from "./pages/HomePage";
 
 const root = ReactDOM.createRoot(
@@ -57,13 +58,17 @@ const router = createBrowserRouter([
     path: '/superadmin',
     children: [
       {
+        path: '/superadmin/',
+        element: <SuperadminDashboard/>
+      },
+      {
         path: '/superadmin/create/new_admin',
         element: <CreateNewUser/>
       },
       {
         path: '/superadmin/login',
         element: <SuperadminLogin/>
-      },
+      }
     ]
   },
 
