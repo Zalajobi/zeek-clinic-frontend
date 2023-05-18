@@ -6,6 +6,7 @@ import {ToasterConfig} from "../../components/global/Toast";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import {AllCountries, AllStatesAndCities, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
+import ImageUpload from "../../components/global/input/ImageUpload";
 
 const CreateNewUser = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
@@ -240,6 +241,8 @@ const CreateNewUser = () => {
                   <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.department?.message}</p>
                 </div>
               </div>
+
+              <ImageUpload/>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
                 {/*Email*/}
