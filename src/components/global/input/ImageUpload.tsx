@@ -4,12 +4,12 @@ import {ImUpload} from "react-icons/im";
 import Dropzone from "react-dropzone";
 import { Button, Label } from "flowbite-react";
 
-const ImageUpload = () => {
+const ImageUpload = ({bucketFolder}: {bucketFolder:string }) => {
   const [previewImageURL, setPreviewImageURL] = useState('');
 
   const onDropzoneUpload = async (acceptedFile: any) => {
     console.log(acceptedFile[0])
-    const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, '/profile_image')
+    const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, bucketFolder)
     setPreviewImageURL(url as string)
     console.log(url)
   }

@@ -45,7 +45,7 @@ const CreateNewUser = () => {
 
         <div className={`w-full p-5 shadow-2xl rounded-lg flex flex-col`}>
           <div className={`grid-container grid grid-cols-[20%_80%] gap-4`}>
-            <ImageUpload/>
+            <ImageUpload bucketFolder={`/profile_image`}/>
 
             <div className={``}>
               Hi There
