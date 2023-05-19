@@ -21,7 +21,9 @@ export const useSuperadminLogin = () => {
     if (response?.success) {
       toast.success(response?.message);
       localStorage.setItem('token', response.data.token)
-      navigate('/superadmin')
+      setTimeout(() => {
+        navigate('/superadmin')
+      }, 3000)
     } else {
       toast.error(response?.message)
     }

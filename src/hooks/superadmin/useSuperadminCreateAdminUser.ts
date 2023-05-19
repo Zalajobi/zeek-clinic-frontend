@@ -30,7 +30,7 @@ export const useSuperadminCreateAdminUser = () => {
     const allDepartments:string[] = []
     const allRoles:string[] = []
 
-    if (response.success) {
+    if (response?.success) {
       for (const dept in response?.data?.department) {
         allDepartments.push(dept)
       }
