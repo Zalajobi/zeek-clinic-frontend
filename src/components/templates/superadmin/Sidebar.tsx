@@ -6,7 +6,7 @@ import Logo from '../../../assets/img/global/logo.png'
 import {RxDashboard} from "react-icons/rx";
 import {GiDoctorFace} from "react-icons/gi";
 import {TbFaceMask} from "react-icons/tb";
-import {MdOutlinePayments} from 'react-icons/md'
+import {MdOutlinePayments, MdOutlineAdminPanelSettings} from 'react-icons/md'
 import SidebarItem from "./SidebarItem";
 import {SidebarItemProps} from "../../../types/superadmin";
 
@@ -41,7 +41,29 @@ const Sidebar = () => {
     {
       item: 'Payment',
       Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      route: '/patient',
+      // route: '/patient',
+      showSidebar: showSidebar,
+      child: [
+        {
+          item: 'Invoice',
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+
+        {
+          item: 'Receipt',
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+      ]
+    },
+
+    {
+      item: 'Admin',
+      Icon: <MdOutlineAdminPanelSettings size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      // route: '/patient',
       showSidebar: showSidebar,
       child: [
         {
