@@ -8,10 +8,8 @@ const ImageUpload = ({bucketFolder}: {bucketFolder:string }) => {
   const [previewImageURL, setPreviewImageURL] = useState('');
 
   const onDropzoneUpload = async (acceptedFile: any) => {
-    console.log(acceptedFile[0])
     const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, bucketFolder)
     setPreviewImageURL(url as string)
-    console.log(url)
   }
 
   const acceptedUploadFileType = {
