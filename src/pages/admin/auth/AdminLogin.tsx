@@ -56,12 +56,12 @@ const AdminLogin = () => {
                 <div className="w-[45%] h-px bg-[#E5E7EB]"/>
               </div>
 
-              <Button onClick={() => console.log('Sign up with Google')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
+              <Button onClick={() => console.log('Signin with Google')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
                 <FcGoogle size={20} className={`mr-2`}/>
                 Sign up with Google
               </Button>
 
-              <Button onClick={() => console.log('Sign up with Github')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
+              <Button onClick={() => console.log('Signin with Github')} outline={true} color={`gray`} className={'text-[#111928] font-medium dark:text-white my-3'}>
                 <GrGithub size={20} className={`mr-2`}/>
                 Sign up with Github
               </Button>
