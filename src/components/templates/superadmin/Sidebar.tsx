@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdOutlinePayments, MdOutlineAdminPanelSettings } from 'react-icons/md'
+import { RxDashboard } from "react-icons/rx";
+import { GiDoctorFace } from "react-icons/gi";
+import { TbFaceMask } from "react-icons/tb";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { HiOutlineClipboardList } from 'react-icons/hi'
 import Logo from '../../../assets/img/global/logo.png'
-import {RxDashboard} from "react-icons/rx";
-import {GiDoctorFace} from "react-icons/gi";
-import {TbFaceMask} from "react-icons/tb";
-import {MdOutlinePayments, MdOutlineAdminPanelSettings} from 'react-icons/md'
 import SidebarItem from "./SidebarItem";
 import {SidebarItemProps} from "../../../types/superadmin";
 
@@ -19,7 +20,6 @@ const Sidebar = () => {
       Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/superadmin',
       showSidebar: showSidebar,
-      // child: null
     },
 
     {
@@ -27,7 +27,6 @@ const Sidebar = () => {
       Icon: <GiDoctorFace size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/doctor',
       showSidebar: showSidebar,
-      // child: null
     },
 
     {
@@ -35,7 +34,6 @@ const Sidebar = () => {
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
       showSidebar: showSidebar,
-      // child: null
     },
 
     {
@@ -63,20 +61,19 @@ const Sidebar = () => {
     {
       item: 'Admin',
       Icon: <MdOutlineAdminPanelSettings size={showSidebar ? 40 : 20} fontWeight={40}/>,
-      // route: '/patient',
       showSidebar: showSidebar,
       child: [
         {
-          item: 'Invoice',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-          route: '/patient',
+          item: 'View',
+          Icon: <HiOutlineClipboardList size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/superadmin',
           showSidebar: showSidebar,
         },
 
         {
-          item: 'Receipt',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
-          route: '/patient',
+          item: 'Create',
+          Icon: <AiOutlineUserAdd size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          route: '/superadmin/create/new_admin',
           showSidebar: showSidebar,
         },
       ]
@@ -86,8 +83,7 @@ const Sidebar = () => {
       item: 'Pharmacy',
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
-      // showSidebar: showSidebar,
-      // child: null
+      showSidebar: showSidebar,
     },
 
     {
@@ -95,7 +91,6 @@ const Sidebar = () => {
       Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/patient',
       showSidebar: showSidebar,
-      // child: null
     },
   ] as SidebarItemProps[]
 
