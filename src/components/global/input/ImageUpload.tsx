@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React from "react";
 import {uploadProfileImage} from "../../../util/useS3Upload";
 import {ImUpload} from "react-icons/im";
 import Dropzone from "react-dropzone";

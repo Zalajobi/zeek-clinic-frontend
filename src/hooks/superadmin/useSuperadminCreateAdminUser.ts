@@ -22,31 +22,34 @@ export const useSuperadminCreateAdminUser = () => {
 
   useEffect(() => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
-    superadminGetRolesAndDepartments().then(r => console.log(`HELLO THERE`))
-  }, []);
 
+    const superadminGetRolesAndDepartments = async () => {
+      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
+      const allDepartments:string[] = []
+      const allRoles:string[] = []
 
-  const superadminGetRolesAndDepartments = async () => {
-    const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
-    const allDepartments:string[] = []
-    const allRoles:string[] = []
+      if (response?.success) {
+        for (const dept in response?.data?.department) {
+          allDepartments.push(dept)
+        }
 
-    if (response?.success) {
-      for (const dept in response?.data?.department) {
-        allDepartments.push(dept)
+        for (const role in response?.data?.role)  {
+          allRoles.push(role)
+        }
+      } else {
+        toast.error(response?.message)
+        navigate('/superadmin/login')
       }
 
-      for (const role in response?.data?.role)  {
-        allRoles.push(role)
-      }
-    } else {
-      toast.error(response?.message)
-      navigate('/superadmin/login')
+      setAllDepartments(allDepartments)
+      setAllRoles(allRoles)
     }
+    superadminGetRolesAndDepartments()
+      .catch(err => {
+        navigate('/superadmin/login')
+      })
+  }, [navigate]);
 
-    setAllDepartments(allDepartments)
-    setAllRoles(allRoles)
-  }
 
   const onUpdateCountry = (value:string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries

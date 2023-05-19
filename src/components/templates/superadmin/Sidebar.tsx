@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdOutlinePayments, MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { RxDashboard } from "react-icons/rx";
@@ -101,11 +100,8 @@ const Sidebar = () => {
           showSidebar ? "md:w-auto" : "md:w-[13rem]"
         } no-scroll md:overflow-y-scroll`}>
         <div
-          className={clsx(
-            "sticky top-0 z-50 hidden h-14 shrink-0 flex-row items-center border-b bg-brand-secondary-background py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex",
-            { ["justify-between"]: !showSidebar },
-            { ["justify-center"]: showSidebar }
-          )}
+          className={`sticky top-0 z-50 hidden h-14 shrink-0 flex-row items-center border-b
+           bg-brand-secondary-background py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex ${showSidebar ? 'justify-center' : 'justify-between'}`}
           >
           <Link to="/superadmin">
             <img
@@ -113,7 +109,7 @@ const Sidebar = () => {
               alt="Logo"
               width={50}
               height={50}
-              className={clsx({ ["hidden"]: showSidebar })}
+              className={`${showSidebar ? 'hidden' : ''}`}
             />
           </Link>
 
