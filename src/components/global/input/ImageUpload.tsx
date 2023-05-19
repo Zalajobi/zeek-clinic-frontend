@@ -4,12 +4,16 @@ import {ImUpload} from "react-icons/im";
 import Dropzone from "react-dropzone";
 import { Button, Label } from "flowbite-react";
 
-const ImageUpload = ({bucketFolder}: {bucketFolder:string }) => {
-  const [previewImageURL, setPreviewImageURL] = useState('');
+interface ImageUploadProps {
+  bucketFolder: string
+  url: string
+  updateImageUrl: (value:string) => void
+}
 
+const ImageUpload = ({bucketFolder, url, updateImageUrl}: ImageUploadProps) => {
   const onDropzoneUpload = async (acceptedFile: any) => {
     const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, bucketFolder)
-    setPreviewImageURL(url as string)
+    updateImageUrl(url as string)
   }
 
   const acceptedUploadFileType = {
@@ -28,7 +32,7 @@ const ImageUpload = ({bucketFolder}: {bucketFolder:string }) => {
                 value="Profile Picture"
               />
             </div>
-            {!previewImageURL ? (
+            {!url ? (
               <div
                 className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed 
     rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 
@@ -55,7 +59,7 @@ const ImageUpload = ({bucketFolder}: {bucketFolder:string }) => {
     dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative overflow-hidden w-full`}
                 >
                   <input {...getInputProps()} />
-                  <img src={previewImageURL} alt={previewImageURL} width={`100%`} height={`100%`}/>
+                  <img src={url} alt={url} width={`100%`} height={`100%`}/>
                 </div>
 
                 <Button

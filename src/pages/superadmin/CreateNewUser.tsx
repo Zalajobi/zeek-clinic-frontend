@@ -23,12 +23,14 @@ const CreateNewUser = () => {
     allStateCities,
     allDepartments,
     allRoles,
+    profileImgURL,
 
     // Functions
     handleCreateAdmin,
     onUpdateCountry,
     onUpdateState,
     onUpdateCity,
+    setProfileImgURL,
   } = useSuperadminCreateAdminUser()
 
   return (
@@ -44,7 +46,7 @@ const CreateNewUser = () => {
         <div className={`w-full p-5 shadow-2xl rounded-lg flex flex-col`}>
           <div className={`grid-container grid grid-cols-6 gap-4 w-full px-4`}>
             <div className={`col-span-2`}>
-              <ImageUpload bucketFolder={`/profile_image`}/>
+              <ImageUpload bucketFolder={`/profile_image`} url={profileImgURL} updateImageUrl={setProfileImgURL}/>
             </div>
 
             <div className={`col-span-4 grid grid-cols-5 gap-4`}>
@@ -334,8 +336,8 @@ const CreateNewUser = () => {
                   type="tel"
                   color={errors.phone_number?.message ? 'failure' : 'gray'}
                   helperText={<React.Fragment><span className="font-medium">{errors.phone_number?.message}</span></React.Fragment>}
-                  // addon={`+${phoneCode}`}
-                  prefix={`+${phoneCode}`}
+                  addon={`+${phoneCode}`}
+                  // prefix={`+${phoneCode}`}
                   {...register("phone_number")}
                 />
               </div>
