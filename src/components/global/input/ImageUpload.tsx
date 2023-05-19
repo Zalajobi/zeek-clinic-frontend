@@ -1,30 +1,80 @@
 import React, {ChangeEvent, useState} from "react";
 import {uploadProfileImage} from "../../../util/useS3Upload";
+import {ImUpload} from "react-icons/im";
+import Dropzone from "react-dropzone";
+import { Button, Label } from "flowbite-react";
 
-const ImageUpload = () => {
-  const [previewImageURL, setPreviewImageURL] = useState('');
-  const updateImageChange = async (event:ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = event.target.files as FileList;
-    console.log(selectedFiles[0])
+interface ImageUploadProps {
+  bucketFolder: string
+  url: string
+  updateImageUrl: (value:string) => void
+}
 
-    const url = await uploadProfileImage(selectedFiles[0],  selectedFiles[0]?.name)
-    setPreviewImageURL(url as string)
+const ImageUpload = ({bucketFolder, url, updateImageUrl}: ImageUploadProps) => {
+  const onDropzoneUpload = async (acceptedFile: any) => {
+    const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, bucketFolder)
+    updateImageUrl(url as string)
+  }
+
+  const acceptedUploadFileType = {
+    'image/*': []
   }
 
   return (
-    <div className="grid grid-cols-1 space-y-2">
-      <label className="text-sm font-bold text-gray-500 tracking-wide">Attach Document</label>
-      <div className="flex items-center justify-center w-full">
-        <label className="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
-          <div className="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
-            <p className="pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files
-              here <br/> or <a href="" id="" className="text-blue-600 hover:underline">select an image</a> from your
-              computer</p>
+    <Dropzone onDrop={onDropzoneUpload} maxSize={5242880} maxFiles={1} accept={acceptedUploadFileType}>
+      {({getRootProps, getInputProps, isDragActive}) => (
+        <section>
+          <div {...getRootProps()} className="flex items-center justify-center w-full flex-col">
+
+            <div className="mb-2 block">
+              <Label
+                htmlFor="profile Picture"
+                value="Profile Picture"
+              />
+            </div>
+            {!url ? (
+              <div
+                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed 
+    rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 
+    dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600`}
+              >
+                <input {...getInputProps()} />
+                {
+                  isDragActive ?
+                    <p>Drop the files here ...</p> :
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <ImUpload size={40} className={`my-4`}/>
+                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or
+                        drag and drop</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 font-extrabold">Max Size 5MB</p>
+                    </div>
+                }
+              </div>
+            ) : (
+              <div className={`mt-2 flex flex-col w-full`}>
+                <div
+                  className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed 
+    rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 
+    dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative overflow-hidden w-full`}
+                >
+                  <input {...getInputProps()} />
+                  <img src={url} alt={url} width={`100%`} height={`100%`}/>
+                </div>
+
+                <Button
+                  outline={true}
+                  gradientDuoTone="greenToBlue"
+                  className={`mt-2 min-w-full`}
+                >
+                  Change Image
+                </Button>
+              </div>
+            )}
           </div>
-          <input type="file" accept="image/*" className="hidden" onChange={updateImageChange}/>
-        </label>
-      </div>
-    </div>
+        </section>
+      )}
+    </Dropzone>
   )
 }
 

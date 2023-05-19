@@ -11,6 +11,7 @@ export const useSuperadminCreateAdminUser = () => {
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
   const [countryCode, setCountryCode] = useState('');
+  const [profileImgURL, setProfileImgURL] = useState('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
   const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
@@ -30,7 +31,7 @@ export const useSuperadminCreateAdminUser = () => {
     const allDepartments:string[] = []
     const allRoles:string[] = []
 
-    if (response.success) {
+    if (response?.success) {
       for (const dept in response?.data?.department) {
         allDepartments.push(dept)
       }
@@ -71,15 +72,16 @@ export const useSuperadminCreateAdminUser = () => {
       city,
       state,
       country_code: countryCode,
-      call_code: phoneCode
+      call_code: phoneCode,
+      profile_img_url: profileImgURL
     }
 
-    const response = await axiosPostRequest('/account/super-admin/create/admin', adminData)
+    const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData)
 
-    console.log(response)
-      // super-admin/create/admin
-    console.log("SUBMIT FORM HERE")
-    console.log(adminData)
+    if (success)
+      toast.success(message)
+    else
+      toast.error(message)
   }
 
   return {
@@ -90,10 +92,12 @@ export const useSuperadminCreateAdminUser = () => {
     allStateCities,
     allDepartments,
     allRoles,
+    profileImgURL,
 
     handleCreateAdmin,
     onUpdateCountry,
     onUpdateState,
     onUpdateCity,
+    setProfileImgURL,
   }
 }

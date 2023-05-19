@@ -31,10 +31,10 @@ const NotificationIcon = () => {
             className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white
             shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-scroll max-h-[400px]"
           >
-            <div className="py-1 ">
+            <div className="p-1">
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -51,7 +51,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -68,7 +68,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -85,7 +85,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -102,7 +102,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -119,7 +119,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -136,7 +136,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -153,7 +153,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -170,7 +170,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>
@@ -187,7 +187,7 @@ const NotificationIcon = () => {
 
               <Menu.Item>
                 {({ active }) => (
-                  <div className={`flex flex-row items-center h-22 px-2 py-2 ${
+                  <div className={`flex flex-row items-center h-22 px-2 py-2 rounded-lg ${
                     active ? 'bg-black text-white' : 'text-gray-900'
                   }`}>
                     <TiMessages size={20} className={"mr-1"}/>

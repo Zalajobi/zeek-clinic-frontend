@@ -1,12 +1,14 @@
 import React from 'react'
-import Text from "../../components/global/Text";
-import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
-import {Button, Label, Select, TextInput} from "flowbite-react";
-import {ToasterConfig} from "../../components/global/Toast";
+import {Button, Label, Select, Textarea, TextInput} from "flowbite-react";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+
+import Text from "../../components/global/Text";
+import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
 import {AllCountries, AllStatesAndCities, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
 import ImageUpload from "../../components/global/input/ImageUpload";
+import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate";
+import {availableTitles} from "../../lib/constants/constants";
 
 const CreateNewUser = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
@@ -21,31 +23,36 @@ const CreateNewUser = () => {
     allStateCities,
     allDepartments,
     allRoles,
+    profileImgURL,
 
     // Functions
     handleCreateAdmin,
     onUpdateCountry,
     onUpdateState,
     onUpdateCity,
+    setProfileImgURL,
   } = useSuperadminCreateAdminUser()
 
   return (
-    <React.Fragment>
-      <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
-        <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-cols-1 md:flex md:flex-row gap-4 p-20">
-          <form className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37] m-10" onSubmit={handleSubmit(handleCreateAdmin)}>
-            <div className="flex flex-col w-full">
-              <Text text={`Welcome back`} className={`text-[#111928] dark:text-white mb-4`} size="2xl" weight={700}/>
+    <SuperadminBaseTemplate>
+      <div className={`w-full p-10 md:px-20 flex flex-col`}>
+        <Text
+          text={`Add Admin`}
+          size="4xl"
+          weight={800}
+          className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
+        />
 
-              <div className="flex flex-row w-full">
-                <Text text={`Don't have an account`} weight={500} size={"sm"} className={`text-[#6B7280] dark:text-white mr-2`}/>
+        <div className={`w-full p-5 shadow-2xl rounded-lg flex flex-col`}>
+          <div className={`grid-container grid grid-cols-6 gap-4 w-full px-4`}>
+            <div className={`col-span-2`}>
+              <ImageUpload bucketFolder={`/profile_image`} url={profileImgURL} updateImageUrl={setProfileImgURL}/>
+            </div>
 
-                <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/signup">Signup</a>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-3">
-                {/*Title*/}
-                <div>
+            <div className={`col-span-4 grid grid-cols-5 gap-4`}>
+              {/*Title*/}
+              <div className={`col-span-1`}>
+                <div className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="title"
@@ -53,18 +60,29 @@ const CreateNewUser = () => {
                       color={errors.title?.message ? 'failure' : 'gray'}
                     />
                   </div>
-                  <TextInput
-                    id="title"
-                    placeholder="Dr."
+
+                  <Select
+                    id="state"
                     required={false}
-                    color={errors.title?.message ? 'failure' : 'gray'}
                     helperText={<React.Fragment><span className="font-medium">{errors.title?.message}</span></React.Fragment>}
                     {...register("title")}
-                  />
-                </div>
+                    color={errors.title?.message ? 'failure' : 'gray'}
+                  >
+                    <option>Select Title</option>
+                    {availableTitles?.map((item:string, idx:number) => {
+                      return (
+                        <option key={idx}>{item}</option>
+                      )
+                    })}
 
-                {/*First Name*/}
-                <div>
+                  </Select>
+                </div>
+              </div>
+
+
+              {/*First Name*/}
+              <div className={`col-span-2`}>
+                <div className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="first_name"
@@ -81,9 +99,11 @@ const CreateNewUser = () => {
                     {...register("first_name")}
                   />
                 </div>
+              </div>
 
-                {/*Last Name*/}
-                <div>
+              {/*Last Name*/}
+              <div className={`col-span-2`}>
+                <div className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="last_name"
@@ -100,9 +120,11 @@ const CreateNewUser = () => {
                     {...register("last_name")}
                   />
                 </div>
+              </div>
 
+              <div className={`grid grid-cols-2 col-span-5 gap-4`}>
                 {/*Middle name*/}
-                <div>
+                <div className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="other_name"
@@ -121,7 +143,7 @@ const CreateNewUser = () => {
                 </div>
 
                 {/*Username*/}
-                <div>
+                <div className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="username"
@@ -138,222 +160,260 @@ const CreateNewUser = () => {
                     {...register("username")}
                   />
                 </div>
-
-                {/*Gender*/}
-                <div id="select_gender">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="select_gender"
-                      value="Gender"
-                      color={errors.gender?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="state"
-                    required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.gender?.message}</span></React.Fragment>}
-                    {...register("gender")}
-                    color={errors.gender?.message ? 'failure' : 'gray'}
-                  >
-                    <option>Select Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-
-                  </Select>
-                </div>
-
-                {/*DOB*/}
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="dob"
-                      value="Date of birth"
-                      color={errors.dob?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="dob"
-                    required={false}
-                    type="date"
-                    color={errors.dob?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.dob?.message}</span></React.Fragment>}
-                    {...register("dob")}
-                  />
-                </div>
-
-                {/*Role*/}
-                <div id="select_role">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="role"
-                      value="Select Role"
-                      color={errors.role?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="role"
-                    required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.role?.message}</span></React.Fragment>}
-                    {...register("role")}
-                    color={errors.role?.message ? 'failure' : 'gray'}
-                  >
-                    <option>
-                      Select Role
-                    </option>
-                    {allRoles?.map((item:any, idx:number) => {
-                      return (
-                        <option key={idx}>
-                          {item?.replaceAll('_', ' ')}
-                        </option>
-                      )
-                    })}
-                  </Select>
-                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.role?.message}</p>
-                </div>
-
-                {/*Department*/}
-                <div id="select_dept">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="select_dept"
-                      value="Select Department"
-                      color={errors.department?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="state"
-                    required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.department?.message}</span></React.Fragment>}
-                    {...register("department")}
-                    color={errors.department?.message ? 'failure' : 'gray'}
-                  >
-                    <option>
-                      Select Department
-                    </option>
-                    {allDepartments?.map((item:any, idx:number) => {
-                      return (
-                        <option key={idx}>
-                          {item?.replaceAll('_', ' ')}
-                        </option>
-                      )
-                    })}
-                  </Select>
-                  <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.department?.message}</p>
-                </div>
               </div>
+            </div>
+          </div>
 
-              <ImageUpload/>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-3">
-                {/*Email*/}
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="email"
-                      value="Email"
-                      color={errors.email?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="email"
-                    placeholder="john_doe@gmail.com"
-                    required={false}
-                    type="email"
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
-                    {...register("email")}
-                  />
-                </div>
-
-                {/*Short Bio*/}
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="bio"
-                      value="Short Bio"
-                      color={errors.bio?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="bio"
-                    placeholder="Short Biography"
-                    required={false}
-                    type="text"
+          <div className={`grid-container grid grid-cols-6 gap-4 w-full p-4`}>
+            {/*Short Bio*/}
+            <div className={`col-span-2`}>
+              <div id="short_bio" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="bio"
+                    value="Short Bio"
                     color={errors.bio?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.bio?.message}</span></React.Fragment>}
-                    sizing={`lg`}
-                    {...register("bio")}
                   />
                 </div>
+                <Textarea
+                  rows={4}
+                  id="bio"
+                  placeholder="Short Biography"
+                  required={false}
+                  color={errors.bio?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.bio?.message}</span></React.Fragment>}
+                  {...register("bio")}
+                />
               </div>
+            </div>
 
-              {/*Address*/}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-3">
-                {/*Country*/}
-                <div id="select_country">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="countries"
-                      value="Select your country"
-                      color={errors.country?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="countries"
-                    required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.country?.message}</span></React.Fragment>}
-                    {...register("country", {
-                      onChange: (e) => onUpdateCountry(e?.target?.value)
-                    })}
+            {/*Gender*/}
+            <div className={`col-span-1`}>
+              <div id="select_gender" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="select_gender"
+                    value="Gender"
+                    color={errors.gender?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <Select
+                  id="state"
+                  required={false}
+                  helperText={<React.Fragment><span className="font-medium">{errors.gender?.message}</span></React.Fragment>}
+                  {...register("gender")}
+                  color={errors.gender?.message ? 'failure' : 'gray'}
+                >
+                  <option>Select Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+
+                </Select>
+              </div>
+            </div>
+
+            {/*DOB*/}
+            <div className={`col-span-1`}>
+              <div id="date_of_birth" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="dob"
+                    value="Date of birth"
+                    color={errors.dob?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="dob"
+                  required={false}
+                  type="date"
+                  color={errors.dob?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.dob?.message}</span></React.Fragment>}
+                  {...register("dob")}
+                />
+              </div>
+            </div>
+
+            {/*Role*/}
+            <div className={`col-span-1`}>
+              <div id="select_role" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="role"
+                    value="Select Role"
+                    color={errors.role?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <Select
+                  id="role"
+                  required={false}
+                  helperText={<React.Fragment><span className="font-medium">{errors.role?.message}</span></React.Fragment>}
+                  {...register("role")}
+                  color={errors.role?.message ? 'failure' : 'gray'}
+                >
+                  <option>
+                    Select Role
+                  </option>
+                  {allRoles?.map((item:any, idx:number) => {
+                    return (
+                      <option key={idx}>
+                        {item?.replaceAll('_', ' ')}
+                      </option>
+                    )
+                  })}
+                </Select>
+                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.role?.message}</p>
+              </div>
+            </div>
+
+            {/*Department*/}
+            <div className={`col-span-1`}>
+              <div id="select_dept" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="select_dept"
+                    value="Select Department"
+                    color={errors.department?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <Select
+                  id="state"
+                  required={false}
+                  helperText={<React.Fragment><span className="font-medium">{errors.department?.message}</span></React.Fragment>}
+                  {...register("department")}
+                  color={errors.department?.message ? 'failure' : 'gray'}
+                >
+                  <option>
+                    Select Department
+                  </option>
+                  {allDepartments?.map((item:any, idx:number) => {
+                    return (
+                      <option key={idx}>
+                        {item?.replaceAll('_', ' ')}
+                      </option>
+                    )
+                  })}
+                </Select>
+                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.department?.message}</p>
+              </div>
+            </div>
+
+            {/*Email*/}
+            <div className={`col-span-2`}>
+              <div id="add_email" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="email"
+                    value="Email"
+                    color={errors.email?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="email"
+                  placeholder="john_doe@gmail.com"
+                  required={false}
+                  type="email"
+                  color={errors.email?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                  {...register("email")}
+                />
+              </div>
+            </div>
+
+            {/*Phone Number*/}
+            <div className={`col-span-2`}>
+              <div id="add_phone" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="phone_number"
+                    value="Phone Number"
+                    color={errors.phone_number?.message ? 'failure' : 'gray'}
+                  />
+                </div>
+                <TextInput
+                  id="phone_number"
+                  placeholder={`9189011920`}
+                  required={false}
+                  type="tel"
+                  color={errors.phone_number?.message ? 'failure' : 'gray'}
+                  helperText={<React.Fragment><span className="font-medium">{errors.phone_number?.message}</span></React.Fragment>}
+                  addon={`+${phoneCode}`}
+                  // prefix={`+${phoneCode}`}
+                  {...register("phone_number")}
+                />
+              </div>
+            </div>
+
+            {/*Country*/}
+            <div className={`col-span-1`}>
+              <div id="select_country" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="countries"
+                    value="Select your country"
                     color={errors.country?.message ? 'failure' : 'gray'}
-                  >
-                    <option>
-                      Select Country
-                    </option>
-                    {allCountries?.map((item:AllCountries, idx:number) => {
-                      return (
-                        <option value={item?.isoCode} key={idx}>
-                          {item?.name}
-                        </option>
-                      )
-                    })}
-                  </Select>
+                  />
                 </div>
+                <Select
+                  id="countries"
+                  required={false}
+                  helperText={<React.Fragment><span className="font-medium">{errors.country?.message}</span></React.Fragment>}
+                  {...register("country", {
+                    onChange: (e) => onUpdateCountry(e?.target?.value)
+                  })}
+                  color={errors.country?.message ? 'failure' : 'gray'}
+                >
+                  <option>
+                    Select Country
+                  </option>
+                  {allCountries?.map((item:AllCountries, idx:number) => {
+                    return (
+                      <option value={item?.isoCode} key={idx}>
+                        {item?.name}
+                      </option>
+                    )
+                  })}
+                </Select>
+              </div>
+            </div>
 
-                {/*State*/}
-                <div id="select_state">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="countries"
-                      value="Select State"
-                      color={errors.state?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="state"
-                    required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.state?.message}</span></React.Fragment>}
-                    {...register("state", {
-                      onChange: (e) => onUpdateState(e?.target?.value)
-                    })}
+            {/*State*/}
+            <div className={`col-span-1`}>
+              <div id="select_state" className={`w-full`}>
+                <div className="mb-2 block">
+                  <Label
+                    htmlFor="countries"
+                    value="Select State"
                     color={errors.state?.message ? 'failure' : 'gray'}
-                  >
-                    <option>
-                      Select State
-                    </option>
-                    {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
-                      return (
-                        <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
-                          {item?.name}
-                        </option>
-                      )
-                    })}
-                  </Select>
+                  />
                 </div>
+                <Select
+                  id="state"
+                  required={false}
+                  helperText={<React.Fragment><span className="font-medium">{errors.state?.message}</span></React.Fragment>}
+                  {...register("state", {
+                    onChange: (e) => onUpdateState(e?.target?.value)
+                  })}
+                  color={errors.state?.message ? 'failure' : 'gray'}
+                >
+                  <option>
+                    Select State
+                  </option>
+                  {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
+                    return (
+                      <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
+                        {item?.name}
+                      </option>
+                    )
+                  })}
+                </Select>
+              </div>
+            </div>
 
-                {/*City*/}
+            <div className={`col-span-6 grid grid-cols-4 gap-4`}>
+              {/*Ciy*/}
+              <div className={`col-span-1`}>
                 {allStateCities?.length !== 0 ? (
-                  <div id="select_city">
+                  <div id="select_city" className={`w-full`}>
                     <div className="mb-2 block">
                       <Label
                         htmlFor="countries"
@@ -383,7 +443,7 @@ const CreateNewUser = () => {
                     </Select>
                   </div>
                 ) : (
-                  <div>
+                  <div id="select_city" className={`w-full`}>
                     <div className="mb-2 block">
                       <Label
                         htmlFor="city"
@@ -401,9 +461,11 @@ const CreateNewUser = () => {
                     />
                   </div>
                 )}
+              </div>
 
-                {/*Address*/}
-                <div>
+              {/*Address*/}
+              <div className={`col-span-1`}>
+                <div id="address" className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="address"
@@ -419,9 +481,11 @@ const CreateNewUser = () => {
                     {...register("address")}
                   />
                 </div>
+              </div>
 
-                {/*AAlternate Address*/}
-                <div>
+              {/*Alternate Address*/}
+              <div className={`col-span-1`}>
+                <div id="alternate_address" className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="address_two"
@@ -437,9 +501,11 @@ const CreateNewUser = () => {
                     {...register("address_two")}
                   />
                 </div>
+              </div>
 
-                {/*zip_code*/}
-                <div>
+              {/*Zip Code*/}
+              <div className={`col-span-1`}>
+                <div id="zip_code" className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="zip_code"
@@ -458,37 +524,13 @@ const CreateNewUser = () => {
                   />
                 </div>
               </div>
-
-
-              {/*phone_number*/}
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="phone_number"
-                    value="Phone Number"
-                    color={errors.phone_number?.message ? 'failure' : 'gray'}
-                  />
-                </div>
-                <TextInput
-                  id="phone_number"
-                  placeholder={`9189011920`}
-                  required={false}
-                  type="tel"
-                  color={errors.phone_number?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.phone_number?.message}</span></React.Fragment>}
-                  addon={phoneCode}
-                  {...register("phone_number")}
-                />
-              </div>
-
-              <Button type={`submit`} onClick={handleSubmit(handleCreateAdmin)} className={`my-4`}>Submit</Button>
             </div>
-          </form>
+          </div>
+
+          <Button type={`submit`} onClick={handleSubmit(handleCreateAdmin)} className={`my-4`}>Submit</Button>
         </div>
       </div>
-
-      <ToasterConfig/>
-    </React.Fragment>
+    </SuperadminBaseTemplate>
   )
 }
 

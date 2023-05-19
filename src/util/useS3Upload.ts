@@ -6,7 +6,7 @@ const region = process.env.REACT_APP_AWS_REGION;
 const accessKeyId = process.env.REACT_APP_IAM_ACCESS_KEY_ID_DEV;
 const secretAccessKey = process.env.REACT_APP_IAM_SECRET_ACCESS_KEY_DEV;
 
-export const uploadProfileImage = async (image:File, fileName:string) => {
+export const uploadProfileImage = async (image:File, fileName:string, folder:string) => {
   try {
     const s3 = new AWS.S3({
       accessKeyId,
@@ -16,7 +16,7 @@ export const uploadProfileImage = async (image:File, fileName:string) => {
     });
 
     const uploadPayload = {
-      Bucket: `${bucketName}/profile_image`,
+      Bucket: `${bucketName}${folder}`,
       Body: image,
       Key: fileName,
     }
