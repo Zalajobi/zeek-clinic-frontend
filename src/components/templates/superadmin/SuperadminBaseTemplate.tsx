@@ -2,8 +2,13 @@ import React from "react";
 import { ToasterConfig } from "../../global/Toast";
 import Header from "../../superadmin/Header";
 import Sidebar from "./Sidebar";
+import {useSuperadminBaseTemplate} from "../../../hooks/superadmin/useSuperadminBaseTemplate";
 
 const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
+  const { requestData } = useSuperadminBaseTemplate()
+
+  console.log(requestData)
+
   return (
     <React.Fragment>
       <div className="relative flex h-screen flex-1 overflow-y-auto bg-white text-brand-body-text dark:bg-ds-dark-800 dark:text-ds-dark-300">
