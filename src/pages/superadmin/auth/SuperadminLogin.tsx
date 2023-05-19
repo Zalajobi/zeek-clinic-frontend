@@ -5,10 +5,10 @@ import {Button} from "flowbite-react";
 import CheckBox from "../../../components/inputs/CheckBox";
 import LoginImage from "../../../assets/img/admin/login.png";
 import {ToasterConfig} from "../../../components/global/Toast";
-import useSuperdminLogin from "../../../hooks/superadmin/useSuperadminLogin";
+import useSuperadminLogin from "../../../hooks/superadmin/useSuperadminLogin";
 
 const SuperadminLogin = () => {
-  const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } = useSuperdminLogin()
+  const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } = useSuperadminLogin()
 
   return (
     <React.Fragment>
