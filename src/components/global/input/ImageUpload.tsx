@@ -7,14 +7,6 @@ import { Button, Label } from "flowbite-react";
 const ImageUpload = () => {
   const [previewImageURL, setPreviewImageURL] = useState('');
 
-  // const updateImageChange = async (event:ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFiles = event.target.files as FileList;
-  //   console.log(selectedFiles[0])
-  //
-  //   const url = await uploadProfileImage(selectedFiles[0],  selectedFiles[0]?.name, '/profile_image')
-  //   setPreviewImageURL(url as string)
-  // }
-
   const onDropzoneUpload = async (acceptedFile: any) => {
     console.log(acceptedFile[0])
     const url = await uploadProfileImage(acceptedFile[0], acceptedFile[0]?.name, '/profile_image')
