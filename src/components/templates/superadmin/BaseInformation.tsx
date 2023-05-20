@@ -3,11 +3,15 @@ import { Menu, Transition } from '@headlessui/react'
 import { AiFillCaretDown, AiFillSetting } from 'react-icons/ai'
 import { FaUserAstronaut } from 'react-icons/fa'
 import { TiMessages } from 'react-icons/ti'
-import { RiLockPasswordLine } from 'react-icons/ri'
+import { RiLockPasswordLine, RiLogoutBoxLine } from 'react-icons/ri'
 import MaleUserIcon from '../../../assets/img/global/male-user-iconn.png'
 import Text from "../../global/Text";
 
-const BaseInformation = () => {
+type BaseInformationProps = {
+  name: string
+}
+
+const BaseInformation = ({name}: BaseInformationProps) => {
   return (
     <React.Fragment>
       <div>
@@ -20,7 +24,7 @@ const BaseInformation = () => {
 
               <div className={`flex flex-shrink relative flex-col`}>
                 <div className={`flex flex-shrink relative flex-row`}>
-                  John Doe <AiFillCaretDown className="pl-3" size={25}/>
+                  {name} <AiFillCaretDown className="pl-3" size={25}/>
                 </div>
 
                 <Text text={`Superadmin`} size={`xs`} className={`text-gray-500 leading-[10px]`} weight={400}/>
@@ -37,13 +41,13 @@ const BaseInformation = () => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <div className="py-1 ">
+              <div className="p-1">
                 <Menu.Item>
                   {({ active }) => (
                     <button
                       className={`${
                         active ? 'bg-black text-white' : 'text-gray-900'
-                      } group flex w-full items-center px-2 py-2 text-sm`}
+                      } group flex w-full items-center px-2 py-2 text-sm rounded-lg`}
                     >
 
                       <FaUserAstronaut size={20} className={`mr-3`}/>
@@ -57,7 +61,7 @@ const BaseInformation = () => {
                     <button
                       className={`${
                         active ? 'bg-black text-white' : 'text-gray-900'
-                      } group flex w-full items-center px-2 py-2 text-sm`}
+                      } group flex w-full items-center px-2 py-2 text-sm rounded-lg`}
                     >
 
                       <TiMessages size={20} className={`mr-3`}/>
@@ -71,7 +75,7 @@ const BaseInformation = () => {
                     <button
                       className={`${
                         active ? 'bg-black text-white' : 'text-gray-900'
-                      } group flex w-full items-center px-2 py-2 text-sm`}
+                      } group flex w-full items-center px-2 py-2 text-sm rounded-lg`}
                     >
 
                       <RiLockPasswordLine size={20} className={`mr-3`}/>
@@ -85,10 +89,23 @@ const BaseInformation = () => {
                     <button
                       className={`${
                         active ? 'bg-black text-white' : 'text-gray-900'
-                      } group flex w-full items-center px-2 py-2 text-sm`}
+                      } group flex w-full items-center px-2 py-2 text-sm rounded-lg`}
                     >
                       <AiFillSetting size={20} className={`mr-3`}/>
                       Settings
+                    </button>
+                  )}
+                </Menu.Item>
+
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={`${
+                        active ? 'bg-red-500 text-white' : 'text-gray-900'
+                      } group flex w-full items-center px-2 py-2 text-sm rounded-lg`}
+                    >
+                      <RiLogoutBoxLine size={20} className={`mr-3`}/>
+                      Logout
                     </button>
                   )}
                 </Menu.Item>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useAdminChangePassword} from "../../../hooks/admin/useAdminChangePassword";
 import Text from "../../../components/global/Text";
-import TextInputLabel from "../../../components/inputs/TextInputLabel";
+import TextInputLabel from "../../../components/global/input/TextInputLabel";
 import {Button} from "flowbite-react";
 import {ToasterConfig} from "../../../components/global/Toast";
 
