@@ -7,7 +7,11 @@ import { RiLockPasswordLine, RiLogoutBoxLine } from 'react-icons/ri'
 import MaleUserIcon from '../../../assets/img/global/male-user-iconn.png'
 import Text from "../../global/Text";
 
-const BaseInformation = ({name}: { name:string }) => {
+type BaseInformationProps = {
+  name: string
+}
+
+const BaseInformation = ({name}: BaseInformationProps) => {
   return (
     <React.Fragment>
       <div>
