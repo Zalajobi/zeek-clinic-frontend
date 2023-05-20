@@ -3,7 +3,6 @@ import { ToasterConfig } from "../../global/Toast";
 import Header from "../../superadmin/Header";
 import Sidebar from "./Sidebar";
 import {useSuperadminBaseTemplate} from "../../../hooks/superadmin/useSuperadminBaseTemplate";
-import {SuperadminBaseData} from "../../../types/superadmin";
 
 const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
   const {
