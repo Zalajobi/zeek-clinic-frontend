@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react'
+import { Fragment } from 'react'
 import ProviderBaseTemplate from "../../components/templates/providers/ProviderBaseTemplate";
 
 const CareGiverDashboard = () => {

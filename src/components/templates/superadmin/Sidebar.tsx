@@ -8,7 +8,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from 'react-icons/hi'
 import Logo from '../../../assets/img/global/logo.png'
 import SidebarItem from "./SidebarItem";
-import {SidebarItemProps} from "../../../types/superadmin";
+import { SidebarItemProps } from "../../../types/common";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false)
@@ -109,7 +109,7 @@ const Sidebar = () => {
               alt="Logo"
               width={50}
               height={50}
-              className={`${showSidebar ? 'hidden' : ''}`}
+              // className={`${showSidebar ? 'hidden' : ''}`}
             />
           </Link>
 
