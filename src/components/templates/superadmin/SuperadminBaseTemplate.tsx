@@ -3,11 +3,10 @@ import { ToasterConfig } from "../../global/Toast";
 import Header from "../../superadmin/Header";
 import Sidebar from "./Sidebar";
 import {useSuperadminBaseTemplate} from "../../../hooks/superadmin/useSuperadminBaseTemplate";
+import {SuperadminBaseData} from "../../../types/superadmin";
 
 const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
   const { requestData } = useSuperadminBaseTemplate()
-
-  console.log(requestData)
 
   return (
     <React.Fragment>
@@ -15,7 +14,7 @@ const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
         <Sidebar/>
 
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
-          <Header/>
+          <Header name={`${requestData?.first_name} ${requestData?.last_name}`}/>
 
           {children}
         </div>
