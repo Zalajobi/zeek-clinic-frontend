@@ -21,7 +21,7 @@ export const uploadProfileImage = async (image:File, fileName:string, folder:str
       Key: fileName,
     }
 
-    const response = <S3UploadResponse><unknown>await s3.upload(uploadPayload).promise()
+    const response = await s3.upload(uploadPayload).promise() as S3UploadResponse
     return response?.Location
   } catch (err) {
     console.error(err);

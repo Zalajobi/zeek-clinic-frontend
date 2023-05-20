@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import Text from "../../global/Text";
+import {Fragment, useState} from "react"
 import {Link} from "react-router-dom";
-import {SidebarItemProps} from "../../../types/superadmin";
+import Text from "../global/Text";
+import {SidebarItemProps} from "../../types/common";
 
-const SidebarItem = ({item, Icon, route, showSidebar, child}:SidebarItemProps) => {
+const SidebarItems = ({item, Icon, route, showSidebar, child}:SidebarItemProps) => {
   const [open, setOpen] = useState(false);
-
+  
   // hover:bg-[#ECF7FE]
   return (
-    <React.Fragment>
+    <Fragment>
       {!child ? (
         <div className={`w-[50%] min-w-max p-1.5 md:w-full`}>
           <Link
@@ -48,8 +48,8 @@ const SidebarItem = ({item, Icon, route, showSidebar, child}:SidebarItemProps) =
           )}
         </div>
       )}
-    </React.Fragment>
+    </Fragment>
   )
 }
 
-export default SidebarItem
+export default SidebarItems

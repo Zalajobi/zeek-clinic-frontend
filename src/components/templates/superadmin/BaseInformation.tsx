@@ -7,7 +7,11 @@ import { RiLockPasswordLine, RiLogoutBoxLine } from 'react-icons/ri'
 import MaleUserIcon from '../../../assets/img/global/male-user-iconn.png'
 import Text from "../../global/Text";
 
-const BaseInformation = () => {
+type BaseInformationProps = {
+  name: string
+}
+
+const BaseInformation = ({name}: BaseInformationProps) => {
   return (
     <React.Fragment>
       <div>
@@ -20,7 +24,7 @@ const BaseInformation = () => {
 
               <div className={`flex flex-shrink relative flex-col`}>
                 <div className={`flex flex-shrink relative flex-row`}>
-                  John Doe <AiFillCaretDown className="pl-3" size={25}/>
+                  {name} <AiFillCaretDown className="pl-3" size={25}/>
                 </div>
 
                 <Text text={`Superadmin`} size={`xs`} className={`text-gray-500 leading-[10px]`} weight={400}/>
