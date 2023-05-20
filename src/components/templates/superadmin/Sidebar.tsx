@@ -7,8 +7,8 @@ import { TbFaceMask } from "react-icons/tb";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from 'react-icons/hi'
 import Logo from '../../../assets/img/global/logo.png'
-import SidebarItem from "./SidebarItem";
 import { SidebarItemProps } from "../../../types/common";
+import SidebarItems from "../SidebarItems";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false)
@@ -131,7 +131,7 @@ const Sidebar = () => {
           {SuperadminSidebar.length >= 1 && SuperadminSidebar.map((sidebar:SidebarItemProps, idx:number) => {
             return (
               <>
-                <SidebarItem item={sidebar?.item} route={sidebar?.route} Icon={sidebar?.Icon} showSidebar={showSidebar} key={idx} child={sidebar?.child ? sidebar?.child : null}/>
+                <SidebarItems item={sidebar?.item} route={sidebar?.route} Icon={sidebar?.Icon} showSidebar={showSidebar} key={idx} child={sidebar?.child ? sidebar?.child : null}/>
               </>
             )
           })}
