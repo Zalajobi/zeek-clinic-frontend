@@ -1,6 +1,6 @@
 import React from "react";
 import { ToasterConfig } from "../../global/Toast";
-import Header from "../../superadmin/Header";
+import Header from "../Header";
 import Sidebar from "./Sidebar";
 import {useSuperadminBaseTemplate} from "../../../hooks/superadmin/useSuperadminBaseTemplate";
 
@@ -20,7 +20,7 @@ const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
         <Sidebar/>
 
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
-          <Header name={`${requestData?.first_name} ${requestData?.last_name}`} query={querySearch} handleSearch={onUpdateQuerySearch}/>
+          <Header name={`${requestData?.first_name} ${requestData?.last_name}`} query={querySearch} handleSearch={onUpdateQuerySearch} role={`Superadmin`}/>
 
           {children}
         </div>

@@ -12,7 +12,7 @@ export const useAdminLogin = () => {
     const response = await axiosPostRequest('/account/admin/login', {
       email,
       password
-    })
+    }, localStorage.getItem('token') as string)
 
     setResponseMessage(response?.message as string)
 

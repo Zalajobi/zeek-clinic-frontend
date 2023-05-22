@@ -9,7 +9,7 @@ export const useAdminForgotPassword = () => {
   const resetPassword = async () => {
     const response = await axiosPostRequest('/account/admin/password/reset-request', {
       email,
-    })
+    }, localStorage.getItem('token') as string)
 
     setResponseMessage(response?.message as string)
 

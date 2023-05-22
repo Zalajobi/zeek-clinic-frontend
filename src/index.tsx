@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import AddProvider from "./pages/admin/addProvider";
-// import AdminLayout from "./layout/AdminLayout";
 import AdminLogin from "./pages/admin/auth/AdminLogin";
 import ForgotPassword from "./pages/admin/auth/ForgotPassword";
 import ChangePassword from "./pages/admin/auth/ChangePassword";
@@ -104,8 +103,6 @@ const router = createBrowserRouter([
       },
     ]
   },
-
-  //   element: <AdminLayout />,
 ]);
 root.render(
   <React.StrictMode>
