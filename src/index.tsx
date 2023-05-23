@@ -4,12 +4,10 @@ import './index.css';
 import App from './App';
 import {
   createBrowserRouter,
-  // Navigate,
   RouterProvider,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-// import AddProvider from "./pages/admin/addProvider";
-// import AdminLayout from "./layout/AdminLayout";
+import AddProvider from "./pages/admin/addProvider";
 import AdminLogin from "./pages/admin/auth/AdminLogin";
 import ForgotPassword from "./pages/admin/auth/ForgotPassword";
 import ChangePassword from "./pages/admin/auth/ChangePassword";
@@ -17,7 +15,7 @@ import AdminSignup from "./pages/admin/auth/AdminSignup";
 import CreateNewUser from "./pages/superadmin/CreateNewUser";
 import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
 import SuperadminDashboard from "./pages/superadmin";
-// import HomePage from "./pages/HomePage";
+import CareGiverDashboard from "./pages/provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -51,6 +49,10 @@ const router = createBrowserRouter([
         path: '/admin/change-password',
         element: <ChangePassword/>
       },
+      {
+        path: '/admin/provider/new',
+        element: <AddProvider/>
+      },
     ]
   },
 
@@ -72,24 +74,35 @@ const router = createBrowserRouter([
     ]
   },
 
-  // {
-  //   path: "/admin/provider/add",
-  //   element: <AddProvider/>
-  // },
-  //
-  // {
-  //   path: '/admin/dashboard',
-  //   element: <AdminLayout />,
-  //   children: [
-  //     { element: <Navigate to="/" />, index: true },
-  //     // { path: 'app', element: <DashboardAppPage /> },
-  //     // { path: 'user', element: <UserPage /> },
-  //     // { path: 'products', element: <ProductsPage /> },
-  //     // { path: 'blog', element: <BlogPage /> },
-  //   ],
-  // },
+  {
+    path: '/care',
+    children: [
+      // {
+      //   path: '/care/login',
+      //   element: <AdminLogin/>
+      // },
 
+      {
+        path: '/care',
+        element: <CareGiverDashboard/>
+      },
 
+      {
+        path: '/care/signup',
+        element: <AdminSignup/>
+      },
+
+      {
+        path: '/care/forgot-password',
+        element: <ForgotPassword/>
+      },
+
+      {
+        path: '/care/change-password',
+        element: <ChangePassword/>
+      },
+    ]
+  },
 ]);
 root.render(
   <React.StrictMode>

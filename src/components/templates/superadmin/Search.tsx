@@ -1,14 +1,12 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent} from "react";
 import { BiSearchAlt } from 'react-icons/bi'
 
-const Search = () => {
-  const [, setQuerySearch] = useState("");
+type SearchProps = {
+  search: string
+  handleSearch: (event:ChangeEvent<HTMLInputElement>) => void
+}
 
-  const handleSearch = (event:ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value)
-    console.log(event?.target?.value)
-  }
-
+const Search = ({search, handleSearch}:SearchProps) => {
   return (
     <div className='max-w-md w-[300px] h-12 flex items-center justify-center mr-auto'>
       <div
@@ -22,7 +20,9 @@ const Search = () => {
           type="text"
           id="search"
           onChange={handleSearch}
-          placeholder="Search something.."/>
+          placeholder="Search something.."
+          value={search}
+        />
       </div>
     </div>
   )

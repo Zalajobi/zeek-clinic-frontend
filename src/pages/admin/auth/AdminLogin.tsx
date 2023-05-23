@@ -1,11 +1,11 @@
 import React from 'react'
 import Text from "../../../components/global/Text";
-import TextInputLabel from "../../../components/inputs/TextInputLabel";
+import TextInputLabel from "../../../components/global/input/TextInputLabel";
 import useAdminLogin from "../../../hooks/admin/useAdminLogin";
 import { Button } from 'flowbite-react';
 import { FcGoogle } from 'react-icons/fc'
 import { GrGithub } from 'react-icons/gr'
-import CheckBox from "../../../components/inputs/CheckBox";
+import CheckBox from "../../../components/global/input/CheckBox";
 import LoginImage from '../../../assets/img/admin/login.png'
 import { ToasterConfig } from "../../../components/global/Toast";
 

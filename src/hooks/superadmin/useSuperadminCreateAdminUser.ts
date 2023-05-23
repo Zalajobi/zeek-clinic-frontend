@@ -11,6 +11,7 @@ export const useSuperadminCreateAdminUser = () => {
   const [state, setState] = useState('');
   const [city, setCity] = useState('None');
   const [countryCode, setCountryCode] = useState('');
+  const [profileImgURL, setProfileImgURL] = useState('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
   const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
@@ -21,31 +22,34 @@ export const useSuperadminCreateAdminUser = () => {
 
   useEffect(() => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
-    superadminGetRolesAndDepartments().then(r => console.log(`HELLO THERE`))
-  }, []);
 
+    const superadminGetRolesAndDepartments = async () => {
+      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments', localStorage.getItem('token') as string)
+      const allDepartments:string[] = []
+      const allRoles:string[] = []
 
-  const superadminGetRolesAndDepartments = async () => {
-    const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
-    const allDepartments:string[] = []
-    const allRoles:string[] = []
+      if (response?.success) {
+        for (const dept in response?.data?.department) {
+          allDepartments.push(dept)
+        }
 
-    if (response.success) {
-      for (const dept in response?.data?.department) {
-        allDepartments.push(dept)
+        for (const role in response?.data?.role)  {
+          allRoles.push(role)
+        }
+      } else {
+        toast.error(response?.message)
+        navigate('/superadmin/login')
       }
 
-      for (const role in response?.data?.role)  {
-        allRoles.push(role)
-      }
-    } else {
-      toast.error(response?.message)
-      navigate('/superadmin/login')
+      setAllDepartments(allDepartments)
+      setAllRoles(allRoles)
     }
+    superadminGetRolesAndDepartments()
+      .catch(err => {
+        navigate('/superadmin/login')
+      })
+  }, [navigate]);
 
-    setAllDepartments(allDepartments)
-    setAllRoles(allRoles)
-  }
 
   const onUpdateCountry = (value:string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries
@@ -71,15 +75,16 @@ export const useSuperadminCreateAdminUser = () => {
       city,
       state,
       country_code: countryCode,
-      call_code: phoneCode
+      call_code: phoneCode,
+      profile_img_url: profileImgURL
     }
 
-    const response = await axiosPostRequest('/account/super-admin/create/admin', adminData)
+    const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData, localStorage.getItem('token') as string)
 
-    console.log(response)
-      // super-admin/create/admin
-    console.log("SUBMIT FORM HERE")
-    console.log(adminData)
+    if (success)
+      toast.success(message)
+    else
+      toast.error(message)
   }
 
   return {
@@ -90,10 +95,12 @@ export const useSuperadminCreateAdminUser = () => {
     allStateCities,
     allDepartments,
     allRoles,
+    profileImgURL,
 
     handleCreateAdmin,
     onUpdateCountry,
     onUpdateState,
     onUpdateCity,
+    setProfileImgURL,
   }
 }
