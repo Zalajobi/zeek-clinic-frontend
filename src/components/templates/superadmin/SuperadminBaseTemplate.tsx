@@ -22,7 +22,9 @@ const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
           <Header name={`${requestData?.first_name} ${requestData?.last_name}`} query={querySearch} handleSearch={onUpdateQuerySearch} role={`Superadmin`}/>
 
-          {children}
+          <div className={`relative flex h-full flex-col space-y-4 overflow-y-auto bg-[#F1F3F7] p-12 dark:bg-ds-dark-800`}>
+            {children}
+          </div>
         </div>
       </div>
 
