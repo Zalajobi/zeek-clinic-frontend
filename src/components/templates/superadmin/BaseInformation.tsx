@@ -9,9 +9,10 @@ import Text from "../../global/Text";
 
 type BaseInformationProps = {
   name: string
+  role: string
 }
 
-const BaseInformation = ({name}: BaseInformationProps) => {
+const BaseInformation = ({name, role}: BaseInformationProps) => {
   return (
     <React.Fragment>
       <div>
@@ -27,7 +28,7 @@ const BaseInformation = ({name}: BaseInformationProps) => {
                   {name} <AiFillCaretDown className="pl-3" size={25}/>
                 </div>
 
-                <Text text={`Superadmin`} size={`xs`} className={`text-gray-500 leading-[10px]`} weight={400}/>
+                <Text text={role} size={`xs`} className={`text-gray-500 leading-[10px]`} weight={400}/>
               </div>
             </Menu.Button>
           </div>

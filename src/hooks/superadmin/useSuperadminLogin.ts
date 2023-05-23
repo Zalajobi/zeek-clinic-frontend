@@ -14,7 +14,7 @@ export const useSuperadminLogin = () => {
     const response = await axiosPostRequest('/account/super-admin/auth/login', {
       email,
       password
-    })
+    }, localStorage.getItem('token') as string)
 
     setResponseMessage(response?.message as string)
 

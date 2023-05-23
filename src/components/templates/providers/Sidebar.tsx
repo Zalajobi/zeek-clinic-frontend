@@ -150,6 +150,13 @@ const Sidebar = () => {
       route: '#',
       showSidebar: showSidebar,
     },
+
+    {
+      item: 'Profile',
+      Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      route: '#',
+      showSidebar: showSidebar,
+    },
   ] as SidebarItemProps[]
 
   return (

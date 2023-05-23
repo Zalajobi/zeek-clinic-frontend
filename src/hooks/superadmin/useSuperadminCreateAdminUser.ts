@@ -24,7 +24,7 @@ export const useSuperadminCreateAdminUser = () => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
 
     const superadminGetRolesAndDepartments = async () => {
-      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
+      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments', localStorage.getItem('token') as string)
       const allDepartments:string[] = []
       const allRoles:string[] = []
 
@@ -79,7 +79,7 @@ export const useSuperadminCreateAdminUser = () => {
       profile_img_url: profileImgURL
     }
 
-    const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData)
+    const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData, localStorage.getItem('token') as string)
 
     if (success)
       toast.success(message)

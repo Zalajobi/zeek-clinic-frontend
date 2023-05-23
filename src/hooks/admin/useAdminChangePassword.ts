@@ -64,7 +64,7 @@ export const useAdminChangePassword = () => {
     const response = await axiosPutRequest('/account/admin/reset_password', {
       password: newPassword,
       token: authToken
-    })
+    }, localStorage.getItem('token') as string)
 
     if (response.success) {
       toast.success(response.message)
