@@ -9,8 +9,10 @@ import SuperadminBaseTemplate from "../../components/templates/superadmin/Supera
 import Text from "../../components/global/Text";
 import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganisation";
 import Table from "../../components/global/Table";
+import TableHeaderDropdown from "../../components/global/TableHeaderDropdown";
 
 const HospitalOrganizations = () => {
+  const itemsPerPage = ['All', 10, 20, 50, 100]
 
   const {
     //Value
@@ -311,119 +313,41 @@ const HospitalOrganizations = () => {
                 </form>
               </div>
 
-                <div
-                  className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-                  <Menu as="div" className="relative inline-block text-left">
-                    <div>
-                      <Menu.Button
-                        className="flex items-center justify-center w-full p-2 text-sm font-medium
-                        text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none
-                        hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200
-                        dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
-                        dark:hover:text-white dark:hover:bg-gray-700 w-[106px]"
-                      >
-                        <IoMdArrowDropdown size={20} className={`mr-2 ml-1`}/> <span className={`mr-1`}>{perPage}</span>
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items
-                        className="z-10 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100
-                        rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-w-[106px]">
-                        <div className="px-1 py-1 ">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active ? 'bg-[#EEF7FF] text-black' : 'text-gray-900'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                onClick={() => onUpdatePerPageItem(10)}
-                              >
-                                10
-                              </button>
-                            )}
-                          </Menu.Item>
-
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active ? 'bg-[#EEF7FF] text-black' : 'text-gray-900'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                onClick={() => onUpdatePerPageItem(20)}
-                              >
-                                20
-                              </button>
-                            )}
-                          </Menu.Item>
-
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active ? 'bg-[#EEF7FF] text-black' : 'text-gray-900'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                onClick={() => onUpdatePerPageItem(50)}
-                              >
-                                50
-                              </button>
-                            )}
-                          </Menu.Item>
-
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active ? 'bg-[#EEF7FF] text-black' : 'text-gray-900'
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                onClick={() => onUpdatePerPageItem(10)}
-                              >
-                                100
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </div>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+              <TableHeaderDropdown value={perPage} items={itemsPerPage} change={onUpdatePerPageItem}/>
 
 
-                  <div className="flex items-center w-full space-x-3 md:w-auto">
-                    <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
-                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                            type="button">
-                      <svg className="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                      </svg>
-                      Actions
-                    </button>
-                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                            type="button">
-                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 mr-2 text-gray-400"
-                           viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                              clip-rule="evenodd"/>
-                      </svg>
-                      Filter
-                      <svg className="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                      </svg>
-                    </button>
-                  </div>
+              <div
+                className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                <div className="flex items-center w-full space-x-3 md:w-auto">
+                  <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
+                          className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          type="button">
+                    <svg className="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path clip-rule="evenodd" fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                    </svg>
+                    Actions
+                  </button>
+                  <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
+                          className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="w-4 h-4 mr-2 text-gray-400"
+                         viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd"
+                            d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                            clip-rule="evenodd"/>
+                    </svg>
+                    Filter
+                    <svg className="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path clip-rule="evenodd" fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                    </svg>
+                  </button>
                 </div>
+              </div>
+
               </div>
             </div>
 
