@@ -3,7 +3,9 @@ import {ChangeEvent, useState} from "react";
 
 export const useHospitalOrganisation = () => {
   const [hospitalTabs, setHospitalTabs] = useState<'All' | 'Pending' | 'Active' | 'Deactivated'>('All');
+  const [perPage, setPerPage] = useState<10 | 20 | 50 | 100>(10);
   const [searchOrganisation, setSearchOrganisation] = useState('');
+  const [showPerPage, setShowPerPage] = useState(false);
 
   const onUpdateSearchOrganisation = (event:ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
@@ -14,13 +16,22 @@ export const useHospitalOrganisation = () => {
     setHospitalTabs(tab)
   }
 
+  const onUpdatePerPageItem = (value: 10 | 20 | 50 | 100) => {
+    console.log(value)
+    setPerPage(value)
+    setShowPerPage(!showPerPage)
+  }
+
   return {
     //Value
     searchOrganisation,
     hospitalTabs,
+    perPage,
+    showPerPage,
 
     // Function
     onUpdateSearchOrganisation,
     onUpdateActiveTab,
+    onUpdatePerPageItem,
   }
 }
