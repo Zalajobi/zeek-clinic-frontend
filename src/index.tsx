@@ -16,6 +16,7 @@ import CreateNewUser from "./pages/superadmin/CreateNewUser";
 import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
 import SuperadminDashboard from "./pages/superadmin";
 import CareGiverDashboard from "./pages/provider";
+import HospitalOrganizations from "./pages/superadmin/HospitalOrganizations";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -63,14 +64,21 @@ const router = createBrowserRouter([
         path: '/superadmin/',
         element: <SuperadminDashboard/>
       },
+
+      {
+        path: '/superadmin/organisations',
+        element: <HospitalOrganizations/>
+      },
+
       {
         path: '/superadmin/create/new_admin',
         element: <CreateNewUser/>
       },
+
       {
         path: '/superadmin/login',
         element: <SuperadminLogin/>
-      }
+      },
     ]
   },
 

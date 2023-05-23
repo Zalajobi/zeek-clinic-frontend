@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import { ToasterConfig } from "../../global/Toast";
 import Header from "../Header";
 import Sidebar from "./Sidebar";
@@ -15,7 +15,7 @@ const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
   } = useSuperadminBaseTemplate()
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="relative flex h-screen flex-1 overflow-y-auto bg-white text-brand-body-text dark:bg-ds-dark-800 dark:text-ds-dark-300">
         <Sidebar/>
 
@@ -27,7 +27,7 @@ const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
       </div>
 
       <ToasterConfig/>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

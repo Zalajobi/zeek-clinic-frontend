@@ -6,6 +6,7 @@ import { GiDoctorFace } from "react-icons/gi";
 import { TbFaceMask } from "react-icons/tb";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { HiOutlineClipboardList } from 'react-icons/hi'
+import { GrOrganization } from 'react-icons/gr'
 import Logo from '../../../assets/img/global/logo.png'
 import { SidebarItemProps } from "../../../types/common";
 import SidebarItems from "../SidebarItems";
@@ -18,6 +19,12 @@ const Sidebar = () => {
       item: 'Dashboard',
       Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40}/>,
       route: '/superadmin',
+      showSidebar: showSidebar,
+    },
+    {
+      item: 'Organisation',
+      Icon: <GrOrganization size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      route: '/superadmin/organisations',
       showSidebar: showSidebar,
     },
 
