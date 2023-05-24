@@ -25,15 +25,9 @@ const Table = ({columns, data}:TableProps) => {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()} className={`border-y bg-ds-gray-100 dark:bg-ds-gray-900`}>
               {headerGroup.headers.map(column => (
-                <th
-                  colSpan={1}
-                  scope="col"
-                  className="font-inter text-xs font-medium text-custom-description"
-                >
-                  <div className={`flex items-center gap-3 whitespace-nowrap px-6 py-3 cursor-pointer select-none`}>
-                    {column.render('Header')}
-                  </div>
-                </th>
+                <>
+                  {column.render('Header')}
+                </>
               ))}
             </tr>
           ))}
