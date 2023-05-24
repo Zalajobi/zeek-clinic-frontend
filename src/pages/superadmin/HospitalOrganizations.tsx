@@ -11,7 +11,7 @@ import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganis
 import Table from "../../components/global/Table";
 import TableHeaderDropdown from "../../components/global/TableHeaderDropdown";
 import {GetHospitalResponseData} from "../../types/superadmin";
-import {SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
+import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -33,60 +33,7 @@ const HospitalOrganizations = () => {
 
   const data = useMemo(() => SuperadminHospitalRow(hospitalData) ?? [], [hospitalData]);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: 'Name',
-        accessor: 'name', // accessor is the "key" in the data
-      },
-
-      {
-        Header: 'Email',
-        accessor: 'email',
-      },
-
-      {
-        Header: 'Sites',
-        accessor: 'site_count',
-      },
-
-      {
-        Header: 'Phone',
-        accessor: 'phone',
-      },
-
-      {
-        Header: 'Address',
-        accessor: 'address',
-      },
-
-      {
-        Header: 'City',
-        accessor: 'city',
-      },
-
-      {
-        Header: 'State',
-        accessor: 'state',
-      },
-
-      {
-        Header: 'Country',
-        accessor: 'country',
-      },
-
-      {
-        Header: 'Joined On',
-        accessor: 'created_at',
-      },
-
-      {
-        Header: 'Action',
-        accessor: 'action',
-      },
-    ],
-    []
-  )
+  const columns = useMemo(() => SuperadminHospitalColumn(), [hospitalData])
 
   return (
     <SuperadminBaseTemplate>

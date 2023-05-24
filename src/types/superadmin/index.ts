@@ -27,14 +27,15 @@ export interface GetHospitalResponseData {
 }
 
 export interface HospitalRowData {
-  name: string
-  email: string
-  site_count: number
-  phone: string
-  address: string
-  city: string
-  state: string
-  country: string
-  created_at: string
+  checkbox: ReactNode
+  name: ReactNode
+  email: ReactNode
+  site_count: ReactNode
+  phone: ReactNode
+  address: ReactNode
+  city: ReactNode
+  state: ReactNode
+  country: ReactNode
+  created_at: ReactNode
   action: ReactNode
 }
