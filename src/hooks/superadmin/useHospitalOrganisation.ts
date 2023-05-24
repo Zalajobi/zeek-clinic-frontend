@@ -10,7 +10,8 @@ export const useHospitalOrganisation = () => {
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [searchOrganisation, setSearchOrganisation] = useState('');
   const [showPerPage, setShowPerPage] = useState(false);
-  const [from, setFrom] = useState<Date | null>();
+  const [hospitalFilterFrom, setHospitalFilterFrom] = useState<Date | null>();
+  const [hospitalFilterTo, setHospitalFilterTo] = useState<Date | null>();
   const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
 
   useEffect(() => {
@@ -29,8 +30,11 @@ export const useHospitalOrganisation = () => {
   }, [navigate]);
 
   const onUpdateSelectFrom = (value:Date | null) => {
-    setFrom(value)
-    console.log(value)
+    setHospitalFilterFrom(value)
+  }
+
+  const onUpdateSelectTo = (value: Date | null) => {
+    setHospitalFilterTo(value)
   }
 
   const onUpdateSearchOrganisation = (event:ChangeEvent<HTMLInputElement>) => {
@@ -61,5 +65,6 @@ export const useHospitalOrganisation = () => {
     onUpdateActiveTab,
     onUpdatePerPageItem,
     onUpdateSelectFrom,
+    onUpdateSelectTo,
   }
 }

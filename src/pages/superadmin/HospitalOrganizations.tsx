@@ -1,6 +1,7 @@
 import { HiPlusSm } from 'react-icons/hi'
 import { TiExportOutline } from 'react-icons/ti'
 import { GoSearch } from 'react-icons/go'
+import { CgArrowsH } from 'react-icons/cg'
 import { Tab } from "@headlessui/react";
 import { useMemo } from "react";
 
@@ -27,6 +28,7 @@ const HospitalOrganizations = () => {
     onUpdateActiveTab,
     onUpdatePerPageItem,
     onUpdateSelectFrom,
+    onUpdateSelectTo,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
@@ -131,7 +133,9 @@ const HospitalOrganizations = () => {
                 <div className="flex items-center w-full space-x-3 md:w-auto">
                   <BasicDatePicker label={`From`} change={onUpdateSelectFrom}/>
 
-                  <h1>HELLO</h1>
+                  <CgArrowsH size={30}/>
+
+                  <BasicDatePicker label={`To`} change={onUpdateSelectTo}/>
                 </div>
               </div>
 
