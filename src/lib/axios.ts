@@ -30,11 +30,12 @@ export const axiosPutRequest = async (url:string, data:any, token:string) => {
   return request.data
 }
 
-export const axiosGetRequest = async (url:string, token?:string) => {
+export const axiosGetRequest = async (url:string, params?:any) => {
   const request = await instance.get(url, {
     headers: {
-      token
-    }
+      token: localStorage.getItem('token') as string
+    },
+    params
   })
 
   return request.data

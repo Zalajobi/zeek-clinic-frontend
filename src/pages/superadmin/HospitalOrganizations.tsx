@@ -21,7 +21,9 @@ const HospitalOrganizations = () => {
     searchOrganisation,
     hospitalTabs,
     perPage,
+    showPerPage,
     hospitalData,
+    currentPage,
 
     // Function
     onUpdateSearchOrganisation,
@@ -33,9 +35,13 @@ const HospitalOrganizations = () => {
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
 
-  const data = useMemo(() => SuperadminHospitalRow(hospitalData) ?? [], [hospitalData]);
+  const data = useMemo(
+    () => SuperadminHospitalRow(hospitalData) ?? [],
+    [hospitalData, currentPage, showPerPage]);
 
-  const columns = useMemo(() => SuperadminHospitalColumn(), [hospitalData])
+  const columns = useMemo(
+    () => SuperadminHospitalColumn(),
+    [hospitalData, currentPage, showPerPage])
 
   return (
     <SuperadminBaseTemplate>
