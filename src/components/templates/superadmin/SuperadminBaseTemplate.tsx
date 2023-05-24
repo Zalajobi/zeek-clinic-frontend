@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import { ToasterConfig } from "../../global/Toast";
 import Header from "../Header";
 import Sidebar from "./Sidebar";
 import {useSuperadminBaseTemplate} from "../../../hooks/superadmin/useSuperadminBaseTemplate";
 
-const SuperadminBaseTemplate = ({children}:{children: React.ReactNode}) => {
+const SuperadminBaseTemplate = ({children}:{children: ReactNode}) => {
   const {
     // Values
     querySearch,

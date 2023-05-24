@@ -10,6 +10,8 @@ import Text from "../../components/global/Text";
 import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganisation";
 import Table from "../../components/global/Table";
 import TableHeaderDropdown from "../../components/global/TableHeaderDropdown";
+import {GetHospitalResponseData} from "../../types/superadmin";
+import {SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -19,6 +21,7 @@ const HospitalOrganizations = () => {
     searchOrganisation,
     hospitalTabs,
     perPage,
+    hospitalData,
 
     // Function
     onUpdateSearchOrganisation,
@@ -26,200 +29,61 @@ const HospitalOrganizations = () => {
     onUpdatePerPageItem,
   } = useHospitalOrganisation()
 
-  const data = useMemo(
-    () => [
+  // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
 
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-      {
-        name: 'Apple MacBook Pro 17',
-        color: 'Silver',
-        category: 'Laptop',
-        accessories: 'Yes',
-        available: 'Yes',
-        price: '$2999',
-        weight: '3.0 lb',
-      },
-
-    ],
-    []
-  )
+  const data = useMemo(() => SuperadminHospitalRow(hospitalData) ?? [], [hospitalData]);
 
   const columns = useMemo(
     () => [
       {
-        Header: 'Product name',
+        Header: 'Name',
         accessor: 'name', // accessor is the "key" in the data
       },
 
       {
-        Header: 'Color',
-        accessor: 'color',
+        Header: 'Email',
+        accessor: 'email',
       },
 
       {
-        Header: 'Category',
-        accessor: 'category',
+        Header: 'Sites',
+        accessor: 'site_count',
       },
 
       {
-        Header: 'Accessories',
-        accessor: 'accessories',
+        Header: 'Phone',
+        accessor: 'phone',
       },
 
       {
-        Header: 'Available',
-        accessor: 'available',
+        Header: 'Address',
+        accessor: 'address',
       },
 
       {
-        Header: 'Price',
-        accessor: 'price',
+        Header: 'City',
+        accessor: 'city',
       },
 
       {
-        Header: 'Weight',
-        accessor: 'weight',
+        Header: 'State',
+        accessor: 'state',
       },
 
+      {
+        Header: 'Country',
+        accessor: 'country',
+      },
+
+      {
+        Header: 'Joined On',
+        accessor: 'created_at',
+      },
+
+      {
+        Header: 'Action',
+        accessor: 'action',
+      },
     ],
     []
   )

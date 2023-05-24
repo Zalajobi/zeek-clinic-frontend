@@ -1,11 +1,32 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import { axiosGetRequest } from "../../lib/axios";
+import {GetHospitalResponseData} from "../../types/superadmin";
 
 
 export const useHospitalOrganisation = () => {
+  const navigate = useNavigate();
   const [hospitalTabs, setHospitalTabs] = useState<'All' | 'Pending' | 'Active' | 'Deactivated'>('All');
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [searchOrganisation, setSearchOrganisation] = useState('');
   const [showPerPage, setShowPerPage] = useState(false);
+  const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
+
+  useEffect(() => {
+    const getHospitalData = async () => {
+      const response = await axiosGetRequest('/account/super-admin/hospitals')
+
+      if (response.success) {
+        setHospitalData(response?.data as GetHospitalResponseData[])
+      }
+    }
+
+    getHospitalData()
+      .catch(err => {
+        navigate('/superadmin/login')
+      })
+  }, [navigate]);
+
 
   const onUpdateSearchOrganisation = (event:ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
@@ -28,6 +49,7 @@ export const useHospitalOrganisation = () => {
     hospitalTabs,
     perPage,
     showPerPage,
+    hospitalData,
 
     // Function
     onUpdateSearchOrganisation,
