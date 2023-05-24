@@ -21,7 +21,6 @@ const HospitalOrganizations = () => {
     searchOrganisation,
     hospitalTabs,
     perPage,
-    showPerPage,
     hospitalData,
     currentPage,
 
@@ -37,11 +36,11 @@ const HospitalOrganizations = () => {
 
   const data = useMemo(
     () => SuperadminHospitalRow(hospitalData) ?? [],
-    [hospitalData, currentPage, showPerPage]);
+    [hospitalData, currentPage]);
 
   const columns = useMemo(
     () => SuperadminHospitalColumn(),
-    [hospitalData, currentPage, showPerPage])
+    [hospitalData, currentPage])
 
   return (
     <SuperadminBaseTemplate>
@@ -107,7 +106,7 @@ const HospitalOrganizations = () => {
           </div>
         </div>
 
-        <div className="relative overflow-x-auto shadow-lg flex flex-col rounded-lg border border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
+        <div className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
 
           <div className="w-full relative my-4 sm:rounded-lg px-10">
             <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">

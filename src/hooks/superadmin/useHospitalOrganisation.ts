@@ -11,7 +11,6 @@ export const useHospitalOrganisation = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchOrganisation, setSearchOrganisation] = useState('');
   const [totalHospitals, setTotalHospitals] = useState<number>(0);
-  const [showPerPage, setShowPerPage] = useState(false);
   const [hospitalFilterFrom, setHospitalFilterFrom] = useState<Date | null>();
   const [hospitalFilterTo, setHospitalFilterTo] = useState<Date | null>();
   const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
@@ -56,10 +55,24 @@ export const useHospitalOrganisation = () => {
     setHospitalTabs(tab)
   }
 
-  const onUpdatePerPageItem = (value: 'All' | 10 | 20 | 50 | 100) => {
-    console.log(value)
+  const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
+    const params = {
+      page: currentPage,
+      per_page: value === 'All' ? 0 : value,
+      from_date: hospitalFilterFrom,
+      to_date: hospitalFilterTo,
+      search: searchOrganisation,
+    }
     setPerPage(value)
-    setShowPerPage(!showPerPage)
+    // setShowPerPage(!showPerPage)
+
+    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+    if (response.success) {
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      console.log(response?.data?.hospitals)
+    }
   }
 
   return {
@@ -67,7 +80,6 @@ export const useHospitalOrganisation = () => {
     searchOrganisation,
     hospitalTabs,
     perPage,
-    showPerPage,
     hospitalData,
     currentPage,
 

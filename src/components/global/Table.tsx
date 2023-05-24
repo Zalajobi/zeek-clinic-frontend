@@ -20,7 +20,7 @@ const Table = ({columns, data}:TableProps) => {
 
       <div className="relative overflow-x-auto sm:rounded-lg">
         <table className="w-full border-none" {...getTableProps()}>
-          <thead>
+          <thead className={`sticky`}>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()} className={`border-y bg-ds-gray-100 dark:bg-ds-gray-900`}>
               {headerGroup.headers.map(column => (
