@@ -10,23 +10,28 @@ export const useHospitalOrganisation = () => {
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [searchOrganisation, setSearchOrganisation] = useState('');
   const [showPerPage, setShowPerPage] = useState(false);
+  const [from, setFrom] = useState<Date | null>();
   const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
 
   useEffect(() => {
-    const getHospitalData = async () => {
-      const response = await axiosGetRequest('/account/super-admin/hospitals')
-
-      if (response.success) {
-        setHospitalData(response?.data as GetHospitalResponseData[])
-      }
-    }
-
-    getHospitalData()
-      .catch(err => {
-        navigate('/superadmin/login')
-      })
+    // const getHospitalData = async () => {
+    //   const response = await axiosGetRequest('/account/super-admin/hospitals')
+    //
+    //   if (response.success) {
+    //     setHospitalData(response?.data as GetHospitalResponseData[])
+    //   }
+    // }
+    //
+    // getHospitalData()
+    //   .catch(err => {
+    //     navigate('/superadmin/login')
+    //   })
   }, [navigate]);
 
+  const onUpdateSelectFrom = (value:Date | null) => {
+    setFrom(value)
+    console.log(value)
+  }
 
   const onUpdateSearchOrganisation = (event:ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
@@ -55,5 +60,6 @@ export const useHospitalOrganisation = () => {
     onUpdateSearchOrganisation,
     onUpdateActiveTab,
     onUpdatePerPageItem,
+    onUpdateSelectFrom,
   }
 }
