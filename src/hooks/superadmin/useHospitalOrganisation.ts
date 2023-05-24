@@ -38,12 +38,42 @@ export const useHospitalOrganisation = () => {
       })
   }, [navigate]);
 
-  const onUpdateSelectFrom = (value:Date | null) => {
+  const onUpdateSelectFrom = async (value: Date | null) => {
     setHospitalFilterFrom(value)
+    const params = {
+      page: 1,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: value,
+      to_date: hospitalFilterTo,
+      search: searchOrganisation,
+    }
+
+    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+    if (response.success) {
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      console.log(response?.data)
+    }
   }
 
-  const onUpdateSelectTo = (value: Date | null) => {
+  const onUpdateSelectTo = async (value: Date | null) => {
     setHospitalFilterTo(value)
+    const params = {
+      page: 1,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: hospitalFilterFrom,
+      to_date: value,
+      search: searchOrganisation,
+    }
+
+    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+    if (response.success) {
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      console.log(response?.data)
+    }
   }
 
   const onUpdateSearchOrganisation = (event:ChangeEvent<HTMLInputElement>) => {
@@ -56,22 +86,21 @@ export const useHospitalOrganisation = () => {
   }
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
+    setPerPage(value)
     const params = {
-      page: currentPage,
+      page: 1,
       per_page: value === 'All' ? 0 : value,
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
     }
-    setPerPage(value)
-    // setShowPerPage(!showPerPage)
 
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
     if (response.success) {
       setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
       setTotalHospitals(response?.data?.count as number)
-      console.log(response?.data?.hospitals)
+      console.log(response?.data)
     }
   }
 

@@ -1,5 +1,6 @@
 import {GetHospitalResponseData, HospitalRowData} from "../../types/superadmin";
 import {TbArrowsMoveVertical} from "react-icons/tb";
+import moment from "moment";
 
 export const SuperadminHospitalColumn = () => {
   const columnItem = [
@@ -185,6 +186,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           </div>
         </div>
       </th>,
+
       name: <th
         colSpan={1}
         scope="col"
@@ -194,6 +196,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.name}
         </div>
       </th>,
+
       email: <th
         colSpan={1}
         scope="col"
@@ -203,6 +206,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.email}
         </div>
       </th>,
+
       site_count: <th
         colSpan={1}
         scope="col"
@@ -212,6 +216,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.site_count}
         </div>
       </th>,
+
       phone: <th
         colSpan={1}
         scope="col"
@@ -221,6 +226,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.phone}
         </div>
       </th>,
+
       address: <th
         colSpan={1}
         scope="col"
@@ -230,6 +236,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.address}
         </div>
       </th>,
+
       city: <th
         colSpan={1}
         scope="col"
@@ -239,6 +246,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.city}
         </div>
       </th>,
+
       state: <th
         colSpan={1}
         scope="col"
@@ -248,6 +256,7 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.state}
         </div>
       </th>,
+
       country: <th
         colSpan={1}
         scope="col"
@@ -257,15 +266,17 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
           {item?.country}
         </div>
       </th>,
+
       created_at: <th
         colSpan={1}
         scope="col"
         className="!font-inter !text-xs !font-medium !text-custom-description"
       >
         <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.created_at}
+          {moment(item?.created_at).format('MMM DD. YYYY')}
         </div>
       </th>,
+
       action: <button>{item?.id}</button>
     })
   })
