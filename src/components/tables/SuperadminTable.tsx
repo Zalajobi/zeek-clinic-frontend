@@ -1,165 +1,121 @@
-import {GetHospitalResponseData, HospitalRowData} from "../../types/superadmin";
 import {TbArrowsMoveVertical} from "react-icons/tb";
 import moment from "moment";
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
+
+import {GetHospitalResponseData, HospitalRowData} from "../../types/superadmin";
 
 export const SuperadminHospitalColumn = () => {
   const columnItem = [
 
     {
-      Header: <th colSpan={1} scope="col" className="!font-inter !text-xs !font-medium">
-        <div className="!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3">
-          <div
-            className="!group !flex !cursor-pointer !select-none !flex-row !items-center !gap-2 !font-inter !text-sm !font-medium !outline-none">
-            <input
-              className="!grid !h-6 !w-6 !flex-shrink-0 !place-items-center !rounded-md border !p-1 !outline-none
-                      !ring-offset-0 !transition-[background-color,_border-color,_box-shadow] !focus:ring-2
-                      !focus:ring-offset-2 !group-hover:ring-2 !group-hover:ring-offset-2 !border-custom-gray-100 !bg-white
-                      !ring-custom-primary-400"
-              type="checkbox"
-            />
-          </div>
-        </div>
-      </th>,
+      Header: <input
+        className="!grid !h-6 !w-6 !flex-shrink-0 !place-items-center !rounded-md border !p-1 !outline-none
+        !ring-offset-0 !transition-[background-color,_border-color,_box-shadow] !focus:ring-2
+        !focus:ring-offset-2 !group-hover:ring-2 !group-hover:ring-offset-2 !border-custom-gray-100 !bg-white
+        !ring-custom-primary-400"
+          type="checkbox"
+        />,
       accessor: 'checkbox',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Name
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By name`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Name
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By name`)}/>
+          </span>
+      </Fragment>,
       accessor: 'name',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Name
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Email`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Email
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Email`)}/>
+          </span>
+      </Fragment>,
       accessor: 'email',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Sites
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Sites`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Sites
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Sites`)}/>
+          </span>
+      </Fragment>,
       accessor: 'site_count',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Phone
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Phone`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Phone
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Phone`)}/>
+          </span>
+      </Fragment>,
       accessor: 'phone',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Address
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Address`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Address
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Address`)}/>
+          </span>
+      </Fragment>,
       accessor: 'address',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          City
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By City`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Email
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By City`)}/>
+          </span>
+      </Fragment>,
       accessor: 'city',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          State
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By State`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        State
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By State`)}/>
+          </span>
+      </Fragment>,
       accessor: 'state',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Country
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Country`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Country
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Country`)}/>
+          </span>
+      </Fragment>,
       accessor: 'country',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Joined On
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By created_at`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Joined On
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By created_at`)}/>
+          </span>
+      </Fragment>,
       accessor: 'created_at',
     },
 
     {
-      Header: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none !font-black`}>
-          Action
-          <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Action`)}/>
-        </div>
-      </th>,
+      Header: <Fragment>
+        Action
+        <span className="flex shrink-0 flex-col gap-1">
+            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Action`)}/>
+          </span>
+      </Fragment>,
       accessor: 'action',
     },
   ]
@@ -172,110 +128,56 @@ export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
 
   data?.map((item:GetHospitalResponseData, idx:number) => {
     rowItems.push({
-      checkbox: <th colSpan={1} scope="col" className="f!ont-inter !text-xs !font-medium">
-        <div className="!flex items-center gap-3 whitespace-nowrap px-6 py-3">
+      checkbox: <th colSpan={1} scope="col" className="font-inter text-xs font-medium">
+        <div className="flex items-center gap-3 whitespace-nowrap">
           <div
-            className="!group !flex !cursor-pointer !select-none !flex-row !items-center !gap-2 !font-inter !text-sm !font-medium !outline-none">
+            className="group flex cursor-pointer select-none flex-row items-center gap-2 font-inter text-sm font-medium outline-none">
             <input
-              className="!grid !h-6 !w-6 !flex-shrink-0 !place-items-center !rounded-md !border !p-1 !outline-none
-                      !ring-offset-0 !transition-[background-color,_border-color,_box-shadow] !focus:ring-2
-                      !focus:ring-offset-2 !group-hover:ring-2 !group-hover:ring-offset-2 !border-custom-gray-100 !bg-white
-                      !ring-custom-primary-400"
+              className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-md border p-1 outline-none
+                      ring-offset-0 transition-[background-color,_border-color,_box-shadow] focus:ring-2
+                      focus:ring-offset-2 group-hover:ring-2 group-hover:ring-offset-2 border-custom-gray-100 bg-white
+                      ring-custom-primary-400"
               type="checkbox"
             />
           </div>
         </div>
       </th>,
 
-      name: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.name}
-        </div>
-      </th>,
+      name: <Link  to={`/superadmin/hospital/${item?.id}`} className={`text-black hover:text-gray-500 decoration-0`}>
+        <b className={`font-extrabold`}>{item?.name}</b>
+      </Link>,
 
-      email: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.email}
-        </div>
-      </th>,
+      email: <>
+        {item?.email}
+      </>,
 
-      site_count: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.site_count}
-        </div>
-      </th>,
+      site_count: <>
+        {item?.site_count}
+      </>,
 
-      phone: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.phone}
-        </div>
-      </th>,
+      phone: <>
+        {item?.phone}
+      </>,
 
-      address: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.address}
-        </div>
-      </th>,
+      address: <>
+        {item?.address}
+      </>,
 
-      city: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.city}
-        </div>
-      </th>,
+      city: <>
+        {item?.city}
+      </>,
 
-      state: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.state}
-        </div>
-      </th>,
+      state: <>
+        {item?.state}
+      </>,
 
-      country: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {item?.country}
-        </div>
-      </th>,
+      country: <>
+        {item?.country}
+      </>,
 
-      created_at: <th
-        colSpan={1}
-        scope="col"
-        className="!font-inter !text-xs !font-medium !text-custom-description"
-      >
-        <div className={`!flex !items-center !gap-3 !whitespace-nowrap !px-6 !py-3 !cursor-pointer !select-none`}>
-          {moment(item?.created_at).format('MMM DD. YYYY')}
-        </div>
-      </th>,
+      created_at: <>
+        {moment(item?.created_at).format('MMM DD. YYYY')}
+      </>,
 
       action: <button>{item?.id}</button>
     })

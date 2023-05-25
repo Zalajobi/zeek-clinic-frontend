@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      inter: ['Inter', 'sans-serif'],
+      rubik: ["var(--font-rubik)", "sans-serif"],
+    },
   },
   plugins: [
     require('flowbite/plugin')
