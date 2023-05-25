@@ -56,21 +56,12 @@ const HospitalOrganizations = () => {
           <div className={`col-span-4 max-w-md`}>
             <Tab.Group>
               <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
-                  <Tab
-                    className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                    ${hospitalTabs === 'All' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                    onClick={() => onUpdateActiveTab('All')}
-                  >
-                    All
-                  </Tab>
-
-
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Pending' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Pending')}
+                  ${hospitalTabs === 'All' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('All')}
                 >
-                  Pending
+                  All
                 </Tab>
 
                 <Tab
@@ -79,6 +70,22 @@ const HospitalOrganizations = () => {
                   onClick={() => onUpdateActiveTab('Active')}
                 >
                   Active
+                </Tab>
+
+                <Tab
+                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
+                  ${hospitalTabs === 'Archived' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('Archived')}
+                >
+                  Archived
+                </Tab>
+
+                <Tab
+                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
+                  ${hospitalTabs === 'Pending' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('Pending')}
+                >
+                  Pending
                 </Tab>
 
                 <Tab
