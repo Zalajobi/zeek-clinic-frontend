@@ -8,10 +8,11 @@ import { useMemo } from "react";
 import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate"
 import Text from "../../components/global/Text";
 import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganisation";
-import Table from "../../components/global/Table";
-import TableHeaderDropdown from "../../components/global/TableHeaderDropdown";
+import Table from "../../components/global/table/Table";
+import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
 import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 import BasicDatePicker from "../../components/global/input/DatePicker";
+import TableFooter from "../../components/global/table/TableFooter";
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -113,7 +114,8 @@ const HospitalOrganizations = () => {
           </div>
         </div>
 
-        <div className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
+        <div className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
+         border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
 
           <div className="w-full relative my-4 sm:rounded-lg px-10">
             <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
@@ -156,6 +158,7 @@ const HospitalOrganizations = () => {
 
           <Table columns={columns} data={data}/>
 
+          <TableFooter/>
         </div>
       </div>
     </SuperadminBaseTemplate>
