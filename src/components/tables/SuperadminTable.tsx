@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 
 import {GetHospitalResponseData, HospitalRowData} from "../../types/superadmin";
 
-export const SuperadminHospitalColumn = () => {
+// const sortHospitalColumnByHeaders: 'name' | 'email' | 'created_at' | 'country' | 'state' | 'phone' | 'site_count' | 'address' | 'city' = 'created_at'
+
+export const SuperadminHospitalColumn = (onClickSortParameters: (value:('name' | 'email' | 'created_at' | 'country' | 'state' | 'phone' | 'site_count' | 'address' | 'city')) => void) => {
   const columnItem = [
 
     {
@@ -21,90 +23,90 @@ export const SuperadminHospitalColumn = () => {
 
     {
       Header: <Fragment>
-        Name
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By name`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('name')}>
+          Name
+          <TbArrowsMoveVertical size={15}/>
+        </span>
       </Fragment>,
       accessor: 'name',
     },
 
     {
       Header: <Fragment>
-        Email
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Email`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('email')}>
+          Email
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'email',
     },
 
     {
       Header: <Fragment>
-        Sites
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Sites`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('site_count')}>
+          Sites
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'site_count',
     },
 
     {
       Header: <Fragment>
-        Phone
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Phone`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('phone')}>
+          Phone
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'phone',
     },
 
     {
       Header: <Fragment>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('address')}>
         Address
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Address`)}/>
-          </span>
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'address',
     },
 
     {
       Header: <Fragment>
-        Email
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By City`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('city')}>
+          City
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'city',
     },
 
     {
       Header: <Fragment>
-        State
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By State`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('state')}>
+          State
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'state',
     },
 
     {
       Header: <Fragment>
-        Country
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Country`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('country')}>
+          Country
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'country',
     },
 
     {
       Header: <Fragment>
-        Joined On
-        <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By created_at`)}/>
-          </span>
+        <span className="flex shrink-0 flex-row gap-1" onClick={() => onClickSortParameters('created_at')}>
+          Joined On
+          <TbArrowsMoveVertical size={15} />
+        </span>
       </Fragment>,
       accessor: 'created_at',
     },
@@ -123,7 +125,7 @@ export const SuperadminHospitalColumn = () => {
   return columnItem
 }
 
-export const SuperadminHospitalRow = (data:GetHospitalResponseData[]) => {
+export const SuperadminHospitalRow = (data: GetHospitalResponseData[]) => {
   const rowItems:HospitalRowData[] = []
 
   data?.map((item:GetHospitalResponseData, idx:number) => {

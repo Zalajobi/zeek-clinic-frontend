@@ -24,6 +24,10 @@ const HospitalOrganizations = () => {
     perPage,
     hospitalData,
     currentPage,
+    noOfPages,
+    totalHospitals,
+    resultFrom,
+    resultTo,
 
     // Function
     onUpdateSearchOrganisation,
@@ -31,6 +35,8 @@ const HospitalOrganizations = () => {
     onUpdatePerPageItem,
     onUpdateSelectFrom,
     onUpdateSelectTo,
+    onClickSortParameters,
+    onClickNext,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
@@ -40,7 +46,7 @@ const HospitalOrganizations = () => {
     [hospitalData, currentPage]);
 
   const columns = useMemo(
-    () => SuperadminHospitalColumn(),
+    () => SuperadminHospitalColumn(onClickSortParameters),
     [hospitalData, currentPage])
 
   return (
@@ -158,7 +164,14 @@ const HospitalOrganizations = () => {
 
           <Table columns={columns} data={data}/>
 
-          <TableFooter/>
+          <TableFooter
+            noOfPages={noOfPages}
+            total={totalHospitals}
+            from={resultFrom}
+            to={resultTo}
+            onNext={onClickNext}
+            currentPage={currentPage}
+          />
         </div>
       </div>
     </SuperadminBaseTemplate>
