@@ -1,6 +1,5 @@
 import { useTable } from 'react-table'
 import { Fragment } from "react"
-import {TbArrowsMoveVertical} from "react-icons/tb";
 
 interface TableProps {
   columns: any[]
