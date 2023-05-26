@@ -207,6 +207,38 @@ export const useHospitalOrganisation = () => {
     }
   }
 
+
+  const onEnterPageNumber = async (value:number | string) => {
+    if (value <= 0)
+      toast.error("You are on the first page")
+    else if (value > noOfPages)
+      toast.error("You Cannot go beyond the last page")
+    else {
+      const pageNumber = value ? Number(value) : 0
+      setCurrentPage(pageNumber - 1)
+
+
+      setResultFrom(((pageNumber - 1) * (perPage !== 'All' ? perPage : 0)) + 1)
+      setResultTo(((pageNumber - 1) === noOfPages) ? totalHospitals : ((pageNumber - 1) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+
+      const params = {
+        page: pageNumber - 1,
+        per_page: perPage === 'All' ? 0 : perPage,
+        from_date: hospitalFilterFrom,
+        to_date: hospitalFilterTo,
+        search: searchOrganisation,
+      }
+
+      const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+      if (response.success) {
+        setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+        setTotalHospitals(response?.data?.count as number)
+        setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+      }
+    }
+  }
+
   return {
     //Value
     searchOrganisation,
@@ -228,5 +260,6 @@ export const useHospitalOrganisation = () => {
     onClickSortParameters,
     onClickNext,
     onClickPrevious,
+    onEnterPageNumber,
   }
 }
