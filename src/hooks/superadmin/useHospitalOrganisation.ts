@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, ChangeEventHandler, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { axiosGetRequest } from "../../lib/axios";
 import {GetHospitalResponseData} from "../../types/superadmin";
@@ -18,28 +18,38 @@ export const useHospitalOrganisation = () => {
   const [hospitalFilterFrom, setHospitalFilterFrom] = useState<Date | null>();
   const [hospitalFilterTo, setHospitalFilterTo] = useState<Date | null>();
   const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
+  const [countryFilter, setCountryFilter] = useState('');
+  const [allHospitalCountries, setAllHospitalCountries] = useState<{country:string}[]>([]);
 
   useEffect(() => {
-    const getHospitalData = async () => {
+    const getData = async () => {
       const params = {
         page: currentPage,
         per_page: perPage === 'All' ? 0 : perPage,
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
+        country: countryFilter
       }
-      const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
-      if (response.success) {
-        setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
-        setTotalHospitals(response?.data?.count as number)
-        setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
-        setResultTo((currentPage + 1 === noOfPages) ? response?.data?.count : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+      const response = await Promise.all([
+        axiosGetRequest('/account/super-admin/hospitals', params),
+        axiosGetRequest('/account/super-admin/hospitals/countries/distinct')
+      ])
+
+      if (response[1]?.success)
+        setAllHospitalCountries(response[1]?.data)
+
+      if (response[0].success) {
+        setHospitalData(response[0]?.data?.hospitals as GetHospitalResponseData[])
+        setTotalHospitals(response[0]?.data?.count as number)
+        setNoOfPages(Math.ceil(response[0]?.data?.count / (perPage === 'All' ? response[0]?.data?.count : perPage)))
+        setResultTo((currentPage + 1 === noOfPages) ? response[0]?.data?.count : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
         setResultFrom(1)
       }
     }
 
-    getHospitalData()
+    getData()
       .catch(err => {
         navigate('/superadmin/login')
       })
@@ -76,6 +86,7 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: value,
       search: searchOrganisation,
+      country: countryFilter
     }
 
     setResultFrom(((currentPage) * (perPage !== 'All' ? perPage : 0)) + 1)
@@ -131,6 +142,7 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
+      country: countryFilter
     }
 
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -168,6 +180,7 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
+        country: countryFilter
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -195,6 +208,7 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
+        country: countryFilter
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -207,6 +221,32 @@ export const useHospitalOrganisation = () => {
     }
   }
 
+  const filterByCountry = async (event: ChangeEvent<HTMLSelectElement>) => {
+    setCountryFilter(event.target.value)
+    setResultFrom(1)
+    setCurrentPage(0)
+
+    // setResultTo((value + 1 === noOfPages) ? totalHospitals : ((value) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+
+    const params = {
+      page: 0,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: hospitalFilterFrom,
+      to_date: hospitalFilterTo,
+      search: searchOrganisation,
+      country: event.target.value
+    }
+
+    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+    if (response.success) {
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setResultTo(perPage === 'All' ? response?.data?.count : (perPage * 1))
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+    }
+  }
 
   const onEnterPageNumber = async (value:number | string) => {
     if (value <= 0)
@@ -227,6 +267,7 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
+        country: countryFilter
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -250,6 +291,7 @@ export const useHospitalOrganisation = () => {
     totalHospitals,
     resultFrom,
     resultTo,
+    allHospitalCountries,
 
     // Function
     onUpdateSearchOrganisation,
@@ -261,5 +303,6 @@ export const useHospitalOrganisation = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
+    filterByCountry,
   }
 }
