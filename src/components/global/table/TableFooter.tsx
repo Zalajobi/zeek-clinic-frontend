@@ -8,9 +8,10 @@ interface TableFooterProps {
   to: number
   currentPage: number
   onNext: (value:number) => void
+  onPrevious: (value:number) => void
 }
 
-const TableFooter = ({noOfPages, total, from, currentPage, onNext, to}: TableFooterProps) => {
+const TableFooter = ({noOfPages, total, from, currentPage, onNext, to, onPrevious}: TableFooterProps) => {
   return (
     <Fragment>
       <footer className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
@@ -30,7 +31,7 @@ const TableFooter = ({noOfPages, total, from, currentPage, onNext, to}: TableFoo
           </p>
           <span className="flex w-max flex-row items-center gap-1 lg:pl-6">
             <button
-              className="grid h-8 w-8 place-items-center rounded-md border border-ds-gray-300 px-2 font-extrabold text-custom-primary-800 dark:border-ds-dark-400 dark:text-white">
+              className="grid h-8 w-8 place-items-center rounded-md border border-ds-gray-300 px-2 font-extrabold text-custom-primary-800 dark:border-ds-dark-400 dark:text-white" onClick={() => onPrevious(currentPage - 1)}>
               <IoMdArrowDropleft size={20}/>
             </button>
 

@@ -181,7 +181,30 @@ export const useHospitalOrganisation = () => {
   }
 
   const onClickPrevious = async (value:number) => {
+    if (value === -1)
+      toast.error("You are on the first page")
+    else {
+      setCurrentPage(value)
 
+      setResultFrom(((value) * (perPage !== 'All' ? perPage : 0)) + 1)
+      setResultTo((value + 1 === noOfPages) ? totalHospitals : ((value) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+
+      const params = {
+        page: value,
+        per_page: perPage === 'All' ? 0 : perPage,
+        from_date: hospitalFilterFrom,
+        to_date: hospitalFilterTo,
+        search: searchOrganisation,
+      }
+
+      const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+      if (response.success) {
+        setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+        setTotalHospitals(response?.data?.count as number)
+        setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+      }
+    }
   }
 
   return {
@@ -204,5 +227,6 @@ export const useHospitalOrganisation = () => {
     onUpdateSelectTo,
     onClickSortParameters,
     onClickNext,
+    onClickPrevious,
   }
 }

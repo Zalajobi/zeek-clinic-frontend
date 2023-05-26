@@ -37,6 +37,7 @@ const HospitalOrganizations = () => {
     onUpdateSelectTo,
     onClickSortParameters,
     onClickNext,
+    onClickPrevious,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
@@ -170,6 +171,7 @@ const HospitalOrganizations = () => {
             from={resultFrom}
             to={resultTo}
             onNext={onClickNext}
+            onPrevious={onClickPrevious}
             currentPage={currentPage}
           />
         </div>
