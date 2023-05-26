@@ -19,6 +19,7 @@ interface TextProps {
   textIndent?: textIndent
   textBreak?: textBreak
   style?: string
+  color?: string
 }
 
 const Text = ({
@@ -32,13 +33,15 @@ const Text = ({
                 textSpace='normal',
                 textIndent='0',
                 textBreak='normal',
-                style='normal'
+                style='normal',
+                color='black'
               }: TextProps) => {
   return (
     <p
       style={{
         fontWeight: weight,
-        fontStyle: style
+        fontStyle: style,
+        color: color
       }}
 
       className={clsx(

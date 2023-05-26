@@ -12,6 +12,7 @@ export const useSuperadminCreateAdminUser = () => {
   const [city, setCity] = useState('None');
   const [countryCode, setCountryCode] = useState('');
   const [profileImgURL, setProfileImgURL] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string | number>('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
   const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
@@ -24,7 +25,7 @@ export const useSuperadminCreateAdminUser = () => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
 
     const superadminGetRolesAndDepartments = async () => {
-      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments', localStorage.getItem('token') as string)
+      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
       const allDepartments:string[] = []
       const allRoles:string[] = []
 
@@ -68,6 +69,8 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateCity = (value:string) => setCity(value ?? 'None')
 
+  const onUpdatePhoneNumber = (value:string | number) => setPhoneNumber(value)
+
   const handleCreateAdmin = async (data:CreateUserInput) => {
     const adminData = {
       ...data,
@@ -76,7 +79,8 @@ export const useSuperadminCreateAdminUser = () => {
       state,
       country_code: countryCode,
       call_code: phoneCode,
-      profile_img_url: profileImgURL
+      profile_img_url: profileImgURL,
+      phone_number: phoneNumber
     }
 
     const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData, localStorage.getItem('token') as string)
@@ -102,5 +106,6 @@ export const useSuperadminCreateAdminUser = () => {
     onUpdateState,
     onUpdateCity,
     setProfileImgURL,
+    onUpdatePhoneNumber,
   }
 }
