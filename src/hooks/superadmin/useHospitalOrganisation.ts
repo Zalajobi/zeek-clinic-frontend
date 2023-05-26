@@ -34,9 +34,8 @@ export const useHospitalOrganisation = () => {
         setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
         setTotalHospitals(response?.data?.count as number)
         setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
-        setResultTo((currentPage * (perPage === 'All' ? response?.data?.count : perPage)) + (currentPage === 0 ? response?.data?.count : (perPage === 'All' ? response?.data?.count : perPage)))
-        setResultFrom((currentPage * (perPage === 'All' ? response?.data?.count : perPage)) + (currentPage === 0 ? 0 : 1)  )
-        // setResponseDataObject(response?.data)
+        setResultTo((currentPage + 1 === noOfPages) ? response?.data?.count : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+        setResultFrom(1)
       }
     }
 
@@ -56,10 +55,16 @@ export const useHospitalOrganisation = () => {
       search: searchOrganisation,
     }
 
+    setResultFrom(((perPage !== 'All' ? perPage : 0)) + 1)
+    setResultTo((1 === noOfPages) ? totalHospitals : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+    setCurrentPage(0)
+
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
     if (response.success) {
-      setResponseDataObject(response?.data)
+      setHospitalData(response?.datadata?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.datadata?.count as number)
+      setNoOfPages(Math.ceil(response?.datadata?.count / (perPage === 'All' ? response?.datadata?.count : perPage)))
     }
   }
 
@@ -73,10 +78,15 @@ export const useHospitalOrganisation = () => {
       search: searchOrganisation,
     }
 
+    setResultFrom(((currentPage) * (perPage !== 'All' ? perPage : 0)) + 1)
+    setResultTo((currentPage + 1 === noOfPages) ? totalHospitals : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
     if (response.success) {
-      setResponseDataObject(response?.data)
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
     }
   }
 
@@ -90,10 +100,16 @@ export const useHospitalOrganisation = () => {
       search: event.target.value,
     }
 
+    setResultFrom(1)
+    setCurrentPage(0)
+
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
     if (response.success) {
-      setResponseDataObject(response?.data)
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
     }
   }
 
@@ -102,14 +118,12 @@ export const useHospitalOrganisation = () => {
   }
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
+
     setPerPage(value)
     setNoOfPages(Math.ceil(totalHospitals / (value === 'All' ? totalHospitals : value)))
-    // setResultFrom((currentPage * (value === 'All' ? totalHospitals : value)) + (currentPage === 0 ? 0 : 1)  )
-    // setResultTo((currentPage * (value === 'All' ? totalHospitals : value)) + (currentPage === 0 ? totalHospitals : (value === 'All' ? totalHospitals : value)))
-    if (currentPage === 0)
-      setResultFrom(1)
-    else
-      setResultFrom((currentPage + 1) * (value !== 'All' ? value : 0))
+    setResultFrom(1)
+    setResultTo(value === 'All' ? totalHospitals : value)
+    setCurrentPage(0)
 
     const params = {
       page: 0,
@@ -118,11 +132,6 @@ export const useHospitalOrganisation = () => {
       to_date: hospitalFilterTo,
       search: searchOrganisation,
     }
-
-    // if (currentPage === 0)
-      setResultFrom(1)
-    // else
-    //   setResultFrom((currentPage + 1) * (value !== 'All' ? value : 0))
 
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
 
@@ -142,22 +151,6 @@ export const useHospitalOrganisation = () => {
     })
     // hospitalData.sort((a:any, b:any) => (a[value] - b[value]) ? 1 : -1  )
     // console.log(hospitalData.sort((a:any, b:any) => (a[value] - b[value]) ? 1 : -1  ))
-  }
-
-  const setResponseDataObject = (data:{
-    hospitals: GetHospitalResponseData[],
-    count: number
-  }) => {
-    setHospitalData(data?.hospitals as GetHospitalResponseData[])
-    setTotalHospitals(data?.count as number)
-    setNoOfPages(Math.ceil(data?.count / (perPage === 'All' ? data?.count : perPage)))
-
-    // if (currentPage === 0) {
-    //   setResultFrom(currentPage + 1)
-    // }
-    // else {
-    //   setResultFrom(((currentPage + 1) * (perPage === 'All' ? 0 : perPage)) + 1)
-    // }
   }
 
   const onClickNext = async (value:number) => {
@@ -185,6 +178,10 @@ export const useHospitalOrganisation = () => {
         setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
       }
     }
+  }
+
+  const onClickPrevious = async (value:number) => {
+
   }
 
   return {
