@@ -15,6 +15,7 @@ import BasicDatePicker from "../../components/global/input/DatePicker";
 import TableFooter from "../../components/global/table/TableFooter";
 import {availableTitles} from "../../lib/constants/constants";
 import {Select} from "flowbite-react";
+import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -31,6 +32,7 @@ const HospitalOrganizations = () => {
     resultFrom,
     resultTo,
     allHospitalCountries,
+    showCreateHospitalModal,
 
     // Function
     onUpdateSearchOrganisation,
@@ -43,6 +45,7 @@ const HospitalOrganizations = () => {
     onClickPrevious,
     onEnterPageNumber,
     filterByCountry,
+    onUpdateShowCreateHospitalModal,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
@@ -114,8 +117,13 @@ const HospitalOrganizations = () => {
           </div>
 
           <div className={`w-full`}>
-            <button type="button"
-                    className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"><HiPlusSm size={20} className={`mr-2`}/>Add new organization
+            <button
+              type="button"
+              onClick={onUpdateShowCreateHospitalModal  }
+              className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium
+              rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"
+            >
+              <HiPlusSm size={20} className={`mr-2`}/>Add new organization
             </button>
           </div>
 
@@ -202,6 +210,8 @@ const HospitalOrganizations = () => {
           />
         </div>
       </div>
+
+      <CreateHospitalModal showModal={showCreateHospitalModal} close={onUpdateShowCreateHospitalModal}/>
     </SuperadminBaseTemplate>
   )
 }

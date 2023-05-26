@@ -20,6 +20,7 @@ export const useHospitalOrganisation = () => {
   const [hospitalData, setHospitalData] = useState<GetHospitalResponseData[]>([]);
   const [countryFilter, setCountryFilter] = useState('');
   const [allHospitalCountries, setAllHospitalCountries] = useState<{country:string}[]>([]);
+  const [showCreateHospitalModal, setShowCreateHospitalModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -280,6 +281,10 @@ export const useHospitalOrganisation = () => {
     }
   }
 
+  const onUpdateShowCreateHospitalModal = () => {
+    setShowCreateHospitalModal(!showCreateHospitalModal)
+  }
+
   return {
     //Value
     searchOrganisation,
@@ -292,6 +297,7 @@ export const useHospitalOrganisation = () => {
     resultFrom,
     resultTo,
     allHospitalCountries,
+    showCreateHospitalModal,
 
     // Function
     onUpdateSearchOrganisation,
@@ -304,5 +310,6 @@ export const useHospitalOrganisation = () => {
     onClickPrevious,
     onEnterPageNumber,
     filterByCountry,
+    onUpdateShowCreateHospitalModal,
   }
 }
