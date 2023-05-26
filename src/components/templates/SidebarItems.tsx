@@ -5,8 +5,7 @@ import {SidebarItemProps} from "../../types/common";
 
 const SidebarItems = ({item, Icon, route, showSidebar, child}:SidebarItemProps) => {
   const [open, setOpen] = useState(false);
-  
-  // hover:bg-[#ECF7FE]
+
   return (
     <Fragment>
       {!child ? (
@@ -38,7 +37,7 @@ const SidebarItems = ({item, Icon, route, showSidebar, child}:SidebarItemProps) 
                       <Link to={childItem?.route ?? 'superadmin'} className={`relative flex w-full cursor-pointer flex-col items-center gap-3 rounded px-3 py-2 font-normal md:flex-row false text-brand-body-text hover:bg-[#ECF7FE] dark:text-ds-dark-300 hover:dark:bg-ds-dark-600/50`}>
                         {childItem?.Icon}
 
-                        <Text text={childItem?.item} weight={500} size={`base`} className={`ml-2 ${childItem?.showSidebar ? 'hidden' : 'flex'}`}/>
+                        <Text text={childItem?.item} weight={500} size={`base`} className={`ml-2 ${childItem?.showSidebar ? 'hidden' : 'flex'}`} color={`black`}/>
                       </Link>
                     </div>
                   </div>

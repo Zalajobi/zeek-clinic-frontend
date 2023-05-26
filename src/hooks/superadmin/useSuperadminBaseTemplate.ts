@@ -10,7 +10,7 @@ export const useSuperadminBaseTemplate = () => {
 
   useEffect(() => {
     const getHeaderData = async () => {
-      const response = await axiosGetRequest('/account/super-admin/profile/get-data', localStorage.getItem('token') as string)
+      const response = await axiosGetRequest('/account/super-admin/profile/get-data')
 
       if (response.success)
         setRequestData(response?.data as SuperadminBaseData)
