@@ -63,7 +63,6 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateState = (value:string) => {
     setAllStateCities(City.getCitiesOfState(countryCode, value) as unknown as AllStatesAndCities[])
-    console.log(value)
     setState(value)
   }
 
