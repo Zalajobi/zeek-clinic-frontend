@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
-import {AllCountries, AllStatesAndCities, CreateHospitalInput} from "../../types/superadmin/formTypes";
 import {Country, State} from "country-state-city";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
+
+import {AllCountries, AllStatesAndCities, CreateHospitalInput} from "../../types/superadmin/formTypes";
 import { axiosPostRequest } from "../../lib/axios";
 
 export const useCreateHospitalModal = () => {
