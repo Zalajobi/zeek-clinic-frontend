@@ -24,6 +24,7 @@ export interface GetHospitalResponseData {
   logo: string
   created_at: string
   updated_at: string
+  status: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED'
 }
 
 export interface HospitalRowData {

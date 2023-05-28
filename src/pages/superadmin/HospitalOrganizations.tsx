@@ -13,7 +13,6 @@ import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdo
 import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 import BasicDatePicker from "../../components/global/input/DatePicker";
 import TableFooter from "../../components/global/table/TableFooter";
-import {availableTitles} from "../../lib/constants/constants";
 import {Select} from "flowbite-react";
 import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
 

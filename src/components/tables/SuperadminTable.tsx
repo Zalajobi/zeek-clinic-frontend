@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import {GetHospitalResponseData, HospitalRowData} from "../../types/superadmin";
+import Status from "../global/Status";
 
 // const sortHospitalColumnByHeaders: 'name' | 'email' | 'created_at' | 'country' | 'state' | 'phone' | 'site_count' | 'address' | 'city' = 'created_at'
 
@@ -113,10 +114,9 @@ export const SuperadminHospitalColumn = (onClickSortParameters: (value:('name' |
 
     {
       Header: <Fragment>
-        Action
         <span className="flex shrink-0 flex-col gap-1">
-            <TbArrowsMoveVertical size={15} onClick={() => console.log(`Sort By Action`)}/>
-          </span>
+          Status
+        </span>
       </Fragment>,
       accessor: 'action',
     },
@@ -181,7 +181,9 @@ export const SuperadminHospitalRow = (data: GetHospitalResponseData[]) => {
         {moment(item?.created_at).format('MMM DD. YYYY')}
       </>,
 
-      action: <button>{item?.id}</button>
+      action: <>
+        <Status status={item?.status}/>
+      </>
     })
   })
 
