@@ -34,7 +34,7 @@ export const useCreateHospitalModal = () => {
     else {
       const hospitalData = {
         ...data,
-        phone: `+${phoneCode}${data.phone}`,
+        phone: `${data.phone}`,
         country,
         logo,
         country_code: countryCode
