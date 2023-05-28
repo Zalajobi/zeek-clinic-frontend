@@ -26,7 +26,6 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
     logo,
     allCountries,
     allCountryStates,
-    phoneCode,
 
     // Functions
     createNewOrganization,
@@ -113,7 +112,7 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
                     })}
                     color={errors.country?.message ? 'failure' : 'gray'}
                   >
-                    <option>
+                    <option value={``}>
                       Select Country
                     </option>
                     {allCountries?.map((item:AllCountries, idx:number) => {
@@ -142,7 +141,7 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
                       {...register("state")}
                       color={errors.state?.message ? 'failure' : 'gray'}
                     >
-                      <option>
+                      <option value={``}>
                         Select State
                       </option>
                       {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {

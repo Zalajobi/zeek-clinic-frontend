@@ -86,10 +86,10 @@ export type CreateHospitalInput = {
 
 export const CreateHospitalInputSchema = yup.object({
   email: yup.string().required('Email field is required'),
-  name: yup.string().required('First name is required'),
+  name: yup.string().required('Organization name is required'),
   phone: yup.number().required('Phone number is required'),
   address: yup.string().required('User address is required').min(10, 'Address too short'),
-  city: yup.string().required('Organization City is required'),
+  city: yup.string().optional(),
   state: yup.string().required('Organization State is required'),
   country: yup.string().required('Organization Country is required'),
 }).required()

@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import {AllCountries, AllStatesAndCities, CreateHospitalInput} from "../../types/superadmin/formTypes";
 import {Country, State} from "country-state-city";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
+import { axiosPostRequest } from "../../lib/axios";
 
 export const useCreateHospitalModal = () => {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ export const useCreateHospitalModal = () => {
   const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
 
-  const [phone, setPhone] = useState<string | number>('');
   const [country, setCountry] = useState('');
   const [logo, setLogo] = useState('');
 
@@ -20,31 +20,32 @@ export const useCreateHospitalModal = () => {
     setAllCountries(Country.getAllCountries() as AllCountries[])
   }, [navigate]);
 
-  const onUpdatePhoneNumber = (value:string) => {
-    setPhone(value)
-    console.log(value)
-  }
-
   const onUpdateCountry = (value:string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries
     setAllCountryStates(State.getStatesOfCountry(value) as unknown as AllStatesAndCities[])
-    console.log(State.getStatesOfCountry(value))
     setCountry(countryInfo?.name)
     setPhoneCode(countryInfo?.phonecode)
     setCountryCode(countryInfo?.isoCode)
   }
 
   const createNewOrganization = async (data:CreateHospitalInput) => {
-    console.log('Create new Organization')
-    const hospitalData = {
-      ...data,
-      phone: `+${phoneCode}${data.phone}`,
-      country,
-      logo,
-      country_code: countryCode
-    }
+    if (!logo)
+      toast.error('Please Upload Organization Logo')
+    else {
+      const hospitalData = {
+        ...data,
+        phone: `+${phoneCode}${data.phone}`,
+        country,
+        logo,
+        country_code: countryCode
+      }
+      const response = await axiosPostRequest('/account/hospital/create', hospitalData)
 
-    console.log(hospitalData)
+      if (response.success)
+        toast.success(response.message)
+      else
+        toast.error(response.message)
+    }
   }
 
 
@@ -54,12 +55,10 @@ export const useCreateHospitalModal = () => {
     allCountries,
     allCountryStates,
     phoneCode,
-    phone,
 
     // Functions
     createNewOrganization,
     setLogo,
     onUpdateCountry,
-    onUpdatePhoneNumber,
   }
 }
