@@ -45,7 +45,7 @@ const Table = ({columns, data}:TableProps) => {
                 <tr {...row.getRowProps()}>
                   {row.cells.map(cell => {
                     return (
-                      <td className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black`}>
+                      <td className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate`}>
                         {cell.render('Cell')}
                       </td>
                     )
