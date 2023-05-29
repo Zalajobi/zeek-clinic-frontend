@@ -10,20 +10,20 @@ const instance = axios.create({
   timeout: 7500,
 })
 
-export const axiosPostRequest = async (url:string, data:any, token:string) => {
+export const axiosPostRequest = async (url:string, data:any) => {
   const request = await instance.post(url, data, {
     headers: {
-      token
+      token: localStorage.getItem('token') as string
     }
   })
 
   return request.data
 }
 
-export const axiosPutRequest = async (url:string, data:any, token:string) => {
+export const axiosPutRequest = async (url:string, data:any) => {
   const request = await instance.put(url, data, {
     headers: {
-      token
+      token: localStorage.getItem('token') as string
     }
   })
 

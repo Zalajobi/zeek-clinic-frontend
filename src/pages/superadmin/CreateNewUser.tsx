@@ -459,7 +459,7 @@ const CreateNewUser = () => {
                       id="city"
                       placeholder="city"
                       required={false}
-                      color={errors.username?.message ? 'failure' : 'gray'}
+                      color={errors.city?.message ? 'failure' : 'gray'}
                       helperText={<React.Fragment><span className="font-medium">{errors.city?.message}</span></React.Fragment>}
                       {...register("city")}
                     />
@@ -474,7 +474,7 @@ const CreateNewUser = () => {
                     <Label
                       htmlFor="address"
                       value="Address"
-                      color={errors.username?.message ? 'failure' : 'gray'}
+                      color={errors.address?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput

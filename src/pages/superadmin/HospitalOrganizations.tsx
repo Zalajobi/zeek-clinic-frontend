@@ -13,8 +13,8 @@ import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdo
 import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 import BasicDatePicker from "../../components/global/input/DatePicker";
 import TableFooter from "../../components/global/table/TableFooter";
-import {availableTitles} from "../../lib/constants/constants";
 import {Select} from "flowbite-react";
+import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -31,6 +31,8 @@ const HospitalOrganizations = () => {
     resultFrom,
     resultTo,
     allHospitalCountries,
+    showCreateHospitalModal,
+    selectAllHospitals,
 
     // Function
     onUpdateSearchOrganisation,
@@ -43,16 +45,19 @@ const HospitalOrganizations = () => {
     onClickPrevious,
     onEnterPageNumber,
     filterByCountry,
+    onUpdateShowCreateHospitalModal,
+    onUpdateSelectedRow,
+    onUpdateSelectAllHospitals,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
 
   const data = useMemo(
-    () => SuperadminHospitalRow(hospitalData) ?? [],
+    () => SuperadminHospitalRow(hospitalData, onUpdateSelectedRow, selectAllHospitals) ?? [],
     [hospitalData, currentPage]);
 
   const columns = useMemo(
-    () => SuperadminHospitalColumn(onClickSortParameters),
+    () => SuperadminHospitalColumn(onClickSortParameters, onUpdateSelectAllHospitals),
     [hospitalData, currentPage])
 
   return (
@@ -71,40 +76,40 @@ const HospitalOrganizations = () => {
               <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'All' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('All')}
+                  ${hospitalTabs === 'ALL' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ALL')}
                 >
                   All
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Active' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Active')}
+                  ${hospitalTabs === 'ACTIVE' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ACTIVE')}
                 >
                   Active
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Archived' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Archived')}
+                  ${hospitalTabs === 'ARCHIVED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ARCHIVED')}
                 >
                   Archived
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Pending' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Pending')}
+                  ${hospitalTabs === 'PENDING' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('PENDING')}
                 >
                   Pending
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Deactivated' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Deactivated')}
+                  ${hospitalTabs === 'DEACTIVATED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('DEACTIVATED')}
                 >
                   Deactivated
                 </Tab>
@@ -114,8 +119,13 @@ const HospitalOrganizations = () => {
           </div>
 
           <div className={`w-full`}>
-            <button type="button"
-                    className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"><HiPlusSm size={20} className={`mr-2`}/>Add new organization
+            <button
+              type="button"
+              onClick={onUpdateShowCreateHospitalModal  }
+              className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium
+              rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"
+            >
+              <HiPlusSm size={20} className={`mr-2`}/>Add new organization
             </button>
           </div>
 
@@ -202,6 +212,8 @@ const HospitalOrganizations = () => {
           />
         </div>
       </div>
+
+      <CreateHospitalModal showModal={showCreateHospitalModal} close={onUpdateShowCreateHospitalModal}/>
     </SuperadminBaseTemplate>
   )
 }

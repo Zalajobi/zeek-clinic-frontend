@@ -22,7 +22,6 @@ export const useProviderBaseTemplate = () => {
 
 
   const onUpdateQuerySearch = (event:ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target?.value)
     setQuerySearch(event?.target?.value as string)
   }
 
