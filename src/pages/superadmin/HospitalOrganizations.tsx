@@ -32,6 +32,7 @@ const HospitalOrganizations = () => {
     resultTo,
     allHospitalCountries,
     showCreateHospitalModal,
+    selectAllHospitals,
 
     // Function
     onUpdateSearchOrganisation,
@@ -45,16 +46,18 @@ const HospitalOrganizations = () => {
     onEnterPageNumber,
     filterByCountry,
     onUpdateShowCreateHospitalModal,
+    onUpdateSelectedRow,
+    onUpdateSelectAllHospitals,
   } = useHospitalOrganisation()
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
 
   const data = useMemo(
-    () => SuperadminHospitalRow(hospitalData) ?? [],
+    () => SuperadminHospitalRow(hospitalData, onUpdateSelectedRow, selectAllHospitals) ?? [],
     [hospitalData, currentPage]);
 
   const columns = useMemo(
-    () => SuperadminHospitalColumn(onClickSortParameters),
+    () => SuperadminHospitalColumn(onClickSortParameters, onUpdateSelectAllHospitals),
     [hospitalData, currentPage])
 
   return (

@@ -1,4 +1,4 @@
-import {ChangeEvent, ChangeEventHandler, useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { axiosGetRequest } from "../../lib/axios";
 import {GetHospitalResponseData} from "../../types/superadmin";
@@ -21,6 +21,9 @@ export const useHospitalOrganisation = () => {
   const [countryFilter, setCountryFilter] = useState('');
   const [allHospitalCountries, setAllHospitalCountries] = useState<{country:string}[]>([]);
   const [showCreateHospitalModal, setShowCreateHospitalModal] = useState(false);
+  const [selectAllHospitals, setSelectAllHospitals] = useState(false);
+
+  let selectedHospitals:string[] = []
 
   useEffect(() => {
     const getData = async () => {
@@ -312,8 +315,20 @@ export const useHospitalOrganisation = () => {
     }
   }
 
-  const onUpdateShowCreateHospitalModal = () => {
-    setShowCreateHospitalModal(!showCreateHospitalModal)
+  const onUpdateShowCreateHospitalModal = () => setShowCreateHospitalModal(!showCreateHospitalModal)
+
+  const onUpdateSelectedRow = (event:ChangeEvent<HTMLInputElement>, id:string) => {
+    if (event.target.checked)
+      selectedHospitals.push(id)
+    else
+      selectedHospitals = selectedHospitals.filter(item => item !== id)
+
+    console.log(selectedHospitals)
+  }
+
+  const onUpdateSelectAllHospitals = (event : ChangeEvent<HTMLInputElement>) => {
+    setSelectAllHospitals(event.target.checked)
+    console.log('HELLO WORLD'  + ' ' + selectAllHospitals)
   }
 
   return {
@@ -329,6 +344,7 @@ export const useHospitalOrganisation = () => {
     resultTo,
     allHospitalCountries,
     showCreateHospitalModal,
+    selectAllHospitals,
 
     // Function
     onUpdateSearchOrganisation,
@@ -341,6 +357,8 @@ export const useHospitalOrganisation = () => {
     onClickPrevious,
     onEnterPageNumber,
     filterByCountry,
+    onUpdateSelectedRow,
     onUpdateShowCreateHospitalModal,
+    onUpdateSelectAllHospitals,
   }
 }
