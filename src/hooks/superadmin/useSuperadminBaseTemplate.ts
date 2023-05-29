@@ -10,7 +10,7 @@ export const useSuperadminBaseTemplate = () => {
 
   useEffect(() => {
     const getHeaderData = async () => {
-      const response = await axiosGetRequest('/account/super-admin/profile/get-data', localStorage.getItem('token') as string)
+      const response = await axiosGetRequest('/account/super-admin/profile/get-data')
 
       if (response.success)
         setRequestData(response?.data as SuperadminBaseData)
@@ -24,7 +24,6 @@ export const useSuperadminBaseTemplate = () => {
 
 
   const onUpdateQuerySearch = (event:ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target?.value)
     setQuerySearch(event?.target?.value as string)
   }
 

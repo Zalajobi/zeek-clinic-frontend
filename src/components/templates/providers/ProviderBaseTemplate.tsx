@@ -2,6 +2,7 @@ import React, {Fragment, ReactNode} from "react"
 import Sidebar from "./Sidebar";
 import Header from "../Header";
 import {useProviderBaseTemplate} from "../../../hooks/provider/useProviderBaseTemplate";
+import {ToasterConfig} from "../../global/Toast";
 
 const ProviderBaseTemplate = ({children}: {children : ReactNode}) => {
   const {
@@ -22,6 +23,8 @@ const ProviderBaseTemplate = ({children}: {children : ReactNode}) => {
           {children}
         </div>
       </div>
+
+      <ToasterConfig/>
     </Fragment>
   )
 }
