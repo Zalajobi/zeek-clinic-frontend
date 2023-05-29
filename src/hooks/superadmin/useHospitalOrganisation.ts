@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export const useHospitalOrganisation = () => {
   const navigate = useNavigate();
-  const [hospitalTabs, setHospitalTabs] = useState<'All' | 'Pending' | 'Active' | 'Deactivated' | 'Archived'>('All');
+  const [hospitalTabs, setHospitalTabs] = useState<'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED'>('ALL');
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [noOfPages, setNoOfPages] = useState(0);
@@ -30,7 +30,8 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
-        country: countryFilter
+        country: countryFilter,
+        status: hospitalTabs === 'ALL' ? '' : hospitalTabs
       }
 
       const response = await Promise.all([
@@ -64,6 +65,8 @@ export const useHospitalOrganisation = () => {
       from_date: value,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
+      country: countryFilter,
+      status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     }
 
     setResultFrom(((perPage !== 'All' ? perPage : 0)) + 1)
@@ -87,7 +90,8 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: value,
       search: searchOrganisation,
-      country: countryFilter
+      country: countryFilter,
+      status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     }
 
     setResultFrom(((currentPage) * (perPage !== 'All' ? perPage : 0)) + 1)
@@ -110,6 +114,7 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: event.target.value,
+      status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     }
 
     setResultFrom(1)
@@ -125,8 +130,29 @@ export const useHospitalOrganisation = () => {
     }
   }
 
-  const onUpdateActiveTab = (tab:'All' | 'Pending' | 'Active' | 'Deactivated' | 'Archived') => {
+  const onUpdateActiveTab = async (tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED') => {
     setHospitalTabs(tab)
+    setResultFrom(1)
+    setCurrentPage(0)
+
+    const params = {
+      page: 0,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: hospitalFilterFrom,
+      to_date: hospitalFilterTo,
+      search: searchOrganisation,
+      country: countryFilter,
+      status: tab === 'ALL' ? '' : tab,
+    }
+
+    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+
+    if (response.success) {
+      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
+      setTotalHospitals(response?.data?.count as number)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+    }
   }
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
@@ -143,7 +169,8 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
-      country: countryFilter
+      country: countryFilter,
+      status: hospitalTabs === 'ALL' ? '' : hospitalTabs
     }
 
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -181,7 +208,8 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
-        country: countryFilter
+        country: countryFilter,
+        status: hospitalTabs === 'ALL' ? '' : hospitalTabs
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -209,7 +237,8 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
-        country: countryFilter
+        country: countryFilter,
+        status: hospitalTabs === 'ALL' ? '' : hospitalTabs
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -235,7 +264,8 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
-      country: event.target.value
+      country: event.target.value,
+      status: hospitalTabs === 'ALL' ? '' : hospitalTabs
     }
 
     const response = await axiosGetRequest('/account/super-admin/hospitals', params)
@@ -268,7 +298,8 @@ export const useHospitalOrganisation = () => {
         from_date: hospitalFilterFrom,
         to_date: hospitalFilterTo,
         search: searchOrganisation,
-        country: countryFilter
+        country: countryFilter,
+        status: hospitalTabs === 'ALL' ? '' : hospitalTabs
       }
 
       const response = await axiosGetRequest('/account/super-admin/hospitals', params)

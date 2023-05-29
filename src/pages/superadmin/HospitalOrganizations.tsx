@@ -73,40 +73,40 @@ const HospitalOrganizations = () => {
               <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'All' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('All')}
+                  ${hospitalTabs === 'ALL' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ALL')}
                 >
                   All
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Active' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Active')}
+                  ${hospitalTabs === 'ACTIVE' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ACTIVE')}
                 >
                   Active
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Archived' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Archived')}
+                  ${hospitalTabs === 'ARCHIVED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('ARCHIVED')}
                 >
                   Archived
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Pending' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Pending')}
+                  ${hospitalTabs === 'PENDING' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('PENDING')}
                 >
                   Pending
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'Deactivated' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('Deactivated')}
+                  ${hospitalTabs === 'DEACTIVATED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
+                  onClick={() => onUpdateActiveTab('DEACTIVATED')}
                 >
                   Deactivated
                 </Tab>
