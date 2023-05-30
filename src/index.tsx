@@ -17,6 +17,7 @@ import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
 import SuperadminDashboard from "./pages/superadmin";
 import CareGiverDashboard from "./pages/provider";
 import HospitalOrganizations from "./pages/superadmin/HospitalOrganizations";
+import OrganizationSite from "./pages/superadmin/OrganizationSite";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
         path: '/superadmin/login',
         element: <SuperadminLogin/>
       },
+
+      {
+        path: '/superadmin/hospital/:hospitalId',
+        element: <OrganizationSite/>
+      },
+
     ]
   },
 
