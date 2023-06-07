@@ -4,6 +4,7 @@ import { GoSearch } from 'react-icons/go'
 import { CgArrowsH } from 'react-icons/cg'
 import { Tab } from "@headlessui/react";
 import React, { useMemo } from "react";
+import { Select } from "flowbite-react";
 
 import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate"
 import Text from "../../components/global/Text";
@@ -13,7 +14,6 @@ import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdo
 import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 import BasicDatePicker from "../../components/global/input/DatePicker";
 import TableFooter from "../../components/global/table/TableFooter";
-import {Select} from "flowbite-react";
 import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
 
 const HospitalOrganizations = () => {
