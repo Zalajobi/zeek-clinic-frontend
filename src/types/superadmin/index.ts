@@ -41,6 +41,20 @@ export interface HospitalRowData {
   action: ReactNode
 }
 
+export interface SiteRowData {
+  checkbox: ReactNode
+  name: ReactNode
+  email: ReactNode
+  phone: ReactNode
+  country: ReactNode
+  state: ReactNode
+  city: ReactNode
+  address: ReactNode
+  status: ReactNode
+  created_at: ReactNode
+  action: ReactNode
+}
+
 export interface HospitalOrganizationData {
 	id: string;
 	name: string;

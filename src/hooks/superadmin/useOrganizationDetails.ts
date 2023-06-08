@@ -7,7 +7,7 @@ import {HospitalOrganizationData, SuperadminSiteData} from "../../types/superadm
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
   const [organization, setOrganization] = useState<HospitalOrganizationData | null>(null);
-  const [sites, setSites] = useState<SuperadminSiteData | null>(null);
+  const [sites, setSites] = useState<SuperadminSiteData[] | null>(null);
   const [activeTabs, setActiveTabs] = useState<'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'>('ALL');
 
   useEffect(() => {

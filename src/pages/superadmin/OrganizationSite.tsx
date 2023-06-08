@@ -9,7 +9,12 @@ import {useOrganizationDetails} from "../../hooks/superadmin/useOrganizationDeta
 import Text from "../../components/global/Text";
 import HospitalDetails from "../../components/superadmin/HospitalDetails";
 import {PrimaryButtonOutline} from "../../components/global/input/ButtonInput";
-import {SuperadminHospitalDataColumn, SuperadminSiteDataColumn} from "../../components/tables/SuperadminTable";
+import {
+  SuperadminHospitalDataColumn,
+  SuperadminHospitalDataRow,
+  SuperadminSiteDataColumn, SuperadminSiteDataRow
+} from "../../components/tables/SuperadminTable";
+import {SuperadminSiteData} from "../../types/superadmin";
 
 const OrganizationSite = () => {
 
@@ -27,6 +32,10 @@ const OrganizationSite = () => {
   const columns = useMemo(
     () => SuperadminSiteDataColumn(),
     [sites])
+
+  const data = useMemo(
+    () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],
+    [sites]);
 
 
   return (
