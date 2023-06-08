@@ -10,6 +10,9 @@ module.exports = {
       inter: ['Inter', 'sans-serif'],
       rubik: ["var(--font-rubik)", "sans-serif"],
     },
+    colors: {
+      primary: 'rgb(233,244,254)'
+    }
   },
   plugins: [
     require('flowbite/plugin')

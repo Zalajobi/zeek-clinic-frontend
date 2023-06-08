@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
+import {Tab} from "@headlessui/react";
+import {HiPlusSm} from "react-icons/hi";
+import {AiFillEdit} from "react-icons/ai";
+
+
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import {useOrganizationDetails} from "../../hooks/superadmin/useOrganizationDetails";
 import Text from "../../components/global/Text";
-import {Tab} from "@headlessui/react";
-import {HiPlusSm} from "react-icons/hi";
 import HospitalDetails from "../../components/superadmin/HospitalDetails";
+import {PrimaryButtonOutline} from "../../components/global/input/ButtonInput";
 
 const OrganizationSite = () => {
 
@@ -22,16 +26,28 @@ const OrganizationSite = () => {
     <Fragment>
       <SuperadminBaseTemplate>
         <div className={`w-full flex flex-col`}>
-          <Text
-            text={`Welcome To, ${organization?.name}`}
-            size="4xl"
-            weight={800}
-            className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
-          />
+          <div className={`flex flex-row gap-4`}>
+            <div className={`mr-auto`}>
+              <Text
+                text={`Welcome To, ${organization?.name}`}
+                size="4xl"
+                weight={800}
+                className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
+              />
+            </div>
+
+            <div className={`ml-auto`}>
+              <PrimaryButtonOutline
+                text={`Edit`}
+                click={() => console.log('Add New Site')}
+                icon={<AiFillEdit size={20} className={`mr-2`}/>}
+              />
+            </div>
+          </div>
 
           <HospitalDetails data={organization ? organization : null}/>
 
-          <div className={`grid grid-cols-6 gap-4 my-5`}>
+          <div className={`grid grid-cols-6 gap-4 my-10`}>
 
             <div className={`col-span-4 max-w-md`}>
               <Tab.Group>
