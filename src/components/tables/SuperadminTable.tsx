@@ -395,7 +395,7 @@ export const SuperadminSiteDataRow = (
       </>,
 
       action: <>
-        <Status status={item?.status}/>
+        <p>Action</p>
       </>
     })
   })

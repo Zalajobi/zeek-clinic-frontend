@@ -11,7 +11,8 @@ module.exports = {
       rubik: ["var(--font-rubik)", "sans-serif"],
     },
     colors: {
-      primary: 'rgb(233,244,254)'
+      primary: 'rgb(233,244,254)',
+      error: '#FAECEC'
     }
   },
   plugins: [

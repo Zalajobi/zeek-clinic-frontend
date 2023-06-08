@@ -36,3 +36,18 @@ export const PrimaryButtonOutline = ({click, className, text, icon}: ButtonProps
     </Fragment>
   )
 }
+
+export const ErrorButtonOutline = ({click, className, text, icon}: ButtonProps) => {
+  return (
+    <Fragment>
+      <button
+        type="button"
+        onClick={click}
+        className={`flex items-center justify-center min-h-12 px-5 py-2 text-sm font-bold text-center min-w-24 border
+        rounded-lg hover:bg-error text-[#D62727] border-[#D62727] box-border ${className}`}
+      >
+        {icon} {text}
+      </button>
+    </Fragment>
+  )
+}
