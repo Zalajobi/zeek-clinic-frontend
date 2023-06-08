@@ -11,7 +11,7 @@ import Text from "../../components/global/Text";
 import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganisation";
 import Table from "../../components/global/table/Table";
 import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
-import {SuperadminHospitalColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
+import {SuperadminHospitalDataColumn, SuperadminHospitalRow} from "../../components/tables/SuperadminTable";
 import BasicDatePicker from "../../components/global/input/DatePicker";
 import TableFooter from "../../components/global/table/TableFooter";
 import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
@@ -57,7 +57,7 @@ const HospitalOrganizations = () => {
     [hospitalData, currentPage]);
 
   const columns = useMemo(
-    () => SuperadminHospitalColumn(onClickSortParameters, onUpdateSelectAllHospitals),
+    () => SuperadminHospitalDataColumn(onClickSortParameters, onUpdateSelectAllHospitals),
     [hospitalData, currentPage])
 
   return (

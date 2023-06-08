@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useMemo} from 'react';
 import {Tab} from "@headlessui/react";
 import {HiPlusSm} from "react-icons/hi";
 import {AiFillEdit} from "react-icons/ai";
@@ -9,6 +9,7 @@ import {useOrganizationDetails} from "../../hooks/superadmin/useOrganizationDeta
 import Text from "../../components/global/Text";
 import HospitalDetails from "../../components/superadmin/HospitalDetails";
 import {PrimaryButtonOutline} from "../../components/global/input/ButtonInput";
+import {SuperadminHospitalDataColumn, SuperadminSiteDataColumn} from "../../components/tables/SuperadminTable";
 
 const OrganizationSite = () => {
 
@@ -16,10 +17,16 @@ const OrganizationSite = () => {
     // Values
     organization,
     activeTabs,
+    sites,
 
     // Functions
     onUpdateActiveTab,
   } = useOrganizationDetails()
+
+
+  const columns = useMemo(
+    () => SuperadminSiteDataColumn(),
+    [sites])
 
 
   return (

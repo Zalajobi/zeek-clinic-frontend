@@ -63,8 +63,9 @@ export interface HospitalOrganizationData {
 	deactivatedSites: number;
 }
 
-export interface SuperadminSite {
+export interface SuperadminSiteData {
 	id: string;
+  address: string;
 	hospital_id: string;
 	name: string;
 	email: string;

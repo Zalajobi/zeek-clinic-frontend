@@ -2,11 +2,12 @@ import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import {axiosGetRequest} from "../../lib/axios";
 import toast from "react-hot-toast";
-import { HospitalOrganizationData } from "../../types/superadmin";
+import {HospitalOrganizationData, SuperadminSiteData} from "../../types/superadmin";
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
-  const [organization, setOrganization] = useState<HospitalOrganizationData>();
+  const [organization, setOrganization] = useState<HospitalOrganizationData | null>(null);
+  const [sites, setSites] = useState<SuperadminSiteData | null>(null);
   const [activeTabs, setActiveTabs] = useState<'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'>('ALL');
 
   useEffect(() => {
@@ -18,8 +19,7 @@ export const useOrganizationDetails = () => {
       if (response.success) {
         console.log(response.data)
         setOrganization(response.data.hospital as HospitalOrganizationData)
-        // console.log(response.data.hospital)
-        // console.log(response.data.sites)
+        setSites(response?.data?.sites)
       } else {
         toast.error(response.mesage)
       }
@@ -41,6 +41,7 @@ export const useOrganizationDetails = () => {
     hospitalId,
     organization,
     activeTabs,
+    sites,
 
     // Functions
     onUpdateActiveTab,
