@@ -2,7 +2,9 @@ import React, {Fragment, useMemo} from 'react';
 import {Tab} from "@headlessui/react";
 import {HiPlusSm} from "react-icons/hi";
 import {AiFillEdit} from "react-icons/ai";
+import { GoSearch } from "react-icons/go";
 import {CgArrowsH, CgExport} from "react-icons/cg";
+import {Select} from "flowbite-react";
 
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
@@ -10,20 +12,15 @@ import {useOrganizationDetails} from "../../hooks/superadmin/useOrganizationDeta
 import Text from "../../components/global/Text";
 import HospitalDetails from "../../components/superadmin/HospitalDetails";
 import {PrimaryButtonOutline} from "../../components/global/input/ButtonInput";
-import {
-  SuperadminHospitalDataColumn,
-  SuperadminHospitalDataRow,
-  SuperadminSiteDataColumn, SuperadminSiteDataRow
-} from "../../components/tables/SuperadminTable";
-import {SuperadminSiteData} from "../../types/superadmin";
-import {GoSearch} from "react-icons/go";
-import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
+import { SuperadminSiteDataColumn, SuperadminSiteDataRow } from "../../components/tables/SuperadminTable";
+import { SuperadminSiteData } from "../../types/superadmin";
 import BasicDatePicker from "../../components/global/input/DatePicker";
-import {Select} from "flowbite-react";
 import Table from "../../components/global/table/Table";
 import TableFooter from "../../components/global/table/TableFooter";
+import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
 
 const OrganizationSite = () => {
+  const itemsPerPage = ['All', 10, 20, 50, 100]
 
   const {
     // Values
@@ -35,6 +32,9 @@ const OrganizationSite = () => {
     noOfPages,
     resultFrom,
     resultTo,
+    totalData,
+    searchSite,
+    countryFilter,
 
     // Functions
     onUpdateActiveTab,
@@ -42,6 +42,9 @@ const OrganizationSite = () => {
     onClickPrevious,
     onUpdateSelectFrom,
     onUpdateSelectTo,
+    onEnterPageNumber,
+    onUpdatePerPageItem,
+    onUpdateSearchSite,
   } = useOrganizationDetails()
 
 
@@ -161,15 +164,15 @@ const OrganizationSite = () => {
                         className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg
                       bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600
                       dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        // value={searchOrganisation}
-                        // onChange={onUpdateSearchOrganisation}
+                        value={searchSite}
+                        onChange={onUpdateSearchSite}
                         placeholder="Search"
                       />
                     </div>
                   </form>
                 </div>
 
-                {/*<TableHeaderDropdown value={perPage} items={itemsPerPage} change={onUpdatePerPageItem}/>*/}
+                <TableHeaderDropdown value={perPage} items={itemsPerPage} change={onUpdatePerPageItem}/>
 
                 <div
                   className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
@@ -207,16 +210,16 @@ const OrganizationSite = () => {
 
             <Table columns={columns} data={data}/>
 
-            {/*<TableFooter*/}
-            {/*  noOfPages={noOfPages}*/}
-            {/*  total={totalHospitals}*/}
-            {/*  from={resultFrom}*/}
-            {/*  to={resultTo}*/}
-            {/*  onNext={onClickNext}*/}
-            {/*  onPrevious={onClickPrevious}*/}
-            {/*  currentPage={currentPage}*/}
-            {/*  enterPageNumber={onEnterPageNumber}*/}
-            {/*/>*/}
+            <TableFooter
+              noOfPages={noOfPages}
+              total={totalData}
+              from={resultFrom}
+              to={resultTo}
+              onNext={onClickNext}
+              onPrevious={onClickPrevious}
+              currentPage={currentPage}
+              enterPageNumber={onEnterPageNumber}
+            />
           </div>
 
         </div>
