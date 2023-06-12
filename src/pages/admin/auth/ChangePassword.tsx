@@ -1,5 +1,5 @@
-import React from 'react'
-import {useAdminChangePassword} from "../../../hooks/admin/useAdminChangePassword";
+import { Fragment } from 'react'
+import { useAdminChangePassword } from "../../../hooks/admin/useAdminChangePassword";
 import Text from "../../../components/global/Text";
 import TextInputLabel from "../../../components/global/input/TextInputLabel";
 import {Button} from "flowbite-react";
@@ -13,7 +13,7 @@ const ChangePassword = () => {
   } = useAdminChangePassword()
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
         <div className="max-w-screen-md flex flex-col items-center justify-center h-full w-full p-20">
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
@@ -55,7 +55,7 @@ const ChangePassword = () => {
       </div>
 
       <ToasterConfig/>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

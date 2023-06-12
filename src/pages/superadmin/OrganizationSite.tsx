@@ -1,4 +1,4 @@
-import React, {Fragment, useMemo} from 'react';
+import { Fragment, useMemo } from 'react';
 import {Tab} from "@headlessui/react";
 import {HiPlusSm} from "react-icons/hi";
 import {AiFillEdit} from "react-icons/ai";
@@ -10,7 +10,6 @@ import {Select} from "flowbite-react";
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import {useOrganizationDetails} from "../../hooks/superadmin/useOrganizationDetails";
 import Text from "../../components/global/Text";
-import HospitalDetails from "../../components/superadmin/HospitalDetails";
 import {PrimaryButtonOutline} from "../../components/global/input/ButtonInput";
 import { SuperadminSiteDataColumn, SuperadminSiteDataRow } from "../../components/tables/SuperadminTable";
 import { SuperadminSiteData } from "../../types/superadmin";
@@ -18,6 +17,7 @@ import BasicDatePicker from "../../components/global/input/DatePicker";
 import Table from "../../components/global/table/Table";
 import TableFooter from "../../components/global/table/TableFooter";
 import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
+import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]

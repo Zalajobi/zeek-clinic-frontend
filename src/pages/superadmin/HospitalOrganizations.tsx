@@ -3,7 +3,7 @@ import { TiExportOutline } from 'react-icons/ti'
 import { GoSearch } from 'react-icons/go'
 import { CgArrowsH } from 'react-icons/cg'
 import { Tab } from "@headlessui/react";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Select } from "flowbite-react";
 
 import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate"

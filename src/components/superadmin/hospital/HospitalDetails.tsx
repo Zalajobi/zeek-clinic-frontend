@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import {HospitalOrganizationData} from "../../types/superadmin";
+import {HospitalOrganizationData} from "../../../types/superadmin";
 import moment from "moment/moment";
-import Status from "../global/Status";
+import Status from "../../global/Status";
 
 interface HospitalDetailsProps {
   data: HospitalOrganizationData | null

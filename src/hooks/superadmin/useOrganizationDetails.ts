@@ -36,8 +36,6 @@ export const useOrganizationDetails = () => {
         })
       ])
 
-      console.log(response)
-
       if (response[0].success && response[1].success) {
         setOrganization(response[0].data.hospital as HospitalOrganizationData)
         setSites(response[0]?.data?.sites)
