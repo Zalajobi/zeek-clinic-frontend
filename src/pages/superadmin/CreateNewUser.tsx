@@ -360,7 +360,7 @@ const CreateNewUser = () => {
                 <Select
                   id="countries"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.country?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.country?.message}</span></Fragment>}
                   {...register("country", {
                     onChange: (e) => onUpdateCountry(e?.target?.value)
                   })}
