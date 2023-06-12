@@ -242,25 +242,29 @@ export const useOrganizationDetails = () => {
 
   const onUpdateSearchSite = async (event: ChangeEvent<HTMLInputElement>) => {
     setSearchSite(event.target.value)
+
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
-      // from_date: hospitalFilterFrom,
-      // to_date: hospitalFilterTo,
-      // search: event.target.value,
-      // status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
+      from_date: dateFilterFrom,
+      to_date: dateFilterTo,
+      search: event.target.value,
+      country: country,
+      status: activeTabs === 'ALL' ? '' : activeTabs,
+      hospital_id: hospitalId,
+      state
     }
 
-    // setResultFrom(1)
-    // setCurrentPage(0)
+    setResultFrom(1)
+    setCurrentPage(0)
 
-    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+    const response = await axiosGetRequest('/account/site/organization/table-filter', params)
 
     if (response.success) {
-      // setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
-      // setTotalHospitals(response?.data?.count as number)
-      // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
-      // setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+      setSites(response?.data?.sites as SuperadminSiteData[])
+      setTotalData(response?.data?.count as number)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
     }
   }
 

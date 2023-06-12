@@ -34,7 +34,6 @@ const OrganizationSite = () => {
     resultTo,
     totalData,
     searchSite,
-    country,
     countryFilterList,
     stateFilterList,
 
