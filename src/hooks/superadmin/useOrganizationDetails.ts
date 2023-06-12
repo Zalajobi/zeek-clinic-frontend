@@ -319,6 +319,34 @@ export const useOrganizationDetails = () => {
     }
   }
 
+  const onUpdateFilterByState = async (event:ChangeEvent<HTMLSelectElement>) => {
+    setState(event.target.value)
+
+    const params = {
+      page: 0,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: dateFilterFrom,
+      to_date: dateFilterTo,
+      search: searchSite,
+      country: country,
+      status: activeTabs === 'ALL' ? '' : activeTabs,
+      hospital_id: hospitalId,
+      state: event.target.value
+    }
+
+    setResultFrom(1)
+    setCurrentPage(0)
+
+    const response = await axiosGetRequest('/account/site/organization/table-filter', params)
+
+    if (response.success) {
+      setSites(response?.data?.sites as SuperadminSiteData[])
+      setTotalData(response?.data?.count as number)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+    }
+  }
+
   return {
     // Values
     hospitalId,
@@ -346,5 +374,6 @@ export const useOrganizationDetails = () => {
     onUpdatePerPageItem,
     onUpdateSearchSite,
     onUpdateFilterByCountry,
+    onUpdateFilterByState,
   }
 }
