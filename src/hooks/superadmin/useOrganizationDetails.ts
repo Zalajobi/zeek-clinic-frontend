@@ -214,28 +214,29 @@ export const useOrganizationDetails = () => {
   }
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
-
     setPerPage(value)
-    // setNoOfPages(Math.ceil(totalHospitals / (value === 'All' ? totalHospitals : value)))
     setResultFrom(1)
-    // setResultTo(value === 'All' ? totalHospitals : value)
     setCurrentPage(0)
 
     const params = {
       page: 0,
       per_page: value === 'All' ? 0 : value,
-      // from_date: hospitalFilterFrom,
-      // to_date: hospitalFilterTo,
-      // search: searchOrganisation,
-      // country: countryFilter,
-      // status: hospitalTabs === 'ALL' ? '' : hospitalTabs
+      from_date: dateFilterFrom,
+      to_date: dateFilterTo,
+      search: searchSite,
+      country: country,
+      status: activeTabs === 'ALL' ? '' : activeTabs,
+      hospital_id: hospitalId,
+      state
     }
 
-    const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+    const response = await axiosGetRequest('/account/site/organization/table-filter', params)
 
     if (response.success) {
-      // setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
-      // setTotalHospitals(response?.data?.count as number)
+      setResultTo(value === 'All' ? response?.data?.count : value)
+      setSites(response?.data?.sites as SuperadminSiteData[])
+      setTotalData(response?.data?.count as number)
+      setNoOfPages(Math.ceil(response?.data?.count / (value === 'All' ? response?.data?.count : value)))
     }
   }
 
