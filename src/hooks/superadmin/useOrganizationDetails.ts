@@ -18,24 +18,36 @@ export const useOrganizationDetails = () => {
   const [searchSite, setSearchSite] = useState('');
   const [dateFilterTo, setDateFilterTo] = useState<Date | null>();
   const [dateFilterFrom, setDateFilterFrom] = useState<Date | null>();
-  const [countryFilter, setCountryFilter] = useState<string[]>([]);
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [countryFilterList, setCountryFilterList] = useState<{country:string}[]>([]);
+  const [stateFilterList, setStateFilterList] = useState<{state:string}[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const response = await axiosGetRequest('/account/hospital/details', {
-        id: hospitalId
-      })
+      const response = await Promise.all([
+        await axiosGetRequest('/account/hospital/details', {
+          id: hospitalId
+        }),
 
-      if (response.success) {
-        console.log(response.data)
-        setOrganization(response.data.hospital as HospitalOrganizationData)
-        setSites(response?.data?.sites)
-        setNoOfPages(Math.ceil(response.data.tableData.sites / (perPage !== 'All' ? perPage : 0)))
-        setTotalData(response.data.tableData.sites)
-        setResultFrom(1)
-        setResultTo((currentPage + 1 === noOfPages) ? response.data.tableData.sites : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+        axiosGetRequest('/account/site/get-distinct/country-and-state/organization', {
+          hospital_id: hospitalId
+        })
+      ])
+
+      console.log(response)
+
+      if (response[0].success && response[1].success) {
+        setOrganization(response[0].data.hospital as HospitalOrganizationData)
+        setSites(response[0]?.data?.sites)
+        setNoOfPages(Math.ceil(response[0].data.tableData.sites / (perPage !== 'All' ? perPage : 0)))
+        setTotalData(response[0].data.tableData.sites)
+        setResultFrom(response[0]?.data?.sites.length <= 0 ? 0 : 1)
+        setResultTo(response[0]?.data?.sites.length <= 0 ? 0 : (currentPage + 1 === noOfPages) ? response[0].data.tableData.sites : ((currentPage) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+        setCountryFilterList(response[1].data.countries)
+        setStateFilterList(response[1].data.states)
       } else {
-        toast.error(response.mesage)
+        toast.error(response[0].message)
       }
     }
 
@@ -65,16 +77,18 @@ export const useOrganizationDetails = () => {
         from_date: dateFilterFrom,
         to_date: dateFilterTo,
         search: searchSite,
-        country: countryFilter,
+        country: country,
         status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId
+        hospital_id: hospitalId,
+        state
       }
 
       const response = await axiosGetRequest('/account/site/organization/table-filter', params)
+      console.log(response)
 
       if (response.success) {
         console.log(response.data)
-        setSites(response?.data?.hospitals as SuperadminSiteData[])
+        setSites(response?.data?.sites as SuperadminSiteData[])
         setTotalData(response?.data?.count as number)
         setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
       }
@@ -255,7 +269,9 @@ export const useOrganizationDetails = () => {
     resultTo,
     totalData,
     searchSite,
-    countryFilter,
+    country,
+    countryFilterList,
+    stateFilterList,
 
     // Functions
     onUpdateActiveTab,

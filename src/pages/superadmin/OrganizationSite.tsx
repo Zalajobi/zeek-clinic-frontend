@@ -34,7 +34,9 @@ const OrganizationSite = () => {
     resultTo,
     totalData,
     searchSite,
-    countryFilter,
+    country,
+    countryFilterList,
+    stateFilterList,
 
     // Functions
     onUpdateActiveTab,
@@ -197,11 +199,31 @@ const OrganizationSite = () => {
                   dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}
                   >
                     <option value={``}>Country</option>
-                    {/*{allHospitalCountries?.map((item:{country:string}, idx:number) => {*/}
-                    {/*  return (*/}
-                    {/*    <option key={idx} value={item?.country}>{item?.country}</option>*/}
-                    {/*  )*/}
-                    {/*})}*/}
+                    {countryFilterList?.map((item:{country:string}, idx:number) => {
+                      return (
+                        <option key={idx} value={item?.country}>{item?.country}</option>
+                      )
+                    })}
+
+                  </Select>
+                </div>
+
+                <div>
+                  <Select
+                    id="state"
+                    required={false}
+                    // onChange={filterByCountry}
+                    className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
+                   border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
+                  focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
+                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}
+                  >
+                    <option value={``}>State</option>
+                    {stateFilterList?.map((item:{state:string}, idx:number) => {
+                      return (
+                        <option key={idx} value={item?.state}>{item?.state}</option>
+                      )
+                    })}
 
                   </Select>
                 </div>
