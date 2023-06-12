@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {axiosGetRequest} from "../../lib/axios";
 import toast from "react-hot-toast";
 import {HospitalOrganizationData, SuperadminSiteData} from "../../types/superadmin";
+import * as queryString from "querystring";
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
@@ -59,7 +60,29 @@ export const useOrganizationDetails = () => {
 
   const onUpdateActiveTab = async (tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE') => {
     setActiveTabs(tab)
-    console.log(tab)
+    setResultFrom(1)
+    setCurrentPage(0)
+
+    const params = {
+      page: 0,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: dateFilterFrom,
+      to_date: dateFilterTo,
+      search: searchSite,
+      country: country,
+      status: tab === 'ALL' ? '' : tab,
+      hospital_id: hospitalId,
+      state
+    }
+
+    const response = await axiosGetRequest('/account/site/organization/table-filter', params)
+
+    if (response.success) {
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setSites(response?.data?.sites as SuperadminSiteData[])
+      setTotalData(response?.data?.count as number)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+    }
   }
 
   const onClickNext = async (value:number) => {
@@ -268,6 +291,34 @@ export const useOrganizationDetails = () => {
     }
   }
 
+  const onUpdateFilterByCountry = async (event:ChangeEvent<HTMLSelectElement>) => {
+    setCountry(event.target.value)
+
+    const params = {
+      page: 0,
+      per_page: perPage === 'All' ? 0 : perPage,
+      from_date: dateFilterFrom,
+      to_date: dateFilterTo,
+      search: searchSite,
+      country: event.target.value,
+      status: activeTabs === 'ALL' ? '' : activeTabs,
+      hospital_id: hospitalId,
+      state
+    }
+
+    setResultFrom(1)
+    setCurrentPage(0)
+
+    const response = await axiosGetRequest('/account/site/organization/table-filter', params)
+
+    if (response.success) {
+      setSites(response?.data?.sites as SuperadminSiteData[])
+      setTotalData(response?.data?.count as number)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+    }
+  }
+
   return {
     // Values
     hospitalId,
@@ -294,5 +345,6 @@ export const useOrganizationDetails = () => {
     onEnterPageNumber,
     onUpdatePerPageItem,
     onUpdateSearchSite,
+    onUpdateFilterByCountry,
   }
 }

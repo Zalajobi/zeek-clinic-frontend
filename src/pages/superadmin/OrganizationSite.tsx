@@ -46,6 +46,7 @@ const OrganizationSite = () => {
     onEnterPageNumber,
     onUpdatePerPageItem,
     onUpdateSearchSite,
+    onUpdateFilterByCountry,
   } = useOrganizationDetails()
 
 
@@ -191,7 +192,7 @@ const OrganizationSite = () => {
                   <Select
                     id="state"
                     required={false}
-                    // onChange={filterByCountry}
+                    onChange={onUpdateFilterByCountry}
                     className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
                    border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
                   focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
