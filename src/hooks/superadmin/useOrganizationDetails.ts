@@ -84,10 +84,8 @@ export const useOrganizationDetails = () => {
       }
 
       const response = await axiosGetRequest('/account/site/organization/table-filter', params)
-      console.log(response)
 
       if (response.success) {
-        console.log(response.data)
         setSites(response?.data?.sites as SuperadminSiteData[])
         setTotalData(response?.data?.count as number)
         setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
@@ -101,25 +99,27 @@ export const useOrganizationDetails = () => {
     else {
       setCurrentPage(value)
 
-      // setResultFrom(((value) * (perPage !== 'All' ? perPage : 0)) + 1)
-      // setResultTo((value + 1 === noOfPages) ? totalHospitals : ((value) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
+      setResultFrom(((value) * (perPage !== 'All' ? perPage : 0)) + 1)
+      setResultTo((value + 1 === noOfPages) ? totalData : ((value) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
 
       const params = {
         page: value,
         per_page: perPage === 'All' ? 0 : perPage,
-        // from_date: hospitalFilterFrom,
-        // to_date: hospitalFilterTo,
-        // search: searchOrganisation,
-        // country: countryFilter,
-        // status: hospitalTabs === 'ALL' ? '' : hospitalTabs
+        from_date: dateFilterFrom,
+        to_date: dateFilterTo,
+        search: searchSite,
+        country: country,
+        status: activeTabs === 'ALL' ? '' : activeTabs,
+        hospital_id: hospitalId,
+        state
       }
 
-      const response = await axiosGetRequest('/account/super-admin/hospitals', params)
+      const response = await axiosGetRequest('/account/site/organization/table-filter', params)
 
       if (response.success) {
-        // setHospitalData(response?.data?.hospitals as GetHospitalResponseData[])
-        // setTotalHospitals(response?.data?.count as number)
-        // setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
+        setSites(response?.data?.sites as SuperadminSiteData[])
+        setTotalData(response?.data?.count as number)
+        setNoOfPages(Math.ceil(response?.data?.count / (perPage === 'All' ? response?.data?.count : perPage)))
       }
     }
   }
