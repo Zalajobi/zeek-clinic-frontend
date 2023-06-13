@@ -18,6 +18,7 @@ import Table from "../../components/global/table/Table";
 import TableFooter from "../../components/global/table/TableFooter";
 import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
 import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
+import HospitalRoutes from "../../components/superadmin/HospitalRoutes";
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -92,6 +93,8 @@ const OrganizationSite = () => {
           </div>
 
           <HospitalDetails data={organization ? organization : null}/>
+
+          <HospitalRoutes/>
 
           <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
 
