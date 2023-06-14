@@ -208,6 +208,7 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
                     required={false}
                     type={`text`}
                     color={errors.zip_code?.message ? 'failure' : 'gray'}
+                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
                     {...register("zip_code")}
                   />
                 </div>
