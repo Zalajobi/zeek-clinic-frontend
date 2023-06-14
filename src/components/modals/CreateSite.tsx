@@ -14,9 +14,10 @@ import {yupResolver} from "@hookform/resolvers/yup";
 interface CreateSiteModalProps {
   showModal: boolean
   close: () => void
+  reloadPage: () => void
 }
 
-const CreateSite = ({showModal, close}: CreateSiteModalProps) => {
+const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<CreateSiteInput>({
     resolver: yupResolver(CreateSiteInputSchema)
   });
@@ -66,7 +67,7 @@ const CreateSite = ({showModal, close}: CreateSiteModalProps) => {
     setHas_wallet,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite()
+  } = useCreateSite(reloadPage, close)
 
   return (
     <Fragment>

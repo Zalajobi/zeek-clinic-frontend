@@ -53,6 +53,7 @@ const OrganizationSite = () => {
     onUpdateFilterByCountry,
     onUpdateFilterByState,
     onUpdateShowCreateSiteModal,
+    onUpdateDataRefresh,
   } = useOrganizationDetails()
 
 
@@ -254,7 +255,7 @@ const OrganizationSite = () => {
 
         </div>
 
-        <CreateSite showModal={showCreateSiteModal} close={onUpdateShowCreateSiteModal}/>
+        <CreateSite showModal={showCreateSiteModal} close={onUpdateShowCreateSiteModal} reloadPage={onUpdateDataRefresh}/>
       </SuperadminBaseTemplate>
     </Fragment>
   )

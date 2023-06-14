@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Country, State} from "country-state-city";
 import {AllCountries, AllStatesAndCities, CreateSiteInput} from "../../types/superadmin/formTypes";
 import {axiosPostRequest} from "../../lib/axios";
 import toast from "react-hot-toast";
 
-export const useCreateSite = () => {
+export const useCreateSite = (reloadPage: () => void, close: () => void) => {
   const navigate = useNavigate();
+  const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
   const [is_private, setIs_private] = useState(false);
   const [has_appointment, setHas_appointment] = useState(false);
@@ -47,19 +48,42 @@ export const useCreateSite = () => {
   }
 
   const createNewSite = async (data:CreateSiteInput) => {
-    const hospitalData = {
+    const siteData = {
       ...data,
       phone: `${data.phone}`,
       country,
       logo,
-      country_code: countryCode
+      country_code: countryCode,
+      is_private,
+      has_appointment,
+      has_caregiver,
+      has_clinical,
+      has_doctor,
+      has_emergency,
+      has_laboratory,
+      has_medical_supply,
+      has_nursing,
+      has_inpatient,
+      has_outpatient,
+      has_pharmacy,
+      has_physical_therapy,
+      has_procedure,
+      has_radiology,
+      has_unit,
+      has_vital,
+      has_wallet,
+      hospital_id: hospitalId
     }
-    // const response = await axiosPostRequest('/account/hospital/create', hospitalData)
-    //
-    // if (response.success)
-    //   toast.success(response.message)
-    // else
-    //   toast.error(response.message)
+
+    const response = await axiosPostRequest('/account/site/create', siteData)
+
+    if (response.success) {
+      toast.success(response.message)
+      reloadPage()
+      close()
+    }
+    else
+      toast.error(response.message)
   }
 
   return {
