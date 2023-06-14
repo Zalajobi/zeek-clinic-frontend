@@ -40,6 +40,7 @@ export const useCreateHospitalModal = () => {
         logo,
         country_code: countryCode
       }
+      console.log(hospitalData)
       const response = await axiosPostRequest('/account/hospital/create', hospitalData)
 
       if (response.success)

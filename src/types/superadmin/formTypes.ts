@@ -82,6 +82,7 @@ export type CreateHospitalInput = {
   city: string
   state: string
   country: string
+  zip_code?: string
 }
 
 export const CreateHospitalInputSchema = yup.object({
@@ -92,4 +93,5 @@ export const CreateHospitalInputSchema = yup.object({
   city: yup.string().optional(),
   state: yup.string().required('Organization State is required'),
   country: yup.string().required('Organization Country is required'),
+  zip_code: yup.string().optional(),
 }).required()
