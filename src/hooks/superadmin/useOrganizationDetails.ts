@@ -23,6 +23,8 @@ export const useOrganizationDetails = () => {
   const [state, setState] = useState('');
   const [countryFilterList, setCountryFilterList] = useState<{country:string}[]>([]);
   const [stateFilterList, setStateFilterList] = useState<{state:string}[]>([]);
+  const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
+  const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -54,7 +56,7 @@ export const useOrganizationDetails = () => {
       .catch(err => {
         toast.error('Response')
       })
-  }, [hospitalId]);
+  }, [hospitalId, refreshData]);
 
   const onUpdateActiveTab = async (tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE') => {
     setActiveTabs(tab)
@@ -345,6 +347,13 @@ export const useOrganizationDetails = () => {
     }
   }
 
+  const onUpdateShowCreateSiteModal = () => {
+    console.log(!showCreateSiteModal)
+    setShowCreateSiteModal(!showCreateSiteModal)
+  }
+
+  const onUpdateDataRefresh = () => setRefreshData(!refreshData)
+
   return {
     // Values
     hospitalId,
@@ -361,6 +370,7 @@ export const useOrganizationDetails = () => {
     country,
     countryFilterList,
     stateFilterList,
+    showCreateSiteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -373,5 +383,7 @@ export const useOrganizationDetails = () => {
     onUpdateSearchSite,
     onUpdateFilterByCountry,
     onUpdateFilterByState,
+    onUpdateShowCreateSiteModal,
+    onUpdateDataRefresh,
   }
 }

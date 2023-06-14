@@ -19,6 +19,8 @@ import TableFooter from "../../components/global/table/TableFooter";
 import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
 import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from "../../components/superadmin/HospitalRoutes";
+import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
+import CreateSite from "../../components/modals/CreateSite";
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100]
@@ -37,6 +39,7 @@ const OrganizationSite = () => {
     searchSite,
     countryFilterList,
     stateFilterList,
+    showCreateSiteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -49,6 +52,8 @@ const OrganizationSite = () => {
     onUpdateSearchSite,
     onUpdateFilterByCountry,
     onUpdateFilterByState,
+    onUpdateShowCreateSiteModal,
+    onUpdateDataRefresh,
   } = useOrganizationDetails()
 
 
@@ -139,7 +144,7 @@ const OrganizationSite = () => {
 
             <div className={`w-full flex flex-row gap-4 items-center justify-end`}>
               <PrimaryButtonOutline
-                click={() => console.log('Add New Site')}
+                click={() => onUpdateShowCreateSiteModal()}
                 text={`Add New Site`}
                 icon={<HiPlusSm size={20} className={`mr-2`}/>}
               />
@@ -249,6 +254,8 @@ const OrganizationSite = () => {
           </div>
 
         </div>
+
+        <CreateSite showModal={showCreateSiteModal} close={onUpdateShowCreateSiteModal} reloadPage={onUpdateDataRefresh}/>
       </SuperadminBaseTemplate>
     </Fragment>
   )
