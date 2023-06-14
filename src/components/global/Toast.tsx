@@ -1,5 +1,4 @@
 import { Toast } from "flowbite-react";
-import React from "react";
 import { FaCheck } from 'react-icons/fa'
 import {Toaster} from "react-hot-toast";
 

@@ -193,7 +193,27 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
                   />
                 </div>
 
-                <div className={`col-span-2`}>
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      htmlFor="zip_code"
+                      value="Zip Code"
+                      color={errors.zip_code?.message ? 'failure' : 'gray'}
+                    />
+                  </div>
+
+                  <TextInput
+                    id="zip_code"
+                    placeholder="101231"
+                    required={false}
+                    type={`text`}
+                    color={errors.zip_code?.message ? 'failure' : 'gray'}
+                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
+                    {...register("zip_code")}
+                  />
+                </div>
+
+                <div>
                   <div id="address" className={`w-full`}>
                     <div className="mb-2 block">
                       <Label

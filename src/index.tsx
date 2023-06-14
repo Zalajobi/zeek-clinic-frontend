@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -17,6 +17,7 @@ import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
 import SuperadminDashboard from "./pages/superadmin";
 import CareGiverDashboard from "./pages/provider";
 import HospitalOrganizations from "./pages/superadmin/HospitalOrganizations";
+import OrganizationSite from "./pages/superadmin/OrganizationSite";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
         path: '/superadmin/login',
         element: <SuperadminLogin/>
       },
+
+      {
+        path: '/superadmin/hospital/:hospitalId',
+        element: <OrganizationSite/>
+      },
+
     ]
   },
 
@@ -113,9 +120,9 @@ const router = createBrowserRouter([
   },
 ]);
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -192,8 +192,6 @@ export const useHospitalOrganisation = () => {
         return b.name.localeCompare(a.name);
       }
     })
-    // hospitalData.sort((a:any, b:any) => (a[value] - b[value]) ? 1 : -1  )
-    // console.log(hospitalData.sort((a:any, b:any) => (a[value] - b[value]) ? 1 : -1  ))
   }
 
   const onClickNext = async (value:number) => {
@@ -322,13 +320,10 @@ export const useHospitalOrganisation = () => {
       selectedHospitals.push(id)
     else
       selectedHospitals = selectedHospitals.filter(item => item !== id)
-
-    console.log(selectedHospitals)
   }
 
   const onUpdateSelectAllHospitals = (event : ChangeEvent<HTMLInputElement>) => {
     setSelectAllHospitals(event.target.checked)
-    console.log('HELLO WORLD'  + ' ' + selectAllHospitals)
   }
 
   return {

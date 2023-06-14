@@ -1,0 +1,22 @@
+/*Text*/
+.text-custom-primary-800 {
+    --tw-text-opacity: 1;
+    color: rgb(17 55 90/var(--tw-text-opacity))
+}
+
+.text-ds-primary-700 {
+    --tw-text-opacity: 1;
+    color: rgb(17 55 90/var(--tw-text-opacity));
+}
+
+/*Border*/
+.border-custom-primary-400\/50 {
+    border-color: rgba(140,197,250,.5);
+}
+
+
+/*Ring*/
+.ring-custom-primary-400 {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(140 197 250/var(--tw-ring-opacity));
+}

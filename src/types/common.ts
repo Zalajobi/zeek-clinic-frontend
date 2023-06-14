@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 
 export type S3UploadResponse = {
   Location: string,

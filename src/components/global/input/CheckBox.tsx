@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 interface CheckBoxProps {
   inputClassName?: string
@@ -11,7 +11,7 @@ interface CheckBoxProps {
 
 const CheckBox = ({inputClassName, labelClassName, text='Remember me', id='remember', checked, click}: CheckBoxProps) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -27,7 +27,7 @@ const CheckBox = ({inputClassName, labelClassName, text='Remember me', id='remem
           {text}
         </label>
       </div>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

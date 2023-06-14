@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import Text from "../../../components/global/Text";
 import {useAdminForgotPassword} from "../../../hooks/admin/useAdminForgotPassword";
 import TextInputLabel from "../../../components/global/input/TextInputLabel";
@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const { setEmail, resetPassword } = useAdminForgotPassword()
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
         <div className="max-w-screen-md flex flex-col items-center justify-center h-full w-full p-20">
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
       </div>
 
       <ToasterConfig/>
-    </React.Fragment>
+    </Fragment>
   )
 }
 
