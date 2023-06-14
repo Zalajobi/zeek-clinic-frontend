@@ -1,4 +1,4 @@
-import React, {Fragment, ReactNode} from "react"
+import { Fragment, ReactNode } from "react"
 import Sidebar from "./Sidebar";
 import Header from "../Header";
 import {useProviderBaseTemplate} from "../../../hooks/provider/useProviderBaseTemplate";

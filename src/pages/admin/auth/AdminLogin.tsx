@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 import Text from "../../../components/global/Text";
 import TextInputLabel from "../../../components/global/input/TextInputLabel";
 import useAdminLogin from "../../../hooks/admin/useAdminLogin";
@@ -13,7 +13,7 @@ const AdminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } = useAdminLogin()
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
         <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-20">
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
@@ -85,7 +85,7 @@ const AdminLogin = () => {
       </div>
 
       <ToasterConfig/>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

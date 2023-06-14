@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import useAdminAddProvider from "../../hooks/admin/useAdminAddProvider";
 
 export const AddProvider = () => {
@@ -6,9 +6,9 @@ export const AddProvider = () => {
 
 
   return (
-    <React.Fragment>
+    <Fragment>
       <h1>{hello}</h1>
-    </React.Fragment>
+    </Fragment>
   )
 }
 
