@@ -44,12 +44,6 @@
     color: rgb(126 139 151/var(--tw-text-opacity));
 }
 
-.text-custom-primary-800 {
-    --tw-text-opacity: 1;
-    color: rgb(17 55 90/var(--tw-text-opacity))
-}
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

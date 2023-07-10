@@ -1,10 +1,10 @@
-import React from "react";
+import { Fragment } from "react";
 
 const AdminSignup = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <h1>ADMIN SIGNUP</h1>
-    </React.Fragment>
+    </Fragment>
   )
 };
 

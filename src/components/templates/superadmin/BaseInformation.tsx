@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { AiFillCaretDown, AiFillSetting } from 'react-icons/ai'
 import { FaUserAstronaut } from 'react-icons/fa'
@@ -14,7 +14,7 @@ type BaseInformationProps = {
 
 const BaseInformation = ({name, role}: BaseInformationProps) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div>
         <Menu as="div" className="relative inline-block text-left">
           <div className={`flex`}>
@@ -115,7 +115,7 @@ const BaseInformation = ({name, role}: BaseInformationProps) => {
           </Transition>
         </Menu>
       </div>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

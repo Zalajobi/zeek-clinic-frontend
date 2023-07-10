@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdOutlinePayments, MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { RxDashboard } from "react-icons/rx";
@@ -101,7 +101,7 @@ const Sidebar = () => {
   ] as SidebarItemProps[]
 
   return (
-    <React.Fragment>
+    <Fragment>
       <aside
         className={`md:h-100 w-screen shrink-0 overflow-x-scroll border-r border-r-custom-gray-100 bg-brand-secondary-background !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
           showSidebar ? "md:w-auto" : "md:w-[13rem]"
@@ -144,7 +144,7 @@ const Sidebar = () => {
           })}
         </div>
       </aside>
-    </React.Fragment>
+    </Fragment>
   )
 }
 
