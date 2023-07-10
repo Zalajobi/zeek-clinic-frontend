@@ -1,12 +1,14 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
+import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
 
-const AdminHomePage = () => {
-
+const AdminDashboard = () => {
   return (
     <Fragment>
-      <h1>Admin</h1>
+      <AdminBaseTemplate>
+        <h1>Admin Homepage</h1>
+      </AdminBaseTemplate>
     </Fragment>
-  )
-}
+  );
+};
 
-export default AdminHomePage
+export default AdminDashboard;
