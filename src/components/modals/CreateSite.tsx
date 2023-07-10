@@ -1,25 +1,43 @@
 import { Fragment } from "react";
-import {Button, Label, Modal, Select, TextInput, ToggleSwitch} from "flowbite-react";
+import {
+  Button,
+  Label,
+  Modal,
+  Select,
+  TextInput,
+  ToggleSwitch,
+} from "flowbite-react";
 import Text from "../global/Text";
 import ImageUpload from "../global/input/ImageUpload";
 import {
-  AllCountries, AllStatesAndCities,
+  AllCountries,
+  AllStatesAndCities,
   CreateSiteInput,
-  CreateSiteInputSchema
+  CreateSiteInputSchema,
 } from "../../types/superadmin/formTypes";
-import {useCreateSite} from "../../hooks/common/useCreateSite";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { useCreateSite } from "../../hooks/common/useCreateSite";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface CreateSiteModalProps {
-  showModal: boolean
-  close: () => void
-  reloadPage: () => void
+  showModal: boolean;
+  totalSites: number;
+  close: () => void;
+  reloadPage: () => void;
 }
 
-const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<CreateSiteInput>({
-    resolver: yupResolver(CreateSiteInputSchema)
+const CreateSite = ({
+  showModal,
+  close,
+  reloadPage,
+  totalSites,
+}: CreateSiteModalProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateSiteInput>({
+    resolver: yupResolver(CreateSiteInputSchema),
   });
   const {
     // Values
@@ -67,7 +85,7 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
     setHas_wallet,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite(reloadPage, close)
+  } = useCreateSite(reloadPage, close, totalSites);
 
   return (
     <Fragment>
@@ -90,7 +108,11 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
           <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
             <div className={`grid grid-cols-6 gap-4 items-center`}>
               <div className={`col-span-2`}>
-                <ImageUpload bucketFolder={`/site_image`} url={logo} updateImageUrl={onUpdateLogo}/>
+                <ImageUpload
+                  bucketFolder={`/site_image`}
+                  url={logo}
+                  updateImageUrl={onUpdateLogo}
+                />
               </div>
 
               <div className={`col-span-4 grid grid-cols-2 gap-4`}>
@@ -99,7 +121,7 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     <Label
                       htmlFor="name"
                       value="Name"
-                      color={errors.name?.message ? 'failure' : 'gray'}
+                      color={errors.name?.message ? "failure" : "gray"}
                     />
                   </div>
 
@@ -107,8 +129,14 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     id="name"
                     placeholder="Zeek Clinic"
                     required={false}
-                    color={errors.name?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.name?.message}</span></Fragment>}
+                    color={errors.name?.message ? "failure" : "gray"}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.name?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("name")}
                   />
                 </div>
@@ -118,7 +146,7 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     <Label
                       htmlFor="email"
                       value="Email"
-                      color={errors.email?.message ? 'failure' : 'gray'}
+                      color={errors.email?.message ? "failure" : "gray"}
                     />
                   </div>
 
@@ -127,8 +155,14 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     placeholder="john@doe.com"
                     required={false}
                     type={`email`}
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.email?.message}</span></Fragment>}
+                    color={errors.email?.message ? "failure" : "gray"}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.email?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("email")}
                   />
                 </div>
@@ -138,28 +172,32 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     <Label
                       htmlFor="countries"
                       value="Select your country"
-                      color={errors.country?.message ? 'failure' : 'gray'}
+                      color={errors.country?.message ? "failure" : "gray"}
                     />
                   </div>
 
                   <Select
                     id="countries"
                     required={false}
-                    helperText={<Fragment><span className="font-medium">{errors.country?.message}</span></Fragment>}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.country?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("country", {
-                      onChange: (e) => onUpdateCountry(e?.target?.value)
+                      onChange: (e) => onUpdateCountry(e?.target?.value),
                     })}
                   >
-                    <option value={``}>
-                      Select Country
-                    </option>
+                    <option value={``}>Select Country</option>
 
-                    {allCountries?.map((item:AllCountries, idx:number) => {
+                    {allCountries?.map((item: AllCountries, idx: number) => {
                       return (
                         <option value={item?.isoCode} key={idx}>
                           {item?.name}
                         </option>
-                      )
+                      );
                     })}
                   </Select>
                 </div>
@@ -170,27 +208,36 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                       <Label
                         htmlFor="countries"
                         value="Select State"
-                        color={errors.state?.message ? 'failure' : 'gray'}
+                        color={errors.state?.message ? "failure" : "gray"}
                       />
                     </div>
                     <Select
                       id="state"
                       required={false}
-                      helperText={<Fragment><span className="font-medium">{errors.state?.message}</span></Fragment>}
+                      helperText={
+                        <Fragment>
+                          <span className="font-medium">
+                            {errors.state?.message}
+                          </span>
+                        </Fragment>
+                      }
                       {...register("state")}
-                      color={errors.state?.message ? 'failure' : 'gray'}
+                      color={errors.state?.message ? "failure" : "gray"}
                     >
-                      <option value={``}>
-                        Select State
-                      </option>
+                      <option value={``}>Select State</option>
 
-                      {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
-                        return (
-                          <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
-                            {item?.name}
-                          </option>
-                        )
-                      })}
+                      {allCountryStates?.map(
+                        (item: AllStatesAndCities, idx: number) => {
+                          return (
+                            <option
+                              value={`${item?.name} (${item?.isoCode})`}
+                              key={idx}
+                            >
+                              {item?.name}
+                            </option>
+                          );
+                        }
+                      )}
                     </Select>
                   </div>
                 </div>
@@ -200,15 +247,21 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     <Label
                       htmlFor="city"
                       value="City"
-                      color={errors.city?.message ? 'failure' : 'gray'}
+                      color={errors.city?.message ? "failure" : "gray"}
                     />
                   </div>
                   <TextInput
                     id="city"
                     placeholder="city"
                     required={false}
-                    color={errors.city?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
+                    color={errors.city?.message ? "failure" : "gray"}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.city?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("city")}
                   />
                 </div>
@@ -218,7 +271,7 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     <Label
                       htmlFor="phone"
                       value="Phone Number"
-                      color={errors.phone?.message ? 'failure' : 'gray'}
+                      color={errors.phone?.message ? "failure" : "gray"}
                     />
                   </div>
 
@@ -227,8 +280,14 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     placeholder="+2347053980998"
                     required={false}
                     type={`tel`}
-                    color={errors.phone?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.phone?.message}</span></Fragment>}
+                    color={errors.phone?.message ? "failure" : "gray"}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.phone?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("phone")}
                   />
                 </div>
@@ -247,8 +306,14 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                     placeholder="101231"
                     required={false}
                     type={`text`}
-                    color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
+                    color={errors.zip_code?.message ? "failure" : "gray"}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.zip_code?.message}
+                        </span>
+                      </Fragment>
+                    }
                     {...register("zip_code")}
                   />
                 </div>
@@ -259,14 +324,20 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
                       <Label
                         htmlFor="address"
                         value="Address"
-                        color={errors.address?.message ? 'failure' : 'gray'}
+                        color={errors.address?.message ? "failure" : "gray"}
                       />
                     </div>
                     <TextInput
                       id="address"
                       required={false}
-                      color={errors.address?.message ? 'failure' : 'gray'}
-                      helperText={<Fragment><span className="font-medium">{errors.address?.message}</span></Fragment>}
+                      color={errors.address?.message ? "failure" : "gray"}
+                      helperText={
+                        <Fragment>
+                          <span className="font-medium">
+                            {errors.address?.message}
+                          </span>
+                        </Fragment>
+                      }
                       {...register("address")}
                     />
                   </div>
@@ -274,7 +345,9 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
               </div>
             </div>
 
-            <div className={`grid gap-4 items-center grid-cols-2 md:grid-cols-4`}>
+            <div
+              className={`grid gap-4 items-center grid-cols-2 md:grid-cols-4`}
+            >
               <div className={`my-2`}>
                 <ToggleSwitch
                   label="Is Private"
@@ -423,21 +496,14 @@ const CreateSite = ({showModal, close, reloadPage}: CreateSiteModalProps) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button
-            onClick={handleSubmit(createNewSite)}
-          >
-            I accept
-          </Button>
-          <Button
-            color="gray"
-            onClick={close}
-          >
+          <Button onClick={handleSubmit(createNewSite)}>I accept</Button>
+          <Button color="gray" onClick={close}>
             Decline
           </Button>
         </Modal.Footer>
       </Modal>
     </Fragment>
-  )
-}
+  );
+};
 
 export default CreateSite;
