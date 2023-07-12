@@ -12,8 +12,6 @@ interface SummaryCardProps {
   bgColour: string;
 }
 
-// #F082AC
-
 const SummaryCard = ({
   icon,
   boldHeader,
