@@ -4,34 +4,18 @@ import { FaHospitalUser, FaUserMd, FaUserNurse } from 'react-icons/fa';
 import { RiAdminFill } from 'react-icons/ri';
 import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
-import { Chart } from 'react-google-charts';
-import GeneralReport from './GeneralReport';
+import { PieChart3D } from '../../global/Charts';
 
 const PatientActiveProvidersAndAdminSummary = () => {
   const data = [
-    ['Task', 'Hours per Day'],
-    ['Work', 11],
-    ['Eat', 2],
-    ['Commute', 2],
-    ['Watch TV', 2],
-    ['Sleep', 7], // CSS-style declaration
+    ['Activity', 'Count'],
+    ['Inpatients', 11],
+    ['Outpatients', 2],
+    ['Prescription', 2],
+    ['Emergency', 2],
+    ['Radiology', 7],
+    ['Laboratory', 7],
   ];
-
-  const options = {
-    title: 'Staff Distribution',
-    pieHole: 0.4,
-    is3D: true,
-    colors: ['yellow', 'green'],
-    legend: {
-      position: 'bottom',
-    },
-    titlePosition: 'bottom',
-    titleFontSize: 20,
-  };
-
-  const getLabel = (entry: any) => {
-    return entry?.name;
-  };
 
   return (
     <Fragment>
@@ -100,17 +84,16 @@ const PatientActiveProvidersAndAdminSummary = () => {
       <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-3`}>
         <CustomCard className={`flex flex-col items-center justify-center`}>
           <Typography
-            text={`Staff Distribution`}
+            text={`Hospital Activity`}
             Tag={`h4`}
             className={`text-[20px] w-full text-start`}
           />
 
-          <Chart
-            chartType="PieChart"
-            width="100%"
-            height="400px"
+          <PieChart3D
             data={data}
-            options={options}
+            title={`Hospital Activity`}
+            height={`300px`}
+            width={`100%`}
           />
         </CustomCard>
       </div>
