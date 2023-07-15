@@ -6,6 +6,7 @@ interface CustomChartProps {
   title: string;
   width?: string;
   height?: string;
+  className: string;
 }
 
 export const PieChart3D = ({
@@ -13,6 +14,7 @@ export const PieChart3D = ({
   title,
   width = '100%',
   height = '400px',
+  className = '',
 }: CustomChartProps) => {
   const options = {
     title,
@@ -48,7 +50,7 @@ export const PieChart3D = ({
   };
 
   return (
-    <Fragment>
+    <div className={className}>
       <Chart
         chartType="PieChart"
         width={width}
@@ -56,6 +58,6 @@ export const PieChart3D = ({
         data={data}
         options={options}
       />
-    </Fragment>
+    </div>
   );
 };

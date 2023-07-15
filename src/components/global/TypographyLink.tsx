@@ -16,7 +16,9 @@ const TypographyLink = ({
   to,
 }: TypographyLinkProps) => {
   return (
-    <a className={`text-[#C4C4C6] text-base font-extrabold ${className}`}>
+    <a
+      href={to}
+      className={`text-[#C4C4C6] text-base font-extrabold hover:cursor-pointer hover:no-underline hover:text-[#C4C4C6] ${className}`}>
       {iconBefore} {text} {iconAfter}
     </a>
   );
