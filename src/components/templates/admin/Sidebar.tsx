@@ -22,9 +22,9 @@ const Sidebar = () => {
       item: 'Dashboard',
       Icon: (
         <RxDashboard
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '/admin',
@@ -35,9 +35,9 @@ const Sidebar = () => {
       item: 'Patients',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -48,9 +48,9 @@ const Sidebar = () => {
       item: 'Notes',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -61,9 +61,9 @@ const Sidebar = () => {
       item: 'Laboratory',
       Icon: (
         <MdOutlinePayments
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       // route: '/patient',
@@ -73,9 +73,9 @@ const Sidebar = () => {
           item: 'Order Lab',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -86,9 +86,9 @@ const Sidebar = () => {
           item: 'Orders',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -101,9 +101,9 @@ const Sidebar = () => {
       item: 'Message',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -114,9 +114,9 @@ const Sidebar = () => {
       item: 'Radiology',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       // route: '/patient',
@@ -126,9 +126,9 @@ const Sidebar = () => {
           item: 'Create Order',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -139,9 +139,9 @@ const Sidebar = () => {
           item: 'Orders',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -154,9 +154,9 @@ const Sidebar = () => {
       item: 'Drug',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       // route: '/patient',
@@ -166,9 +166,9 @@ const Sidebar = () => {
           item: 'Store',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -179,9 +179,9 @@ const Sidebar = () => {
           item: 'Orders',
           Icon: (
             <TbFaceMask
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -194,9 +194,9 @@ const Sidebar = () => {
       item: 'Medical Store',
       Icon: (
         <MdOutlineAdminPanelSettings
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       showSidebar: showSidebar,
@@ -205,9 +205,9 @@ const Sidebar = () => {
           item: 'Store',
           Icon: (
             <HiOutlineClipboardList
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -218,9 +218,9 @@ const Sidebar = () => {
           item: 'Create',
           Icon: (
             <AiOutlineUserAdd
-              size={showSidebar ? 40 : 20}
+              size={30}
               fontWeight={40}
-              color={`black`}
+              className={`text-gray-500 hover:text-gray-800`}
             />
           ),
           route: '#',
@@ -233,9 +233,9 @@ const Sidebar = () => {
       item: 'History',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -246,9 +246,9 @@ const Sidebar = () => {
       item: 'Appointment',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -259,9 +259,9 @@ const Sidebar = () => {
       item: 'Profile',
       Icon: (
         <TbFaceMask
-          size={showSidebar ? 40 : 20}
+          size={30}
           fontWeight={40}
-          color={`black`}
+          className={`text-gray-500 hover:text-gray-800`}
         />
       ),
       route: '#',
@@ -277,7 +277,7 @@ const Sidebar = () => {
         } no-scroll md:overflow-y-scroll`}>
         <div
           className={`sticky top-0 z-50 hidden h-14 shrink-0 flex-row items-center border-b
-           bg-brand-secondary-background py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex ${
+           bg-white py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex ${
              showSidebar ? 'justify-center' : 'justify-between'
            }`}>
           <Link to="/care">
@@ -303,7 +303,7 @@ const Sidebar = () => {
           </button>
         </div>
 
-        <div className="mt-2 flex md:flex-col">
+        <ul className="flex py-4 overflow-hidden     md:flex-col">
           {providerSidebar.length >= 1 &&
             providerSidebar.map((sidebar: SidebarItemProps, idx: number) => {
               return (
@@ -319,7 +319,7 @@ const Sidebar = () => {
                 </>
               );
             })}
-        </div>
+        </ul>
       </aside>
     </Fragment>
   );
