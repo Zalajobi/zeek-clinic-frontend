@@ -21,6 +21,7 @@ export const useAdminLogin = () => {
     if (response?.success) {
       toast.success(response?.message);
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', response.data.role);
       console.log(response);
       setTimeout(() => {
         navigate('/admin');
