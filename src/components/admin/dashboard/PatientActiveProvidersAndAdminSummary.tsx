@@ -7,6 +7,7 @@ import Typography from '../../global/Typography';
 import { PieChart3D } from '../../global/Charts';
 import HospitalReport from './HospitalReport';
 import TypographyLink from '../../global/TypographyLink';
+import BedOccupancy from './BedOccupancy';
 
 const PatientActiveProvidersAndAdminSummary = () => {
   const data = [
@@ -200,6 +201,7 @@ const PatientActiveProvidersAndAdminSummary = () => {
       </div>
 
       <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-3`}>
+        {/*Hospital Activity*/}
         <CustomCard
           className={`flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
@@ -217,6 +219,7 @@ const PatientActiveProvidersAndAdminSummary = () => {
           />
         </CustomCard>
 
+        {/*Hospital Report*/}
         <CustomCard
           className={`flex flex-col items-center justify-center max-h-[400px]`}>
           <div className={`w-full flex justify-center items-center`}>
@@ -234,6 +237,18 @@ const PatientActiveProvidersAndAdminSummary = () => {
           </div>
 
           <HospitalReport data={hospitalReportData} />
+        </CustomCard>
+
+        {/*Current Occupancy Rate*/}
+        <CustomCard
+          className={`flex flex-col items-center justify-center max-h-[400px]`}>
+          <Typography
+            text={`Bed Occupancy`}
+            Tag={`h4`}
+            className={`text-[20px] w-full text-start mr-auto`}
+          />
+
+          <BedOccupancy />
         </CustomCard>
       </div>
     </Fragment>

@@ -272,15 +272,14 @@ const Sidebar = () => {
   return (
     <Fragment>
       <aside
-        className={`md:h-100 w-screen shrink-0 overflow-x-scroll border-r border-r-custom-gray-100 bg-brand-secondary-background !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
+        className={`md:h-100 w-screen shrink-0 overflow-x-scroll bg-brand-secondary-background !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
           showSidebar ? 'md:w-auto' : 'md:w-[13rem]'
         } no-scroll md:overflow-y-scroll`}>
         <div
-          className={`sticky top-0 z-50 hidden h-14 shrink-0 flex-row items-center border-b
-           bg-white py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex ${
-             showSidebar ? 'justify-center' : 'justify-between'
-           }`}>
-          <Link to="/care">
+          className={`sticky top-0 z-50 hidden flex items-center bg-white py-2 px-4 justify-center h-20 shadow-md md:flex ${
+            showSidebar ? 'justify-center' : 'justify-between'
+          }`}>
+          <Link to="/admin">
             <img
               src={Logo}
               alt="Logo"
