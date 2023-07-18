@@ -1,15 +1,11 @@
 import { Fragment } from 'react';
-import { FaHospitalUser, FaUserMd, FaUserNurse } from 'react-icons/fa';
-import SummaryCard from './SummaryCard';
-import { RiAdminFill } from 'react-icons/ri';
 import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import { PieChart3D } from '../../global/Charts';
-import HospitalReport from './HospitalReport';
 import TypographyLink from '../../global/TypographyLink';
-import BedOccupancy from './BedOccupancy';
+import HospitalReport from './HospitalReport';
 
-const PatientActiveProvidersAndAdminSummary = () => {
+const ActivityReport = () => {
   const data = [
     ['Activity', 'Count'],
     ['Inpatients', 11],
@@ -19,6 +15,16 @@ const PatientActiveProvidersAndAdminSummary = () => {
     ['Radiology', 8],
     ['Laboratory', 14],
     ['Appointments', 18],
+  ];
+
+  const patientReportData = [
+    ['Status', 'Count'],
+    ['Active', 11],
+    ['Pending', 9],
+    ['Discharged', 7],
+    ['Deceased', 12],
+    ['Inpatient', 8],
+    ['Outpatient', 14],
   ];
 
   const hospitalReportData = [
@@ -138,68 +144,6 @@ const PatientActiveProvidersAndAdminSummary = () => {
 
   return (
     <Fragment>
-      <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
-        <SummaryCard
-          icon={
-            <FaUserMd
-              size={20}
-              color={`#3DC1C5`}
-            />
-          }
-          boldHeader={'2937'}
-          lightHeader={`Doctors`}
-          descriptionContext={`31`}
-          description={'Active doctor(s)'}
-          contextColour={`#3DC1C5`}
-          bgColour={`#DDF5F6`}
-        />
-
-        <SummaryCard
-          icon={
-            <FaUserNurse
-              size={20}
-              color={`#369DFF`}
-            />
-          }
-          boldHeader={'3798'}
-          lightHeader={`Nurses`}
-          descriptionContext={`45`}
-          description={'Active Nurse(s)'}
-          contextColour={`#369DFF`}
-          bgColour={`#DEF0FF`}
-        />
-
-        <SummaryCard
-          icon={
-            <FaHospitalUser
-              size={20}
-              color={`#F7777B`}
-            />
-          }
-          boldHeader={'5453'}
-          lightHeader={`Visits`}
-          descriptionContext={`1291`}
-          description={'Patients visits in the last 7 days'}
-          contextColour={`#F7777B`}
-          bgColour={`#FDE8E9`}
-        />
-
-        <SummaryCard
-          icon={
-            <RiAdminFill
-              size={20}
-              color={`#495058`}
-            />
-          }
-          boldHeader={'5453'}
-          lightHeader={`Admin`}
-          descriptionContext={`1291`}
-          description={'Active Admin(s)'}
-          contextColour={`#495058`}
-          bgColour={`#DEE2E6`}
-        />
-      </div>
-
       <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-3`}>
         {/*Hospital Activity*/}
         <CustomCard
@@ -243,16 +187,22 @@ const PatientActiveProvidersAndAdminSummary = () => {
         <CustomCard
           className={`flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
-            text={`Bed Occupancy`}
+            text={`Patient Report`}
             Tag={`h4`}
             className={`text-[20px] w-full text-start mr-auto`}
           />
 
-          <BedOccupancy />
+          <PieChart3D
+            data={patientReportData}
+            title={`Hospital Activity`}
+            height={`300px`}
+            width={`100%`}
+            className={`mt-[30px]`}
+          />
         </CustomCard>
       </div>
     </Fragment>
   );
 };
 
-export default PatientActiveProvidersAndAdminSummary;
+export default ActivityReport;

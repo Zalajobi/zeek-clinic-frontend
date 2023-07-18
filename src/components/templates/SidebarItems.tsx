@@ -18,7 +18,11 @@ const SidebarItems = ({
           <a
             href={route ?? '/admin'}
             className={`flex flex-row items-center h-16 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800 hover:no-underline`}
-            onClick={() => setOpen(!open)}>
+            onClick={() => {
+              setOpen(!open);
+              console.log('HEELLO WORLD');
+            }}
+            onMouseEnter={() => setOpen(!open)}>
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
               {Icon}
             </span>
@@ -36,7 +40,8 @@ const SidebarItems = ({
           <a
             href="#"
             className={`flex flex-row items-center h-16 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800 hover:no-underline`}
-            onClick={() => setOpen(!open)}>
+            onClick={() => setOpen(!open)}
+            onMouseEnter={() => setOpen(!open)}>
             <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
               {Icon}
             </span>
