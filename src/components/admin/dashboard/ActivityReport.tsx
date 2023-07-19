@@ -147,7 +147,7 @@ const ActivityReport = () => {
       <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-3`}>
         {/*Hospital Activity*/}
         <CustomCard
-          className={`flex flex-col items-center justify-center max-h-[400px]`}>
+          className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
             text={`Hospital Activity`}
             Tag={`h4`}
@@ -165,7 +165,7 @@ const ActivityReport = () => {
 
         {/*Hospital Report*/}
         <CustomCard
-          className={`flex flex-col items-center justify-center max-h-[400px]`}>
+          className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
           <div className={`w-full flex justify-center items-center`}>
             <Typography
               text={`Hospital Report`}
@@ -185,7 +185,7 @@ const ActivityReport = () => {
 
         {/*Current Occupancy Rate*/}
         <CustomCard
-          className={`flex flex-col items-center justify-center max-h-[400px]`}>
+          className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
             text={`Patient Report`}
             Tag={`h4`}

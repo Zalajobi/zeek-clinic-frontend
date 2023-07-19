@@ -23,7 +23,7 @@ const SummaryCard = ({
 }: SummaryCardProps) => {
   return (
     <Fragment>
-      <CustomCard className={`w-full`}>
+      <CustomCard className={`max-w-md w-full`}>
         <div className={`w-full flex flex-col justify-start px-8 py-4`}>
           <div className={`w-full flex flex-row justify-start mb24`}>
             <div

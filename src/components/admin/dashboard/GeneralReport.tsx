@@ -17,7 +17,8 @@ const GeneralReport = () => {
 
   return (
     <Fragment>
-      <CustomCard className={`flex flex-col items-center justify-start`}>
+      <CustomCard
+        className={`max-w-md flex flex-col items-center justify-start`}>
         <div className={`flex flex-row w-full items-center mt-[10px]`}>
           <Typography
             text={`Hospital Report`}

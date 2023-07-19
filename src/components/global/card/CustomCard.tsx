@@ -9,7 +9,7 @@ const CustomCard = ({ children, className }: CustomCardProps) => {
   return (
     <Fragment>
       <div
-        className={`max-w-md bg-white border border-gray-200 rounded-2xl shadow p-4 overflow-hidden ${className}`}>
+        className={`bg-white border border-gray-200 rounded-2xl shadow p-4 overflow-hidden ${className}`}>
         {children}
       </div>
     </Fragment>
