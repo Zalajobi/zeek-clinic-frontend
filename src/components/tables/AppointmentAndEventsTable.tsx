@@ -1,6 +1,11 @@
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  AppointmentTableData,
+  AppointmentTableRowData,
+} from '../../types/admin';
 
-export const AppointmentAndEventsTable = () => {
+export const AppointmentAndEventsTableColumn = () => {
   const columnItem = [
     {
       Header: (
@@ -69,4 +74,38 @@ export const AppointmentAndEventsTable = () => {
   ];
 
   return columnItem;
+};
+
+export const AppointmentAndEventsTableRowData = (
+  data: AppointmentTableData[]
+) => {
+  const rowItems: AppointmentTableRowData[] = [];
+
+  data?.map((item: AppointmentTableData, idx: number) => {
+    console.log(idx);
+
+    rowItems.push({
+      name: (
+        <Link
+          to={`#`}
+          className={`text-black hover:text-gray-500 decoration-0`}>
+          <b className={`font-extrabold`}>
+            {item?.title} {item.first_name} {item?.last_name}
+          </b>
+        </Link>
+      ),
+
+      date: <>{item?.date}</>,
+
+      age: <>{item?.age}</>,
+
+      phone: <>{item?.phone}</>,
+
+      for: <>{item?.for}</>,
+
+      action: <>{item?.id}</>,
+    });
+  });
+
+  return rowItems;
 };

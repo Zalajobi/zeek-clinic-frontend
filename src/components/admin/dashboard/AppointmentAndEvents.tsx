@@ -3,12 +3,84 @@ import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import TypographyLink from '../../global/TypographyLink';
 import Table from '../../global/table/Table';
-import { AppointmentAndEventsTable } from '../../tables/AppointmentAndEventsTable';
+import {
+  AppointmentAndEventsTableColumn,
+  AppointmentAndEventsTableRowData,
+} from '../../tables/AppointmentAndEventsTable';
+import { AppointmentTableData } from '../../../types/admin';
 
 const AppointmentAndEvents = () => {
-  const columns = useMemo(() => AppointmentAndEventsTable(), []);
+  const testData: AppointmentTableData[] = [
+    {
+      id: '1',
+      title: 'Mr.',
+      first_name: 'Zhikrullah',
+      last_name: 'Igbalajobi',
+      date: '10, Jan 2023: 11:39am',
+      age: 26,
+      phone: '07053980998',
+      for: 'Dermatologist',
+    },
 
-  const data = [] as any;
+    {
+      id: '2',
+      title: 'Mr.',
+      first_name: 'Cameron',
+      last_name: 'Diaz',
+      date: '20, May 2023, 6:30pm',
+      age: 54,
+      phone: '07053980998',
+      for: 'Dr. Lee',
+    },
+
+    {
+      id: '3',
+      title: 'Mr.',
+      first_name: 'Jorge',
+      last_name: 'Foreman',
+      date: '20, May 2023, 7:30pm',
+      age: 76,
+      phone: '07053980998',
+      for: 'Dr. Gregory',
+    },
+
+    {
+      id: '4',
+      title: 'Mr.',
+      first_name: 'Philip',
+      last_name: 'Lahm',
+      date: '20, May 2023, 8:30pm',
+      age: 47,
+      phone: '07053980998',
+      for: 'Dr. Bernard',
+    },
+
+    {
+      id: '1',
+      title: 'Mr.',
+      first_name: 'Nathan',
+      last_name: 'Daniels',
+      date: '20, May 2023, 9:00pm',
+      age: 40,
+      phone: '07053980998',
+      for: 'Dr. Mitchell',
+    },
+
+    {
+      id: '1',
+      title: 'Mr.',
+      first_name: 'Soham',
+      last_name: 'Pratt',
+      date: '20, May 2023, 6:30pm',
+      age: 3,
+      phone: '07053980998',
+      for: 'Dr. Randall',
+    },
+  ];
+
+  const columns = useMemo(() => AppointmentAndEventsTableColumn(), []);
+
+  const data = useMemo(() => AppointmentAndEventsTableRowData(testData), []);
 
   return (
     <Fragment>
