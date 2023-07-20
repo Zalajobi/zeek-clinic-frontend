@@ -1,8 +1,10 @@
-import {useState} from "react";
-import {axiosPostRequest} from "../../lib/axios";
+import { useState } from 'react';
+import { axiosPostRequest } from '../../lib/axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export const useAdminLogin = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('Johndoe@gmail.com');
   const [password, setPassword] = useState(`********`);
   const [rememberMe, setRememberMe] = useState(false);
@@ -11,17 +13,23 @@ export const useAdminLogin = () => {
   const handleLogin = async () => {
     const response = await axiosPostRequest('/account/admin/login', {
       email,
-      password
-    })
+      password,
+    });
 
-    setResponseMessage(response?.message as string)
+    setResponseMessage(response?.message as string);
 
     if (response?.success) {
       toast.success(response?.message);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', response.data.role);
+      console.log(response);
+      setTimeout(() => {
+        navigate('/admin');
+      }, 3000);
     } else {
-      toast.error(response?.message)
+      toast.error(response?.message);
     }
-  }
+  };
 
   return {
     email,
@@ -33,7 +41,7 @@ export const useAdminLogin = () => {
     setPassword,
     setRememberMe,
     handleLogin,
-  }
-}
+  };
+};
 
 export default useAdminLogin;

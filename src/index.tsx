@@ -2,22 +2,20 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import AddProvider from "./pages/admin/addProvider";
-import AdminLogin from "./pages/admin/auth/AdminLogin";
-import ForgotPassword from "./pages/admin/auth/ForgotPassword";
-import ChangePassword from "./pages/admin/auth/ChangePassword";
-import AdminSignup from "./pages/admin/auth/AdminSignup";
-import CreateNewUser from "./pages/superadmin/CreateNewUser";
-import SuperadminLogin from "./pages/superadmin/auth/SuperadminLogin";
-import SuperadminDashboard from "./pages/superadmin";
-import CareGiverDashboard from "./pages/provider";
-import HospitalOrganizations from "./pages/superadmin/HospitalOrganizations";
-import OrganizationSite from "./pages/superadmin/OrganizationSite";
+import AddProvider from './pages/admin/addProvider';
+import AdminLogin from './pages/admin/auth/AdminLogin';
+import ForgotPassword from './pages/admin/auth/ForgotPassword';
+import ChangePassword from './pages/admin/auth/ChangePassword';
+import AdminSignup from './pages/admin/auth/AdminSignup';
+import CreateNewUser from './pages/superadmin/CreateNewUser';
+import SuperadminLogin from './pages/superadmin/auth/SuperadminLogin';
+import SuperadminDashboard from './pages/superadmin';
+import CareGiverDashboard from './pages/provider';
+import HospitalOrganizations from './pages/superadmin/HospitalOrganizations';
+import OrganizationSite from './pages/superadmin/OrganizationSite';
+import AdminDashboard from './pages/admin';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,37 +23,41 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App/>,
+    path: '/',
+    element: <App />,
   },
 
   {
     path: '/admin',
     children: [
       {
+        path: '/admin',
+        element: <AdminDashboard />,
+      },
+      {
         path: '/admin/login',
-        element: <AdminLogin/>
+        element: <AdminLogin />,
       },
 
       {
         path: '/admin/signup',
-        element: <AdminSignup/>
+        element: <AdminSignup />,
       },
 
       {
         path: '/admin/forgot-password',
-        element: <ForgotPassword/>
+        element: <ForgotPassword />,
       },
 
       {
         path: '/admin/change-password',
-        element: <ChangePassword/>
+        element: <ChangePassword />,
       },
       {
         path: '/admin/provider/new',
-        element: <AddProvider/>
+        element: <AddProvider />,
       },
-    ]
+    ],
   },
 
   {
@@ -63,30 +65,29 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/superadmin/',
-        element: <SuperadminDashboard/>
+        element: <SuperadminDashboard />,
       },
 
       {
         path: '/superadmin/organisations',
-        element: <HospitalOrganizations/>
+        element: <HospitalOrganizations />,
       },
 
       {
         path: '/superadmin/create/new_admin',
-        element: <CreateNewUser/>
+        element: <CreateNewUser />,
       },
 
       {
         path: '/superadmin/login',
-        element: <SuperadminLogin/>
+        element: <SuperadminLogin />,
       },
 
       {
         path: '/superadmin/hospital/:hospitalId',
-        element: <OrganizationSite/>
+        element: <OrganizationSite />,
       },
-
-    ]
+    ],
   },
 
   {
@@ -99,24 +100,24 @@ const router = createBrowserRouter([
 
       {
         path: '/care',
-        element: <CareGiverDashboard/>
+        element: <CareGiverDashboard />,
       },
 
       {
         path: '/care/signup',
-        element: <AdminSignup/>
+        element: <AdminSignup />,
       },
 
       {
         path: '/care/forgot-password',
-        element: <ForgotPassword/>
+        element: <ForgotPassword />,
       },
 
       {
         path: '/care/change-password',
-        element: <ChangePassword/>
+        element: <ChangePassword />,
       },
-    ]
+    ],
   },
 ]);
 root.render(
