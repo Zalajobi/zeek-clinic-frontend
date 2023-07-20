@@ -1,9 +1,13 @@
 import { Fragment } from 'react';
+import { BsSuitHeartFill } from 'react-icons/bs';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
 import Typography from '../../components/global/Typography';
 import ImageUpload from '../../components/global/input/ImageUpload';
-import { TextInput } from '../../components/global/input/CustomInput';
+import {
+  SelectInput,
+  TextInput,
+} from '../../components/global/input/CustomInput';
 
 export const AddProvider = () => {
   const {
@@ -12,11 +16,14 @@ export const AddProvider = () => {
     profilePic,
     firstName,
     firstNameError,
+    userTitle,
+    titleList,
 
     // Functions
     setProfilePic,
     onUpdateFirstName,
     onSubmit,
+    onUpdateTitle,
   } = useAdminAddProvider();
 
   return (
@@ -40,19 +47,34 @@ export const AddProvider = () => {
 
             <div
               className={`w-full grid grid-cols-1 gap-4 items-center lg:grid-cols-4 lg:col-span-3`}>
+              <SelectInput
+                change={onUpdateTitle}
+                label={`Title`}
+                options={titleList}
+                className={`lg:col-span-2`}
+              />
+
               <TextInput
                 value={firstName}
                 change={onUpdateFirstName}
                 label={`First Name`}
                 className={`lg:col-span-2`}
                 isError={firstNameError}
+                icon={
+                  <BsSuitHeartFill
+                    className={`mr-2`}
+                    size={10}
+                  />
+                }
               />
+
               <TextInput
                 value={firstName}
                 change={onUpdateFirstName}
                 label={`First Name`}
                 className={`lg:col-span-2`}
               />
+
               <TextInput
                 value={firstName}
                 change={onUpdateFirstName}
