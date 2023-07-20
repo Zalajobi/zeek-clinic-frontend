@@ -117,14 +117,6 @@ const DoctorsList = () => {
                         Tag={'span'}
                         className={`text-left text-[#C4C4C6] text-[12px] text-normal leading truncate max-w-xs`}
                       />
-                      {/*</div>*/}
-
-                      {/*<div className={`flex flex-col ml-auto`}>*/}
-                      {/*  <Typography*/}
-                      {/*    text={formatTimeOrDays(item.createdAt)}*/}
-                      {/*    Tag={'span'}*/}
-                      {/*    className={`text-left text-[#C4C4C6] text-[12px] text-normal leading truncate max-w-xs`}*/}
-                      {/*  />*/}
                     </div>
                   </div>
                 </ListView>
