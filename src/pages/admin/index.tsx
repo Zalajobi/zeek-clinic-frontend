@@ -1,12 +1,30 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
+import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import ActivitySummary from '../../components/admin/dashboard/ActivitySummary';
+import ActivityReport from '../../components/admin/dashboard/ActivityReport';
+import AppointmentAndEvents from '../../components/admin/dashboard/AppointmentAndEvents';
+import DoctorsList from '../../components/admin/dashboard/DoctorsList';
 
-const AdminHomePage = () => {
-
+const AdminDashboard = () => {
   return (
     <Fragment>
-      <h1>Admin</h1>
-    </Fragment>
-  )
-}
+      <AdminBaseTemplate>
+        <div className={`w-full flex items-center justify-center`}>
+          <div className={`max-w-screen-2xl w-full p-10 flex flex-col`}>
+            <ActivitySummary />
 
-export default AdminHomePage
+            <ActivityReport />
+
+            <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
+              <AppointmentAndEvents />
+
+              <DoctorsList />
+            </div>
+          </div>
+        </div>
+      </AdminBaseTemplate>
+    </Fragment>
+  );
+};
+
+export default AdminDashboard;
