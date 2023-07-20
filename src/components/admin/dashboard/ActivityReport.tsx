@@ -144,7 +144,7 @@ const ActivityReport = () => {
 
   return (
     <Fragment>
-      <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-3`}>
+      <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
         {/*Hospital Activity*/}
         <CustomCard
           className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
@@ -165,7 +165,7 @@ const ActivityReport = () => {
 
         {/*Hospital Report*/}
         <CustomCard
-          className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
+          className={`w-full flex flex-col items-center justify-center max-h-[400px] lg:col-span-2`}>
           <div className={`w-full flex justify-center items-center`}>
             <Typography
               text={`Hospital Report`}
