@@ -30,6 +30,7 @@ export const AddProvider = () => {
   const {
     // Values
     profilePic,
+    departments,
     allCountries,
     allCountryStates,
 
@@ -63,7 +64,7 @@ export const AddProvider = () => {
               <SelectInput
                 label={`Title`}
                 options={providersTitleSelectInput}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 register={register}
                 id={'title'}
                 errorMsg={errors.title?.message ?? ''}
@@ -71,7 +72,7 @@ export const AddProvider = () => {
 
               <TextInput
                 label={`First Name`}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 errorMsg={errors.first_name?.message ?? ''}
                 id={`first_name`}
                 register={register}
@@ -79,14 +80,14 @@ export const AddProvider = () => {
 
               <TextInput
                 label={`Middle Name`}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 id={`middle_name`}
                 register={register}
               />
 
               <TextInput
                 label={`Last Name`}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 errorMsg={errors.last_name?.message ?? ''}
                 id={`last_name`}
                 register={register}
@@ -95,7 +96,7 @@ export const AddProvider = () => {
               <SelectInput
                 label={`Gender`}
                 options={genderSelectInput}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 register={register}
                 id={`gender`}
                 errorMsg={errors.gender?.message ?? ''}
@@ -104,7 +105,7 @@ export const AddProvider = () => {
               <DateInput
                 label={`Date Or Birth`}
                 placeholder={`DD/MM/YYYY`}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 errorMsg={errors.dob?.message ?? ''}
                 id={`dob`}
                 register={register}
@@ -113,7 +114,7 @@ export const AddProvider = () => {
               <TextInput
                 label={`Email`}
                 placeholder={`jane@doe.com`}
-                className={`lg:col-span-2`}
+                className={`my-3 lg:col-span-2`}
                 errorMsg={errors.email?.message ?? ''}
                 id={`email`}
                 register={register}
@@ -121,22 +122,32 @@ export const AddProvider = () => {
               />
 
               <TextInput
-                label={`Phone Number`}
-                placeholder={`+2347053980998`}
-                className={`lg:col-span-2`}
-                errorMsg={errors.phone?.message ?? ''}
-                id={`phone`}
+                label={`Staff ID`}
+                placeholder={`NA92NS90D2KNS`}
+                className={`my-3 lg:col-span-2`}
+                errorMsg={errors.staff_id?.message ?? ''}
+                id={`staff_id`}
                 register={register}
-                type={`tel`}
+                type={`text`}
               />
             </div>
 
             <div
               className={`grid grid-cols-1 lg:grid-cols-4 gap-6 lg:col-span-6`}>
               <SelectInput
+                label={`Department`}
+                options={departments}
+                className={`w-full my-3`}
+                register={register}
+                id={'department'}
+                errorMsg={errors.department?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
                 label={`Country`}
                 options={allCountries}
-                className={`w-full`}
+                className={`w-full my-3`}
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
@@ -147,11 +158,28 @@ export const AddProvider = () => {
               <SelectInput
                 label={`State`}
                 options={allCountryStates}
-                className={`w-full`}
+                className={`w-full my-3`}
                 register={register}
                 id={'state'}
                 errorMsg={errors.state?.message ?? ''}
                 enableFilter={true}
+              />
+
+              <TextInput
+                label={`City`}
+                className={`my-3 w-full`}
+                id={`city`}
+                register={register}
+              />
+
+              <TextInput
+                label={`Phone Number`}
+                placeholder={`+2347053980998`}
+                className={`my-3 w-full`}
+                errorMsg={errors.phone?.message ?? ''}
+                id={`phone`}
+                register={register}
+                type={`tel`}
               />
             </div>
           </div>

@@ -51,14 +51,15 @@ export const TextInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[200px] ${className}`}
+        className={`relative w-full min-w-[200px] ${className}`}
         data-te-input-wrapper-init>
         <input
-          className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15]
-          outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
-          data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-          dark:placeholder:text-neutral-200 dark:peer-focus:text-primary !border-red-500
-          [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
+          className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
+          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
+          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
+          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
+          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
+          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]`}
           placeholder={placeholder}
           {...register(id)}
           id={id}
@@ -72,17 +73,20 @@ export const TextInput = ({
         )}
 
         <label
-          className={`pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem]
-            leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem]
-            peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem]
-            peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200
-            dark:peer-focus:text-primary`}
+          className={`pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 
+          py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 
+          peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary 
+          peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] 
+          peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 
+          dark:peer-focus:text-primary ${errorMsg ? 'text-red-500' : ''}`}
           htmlFor={id}>
           {label}
         </label>
 
         {errorMsg && (
-          <>
+          <div
+            className="absolute w-full text-sm text-neutral-500 peer-focus:text-primary dark:text-neutral-200 dark:peer-focus:text-primary"
+            data-te-input-helper-ref>
             <Typography
               Tag={`span`}
               text={errorMsg}
@@ -90,7 +94,7 @@ export const TextInput = ({
                 errorMsg ? 'text-red-500' : ''
               }`}
             />
-          </>
+          </div>
         )}
       </div>
     </Fragment>

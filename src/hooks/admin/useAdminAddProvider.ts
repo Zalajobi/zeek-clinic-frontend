@@ -8,13 +8,11 @@ import { GetDepartmentsDataResponse } from '../../types/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
-  AllStatesAndCities,
 } from '../../types/superadmin/formTypes';
 import input = Simulate.input;
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
-  const departments: SelectInputFieldProps[] = [];
 
   // State for Input fields
   const [profilePic, setProfilePic] = useState('');
@@ -25,14 +23,12 @@ export const useAdminAddProvider = () => {
     SelectInputFieldProps[]
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
-  // const [state, setState] = useState(initState);
-
-  // Check for input error state management
-  const [firstNameError, setFirstNameError] = useState(false);
+  const [departments, setDepartments] = useState<SelectInputFieldProps[]>([]);
 
   useEffect(() => {
     const getAddProviderData = async () => {
-      let countriesUpdate: SelectInputFieldProps[] = [];
+      let countriesUpdate: SelectInputFieldProps[] = [],
+        temporaryDeptStore: SelectInputFieldProps[] = [];
 
       Country.getAllCountries().map((country) => {
         countriesUpdate.push({
@@ -40,7 +36,6 @@ export const useAdminAddProvider = () => {
           placeholder: country.name,
         });
       });
-
       setAllCountries(countriesUpdate);
 
       const response = await axiosGetRequest(
@@ -49,13 +44,13 @@ export const useAdminAddProvider = () => {
 
       if (response.success) {
         const data = response.data as GetDepartmentsDataResponse[];
-
-        for (const item of data) {
-          departments.push({
+        data?.map((item) => {
+          temporaryDeptStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
-        }
+        });
+        setDepartments(temporaryDeptStore);
       }
     };
 
