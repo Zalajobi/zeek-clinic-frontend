@@ -1,29 +1,56 @@
 import { Fragment } from 'react';
-import { BsSuitHeartFill } from 'react-icons/bs';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
 import Typography from '../../components/global/Typography';
 import ImageUpload from '../../components/global/input/ImageUpload';
 import {
+  DateInput,
   SelectInput,
   TextInput,
 } from '../../components/global/input/CustomInput';
+import {
+  genderSelectInput,
+  providersTitleSelectInput,
+} from '../../lib/constants/constants';
+import { useForm } from 'react-hook-form';
+import {
+  AdminAddProviderInput,
+  AdminAddProviderInputSchema,
+} from '../../types/superadmin/formTypes';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Label } from 'flowbite-react';
 
 export const AddProvider = () => {
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AdminAddProviderInput>({
+    resolver: yupResolver(AdminAddProviderInputSchema),
+  });
   const {
     // Values
     hello,
     profilePic,
     firstName,
     firstNameError,
+    departments,
+    lastName,
+    middleName,
     userTitle,
-    titleList,
+    gender,
+    dateOfBirth,
 
     // Functions
     setProfilePic,
     onUpdateFirstName,
     onSubmit,
     onUpdateTitle,
+    onUpdateLastName,
+    onUpdateMiddleName,
+    onUpdateGender,
+    onUpdateDateOfBirth,
   } = useAdminAddProvider();
 
   return (
@@ -50,58 +77,53 @@ export const AddProvider = () => {
               <SelectInput
                 change={onUpdateTitle}
                 label={`Title`}
-                options={titleList}
+                options={providersTitleSelectInput}
                 className={`lg:col-span-2`}
+                value={userTitle}
               />
 
               <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
                 label={`First Name`}
                 className={`lg:col-span-2`}
-                isError={firstNameError}
-                icon={
-                  <BsSuitHeartFill
-                    className={`mr-2`}
-                    size={10}
-                  />
-                }
+                errorMsg={errors.first_name?.message ?? ''}
+                id={`first_name`}
+                register={register}
               />
 
-              <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
-                label={`First Name`}
-                className={`lg:col-span-2`}
-              />
+              {/*<TextInput*/}
+              {/*  value={getValues("middle_name")}*/}
+              {/*  label={`Middle Name`}*/}
+              {/*  className={`lg:col-span-2`}*/}
+              {/*  id={`middle_name`}*/}
+              {/*  register={register}*/}
+              {/*/>*/}
 
-              <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
-                label={`First Name`}
-                className={`lg:col-span-2`}
-              />
-              <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
-                label={`First Name`}
-                className={`lg:col-span-2`}
-              />
-              <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
-                label={`First Name`}
-                className={`lg:col-span-2`}
-              />
-              <TextInput
-                value={firstName}
-                change={onUpdateFirstName}
-                label={`First Name`}
-                className={`lg:col-span-2`}
-              />
+              {/*<TextInput*/}
+              {/*  value={getValues("last_name")}*/}
+              {/*  label={`Last Name`}*/}
+              {/*  className={`lg:col-span-2`}*/}
+              {/*  id={`last_name`}*/}
+              {/*  register={register}*/}
+              {/*/>*/}
+
+              {/*<SelectInput*/}
+              {/*  change={onUpdateGender}*/}
+              {/*  label={`Gender`}*/}
+              {/*  options={genderSelectInput}*/}
+              {/*  className={`lg:col-span-2`}*/}
+              {/*  value={gender}*/}
+              {/*/>*/}
+
+              {/*<DateInput*/}
+              {/*  value={dateOfBirth}*/}
+              {/*  change={onUpdateDateOfBirth}*/}
+              {/*  label={`Date Or Birth`}*/}
+              {/*  placeholder={`Date Or Birth`}*/}
+              {/*  className={`lg:col-span-2`}*/}
+              {/*/>*/}
             </div>
 
-            <button onClick={onSubmit}>Submit</button>
+            <button onClick={handleSubmit(onSubmit)}>Submit</button>
           </div>
           <h1>{hello}</h1>
           <h1>{hello}</h1>

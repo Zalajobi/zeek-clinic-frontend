@@ -2,17 +2,44 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
 import { axiosGetRequest } from '../../lib/axios';
+import { useParams } from 'react-router-dom';
+import { SelectInputFieldProps } from '../../types/common';
+import { GetDepartmentsDataResponse } from '../../types/apiResponses';
+import { AdminAddProviderInput } from '../../types/superadmin/formTypes';
 
 export const useAdminAddProvider = () => {
+  const { siteId } = useParams();
+  const departments: SelectInputFieldProps[] = [];
+
+  // State for Input fields
+  const [profilePic, setProfilePic] = useState('');
+  const [userTitle, setUserTitle] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [gender, setGender] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+
+  // Check for input error state management
+  const [firstNameError, setFirstNameError] = useState(false);
+
+  // Data From Api Calls
+
   useEffect(() => {
     const getAddProviderData = async () => {
       const response = await axiosGetRequest(
-        '/account/department/get-all/2e696809-80f2-43f0-94c8-e3925aec15b4'
+        `/account/department/get-all/${siteId}`
       );
-      console.log(response);
 
       if (response.success) {
-        console.log(response);
+        const data = response.data as GetDepartmentsDataResponse[];
+
+        for (const item of data) {
+          departments.push({
+            value: item?.id,
+            placeholder: item?.name,
+          });
+        }
       }
     };
 
@@ -21,39 +48,41 @@ export const useAdminAddProvider = () => {
     });
   }, [input]);
 
-  const titleList = [
-    'Mr.',
-    'Mrs.',
-    'Miss.',
-    'Dr.',
-    'Rn.',
-    'Lpn.',
-    'Pa.',
-    'Np.',
-    'Ot.',
-    'Pt.',
-    'Slp.',
-    'Sw.',
-  ];
-  // State for Input fields
-  const [profilePic, setProfilePic] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [userTitle, setUserTitle] = useState('');
-
-  // Check for input error state management
-  const [firstNameError, setFirstNameError] = useState(false);
+  const onUpdateTitle = (event: ChangeEvent<HTMLSelectElement>) =>
+    setUserTitle(event.target.value);
 
   const onUpdateFirstName = (event: ChangeEvent<HTMLInputElement>) =>
     setFirstName(event.target.value);
 
-  const onUpdateTitle = (event: ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value);
+  const onUpdateLastName = (event: ChangeEvent<HTMLInputElement>) =>
+    setLastName(event.target.value);
+
+  const onUpdateMiddleName = (event: ChangeEvent<HTMLInputElement>) =>
+    setMiddleName(event.target.value);
+
+  const onUpdateGender = (event: ChangeEvent<HTMLSelectElement>) =>
+    setGender(event.target.value);
+
+  const onUpdateDateOfBirth = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log('HELLO WORLD');
+    console.log(event);
   };
 
   const hello = 'HI';
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: AdminAddProviderInput) => {
+    console.log(data);
     if (firstName.length <= 3) setFirstNameError(true);
+
+    const newProviderData = {
+      title: userTitle,
+      first_name: firstName,
+      middle_name: middleName,
+      last_name: lastName,
+      gender,
+    };
+
+    console.log(newProviderData);
   };
 
   return {
@@ -62,14 +91,22 @@ export const useAdminAddProvider = () => {
     profilePic,
     firstName,
     firstNameError,
+    departments,
+    lastName,
+    middleName,
     userTitle,
-    titleList,
+    gender,
+    dateOfBirth,
 
     // Functions
     setProfilePic,
     onUpdateFirstName,
     onSubmit,
     onUpdateTitle,
+    onUpdateLastName,
+    onUpdateMiddleName,
+    onUpdateGender,
+    onUpdateDateOfBirth,
   };
 };
 
