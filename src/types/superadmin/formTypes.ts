@@ -150,14 +150,18 @@ export const CreateSiteInputSchema = yup
 
 export const AdminAddProviderInputSchema = yup
   .object({
-    title: yup.string(), //.required('Title is Required'),
+    title: yup.string().required('Title is Required'),
     first_name: yup
       .string()
       .required('First Name is a required field')
       .min(4, 'First Name must be at least four(4) character(s)')
       .max(25, 'Exceeded the 25 character threshold'),
-    last_name: yup.string(), //.required('First Name is a required field'),
-    middle_name: yup.string(), //.optional(),
+    last_name: yup
+      .string()
+      .required('Last Name is a required field')
+      .min(4, 'Last Name must be at least four(4) character(s)')
+      .max(25, 'Exceeded the 25 character threshold'),
+    middle_name: yup.string().optional(),
     dob: yup.string(), //.required('Date Of Birth is a required field'),
   })
   .required();

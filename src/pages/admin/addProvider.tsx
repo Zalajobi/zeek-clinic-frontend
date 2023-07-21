@@ -75,11 +75,12 @@ export const AddProvider = () => {
             <div
               className={`w-full grid grid-cols-1 gap-4 items-center lg:grid-cols-4 lg:col-span-3`}>
               <SelectInput
-                change={onUpdateTitle}
                 label={`Title`}
                 options={providersTitleSelectInput}
                 className={`lg:col-span-2`}
-                value={userTitle}
+                register={register}
+                id={'title'}
+                errorMsg={errors.title?.message ?? ''}
               />
 
               <TextInput
@@ -90,21 +91,20 @@ export const AddProvider = () => {
                 register={register}
               />
 
-              {/*<TextInput*/}
-              {/*  value={getValues("middle_name")}*/}
-              {/*  label={`Middle Name`}*/}
-              {/*  className={`lg:col-span-2`}*/}
-              {/*  id={`middle_name`}*/}
-              {/*  register={register}*/}
-              {/*/>*/}
+              <TextInput
+                label={`Middle Name`}
+                className={`lg:col-span-2`}
+                id={`middle_name`}
+                register={register}
+              />
 
-              {/*<TextInput*/}
-              {/*  value={getValues("last_name")}*/}
-              {/*  label={`Last Name`}*/}
-              {/*  className={`lg:col-span-2`}*/}
-              {/*  id={`last_name`}*/}
-              {/*  register={register}*/}
-              {/*/>*/}
+              <TextInput
+                label={`Last Name`}
+                className={`lg:col-span-2`}
+                errorMsg={errors.last_name?.message ?? ''}
+                id={`last_name`}
+                register={register}
+              />
 
               {/*<SelectInput*/}
               {/*  change={onUpdateGender}*/}
