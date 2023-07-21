@@ -83,6 +83,7 @@ export type AdminAddProviderInput = {
   email: string;
   phone: string;
   country: string;
+  state: string;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -172,7 +173,8 @@ export const AdminAddProviderInputSchema = yup
       .string()
       .email('Email format is wrong')
       .required('Email is a required field'),
-    phone: yup.string().required('Phone is a required field'),
-    country: yup.string().required('Country is required'),
+    phone: yup.string().required('Phone Number is a required field'),
+    country: yup.string().required('Country is a required field'),
+    state: yup.string().required('State is a required field'),
   })
   .required();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
@@ -22,9 +22,10 @@ export const useAdminAddProvider = () => {
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
-    AllStatesAndCities[]
+    SelectInputFieldProps[]
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
+  // const [state, setState] = useState(initState);
 
   // Check for input error state management
   const [firstNameError, setFirstNameError] = useState(false);
@@ -65,16 +66,27 @@ export const useAdminAddProvider = () => {
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-    setAllCountryStates(
-      State.getStatesOfCountry(value) as unknown as AllStatesAndCities[]
-    );
+    let countryStates: SelectInputFieldProps[] = [];
+
+    State.getStatesOfCountry(value).map((country) => {
+      countryStates.push({
+        value: country.isoCode,
+        placeholder: country.name,
+      });
+    });
+
+    setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
   };
 
   const onSubmit = async (data: AdminAddProviderInput) => {
-    console.log(data);
+    const addAdminData = {
+      ...data,
+      country,
+    };
+    console.log(addAdminData);
   };
 
   return {
@@ -82,6 +94,7 @@ export const useAdminAddProvider = () => {
     profilePic,
     departments,
     allCountries,
+    allCountryStates,
 
     // Functions
     setProfilePic,

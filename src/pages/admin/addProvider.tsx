@@ -31,10 +31,12 @@ export const AddProvider = () => {
     // Values
     profilePic,
     allCountries,
+    allCountryStates,
 
     // Functions
     setProfilePic,
     onSubmit,
+    onUpdateCountry,
   } = useAdminAddProvider();
 
   return (
@@ -139,7 +141,17 @@ export const AddProvider = () => {
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
                 enableFilter={true}
-                change={(e) => console.log(e.target.value)}
+                change={(e) => onUpdateCountry(e.target.value)}
+              />
+
+              <SelectInput
+                label={`State`}
+                options={allCountryStates}
+                className={`w-full`}
+                register={register}
+                id={'state'}
+                errorMsg={errors.state?.message ?? ''}
+                enableFilter={true}
               />
             </div>
           </div>
