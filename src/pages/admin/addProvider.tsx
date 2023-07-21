@@ -30,6 +30,7 @@ export const AddProvider = () => {
   const {
     // Values
     profilePic,
+    allCountries,
 
     // Functions
     setProfilePic,
@@ -128,7 +129,19 @@ export const AddProvider = () => {
               />
             </div>
 
-            <div className={`grid grid-cols-1 lg:grid-cols-4 gap-6`}></div>
+            <div
+              className={`grid grid-cols-1 lg:grid-cols-4 gap-6 lg:col-span-6`}>
+              <SelectInput
+                label={`Country`}
+                options={allCountries}
+                className={`w-full`}
+                register={register}
+                id={'country'}
+                errorMsg={errors.country?.message ?? ''}
+                enableFilter={true}
+                change={(e) => console.log(e.target.value)}
+              />
+            </div>
           </div>
 
           <button onClick={handleSubmit(onSubmit)}>Submit</button>

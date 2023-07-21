@@ -1,6 +1,8 @@
-import { Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import Typography from '../Typography';
+import { Simulate } from 'react-dom/test-utils';
+import change = Simulate.change;
 
 interface TextInputProps {
   label: string;
@@ -19,10 +21,12 @@ interface SelectInputProps {
     value: string;
     placeholder: string;
   }[];
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   label: string;
   errorMsg?: string;
   className?: string;
+  change?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  enableFilter?: boolean;
 }
 
 interface DateInputProps {
@@ -100,6 +104,8 @@ export const SelectInput = ({
   className = '',
   id,
   register,
+  enableFilter = false,
+  change,
 }: SelectInputProps) => {
   return (
     <Fragment>
@@ -107,7 +113,14 @@ export const SelectInput = ({
         <select
           data-te-select-init
           data-te-select-size="lg"
-          {...register(id)}
+          data-te-select-filter={enableFilter}
+          {...register?.(id, {
+            onChange: (event) => {
+              if (change) {
+                change(event);
+              }
+            },
+          })}
           id={id}>
           <option value="">Select {label}</option>
           {options.map((item, idx) => {
