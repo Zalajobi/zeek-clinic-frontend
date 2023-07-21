@@ -58,6 +58,7 @@ export const TextInput = ({
           placeholder={placeholder}
           {...register(id)}
           id={id}
+          type={type}
         />
 
         {icon && (

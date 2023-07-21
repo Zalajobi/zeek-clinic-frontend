@@ -48,7 +48,7 @@ export const AddProvider = () => {
           </div>
 
           <div
-            className={`grid grid-col-1 w-full h-full shadow-2xl p-6 my-6 gap-4 lg:grid-cols-4`}>
+            className={`grid grid-col-1 w-full h-full shadow-2xl p-6 my-6 gap-6 lg:grid-cols-4`}>
             <ImageUpload
               bucketFolder={`/hospital_image`}
               url={profilePic}
@@ -107,18 +107,31 @@ export const AddProvider = () => {
                 register={register}
               />
 
-              <DateInput
-                label={`Date Or Birth`}
-                placeholder={`DD/MM/YYYY`}
+              <TextInput
+                label={`Email`}
+                placeholder={`jane@doe.com`}
                 className={`lg:col-span-2`}
-                errorMsg={errors.dob?.message ?? ''}
-                id={`dob`}
+                errorMsg={errors.email?.message ?? ''}
+                id={`email`}
                 register={register}
+                type={`email`}
+              />
+
+              <TextInput
+                label={`Phone Number`}
+                placeholder={`+2347053980998`}
+                className={`lg:col-span-2`}
+                errorMsg={errors.phone?.message ?? ''}
+                id={`phone`}
+                register={register}
+                type={`tel`}
               />
             </div>
 
-            <button onClick={handleSubmit(onSubmit)}>Submit</button>
+            <div className={`grid grid-cols-1 lg:grid-cols-4 gap-6`}></div>
           </div>
+
+          <button onClick={handleSubmit(onSubmit)}>Submit</button>
         </div>
       </AdminBaseTemplate>
     </Fragment>
