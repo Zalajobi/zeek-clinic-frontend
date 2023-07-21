@@ -6,6 +6,7 @@ interface TextInputProps {
   label: string;
   id: string;
   register: UseFormRegister<any>;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
   className?: string;
   errorMsg?: string;
   placeholder?: string;
@@ -41,6 +42,7 @@ export const TextInput = ({
   placeholder = '',
   className = '',
   register,
+  type = 'text',
 }: TextInputProps) => {
   return (
     <Fragment>

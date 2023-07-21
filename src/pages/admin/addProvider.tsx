@@ -22,7 +22,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 export const AddProvider = () => {
   const {
     register,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<AdminAddProviderInput>({
@@ -31,7 +30,6 @@ export const AddProvider = () => {
   const {
     // Values
     profilePic,
-    departments,
 
     // Functions
     setProfilePic,
@@ -98,6 +96,15 @@ export const AddProvider = () => {
                 register={register}
                 id={`gender`}
                 errorMsg={errors.gender?.message ?? ''}
+              />
+
+              <DateInput
+                label={`Date Or Birth`}
+                placeholder={`DD/MM/YYYY`}
+                className={`lg:col-span-2`}
+                errorMsg={errors.dob?.message ?? ''}
+                id={`dob`}
+                register={register}
               />
 
               <DateInput
