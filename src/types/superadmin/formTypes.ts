@@ -51,13 +51,68 @@ export type CreateUserInput = {
   profile_img?: string;
 };
 
+export type CreateHospitalInput = {
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zip_code?: string;
+};
+
+export type CreateSiteInput = {
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zip_code: string;
+};
+
 export type AdminAddProviderInput = {
   title: string;
   first_name: string;
   last_name: string;
-  middle_name: string;
+  middle_name?: string;
   dob: string;
+  gender: string;
 };
+
+export const CreateHospitalInputSchema = yup
+  .object({
+    email: yup.string().required('Email field is required'),
+    name: yup.string().required('Organization name is required'),
+    phone: yup.number().required('Phone number is required'),
+    address: yup
+      .string()
+      .required('User address is required')
+      .min(10, 'Address too short'),
+    city: yup.string().optional(),
+    state: yup.string().required('Organization State is required'),
+    country: yup.string().required('Organization Country is required'),
+    zip_code: yup.string().required('Zip Code is required'),
+  })
+  .required();
+
+export const CreateSiteInputSchema = yup
+  .object({
+    email: yup.string().required('Email field is required'),
+    name: yup.string().required('Organization name is required'),
+    phone: yup.number().required('Phone number is required'),
+    address: yup
+      .string()
+      .required('User address is required')
+      .min(10, 'Address too short'),
+    city: yup.string().optional(),
+    state: yup.string().required('Organization State is required'),
+    country: yup.string().required('Organization Country is required'),
+    zip_code: yup.string().required('Zip Code is required'),
+  })
+  .required();
 
 export const CreateUserInputSchema = yup
   .object({
@@ -94,60 +149,6 @@ export const CreateUserInputSchema = yup
   })
   .required();
 
-export type CreateHospitalInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code?: string;
-};
-
-export type CreateSiteInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code: string;
-};
-
-export const CreateHospitalInputSchema = yup
-  .object({
-    email: yup.string().required('Email field is required'),
-    name: yup.string().required('Organization name is required'),
-    phone: yup.number().required('Phone number is required'),
-    address: yup
-      .string()
-      .required('User address is required')
-      .min(10, 'Address too short'),
-    city: yup.string().optional(),
-    state: yup.string().required('Organization State is required'),
-    country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
-  })
-  .required();
-
-export const CreateSiteInputSchema = yup
-  .object({
-    email: yup.string().required('Email field is required'),
-    name: yup.string().required('Organization name is required'),
-    phone: yup.number().required('Phone number is required'),
-    address: yup
-      .string()
-      .required('User address is required')
-      .min(10, 'Address too short'),
-    city: yup.string().optional(),
-    state: yup.string().required('Organization State is required'),
-    country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
-  })
-  .required();
-
 export const AdminAddProviderInputSchema = yup
   .object({
     title: yup.string().required('Title is Required'),
@@ -162,6 +163,7 @@ export const AdminAddProviderInputSchema = yup
       .min(4, 'Last Name must be at least four(4) character(s)')
       .max(25, 'Exceeded the 25 character threshold'),
     middle_name: yup.string().optional(),
-    dob: yup.string(), //.required('Date Of Birth is a required field'),
+    gender: yup.string().required('Gender is Required'),
+    dob: yup.string().required('Date Of Birth is a required field'),
   })
   .required();

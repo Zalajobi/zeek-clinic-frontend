@@ -18,7 +18,6 @@ import {
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Label } from 'flowbite-react';
 
 export const AddProvider = () => {
   const {
@@ -31,26 +30,12 @@ export const AddProvider = () => {
   });
   const {
     // Values
-    hello,
     profilePic,
-    firstName,
-    firstNameError,
     departments,
-    lastName,
-    middleName,
-    userTitle,
-    gender,
-    dateOfBirth,
 
     // Functions
     setProfilePic,
-    onUpdateFirstName,
     onSubmit,
-    onUpdateTitle,
-    onUpdateLastName,
-    onUpdateMiddleName,
-    onUpdateGender,
-    onUpdateDateOfBirth,
   } = useAdminAddProvider();
 
   return (
@@ -106,28 +91,27 @@ export const AddProvider = () => {
                 register={register}
               />
 
-              {/*<SelectInput*/}
-              {/*  change={onUpdateGender}*/}
-              {/*  label={`Gender`}*/}
-              {/*  options={genderSelectInput}*/}
-              {/*  className={`lg:col-span-2`}*/}
-              {/*  value={gender}*/}
-              {/*/>*/}
+              <SelectInput
+                label={`Gender`}
+                options={genderSelectInput}
+                className={`lg:col-span-2`}
+                register={register}
+                id={`gender`}
+                errorMsg={errors.gender?.message ?? ''}
+              />
 
-              {/*<DateInput*/}
-              {/*  value={dateOfBirth}*/}
-              {/*  change={onUpdateDateOfBirth}*/}
-              {/*  label={`Date Or Birth`}*/}
-              {/*  placeholder={`Date Or Birth`}*/}
-              {/*  className={`lg:col-span-2`}*/}
-              {/*/>*/}
+              <DateInput
+                label={`Date Or Birth`}
+                placeholder={`DD/MM/YYYY`}
+                className={`lg:col-span-2`}
+                errorMsg={errors.dob?.message ?? ''}
+                id={`dob`}
+                register={register}
+              />
             </div>
 
             <button onClick={handleSubmit(onSubmit)}>Submit</button>
           </div>
-          <h1>{hello}</h1>
-          <h1>{hello}</h1>
-          <h1>{hello}</h1>
         </div>
       </AdminBaseTemplate>
     </Fragment>
