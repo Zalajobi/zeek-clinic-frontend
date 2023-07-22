@@ -118,6 +118,32 @@ export const AddProvider = () => {
                   }
                 />
               </div>
+
+              <div className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-2`}>
+                <TextInput
+                  label={`Middle Name`}
+                  className={`my-3`}
+                  id={`middle_name`}
+                  register={register}
+                  icon={
+                    <BiRename
+                      size={20}
+                      className={`${
+                        errors.middle_name?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
+
+                <SelectInput
+                  label={`Gender`}
+                  options={genderSelectInput}
+                  className={`my-3`}
+                  register={register}
+                  id={`gender`}
+                  errorMsg={errors.gender?.message ?? ''}
+                />
+              </div>
             </div>
           </div>
 
@@ -125,30 +151,6 @@ export const AddProvider = () => {
             className={`grid grid-col-1 w-full h-full shadow-2xl p-6 my-6 gap-6 lg:grid-cols-4`}>
             <div
               className={`w-full grid grid-cols-1 gap-4 items-center lg:grid-cols-4 lg:col-span-3`}>
-              <TextInput
-                label={`Middle Name`}
-                className={`my-3 lg:col-span-2`}
-                id={`middle_name`}
-                register={register}
-                icon={
-                  <BiRename
-                    size={20}
-                    className={`${
-                      errors.middle_name?.message ? 'text-red-500' : ''
-                    }`}
-                  />
-                }
-              />
-
-              <SelectInput
-                label={`Gender`}
-                options={genderSelectInput}
-                className={`my-3 lg:col-span-2`}
-                register={register}
-                id={`gender`}
-                errorMsg={errors.gender?.message ?? ''}
-              />
-
               <DateInput
                 label={`Date Or Birth`}
                 placeholder={`DD/MM/YYYY`}
