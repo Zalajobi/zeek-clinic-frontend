@@ -1,4 +1,11 @@
 import { Fragment } from 'react';
+import { FaCalendarAlt, FaEye, FaPhone, FaCity } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { HiIdentification } from 'react-icons/hi';
+import { TbZoomInAreaFilled } from 'react-icons/tb';
+import { BiRename } from 'react-icons/bi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
 import Typography from '../../components/global/Typography';
@@ -14,13 +21,10 @@ import {
   relationshipStatus,
   religions,
 } from '../../lib/constants/constants';
-import { useForm } from 'react-hook-form';
 import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { FaCalendarAlt } from 'react-icons/fa';
 
 export const AddProvider = () => {
   const {
@@ -83,6 +87,14 @@ export const AddProvider = () => {
                 errorMsg={errors.first_name?.message ?? ''}
                 id={`first_name`}
                 register={register}
+                icon={
+                  <BiRename
+                    size={20}
+                    className={`${
+                      errors.first_name?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <TextInput
@@ -90,6 +102,14 @@ export const AddProvider = () => {
                 className={`my-3 lg:col-span-2`}
                 id={`middle_name`}
                 register={register}
+                icon={
+                  <BiRename
+                    size={20}
+                    className={`${
+                      errors.middle_name?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <TextInput
@@ -98,6 +118,14 @@ export const AddProvider = () => {
                 errorMsg={errors.last_name?.message ?? ''}
                 id={`last_name`}
                 register={register}
+                icon={
+                  <BiRename
+                    size={20}
+                    className={`${
+                      errors.last_name?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <SelectInput
@@ -116,7 +144,12 @@ export const AddProvider = () => {
                 errorMsg={errors.dob?.message ?? ''}
                 id={`dob`}
                 register={register}
-                icon={<FaCalendarAlt size={20} />}
+                icon={
+                  <FaCalendarAlt
+                    size={20}
+                    className={`${errors.dob?.message ? 'text-red-500' : ''}`}
+                  />
+                }
               />
             </div>
 
@@ -130,6 +163,12 @@ export const AddProvider = () => {
                 id={`email`}
                 register={register}
                 type={`email`}
+                icon={
+                  <MdEmail
+                    size={20}
+                    className={`${errors.email?.message ? 'text-red-500' : ''}`}
+                  />
+                }
               />
 
               <TextInput
@@ -140,6 +179,14 @@ export const AddProvider = () => {
                 id={`password`}
                 register={register}
                 type={`password`}
+                icon={
+                  <FaEye
+                    size={20}
+                    className={`${
+                      errors.password?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <TextInput
@@ -150,6 +197,14 @@ export const AddProvider = () => {
                 id={`staff_id`}
                 register={register}
                 type={`text`}
+                icon={
+                  <HiIdentification
+                    size={20}
+                    className={`${
+                      errors.staff_id?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <SelectInput
@@ -240,6 +295,12 @@ export const AddProvider = () => {
                 className={`my-3 w-full`}
                 id={`city`}
                 register={register}
+                icon={
+                  <FaCity
+                    size={20}
+                    className={`${errors.city?.message ? 'text-red-500' : ''}`}
+                  />
+                }
               />
 
               <TextInput
@@ -248,6 +309,14 @@ export const AddProvider = () => {
                 errorMsg={errors.zip_code?.message ?? ''}
                 id={`zip_code`}
                 register={register}
+                icon={
+                  <TbZoomInAreaFilled
+                    size={20}
+                    className={`${
+                      errors.zip_code?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
               />
 
               <TextInput
@@ -259,6 +328,12 @@ export const AddProvider = () => {
                 register={register}
                 type={`tel`}
                 prefix={`${phoneCode ? '+' + phoneCode : ''}`}
+                icon={
+                  <FaPhone
+                    size={20}
+                    className={`${errors.phone?.message ? 'text-red-500' : ''}`}
+                  />
+                }
               />
             </div>
           </div>
