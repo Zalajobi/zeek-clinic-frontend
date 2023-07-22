@@ -63,7 +63,7 @@ export const TextInput = ({
   return (
     <Fragment>
       <div
-        className={`relative w-full min-w-[200px] ${className}`}
+        className={`relative w-full min-w-[100px] ${className}`}
         data-te-input-wrapper-init>
         {prefix && (
           <div>
@@ -137,11 +137,12 @@ export const SelectInput = ({
 }: SelectInputProps) => {
   return (
     <Fragment>
-      <div className={`relative h-10 w-full min-w-[200px] ${className}`}>
+      <div className={`relative h-10 w-full min-w-[100px] ${className}`}>
         <select
           data-te-select-init
           data-te-select-size="lg"
           data-te-select-filter={enableFilter}
+          className={`helloworld`}
           {...register?.(id, {
             onChange: (event) => {
               if (change) {
@@ -191,7 +192,7 @@ export const DateInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[200px] ${className}`}
+        className={`relative h-10 w-full min-w-[100px] ${className}`}
         data-te-datepicker-init
         data-te-inline={true}
         data-te-input-wrapper-init>

@@ -21,6 +21,8 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
     initTE({ Datepicker, Input, Select });
   }, [input]);
 
+  console.log(requestData);
+
   return (
     <Fragment>
       <div className="relative flex h-screen flex-1 overflow-y-auto bg-white text-brand-body-text bg-[#F7F7F7] dark:bg-ds-dark-800 dark:text-ds-dark-300">
@@ -28,7 +30,9 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
 
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
           <Header
-            name={`${requestData?.personalInfo.first_name} ${requestData?.personalInfo.last_name}`}
+            name={`${requestData?.personalInfo?.first_name ?? ''} ${
+              requestData?.personalInfo?.last_name ?? ''
+            }`}
             query={querySearch}
             handleSearch={onUpdateQuerySearch}
             role={requestData?.role.replace('_', ' ') as string}

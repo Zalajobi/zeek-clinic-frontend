@@ -64,40 +64,67 @@ export const AddProvider = () => {
           </div>
 
           <div
-            className={`grid grid-col-1 w-full h-full shadow-2xl p-6 my-6 gap-6 lg:grid-cols-4`}>
-            <ImageUpload
-              bucketFolder={`/hospital_image`}
-              url={profilePic}
-              updateImageUrl={setProfilePic}
-            />
+            className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+            <div
+              className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b]`}>
+              <ImageUpload
+                bucketFolder={`/hospital_image`}
+                url={profilePic}
+                updateImageUrl={setProfilePic}
+              />
+            </div>
 
             <div
+              className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b]`}>
+              <div className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-5`}>
+                <SelectInput
+                  label={`Title`}
+                  options={providersTitleSelectInput}
+                  className={`my-3`}
+                  register={register}
+                  id={'title'}
+                  errorMsg={errors.title?.message ?? ''}
+                />
+
+                <TextInput
+                  label={`First Name`}
+                  className={`my-3 lg:col-span-2`}
+                  errorMsg={errors.first_name?.message ?? ''}
+                  id={`first_name`}
+                  register={register}
+                  icon={
+                    <BiRename
+                      size={20}
+                      className={`${
+                        errors.first_name?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
+
+                <TextInput
+                  label={`Last Name`}
+                  className={`my-3 lg:col-span-2`}
+                  errorMsg={errors.last_name?.message ?? ''}
+                  id={`last_name`}
+                  register={register}
+                  icon={
+                    <BiRename
+                      size={20}
+                      className={`${
+                        errors.last_name?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`grid grid-col-1 w-full h-full shadow-2xl p-6 my-6 gap-6 lg:grid-cols-4`}>
+            <div
               className={`w-full grid grid-cols-1 gap-4 items-center lg:grid-cols-4 lg:col-span-3`}>
-              <SelectInput
-                label={`Title`}
-                options={providersTitleSelectInput}
-                className={`my-3 lg:col-span-2`}
-                register={register}
-                id={'title'}
-                errorMsg={errors.title?.message ?? ''}
-              />
-
-              <TextInput
-                label={`First Name`}
-                className={`my-3 lg:col-span-2`}
-                errorMsg={errors.first_name?.message ?? ''}
-                id={`first_name`}
-                register={register}
-                icon={
-                  <BiRename
-                    size={20}
-                    className={`${
-                      errors.first_name?.message ? 'text-red-500' : ''
-                    }`}
-                  />
-                }
-              />
-
               <TextInput
                 label={`Middle Name`}
                 className={`my-3 lg:col-span-2`}
@@ -108,22 +135,6 @@ export const AddProvider = () => {
                     size={20}
                     className={`${
                       errors.middle_name?.message ? 'text-red-500' : ''
-                    }`}
-                  />
-                }
-              />
-
-              <TextInput
-                label={`Last Name`}
-                className={`my-3 lg:col-span-2`}
-                errorMsg={errors.last_name?.message ?? ''}
-                id={`last_name`}
-                register={register}
-                icon={
-                  <BiRename
-                    size={20}
-                    className={`${
-                      errors.last_name?.message ? 'text-red-500' : ''
                     }`}
                   />
                 }
@@ -356,9 +367,23 @@ export const AddProvider = () => {
               />
 
               <CheckboxInput
-                label={`Is Consultant`}
+                label={`Consultant`}
                 className={`my-3 w-full flex items-center`}
                 id={`is_consultant`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Specialist`}
+                className={`my-3 w-full flex items-center`}
+                id={`is_specialist`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Appointments`}
+                className={`my-3 w-full flex items-center`}
+                id={`appointments`}
                 register={register}
               />
             </div>

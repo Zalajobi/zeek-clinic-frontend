@@ -111,6 +111,7 @@ export const useAdminAddProvider = () => {
       ...data,
       country,
       phone: `+${phoneCode}${data.phone}`,
+      siteId,
     };
     console.log(addAdminData);
   };
