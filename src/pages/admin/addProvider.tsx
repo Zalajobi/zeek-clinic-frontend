@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaEye, FaPhone, FaCity } from 'react-icons/fa';
+import { FaCalendarAlt, FaEye, FaPhone, FaCity, FaUser } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
@@ -11,6 +11,7 @@ import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplat
 import Typography from '../../components/global/Typography';
 import ImageUpload from '../../components/global/input/ImageUpload';
 import {
+  CheckboxInput,
   DateInput,
   SelectInput,
   TextInput,
@@ -207,6 +208,24 @@ export const AddProvider = () => {
                 }
               />
 
+              <TextInput
+                label={`Username`}
+                placeholder={`john_doe`}
+                className={`my-3 w-full`}
+                errorMsg={errors.username?.message ?? ''}
+                id={`username`}
+                register={register}
+                type={`text`}
+                icon={
+                  <FaUser
+                    size={20}
+                    className={`${
+                      errors.username?.message ? 'text-red-500' : ''
+                    }`}
+                  />
+                }
+              />
+
               <SelectInput
                 label={`Relationship Status`}
                 options={relationshipStatus}
@@ -334,6 +353,13 @@ export const AddProvider = () => {
                     className={`${errors.phone?.message ? 'text-red-500' : ''}`}
                   />
                 }
+              />
+
+              <CheckboxInput
+                label={`Is Consultant`}
+                className={`my-3 w-full flex items-center`}
+                id={`is_consultant`}
+                register={register}
               />
             </div>
           </div>

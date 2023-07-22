@@ -95,6 +95,8 @@ export type AdminAddProviderInput = {
   relationship_status: string;
   religion: string;
   password: string;
+  username: string;
+  is_consultant: boolean;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -204,6 +206,8 @@ export const AdminAddProviderInputSchema = yup
       .string()
       .required('Relationship Status is a required field'),
     religion: yup.string().required('Religion is a required field'),
+    username: yup.string().required('Username is required'),
+    is_consultant: yup.boolean().default(false),
     password: yup
       .string()
       .min(8, 'Must be at least Eight(8) characters long')
