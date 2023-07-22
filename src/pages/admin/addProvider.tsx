@@ -12,6 +12,7 @@ import {
   genderSelectInput,
   providersTitleSelectInput,
   relationshipStatus,
+  religions,
 } from '../../lib/constants/constants';
 import { useForm } from 'react-hook-form';
 import {
@@ -148,6 +149,18 @@ export const AddProvider = () => {
                 register={register}
                 id={'relationship_status'}
                 errorMsg={errors.relationship_status?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
+                label={`Religion`}
+                options={religions.sort((a, b) =>
+                  a.placeholder.localeCompare(b.placeholder)
+                )}
+                className={`w-full my-3`}
+                register={register}
+                id={'religion'}
+                errorMsg={errors.religion?.message ?? ''}
                 enableFilter={true}
               />
 

@@ -93,6 +93,7 @@ export type AdminAddProviderInput = {
   staff_id: string;
   zip_code: string;
   relationship_status: string;
+  religion: string;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -201,5 +202,6 @@ export const AdminAddProviderInputSchema = yup
     relationship_status: yup
       .string()
       .required('Relationship Status is a required field'),
+    religion: yup.string().required('Relationship Status is a required field'),
   })
   .required();
