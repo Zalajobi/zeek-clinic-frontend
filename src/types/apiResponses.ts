@@ -1,5 +1,11 @@
-export interface GetDepartmentsDataResponse {
+export interface AdminCreateProviderApiDataChildObject {
   name: string;
-  description: string;
   id: string;
+}
+
+export interface AdminCreateProviderResponseData {
+  departments: AdminCreateProviderApiDataChildObject[];
+  roles: AdminCreateProviderApiDataChildObject[];
+  serviceAreas: AdminCreateProviderApiDataChildObject[];
+  units: AdminCreateProviderApiDataChildObject[];
 }

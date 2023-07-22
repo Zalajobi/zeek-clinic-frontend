@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import { axiosGetRequest } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
-import { GetDepartmentsDataResponse } from '../../types/apiResponses';
+import { AdminCreateProviderResponseData } from '../../types/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
 } from '../../types/superadmin/formTypes';
 import input = Simulate.input;
+import { prefix } from 'rsuite/utils';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -18,17 +19,22 @@ export const useAdminAddProvider = () => {
   const [profilePic, setProfilePic] = useState('');
   const [country, setCountry] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
-  const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [departments, setDepartments] = useState<SelectInputFieldProps[]>([]);
+  const [roles, setRoles] = useState<SelectInputFieldProps[]>([]);
+  const [serviceArea, setServiceArea] = useState<SelectInputFieldProps[]>([]);
+  const [units, setUnits] = useState<SelectInputFieldProps[]>([]);
 
   useEffect(() => {
     const getAddProviderData = async () => {
       let countriesUpdate: SelectInputFieldProps[] = [],
-        temporaryDeptStore: SelectInputFieldProps[] = [];
+        temporaryDeptStore: SelectInputFieldProps[] = [],
+        temporaryRoleStore: SelectInputFieldProps[] = [],
+        temporaryServiceAreaStore: SelectInputFieldProps[] = [],
+        temporaryUnitStore: SelectInputFieldProps[] = [];
 
       Country.getAllCountries().map((country) => {
         countriesUpdate.push({
@@ -39,18 +45,44 @@ export const useAdminAddProvider = () => {
       setAllCountries(countriesUpdate);
 
       const response = await axiosGetRequest(
-        `/account/department/get-all/${siteId}`
+        `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
       );
 
       if (response.success) {
-        const data = response.data as GetDepartmentsDataResponse[];
-        data?.map((item) => {
+        const data = response.data as AdminCreateProviderResponseData;
+
+        data.departments.map((item) => {
           temporaryDeptStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
+
+        data.roles.map((item) => {
+          temporaryRoleStore.push({
+            value: item?.id,
+            placeholder: item?.name,
+          });
+        });
+
+        data.serviceAreas.map((item) => {
+          temporaryServiceAreaStore.push({
+            value: item?.id,
+            placeholder: item?.name,
+          });
+        });
+
+        data.units.map((item) => {
+          temporaryUnitStore.push({
+            value: item?.id,
+            placeholder: item?.name,
+          });
+        });
+
         setDepartments(temporaryDeptStore);
+        setRoles(temporaryRoleStore);
+        setServiceArea(temporaryServiceAreaStore);
+        setUnits(temporaryUnitStore);
       }
     };
 
@@ -73,13 +105,13 @@ export const useAdminAddProvider = () => {
     setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
-    setCountryCode(countryInfo?.isoCode);
   };
 
   const onSubmit = async (data: AdminAddProviderInput) => {
     const addAdminData = {
       ...data,
       country,
+      phone: `+${phoneCode}${data.phone}`,
     };
     console.log(addAdminData);
   };
@@ -91,6 +123,9 @@ export const useAdminAddProvider = () => {
     allCountries,
     allCountryStates,
     phoneCode,
+    roles,
+    serviceArea,
+    units,
 
     // Functions
     setProfilePic,

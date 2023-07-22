@@ -35,6 +35,9 @@ export const AddProvider = () => {
     allCountries,
     allCountryStates,
     phoneCode,
+    roles,
+    serviceArea,
+    units,
 
     // Functions
     setProfilePic,
@@ -144,6 +147,36 @@ export const AddProvider = () => {
                 register={register}
                 id={'department'}
                 errorMsg={errors.department?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
+                label={`Role`}
+                options={roles}
+                className={`w-full my-3`}
+                register={register}
+                id={'role'}
+                errorMsg={errors.role?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
+                label={`Service Area`}
+                options={serviceArea}
+                className={`w-full my-3`}
+                register={register}
+                id={'serviceArea'}
+                errorMsg={errors.serviceArea?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
+                label={`Unit`}
+                options={units}
+                className={`w-full my-3`}
+                register={register}
+                id={'unit'}
+                errorMsg={errors.unit?.message ?? ''}
                 enableFilter={true}
               />
 

@@ -143,7 +143,13 @@ export const SelectInput = ({
           id={id}>
           <option value="">Select {label}</option>
           {options.map((item, idx) => {
-            return <option value={item.value}>{item.placeholder}</option>;
+            return (
+              <option
+                className={`!capitalize`}
+                value={item.value}>
+                {item.placeholder.replaceAll('_', ' ').toLowerCase()}
+              </option>
+            );
           })}
         </select>
         <label data-te-select-label-ref>{label}</label>

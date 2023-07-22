@@ -83,6 +83,9 @@ export type AdminAddProviderInput = {
   email: string;
   phone: string;
   department: string;
+  role: string;
+  serviceArea: string;
+  unit: string;
   country: string;
   state: string;
   city?: string;
@@ -178,6 +181,11 @@ export const AdminAddProviderInputSchema = yup
       .required('Email is a required field'),
     phone: yup.string().required('Phone Number is a required field'),
     department: yup.string().required('Providers Department is not selected'),
+    role: yup.string().required('Providers Role is not selected'),
+    serviceArea: yup
+      .string()
+      .required('Providers Service Area is not selected'),
+    unit: yup.string().required('Providers Unit is not selected'),
     country: yup.string().required('Country is a required field'),
     state: yup.string().required('State is a required field'),
     staff_id: yup
