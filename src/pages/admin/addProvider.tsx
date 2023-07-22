@@ -133,6 +133,16 @@ export const AddProvider = () => {
               />
 
               <TextInput
+                label={`Password`}
+                placeholder={`********`}
+                className={`my-3 w-full`}
+                errorMsg={errors.password?.message ?? ''}
+                id={`password`}
+                register={register}
+                type={`password`}
+              />
+
+              <TextInput
                 label={`Staff ID`}
                 placeholder={`NA92NS90D2KNS`}
                 className={`my-3 w-full`}

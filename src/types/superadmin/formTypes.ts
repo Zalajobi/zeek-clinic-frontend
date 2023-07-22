@@ -94,6 +94,7 @@ export type AdminAddProviderInput = {
   zip_code: string;
   relationship_status: string;
   religion: string;
+  password: string;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -202,6 +203,14 @@ export const AdminAddProviderInputSchema = yup
     relationship_status: yup
       .string()
       .required('Relationship Status is a required field'),
-    religion: yup.string().required('Relationship Status is a required field'),
+    religion: yup.string().required('Religion is a required field'),
+    password: yup
+      .string()
+      .min(8, 'Must be at least Eight(8) characters long')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      )
+      .required('Password is required'),
   })
   .required();
