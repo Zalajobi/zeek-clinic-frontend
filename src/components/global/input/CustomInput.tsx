@@ -137,12 +137,12 @@ export const SelectInput = ({
 }: SelectInputProps) => {
   return (
     <Fragment>
-      <div className={`relative h-10 w-full min-w-[100px] ${className}`}>
+      <div
+        className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
         <select
           data-te-select-init
           data-te-select-size="lg"
           data-te-select-filter={enableFilter}
-          className={`helloworld`}
           {...register?.(id, {
             onChange: (event) => {
               if (change) {

@@ -40,8 +40,17 @@
 }
 
 .text-description {
-    --tw-text-opacity: 1;
-    color: rgb(126 139 151/var(--tw-text-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(126 139 151 / var(--tw-text-opacity));
+}
+
+.select-input-global-component > div,
+.select-input-global-component > div > div,
+.select-input-global-component input {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @tailwind base;
