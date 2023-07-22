@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { relationshipStatus } from '../../lib/constants/constants';
 
 export type AllCountries = {
   currency: string;
@@ -90,6 +91,8 @@ export type AdminAddProviderInput = {
   state: string;
   city?: string;
   staff_id: string;
+  zip_code: string;
+  relationship_status: string;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -194,5 +197,9 @@ export const AdminAddProviderInputSchema = yup
       .max(20, 'Maximum of Twenty(20) characters')
       .required('Staff ID is a required field'),
     city: yup.string().optional(),
+    zip_code: yup.string().required('ZipCode is a required field'),
+    relationship_status: yup
+      .string()
+      .required('Relationship Status is a required field'),
   })
   .required();

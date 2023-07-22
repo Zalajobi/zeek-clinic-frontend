@@ -147,7 +147,7 @@ export const SelectInput = ({
               <option
                 className={`!capitalize`}
                 value={item.value}>
-                {item.placeholder.replaceAll('_', ' ').toLowerCase()}
+                {item.placeholder.replaceAll('_', ' ')}
               </option>
             );
           })}

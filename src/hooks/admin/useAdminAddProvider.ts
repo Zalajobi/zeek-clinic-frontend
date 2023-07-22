@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
@@ -10,7 +10,6 @@ import {
   AllCountries,
 } from '../../types/superadmin/formTypes';
 import input = Simulate.input;
-import { prefix } from 'rsuite/utils';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();

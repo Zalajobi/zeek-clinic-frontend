@@ -11,6 +11,7 @@ import {
 import {
   genderSelectInput,
   providersTitleSelectInput,
+  relationshipStatus,
 } from '../../lib/constants/constants';
 import { useForm } from 'react-hook-form';
 import {
@@ -141,6 +142,16 @@ export const AddProvider = () => {
               />
 
               <SelectInput
+                label={`Relationship Status`}
+                options={relationshipStatus}
+                className={`w-full my-3`}
+                register={register}
+                id={'relationship_status'}
+                errorMsg={errors.relationship_status?.message ?? ''}
+                enableFilter={true}
+              />
+
+              <SelectInput
                 label={`Department`}
                 options={departments}
                 className={`w-full my-3`}
@@ -205,6 +216,14 @@ export const AddProvider = () => {
                 label={`City`}
                 className={`my-3 w-full`}
                 id={`city`}
+                register={register}
+              />
+
+              <TextInput
+                label={`Zip Code`}
+                className={`my-3 w-full`}
+                errorMsg={errors.zip_code?.message ?? ''}
+                id={`zip_code`}
                 register={register}
               />
 

@@ -100,3 +100,18 @@ export const genderSelectInput: SelectInputFieldProps[] = [
     placeholder: 'Others',
   },
 ];
+
+export const relationshipStatus: SelectInputFieldProps[] = [
+  { value: 'SINGLE', placeholder: 'Single' },
+  { value: 'IN_A_RELATIONSHIP', placeholder: 'In a Relationship' },
+  { value: 'ENGAGED', placeholder: 'Engaged' },
+  { value: 'MARRIED', placeholder: 'Married' },
+  { value: 'DIVORCED', placeholder: 'Divorced' },
+  { value: 'WIDOWED', placeholder: 'Widowed' },
+  { value: 'SEPARATED', placeholder: 'Separated' },
+  { value: 'COMPLICATED', placeholder: "It's Complicated" },
+  { value: 'OPEN_RELATIONSHIP', placeholder: 'Open Relationship' },
+  { value: 'CIVIL_UNION', placeholder: 'Civil Union' },
+  { value: 'DOMESTIC_PARTNERSHIP', placeholder: 'Domestic Partnership' },
+  { value: 'OTHER', placeholder: 'Other' },
+];
