@@ -90,6 +90,7 @@ export const useAdminAddProvider = () => {
     departments,
     allCountries,
     allCountryStates,
+    phoneCode,
 
     // Functions
     setProfilePic,

@@ -18,6 +18,7 @@ import {
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FaCalendarAlt } from 'react-icons/fa';
 
 export const AddProvider = () => {
   const {
@@ -33,6 +34,7 @@ export const AddProvider = () => {
     departments,
     allCountries,
     allCountryStates,
+    phoneCode,
 
     // Functions
     setProfilePic,
@@ -109,12 +111,16 @@ export const AddProvider = () => {
                 errorMsg={errors.dob?.message ?? ''}
                 id={`dob`}
                 register={register}
+                icon={<FaCalendarAlt size={20} />}
               />
+            </div>
 
+            <div
+              className={`grid grid-cols-1 lg:grid-cols-4 gap-6 lg:col-span-6`}>
               <TextInput
                 label={`Email`}
                 placeholder={`jane@doe.com`}
-                className={`my-3 lg:col-span-2`}
+                className={`my-3 w-full`}
                 errorMsg={errors.email?.message ?? ''}
                 id={`email`}
                 register={register}
@@ -124,16 +130,13 @@ export const AddProvider = () => {
               <TextInput
                 label={`Staff ID`}
                 placeholder={`NA92NS90D2KNS`}
-                className={`my-3 lg:col-span-2`}
+                className={`my-3 w-full`}
                 errorMsg={errors.staff_id?.message ?? ''}
                 id={`staff_id`}
                 register={register}
                 type={`text`}
               />
-            </div>
 
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-4 gap-6 lg:col-span-6`}>
               <SelectInput
                 label={`Department`}
                 options={departments}
@@ -180,6 +183,7 @@ export const AddProvider = () => {
                 id={`phone`}
                 register={register}
                 type={`tel`}
+                prefix={`${phoneCode ? '+' + phoneCode : ''}`}
               />
             </div>
           </div>

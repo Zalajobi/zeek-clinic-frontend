@@ -13,6 +13,7 @@ interface TextInputProps {
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
+  prefix?: string;
 }
 
 interface SelectInputProps {
@@ -33,9 +34,10 @@ interface DateInputProps {
   label: string;
   id: string;
   placeholder: string;
+  register: UseFormRegister<any>;
   className?: string;
   errorMsg?: string;
-  register: UseFormRegister<any>;
+  icon?: ReactNode;
 }
 
 export const TextInput = ({
@@ -47,19 +49,32 @@ export const TextInput = ({
   className = '',
   register,
   type = 'text',
+  prefix,
 }: TextInputProps) => {
   return (
     <Fragment>
       <div
         className={`relative w-full min-w-[200px] ${className}`}
         data-te-input-wrapper-init>
+        {prefix && (
+          <div>
+            <Typography
+              className="absolute top-2/4 grid h-5 w-18 -translate-y-2/4 place-items-center text-blue-gray-500 ml-[10px]
+              peer-[:not(:placeholder-shown)]:top-[67%] focus:top-[67%] peer-focus:top-[67%] text-[#C4C4C6]
+              [&:not(:placeholder-shown)]:top-[67%] [&:not(:placeholder-shown)]:top-[67%]"
+              Tag={`span`}
+              text={prefix}
+            />
+          </div>
+        )}
         <input
           className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
           bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
           ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
           focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
           dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
-          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]`}
+          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
+          ${prefix ? 'pl-[70px]' : ''}`}
           placeholder={placeholder}
           {...register(id)}
           id={id}
@@ -156,6 +171,7 @@ export const DateInput = ({
   errorMsg,
   id,
   register,
+  icon,
 }: DateInputProps) => {
   return (
     <Fragment>
@@ -165,6 +181,8 @@ export const DateInput = ({
         data-te-inline={true}
         data-te-input-wrapper-init>
         <input
+          data-te-datepicker-toggle-ref
+          data-te-datepicker-toggle-button-ref
           type="text"
           className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
             outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
@@ -175,6 +193,12 @@ export const DateInput = ({
           {...register(id)}
           id={id}
         />
+
+        {icon && (
+          <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+            {icon}
+          </div>
+        )}
 
         <label
           htmlFor={id}
