@@ -28,6 +28,8 @@ import {
 } from '../../types/superadmin/formTypes';
 
 export const AddProvider = () => {
+  // tailwindElementsConfig()
+
   const {
     register,
     handleSubmit,
@@ -35,6 +37,7 @@ export const AddProvider = () => {
   } = useForm<AdminAddProviderInput>({
     resolver: yupResolver(AdminAddProviderInputSchema),
   });
+
   const {
     // Values
     profilePic,

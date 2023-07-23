@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
+import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
 import { axiosGetRequest } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
 import { AdminCreateProviderResponseData } from '../../types/apiResponses';
@@ -84,6 +85,8 @@ export const useAdminAddProvider = () => {
         setUnits(temporaryUnitStore);
       }
     };
+
+    initTE({ Datepicker, Input, Select, Ripple });
 
     getAddProviderData().catch((err) => {
       console.log(err);

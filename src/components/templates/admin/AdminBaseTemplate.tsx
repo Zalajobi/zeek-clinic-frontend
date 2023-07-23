@@ -1,11 +1,8 @@
-import { Fragment, ReactNode, useEffect } from 'react';
-import { Datepicker, Input, initTE, Select } from 'tw-elements';
+import { Fragment, ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import Header from '../Header';
 import { ToasterConfig } from '../../global/Toast';
 import { useAdminBaseTemplate } from '../../../hooks/admin/useAdminBaseTemplate';
-import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
 
 const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {
@@ -16,10 +13,6 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
     // Functions
     onUpdateQuerySearch,
   } = useAdminBaseTemplate();
-
-  useEffect(() => {
-    initTE({ Datepicker, Input, Select });
-  }, [input]);
 
   console.log(requestData);
 
