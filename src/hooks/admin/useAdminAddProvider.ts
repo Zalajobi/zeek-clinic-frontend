@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
@@ -10,7 +9,6 @@ import {
   AdminAddProviderInput,
   AllCountries,
 } from '../../types/superadmin/formTypes';
-import input = Simulate.input;
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -91,7 +89,7 @@ export const useAdminAddProvider = () => {
     getAddProviderData().catch((err) => {
       console.log(err);
     });
-  }, [input]);
+  }, []);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;

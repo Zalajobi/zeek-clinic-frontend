@@ -4,6 +4,7 @@ import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
 import { BiRename } from 'react-icons/bi';
+import { IoMdPersonAdd } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
@@ -26,6 +27,7 @@ import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
+import { BasicOutlineButton } from '../../components/global/CustomButton';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -405,10 +407,24 @@ export const AddProvider = () => {
                   register={register}
                 />
               </div>
+
+              <div className={`w-full flex justify-center mt-8`}>
+                <BasicOutlineButton
+                  click={handleSubmit(onSubmit)}
+                  text={`Create Provider`}
+                  type={`success`}
+                  iconBefore={
+                    <IoMdPersonAdd
+                      size={15}
+                      className={`mr-1`}
+                    />
+                  }
+                  curvedEdges={false}
+                  className={`min-w-[100px] max-w-[200px]`}
+                />
+              </div>
             </div>
           </div>
-
-          <button onClick={handleSubmit(onSubmit)}>Submit</button>
         </div>
       </AdminBaseTemplate>
     </Fragment>
