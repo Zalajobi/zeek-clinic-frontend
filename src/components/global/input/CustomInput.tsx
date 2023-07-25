@@ -192,7 +192,7 @@ export const DateInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[100px] min-h-[58px] ${className}`}
+        className={`relative h-10 w-full min-w-[100px] min-h-[58px] date_picker-input-global-component ${className}`}
         data-te-datepicker-init
         data-te-inline={true}
         data-te-input-wrapper-init>

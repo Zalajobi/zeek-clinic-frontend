@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
-import { axiosGetRequest } from '../../lib/axios';
+import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
 import { AdminCreateProviderResponseData } from '../../types/apiResponses';
 import {
@@ -89,7 +89,7 @@ export const useAdminAddProvider = () => {
     getAddProviderData().catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [siteId]);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -115,6 +115,13 @@ export const useAdminAddProvider = () => {
       siteId,
     };
     console.log(addAdminData);
+
+    const response = await axiosPostRequest(
+      `account/providers/admin/create-new/provider`,
+      addAdminData
+    );
+
+    console.log(response);
   };
 
   return {

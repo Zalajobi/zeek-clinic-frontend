@@ -73,7 +73,7 @@ export const AddProvider = () => {
             <div
               className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b] max-h-[400px]`}>
               <ImageUpload
-                bucketFolder={`/hospital_image`}
+                bucketFolder={`/profile_image/providers`}
                 url={profilePic}
                 updateImageUrl={setProfilePic}
               />

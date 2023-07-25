@@ -54,6 +54,10 @@
   width: 100%;
 }
 
+.date_picker-input-global-component input {
+  min-height: 58px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
