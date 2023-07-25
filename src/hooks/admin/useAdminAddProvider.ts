@@ -86,6 +86,11 @@ export const useAdminAddProvider = () => {
 
     initTE({ Datepicker, Input, Select, Ripple });
 
+    // const datepickerDisableFuture = document.getElementById('datepicker-disable-future');
+    // new Datepicker(datepickerDisableFuture, {
+    //   disableFuture: true
+    // });
+
     getAddProviderData().catch((err) => {
       console.log(err);
     });
