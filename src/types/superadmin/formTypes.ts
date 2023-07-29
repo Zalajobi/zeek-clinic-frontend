@@ -99,6 +99,7 @@ export type AdminAddProviderInput = {
   is_consultant: boolean;
   is_specialist: boolean;
   appointments: boolean;
+  address: string;
 };
 
 export const CreateHospitalInputSchema = yup
@@ -209,6 +210,7 @@ export const AdminAddProviderInputSchema = yup
       .required('Relationship Status is a required field'),
     religion: yup.string().required('Religion is a required field'),
     username: yup.string().required('Username is required'),
+    address: yup.string().required('Address is required'),
     is_consultant: yup.boolean().default(false),
     is_specialist: yup.boolean().default(false),
     appointments: yup.boolean().default(false),

@@ -4,11 +4,15 @@ import { Country, State } from 'country-state-city';
 import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
 import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
-import { AdminCreateProviderResponseData } from '../../types/apiResponses';
+import {
+  AdminCreateProviderResponseData,
+  AccountServiceApiResponse,
+} from '../../types/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
 } from '../../types/superadmin/formTypes';
+import toast from 'react-hot-toast';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -42,8 +46,10 @@ export const useAdminAddProvider = () => {
       });
       setAllCountries(countriesUpdate);
 
-      const response = await axiosGetRequest(
-        `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+      const response = <AccountServiceApiResponse>(
+        await axiosGetRequest(
+          `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+        )
       );
 
       if (response.success) {
@@ -118,15 +124,21 @@ export const useAdminAddProvider = () => {
       country,
       phone: `+${phoneCode}${data.phone}`,
       siteId,
+      profilePic,
     };
-    console.log(addAdminData);
 
-    const response = await axiosPostRequest(
-      `account/providers/admin/create-new/provider`,
-      addAdminData
+    const response = <AccountServiceApiResponse>(
+      await axiosPostRequest(
+        `account/providers/admin/create-new/provider`,
+        addAdminData
+      )
     );
 
-    console.log(response);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return {

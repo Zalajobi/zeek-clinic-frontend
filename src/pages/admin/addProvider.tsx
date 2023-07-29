@@ -347,7 +347,23 @@ export const AddProvider = () => {
               </div>
 
               <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
+                <TextInput
+                  label={`Address`}
+                  className={`my-3 w-full`}
+                  errorMsg={errors.address?.message ?? ''}
+                  id={`address`}
+                  register={register}
+                  icon={
+                    <TbZoomInAreaFilled
+                      size={20}
+                      className={`${
+                        errors.address?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
+
                 <TextInput
                   label={`Zip Code`}
                   className={`my-3 w-full`}

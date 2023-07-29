@@ -9,3 +9,9 @@ export interface AdminCreateProviderResponseData {
   serviceAreas: AdminCreateProviderApiDataChildObject[];
   units: AdminCreateProviderApiDataChildObject[];
 }
+
+export interface AccountServiceApiResponse {
+  data: any;
+  message: string;
+  success: boolean;
+}
