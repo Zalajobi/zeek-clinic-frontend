@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
 import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
@@ -16,6 +16,7 @@ import toast from 'react-hot-toast';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
+  const navigate = useNavigate();
 
   // State for Input fields
   const [profilePic, setProfilePic] = useState('');
@@ -92,15 +93,15 @@ export const useAdminAddProvider = () => {
 
     initTE({ Datepicker, Input, Select, Ripple });
 
-    // const datepickerDisableFuture = document.getElementById('datepicker-disable-future');
-    // new Datepicker(datepickerDisableFuture, {
-    //   disableFuture: true
-    // });
-
     getAddProviderData().catch((err) => {
       console.log(err);
     });
   }, [siteId]);
+
+  // const datepickerDisableFuture = document.getElementById('datepicker-disable-future');
+  // new Datepicker(datepickerDisableFuture, {
+  //   disableFuture: true
+  // });
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -136,6 +137,9 @@ export const useAdminAddProvider = () => {
 
     if (response.success) {
       toast.success(response.message);
+      setTimeout(() => {
+        navigate('/admin');
+      }, 3000);
     } else {
       toast.error(response.message);
     }
