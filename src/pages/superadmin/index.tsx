@@ -1,4 +1,3 @@
-import React from "react";
 import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate";
 
 const SuperadminDashboard = () => {

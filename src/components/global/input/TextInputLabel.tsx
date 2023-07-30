@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 interface TextInputWthLabelProps{
   forItem: string
@@ -14,7 +14,7 @@ interface TextInputWthLabelProps{
 
 const TextInputLabel = ({forItem, labelClassName, labelText, type='text', id, handleChange, required=false, inputClassName, inputPlaceholder}:TextInputWthLabelProps) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div>
         <label htmlFor={forItem} className={`text-sm font-medium text-gray-900 dark:text-gray-300 ${labelClassName}`}>{labelText}</label>
         <input type={type} id={id}
@@ -24,7 +24,7 @@ const TextInputLabel = ({forItem, labelClassName, labelText, type='text', id, ha
                dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm ${inputClassName}`}
                placeholder={inputPlaceholder} required={required} onChange={handleChange}/>
       </div>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

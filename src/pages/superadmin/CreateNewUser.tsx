@@ -1,7 +1,8 @@
-import React from 'react'
+import { Fragment } from 'react'
 import {Button, Label, Select, Textarea, TextInput} from "flowbite-react";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import { InputNumber } from 'rsuite';
 
 import Text from "../../components/global/Text";
 import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
@@ -31,6 +32,7 @@ const CreateNewUser = () => {
     onUpdateState,
     onUpdateCity,
     setProfileImgURL,
+    onUpdatePhoneNumber,
   } = useSuperadminCreateAdminUser()
 
   return (
@@ -64,7 +66,7 @@ const CreateNewUser = () => {
                   <Select
                     id="state"
                     required={false}
-                    helperText={<React.Fragment><span className="font-medium">{errors.title?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.title?.message}</span></Fragment>}
                     {...register("title")}
                     color={errors.title?.message ? 'failure' : 'gray'}
                   >
@@ -95,7 +97,7 @@ const CreateNewUser = () => {
                     placeholder="John"
                     required={false}
                     color={errors.first_name?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.first_name?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.first_name?.message}</span></Fragment>}
                     {...register("first_name")}
                   />
                 </div>
@@ -116,7 +118,7 @@ const CreateNewUser = () => {
                     placeholder="Doe"
                     required={false}
                     color={errors.last_name?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.last_name?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.last_name?.message}</span></Fragment>}
                     {...register("last_name")}
                   />
                 </div>
@@ -137,7 +139,7 @@ const CreateNewUser = () => {
                     placeholder="Felix"
                     required={false}
                     color={errors.other_name?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.other_name?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.other_name?.message}</span></Fragment>}
                     {...register("other_name")}
                   />
                 </div>
@@ -156,7 +158,7 @@ const CreateNewUser = () => {
                     placeholder="john_doe"
                     required={false}
                     color={errors.username?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.username?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.username?.message}</span></Fragment>}
                     {...register("username")}
                   />
                 </div>
@@ -181,7 +183,7 @@ const CreateNewUser = () => {
                   placeholder="Short Biography"
                   required={false}
                   color={errors.bio?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.bio?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.bio?.message}</span></Fragment>}
                   {...register("bio")}
                 />
               </div>
@@ -200,7 +202,7 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.gender?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.gender?.message}</span></Fragment>}
                   {...register("gender")}
                   color={errors.gender?.message ? 'failure' : 'gray'}
                 >
@@ -227,7 +229,7 @@ const CreateNewUser = () => {
                   required={false}
                   type="date"
                   color={errors.dob?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.dob?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.dob?.message}</span></Fragment>}
                   {...register("dob")}
                 />
               </div>
@@ -246,7 +248,7 @@ const CreateNewUser = () => {
                 <Select
                   id="role"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.role?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.role?.message}</span></Fragment>}
                   {...register("role")}
                   color={errors.role?.message ? 'failure' : 'gray'}
                 >
@@ -278,7 +280,7 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.department?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.department?.message}</span></Fragment>}
                   {...register("department")}
                   color={errors.department?.message ? 'failure' : 'gray'}
                 >
@@ -313,7 +315,7 @@ const CreateNewUser = () => {
                   required={false}
                   type="email"
                   color={errors.email?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.email?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.email?.message}</span></Fragment>}
                   {...register("email")}
                 />
               </div>
@@ -329,16 +331,18 @@ const CreateNewUser = () => {
                     color={errors.phone_number?.message ? 'failure' : 'gray'}
                   />
                 </div>
-                <TextInput
+                <InputNumber
+                  className={`block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 
+                  border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 
+                  dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 
+                  dark:focus:ring-blue-500 rounded-lg text-sm h-[43px]`}
                   id="phone_number"
                   placeholder={`9189011920`}
-                  required={false}
+                  required={true}
                   type="tel"
+                  onChange={(value) => onUpdatePhoneNumber(value)}
                   color={errors.phone_number?.message ? 'failure' : 'gray'}
-                  helperText={<React.Fragment><span className="font-medium">{errors.phone_number?.message}</span></React.Fragment>}
-                  addon={`+${phoneCode}`}
-                  // prefix={`+${phoneCode}`}
-                  {...register("phone_number")}
+                  prefix={`+${phoneCode}`}
                 />
               </div>
             </div>
@@ -356,7 +360,7 @@ const CreateNewUser = () => {
                 <Select
                   id="countries"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.country?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.country?.message}</span></Fragment>}
                   {...register("country", {
                     onChange: (e) => onUpdateCountry(e?.target?.value)
                   })}
@@ -389,7 +393,7 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<React.Fragment><span className="font-medium">{errors.state?.message}</span></React.Fragment>}
+                  helperText={<Fragment><span className="font-medium">{errors.state?.message}</span></Fragment>}
                   {...register("state", {
                     onChange: (e) => onUpdateState(e?.target?.value)
                   })}
@@ -424,7 +428,7 @@ const CreateNewUser = () => {
                     <Select
                       id="state"
                       required={false}
-                      helperText={<React.Fragment><span className="font-medium">{errors.city?.message}</span></React.Fragment>}
+                      helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
                       {...register("city", {
                         onChange: (e) => onUpdateCity(e?.target?.value)
                       })}
@@ -455,8 +459,8 @@ const CreateNewUser = () => {
                       id="city"
                       placeholder="city"
                       required={false}
-                      color={errors.username?.message ? 'failure' : 'gray'}
-                      helperText={<React.Fragment><span className="font-medium">{errors.city?.message}</span></React.Fragment>}
+                      color={errors.city?.message ? 'failure' : 'gray'}
+                      helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
                       {...register("city")}
                     />
                   </div>
@@ -470,14 +474,14 @@ const CreateNewUser = () => {
                     <Label
                       htmlFor="address"
                       value="Address"
-                      color={errors.username?.message ? 'failure' : 'gray'}
+                      color={errors.address?.message ? 'failure' : 'gray'}
                     />
                   </div>
                   <TextInput
                     id="address"
                     required={false}
                     color={errors.address?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.address?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.address?.message}</span></Fragment>}
                     {...register("address")}
                   />
                 </div>
@@ -497,7 +501,7 @@ const CreateNewUser = () => {
                     id="address_two"
                     required={false}
                     color={errors.address_two?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.address_two?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.address_two?.message}</span></Fragment>}
                     {...register("address_two")}
                   />
                 </div>
@@ -519,7 +523,7 @@ const CreateNewUser = () => {
                     required={false}
                     type="number"
                     color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    helperText={<React.Fragment><span className="font-medium">{errors.zip_code?.message}</span></React.Fragment>}
+                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
                     {...register("zip_code")}
                   />
                 </div>

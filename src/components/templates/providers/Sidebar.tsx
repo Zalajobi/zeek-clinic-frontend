@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react"
+import { Fragment, useState } from "react"
 import {Link} from "react-router-dom";
 import Logo from "../../../assets/img/global/logo.png";
 import {
@@ -20,21 +20,21 @@ const Sidebar = () => {
   const providerSidebar = [
     {
       item: 'Dashboard',
-      Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <RxDashboard size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '/care',
       showSidebar: showSidebar,
     },
 
     {
       item: 'Patients',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '#',
       showSidebar: showSidebar,
     },
 
     {
       item: 'Notes',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '#',
       showSidebar: showSidebar,
     },
@@ -42,20 +42,20 @@ const Sidebar = () => {
 
     {
       item: 'Laboratory',
-      Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       // route: '/patient',
       showSidebar: showSidebar,
       child: [
         {
           item: 'Order Lab',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
 
         {
           item: 'Orders',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
@@ -65,27 +65,27 @@ const Sidebar = () => {
 
     {
       item: 'Message',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '#',
       showSidebar: showSidebar,
     },
 
     {
       item: 'Radiology',
-      Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       // route: '/patient',
       showSidebar: showSidebar,
       child: [
         {
           item: 'Create Order',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
 
         {
           item: 'Orders',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
@@ -95,20 +95,20 @@ const Sidebar = () => {
 
     {
       item: 'Drug',
-      Icon: <MdOutlinePayments size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       // route: '/patient',
       showSidebar: showSidebar,
       child: [
         {
           item: 'Store',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
 
         {
           item: 'Orders',
-          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
@@ -118,19 +118,19 @@ const Sidebar = () => {
 
     {
       item: 'Medical Store',
-      Icon: <MdOutlineAdminPanelSettings size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <MdOutlineAdminPanelSettings size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       showSidebar: showSidebar,
       child: [
         {
           item: 'Store',
-          Icon: <HiOutlineClipboardList size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <HiOutlineClipboardList size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
 
         {
           item: 'Create',
-          Icon: <AiOutlineUserAdd size={showSidebar ? 40 : 20} fontWeight={40}/>,
+          Icon: <AiOutlineUserAdd size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
           route: '#',
           showSidebar: showSidebar,
         },
@@ -139,14 +139,21 @@ const Sidebar = () => {
 
     {
       item: 'History',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '#',
       showSidebar: showSidebar,
     },
 
     {
       item: 'Appointment',
-      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40}/>,
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
+      route: '#',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Profile',
+      Icon: <TbFaceMask size={showSidebar ? 40 : 20} fontWeight={40} color={`black`}/>,
       route: '#',
       showSidebar: showSidebar,
     },

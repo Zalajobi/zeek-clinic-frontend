@@ -1,19 +1,28 @@
-import { Container, Typography } from "@mui/material";
-import { useTheme } from '@mui/material/styles';
-import React from "react";
+import { Fragment } from 'react';
+import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import ActivitySummary from '../../components/admin/dashboard/ActivitySummary';
+import ActivityReport from '../../components/admin/dashboard/ActivityReport';
+import AppointmentAndEvents from '../../components/admin/dashboard/AppointmentAndEvents';
+import DoctorsList from '../../components/admin/dashboard/DoctorsList';
 
-const AdminHomePage = () => {
-  const theme = useTheme();
-
+const AdminDashboard = () => {
   return (
-    <React.Fragment>
-      <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
-        </Typography>
-      </Container>
-    </React.Fragment>
-  )
-}
+    <Fragment>
+      <AdminBaseTemplate>
+        <div className={`flex flex-col`}>
+          <ActivitySummary />
 
-export default AdminHomePage
+          <ActivityReport />
+
+          <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
+            <AppointmentAndEvents />
+
+            <DoctorsList />
+          </div>
+        </div>
+      </AdminBaseTemplate>
+    </Fragment>
+  );
+};
+
+export default AdminDashboard;
