@@ -82,8 +82,6 @@ export const AppointmentAndEventsTableRowData = (
   const rowItems: AppointmentTableRowData[] = [];
 
   data?.map((item: AppointmentTableData, idx: number) => {
-    console.log(idx);
-
     rowItems.push({
       name: (
         <Link
