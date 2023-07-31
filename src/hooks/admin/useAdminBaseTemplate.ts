@@ -21,7 +21,7 @@ export const useAdminBaseTemplate = () => {
     getHeaderData().catch((err) => {
       navigate('/admin/login');
     });
-  }, [navigate]);
+  }, []);
 
   const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
     setQuerySearch(event?.target?.value as string);

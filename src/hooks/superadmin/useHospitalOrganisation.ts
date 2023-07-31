@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { axiosGetRequest } from '../../lib/axios';
 import { GetHospitalResponseData } from '../../types/superadmin';
 import toast from 'react-hot-toast';
+import { customPromiseRequest } from '../../lib/requests';
 
 export const useHospitalOrganisation = () => {
   const navigate = useNavigate();
@@ -42,36 +43,57 @@ export const useHospitalOrganisation = () => {
         status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
       };
 
-      const response = await Promise.all([
-        axiosGetRequest('/account/hospital/pagination/data', params),
-        axiosGetRequest('/account/hospital/countries/distinct'),
+      // const [organization]
+
+      const [organization, distinctCountries] = await customPromiseRequest([
+        axiosGetRequest(
+          '/account/hospital/super-admin/get/all/pagination',
+          params
+        ),
+        axiosGetRequest('/account/hospital/super-admin/countries/distinct'),
       ]);
 
-      if (response[1]?.success) setAllHospitalCountries(response[1]?.data);
+      console.log(organization);
+      console.log(distinctCountries);
 
-      if (response[0].success) {
+      if (
+        distinctCountries?.status === 'fulfilled' &&
+        distinctCountries?.value?.success
+      ) {
+        setAllHospitalCountries(distinctCountries?.value?.data);
+      } else {
+        toast.error('Something went wrong getting organization countries');
+      }
+
+      if (
+        organization?.status === 'fulfilled' &&
+        organization?.value?.success
+      ) {
         setHospitalData(
-          response[0]?.data?.hospitals as GetHospitalResponseData[]
+          organization?.value?.data?.hospitals as GetHospitalResponseData[]
         );
-        setTotalHospitals(response[0]?.data?.count as number);
+        setTotalHospitals(organization?.value?.data?.count as number);
         setNoOfPages(
           Math.ceil(
-            response[0]?.data?.count /
-              (perPage === 'All' ? response[0]?.data?.count : perPage)
+            organization?.value?.data?.count /
+              (perPage === 'All' ? organization?.value?.data?.count : perPage)
           )
         );
         setResultTo(
           currentPage + 1 === noOfPages
-            ? response[0]?.data?.count
+            ? organization?.value?.data?.count
             : currentPage * (perPage !== 'All' ? perPage : 0) +
                 (perPage !== 'All' ? perPage : 0)
         );
         setResultFrom(1);
+      } else {
+        toast.error('Error getting list of organisation(s)');
       }
     };
 
     getData().catch((err) => {
-      navigate('/superadmin/login');
+      toast.error('Something went wrong');
+      // navigate('/superadmin/login');
     });
   }, [navigate]);
 
@@ -97,7 +119,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -136,7 +158,7 @@ export const useHospitalOrganisation = () => {
     );
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -169,7 +191,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -204,7 +226,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -241,7 +263,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -296,7 +318,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
@@ -337,7 +359,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
@@ -372,7 +394,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -417,7 +439,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
