@@ -431,7 +431,7 @@ export const AddProvider = () => {
                 <BasicOutlineButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`danger`}
+                  type={`info`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
@@ -445,7 +445,7 @@ export const AddProvider = () => {
                 <BasicLightButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`danger`}
+                  type={`primary`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
