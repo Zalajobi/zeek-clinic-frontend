@@ -78,7 +78,8 @@ export const BasicLightButton = ({
   iconAfter,
 }: ButtonProps) => {
   const classes = clsx(
-    `text-[14px] font-bold flex flex-row rounded-[8px] px-[18px] py-[5px] items-center justify-center leading-[34px] transition duration-150 ease-in-out hover:ring-offset-4 hover:ring-2 ${className}`,
+    `text-[14px] font-bold flex flex-row rounded-[8px] px-[18px] py-[5px] items-center justify-center 
+    leading-[34px] transition duration-150 ease-in-out hover:ring-offset-4 hover:ring-2 ${className}`,
     {
       'text-[color:var(--blue-6)] bg-[color:var(--blue-0)] hover:bg-[color:var(--blue-1)] ring-[color:var(--blue-1)]':
         type === 'primary',
