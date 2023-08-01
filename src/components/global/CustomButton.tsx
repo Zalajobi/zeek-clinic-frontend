@@ -89,6 +89,8 @@ export const BasicLightButton = ({
         type === 'warning',
       'text-[color:var(--cyan-6)] bg-[color:var(--cyan-0)] hover:bg-[color:var(--cyan-1)] hover:ring-[color:var(--cyan-1)]':
         type === 'info',
+      'text-[color:var(--indigo-6)] bg-[color:var(--indigo-0)] hover:bg-[color:var(--indigo-1)] hover:ring-[color:var(--indigo-1)]':
+        type === 'secondary',
     }
   );
 
