@@ -14,6 +14,7 @@ module.exports = {
     colors: {
       primary: 'rgb(233,244,254)',
       error: '#FAECEC',
+      customPrimaryColor: 'var(--blue-6, #228BE6)',
     },
   },
   plugins: [require('flowbite/plugin'), require('tw-elements/dist/plugin.cjs')],

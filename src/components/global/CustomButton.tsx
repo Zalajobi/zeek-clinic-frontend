@@ -1,7 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 import clsx from 'clsx';
 
-interface BasicOutlineButtonProps {
+interface ButtonProps {
   type:
     | 'primary'
     | 'secondary'
@@ -23,11 +23,11 @@ export const BasicOutlineButton = ({
   type = 'primary',
   text,
   click,
-  className,
+  className = '',
   curvedEdges = false,
   iconBefore,
   iconAfter,
-}: BasicOutlineButtonProps) => {
+}: ButtonProps) => {
   const classes = clsx(
     `rounded text-sm font-bold leading-normal inline-block border-2 px-6 pb-[6px] pt-2 
   transition duration-150 ease-in-out hover:bg-opacity-10 ${className}`,
@@ -59,6 +59,38 @@ export const BasicOutlineButton = ({
         type="button"
         className={classes}
         data-te-ripple-init>
+        {iconBefore}
+
+        {text}
+
+        {iconAfter}
+      </button>
+    </Fragment>
+  );
+};
+
+export const BasicLightButton = ({
+  type = 'primary',
+  text,
+  click,
+  className = '',
+  iconBefore,
+  iconAfter,
+}: ButtonProps) => {
+  const classes = clsx(
+    `text-[14px] font-bold flex flex-row rounded-[4px] px-[18px] py-[5px] items-center justify-center ${className}`,
+    {
+      'text-customPrimaryColor bg-[#E7F5FF] hover:bg-[#D0EBFF] transition duration-150 ease-in-out':
+        type === 'primary',
+    }
+  );
+
+  return (
+    <Fragment>
+      <button
+        onClick={click}
+        type="button"
+        className={classes}>
         {iconBefore}
 
         {text}
