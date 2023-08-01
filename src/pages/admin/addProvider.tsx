@@ -9,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
-import Typography from '../../components/global/Typography';
 import ImageUpload from '../../components/global/input/ImageUpload';
 import {
   CheckboxInput,
@@ -28,6 +27,7 @@ import {
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
 import { BasicOutlineButton } from '../../components/global/CustomButton';
+import { Typography } from '../../components/global/Typography';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()

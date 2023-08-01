@@ -1,9 +1,8 @@
 import { Fragment } from 'react';
-import Typography from '../../global/Typography';
+import { Typography, TypographyWithLink } from '../../global/Typography';
 import { PieChart3D } from '../../global/Charts';
-import TypographyLink from '../../global/TypographyLink';
 import HospitalReport from './HospitalReport';
-import { CustomCard } from '../../global/card/CustomCard';
+import { CustomTransparentCard } from '../../global/card/CustomCard';
 
 const ActivityReport = () => {
   const data = [
@@ -146,7 +145,7 @@ const ActivityReport = () => {
     <Fragment>
       <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
         {/*Hospital Activity*/}
-        <CustomCard
+        <CustomTransparentCard
           className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
             text={`Hospital Activity`}
@@ -161,10 +160,10 @@ const ActivityReport = () => {
             width={`100%`}
             className={`mt-[30px]`}
           />
-        </CustomCard>
+        </CustomTransparentCard>
 
         {/*Hospital Report*/}
-        <CustomCard
+        <CustomTransparentCard
           className={`w-full flex flex-col items-center justify-center max-h-[400px] lg:col-span-2`}>
           <div className={`w-full flex justify-center items-center`}>
             <Typography
@@ -173,7 +172,7 @@ const ActivityReport = () => {
               className={`text-[20px] w-full text-start mr-auto`}
             />
 
-            <TypographyLink
+            <TypographyWithLink
               text={`View All`}
               to={`#`}
               className={`text-[13px] ml-auto font-bold text-xs min-w-[50px] text-center`}
@@ -181,10 +180,10 @@ const ActivityReport = () => {
           </div>
 
           <HospitalReport data={hospitalReportData} />
-        </CustomCard>
+        </CustomTransparentCard>
 
         {/*Current Occupancy Rate*/}
-        <CustomCard
+        <CustomTransparentCard
           className={`max-w-md flex flex-col items-center justify-center max-h-[400px]`}>
           <Typography
             text={`Patient Report`}
@@ -199,7 +198,7 @@ const ActivityReport = () => {
             width={`100%`}
             className={`mt-[30px]`}
           />
-        </CustomCard>
+        </CustomTransparentCard>
       </div>
     </Fragment>
   );

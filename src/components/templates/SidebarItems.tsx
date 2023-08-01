@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { SidebarItemProps } from '../../types/common';
-import Typography from '../global/Typography';
+import { Typography } from '../global/Typography';
 
 const SidebarItems = ({
   item,

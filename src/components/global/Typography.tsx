@@ -8,7 +8,15 @@ interface TypographyProps {
   iconAfter?: ReactNode;
 }
 
-const Typography = ({
+interface TypographyWithLinkProps {
+  text: string;
+  to: string;
+  className?: string;
+  iconBefore?: ReactNode;
+  iconAfter?: ReactNode;
+}
+
+export const Typography = ({
   text,
   className = '',
   iconBefore,
@@ -22,4 +30,18 @@ const Typography = ({
   );
 };
 
-export default Typography;
+export const TypographyWithLink = ({
+  text,
+  className = '',
+  iconBefore,
+  iconAfter,
+  to,
+}: TypographyWithLinkProps) => {
+  return (
+    <a
+      href={to}
+      className={`text-[#C4C4C6] text-base font-extrabold hover:cursor-pointer hover:no-underline hover:text-[#C4C4C6] ${className}`}>
+      {iconBefore} {text} {iconAfter}
+    </a>
+  );
+};
