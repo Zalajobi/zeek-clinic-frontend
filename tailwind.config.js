@@ -14,10 +14,6 @@ module.exports = {
     colors: {
       primary: 'rgb(233,244,254)',
       error: '#FAECEC',
-      customDangerColor: 'var(--red-6, #FA5252);',
-      customBackgroundDangerColor: 'var(--red-0, #FFF5F5)',
-      customWarningColor: 'var(--orange-6, #FD7E14)',
-      customBackgroundWarningColor: 'var(--orange-0, #FFF4E6)',
     },
   },
   plugins: [require('flowbite/plugin'), require('tw-elements/dist/plugin.cjs')],

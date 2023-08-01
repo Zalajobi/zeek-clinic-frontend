@@ -82,9 +82,9 @@ export const BasicLightButton = ({
     {
       'text-[color:var(--blue-6)] bg-[color:var(--blue-0)] hover:bg-[color:var(--blue-1)] ring-[color:var(--blue-1)]':
         type === 'primary',
-      'text-customDangerColor bg-customBackgroundDangerColor hover:bg-[#FFE3E3] hover:ring-[#FFE3E3]':
+      'text-[color:var(--red-6)] bg-[color:var(--red-0)] hover:bg-[color:var(--red-1)] hover:ring-[color:var(--red-1)]':
         type === 'danger',
-      'text-customWarningColor bg-customBackgroundWarningColor hover:bg-[#FFE8CC] hover:ring-[#FFE8CC]':
+      'text-[color:var(--orange-6)] bg-[color:var(--orange-0)] hover:bg-[color:var(--orange-1)] hover:ring-[color:var(--orange-1)]':
         type === 'warning',
     }
   );

@@ -445,7 +445,7 @@ export const AddProvider = () => {
                 <BasicLightButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`primary`}
+                  type={`warning`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
