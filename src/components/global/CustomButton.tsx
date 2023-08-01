@@ -78,10 +78,12 @@ export const BasicLightButton = ({
   iconAfter,
 }: ButtonProps) => {
   const classes = clsx(
-    `text-[14px] font-bold flex flex-row rounded-[4px] px-[18px] py-[5px] items-center justify-center ${className}`,
+    `text-[14px] font-bold flex flex-row rounded-[8px] px-[18px] py-[5px] items-center justify-center transition duration-150 ease-in-out hover:ring-offset-4 hover:ring-2 ${className}`,
     {
-      'text-customPrimaryColor bg-[#E7F5FF] hover:bg-[#D0EBFF] transition duration-150 ease-in-out':
+      'text-customPrimaryColor bg-[#E7F5FF] hover:bg-[#D0EBFF] ring-[#D0EBFF]':
         type === 'primary',
+      'text-customDangerColor bg-customBackgroundDangerColor hover:bg-[#FFE3E3] hover:ring-[#FFE3E3]':
+        type === 'danger',
     }
   );
 
