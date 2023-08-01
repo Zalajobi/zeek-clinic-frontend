@@ -27,7 +27,7 @@ import {
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
 import {
-  BasicLightButton,
+  BasicFilledButton,
   BasicOutlineButton,
 } from '../../components/global/CustomButton';
 import { Typography } from '../../components/global/Typography';
@@ -442,10 +442,10 @@ export const AddProvider = () => {
                   className={`min-w-[100px] max-w-[200px]`}
                 />
 
-                <BasicLightButton
+                <BasicFilledButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`dark`}
+                  type={`success`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
