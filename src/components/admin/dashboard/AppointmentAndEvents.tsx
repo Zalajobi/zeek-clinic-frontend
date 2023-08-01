@@ -1,5 +1,4 @@
 import { Fragment, useMemo } from 'react';
-import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import TypographyLink from '../../global/TypographyLink';
 import Table from '../../global/table/Table';
@@ -8,6 +7,7 @@ import {
   AppointmentAndEventsTableRowData,
 } from '../../tables/AppointmentAndEventsTable';
 import { AppointmentTableData } from '../../../types/admin';
+import { CustomCard } from '../../global/card/CustomCard';
 
 const AppointmentAndEvents = () => {
   const testData: AppointmentTableData[] = [

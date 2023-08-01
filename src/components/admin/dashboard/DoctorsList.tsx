@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import CustomCard from '../../global/card/CustomCard';
+import { CustomCard } from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import TypographyLink from '../../global/TypographyLink';
 import ListView from '../../global/views/ListView';

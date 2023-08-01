@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import TypographyLink from '../../global/TypographyLink';
 import CustomInnerCard from '../../global/card/CustomInnerCard';
+import { CustomCard } from '../../global/card/CustomCard';
 
 const GeneralReport = () => {
   const date = new Date();

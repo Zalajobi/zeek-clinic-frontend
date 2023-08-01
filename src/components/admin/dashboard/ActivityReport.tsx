@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import CustomCard from '../../global/card/CustomCard';
 import Typography from '../../global/Typography';
 import { PieChart3D } from '../../global/Charts';
 import TypographyLink from '../../global/TypographyLink';
 import HospitalReport from './HospitalReport';
+import { CustomCard } from '../../global/card/CustomCard';
 
 const ActivityReport = () => {
   const data = [
