@@ -9,7 +9,6 @@ interface ButtonProps {
     | 'danger'
     | 'warning'
     | 'info'
-    | 'light'
     | 'dark';
   text: string;
   click: () => void;
@@ -46,8 +45,6 @@ export const BasicOutlineButton = ({
         type === 'warning',
       'border-2 border-info text-info hover:border-info-600 hover:bg-neutral-500 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10':
         type === 'info',
-      'border-neutral-50 text-neutral-50 hover:border-neutral-100 hover:bg-neutral-500 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10':
-        type === 'light',
       'border-neutral-800 text-neutral-800 hover:border-neutral-800 hover:bg-neutral-500 hover:text-neutral-800 focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 dark:active:text-neutral-900':
         type === 'dark',
     }
@@ -91,6 +88,10 @@ export const BasicLightButton = ({
         type === 'info',
       'text-[color:var(--indigo-6)] bg-[color:var(--indigo-0)] hover:bg-[color:var(--indigo-1)] hover:ring-[color:var(--indigo-1)]':
         type === 'secondary',
+      'text-[color:var(--green-6)] bg-[color:var(--green-0)] hover:bg-[color:var(--green-1)] hover:ring-[color:var(--green-1)]':
+        type === 'success',
+      'text-[color:var(--dark-6)] bg-[color:var(--dark-0)] hover:bg-[color:var(--dark-1)] hover:ring-[color:var(--dark-1)]':
+        type === 'dark',
     }
   );
 
