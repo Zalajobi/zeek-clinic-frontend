@@ -26,10 +26,7 @@ import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
-import {
-  BasicFilledButton,
-  BasicOutlineButton,
-} from '../../components/global/CustomButton';
+import { BasicFilledButton } from '../../components/global/CustomButton';
 import { Typography } from '../../components/global/Typography';
 
 export const AddProvider = () => {
@@ -428,7 +425,7 @@ export const AddProvider = () => {
               </div>
 
               <div className={`w-full flex justify-center mt-8`}>
-                <BasicOutlineButton
+                <BasicFilledButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
                   type={`dark`}
@@ -438,28 +435,7 @@ export const AddProvider = () => {
                       className={`mr-1`}
                     />
                   }
-                  curvedEdges={false}
                   className={`min-w-[100px] max-w-[200px]`}
-                />
-
-                <BasicFilledButton
-                  click={handleSubmit(onSubmit)}
-                  text={`Create Provider`}
-                  type={`success`}
-                  iconBefore={
-                    <IoMdPersonAdd
-                      size={15}
-                      className={`mr-1`}
-                    />
-                  }
-                  iconAfter={
-                    <IoMdPersonAdd
-                      size={15}
-                      className={`ml-1`}
-                    />
-                  }
-                  curvedEdges={false}
-                  className={`min-w-[100px] max-w-[200px] mx-10`}
                 />
               </div>
             </div>
