@@ -3,6 +3,7 @@ import { HospitalOrganizationData } from '../../../types/superadmin';
 import moment from 'moment/moment';
 import Status from '../../global/Status';
 import { Typography } from '../../global/dialog/Typography';
+import { CustomTransparentCard } from '../../global/card/CustomCard';
 
 interface HospitalDetailsProps {
   data: HospitalOrganizationData | null;
@@ -11,8 +12,8 @@ interface HospitalDetailsProps {
 const HospitalDetails = ({ data }: HospitalDetailsProps) => {
   return (
     <Fragment>
-      <div
-        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold rounded-lg`}>
+      <CustomTransparentCard
+        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold`}>
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Name:`}
@@ -250,7 +251,7 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             status={data?.status ?? '--'}
           />
         </div>
-      </div>
+      </CustomTransparentCard>
     </Fragment>
   );
 };
