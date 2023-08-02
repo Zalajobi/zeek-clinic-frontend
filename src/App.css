@@ -41,7 +41,7 @@
 
 .text-description {
   --tw-text-opacity: 1;
-  color: rgb(126 139 151 / var(--tw-text-opacity));
+  color: var(--label-color);
 }
 
 .select-input-global-component > div,

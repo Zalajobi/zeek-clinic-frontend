@@ -1,108 +1,258 @@
-import { Fragment } from "react";
-import {HospitalOrganizationData} from "../../../types/superadmin";
-import moment from "moment/moment";
-import Status from "../../global/Status";
+import { Fragment } from 'react';
+import { HospitalOrganizationData } from '../../../types/superadmin';
+import moment from 'moment/moment';
+import Status from '../../global/Status';
+import { Typography } from '../../global/dialog/Typography';
 
 interface HospitalDetailsProps {
-  data: HospitalOrganizationData | null
+  data: HospitalOrganizationData | null;
 }
 
-const HospitalDetails = ({data}: HospitalDetailsProps) => {
+const HospitalDetails = ({ data }: HospitalDetailsProps) => {
   return (
     <Fragment>
-      <div className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold rounded-lg`}>
+      <div
+        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold rounded-lg`}>
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Name:</p>
+          <Typography
+            text={`Name:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.name}</p>
+          <Typography
+            text={data?.name as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Email:</p>
+          <Typography
+            text={`Email:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.email}</p>
+          <Typography
+            text={data?.email as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Phone:</p>
+          <Typography
+            text={`Phone:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.phone}</p>
+          <Typography
+            text={data?.phone as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Created On:</p>
+          <Typography
+            text={`Created On:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{moment(data?.created_at).format('MMM DD. YYYY')}</p>
+          <Typography
+            text={moment(data?.created_at).format('MMM DD. YYYY')}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Country:</p>
+          <Typography
+            text={`Country:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.country}</p>
+          <Typography
+            text={data?.country as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">State:</p>
+          <Typography
+            text={`State:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.state}</p>
+          <Typography
+            text={data?.state as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">city:</p>
+          <Typography
+            text={`City:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.city}</p>
+          <Typography
+            text={data?.city as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Address:</p>
+          <Typography
+            text={`Address:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.address}</p>
+          <Typography
+            text={data?.address as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Zip Code:</p>
+          <Typography
+            text={`Zip Code:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.zip_code ?? '---'}</p>
+          <Typography
+            text={data?.zip_code as string}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Total Sites:</p>
+          <Typography
+            text={`Total Sites:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.site_count}</p>
+          <Typography
+            text={data?.site_count as number}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Active Sites:</p>
+          <Typography
+            text={`Active Sites:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.activeSites}</p>
+          <Typography
+            text={data?.activeSites as number}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Pending Sites:</p>
+          <Typography
+            text={`Pending Sites:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.pendingSites}</p>
+          <Typography
+            text={data?.pendingSites as number}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Closed Sites:</p>
+          <Typography
+            text={`Closed Sites:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.closedSites}</p>
+          <Typography
+            text={data?.closedSites as number}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Suspended Operation Sites:</p>
+          <Typography
+            text={`Suspended Operation Sites:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <p className="text-ds-primary-700 dark:text-white mt-0 ml-3">{data?.deactivatedSites}</p>
+          <Typography
+            text={data?.deactivatedSites as number}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+          />
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
-          <p className="text-custom-description dark:text-ds-dark-300 text-description">Status:</p>
+          <Typography
+            text={`Status:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
 
-          <Status className={`ml-3`} status={data?.status ?? '--'}/>
+          <Status
+            className={`ml-3`}
+            status={data?.status ?? '--'}
+          />
         </div>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default HospitalDetails;

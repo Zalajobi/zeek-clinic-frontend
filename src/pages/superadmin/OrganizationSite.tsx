@@ -25,6 +25,7 @@ import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
+import { Typography } from '../../components/global/dialog/Typography';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -73,11 +74,12 @@ const OrganizationSite = () => {
         <div className={`w-full flex flex-col`}>
           <div className={`flex flex-row gap-4`}>
             <div className={`mr-auto`}>
-              <Text
+              <Typography
                 text={`Welcome To, ${organization?.name}`}
                 size="4xl"
                 weight={800}
-                className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
+                className="mb-8"
+                Tag={'h1'}
               />
             </div>
 
