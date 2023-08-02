@@ -8,13 +8,26 @@ import moment from 'moment';
 interface TextInputProps {
   label: string;
   id: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
   className?: string;
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
   prefix?: string;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+}
+
+interface TextInputWithoutLabelProps {
+  id: string;
+  register?: UseFormRegister<any>;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  className?: string;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  max?: string | number;
+  min?: string | number;
 }
 
 interface SelectInputProps {
@@ -62,6 +75,8 @@ export const TextInput = ({
   register,
   type = 'text',
   prefix,
+  change,
+  value,
 }: TextInputProps) => {
   return (
     <Fragment>
@@ -79,19 +94,37 @@ export const TextInput = ({
             />
           </div>
         )}
-        <input
-          className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
+
+        {register ? (
+          <input
+            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
           bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
           ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
           focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
           dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
           [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
           ${prefix ? 'pl-[70px]' : ''}`}
-          placeholder={placeholder}
-          {...register(id)}
-          id={id}
-          type={type}
-        />
+            placeholder={placeholder}
+            {...register(id)}
+            id={id}
+            type={type}
+          />
+        ) : (
+          <input
+            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
+          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
+          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
+          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
+          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
+          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
+          ${prefix ? 'pl-[70px]' : ''}`}
+            placeholder={placeholder}
+            onChange={change}
+            value={value}
+            id={id}
+            type={type}
+          />
+        )}
 
         {icon && (
           <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -124,6 +157,40 @@ export const TextInput = ({
           </div>
         )}
       </div>
+    </Fragment>
+  );
+};
+
+export const TextInputWithoutLabel = ({
+  id,
+  register,
+  type = 'text',
+  className,
+  change,
+  value,
+  max,
+  min,
+}: TextInputWithoutLabelProps) => {
+  return (
+    <Fragment>
+      {register ? (
+        <input
+          type={type}
+          {...register(id)}
+          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
+          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
+        />
+      ) : (
+        <input
+          type={type}
+          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
+          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
+          onChange={change}
+          value={value}
+          max={max}
+          min={min}
+        />
+      )}
     </Fragment>
   );
 };
