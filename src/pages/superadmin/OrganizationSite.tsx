@@ -8,7 +8,6 @@ import { Select } from 'flowbite-react';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
-import Text from '../../components/global/dialog/Text';
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
@@ -26,6 +25,8 @@ import {
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
 import { Typography } from '../../components/global/dialog/Typography';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { DateInput } from '../../components/global/formInput/CustomInput';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -45,6 +46,7 @@ const OrganizationSite = () => {
     countryFilterList,
     stateFilterList,
     showCreateSiteModal,
+    dateFilterFrom,
 
     // Functions
     onUpdateActiveTab,
@@ -235,9 +237,19 @@ const OrganizationSite = () => {
 
                 <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                   <div className="flex items-center w-full space-x-3 md:w-auto">
-                    <BasicDatePicker
+                    {/*<BasicDatePicker*/}
+                    {/*  label={`From`}*/}
+                    {/*  change={onUpdateSelectFrom}*/}
+                    {/*/>*/}
+
+                    <DateInput
                       label={`From`}
-                      change={onUpdateSelectFrom}
+                      placeholder={`DD/MM/YYYY`}
+                      className={`my-3`}
+                      change={(e) => onUpdateSelectFrom(e.target.value)}
+                      value={dateFilterFrom as Date}
+                      id={`from`}
+                      icon={<FaCalendarAlt size={20} />}
                     />
 
                     <CgArrowsH size={30} />

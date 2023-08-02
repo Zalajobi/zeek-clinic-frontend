@@ -3,6 +3,7 @@ import { UseFormRegister } from 'react-hook-form';
 import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
+import moment from 'moment';
 
 interface TextInputProps {
   label: string;
@@ -34,10 +35,12 @@ interface DateInputProps {
   label: string;
   id: string;
   placeholder: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   className?: string;
   errorMsg?: string;
   icon?: ReactNode;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value: Date;
 }
 
 interface CheckboxInputProps {
@@ -188,6 +191,8 @@ export const DateInput = ({
   id,
   register,
   icon,
+  change,
+  value,
 }: DateInputProps) => {
   return (
     <Fragment>
@@ -197,19 +202,36 @@ export const DateInput = ({
         data-te-inline={true}
         data-te-input-wrapper-init
         data-te-format={'m-d-yyyy'}>
-        <input
-          data-te-datepicker-toggle-ref
-          data-te-datepicker-toggle-button-ref
-          type="text"
-          className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
+        {register ? (
+          <input
+            data-te-datepicker-toggle-ref
+            data-te-datepicker-toggle-button-ref
+            type="text"
+            className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
             outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
             data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
             dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
             [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
-          placeholder={placeholder}
-          {...register(id)}
-          id={id}
-        />
+            placeholder={placeholder}
+            {...register(id)}
+            value={moment(value).format('MMM DD. YYYY')}
+            id={id}
+          />
+        ) : (
+          <input
+            data-te-datepicker-toggle-ref
+            data-te-datepicker-toggle-button-ref
+            type="text"
+            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6]
+            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
+            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
+            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
+            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            placeholder={placeholder}
+            onInput={change}
+            id={id}
+          />
+        )}
 
         {icon && (
           <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">

@@ -204,8 +204,10 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectFrom = async (value: Date | null) => {
-    setDateFilterFrom(value);
+  const onUpdateSelectFrom = async (value: string) => {
+    console.log('HELLO WORLD');
+    setDateFilterFrom(new Date(value));
+    console.log(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -507,6 +509,7 @@ export const useOrganizationDetails = () => {
     countryFilterList,
     stateFilterList,
     showCreateSiteModal,
+    dateFilterFrom,
 
     // Functions
     onUpdateActiveTab,

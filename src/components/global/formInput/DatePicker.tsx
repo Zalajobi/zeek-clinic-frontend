@@ -1,9 +1,6 @@
 import { Fragment } from 'react';
 import { DatePicker, Stack } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 interface BasicDatePickerProps {
   label: string;
