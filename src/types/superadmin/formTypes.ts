@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import { relationshipStatus } from '../../lib/constants/constants';
 
 export type AllCountries = {
   currency: string;

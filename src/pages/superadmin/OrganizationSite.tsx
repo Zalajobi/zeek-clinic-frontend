@@ -9,7 +9,6 @@ import { Select } from 'flowbite-react';
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
 import Text from '../../components/global/dialog/Text';
-import { PrimaryButtonOutline } from '../../components/global/formInput/ButtonInput';
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
@@ -21,9 +20,11 @@ import TableFooter from '../../components/global/table/TableFooter';
 import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
 import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
-import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
 import CreateSite from '../../components/modals/CreateSite';
-import { ModalButtonFilledLunch } from '../../components/global/CustomButton';
+import {
+  BasicOutlineButton,
+  ModalButtonOutlineLunch,
+} from '../../components/global/CustomButton';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -81,28 +82,30 @@ const OrganizationSite = () => {
             </div>
 
             <div className={`ml-auto flex flex-row gap-4`}>
-              <PrimaryButtonOutline
+              <BasicOutlineButton
                 text={`Edit`}
                 click={() => console.log('Add New Site')}
-                icon={
+                type={'primary'}
+                className={`h-[38px] w-[140px]`}
+                iconBefore={
                   <AiFillEdit
                     size={20}
                     className={`mr-2`}
                   />
                 }
-                className={`h-[38px] w-[140px]`}
               />
 
-              <PrimaryButtonOutline
-                click={() => console.log('Export Data')}
+              <BasicOutlineButton
                 text={`Export Data`}
-                icon={
+                click={() => console.log('Export Data')}
+                type={'primary'}
+                className={`h-[38px] w-[150px]`}
+                iconBefore={
                   <CgExport
                     size={20}
                     className={`mr-2`}
                   />
                 }
-                className={`h-[38px] w-[150px]`}
               />
             </div>
           </div>
@@ -164,29 +167,7 @@ const OrganizationSite = () => {
 
             <div
               className={`w-full flex flex-row gap-4 items-center justify-end`}>
-              <PrimaryButtonOutline
-                click={() => onUpdateShowCreateSiteModal()}
-                text={`Add New Site`}
-                icon={
-                  <HiPlusSm
-                    size={20}
-                    className={`mr-2`}
-                  />
-                }
-              />
-
-              <PrimaryButtonOutline
-                click={() => console.log('Export Sites')}
-                text={`Export Sites`}
-                icon={
-                  <CgExport
-                    size={20}
-                    className={`mr-2`}
-                  />
-                }
-              />
-
-              <ModalButtonFilledLunch
+              <ModalButtonOutlineLunch
                 iconBefore={
                   <HiPlusSm
                     size={20}
@@ -195,8 +176,21 @@ const OrganizationSite = () => {
                 }
                 targetModalId={`createSite`}
                 text={`Add New Site`}
-                type={`secondary`}
-                hasRings={true}
+                type={`primary`}
+                className={`h-[38px] w-[180px]`}
+              />
+
+              <BasicOutlineButton
+                text={`Export Sites`}
+                click={() => console.log('Export Sites')}
+                type={'primary'}
+                className={`h-[38px] w-[150px]`}
+                iconBefore={
+                  <CgExport
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
               />
             </div>
           </div>

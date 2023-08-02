@@ -5,7 +5,7 @@ import { AllCountries } from '../../types/superadmin/formTypes';
 import { axiosPostRequest } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import { SelectInputFieldProps } from '../../types/common';
-import { Datepicker, initTE, Input, Ripple, Select } from 'tw-elements';
+import { initTE, Select } from 'tw-elements';
 import { CreateSiteInput } from '../../types/superadmin/forms';
 
 export const useCreateSite = (
@@ -67,9 +67,6 @@ export const useCreateSite = (
       country_code: countryCode,
       hospital_id: hospitalId,
     };
-
-    // console.log("data")
-    // console.log(data)
 
     const response = await axiosPostRequest('/account/site/create', siteData);
 
