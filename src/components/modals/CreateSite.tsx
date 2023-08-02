@@ -39,6 +39,7 @@ const CreateSite = ({
   } = useForm<CreateSiteInput>({
     resolver: yupResolver(CreateSiteInputSchema),
   });
+
   const {
     // Values
     logo,
