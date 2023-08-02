@@ -23,12 +23,7 @@ import HospitalDetails from '../../components/superadmin/hospital/HospitalDetail
 import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
 import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
 import CreateSite from '../../components/modals/CreateSite';
-import {
-  ModalButtonFilledLunch,
-  ModalButtonLightLunch,
-  ModalButtonOutlineLunch,
-} from '../../components/global/CustomButton';
-import { CustomModal } from '../../components/global/dialog/CustomModal';
+import { ModalButtonFilledLunch } from '../../components/global/CustomButton';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -332,8 +327,6 @@ const OrganizationSite = () => {
           reloadPage={onUpdateDataRefresh}
           totalSites={organization?.site_count ?? (0 as number)}
         />
-
-        <CustomModal targetModalId={`createSite`} />
       </SuperadminBaseTemplate>
     </Fragment>
   );
