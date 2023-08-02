@@ -389,15 +389,15 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSearchSite = async (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchSite(event.target.value);
+  const onUpdateSearchSite = async (value: string) => {
+    setSearchSite(value);
 
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
       from_date: dateFilterFrom,
       to_date: dateFilterTo,
-      search: event.target.value,
+      search: value,
       country: country,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,

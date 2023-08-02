@@ -2,7 +2,6 @@ import { Fragment, useMemo } from 'react';
 import { Tab } from '@headlessui/react';
 import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
-import { GoSearch } from 'react-icons/go';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
@@ -28,6 +27,7 @@ import {
   DateInput,
   SelectInput,
 } from '../../components/global/formInput/CustomInput';
+import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -205,28 +205,15 @@ const OrganizationSite = () => {
             <div className="w-full relative my-4 sm:rounded-lg px-10">
               <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 <div className="w-full md:w-3/4">
-                  <form className="flex items-center">
-                    <label
-                      htmlFor="simple-search"
-                      className="sr-only">
-                      Search
-                    </label>
-                    <div className="relative w-full">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <GoSearch size={20} />
-                      </div>
-                      <input
-                        type="text"
-                        id="search"
-                        className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg
-                      bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600
-                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value={searchSite}
-                        onChange={onUpdateSearchSite}
-                        placeholder="Search"
-                      />
-                    </div>
-                  </form>
+                  <BasicSearchInput
+                    id={`searchOrg`}
+                    placeholder={`Search...`}
+                    value={searchSite}
+                    change={(e) => onUpdateSearchSite(e.target.value)}
+                    inputClass={`!min-h-[58px]`}
+                    labelClass={`!top-[12px] !text-[15px]`}
+                    className={`!mb-0`}
+                  />
                 </div>
 
                 <TableHeaderDropdown
