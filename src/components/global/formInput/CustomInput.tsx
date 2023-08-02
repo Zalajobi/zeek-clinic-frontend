@@ -298,3 +298,21 @@ export const CheckboxInput = ({
     </Fragment>
   );
 };
+
+export const CustomInputLabel = ({
+  forItem,
+  label,
+  className = '',
+}: {
+  forItem: string;
+  label: string;
+  className?: string;
+}) => {
+  return (
+    <label
+      className={`text-sm font-medium text-gray-900 dark:text-gray-300 ${className}`}
+      htmlFor={forItem}>
+      {label}
+    </label>
+  );
+};

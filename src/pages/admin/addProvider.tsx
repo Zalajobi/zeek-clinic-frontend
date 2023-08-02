@@ -9,13 +9,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
-import ImageUpload from '../../components/global/input/ImageUpload';
+import ImageUpload from '../../components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
   SelectInput,
   TextInput,
-} from '../../components/global/input/CustomInput';
+} from '../../components/global/formInput/CustomInput';
 import {
   genderSelectInput,
   providersTitleSelectInput,

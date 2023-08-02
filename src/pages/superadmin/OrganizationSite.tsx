@@ -1,31 +1,31 @@
-import { Fragment, useMemo } from "react";
-import { Tab } from "@headlessui/react";
-import { HiPlusSm } from "react-icons/hi";
-import { AiFillEdit } from "react-icons/ai";
-import { GoSearch } from "react-icons/go";
-import { CgArrowsH, CgExport } from "react-icons/cg";
-import { Select } from "flowbite-react";
+import { Fragment, useMemo } from 'react';
+import { Tab } from '@headlessui/react';
+import { HiPlusSm } from 'react-icons/hi';
+import { AiFillEdit } from 'react-icons/ai';
+import { GoSearch } from 'react-icons/go';
+import { CgArrowsH, CgExport } from 'react-icons/cg';
+import { Select } from 'flowbite-react';
 
-import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate";
-import { useOrganizationDetails } from "../../hooks/superadmin/useOrganizationDetails";
-import Text from "../../components/global/Text";
-import { PrimaryButtonOutline } from "../../components/global/input/ButtonInput";
+import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
+import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
+import Text from '../../components/global/Text';
+import { PrimaryButtonOutline } from '../../components/global/formInput/ButtonInput';
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
-} from "../../components/tables/SuperadminTable";
-import { SuperadminSiteData } from "../../types/superadmin";
-import BasicDatePicker from "../../components/global/input/DatePicker";
-import Table from "../../components/global/table/Table";
-import TableFooter from "../../components/global/table/TableFooter";
-import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
-import HospitalDetails from "../../components/superadmin/hospital/HospitalDetails";
-import HospitalRoutes from "../../components/superadmin/HospitalRoutes";
-import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
-import CreateSite from "../../components/modals/CreateSite";
+} from '../../components/tables/SuperadminTable';
+import { SuperadminSiteData } from '../../types/superadmin';
+import BasicDatePicker from '../../components/global/formInput/DatePicker';
+import Table from '../../components/global/table/Table';
+import TableFooter from '../../components/global/table/TableFooter';
+import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
+import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
+import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
+import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
+import CreateSite from '../../components/modals/CreateSite';
 
 const OrganizationSite = () => {
-  const itemsPerPage = ["All", 10, 20, 50, 100];
+  const itemsPerPage = ['All', 10, 20, 50, 100];
 
   const {
     // Values
@@ -82,15 +82,25 @@ const OrganizationSite = () => {
             <div className={`ml-auto flex flex-row gap-4`}>
               <PrimaryButtonOutline
                 text={`Edit`}
-                click={() => console.log("Add New Site")}
-                icon={<AiFillEdit size={20} className={`mr-2`} />}
+                click={() => console.log('Add New Site')}
+                icon={
+                  <AiFillEdit
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
                 className={`h-[38px] w-[140px]`}
               />
 
               <PrimaryButtonOutline
-                click={() => console.log("Export Data")}
+                click={() => console.log('Export Data')}
                 text={`Export Data`}
-                icon={<CgExport size={20} className={`mr-2`} />}
+                icon={
+                  <CgExport
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
                 className={`h-[38px] w-[150px]`}
               />
             </div>
@@ -107,48 +117,44 @@ const OrganizationSite = () => {
                   <Tab
                     className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
                   ${
-                    activeTabs === "ALL"
-                      ? "bg-[#EEF7FF] shadow"
-                      : "text-black hover:bg-[#bfdbfe] hover:text-[#27272a]"
+                    activeTabs === 'ALL'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
                   }`}
-                    onClick={() => onUpdateActiveTab("ALL")}
-                  >
+                    onClick={() => onUpdateActiveTab('ALL')}>
                     All
                   </Tab>
 
                   <Tab
                     className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
                   ${
-                    activeTabs === "ACTIVE"
-                      ? "bg-[#EEF7FF] shadow"
-                      : "text-black hover:bg-[#bfdbfe] hover:text-[#27272a]"
+                    activeTabs === 'ACTIVE'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
                   }`}
-                    onClick={() => onUpdateActiveTab("ACTIVE")}
-                  >
+                    onClick={() => onUpdateActiveTab('ACTIVE')}>
                     Active
                   </Tab>
 
                   <Tab
                     className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
                   ${
-                    activeTabs === "PENDING"
-                      ? "bg-[#EEF7FF] shadow"
-                      : "text-black hover:bg-[#bfdbfe] hover:text-[#27272a]"
+                    activeTabs === 'PENDING'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
                   }`}
-                    onClick={() => onUpdateActiveTab("PENDING")}
-                  >
+                    onClick={() => onUpdateActiveTab('PENDING')}>
                     Pending
                   </Tab>
 
                   <Tab
                     className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
                   ${
-                    activeTabs === "DEACTIVATE"
-                      ? "bg-[#EEF7FF] shadow"
-                      : "text-black hover:bg-[#bfdbfe] hover:text-[#27272a]"
+                    activeTabs === 'DEACTIVATE'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
                   }`}
-                    onClick={() => onUpdateActiveTab("DEACTIVATE")}
-                  >
+                    onClick={() => onUpdateActiveTab('DEACTIVATE')}>
                     Deactivated
                   </Tab>
                 </Tab.List>
@@ -156,31 +162,41 @@ const OrganizationSite = () => {
             </div>
 
             <div
-              className={`w-full flex flex-row gap-4 items-center justify-end`}
-            >
+              className={`w-full flex flex-row gap-4 items-center justify-end`}>
               <PrimaryButtonOutline
                 click={() => onUpdateShowCreateSiteModal()}
                 text={`Add New Site`}
-                icon={<HiPlusSm size={20} className={`mr-2`} />}
+                icon={
+                  <HiPlusSm
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
               />
 
               <PrimaryButtonOutline
-                click={() => console.log("Export Sites")}
+                click={() => console.log('Export Sites')}
                 text={`Export Sites`}
-                icon={<CgExport size={20} className={`mr-2`} />}
+                icon={
+                  <CgExport
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
               />
             </div>
           </div>
 
           <div
             className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
-         border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700"
-          >
+         border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
             <div className="w-full relative my-4 sm:rounded-lg px-10">
               <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 <div className="w-full md:w-3/4">
                   <form className="flex items-center">
-                    <label htmlFor="simple-search" className="sr-only">
+                    <label
+                      htmlFor="simple-search"
+                      className="sr-only">
                       Search
                     </label>
                     <div className="relative w-full">
@@ -216,7 +232,10 @@ const OrganizationSite = () => {
 
                     <CgArrowsH size={30} />
 
-                    <BasicDatePicker label={`To`} change={onUpdateSelectTo} />
+                    <BasicDatePicker
+                      label={`To`}
+                      change={onUpdateSelectTo}
+                    />
                   </div>
                 </div>
 
@@ -228,13 +247,14 @@ const OrganizationSite = () => {
                     className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
                    border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
                   focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}
-                  >
+                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
                     <option value={``}>Country</option>
                     {countryFilterList?.map(
                       (item: { country: string }, idx: number) => {
                         return (
-                          <option key={idx} value={item?.country}>
+                          <option
+                            key={idx}
+                            value={item?.country}>
                             {item?.country}
                           </option>
                         );
@@ -251,13 +271,14 @@ const OrganizationSite = () => {
                     className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
                    border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
                   focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}
-                  >
+                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
                     <option value={``}>State</option>
                     {stateFilterList?.map(
                       (item: { state: string }, idx: number) => {
                         return (
-                          <option key={idx} value={item?.state}>
+                          <option
+                            key={idx}
+                            value={item?.state}>
                             {item?.state}
                           </option>
                         );
@@ -268,7 +289,10 @@ const OrganizationSite = () => {
               </div>
             </div>
 
-            <Table columns={columns} data={data} />
+            <Table
+              columns={columns}
+              data={data}
+            />
 
             <TableFooter
               noOfPages={noOfPages}

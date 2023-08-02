@@ -1,19 +1,28 @@
-import { Fragment } from 'react'
-import {Button, Label, Select, Textarea, TextInput} from "flowbite-react";
+import { Fragment } from 'react';
+import { Button, Label, Select, Textarea, TextInput } from 'flowbite-react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { InputNumber } from 'rsuite';
 
-import Text from "../../components/global/Text";
-import {useSuperadminCreateAdminUser} from "../../hooks/superadmin/useSuperadminCreateAdminUser";
-import {AllCountries, AllStatesAndCities, CreateUserInput, CreateUserInputSchema} from '../../types/superadmin/formTypes';
-import ImageUpload from "../../components/global/input/ImageUpload";
-import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate";
-import {availableTitles} from "../../lib/constants/constants";
+import Text from '../../components/global/Text';
+import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
+import {
+  AllCountries,
+  AllStatesAndCities,
+  CreateUserInput,
+  CreateUserInputSchema,
+} from '../../types/superadmin/formTypes';
+import ImageUpload from '../../components/global/formInput/ImageUpload';
+import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
+import { availableTitles } from '../../lib/constants/constants';
 
 const CreateNewUser = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<CreateUserInput>({
-    resolver: yupResolver(CreateUserInputSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateUserInput>({
+    resolver: yupResolver(CreateUserInputSchema),
   });
 
   const {
@@ -33,7 +42,7 @@ const CreateNewUser = () => {
     onUpdateCity,
     setProfileImgURL,
     onUpdatePhoneNumber,
-  } = useSuperadminCreateAdminUser()
+  } = useSuperadminCreateAdminUser();
 
   return (
     <SuperadminBaseTemplate>
@@ -48,7 +57,11 @@ const CreateNewUser = () => {
         <div className={`w-full p-5 shadow-2xl rounded-lg flex flex-col`}>
           <div className={`grid-container grid grid-cols-6 gap-4 w-full px-4`}>
             <div className={`col-span-2`}>
-              <ImageUpload bucketFolder={`/profile_image`} url={profileImgURL} updateImageUrl={setProfileImgURL}/>
+              <ImageUpload
+                bucketFolder={`/profile_image`}
+                url={profileImgURL}
+                updateImageUrl={setProfileImgURL}
+              />
             </div>
 
             <div className={`col-span-4 grid grid-cols-5 gap-4`}>
@@ -66,21 +79,22 @@ const CreateNewUser = () => {
                   <Select
                     id="state"
                     required={false}
-                    helperText={<Fragment><span className="font-medium">{errors.title?.message}</span></Fragment>}
-                    {...register("title")}
-                    color={errors.title?.message ? 'failure' : 'gray'}
-                  >
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.title?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('title')}
+                    color={errors.title?.message ? 'failure' : 'gray'}>
                     <option>Select Title</option>
-                    {availableTitles?.map((item:string, idx:number) => {
-                      return (
-                        <option key={idx}>{item}</option>
-                      )
+                    {availableTitles?.map((item: string, idx: number) => {
+                      return <option key={idx}>{item}</option>;
                     })}
-
                   </Select>
                 </div>
               </div>
-
 
               {/*First Name*/}
               <div className={`col-span-2`}>
@@ -97,8 +111,14 @@ const CreateNewUser = () => {
                     placeholder="John"
                     required={false}
                     color={errors.first_name?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.first_name?.message}</span></Fragment>}
-                    {...register("first_name")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.first_name?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('first_name')}
                   />
                 </div>
               </div>
@@ -118,8 +138,14 @@ const CreateNewUser = () => {
                     placeholder="Doe"
                     required={false}
                     color={errors.last_name?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.last_name?.message}</span></Fragment>}
-                    {...register("last_name")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.last_name?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('last_name')}
                   />
                 </div>
               </div>
@@ -139,8 +165,14 @@ const CreateNewUser = () => {
                     placeholder="Felix"
                     required={false}
                     color={errors.other_name?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.other_name?.message}</span></Fragment>}
-                    {...register("other_name")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.other_name?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('other_name')}
                   />
                 </div>
 
@@ -158,8 +190,14 @@ const CreateNewUser = () => {
                     placeholder="john_doe"
                     required={false}
                     color={errors.username?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.username?.message}</span></Fragment>}
-                    {...register("username")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.username?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('username')}
                   />
                 </div>
               </div>
@@ -169,7 +207,9 @@ const CreateNewUser = () => {
           <div className={`grid-container grid grid-cols-6 gap-4 w-full p-4`}>
             {/*Short Bio*/}
             <div className={`col-span-2`}>
-              <div id="short_bio" className={`w-full`}>
+              <div
+                id="short_bio"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="bio"
@@ -183,15 +223,21 @@ const CreateNewUser = () => {
                   placeholder="Short Biography"
                   required={false}
                   color={errors.bio?.message ? 'failure' : 'gray'}
-                  helperText={<Fragment><span className="font-medium">{errors.bio?.message}</span></Fragment>}
-                  {...register("bio")}
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">{errors.bio?.message}</span>
+                    </Fragment>
+                  }
+                  {...register('bio')}
                 />
               </div>
             </div>
 
             {/*Gender*/}
             <div className={`col-span-1`}>
-              <div id="select_gender" className={`w-full`}>
+              <div
+                id="select_gender"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="select_gender"
@@ -202,21 +248,27 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<Fragment><span className="font-medium">{errors.gender?.message}</span></Fragment>}
-                  {...register("gender")}
-                  color={errors.gender?.message ? 'failure' : 'gray'}
-                >
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.gender?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('gender')}
+                  color={errors.gender?.message ? 'failure' : 'gray'}>
                   <option>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
-
                 </Select>
               </div>
             </div>
 
             {/*DOB*/}
             <div className={`col-span-1`}>
-              <div id="date_of_birth" className={`w-full`}>
+              <div
+                id="date_of_birth"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="dob"
@@ -229,15 +281,21 @@ const CreateNewUser = () => {
                   required={false}
                   type="date"
                   color={errors.dob?.message ? 'failure' : 'gray'}
-                  helperText={<Fragment><span className="font-medium">{errors.dob?.message}</span></Fragment>}
-                  {...register("dob")}
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">{errors.dob?.message}</span>
+                    </Fragment>
+                  }
+                  {...register('dob')}
                 />
               </div>
             </div>
 
             {/*Role*/}
             <div className={`col-span-1`}>
-              <div id="select_role" className={`w-full`}>
+              <div
+                id="select_role"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="role"
@@ -248,28 +306,33 @@ const CreateNewUser = () => {
                 <Select
                   id="role"
                   required={false}
-                  helperText={<Fragment><span className="font-medium">{errors.role?.message}</span></Fragment>}
-                  {...register("role")}
-                  color={errors.role?.message ? 'failure' : 'gray'}
-                >
-                  <option>
-                    Select Role
-                  </option>
-                  {allRoles?.map((item:any, idx:number) => {
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.role?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('role')}
+                  color={errors.role?.message ? 'failure' : 'gray'}>
+                  <option>Select Role</option>
+                  {allRoles?.map((item: any, idx: number) => {
                     return (
-                      <option key={idx}>
-                        {item?.replaceAll('_', ' ')}
-                      </option>
-                    )
+                      <option key={idx}>{item?.replaceAll('_', ' ')}</option>
+                    );
                   })}
                 </Select>
-                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.role?.message}</p>
+                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>
+                  {errors.role?.message}
+                </p>
               </div>
             </div>
 
             {/*Department*/}
             <div className={`col-span-1`}>
-              <div id="select_dept" className={`w-full`}>
+              <div
+                id="select_dept"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="select_dept"
@@ -280,28 +343,33 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<Fragment><span className="font-medium">{errors.department?.message}</span></Fragment>}
-                  {...register("department")}
-                  color={errors.department?.message ? 'failure' : 'gray'}
-                >
-                  <option>
-                    Select Department
-                  </option>
-                  {allDepartments?.map((item:any, idx:number) => {
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.department?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('department')}
+                  color={errors.department?.message ? 'failure' : 'gray'}>
+                  <option>Select Department</option>
+                  {allDepartments?.map((item: any, idx: number) => {
                     return (
-                      <option key={idx}>
-                        {item?.replaceAll('_', ' ')}
-                      </option>
-                    )
+                      <option key={idx}>{item?.replaceAll('_', ' ')}</option>
+                    );
                   })}
                 </Select>
-                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>{errors.department?.message}</p>
+                <p className={`mt-2 text-sm text-gray-500 dark:text-gray-400`}>
+                  {errors.department?.message}
+                </p>
               </div>
             </div>
 
             {/*Email*/}
             <div className={`col-span-2`}>
-              <div id="add_email" className={`w-full`}>
+              <div
+                id="add_email"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="email"
@@ -315,15 +383,23 @@ const CreateNewUser = () => {
                   required={false}
                   type="email"
                   color={errors.email?.message ? 'failure' : 'gray'}
-                  helperText={<Fragment><span className="font-medium">{errors.email?.message}</span></Fragment>}
-                  {...register("email")}
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.email?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('email')}
                 />
               </div>
             </div>
 
             {/*Phone Number*/}
             <div className={`col-span-2`}>
-              <div id="add_phone" className={`w-full`}>
+              <div
+                id="add_phone"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="phone_number"
@@ -349,7 +425,9 @@ const CreateNewUser = () => {
 
             {/*Country*/}
             <div className={`col-span-1`}>
-              <div id="select_country" className={`w-full`}>
+              <div
+                id="select_country"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="countries"
@@ -360,21 +438,26 @@ const CreateNewUser = () => {
                 <Select
                   id="countries"
                   required={false}
-                  helperText={<Fragment><span className="font-medium">{errors.country?.message}</span></Fragment>}
-                  {...register("country", {
-                    onChange: (e) => onUpdateCountry(e?.target?.value)
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.country?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('country', {
+                    onChange: (e) => onUpdateCountry(e?.target?.value),
                   })}
-                  color={errors.country?.message ? 'failure' : 'gray'}
-                >
-                  <option>
-                    Select Country
-                  </option>
-                  {allCountries?.map((item:AllCountries, idx:number) => {
+                  color={errors.country?.message ? 'failure' : 'gray'}>
+                  <option>Select Country</option>
+                  {allCountries?.map((item: AllCountries, idx: number) => {
                     return (
-                      <option value={item?.isoCode} key={idx}>
+                      <option
+                        value={item?.isoCode}
+                        key={idx}>
                         {item?.name}
                       </option>
-                    )
+                    );
                   })}
                 </Select>
               </div>
@@ -382,7 +465,9 @@ const CreateNewUser = () => {
 
             {/*State*/}
             <div className={`col-span-1`}>
-              <div id="select_state" className={`w-full`}>
+              <div
+                id="select_state"
+                className={`w-full`}>
                 <div className="mb-2 block">
                   <Label
                     htmlFor="countries"
@@ -393,22 +478,29 @@ const CreateNewUser = () => {
                 <Select
                   id="state"
                   required={false}
-                  helperText={<Fragment><span className="font-medium">{errors.state?.message}</span></Fragment>}
-                  {...register("state", {
-                    onChange: (e) => onUpdateState(e?.target?.value)
+                  helperText={
+                    <Fragment>
+                      <span className="font-medium">
+                        {errors.state?.message}
+                      </span>
+                    </Fragment>
+                  }
+                  {...register('state', {
+                    onChange: (e) => onUpdateState(e?.target?.value),
                   })}
-                  color={errors.state?.message ? 'failure' : 'gray'}
-                >
-                  <option>
-                    Select State
-                  </option>
-                  {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
-                    return (
-                      <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
-                        {item?.name}
-                      </option>
-                    )
-                  })}
+                  color={errors.state?.message ? 'failure' : 'gray'}>
+                  <option>Select State</option>
+                  {allCountryStates?.map(
+                    (item: AllStatesAndCities, idx: number) => {
+                      return (
+                        <option
+                          value={`${item?.name} (${item?.isoCode})`}
+                          key={idx}>
+                          {item?.name}
+                        </option>
+                      );
+                    }
+                  )}
                 </Select>
               </div>
             </div>
@@ -417,7 +509,9 @@ const CreateNewUser = () => {
               {/*Ciy*/}
               <div className={`col-span-1`}>
                 {allStateCities?.length !== 0 ? (
-                  <div id="select_city" className={`w-full`}>
+                  <div
+                    id="select_city"
+                    className={`w-full`}>
                     <div className="mb-2 block">
                       <Label
                         htmlFor="countries"
@@ -428,26 +522,35 @@ const CreateNewUser = () => {
                     <Select
                       id="state"
                       required={false}
-                      helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
-                      {...register("city", {
-                        onChange: (e) => onUpdateCity(e?.target?.value)
+                      helperText={
+                        <Fragment>
+                          <span className="font-medium">
+                            {errors.city?.message}
+                          </span>
+                        </Fragment>
+                      }
+                      {...register('city', {
+                        onChange: (e) => onUpdateCity(e?.target?.value),
                       })}
-                      color={errors.state?.message ? 'failure' : 'gray'}
-                    >
-                      <option>
-                        Select City
-                      </option>
-                      {allStateCities?.map((item:AllStatesAndCities, idx:number) => {
-                        return (
-                          <option value={item?.name} key={idx}>
-                            {item?.name}
-                          </option>
-                        )
-                      })}
+                      color={errors.state?.message ? 'failure' : 'gray'}>
+                      <option>Select City</option>
+                      {allStateCities?.map(
+                        (item: AllStatesAndCities, idx: number) => {
+                          return (
+                            <option
+                              value={item?.name}
+                              key={idx}>
+                              {item?.name}
+                            </option>
+                          );
+                        }
+                      )}
                     </Select>
                   </div>
                 ) : (
-                  <div id="select_city" className={`w-full`}>
+                  <div
+                    id="select_city"
+                    className={`w-full`}>
                     <div className="mb-2 block">
                       <Label
                         htmlFor="city"
@@ -460,8 +563,14 @@ const CreateNewUser = () => {
                       placeholder="city"
                       required={false}
                       color={errors.city?.message ? 'failure' : 'gray'}
-                      helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
-                      {...register("city")}
+                      helperText={
+                        <Fragment>
+                          <span className="font-medium">
+                            {errors.city?.message}
+                          </span>
+                        </Fragment>
+                      }
+                      {...register('city')}
                     />
                   </div>
                 )}
@@ -469,7 +578,9 @@ const CreateNewUser = () => {
 
               {/*Address*/}
               <div className={`col-span-1`}>
-                <div id="address" className={`w-full`}>
+                <div
+                  id="address"
+                  className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="address"
@@ -481,15 +592,23 @@ const CreateNewUser = () => {
                     id="address"
                     required={false}
                     color={errors.address?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.address?.message}</span></Fragment>}
-                    {...register("address")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.address?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('address')}
                   />
                 </div>
               </div>
 
               {/*Alternate Address*/}
               <div className={`col-span-1`}>
-                <div id="alternate_address" className={`w-full`}>
+                <div
+                  id="alternate_address"
+                  className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="address_two"
@@ -501,15 +620,23 @@ const CreateNewUser = () => {
                     id="address_two"
                     required={false}
                     color={errors.address_two?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.address_two?.message}</span></Fragment>}
-                    {...register("address_two")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.address_two?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('address_two')}
                   />
                 </div>
               </div>
 
               {/*Zip Code*/}
               <div className={`col-span-1`}>
-                <div id="zip_code" className={`w-full`}>
+                <div
+                  id="zip_code"
+                  className={`w-full`}>
                   <div className="mb-2 block">
                     <Label
                       htmlFor="zip_code"
@@ -523,19 +650,30 @@ const CreateNewUser = () => {
                     required={false}
                     type="number"
                     color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
-                    {...register("zip_code")}
+                    helperText={
+                      <Fragment>
+                        <span className="font-medium">
+                          {errors.zip_code?.message}
+                        </span>
+                      </Fragment>
+                    }
+                    {...register('zip_code')}
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <Button type={`submit`} onClick={handleSubmit(handleCreateAdmin)} className={`my-4`}>Submit</Button>
+          <Button
+            type={`submit`}
+            onClick={handleSubmit(handleCreateAdmin)}
+            className={`my-4`}>
+            Submit
+          </Button>
         </div>
       </div>
     </SuperadminBaseTemplate>
-  )
-}
+  );
+};
 
 export default CreateNewUser;

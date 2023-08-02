@@ -1,23 +1,26 @@
-import { HiPlusSm } from 'react-icons/hi'
-import { TiExportOutline } from 'react-icons/ti'
-import { GoSearch } from 'react-icons/go'
-import { CgArrowsH } from 'react-icons/cg'
-import { Tab } from "@headlessui/react";
-import { useMemo } from "react";
-import { Select } from "flowbite-react";
+import { HiPlusSm } from 'react-icons/hi';
+import { TiExportOutline } from 'react-icons/ti';
+import { GoSearch } from 'react-icons/go';
+import { CgArrowsH } from 'react-icons/cg';
+import { Tab } from '@headlessui/react';
+import { useMemo } from 'react';
+import { Select } from 'flowbite-react';
 
-import SuperadminBaseTemplate from "../../components/templates/superadmin/SuperadminBaseTemplate"
-import Text from "../../components/global/Text";
-import {useHospitalOrganisation} from "../../hooks/superadmin/useHospitalOrganisation";
-import Table from "../../components/global/table/Table";
-import TableHeaderDropdown from "../../components/global/table/TableHeaderDropdown";
-import {SuperadminHospitalDataColumn, SuperadminHospitalDataRow} from "../../components/tables/SuperadminTable";
-import BasicDatePicker from "../../components/global/input/DatePicker";
-import TableFooter from "../../components/global/table/TableFooter";
-import CreateHospitalModal from "../../components/modals/CreateHospitalModal";
+import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
+import Text from '../../components/global/Text';
+import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
+import Table from '../../components/global/table/Table';
+import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
+import {
+  SuperadminHospitalDataColumn,
+  SuperadminHospitalDataRow,
+} from '../../components/tables/SuperadminTable';
+import BasicDatePicker from '../../components/global/formInput/DatePicker';
+import TableFooter from '../../components/global/table/TableFooter';
+import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
 
 const HospitalOrganizations = () => {
-  const itemsPerPage = ['All', 10, 20, 50, 100]
+  const itemsPerPage = ['All', 10, 20, 50, 100];
 
   const {
     //Value
@@ -48,17 +51,28 @@ const HospitalOrganizations = () => {
     onUpdateShowCreateHospitalModal,
     onUpdateSelectedRow,
     onUpdateSelectAllHospitals,
-  } = useHospitalOrganisation()
+  } = useHospitalOrganisation();
 
   // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
 
   const data = useMemo(
-    () => SuperadminHospitalDataRow(hospitalData, onUpdateSelectedRow, selectAllHospitals) ?? [],
-    [hospitalData, currentPage]);
+    () =>
+      SuperadminHospitalDataRow(
+        hospitalData,
+        onUpdateSelectedRow,
+        selectAllHospitals
+      ) ?? [],
+    [hospitalData, currentPage]
+  );
 
   const columns = useMemo(
-    () => SuperadminHospitalDataColumn(onClickSortParameters, onUpdateSelectAllHospitals),
-    [hospitalData, currentPage])
+    () =>
+      SuperadminHospitalDataColumn(
+        onClickSortParameters,
+        onUpdateSelectAllHospitals
+      ),
+    [hospitalData, currentPage]
+  );
 
   return (
     <SuperadminBaseTemplate>
@@ -76,44 +90,58 @@ const HospitalOrganizations = () => {
               <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'ALL' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('ALL')}
-                >
+                  ${
+                    hospitalTabs === 'ALL'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => onUpdateActiveTab('ALL')}>
                   All
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'ACTIVE' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('ACTIVE')}
-                >
+                  ${
+                    hospitalTabs === 'ACTIVE'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => onUpdateActiveTab('ACTIVE')}>
                   Active
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'ARCHIVED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('ARCHIVED')}
-                >
+                  ${
+                    hospitalTabs === 'ARCHIVED'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => onUpdateActiveTab('ARCHIVED')}>
                   Archived
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'PENDING' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('PENDING')}
-                >
+                  ${
+                    hospitalTabs === 'PENDING'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => onUpdateActiveTab('PENDING')}>
                   Pending
                 </Tab>
 
                 <Tab
                   className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${hospitalTabs === 'DEACTIVATED' ? 'bg-[#EEF7FF] shadow' : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'}`}
-                  onClick={() => onUpdateActiveTab('DEACTIVATED')}
-                >
+                  ${
+                    hospitalTabs === 'DEACTIVATED'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => onUpdateActiveTab('DEACTIVATED')}>
                   Deactivated
                 </Tab>
-
               </Tab.List>
             </Tab.Group>
           </div>
@@ -121,32 +149,45 @@ const HospitalOrganizations = () => {
           <div className={`w-full`}>
             <button
               type="button"
-              onClick={onUpdateShowCreateHospitalModal  }
+              onClick={onUpdateShowCreateHospitalModal}
               className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium
-              rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"
-            >
-              <HiPlusSm size={20} className={`mr-2`}/>Add new organization
+              rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700">
+              <HiPlusSm
+                size={20}
+                className={`mr-2`}
+              />
+              Add new organization
             </button>
           </div>
 
           <div className={`w-full`}>
-            <button type="button"
-                    className="w-full flex flex-row items-center py-2.5 px-5 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-fit"><TiExportOutline size={20} className={`mr-2`}/>Export Organization
+            <button
+              type="button"
+              className="w-full flex flex-row items-center py-2.5 px-5 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-fit">
+              <TiExportOutline
+                size={20}
+                className={`mr-2`}
+              />
+              Export Organization
             </button>
           </div>
         </div>
 
-        <div className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
+        <div
+          className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
          border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
-
           <div className="w-full relative my-4 sm:rounded-lg px-10">
             <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
               <div className="w-full md:w-3/4">
                 <form className="flex items-center">
-                  <label htmlFor="simple-search" className="sr-only">Search</label>
+                  <label
+                    htmlFor="simple-search"
+                    className="sr-only">
+                    Search
+                  </label>
                   <div className="relative w-full">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <GoSearch size={20}/>
+                      <GoSearch size={20} />
                     </div>
                     <input
                       type="text"
@@ -162,18 +203,26 @@ const HospitalOrganizations = () => {
                 </form>
               </div>
 
-              <TableHeaderDropdown value={perPage} items={itemsPerPage} change={onUpdatePerPageItem}/>
+              <TableHeaderDropdown
+                value={perPage}
+                items={itemsPerPage}
+                change={onUpdatePerPageItem}
+              />
 
-              <div
-                className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+              <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                 <div className="flex items-center w-full space-x-3 md:w-auto">
-                  <BasicDatePicker label={`From`} change={onUpdateSelectFrom}/>
+                  <BasicDatePicker
+                    label={`From`}
+                    change={onUpdateSelectFrom}
+                  />
 
-                  <CgArrowsH size={30}/>
+                  <CgArrowsH size={30} />
 
-                  <BasicDatePicker label={`To`} change={onUpdateSelectTo}/>
+                  <BasicDatePicker
+                    label={`To`}
+                    change={onUpdateSelectTo}
+                  />
                 </div>
-
               </div>
 
               <div>
@@ -184,21 +233,28 @@ const HospitalOrganizations = () => {
                   className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
                    border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
                   focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}
-                >
+                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
                   <option value={``}>Country</option>
-                  {allHospitalCountries?.map((item:{country:string}, idx:number) => {
-                    return (
-                      <option key={idx} value={item?.country}>{item?.country}</option>
-                    )
-                  })}
-
+                  {allHospitalCountries?.map(
+                    (item: { country: string }, idx: number) => {
+                      return (
+                        <option
+                          key={idx}
+                          value={item?.country}>
+                          {item?.country}
+                        </option>
+                      );
+                    }
+                  )}
                 </Select>
               </div>
             </div>
           </div>
 
-          <Table columns={columns} data={data}/>
+          <Table
+            columns={columns}
+            data={data}
+          />
 
           <TableFooter
             noOfPages={noOfPages}
@@ -213,9 +269,12 @@ const HospitalOrganizations = () => {
         </div>
       </div>
 
-      <CreateHospitalModal showModal={showCreateHospitalModal} close={onUpdateShowCreateHospitalModal}/>
+      <CreateHospitalModal
+        showModal={showCreateHospitalModal}
+        close={onUpdateShowCreateHospitalModal}
+      />
     </SuperadminBaseTemplate>
-  )
-}
+  );
+};
 
-export default HospitalOrganizations
+export default HospitalOrganizations;
