@@ -63,17 +63,6 @@ export type CreateHospitalInput = {
   zip_code?: string;
 };
 
-export type CreateSiteInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code: string;
-};
-
 export type AdminAddProviderInput = {
   title: string;
   first_name: string;
@@ -103,22 +92,6 @@ export type AdminAddProviderInput = {
 };
 
 export const CreateHospitalInputSchema = yup
-  .object({
-    email: yup.string().required('Email field is required'),
-    name: yup.string().required('Organization name is required'),
-    phone: yup.number().required('Phone number is required'),
-    address: yup
-      .string()
-      .required('User address is required')
-      .min(10, 'Address too short'),
-    city: yup.string().optional(),
-    state: yup.string().required('Organization State is required'),
-    country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
-  })
-  .required();
-
-export const CreateSiteInputSchema = yup
   .object({
     email: yup.string().required('Email field is required'),
     name: yup.string().required('Organization name is required'),

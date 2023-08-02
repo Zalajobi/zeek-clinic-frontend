@@ -1,23 +1,21 @@
 import { Fragment } from 'react';
-import {
-  Button,
-  Label,
-  Modal,
-  Select,
-  TextInput,
-  ToggleSwitch,
-} from 'flowbite-react';
-import Text from '../global/Text';
-import ImageUpload from '../global/formInput/ImageUpload';
-import {
-  AllCountries,
-  AllStatesAndCities,
-  CreateSiteInput,
-  CreateSiteInputSchema,
-} from '../../types/superadmin/formTypes';
-import { useCreateSite } from '../../hooks/common/useCreateSite';
+import { Modal } from 'flowbite-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Text from '../global/Text';
+import ImageUpload from '../global/formInput/ImageUpload';
+import { useCreateSite } from '../../hooks/common/useCreateSite';
+import {
+  CheckboxInput,
+  SelectInput,
+  TextInput,
+} from '../global/formInput/CustomInput';
+import { CustomTransparentCard } from '../global/card/CustomCard';
+import {
+  CreateSiteInput,
+  CreateSiteInputSchema,
+} from '../../types/superadmin/forms';
+import { BasicOutlineButton } from '../global/CustomButton';
 
 interface CreateSiteModalProps {
   showModal: boolean;
@@ -43,47 +41,11 @@ const CreateSite = ({
   const {
     // Values
     logo,
-    is_private,
-    has_appointment,
-    has_caregiver,
-    has_clinical,
-    has_doctor,
-    has_emergency,
-    has_laboratory,
-    has_medical_supply,
-    has_nursing,
-    has_inpatient,
-    has_outpatient,
-    has_pharmacy,
-    has_physical_therapy,
-    has_procedure,
-    has_radiology,
-    has_unit,
-    has_vital,
-    has_wallet,
     allCountries,
     allCountryStates,
 
     // Functions
     onUpdateLogo,
-    setIs_private,
-    setHas_appointment,
-    setHas_caregiver,
-    setHas_clinical,
-    setHas_doctor,
-    setHas_emergency,
-    setHas_laboratory,
-    setHas_medical_supply,
-    setHas_nursing,
-    setHas_inpatient,
-    setHas_outpatient,
-    setHas_pharmacy,
-    setHas_physical_therapy,
-    setHas_procedure,
-    setHas_radiology,
-    setHas_unit,
-    setHas_vital,
-    setHas_wallet,
     createNewSite,
     onUpdateCountry,
   } = useCreateSite(reloadPage, close, totalSites);
@@ -105,403 +67,243 @@ const CreateSite = ({
           />
         </Modal.Header>
         <Modal.Body>
-          <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
-            <div className={`grid grid-cols-6 gap-4 items-center`}>
-              <div className={`col-span-2`}>
-                <ImageUpload
-                  bucketFolder={`/site_image`}
-                  url={logo}
-                  updateImageUrl={onUpdateLogo}
+          <div
+            className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+            <CustomTransparentCard
+              className={`w-full h-full p-4 rounded-2xl max-h-[400px]`}>
+              <ImageUpload
+                bucketFolder={`/site_image`}
+                url={logo}
+                updateImageUrl={onUpdateLogo}
+                label={`Site Logo`}
+              />
+            </CustomTransparentCard>
+
+            <CustomTransparentCard className={`w-full h-full p-4 rounded-2xl`}>
+              <div
+                className={`w-full grid gap-6 grid-cols-1 mb-6 lg:grid-cols-2`}>
+                <TextInput
+                  label={`Site Name`}
+                  className={`my-3`}
+                  errorMsg={errors.name?.message ?? ''}
+                  id={`name`}
+                  register={register}
+                />
+
+                <TextInput
+                  label={`Email`}
+                  className={`my-3`}
+                  errorMsg={errors.email?.message ?? ''}
+                  id={`email`}
+                  type={`email`}
+                  register={register}
                 />
               </div>
 
-              <div className={`col-span-4 grid grid-cols-2 gap-4`}>
-                <div>
-                  <div className="mb-2 block w-full">
-                    <Label
-                      htmlFor="name"
-                      value="Name"
-                      color={errors.name?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
+              <div
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
+                <SelectInput
+                  label={`Country`}
+                  options={allCountries}
+                  className={`w-full my-3`}
+                  register={register}
+                  id={'country'}
+                  errorMsg={errors.country?.message ?? ''}
+                  enableFilter={true}
+                  change={(e) => onUpdateCountry(e.target.value)}
+                />
 
-                  <TextInput
-                    id="name"
-                    placeholder="Zeek Clinic"
-                    required={false}
-                    color={errors.name?.message ? 'failure' : 'gray'}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.name?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('name')}
-                  />
-                </div>
+                <SelectInput
+                  label={`State`}
+                  options={allCountryStates}
+                  className={`w-full my-3`}
+                  register={register}
+                  id={'state'}
+                  errorMsg={errors.state?.message ?? ''}
+                  enableFilter={true}
+                />
 
-                <div>
-                  <div className="mb-2 block w-full">
-                    <Label
-                      htmlFor="email"
-                      value="Email"
-                      color={errors.email?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
+                <TextInput
+                  label={`City`}
+                  className={`my-3`}
+                  errorMsg={errors.city?.message ?? ''}
+                  id={`city`}
+                  register={register}
+                />
 
-                  <TextInput
-                    id="email"
-                    placeholder="john@doe.com"
-                    required={false}
-                    type={`email`}
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.email?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('email')}
-                  />
-                </div>
+                <TextInput
+                  label={`Zip Code`}
+                  className={`my-3`}
+                  errorMsg={errors.zip_code?.message ?? ''}
+                  type={'number'}
+                  id={`zip_code`}
+                  register={register}
+                />
 
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="countries"
-                      value="Select your country"
-                      color={errors.country?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
+                <TextInput
+                  label={`Address`}
+                  className={`my-3`}
+                  errorMsg={errors.address?.message ?? ''}
+                  id={`address`}
+                  register={register}
+                />
 
-                  <Select
-                    id="countries"
-                    required={false}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.country?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('country', {
-                      onChange: (e) => onUpdateCountry(e?.target?.value),
-                    })}>
-                    <option value={``}>Select Country</option>
-
-                    {allCountries?.map((item: AllCountries, idx: number) => {
-                      return (
-                        <option
-                          value={item?.isoCode}
-                          key={idx}>
-                          {item?.name}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </div>
-
-                <div>
-                  <div className={`mb-2 block`}>
-                    <div className="mb-2 block">
-                      <Label
-                        htmlFor="countries"
-                        value="Select State"
-                        color={errors.state?.message ? 'failure' : 'gray'}
-                      />
-                    </div>
-                    <Select
-                      id="state"
-                      required={false}
-                      helperText={
-                        <Fragment>
-                          <span className="font-medium">
-                            {errors.state?.message}
-                          </span>
-                        </Fragment>
-                      }
-                      {...register('state')}
-                      color={errors.state?.message ? 'failure' : 'gray'}>
-                      <option value={``}>Select State</option>
-
-                      {allCountryStates?.map(
-                        (item: AllStatesAndCities, idx: number) => {
-                          return (
-                            <option
-                              value={`${item?.name} (${item?.isoCode})`}
-                              key={idx}>
-                              {item?.name}
-                            </option>
-                          );
-                        }
-                      )}
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="city"
-                      value="City"
-                      color={errors.city?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="city"
-                    placeholder="city"
-                    required={false}
-                    color={errors.city?.message ? 'failure' : 'gray'}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.city?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('city')}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="phone"
-                      value="Phone Number"
-                      color={errors.phone?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-
-                  <TextInput
-                    id="phone"
-                    placeholder="+2347053980998"
-                    required={false}
-                    type={`tel`}
-                    color={errors.phone?.message ? 'failure' : 'gray'}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.phone?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('phone')}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="zip_code"
-                      value="Zip Code"
-                      // color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-
-                  <TextInput
-                    id="zip_code"
-                    placeholder="101231"
-                    required={false}
-                    type={`text`}
-                    color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    helperText={
-                      <Fragment>
-                        <span className="font-medium">
-                          {errors.zip_code?.message}
-                        </span>
-                      </Fragment>
-                    }
-                    {...register('zip_code')}
-                  />
-                </div>
-
-                <div>
-                  <div
-                    id="address"
-                    className={`w-full`}>
-                    <div className="mb-2 block">
-                      <Label
-                        htmlFor="address"
-                        value="Address"
-                        color={errors.address?.message ? 'failure' : 'gray'}
-                      />
-                    </div>
-                    <TextInput
-                      id="address"
-                      required={false}
-                      color={errors.address?.message ? 'failure' : 'gray'}
-                      helperText={
-                        <Fragment>
-                          <span className="font-medium">
-                            {errors.address?.message}
-                          </span>
-                        </Fragment>
-                      }
-                      {...register('address')}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`grid gap-4 items-center grid-cols-2 md:grid-cols-4`}>
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Is Private"
-                  onChange={(value) => setIs_private(value)}
-                  checked={is_private}
+                <TextInput
+                  label={`Phone`}
+                  className={`my-3`}
+                  errorMsg={errors.phone?.message ?? ''}
+                  id={`phone`}
+                  type={'tel'}
+                  register={register}
                 />
               </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Appointment"
-                  onChange={(value) => setHas_appointment(value)}
-                  checked={has_appointment}
+              <div
+                className={`w-full grid gap-6 grid-cols-2 my-2 lg:grid-cols-4`}>
+                <CheckboxInput
+                  label={`Is Private`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`is_private`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Care-Giver"
-                  onChange={(value) => setHas_caregiver(value)}
-                  checked={has_caregiver}
+                <CheckboxInput
+                  label={`Has Appointment`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_appointment`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Clinical"
-                  onChange={(value) => setHas_clinical(value)}
-                  checked={has_clinical}
+                <CheckboxInput
+                  label={`Has Care-Giver`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_caregiver`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Doctors"
-                  onChange={(value) => setHas_doctor(value)}
-                  checked={has_doctor}
+                <CheckboxInput
+                  label={`Has Clinical`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_clinical`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Emergency"
-                  onChange={(value) => setHas_emergency(value)}
-                  checked={has_emergency}
+                <CheckboxInput
+                  label={`Has Doctors`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_doctor`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Laboratory"
-                  onChange={(value) => setHas_laboratory(value)}
-                  checked={has_laboratory}
+                <CheckboxInput
+                  label={`Has Emergency`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_emergency`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Medical Supply"
-                  onChange={(value) => setHas_medical_supply(value)}
-                  checked={has_medical_supply}
+                <CheckboxInput
+                  label={`Has Laboratory`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_laboratory`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Nursing"
-                  onChange={(value) => setHas_nursing(value)}
-                  checked={has_nursing}
+                <CheckboxInput
+                  label={`Has Medical Supply`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_medical_supply`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Inpatient"
-                  onChange={(value) => setHas_inpatient(value)}
-                  checked={has_inpatient}
+                <CheckboxInput
+                  label={`Has Nursing`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_nursing`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Outpatient"
-                  onChange={(value) => setHas_outpatient(value)}
-                  checked={has_outpatient}
+                <CheckboxInput
+                  label={`Has In-Patient`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_inpatient`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Pharmacy"
-                  onChange={(value) => setHas_pharmacy(value)}
-                  checked={has_pharmacy}
+                <CheckboxInput
+                  label={`Has Out-Patient`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_outpatient`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Physical Therapy"
-                  onChange={(value) => setHas_physical_therapy(value)}
-                  checked={has_physical_therapy}
+                <CheckboxInput
+                  label={`Has Pharmacy`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_pharmacy`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Procedure"
-                  onChange={(value) => setHas_procedure(value)}
-                  checked={has_procedure}
+                <CheckboxInput
+                  label={`Has Physical Therapy`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_physical_therapy`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Radiology"
-                  onChange={(value) => setHas_radiology(value)}
-                  checked={has_radiology}
+                <CheckboxInput
+                  label={`Has Procedure`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_procedure`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Unit"
-                  onChange={(value) => setHas_unit(value)}
-                  checked={has_unit}
+                <CheckboxInput
+                  label={`Has Radiology`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_radiology`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Vital"
-                  onChange={(value) => setHas_vital(value)}
-                  checked={has_vital}
+                <CheckboxInput
+                  label={`Has Unit`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_unit`}
+                  register={register}
                 />
-              </div>
 
-              <div className={`my-2`}>
-                <ToggleSwitch
-                  label="Has Wallet"
-                  onChange={(value) => setHas_wallet(value)}
-                  checked={has_wallet}
+                <CheckboxInput
+                  label={`Has Vital`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_vital`}
+                  register={register}
+                />
+
+                <CheckboxInput
+                  label={`Has Wallet`}
+                  className={`my-3 w-full flex items-center`}
+                  id={`has_wallet`}
+                  register={register}
                 />
               </div>
-            </div>
+            </CustomTransparentCard>
           </div>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={handleSubmit(createNewSite)}>I accept</Button>
-          <Button
-            color="gray"
-            onClick={close}>
-            Decline
-          </Button>
+          <BasicOutlineButton
+            click={handleSubmit(createNewSite)}
+            text={`Add Site`}
+            type={`secondary`}
+            className={`min-w-[200px] mx-5`}
+          />
+
+          <BasicOutlineButton
+            click={close}
+            text={`Decline`}
+            type={`danger`}
+            className={`min-w-[200px] mx-5`}
+          />
         </Modal.Footer>
       </Modal>
     </Fragment>

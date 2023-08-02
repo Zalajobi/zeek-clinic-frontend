@@ -140,7 +140,7 @@ export const SelectInput = ({
       <div
         className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
         <select
-          data-te-select-init
+          data-te-select-init={true}
           data-te-select-size="lg"
           data-te-select-filter={enableFilter}
           {...register?.(id, {
