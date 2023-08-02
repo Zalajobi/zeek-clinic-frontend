@@ -4,7 +4,6 @@ import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 import { GoSearch } from 'react-icons/go';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
-import { Select } from 'flowbite-react';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
@@ -13,7 +12,6 @@ import {
   SuperadminSiteDataRow,
 } from '../../components/tables/SuperadminTable';
 import { SuperadminSiteData } from '../../types/superadmin';
-import BasicDatePicker from '../../components/global/formInput/DatePicker';
 import Table from '../../components/global/table/Table';
 import TableFooter from '../../components/global/table/TableFooter';
 import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
@@ -26,7 +24,10 @@ import {
 } from '../../components/global/CustomButton';
 import { Typography } from '../../components/global/dialog/Typography';
 import { FaCalendarAlt } from 'react-icons/fa';
-import { DateInput } from '../../components/global/formInput/CustomInput';
+import {
+  DateInput,
+  SelectInput,
+} from '../../components/global/formInput/CustomInput';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -45,8 +46,8 @@ const OrganizationSite = () => {
     searchSite,
     countryFilterList,
     stateFilterList,
-    showCreateSiteModal,
     dateFilterFrom,
+    dateFilterTo,
 
     // Functions
     onUpdateActiveTab,
@@ -59,7 +60,6 @@ const OrganizationSite = () => {
     onUpdateSearchSite,
     onUpdateFilterByCountry,
     onUpdateFilterByState,
-    onUpdateShowCreateSiteModal,
     onUpdateDataRefresh,
   } = useOrganizationDetails();
 
@@ -235,13 +235,10 @@ const OrganizationSite = () => {
                   change={onUpdatePerPageItem}
                 />
 
-                <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                <div
+                  className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto
+                  md:flex-row md:space-y-0 md:items-center md:space-x-3">
                   <div className="flex items-center w-full space-x-3 md:w-auto">
-                    {/*<BasicDatePicker*/}
-                    {/*  label={`From`}*/}
-                    {/*  change={onUpdateSelectFrom}*/}
-                    {/*/>*/}
-
                     <DateInput
                       label={`From`}
                       placeholder={`DD/MM/YYYY`}
@@ -252,61 +249,40 @@ const OrganizationSite = () => {
                       icon={<FaCalendarAlt size={20} />}
                     />
 
-                    <CgArrowsH size={30} />
+                    <CgArrowsH size={40} />
 
-                    <BasicDatePicker
+                    <DateInput
                       label={`To`}
-                      change={onUpdateSelectTo}
+                      placeholder={`DD/MM/YYYY`}
+                      className={`my-3`}
+                      change={(e) => onUpdateSelectTo(e.target.value)}
+                      value={dateFilterTo as Date}
+                      id={`to`}
+                      icon={<FaCalendarAlt size={20} />}
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Select
-                    id="state"
-                    required={false}
-                    onChange={onUpdateFilterByCountry}
-                    className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
-                   border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
-                  focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
-                    <option value={``}>Country</option>
-                    {countryFilterList?.map(
-                      (item: { country: string }, idx: number) => {
-                        return (
-                          <option
-                            key={idx}
-                            value={item?.country}>
-                            {item?.country}
-                          </option>
-                        );
-                      }
-                    )}
-                  </Select>
-                </div>
+                <div
+                  className={`flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto 
+                  md:flex-row md:space-y-0 md:items-center md:space-x-3`}>
+                  <SelectInput
+                    label={`Country`}
+                    options={countryFilterList}
+                    className={`w-full min-h-[59px]`}
+                    id={'country'}
+                    enableFilter={true}
+                    change={(e) => onUpdateFilterByCountry(e.target.value)}
+                  />
 
-                <div>
-                  <Select
-                    id="state"
-                    required={false}
-                    onChange={onUpdateFilterByState}
-                    className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
-                   border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
-                  focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
-                    <option value={``}>State</option>
-                    {stateFilterList?.map(
-                      (item: { state: string }, idx: number) => {
-                        return (
-                          <option
-                            key={idx}
-                            value={item?.state}>
-                            {item?.state}
-                          </option>
-                        );
-                      }
-                    )}
-                  </Select>
+                  <SelectInput
+                    label={`State`}
+                    options={stateFilterList}
+                    className={`w-full min-h-[59px]`}
+                    id={'state'}
+                    enableFilter={true}
+                    change={(e) => onUpdateFilterByState(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
@@ -330,8 +306,6 @@ const OrganizationSite = () => {
         </div>
 
         <CreateSite
-          showModal={showCreateSiteModal}
-          close={onUpdateShowCreateSiteModal}
           reloadPage={onUpdateDataRefresh}
           totalSites={organization?.site_count ?? (0 as number)}
         />

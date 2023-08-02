@@ -72,7 +72,8 @@ export const BasicOutlineButton = ({
         onClick={click}
         type="button"
         className={classes}
-        data-te-ripple-init>
+        data-te-ripple-init
+        data-te-modal-dismiss>
         {iconBefore}
 
         {text}
@@ -119,7 +120,9 @@ export const BasicLightButton = ({
       <button
         onClick={click}
         type="button"
-        className={classes}>
+        className={classes}
+        data-te-ripple-init
+        data-te-modal-dismiss>
         {iconBefore}
 
         {text}
@@ -165,7 +168,9 @@ export const BasicFilledButton = ({
       <button
         onClick={click}
         type="button"
-        className={classes}>
+        className={classes}
+        data-te-ripple-init
+        data-te-modal-dismiss>
         {iconBefore}
 
         {text}
@@ -214,7 +219,7 @@ export const ModalButtonOutlineLunch = ({
       data-te-toggle="modal"
       data-te-target={`#${targetModalId}`}
       data-te-ripple-init
-      data-te-ripple-color="light">
+      data-te-modal-dismiss>
       {iconBefore}
 
       {text}
@@ -263,7 +268,7 @@ export const ModalButtonLightLunch = ({
         data-te-toggle="modal"
         data-te-target={`#${targetModalId}`}
         data-te-ripple-init
-        data-te-ripple-color="light">
+        data-te-modal-dismiss>
         {iconBefore}
 
         {text}
@@ -312,7 +317,7 @@ export const ModalButtonFilledLunch = ({
         data-te-toggle="modal"
         data-te-target={`#${targetModalId}`}
         data-te-ripple-init
-        data-te-ripple-color="light">
+        data-te-modal-dismiss>
         {iconBefore}
 
         {text}

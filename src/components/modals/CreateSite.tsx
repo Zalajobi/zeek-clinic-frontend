@@ -17,18 +17,11 @@ import { BasicOutlineButton } from '../global/CustomButton';
 import { CustomBasicModal } from '../global/dialog/CustomModal';
 
 interface CreateSiteModalProps {
-  showModal: boolean;
   totalSites: number;
-  close: () => void;
   reloadPage: () => void;
 }
 
-const CreateSite = ({
-  showModal,
-  close,
-  reloadPage,
-  totalSites,
-}: CreateSiteModalProps) => {
+const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
   const {
     register,
     handleSubmit,
@@ -47,7 +40,7 @@ const CreateSite = ({
     onUpdateLogo,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite(reloadPage, close, totalSites);
+  } = useCreateSite(reloadPage, totalSites);
 
   return (
     <Fragment>
@@ -63,7 +56,6 @@ const CreateSite = ({
             />
 
             <BasicOutlineButton
-              click={close}
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}

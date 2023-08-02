@@ -7,6 +7,7 @@ import {
   SuperadminSiteData,
 } from '../../types/superadmin';
 import * as queryString from 'querystring';
+import { SelectInputFieldProps } from '../../types/common';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
@@ -28,15 +29,17 @@ export const useOrganizationDetails = () => {
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [countryFilterList, setCountryFilterList] = useState<
-    { country: string }[]
+    SelectInputFieldProps[]
   >([]);
-  const [stateFilterList, setStateFilterList] = useState<{ state: string }[]>(
-    []
-  );
-  const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
+  const [stateFilterList, setStateFilterList] = useState<
+    SelectInputFieldProps[]
+  >([]);
   const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
+    let tempCountriesFilter: SelectInputFieldProps[] = [],
+      stateFilter: SelectInputFieldProps[] = [];
+
     const getData = async () => {
       const response = await Promise.all([
         await axiosGetRequest('/account/hospital/details', {
@@ -52,6 +55,20 @@ export const useOrganizationDetails = () => {
       ]);
 
       if (response[0].success && response[1].success) {
+        response[1].data.countries.map((item: { country: string }) => {
+          tempCountriesFilter.push({
+            value: item?.country,
+            placeholder: item?.country,
+          });
+        });
+
+        response[1].data.states.map((item: { state: string }) => {
+          stateFilter.push({
+            value: item?.state,
+            placeholder: item?.state,
+          });
+        });
+
         setOrganization(response[0].data.hospital as HospitalOrganizationData);
         setSites(response[0]?.data?.sites);
         setNoOfPages(
@@ -69,8 +86,9 @@ export const useOrganizationDetails = () => {
             : currentPage * (perPage !== 'All' ? perPage : 0) +
               (perPage !== 'All' ? perPage : 0)
         );
-        setCountryFilterList(response[1].data.countries);
-        setStateFilterList(response[1].data.states);
+
+        setCountryFilterList(tempCountriesFilter);
+        setStateFilterList(stateFilter);
       } else {
         toast.error(response[0].message);
       }
@@ -205,9 +223,7 @@ export const useOrganizationDetails = () => {
   };
 
   const onUpdateSelectFrom = async (value: string) => {
-    console.log('HELLO WORLD');
     setDateFilterFrom(new Date(value));
-    console.log(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -249,8 +265,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectTo = async (value: Date | null) => {
-    setDateFilterTo(value);
+  const onUpdateSelectTo = async (value: string) => {
+    setDateFilterTo(new Date(value));
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -409,10 +425,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateFilterByCountry = async (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setCountry(event.target.value);
+  const onUpdateFilterByCountry = async (value: string) => {
+    setCountry(value);
 
     const params = {
       page: 0,
@@ -420,7 +434,7 @@ export const useOrganizationDetails = () => {
       from_date: dateFilterFrom,
       to_date: dateFilterTo,
       search: searchSite,
-      country: event.target.value,
+      country: value,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
@@ -447,10 +461,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateFilterByState = async (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setState(event.target.value);
+  const onUpdateFilterByState = async (value: string) => {
+    setState(value);
 
     const params = {
       page: 0,
@@ -461,7 +473,7 @@ export const useOrganizationDetails = () => {
       country: country,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
-      state: event.target.value,
+      state: value,
     };
 
     setResultFrom(1);
@@ -485,11 +497,6 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateShowCreateSiteModal = () => {
-    // console.log(!showCreateSiteModal)
-    setShowCreateSiteModal(!showCreateSiteModal);
-  };
-
   const onUpdateDataRefresh = () => setRefreshData(!refreshData);
 
   return {
@@ -508,8 +515,8 @@ export const useOrganizationDetails = () => {
     country,
     countryFilterList,
     stateFilterList,
-    showCreateSiteModal,
     dateFilterFrom,
+    dateFilterTo,
 
     // Functions
     onUpdateActiveTab,
@@ -522,7 +529,6 @@ export const useOrganizationDetails = () => {
     onUpdateSearchSite,
     onUpdateFilterByCountry,
     onUpdateFilterByState,
-    onUpdateShowCreateSiteModal,
     onUpdateDataRefresh,
   };
 };

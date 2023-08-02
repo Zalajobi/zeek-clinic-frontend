@@ -8,11 +8,7 @@ import { SelectInputFieldProps } from '../../types/common';
 import { initTE, Select } from 'tw-elements';
 import { CreateSiteInput } from '../../types/superadmin/forms';
 
-export const useCreateSite = (
-  reloadPage: () => void,
-  close: () => void,
-  totalSites: number
-) => {
+export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
   const navigate = useNavigate();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
@@ -73,7 +69,6 @@ export const useCreateSite = (
     if (response.success) {
       toast.success(response.message);
       reloadPage();
-      close();
     } else toast.error(response.message);
   };
 

@@ -40,7 +40,7 @@ interface DateInputProps {
   errorMsg?: string;
   icon?: ReactNode;
   change?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: Date;
+  value?: Date;
 }
 
 interface CheckboxInputProps {
@@ -142,29 +142,50 @@ export const SelectInput = ({
     <Fragment>
       <div
         className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
-        <select
-          data-te-select-init={true}
-          data-te-select-size="lg"
-          data-te-select-filter={enableFilter}
-          {...register?.(id, {
-            onChange: (event) => {
-              if (change) {
-                change(event);
-              }
-            },
-          })}
-          id={id}>
-          <option value="">Select {label}</option>
-          {options.map((item, idx) => {
-            return (
-              <option
-                className={`!capitalize`}
-                value={item.value}>
-                {item.placeholder.replaceAll('_', ' ')}
-              </option>
-            );
-          })}
-        </select>
+        {register ? (
+          <select
+            data-te-select-init={true}
+            data-te-select-size="lg"
+            data-te-select-filter={enableFilter}
+            {...register?.(id, {
+              onChange: (event) => {
+                if (change) {
+                  change(event);
+                }
+              },
+            })}
+            id={id}>
+            <option value="">Select {label}</option>
+            {options.map((item, idx) => {
+              return (
+                <option
+                  className={`!capitalize`}
+                  value={item.value}>
+                  {item.placeholder.replaceAll('_', ' ')}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <select
+            data-te-select-init={true}
+            data-te-select-size="lg"
+            data-te-select-filter={enableFilter}
+            onChange={change}
+            id={id}>
+            <option value="">Select {label}</option>
+            {options.map((item, idx) => {
+              return (
+                <option
+                  className={`!capitalize`}
+                  value={item.value}>
+                  {item.placeholder.replaceAll('_', ' ')}
+                </option>
+              );
+            })}
+          </select>
+        )}
+
         <label data-te-select-label-ref>{label}</label>
 
         {errorMsg && (
