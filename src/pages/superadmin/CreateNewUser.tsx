@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Button, Label, Select, Textarea, TextInput } from 'flowbite-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { InputNumber } from 'rsuite';
 
 import Text from '../../components/global/dialog/Text';
 import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
@@ -407,19 +406,19 @@ const CreateNewUser = () => {
                     color={errors.phone_number?.message ? 'failure' : 'gray'}
                   />
                 </div>
-                <InputNumber
-                  className={`block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 
-                  border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 
-                  dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 
-                  dark:focus:ring-blue-500 rounded-lg text-sm h-[43px]`}
-                  id="phone_number"
-                  placeholder={`9189011920`}
-                  required={true}
-                  type="tel"
-                  onChange={(value) => onUpdatePhoneNumber(value)}
-                  color={errors.phone_number?.message ? 'failure' : 'gray'}
-                  prefix={`+${phoneCode}`}
-                />
+                {/*<TextInput*/}
+                {/*  className={`block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 */}
+                {/*  border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 */}
+                {/*  dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 */}
+                {/*  dark:focus:ring-blue-500 rounded-lg text-sm h-[43px]`}*/}
+                {/*  id="phone_number"*/}
+                {/*  placeholder={`9189011920`}*/}
+                {/*  required={true}*/}
+                {/*  type="tel"*/}
+                {/*  onChange={(value) => onUpdatePhoneNumber(value)}*/}
+                {/*  color={errors.phone_number?.message ? 'failure' : 'gray'}*/}
+                {/*  prefix={`+${phoneCode}`}*/}
+                {/*/>*/}
               </div>
             </div>
 

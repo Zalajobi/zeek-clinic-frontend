@@ -1,9 +1,15 @@
-import {useEffect, useState} from "react";
-import {AllCountries, AllStatesAndCities, CreateUserInput} from "../../types/superadmin/formTypes";
-import { Country, State, City} from 'country-state-city'
-import {axiosGetRequest, axiosPostRequest} from "../../lib/axios";
-import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from 'react';
+import {
+  AllCountries,
+  AllStatesAndCities,
+  CreateUserInput,
+} from '../../types/superadmin/formTypes';
+import { Country, State, City } from 'country-state-city';
+import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { Simulate } from 'react-dom/test-utils';
+import input = Simulate.input;
 
 export const useSuperadminCreateAdminUser = () => {
   const navigate = useNavigate();
@@ -15,61 +21,71 @@ export const useSuperadminCreateAdminUser = () => {
   const [phoneNumber, setPhoneNumber] = useState<string | number>('');
 
   const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
-  const [allCountryStates, setAllCountryStates] = useState<AllStatesAndCities[] | null>(null);
-  const [allStateCities, setAllStateCities] = useState<AllStatesAndCities[] | null>(null);
+  const [allCountryStates, setAllCountryStates] = useState<
+    AllStatesAndCities[] | null
+  >(null);
+  const [allStateCities, setAllStateCities] = useState<
+    AllStatesAndCities[] | null
+  >(null);
   const [allDepartments, setAllDepartments] = useState<string[]>([]);
   const [allRoles, setAllRoles] = useState<string[]>([]);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
-    setAllCountries(Country.getAllCountries() as AllCountries[])
+    setAllCountries(Country.getAllCountries() as AllCountries[]);
 
-    const superadminGetRolesAndDepartments = async () => {
-      const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
-      const allDepartments:string[] = []
-      const allRoles:string[] = []
+    // const superadminGetRolesAndDepartments = async () => {
+    //   const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
+    //   const allDepartments:string[] = []
+    //   const allRoles:string[] = []
+    //
+    //   if (response?.success) {
+    //     for (const dept in response?.data?.department) {
+    //       allDepartments.push(dept)
+    //     }
+    //
+    //     for (const role in response?.data?.role)  {
+    //       allRoles.push(role)
+    //     }
+    //   } else {
+    //     toast.error(response?.message)
+    // navigate('/superadmin/login')
+    // }
 
-      if (response?.success) {
-        for (const dept in response?.data?.department) {
-          allDepartments.push(dept)
-        }
+    // setAllDepartments(allDepartments)
+    // setAllRoles(allRoles)
+    // }
+    // superadminGetRolesAndDepartments()
+    //   .catch(err => {
+    //     navigate('/superadmin/login')
+    //   })
+  }, [input]);
 
-        for (const role in response?.data?.role)  {
-          allRoles.push(role)
-        }
-      } else {
-        toast.error(response?.message)
-        navigate('/superadmin/login')
-      }
+  const onUpdateCountry = (value: string) => {
+    const countryInfo = Country.getCountryByCode(value) as AllCountries;
+    setAllCountryStates(
+      State.getStatesOfCountry(value) as unknown as AllStatesAndCities[]
+    );
+    setCountry(countryInfo?.name);
+    setPhoneCode(countryInfo?.phonecode);
+    setCountryCode(countryInfo?.isoCode);
+  };
 
-      setAllDepartments(allDepartments)
-      setAllRoles(allRoles)
-    }
-    superadminGetRolesAndDepartments()
-      .catch(err => {
-        navigate('/superadmin/login')
-      })
-  }, [navigate]);
+  const onUpdateState = (value: string) => {
+    setAllStateCities(
+      City.getCitiesOfState(
+        countryCode,
+        value
+      ) as unknown as AllStatesAndCities[]
+    );
+    setState(value);
+  };
 
+  const onUpdateCity = (value: string) => setCity(value ?? 'None');
 
-  const onUpdateCountry = (value:string) => {
-    const countryInfo = Country.getCountryByCode(value) as AllCountries
-    setAllCountryStates(State.getStatesOfCountry(value) as unknown as AllStatesAndCities[])
-    setCountry(countryInfo?.name)
-    setPhoneCode(countryInfo?.phonecode)
-    setCountryCode(countryInfo?.isoCode)
-  }
+  const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
-  const onUpdateState = (value:string) => {
-    setAllStateCities(City.getCitiesOfState(countryCode, value) as unknown as AllStatesAndCities[])
-    setState(value)
-  }
-
-  const onUpdateCity = (value:string) => setCity(value ?? 'None')
-
-  const onUpdatePhoneNumber = (value:string | number) => setPhoneNumber(value)
-
-  const handleCreateAdmin = async (data:CreateUserInput) => {
+  const handleCreateAdmin = async (data: CreateUserInput) => {
     const adminData = {
       ...data,
       country,
@@ -78,16 +94,17 @@ export const useSuperadminCreateAdminUser = () => {
       country_code: countryCode,
       call_code: phoneCode,
       profile_img_url: profileImgURL,
-      phone_number: phoneNumber
-    }
+      phone_number: phoneNumber,
+    };
 
-    const {success, message} = await axiosPostRequest('/account/super-admin/create/admin', adminData)
+    const { success, message } = await axiosPostRequest(
+      '/account/super-admin/create/admin',
+      adminData
+    );
 
-    if (success)
-      toast.success(message)
-    else
-      toast.error(message)
-  }
+    if (success) toast.success(message);
+    else toast.error(message);
+  };
 
   return {
     // Values
@@ -105,5 +122,5 @@ export const useSuperadminCreateAdminUser = () => {
     onUpdateCity,
     setProfileImgURL,
     onUpdatePhoneNumber,
-  }
-}
+  };
+};
