@@ -8,6 +8,8 @@ import {
 } from '../../types/superadmin';
 import * as queryString from 'querystring';
 import { SelectInputFieldProps } from '../../types/common';
+import { customPromiseRequest } from '../../lib/requests';
+import { AccountServiceApiResponse } from '../../types/apiResponses';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
@@ -37,12 +39,9 @@ export const useOrganizationDetails = () => {
   const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
-    let tempCountriesFilter: SelectInputFieldProps[] = [],
-      stateFilter: SelectInputFieldProps[] = [];
-
     const getData = async () => {
-      const response = await Promise.all([
-        await axiosGetRequest('/account/hospital/details', {
+      const [hospital, countryStates] = await customPromiseRequest([
+        axiosGetRequest('/account/hospital/details', {
           id: hospitalId,
         }),
 
@@ -54,43 +53,21 @@ export const useOrganizationDetails = () => {
         ),
       ]);
 
-      if (response[0].success && response[1].success) {
-        response[1].data.countries.map((item: { country: string }) => {
-          tempCountriesFilter.push({
-            value: item?.country,
-            placeholder: item?.country,
-          });
-        });
-
-        response[1].data.states.map((item: { state: string }) => {
-          stateFilter.push({
-            value: item?.state,
-            placeholder: item?.state,
-          });
-        });
-
-        setOrganization(response[0].data.hospital as HospitalOrganizationData);
-        setSites(response[0]?.data?.sites);
-        setNoOfPages(
-          Math.ceil(
-            response[0].data.tableData.sites / (perPage !== 'All' ? perPage : 0)
-          )
-        );
-        setTotalData(response[0].data.tableData.sites);
-        setResultFrom(response[0]?.data?.sites.length <= 0 ? 0 : 1);
-        setResultTo(
-          response[0]?.data?.sites.length <= 0
-            ? 0
-            : currentPage + 1 === noOfPages
-            ? response[0].data.tableData.sites
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
-        );
-
-        setCountryFilterList(tempCountriesFilter);
-        setStateFilterList(stateFilter);
+      if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
+        setHospitalData(<AccountServiceApiResponse>hospital?.value);
       } else {
-        toast.error(response[0].message);
+        toast.error('Something went wrong getting hospital list');
+      }
+
+      if (
+        countryStates.status === 'fulfilled' &&
+        countryStates?.value?.success
+      ) {
+        setCountryAndStateSitesData(
+          <AccountServiceApiResponse>countryStates.value
+        );
+      } else {
+        toast.error('Something went wrong getting site countries and states');
       }
     };
 
@@ -98,6 +75,47 @@ export const useOrganizationDetails = () => {
       toast.error('Response');
     });
   }, [hospitalId, refreshData]);
+
+  const setHospitalData = (responseData: AccountServiceApiResponse) => {
+    setOrganization(responseData.data.hospital as HospitalOrganizationData);
+    setSites(responseData?.data?.sites);
+    setNoOfPages(
+      Math.ceil(
+        responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
+      )
+    );
+    setTotalData(responseData.data.tableData.sites);
+    setResultFrom(responseData?.data?.sites.length <= 0 ? 0 : 1);
+    setResultTo(
+      responseData?.data?.sites.length <= 0
+        ? 0
+        : currentPage + 1 === noOfPages
+        ? responseData.data.tableData.sites
+        : currentPage * (perPage !== 'All' ? perPage : 0) +
+          (perPage !== 'All' ? perPage : 0)
+    );
+  };
+
+  const setCountryAndStateSitesData = (
+    responseData: AccountServiceApiResponse
+  ) => {
+    let tempCountriesFilter: SelectInputFieldProps[] = [],
+      stateFilter: SelectInputFieldProps[] = [];
+
+    responseData.data.countries.map((item: { country: string }) => {
+      tempCountriesFilter.push({
+        value: item?.country,
+        placeholder: item?.country,
+      });
+    });
+
+    responseData.data.states.map((item: { state: string }) => {
+      stateFilter.push({
+        value: item?.state,
+        placeholder: item?.state,
+      });
+    });
+  };
 
   const onUpdateActiveTab = async (
     tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'

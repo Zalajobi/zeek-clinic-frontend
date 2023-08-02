@@ -53,9 +53,6 @@ export const useHospitalOrganisation = () => {
         axiosGetRequest('/account/hospital/super-admin/countries/distinct'),
       ]);
 
-      console.log(organization);
-      console.log(distinctCountries);
-
       if (
         distinctCountries?.status === 'fulfilled' &&
         distinctCountries?.value?.success
