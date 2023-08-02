@@ -3,7 +3,6 @@ import { ToasterConfig } from '../../global/Toast';
 import Header from '../Header';
 import Sidebar from './Sidebar';
 import { useSuperadminBaseTemplate } from '../../../hooks/superadmin/useSuperadminBaseTemplate';
-import { Simulate } from 'react-dom/test-utils';
 
 const SuperadminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {

@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { axiosGetRequest } from '../../lib/axios';
 import { useNavigate } from 'react-router-dom';
 import { SuperadminBaseData } from '../../types/superadmin';
-import { Datepicker, initTE, Input, Ripple, Select } from 'tw-elements';
+import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
 import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
 
@@ -12,7 +12,7 @@ export const useSuperadminBaseTemplate = () => {
   const [querySearch, setQuerySearch] = useState<string>('');
 
   useEffect(() => {
-    initTE({ Datepicker, Input, Select, Ripple });
+    initTE({ Datepicker, Input, Select, Ripple, Modal });
     const getHeaderData = async () => {
       const response = await axiosGetRequest(
         '/account/super-admin/profile/get-data'

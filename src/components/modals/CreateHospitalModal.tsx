@@ -1,7 +1,7 @@
 import { Button, Label, Modal, Select, TextInput } from 'flowbite-react';
 import { Fragment } from 'react';
 import { useCreateHospitalModal } from '../../hooks/superadmin/useCreateHospitalModal';
-import Text from '../global/Text';
+import Text from '../global/dialog/Text';
 import ImageUpload from '../global/formInput/ImageUpload';
 import { useForm } from 'react-hook-form';
 import {

@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { Select } from 'flowbite-react';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
-import Text from '../../components/global/Text';
+import Text from '../../components/global/dialog/Text';
 import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
 import Table from '../../components/global/table/Table';
 import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';

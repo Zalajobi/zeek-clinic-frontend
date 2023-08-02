@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { CustomTransparentCard } from '../../global/card/CustomCard';
-import { Typography, TypographyWithLink } from '../../global/Typography';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import ListView from '../../global/views/ListView';
 
 const DoctorsList = () => {

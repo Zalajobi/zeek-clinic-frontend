@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { axiosGetRequest } from '../../lib/axios';
 import { AdminHeaderBaseTemplateData } from '../../types/admin';
-import { Datepicker, initTE, Input, Ripple, Select } from 'tw-elements';
+import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
 
 export const useAdminBaseTemplate = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const useAdminBaseTemplate = () => {
       navigate('/admin/login');
     });
 
-    initTE({ Datepicker, Input, Select, Ripple });
+    initTE({ Datepicker, Input, Select, Ripple, Modal });
   }, []);
 
   const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {

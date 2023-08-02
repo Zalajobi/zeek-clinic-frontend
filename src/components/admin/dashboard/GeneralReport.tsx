@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Typography, TypographyWithLink } from '../../global/Typography';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import CustomInnerCard from '../../global/card/CustomInnerCard';
 import { CustomCard } from '../../global/card/CustomCard';
 

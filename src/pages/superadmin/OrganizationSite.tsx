@@ -8,7 +8,7 @@ import { Select } from 'flowbite-react';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
-import Text from '../../components/global/Text';
+import Text from '../../components/global/dialog/Text';
 import { PrimaryButtonOutline } from '../../components/global/formInput/ButtonInput';
 import {
   SuperadminSiteDataColumn,
@@ -23,6 +23,12 @@ import HospitalDetails from '../../components/superadmin/hospital/HospitalDetail
 import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
 import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
 import CreateSite from '../../components/modals/CreateSite';
+import {
+  ModalButtonFilledLunch,
+  ModalButtonLightLunch,
+  ModalButtonOutlineLunch,
+} from '../../components/global/CustomButton';
+import { CustomModal } from '../../components/global/dialog/CustomModal';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -184,6 +190,19 @@ const OrganizationSite = () => {
                   />
                 }
               />
+
+              <ModalButtonFilledLunch
+                iconBefore={
+                  <HiPlusSm
+                    size={20}
+                    className={`mr-2`}
+                  />
+                }
+                targetModalId={`createSite`}
+                text={`Add New Site`}
+                type={`secondary`}
+                hasRings={true}
+              />
             </div>
           </div>
 
@@ -313,6 +332,8 @@ const OrganizationSite = () => {
           reloadPage={onUpdateDataRefresh}
           totalSites={organization?.site_count ?? (0 as number)}
         />
+
+        <CustomModal targetModalId={`createSite`} />
       </SuperadminBaseTemplate>
     </Fragment>
   );

@@ -1,5 +1,5 @@
 import { Fragment, useMemo } from 'react';
-import { Typography, TypographyWithLink } from '../../global/Typography';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import Table from '../../global/table/Table';
 import {
   AppointmentAndEventsTableColumn,

@@ -27,7 +27,7 @@ import {
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
 import { BasicFilledButton } from '../../components/global/CustomButton';
-import { Typography } from '../../components/global/Typography';
+import { Typography } from '../../components/global/dialog/Typography';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()

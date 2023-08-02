@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { BsEnvelopeFill, BsEnvelopeOpenFill } from 'react-icons/bs';
-import { Typography } from '../../global/Typography';
+import { Typography } from '../../global/dialog/Typography';
 import { formatTimeOrDays } from '../../../util';
 import ListView from '../../global/views/ListView';
 

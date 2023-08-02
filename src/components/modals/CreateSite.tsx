@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Modal } from 'flowbite-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Text from '../global/Text';
+import Text from '../global/dialog/Text';
 import ImageUpload from '../global/formInput/ImageUpload';
 import { useCreateSite } from '../../hooks/common/useCreateSite';
 import {

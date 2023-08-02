@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { InputNumber } from 'rsuite';
 
-import Text from '../../components/global/Text';
+import Text from '../../components/global/dialog/Text';
 import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
 import {
   AllCountries,

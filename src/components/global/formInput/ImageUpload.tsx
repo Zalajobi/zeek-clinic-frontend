@@ -89,7 +89,6 @@ const ImageUpload = ({
                   text={`Change Image`}
                   className={`mt-2 min-w-full hover:!ring-0`}
                   type={`secondary`}
-                  click={() => console.log('Change Image')}
                 />
               </div>
             )}

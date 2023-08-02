@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Text from '../../../components/global/Text';
+import Text from '../../../components/global/dialog/Text';
 import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
 import useAdminLogin from '../../../hooks/admin/useAdminLogin';
 import { Button } from 'flowbite-react';

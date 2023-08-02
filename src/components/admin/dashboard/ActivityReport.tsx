@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Typography, TypographyWithLink } from '../../global/Typography';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import { PieChart3D } from '../../global/Charts';
 import HospitalReport from './HospitalReport';
 import { CustomTransparentCard } from '../../global/card/CustomCard';

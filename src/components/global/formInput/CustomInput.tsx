@@ -1,6 +1,6 @@
 import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Typography } from '../Typography';
+import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
 

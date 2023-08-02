@@ -3,7 +3,7 @@ import { AiOutlineDollar } from 'react-icons/ai';
 import { FaUserLock, FaUserInjured, FaUserNurse } from 'react-icons/fa';
 import { TbActivityHeartbeat, TbFileInvoice } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
-import Text from '../global/Text';
+import Text from '../global/dialog/Text';
 
 const HospitalRoutes = () => {
   return (

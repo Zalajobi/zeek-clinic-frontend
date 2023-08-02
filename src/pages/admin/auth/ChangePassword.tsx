@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { useAdminChangePassword } from '../../../hooks/admin/useAdminChangePassword';
-import Text from '../../../components/global/Text';
+import Text from '../../../components/global/dialog/Text';
 import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
 import { Button } from 'flowbite-react';
 import { ToasterConfig } from '../../../components/global/Toast';
