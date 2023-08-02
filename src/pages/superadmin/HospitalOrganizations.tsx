@@ -1,10 +1,9 @@
-import { HiPlusSm } from 'react-icons/hi';
-import { TiExportOutline } from 'react-icons/ti';
-import { GoSearch } from 'react-icons/go';
-import { CgArrowsH } from 'react-icons/cg';
-import { Tab } from '@headlessui/react';
 import { useMemo } from 'react';
-import { Select } from 'flowbite-react';
+import { Tab } from '@headlessui/react';
+import { TiExportOutline } from 'react-icons/ti';
+import { CgArrowsH } from 'react-icons/cg';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { HiPlusSm } from 'react-icons/hi';
 
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import Text from '../../components/global/dialog/Text';
@@ -15,9 +14,17 @@ import {
   SuperadminHospitalDataColumn,
   SuperadminHospitalDataRow,
 } from '../../components/tables/SuperadminTable';
-import BasicDatePicker from '../../components/global/formInput/DatePicker';
 import TableFooter from '../../components/global/table/TableFooter';
 import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
+import {
+  DateInput,
+  SelectInput,
+} from '../../components/global/formInput/CustomInput';
+import {
+  BasicOutlineButton,
+  ModalButtonOutlineLunch,
+} from '../../components/global/CustomButton';
+import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -36,6 +43,8 @@ const HospitalOrganizations = () => {
     allHospitalCountries,
     showCreateHospitalModal,
     selectAllHospitals,
+    hospitalFilterFrom,
+    hospitalFilterTo,
 
     // Function
     onUpdateSearchOrganisation,
@@ -146,31 +155,30 @@ const HospitalOrganizations = () => {
             </Tab.Group>
           </div>
 
-          <div className={`w-full`}>
-            <button
-              type="button"
-              onClick={onUpdateShowCreateHospitalModal}
-              className="w-full flex flex-row items-center text-white bg-blue-700 hover:bg-blue-800 font-medium
-              rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700">
+          <ModalButtonOutlineLunch
+            iconBefore={
               <HiPlusSm
                 size={20}
                 className={`mr-2`}
               />
-              Add new organization
-            </button>
-          </div>
+            }
+            targetModalId={`createOrg`}
+            text={`Add New Organization`}
+            type={`primary`}
+            className={`h-[38px] w-full py-6`}
+          />
 
-          <div className={`w-full`}>
-            <button
-              type="button"
-              className="w-full flex flex-row items-center py-2.5 px-5 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-fit">
+          <BasicOutlineButton
+            text={`Export Organization`}
+            type={'primary'}
+            className={`h-[38px] w-full py-6`}
+            iconBefore={
               <TiExportOutline
                 size={20}
                 className={`mr-2`}
               />
-              Export Organization
-            </button>
-          </div>
+            }
+          />
         </div>
 
         <div
@@ -179,28 +187,15 @@ const HospitalOrganizations = () => {
           <div className="w-full relative my-4 sm:rounded-lg px-10">
             <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
               <div className="w-full md:w-3/4">
-                <form className="flex items-center">
-                  <label
-                    htmlFor="simple-search"
-                    className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <GoSearch size={20} />
-                    </div>
-                    <input
-                      type="text"
-                      id="search"
-                      className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg
-                      bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600
-                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      value={searchOrganisation}
-                      onChange={onUpdateSearchOrganisation}
-                      placeholder="Search"
-                    />
-                  </div>
-                </form>
+                <BasicSearchInput
+                  id={`searchOrg`}
+                  placeholder={`Search...`}
+                  value={searchOrganisation}
+                  change={(e) => onUpdateSearchOrganisation(e.target.value)}
+                  inputClass={`!min-h-[58px]`}
+                  labelClass={`!top-[12px] !text-[15px]`}
+                  className={`!mb-0`}
+                />
               </div>
 
               <TableHeaderDropdown
@@ -211,42 +206,39 @@ const HospitalOrganizations = () => {
 
               <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                 <div className="flex items-center w-full space-x-3 md:w-auto">
-                  <BasicDatePicker
+                  <DateInput
                     label={`From`}
-                    change={onUpdateSelectFrom}
+                    placeholder={`DD/MM/YYYY`}
+                    className={`my-3`}
+                    change={(e) => onUpdateSelectFrom(new Date(e.target.value))}
+                    value={hospitalFilterFrom as Date}
+                    id={`from`}
+                    icon={<FaCalendarAlt size={20} />}
                   />
 
-                  <CgArrowsH size={30} />
+                  <CgArrowsH size={40} />
 
-                  <BasicDatePicker
+                  <DateInput
                     label={`To`}
-                    change={onUpdateSelectTo}
+                    placeholder={`DD/MM/YYYY`}
+                    className={`my-3`}
+                    change={(e) => onUpdateSelectTo(new Date(e.target.value))}
+                    value={hospitalFilterTo as Date}
+                    id={`to`}
+                    icon={<FaCalendarAlt size={20} />}
                   />
                 </div>
               </div>
 
               <div>
-                <Select
-                  id="state"
-                  required={false}
-                  onChange={filterByCountry}
-                  className={`flex items-center justify-center w-full text-sm font-medium text-gray-900 bg-white border
-                   border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 
-                  focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 
-                  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-[106px]`}>
-                  <option value={``}>Country</option>
-                  {allHospitalCountries?.map(
-                    (item: { country: string }, idx: number) => {
-                      return (
-                        <option
-                          key={idx}
-                          value={item?.country}>
-                          {item?.country}
-                        </option>
-                      );
-                    }
-                  )}
-                </Select>
+                <SelectInput
+                  label={`Country`}
+                  options={allHospitalCountries}
+                  className={`w-full min-h-[59px]`}
+                  id={'country'}
+                  enableFilter={true}
+                  change={(e) => filterByCountry(e.target.value)}
+                />
               </div>
             </div>
           </div>
@@ -269,10 +261,7 @@ const HospitalOrganizations = () => {
         </div>
       </div>
 
-      <CreateHospitalModal
-        showModal={showCreateHospitalModal}
-        close={onUpdateShowCreateHospitalModal}
-      />
+      <CreateHospitalModal />
     </SuperadminBaseTemplate>
   );
 };

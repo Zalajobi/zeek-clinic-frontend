@@ -88,7 +88,6 @@ const OrganizationSite = () => {
             <div className={`ml-auto flex flex-row gap-4`}>
               <BasicOutlineButton
                 text={`Edit`}
-                click={() => console.log('Add New Site')}
                 type={'primary'}
                 className={`h-[38px] w-[140px]`}
                 iconBefore={
@@ -101,7 +100,6 @@ const OrganizationSite = () => {
 
               <BasicOutlineButton
                 text={`Export Data`}
-                click={() => console.log('Export Data')}
                 type={'primary'}
                 className={`h-[38px] w-[150px]`}
                 iconBefore={

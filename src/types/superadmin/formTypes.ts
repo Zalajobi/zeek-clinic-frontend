@@ -51,17 +51,6 @@ export type CreateUserInput = {
   profile_img?: string;
 };
 
-export type CreateHospitalInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code?: string;
-};
-
 export type AdminAddProviderInput = {
   title: string;
   first_name: string;
@@ -89,22 +78,6 @@ export type AdminAddProviderInput = {
   appointments: boolean;
   address: string;
 };
-
-export const CreateHospitalInputSchema = yup
-  .object({
-    email: yup.string().required('Email field is required'),
-    name: yup.string().required('Organization name is required'),
-    phone: yup.number().required('Phone number is required'),
-    address: yup
-      .string()
-      .required('User address is required')
-      .min(10, 'Address too short'),
-    city: yup.string().optional(),
-    state: yup.string().required('Organization State is required'),
-    country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
-  })
-  .required();
 
 export const CreateUserInputSchema = yup
   .object({

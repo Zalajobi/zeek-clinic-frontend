@@ -115,6 +115,9 @@ export const useOrganizationDetails = () => {
         placeholder: item?.state,
       });
     });
+
+    setCountryFilterList(tempCountriesFilter);
+    setStateFilterList(stateFilter);
   };
 
   const onUpdateActiveTab = async (

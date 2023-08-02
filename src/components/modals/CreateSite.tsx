@@ -13,7 +13,10 @@ import {
   CreateSiteInput,
   CreateSiteInputSchema,
 } from '../../types/superadmin/forms';
-import { BasicOutlineButton } from '../global/CustomButton';
+import {
+  BasicOutlineButton,
+  ModalButtonOutlineLunch,
+} from '../global/CustomButton';
 import { CustomBasicModal } from '../global/dialog/CustomModal';
 
 interface CreateSiteModalProps {
@@ -55,10 +58,11 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
               className={`min-w-[200px] mx-5`}
             />
 
-            <BasicOutlineButton
+            <ModalButtonOutlineLunch
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
+              targetModalId={''}
             />
           </Fragment>
         }

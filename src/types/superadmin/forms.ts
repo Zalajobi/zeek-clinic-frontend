@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 
+// Create Site
 export type CreateSiteInput = {
   email: string;
   name: string;
@@ -60,5 +61,33 @@ export const CreateSiteInputSchema = yup
     has_unit: yup.boolean().default(false),
     has_vital: yup.boolean().default(false),
     has_wallet: yup.boolean().default(false),
+  })
+  .required();
+
+// Create Organization
+export type CreateHospitalInput = {
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zip_code?: string;
+};
+
+export const CreateHospitalInputSchema = yup
+  .object({
+    email: yup.string().required('Email field is required'),
+    name: yup.string().required('Organization name is required'),
+    phone: yup.number().required('Phone number is required'),
+    address: yup
+      .string()
+      .required('User address is required')
+      .min(10, 'Address too short'),
+    city: yup.string().optional(),
+    state: yup.string().required('Organization State is required'),
+    country: yup.string().required('Organization Country is required'),
+    zip_code: yup.string().required('Zip Code is required'),
   })
   .required();

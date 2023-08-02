@@ -4,6 +4,7 @@ import { axiosGetRequest } from '../../lib/axios';
 import { GetHospitalResponseData } from '../../types/superadmin';
 import toast from 'react-hot-toast';
 import { customPromiseRequest } from '../../lib/requests';
+import { SelectInputFieldProps } from '../../types/common';
 
 export const useHospitalOrganisation = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export const useHospitalOrganisation = () => {
   );
   const [countryFilter, setCountryFilter] = useState('');
   const [allHospitalCountries, setAllHospitalCountries] = useState<
-    { country: string }[]
+    SelectInputFieldProps[]
   >([]);
   const [showCreateHospitalModal, setShowCreateHospitalModal] = useState(false);
   const [selectAllHospitals, setSelectAllHospitals] = useState(false);
@@ -57,7 +58,17 @@ export const useHospitalOrganisation = () => {
         distinctCountries?.status === 'fulfilled' &&
         distinctCountries?.value?.success
       ) {
-        setAllHospitalCountries(distinctCountries?.value?.data);
+        let tempCountriesFilter: SelectInputFieldProps[] = [];
+
+        distinctCountries?.value?.data.map((item: { country: string }) => {
+          tempCountriesFilter.push({
+            value: item?.country,
+            placeholder: item?.country,
+          });
+        });
+
+        // console.log(distinctCountries?.value?.data)
+        setAllHospitalCountries(tempCountriesFilter);
       } else {
         toast.error('Something went wrong getting organization countries');
       }
@@ -95,6 +106,7 @@ export const useHospitalOrganisation = () => {
   }, [navigate]);
 
   const onUpdateSelectFrom = async (value: Date | null) => {
+    console.log(value);
     setHospitalFilterFrom(value);
     const params = {
       page: 0,
@@ -171,16 +183,14 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const onUpdateSearchOrganisation = async (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchOrganisation(event.target.value);
+  const onUpdateSearchOrganisation = async (value: string) => {
+    setSearchOrganisation(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
-      search: event.target.value,
+      search: value,
       status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     };
 
@@ -373,8 +383,8 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const filterByCountry = async (event: ChangeEvent<HTMLSelectElement>) => {
-    setCountryFilter(event.target.value);
+  const filterByCountry = async (value: string) => {
+    setCountryFilter(value);
     setResultFrom(1);
     setCurrentPage(0);
 
@@ -386,7 +396,7 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
-      country: event.target.value,
+      country: value,
       status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     };
 
@@ -482,6 +492,8 @@ export const useHospitalOrganisation = () => {
     allHospitalCountries,
     showCreateHospitalModal,
     selectAllHospitals,
+    hospitalFilterFrom,
+    hospitalFilterTo,
 
     // Function
     onUpdateSearchOrganisation,
