@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   AllCountries,
   AllStatesAndCities,
-  CreateUserInput,
 } from '../../types/superadmin/formTypes';
 import { Country, State, City } from 'country-state-city';
 import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
@@ -10,6 +9,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
+import { CreateAdminUserInput } from '../../types/superadmin/forms';
+import { SelectInputFieldProps } from '../../types/common';
 
 export const useSuperadminCreateAdminUser = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const useSuperadminCreateAdminUser = () => {
   const [profileImgURL, setProfileImgURL] = useState('');
   const [phoneNumber, setPhoneNumber] = useState<string | number>('');
 
-  const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
+  const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [allCountryStates, setAllCountryStates] = useState<
     AllStatesAndCities[] | null
   >(null);
@@ -32,7 +33,14 @@ export const useSuperadminCreateAdminUser = () => {
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
-    setAllCountries(Country.getAllCountries() as AllCountries[]);
+    let countriesUpdate: SelectInputFieldProps[] = [];
+    Country.getAllCountries().map((country) => {
+      countriesUpdate.push({
+        value: country.isoCode,
+        placeholder: country.name,
+      });
+    });
+    setAllCountries(countriesUpdate);
 
     // const superadminGetRolesAndDepartments = async () => {
     //   const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
@@ -85,7 +93,7 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
-  const handleCreateAdmin = async (data: CreateUserInput) => {
+  const handleCreateAdmin = async (data: CreateAdminUserInput) => {
     const adminData = {
       ...data,
       country,
