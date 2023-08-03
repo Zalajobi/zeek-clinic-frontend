@@ -8,10 +8,7 @@ import { CreateAdminUserInput } from '../../types/superadmin/forms';
 import { SelectInputFieldProps } from '../../types/common';
 import { AccountServiceApiResponse } from '../../types/apiResponses';
 import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
-import {
-  AllCountries,
-  AllStatesAndCities,
-} from '../../types/superadmin/formTypes';
+import { AllCountries } from '../../types/superadmin/formTypes';
 import input = Simulate.input;
 
 interface DepartmentRoleProps {
@@ -31,11 +28,8 @@ export const useSuperadminCreateAdminUser = () => {
 
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [allCountryStates, setAllCountryStates] = useState<
-    AllStatesAndCities[] | null
-  >(null);
-  const [allStateCities, setAllStateCities] = useState<
-    AllStatesAndCities[] | null
-  >(null);
+    SelectInputFieldProps[]
+  >([]);
   const [allDepartments, setAllDepartments] = useState<SelectInputFieldProps[]>(
     []
   );
@@ -86,25 +80,20 @@ export const useSuperadminCreateAdminUser = () => {
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-    setAllCountryStates(
-      State.getStatesOfCountry(value) as unknown as AllStatesAndCities[]
-    );
+    let countryStates: SelectInputFieldProps[] = [];
+
+    State.getStatesOfCountry(value).map((country) => {
+      countryStates.push({
+        value: country.isoCode,
+        placeholder: country.name,
+      });
+    });
+
+    setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
   };
-
-  const onUpdateState = (value: string) => {
-    setAllStateCities(
-      City.getCitiesOfState(
-        countryCode,
-        value
-      ) as unknown as AllStatesAndCities[]
-    );
-    setState(value);
-  };
-
-  const onUpdateCity = (value: string) => setCity(value ?? 'None');
 
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
@@ -134,15 +123,12 @@ export const useSuperadminCreateAdminUser = () => {
     allCountries,
     phoneCode,
     allCountryStates,
-    allStateCities,
     allDepartments,
     allRoles,
     profileImgURL,
 
     handleCreateAdmin,
     onUpdateCountry,
-    onUpdateState,
-    onUpdateCity,
     setProfileImgURL,
     onUpdatePhoneNumber,
   };

@@ -16,13 +16,10 @@ import {
   SelectInput,
   TextInput,
 } from '../../components/global/formInput/CustomInput';
-import { BiRename } from 'react-icons/bi';
 import {
   CreateAdminUserInput,
   CreateAdminUserInputSchema,
 } from '../../types/superadmin/forms';
-import { FaCalendarAlt } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
 
 const CreateNewUser = () => {
   const {
@@ -38,7 +35,6 @@ const CreateNewUser = () => {
     allCountries,
     phoneCode,
     allCountryStates,
-    allStateCities,
     allDepartments,
     allRoles,
     profileImgURL,
@@ -46,8 +42,6 @@ const CreateNewUser = () => {
     // Functions
     handleCreateAdmin,
     onUpdateCountry,
-    onUpdateState,
-    onUpdateCity,
     setProfileImgURL,
     onUpdatePhoneNumber,
   } = useSuperadminCreateAdminUser();
@@ -76,7 +70,7 @@ const CreateNewUser = () => {
 
           <CustomCard>
             <div
-              className={`w-full grid gap-6 grid-cols-1 mb-2 lg:grid-cols-5`}>
+              className={`w-full grid gap-6 grid-cols-1 mb-5 lg:grid-cols-5`}>
               {/*Title*/}
               <SelectInput
                 label={`Title`}
@@ -107,7 +101,7 @@ const CreateNewUser = () => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-2`}>
               {/*Middle Name*/}
               <TextInput
                 label={`Other Name`}
@@ -128,7 +122,7 @@ const CreateNewUser = () => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-3`}>
               {/*DOB*/}
               <DateInput
                 label={`Date Or Birth`}
@@ -163,7 +157,8 @@ const CreateNewUser = () => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-2`}>
+              {/*Departments*/}
               <SelectInput
                 label={`Department`}
                 options={allDepartments}
@@ -174,6 +169,7 @@ const CreateNewUser = () => {
                 errorMsg={errors.department?.message ?? ''}
               />
 
+              {/*Roles*/}
               <SelectInput
                 label={`Role`}
                 options={allRoles}
@@ -182,6 +178,82 @@ const CreateNewUser = () => {
                 id={`role`}
                 enableFilter={true}
                 errorMsg={errors.role?.message ?? ''}
+              />
+            </div>
+
+            <div
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-3`}>
+              {/*Country*/}
+              <SelectInput
+                label={`Country`}
+                options={allCountries}
+                className={`my-3`}
+                register={register}
+                id={`country`}
+                enableFilter={true}
+                errorMsg={errors.country?.message ?? ''}
+                change={(e) => onUpdateCountry(e.target.value)}
+              />
+
+              {/*State*/}
+              <SelectInput
+                label={`State`}
+                options={allCountryStates}
+                className={`my-3`}
+                register={register}
+                id={`state`}
+                enableFilter={true}
+                errorMsg={errors.state?.message ?? ''}
+              />
+
+              {/*City*/}
+              <TextInput
+                label={`City`}
+                className={`my-3`}
+                id={`city`}
+                register={register}
+                errorMsg={errors.city?.message ?? ''}
+              />
+
+              {/*Zip Code*/}
+              <TextInput
+                label={`Zip Code`}
+                className={`my-3`}
+                id={`zip_code`}
+                register={register}
+                errorMsg={errors.zip_code?.message ?? ''}
+              />
+
+              {/*Address*/}
+              <TextInput
+                label={`Address`}
+                className={`my-3`}
+                id={`address`}
+                register={register}
+                errorMsg={errors.address?.message ?? ''}
+              />
+
+              {/*Alternative Address*/}
+              <TextInput
+                label={`Alternative Address`}
+                className={`my-3`}
+                id={`address_two`}
+                register={register}
+                errorMsg={errors.address_two?.message ?? ''}
+              />
+            </div>
+
+            <div
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-2`}>
+              <TextInput
+                label={`Phone Number`}
+                placeholder={`+2347053980998`}
+                className={`my-3 w-full`}
+                errorMsg={errors.phone_number?.message ?? ''}
+                id={`phone`}
+                register={register}
+                type={`tel`}
+                prefix={`${phoneCode ? '+' + phoneCode : ''}`}
               />
             </div>
           </CustomCard>
