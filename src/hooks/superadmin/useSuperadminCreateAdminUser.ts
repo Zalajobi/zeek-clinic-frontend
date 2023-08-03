@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
+import { Country, State, City } from 'country-state-city';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { Simulate } from 'react-dom/test-utils';
+
+import { CreateAdminUserInput } from '../../types/superadmin/forms';
+import { SelectInputFieldProps } from '../../types/common';
+import { AccountServiceApiResponse } from '../../types/apiResponses';
+import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
 import {
   AllCountries,
   AllStatesAndCities,
 } from '../../types/superadmin/formTypes';
-import { Country, State, City } from 'country-state-city';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
-import { CreateAdminUserInput } from '../../types/superadmin/forms';
-import { SelectInputFieldProps } from '../../types/common';
+
+interface DepartmentRoleProps {
+  name: string;
+  description: string;
+  id: string;
+}
 
 export const useSuperadminCreateAdminUser = () => {
   const navigate = useNavigate();
@@ -28,12 +36,16 @@ export const useSuperadminCreateAdminUser = () => {
   const [allStateCities, setAllStateCities] = useState<
     AllStatesAndCities[] | null
   >(null);
-  const [allDepartments, setAllDepartments] = useState<string[]>([]);
-  const [allRoles, setAllRoles] = useState<string[]>([]);
+  const [allDepartments, setAllDepartments] = useState<SelectInputFieldProps[]>(
+    []
+  );
+  const [allRoles, setAllRoles] = useState<SelectInputFieldProps[]>([]);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
-    let countriesUpdate: SelectInputFieldProps[] = [];
+    let countriesUpdate: SelectInputFieldProps[] = [],
+      rolesList: SelectInputFieldProps[] = [],
+      departmentsList: SelectInputFieldProps[] = [];
     Country.getAllCountries().map((country) => {
       countriesUpdate.push({
         value: country.isoCode,
@@ -42,31 +54,34 @@ export const useSuperadminCreateAdminUser = () => {
     });
     setAllCountries(countriesUpdate);
 
-    // const superadminGetRolesAndDepartments = async () => {
-    //   const response = await axiosGetRequest('/account/super-admin/create/roles_and_departments')
-    //   const allDepartments:string[] = []
-    //   const allRoles:string[] = []
-    //
-    //   if (response?.success) {
-    //     for (const dept in response?.data?.department) {
-    //       allDepartments.push(dept)
-    //     }
-    //
-    //     for (const role in response?.data?.role)  {
-    //       allRoles.push(role)
-    //     }
-    //   } else {
-    //     toast.error(response?.message)
-    // navigate('/superadmin/login')
-    // }
+    const superadminGetRolesAndDepartments = async () => {
+      const response = <AccountServiceApiResponse>(
+        await axiosGetRequest('/account/super-admin/get/roles_and_departments')
+      );
+      if (response?.success) {
+        response?.data?.department?.map((item: DepartmentRoleProps) => {
+          departmentsList.push({
+            placeholder: item.name,
+            value: item.id,
+          });
+        });
 
-    // setAllDepartments(allDepartments)
-    // setAllRoles(allRoles)
-    // }
-    // superadminGetRolesAndDepartments()
-    //   .catch(err => {
-    //     navigate('/superadmin/login')
-    //   })
+        response?.data?.role?.map((item: DepartmentRoleProps) => {
+          rolesList.push({
+            placeholder: item.name,
+            value: item.id,
+          });
+        });
+
+        setAllDepartments(departmentsList);
+        setAllRoles(rolesList);
+      } else {
+        toast.error(response?.message);
+      }
+    };
+    superadminGetRolesAndDepartments().catch((err) => {
+      toast.error(err?.message);
+    });
   }, [input]);
 
   const onUpdateCountry = (value: string) => {

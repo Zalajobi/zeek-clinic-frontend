@@ -125,7 +125,10 @@ const CreateNewUser = () => {
                 id={`gender`}
                 errorMsg={errors.gender?.message ?? ''}
               />
+            </div>
 
+            <div
+              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
               {/*DOB*/}
               <DateInput
                 label={`Date Or Birth`}
@@ -160,7 +163,27 @@ const CreateNewUser = () => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}></div>
+              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
+              <SelectInput
+                label={`Department`}
+                options={allDepartments}
+                className={`my-3`}
+                register={register}
+                id={`department`}
+                enableFilter={true}
+                errorMsg={errors.department?.message ?? ''}
+              />
+
+              <SelectInput
+                label={`Role`}
+                options={allRoles}
+                className={`my-3`}
+                register={register}
+                id={`role`}
+                enableFilter={true}
+                errorMsg={errors.role?.message ?? ''}
+              />
+            </div>
           </CustomCard>
         </div>
       </div>
