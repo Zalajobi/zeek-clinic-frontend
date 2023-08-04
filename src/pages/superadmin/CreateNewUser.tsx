@@ -37,7 +37,6 @@ const CreateNewUser = () => {
     allCountries,
     phoneCode,
     allCountryStates,
-    allDepartments,
     allRoles,
     profileImgURL,
 
@@ -193,18 +192,7 @@ const CreateNewUser = () => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-2`}>
-              {/*Departments*/}
-              <SelectInput
-                label={`Department`}
-                options={allDepartments}
-                className={`my-3`}
-                register={register}
-                id={`department`}
-                enableFilter={true}
-                errorMsg={errors.department?.message ?? ''}
-              />
-
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-4`}>
               {/*Roles*/}
               <SelectInput
                 label={`Role`}
@@ -215,10 +203,7 @@ const CreateNewUser = () => {
                 enableFilter={true}
                 errorMsg={errors.role?.message ?? ''}
               />
-            </div>
 
-            <div
-              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-3`}>
               {/*Country*/}
               <SelectInput
                 label={`Country`}
@@ -250,7 +235,10 @@ const CreateNewUser = () => {
                 register={register}
                 errorMsg={errors.city?.message ?? ''}
               />
+            </div>
 
+            <div
+              className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-3`}>
               {/*Zip Code*/}
               <TextInput
                 label={`Zip Code`}

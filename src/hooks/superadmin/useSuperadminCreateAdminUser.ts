@@ -26,54 +26,43 @@ export const useSuperadminCreateAdminUser = () => {
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
-  const [allDepartments, setAllDepartments] = useState<SelectInputFieldProps[]>(
-    []
-  );
   const [allRoles, setAllRoles] = useState<SelectInputFieldProps[]>([]);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
     let countriesUpdate: SelectInputFieldProps[] = [],
-      rolesList: SelectInputFieldProps[] = [],
-      departmentsList: SelectInputFieldProps[] = [];
+      rolesList: SelectInputFieldProps[] = [];
+
     Country.getAllCountries().map((country) => {
-      countriesUpdate.push({
+      return countriesUpdate.push({
         value: country.isoCode,
         placeholder: country.name,
       });
     });
     setAllCountries(countriesUpdate);
 
-    // const superadminGetRolesAndDepartments = async () => {
-    //   const response = <AccountServiceApiResponse>(
-    //     await axiosGetRequest('/account/super-admin/get/available-admin/roles_and_departments', {
-    //       siteId
-    //     })
-    //   );
-    //   if (response?.success) {
-    //     response?.data?.department?.map((item: DepartmentRoleProps) => {
-    //       departmentsList.push({
-    //         placeholder: item.name,
-    //         value: item.id ?? '',
-    //       });
-    //     });
-    //
-    //     response?.data?.role?.map((item: DepartmentRoleProps) => {
-    //       rolesList.push({
-    //         placeholder: item.name,
-    //         value: item.name,
-    //       });
-    //     });
-    //
-    //     setAllDepartments(departmentsList);
-    //     setAllRoles(rolesList);
-    //   } else {
-    //     toast.error(response?.message);
-    //   }
-    // };
-    // superadminGetRolesAndDepartments().catch((err) => {
-    //   toast.error(err?.message);
-    // });
+    const superadminGetRolesAndDepartments = async () => {
+      const response = (await axiosGetRequest(
+        '/account/super-admin/get/available-admin/roles_and_departments',
+        { siteId }
+      )) as AccountServiceApiResponse;
+
+      if (response?.success) {
+        response?.data?.role?.map((item: DepartmentRoleProps) => {
+          return rolesList.push({
+            placeholder: item.name,
+            value: item.name,
+          });
+        });
+
+        setAllRoles(rolesList);
+      } else {
+        toast.error(response?.message);
+      }
+    };
+    superadminGetRolesAndDepartments().catch((err) => {
+      toast.error(err?.message);
+    });
   }, [siteId]);
 
   const onUpdateCountry = (value: string) => {
@@ -81,7 +70,7 @@ export const useSuperadminCreateAdminUser = () => {
     let countryStates: SelectInputFieldProps[] = [];
 
     State.getStatesOfCountry(value).map((country) => {
-      countryStates.push({
+      return countryStates.push({
         value: country.isoCode,
         placeholder: country.name,
       });
@@ -103,15 +92,17 @@ export const useSuperadminCreateAdminUser = () => {
       phone: `+${phoneCode}${data?.phone}`,
     };
 
-    console.log(adminData);
-
     const { success, message } = await axiosPostRequest(
       '/account/admin/create-admin',
       adminData
     );
 
-    if (success) toast.success(message);
-    else toast.error(message);
+    if (success) {
+      toast.success(message);
+      setTimeout(() => {
+        rerouteToURL('/superadmin');
+      }, 3000);
+    } else toast.error(message);
   };
 
   const rerouteToURL = (url: string) => {
@@ -123,7 +114,6 @@ export const useSuperadminCreateAdminUser = () => {
     allCountries,
     phoneCode,
     allCountryStates,
-    allDepartments,
     allRoles,
     profileImgURL,
 

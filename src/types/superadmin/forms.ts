@@ -107,7 +107,7 @@ export type CreateAdminUserInput = {
   zip_code: string;
   role: string;
   staff_id: string;
-  department: string;
+  // department: string;
   religion?: string;
   gender: string;
   dob: string;
@@ -136,7 +136,7 @@ export const CreateAdminUserInputSchema = yup
     country_code: yup.string().optional(),
     zip_code: yup.string().required('Zip code is required'),
     role: yup.string().required('User role must be selected'),
-    department: yup.string().required('Department must be selected'),
+    // department: yup.string().required('Department must be selected'),
     gender: yup.string().required('Please choose a valid gender'),
     dob: yup.string().required('Date of birth is required'),
     title: yup.string().required('User title is required'),
