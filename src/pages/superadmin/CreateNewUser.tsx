@@ -1,13 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import Text from '../../components/global/dialog/Text';
 import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
 import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
 import {
   availableTitles,
   genderSelectInput,
+  relationshipStatus,
+  religions,
 } from '../../lib/constants/constants';
 import { Typography } from '../../components/global/dialog/Typography';
 import { CustomCard } from '../../components/global/card/CustomCard';
@@ -20,6 +21,7 @@ import {
   CreateAdminUserInput,
   CreateAdminUserInputSchema,
 } from '../../types/superadmin/forms';
+import { BasicFilledButton } from '../../components/global/CustomButton';
 
 const CreateNewUser = () => {
   const {
@@ -43,7 +45,7 @@ const CreateNewUser = () => {
     handleCreateAdmin,
     onUpdateCountry,
     setProfileImgURL,
-    onUpdatePhoneNumber,
+    rerouteToURL,
   } = useSuperadminCreateAdminUser();
 
   return (
@@ -106,7 +108,7 @@ const CreateNewUser = () => {
               <TextInput
                 label={`Other Name`}
                 className={`my-3`}
-                id={`other_name`}
+                id={`middle_name`}
                 register={register}
               />
 
@@ -123,16 +125,6 @@ const CreateNewUser = () => {
 
             <div
               className={`w-full grid gap-6 grid-cols-1 my-5 lg:grid-cols-3`}>
-              {/*DOB*/}
-              <DateInput
-                label={`Date Or Birth`}
-                placeholder={`DD/MM/YYYY`}
-                className={`my-3`}
-                errorMsg={errors.dob?.message ?? ''}
-                id={`dob`}
-                register={register}
-              />
-
               {/*Email*/}
               <TextInput
                 label={`Email`}
@@ -153,6 +145,50 @@ const CreateNewUser = () => {
                 id={`username`}
                 register={register}
                 type={`text`}
+              />
+
+              <SelectInput
+                label={`Relationship Status`}
+                options={relationshipStatus}
+                className={`w-full my-3`}
+                register={register}
+                id={'marital_status'}
+                errorMsg={errors.marital_status?.message ?? ''}
+                enableFilter={true}
+              />
+
+              {/*Religion*/}
+              <SelectInput
+                label={`Religion`}
+                options={religions.sort((a, b) =>
+                  a.placeholder.localeCompare(b.placeholder)
+                )}
+                className={`w-full my-3`}
+                register={register}
+                id={'religion'}
+                errorMsg={errors.religion?.message ?? ''}
+                enableFilter={true}
+              />
+
+              {/*Staff ID*/}
+              <TextInput
+                label={`Staff ID`}
+                placeholder={`IODANJK89IK`}
+                className={`my-3 w-full`}
+                errorMsg={errors.staff_id?.message ?? ''}
+                id={`staff_id`}
+                register={register}
+                type={`text`}
+              />
+
+              {/*DOB*/}
+              <DateInput
+                label={`Date Or Birth`}
+                placeholder={`DD/MM/YYYY`}
+                className={`my-3`}
+                errorMsg={errors.dob?.message ?? ''}
+                id={`dob`}
+                register={register}
               />
             </div>
 
@@ -249,24 +285,33 @@ const CreateNewUser = () => {
                 label={`Phone Number`}
                 placeholder={`+2347053980998`}
                 className={`my-3 w-full`}
-                errorMsg={errors.phone_number?.message ?? ''}
+                errorMsg={errors.phone?.message ?? ''}
                 id={`phone`}
                 register={register}
                 type={`tel`}
                 prefix={`${phoneCode ? '+' + phoneCode : ''}`}
               />
             </div>
+
+            <div className={`w-full flex items-center justify-center my-5`}>
+              <BasicFilledButton
+                type={`danger`}
+                text={`Cancel`}
+                className={`mx-4 min-w-[200px]`}
+                hasRings={true}
+                click={() => rerouteToURL('/superadmin')}
+              />
+
+              <BasicFilledButton
+                type={`secondary`}
+                text={`Add Provider`}
+                className={`mx-4 min-w-[200px]`}
+                hasRings={true}
+                click={handleSubmit(handleCreateAdmin)}
+              />
+            </div>
           </CustomCard>
         </div>
-      </div>
-
-      <div className={`w-full p-10 md:px-20 flex flex-col`}>
-        <Text
-          text={`Add Admin`}
-          size="4xl"
-          weight={800}
-          className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
-        />
       </div>
     </SuperadminBaseTemplate>
   );

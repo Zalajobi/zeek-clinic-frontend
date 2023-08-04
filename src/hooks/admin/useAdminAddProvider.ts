@@ -95,11 +95,6 @@ export const useAdminAddProvider = () => {
     });
   }, [siteId]);
 
-  // const datepickerDisableFuture = document.getElementById('datepicker-disable-future');
-  // new Datepicker(datepickerDisableFuture, {
-  //   disableFuture: true
-  // });
-
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
     let countryStates: SelectInputFieldProps[] = [];
