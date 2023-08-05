@@ -1,13 +1,12 @@
 import { Fragment, useMemo } from 'react';
-import CustomCard from '../../global/card/CustomCard';
-import Typography from '../../global/Typography';
-import TypographyLink from '../../global/TypographyLink';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import Table from '../../global/table/Table';
 import {
   AppointmentAndEventsTableColumn,
   AppointmentAndEventsTableRowData,
 } from '../../tables/AppointmentAndEventsTable';
 import { AppointmentTableData } from '../../../types/admin';
+import { CustomTransparentCard } from '../../global/card/CustomCard';
 
 const AppointmentAndEvents = () => {
   const testData: AppointmentTableData[] = [
@@ -84,7 +83,7 @@ const AppointmentAndEvents = () => {
 
   return (
     <Fragment>
-      <CustomCard
+      <CustomTransparentCard
         className={`w-full flex flex-col items-center justify-center max-h-[400px] lg:col-span-3`}>
         <div className={`w-full flex justify-center items-center`}>
           <Typography
@@ -93,7 +92,7 @@ const AppointmentAndEvents = () => {
             className={`text-[20px] w-full text-start mr-auto`}
           />
 
-          <TypographyLink
+          <TypographyWithLink
             text={`View All`}
             to={`#`}
             className={`text-[13px] ml-auto font-bold text-xs min-w-[50px] text-center`}
@@ -105,7 +104,7 @@ const AppointmentAndEvents = () => {
           columns={columns}
           data={data}
         />
-      </CustomCard>
+      </CustomTransparentCard>
     </Fragment>
   );
 };

@@ -41,7 +41,7 @@
 
 .text-description {
   --tw-text-opacity: 1;
-  color: rgb(126 139 151 / var(--tw-text-opacity));
+  color: var(--label-color);
 }
 
 .select-input-global-component > div,
@@ -56,6 +56,16 @@
 
 .date_picker-input-global-component input {
   min-height: 58px;
+}
+
+.glassmorphism {
+  border-top: 2px solid #ffffff75;
+  border-left: 2px solid #ffffff75;
+  box-shadow: 5px 5px 12px #00000035;
+  background: #ffffff25;
+  border-radius: 15px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
 }
 
 @tailwind base;

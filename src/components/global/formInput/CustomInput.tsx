@@ -1,19 +1,33 @@
 import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import Typography from '../Typography';
+import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
+import moment from 'moment';
 
 interface TextInputProps {
   label: string;
   id: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
   className?: string;
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
   prefix?: string;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+}
+
+interface TextInputWithoutLabelProps {
+  id: string;
+  register?: UseFormRegister<any>;
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  className?: string;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  max?: string | number;
+  min?: string | number;
 }
 
 interface SelectInputProps {
@@ -34,10 +48,12 @@ interface DateInputProps {
   label: string;
   id: string;
   placeholder: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   className?: string;
   errorMsg?: string;
   icon?: ReactNode;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: Date;
 }
 
 interface CheckboxInputProps {
@@ -59,6 +75,8 @@ export const TextInput = ({
   register,
   type = 'text',
   prefix,
+  change,
+  value,
 }: TextInputProps) => {
   return (
     <Fragment>
@@ -76,19 +94,37 @@ export const TextInput = ({
             />
           </div>
         )}
-        <input
-          className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
+
+        {register ? (
+          <input
+            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
           bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
           ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
           focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
           dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
           [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
           ${prefix ? 'pl-[70px]' : ''}`}
-          placeholder={placeholder}
-          {...register(id)}
-          id={id}
-          type={type}
-        />
+            placeholder={placeholder}
+            {...register(id)}
+            id={id}
+            type={type}
+          />
+        ) : (
+          <input
+            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
+          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
+          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
+          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
+          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
+          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
+          ${prefix ? 'pl-[70px]' : ''}`}
+            placeholder={placeholder}
+            onChange={change}
+            value={value}
+            id={id}
+            type={type}
+          />
+        )}
 
         {icon && (
           <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -125,6 +161,40 @@ export const TextInput = ({
   );
 };
 
+export const TextInputWithoutLabel = ({
+  id,
+  register,
+  type = 'text',
+  className,
+  change,
+  value,
+  max,
+  min,
+}: TextInputWithoutLabelProps) => {
+  return (
+    <Fragment>
+      {register ? (
+        <input
+          type={type}
+          {...register(id)}
+          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
+          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
+        />
+      ) : (
+        <input
+          type={type}
+          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
+          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
+          onChange={change}
+          value={value}
+          max={max}
+          min={min}
+        />
+      )}
+    </Fragment>
+  );
+};
+
 export const SelectInput = ({
   options,
   label,
@@ -139,29 +209,50 @@ export const SelectInput = ({
     <Fragment>
       <div
         className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
-        <select
-          data-te-select-init
-          data-te-select-size="lg"
-          data-te-select-filter={enableFilter}
-          {...register?.(id, {
-            onChange: (event) => {
-              if (change) {
-                change(event);
-              }
-            },
-          })}
-          id={id}>
-          <option value="">Select {label}</option>
-          {options.map((item, idx) => {
-            return (
-              <option
-                className={`!capitalize`}
-                value={item.value}>
-                {item.placeholder.replaceAll('_', ' ')}
-              </option>
-            );
-          })}
-        </select>
+        {register ? (
+          <select
+            data-te-select-init={true}
+            data-te-select-size="lg"
+            data-te-select-filter={enableFilter}
+            {...register?.(id, {
+              onChange: (event) => {
+                if (change) {
+                  change(event);
+                }
+              },
+            })}
+            id={id}>
+            <option value="">Select {label}</option>
+            {options.map((item, idx) => {
+              return (
+                <option
+                  className={`!capitalize`}
+                  value={item.value}>
+                  {item.placeholder.replaceAll('_', ' ')}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <select
+            data-te-select-init={true}
+            data-te-select-size="lg"
+            data-te-select-filter={enableFilter}
+            onChange={change}
+            id={id}>
+            <option value="">Select {label}</option>
+            {options.map((item, idx) => {
+              return (
+                <option
+                  className={`!capitalize`}
+                  value={item.value}>
+                  {item.placeholder.replaceAll('_', ' ')}
+                </option>
+              );
+            })}
+          </select>
+        )}
+
         <label data-te-select-label-ref>{label}</label>
 
         {errorMsg && (
@@ -188,6 +279,8 @@ export const DateInput = ({
   id,
   register,
   icon,
+  change,
+  value,
 }: DateInputProps) => {
   return (
     <Fragment>
@@ -197,19 +290,36 @@ export const DateInput = ({
         data-te-inline={true}
         data-te-input-wrapper-init
         data-te-format={'m-d-yyyy'}>
-        <input
-          data-te-datepicker-toggle-ref
-          data-te-datepicker-toggle-button-ref
-          type="text"
-          className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
+        {register ? (
+          <input
+            data-te-datepicker-toggle-ref
+            data-te-datepicker-toggle-button-ref
+            type="text"
+            className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
             outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
             data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
             dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
             [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
-          placeholder={placeholder}
-          {...register(id)}
-          id={id}
-        />
+            placeholder={placeholder}
+            {...register(id)}
+            value={moment(value).format('MMM DD. YYYY')}
+            id={id}
+          />
+        ) : (
+          <input
+            data-te-datepicker-toggle-ref
+            data-te-datepicker-toggle-button-ref
+            type="text"
+            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6]
+            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
+            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
+            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
+            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            placeholder={placeholder}
+            onInput={change}
+            id={id}
+          />
+        )}
 
         {icon && (
           <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -296,5 +406,23 @@ export const CheckboxInput = ({
         </label>
       </div>
     </Fragment>
+  );
+};
+
+export const CustomInputLabel = ({
+  forItem,
+  label,
+  className = '',
+}: {
+  forItem: string;
+  label: string;
+  className?: string;
+}) => {
+  return (
+    <label
+      className={`text-sm font-medium text-gray-900 dark:text-gray-300 ${className}`}
+      htmlFor={forItem}>
+      {label}
+    </label>
   );
 };

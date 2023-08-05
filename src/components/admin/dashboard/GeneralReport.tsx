@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
-import CustomCard from '../../global/card/CustomCard';
-import Typography from '../../global/Typography';
-import TypographyLink from '../../global/TypographyLink';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import CustomInnerCard from '../../global/card/CustomInnerCard';
+import { CustomCard } from '../../global/card/CustomCard';
 
 const GeneralReport = () => {
   const date = new Date();
@@ -26,7 +25,7 @@ const GeneralReport = () => {
             className={`text-start text-[20px] mr-auto`}
           />
 
-          <TypographyLink
+          <TypographyWithLink
             text={`View All`}
             to={`/admin`}
             className={`text-[13px] ml-auto hover:cursor-pointer hover:no-underline hover:text-[#C4C4C6]`}

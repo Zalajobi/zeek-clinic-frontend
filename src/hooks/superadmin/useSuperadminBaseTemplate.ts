@@ -1,7 +1,10 @@
-import {ChangeEvent, useEffect, useState} from "react";
-import {axiosGetRequest} from "../../lib/axios";
-import {useNavigate} from "react-router-dom";
-import {SuperadminBaseData} from "../../types/superadmin";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { axiosGetRequest } from '../../lib/axios';
+import { useNavigate } from 'react-router-dom';
+import { SuperadminBaseData } from '../../types/superadmin';
+import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
+import { Simulate } from 'react-dom/test-utils';
+import input = Simulate.input;
 
 export const useSuperadminBaseTemplate = () => {
   const navigate = useNavigate();
@@ -9,24 +12,24 @@ export const useSuperadminBaseTemplate = () => {
   const [querySearch, setQuerySearch] = useState<string>('');
 
   useEffect(() => {
+    initTE({ Datepicker, Input, Select, Ripple, Modal });
     const getHeaderData = async () => {
-      const response = await axiosGetRequest('/account/super-admin/profile/get-data')
+      const response = await axiosGetRequest(
+        '/account/super-admin/profile/get-data'
+      );
 
       if (response.success)
-        setRequestData(response?.data as SuperadminBaseData)
-    }
+        setRequestData(response?.data as SuperadminBaseData);
+    };
 
-    getHeaderData()
-      .catch(err => {
-        navigate('/superadmin/login')
-      })
-  }, [navigate] );
+    getHeaderData().catch((err) => {
+      navigate('/superadmin/login');
+    });
+  }, [input]);
 
-
-  const onUpdateQuerySearch = (event:ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value as string)
-  }
-
+  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuerySearch(event?.target?.value as string);
+  };
 
   return {
     // Values
@@ -34,6 +37,6 @@ export const useSuperadminBaseTemplate = () => {
     requestData,
 
     // Functions
-    onUpdateQuerySearch
-  }
-}
+    onUpdateQuerySearch,
+  };
+};

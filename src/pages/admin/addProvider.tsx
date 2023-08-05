@@ -9,14 +9,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
-import Typography from '../../components/global/Typography';
-import ImageUpload from '../../components/global/input/ImageUpload';
+import ImageUpload from '../../components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
   SelectInput,
   TextInput,
-} from '../../components/global/input/CustomInput';
+} from '../../components/global/formInput/CustomInput';
 import {
   genderSelectInput,
   providersTitleSelectInput,
@@ -27,7 +26,8 @@ import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
 } from '../../types/superadmin/formTypes';
-import { BasicOutlineButton } from '../../components/global/CustomButton';
+import { BasicFilledButton } from '../../components/global/CustomButton';
+import { Typography } from '../../components/global/dialog/Typography';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -425,17 +425,16 @@ export const AddProvider = () => {
               </div>
 
               <div className={`w-full flex justify-center mt-8`}>
-                <BasicOutlineButton
+                <BasicFilledButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`success`}
+                  type={`dark`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
                       className={`mr-1`}
                     />
                   }
-                  curvedEdges={false}
                   className={`min-w-[100px] max-w-[200px]`}
                 />
               </div>
