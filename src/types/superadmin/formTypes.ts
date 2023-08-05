@@ -48,7 +48,7 @@ export type AdminAddProviderInput = {
   zip_code: string;
   relationship_status: string;
   religion: string;
-  password: string;
+  // password?: string;
   username: string;
   is_consultant: boolean;
   is_specialist: boolean;
@@ -101,13 +101,13 @@ export const AdminAddProviderInputSchema = yup
     is_consultant: yup.boolean().default(false),
     is_specialist: yup.boolean().default(false),
     appointments: yup.boolean().default(false),
-    password: yup
-      .string()
-      .min(8, 'Must be at least Eight(8) characters long')
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-      )
-      .required('Password is required'),
+    // password: yup
+    //   .string()
+    //   .min(8, 'Must be at least Eight(8) characters long')
+    //   .matches(
+    //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    //     'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    //   )
+    //   .required('Password is required'),
   })
   .required();

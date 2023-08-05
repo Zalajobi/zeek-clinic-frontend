@@ -185,18 +185,18 @@ export const AddProvider = () => {
                 />
 
                 <TextInput
-                  label={`Password`}
-                  placeholder={`********`}
+                  label={`Username`}
+                  placeholder={`john_doe`}
                   className={`my-3 w-full`}
-                  errorMsg={errors.password?.message ?? ''}
-                  id={`password`}
+                  errorMsg={errors.username?.message ?? ''}
+                  id={`username`}
                   register={register}
-                  type={`password`}
+                  type={`text`}
                   icon={
-                    <FaEye
+                    <FaUser
                       size={20}
                       className={`${
-                        errors.password?.message ? 'text-red-500' : ''
+                        errors.username?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }
@@ -222,25 +222,7 @@ export const AddProvider = () => {
               </div>
 
               <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
-                <TextInput
-                  label={`Username`}
-                  placeholder={`john_doe`}
-                  className={`my-3 w-full`}
-                  errorMsg={errors.username?.message ?? ''}
-                  id={`username`}
-                  register={register}
-                  type={`text`}
-                  icon={
-                    <FaUser
-                      size={20}
-                      className={`${
-                        errors.username?.message ? 'text-red-500' : ''
-                      }`}
-                    />
-                  }
-                />
-
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
                 <SelectInput
                   label={`Relationship Status`}
                   options={relationshipStatus}
@@ -262,10 +244,7 @@ export const AddProvider = () => {
                   errorMsg={errors.religion?.message ?? ''}
                   enableFilter={true}
                 />
-              </div>
 
-              <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
                 <SelectInput
                   label={`Department`}
                   options={departments}
