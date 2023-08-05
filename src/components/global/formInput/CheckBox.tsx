@@ -1,15 +1,22 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
 
 interface CheckBoxProps {
-  inputClassName?: string
-  labelClassName?: string
-  text?: string
-  id?: string
-  checked: boolean
-  click: () => void
+  inputClassName?: string;
+  labelClassName?: string;
+  text?: string;
+  id?: string;
+  checked: boolean;
+  click: () => void;
 }
 
-const CheckBox = ({inputClassName, labelClassName, text='Remember me', id='remember', checked, click}: CheckBoxProps) => {
+const CheckBox = ({
+  inputClassName,
+  labelClassName,
+  text = 'Remember me',
+  id = 'remember',
+  checked,
+  click,
+}: CheckBoxProps) => {
   return (
     <Fragment>
       <div className="flex items-center gap-2">
@@ -22,13 +29,12 @@ const CheckBox = ({inputClassName, labelClassName, text='Remember me', id='remem
         />
         <label
           className={`text-sm font-medium text-gray-900 dark:text-gray-300 hover:cursor-pointer ${labelClassName}`}
-          onClick={click}
-        >
+          onClick={click}>
           {text}
         </label>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default CheckBox;

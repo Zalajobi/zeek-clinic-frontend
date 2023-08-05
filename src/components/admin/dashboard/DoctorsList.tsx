@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import CustomCard from '../../global/card/CustomCard';
-import Typography from '../../global/Typography';
-import TypographyLink from '../../global/TypographyLink';
+import { CustomTransparentCard } from '../../global/card/CustomCard';
+import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
 import ListView from '../../global/views/ListView';
 
 const DoctorsList = () => {
@@ -66,7 +65,7 @@ const DoctorsList = () => {
 
   return (
     <Fragment>
-      <CustomCard
+      <CustomTransparentCard
         className={`w-full flex flex-col items-center justify-center max-h-[400px]`}>
         <div className={`w-full flex justify-center items-center`}>
           <Typography
@@ -75,7 +74,7 @@ const DoctorsList = () => {
             className={`text-[20px] w-full text-start mr-auto`}
           />
 
-          <TypographyLink
+          <TypographyWithLink
             text={`View All`}
             to={`#`}
             className={`text-[13px] ml-auto font-bold text-xs min-w-[50px] text-center`}
@@ -124,7 +123,7 @@ const DoctorsList = () => {
             );
           })}
         </div>
-      </CustomCard>
+      </CustomTransparentCard>
     </Fragment>
   );
 };

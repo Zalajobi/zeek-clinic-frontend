@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <ChangePassword />,
       },
       {
-        path: '/admin/provider/new',
+        path: '/admin/provider/new/:siteId',
         element: <AddProvider />,
       },
     ],
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/superadmin/create/new_admin',
+        path: '/superadmin/create/new_admin/:siteId',
         element: <CreateNewUser />,
       },
 

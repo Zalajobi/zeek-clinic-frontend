@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { axiosGetRequest } from '../../lib/axios';
 import { GetHospitalResponseData } from '../../types/superadmin';
 import toast from 'react-hot-toast';
+import { customPromiseRequest } from '../../lib/requests';
+import { SelectInputFieldProps } from '../../types/common';
 
 export const useHospitalOrganisation = () => {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export const useHospitalOrganisation = () => {
   );
   const [countryFilter, setCountryFilter] = useState('');
   const [allHospitalCountries, setAllHospitalCountries] = useState<
-    { country: string }[]
+    SelectInputFieldProps[]
   >([]);
   const [showCreateHospitalModal, setShowCreateHospitalModal] = useState(false);
   const [selectAllHospitals, setSelectAllHospitals] = useState(false);
@@ -42,40 +44,69 @@ export const useHospitalOrganisation = () => {
         status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
       };
 
-      const response = await Promise.all([
-        axiosGetRequest('/account/hospital/pagination/data', params),
-        axiosGetRequest('/account/hospital/countries/distinct'),
+      // const [organization]
+
+      const [organization, distinctCountries] = await customPromiseRequest([
+        axiosGetRequest(
+          '/account/hospital/super-admin/get/all/pagination',
+          params
+        ),
+        axiosGetRequest('/account/hospital/super-admin/countries/distinct'),
       ]);
 
-      if (response[1]?.success) setAllHospitalCountries(response[1]?.data);
+      if (
+        distinctCountries?.status === 'fulfilled' &&
+        distinctCountries?.value?.success
+      ) {
+        let tempCountriesFilter: SelectInputFieldProps[] = [];
 
-      if (response[0].success) {
+        distinctCountries?.value?.data.map((item: { country: string }) => {
+          tempCountriesFilter.push({
+            value: item?.country,
+            placeholder: item?.country,
+          });
+        });
+
+        // console.log(distinctCountries?.value?.data)
+        setAllHospitalCountries(tempCountriesFilter);
+      } else {
+        toast.error('Something went wrong getting organization countries');
+      }
+
+      if (
+        organization?.status === 'fulfilled' &&
+        organization?.value?.success
+      ) {
         setHospitalData(
-          response[0]?.data?.hospitals as GetHospitalResponseData[]
+          organization?.value?.data?.hospitals as GetHospitalResponseData[]
         );
-        setTotalHospitals(response[0]?.data?.count as number);
+        setTotalHospitals(organization?.value?.data?.count as number);
         setNoOfPages(
           Math.ceil(
-            response[0]?.data?.count /
-              (perPage === 'All' ? response[0]?.data?.count : perPage)
+            organization?.value?.data?.count /
+              (perPage === 'All' ? organization?.value?.data?.count : perPage)
           )
         );
         setResultTo(
           currentPage + 1 === noOfPages
-            ? response[0]?.data?.count
+            ? organization?.value?.data?.count
             : currentPage * (perPage !== 'All' ? perPage : 0) +
                 (perPage !== 'All' ? perPage : 0)
         );
         setResultFrom(1);
+      } else {
+        toast.error('Error getting list of organisation(s)');
       }
     };
 
     getData().catch((err) => {
-      navigate('/superadmin/login');
+      toast.error('Something went wrong');
+      // navigate('/superadmin/login');
     });
   }, [navigate]);
 
   const onUpdateSelectFrom = async (value: Date | null) => {
+    console.log(value);
     setHospitalFilterFrom(value);
     const params = {
       page: 0,
@@ -97,7 +128,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -136,7 +167,7 @@ export const useHospitalOrganisation = () => {
     );
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -152,16 +183,14 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const onUpdateSearchOrganisation = async (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchOrganisation(event.target.value);
+  const onUpdateSearchOrganisation = async (value: string) => {
+    setSearchOrganisation(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
-      search: event.target.value,
+      search: value,
       status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     };
 
@@ -169,7 +198,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -204,7 +233,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -241,7 +270,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -296,7 +325,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
@@ -337,7 +366,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
@@ -354,8 +383,8 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const filterByCountry = async (event: ChangeEvent<HTMLSelectElement>) => {
-    setCountryFilter(event.target.value);
+  const filterByCountry = async (value: string) => {
+    setCountryFilter(value);
     setResultFrom(1);
     setCurrentPage(0);
 
@@ -367,12 +396,12 @@ export const useHospitalOrganisation = () => {
       from_date: hospitalFilterFrom,
       to_date: hospitalFilterTo,
       search: searchOrganisation,
-      country: event.target.value,
+      country: value,
       status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
     };
 
     const response = await axiosGetRequest(
-      '/account/hospital/pagination/data',
+      '/account/hospital/super-admin/get/all/pagination',
       params
     );
 
@@ -417,7 +446,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/hospital/pagination/data',
+        '/account/hospital/super-admin/get/all/pagination',
         params
       );
 
@@ -463,6 +492,8 @@ export const useHospitalOrganisation = () => {
     allHospitalCountries,
     showCreateHospitalModal,
     selectAllHospitals,
+    hospitalFilterFrom,
+    hospitalFilterTo,
 
     // Function
     onUpdateSearchOrganisation,

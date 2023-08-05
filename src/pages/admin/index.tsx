@@ -9,17 +9,15 @@ const AdminDashboard = () => {
   return (
     <Fragment>
       <AdminBaseTemplate>
-        <div className={`w-full flex items-center justify-center`}>
-          <div className={`max-w-screen-2xl w-full p-10 flex flex-col`}>
-            <ActivitySummary />
+        <div className={`flex flex-col`}>
+          <ActivitySummary />
 
-            <ActivityReport />
+          <ActivityReport />
 
-            <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
-              <AppointmentAndEvents />
+          <div className={`grid grid-cols-1 gap-4 my-4 lg:grid-cols-4`}>
+            <AppointmentAndEvents />
 
-              <DoctorsList />
-            </div>
+            <DoctorsList />
           </div>
         </div>
       </AdminBaseTemplate>
