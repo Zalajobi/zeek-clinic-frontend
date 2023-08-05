@@ -3,7 +3,7 @@ import { MdDashboard, MdLocalActivity, MdReport } from 'react-icons/md';
 import {
   FaUserFriends,
   FaUserInjured,
-  FaUserNurse,
+  // FaUserNurse,
   FaUserMd,
   FaUsersCog,
   FaPaperclip,
@@ -51,7 +51,6 @@ export const AdminSideBarItems = (showSidebar: boolean) => {
             className={`text-gray-500 hover:text-gray-800`}
           />
         ),
-        // route: '/patient',
         showSidebar: showSidebar,
         child: [
           {
@@ -68,7 +67,7 @@ export const AdminSideBarItems = (showSidebar: boolean) => {
           },
 
           {
-            item: 'Doctor',
+            item: 'Providers',
             Icon: (
               <FaUserMd
                 size={30}
@@ -76,22 +75,22 @@ export const AdminSideBarItems = (showSidebar: boolean) => {
                 className={`text-gray-500 hover:text-gray-800`}
               />
             ),
-            route: '#',
+            route: '/admin/providers',
             showSidebar: showSidebar,
           },
 
-          {
-            item: 'Nurse',
-            Icon: (
-              <FaUserNurse
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: '#',
-            showSidebar: showSidebar,
-          },
+          // {
+          //   item: 'Nurse',
+          //   Icon: (
+          //     <FaUserNurse
+          //       size={30}
+          //       fontWeight={40}
+          //       className={`text-gray-500 hover:text-gray-800`}
+          //     />
+          //   ),
+          //   route: '#',
+          //   showSidebar: showSidebar,
+          // },
         ],
       },
 

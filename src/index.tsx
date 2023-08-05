@@ -16,6 +16,7 @@ import CareGiverDashboard from './pages/provider';
 import HospitalOrganizations from './pages/superadmin/HospitalOrganizations';
 import OrganizationSite from './pages/superadmin/OrganizationSite';
 import AdminDashboard from './pages/admin';
+import AdminProviderPage from './pages/admin/adminProviderPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -50,9 +51,15 @@ const router = createBrowserRouter([
       },
 
       {
+        path: '/admin/providers',
+        element: <AdminProviderPage />,
+      },
+
+      {
         path: '/admin/change-password',
         element: <ChangePassword />,
       },
+
       {
         path: '/admin/provider/new/:siteId',
         element: <AddProvider />,
