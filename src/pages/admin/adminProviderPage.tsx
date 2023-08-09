@@ -5,7 +5,7 @@ import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 const AdminProviderPage = () => {
   const { navigate } = useAdminProviderPage();
 
-  console.log(navigate);
+  // console.log(navigate);
 
   return (
     <Fragment>
