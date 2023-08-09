@@ -1,7 +1,12 @@
 import { Fragment } from 'react';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 
 const AdminProviderPage = () => {
+  const { navigate } = useAdminProviderPage();
+
+  console.log(navigate);
+
   return (
     <Fragment>
       <AdminBaseTemplate>

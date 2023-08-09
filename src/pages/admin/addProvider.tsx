@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaEye, FaPhone, FaCity, FaUser } from 'react-icons/fa';
+import { FaCalendarAlt, FaPhone, FaCity } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
