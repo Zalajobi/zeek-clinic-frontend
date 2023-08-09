@@ -150,7 +150,10 @@ export const AddProvider = () => {
                   id={`gender`}
                   errorMsg={errors.gender?.message ?? ''}
                 />
+              </div>
 
+              <div
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
                 <DateInput
                   label={`Date Or Birth`}
                   placeholder={`DD/MM/YYYY`}
@@ -184,23 +187,23 @@ export const AddProvider = () => {
                   }
                 />
 
-                <TextInput
-                  label={`Username`}
-                  placeholder={`john_doe`}
-                  className={`my-3 w-full`}
-                  errorMsg={errors.username?.message ?? ''}
-                  id={`username`}
-                  register={register}
-                  type={`text`}
-                  icon={
-                    <FaUser
-                      size={20}
-                      className={`${
-                        errors.username?.message ? 'text-red-500' : ''
-                      }`}
-                    />
-                  }
-                />
+                {/*<TextInput*/}
+                {/*  label={`Username`}*/}
+                {/*  placeholder={`john_doe`}*/}
+                {/*  className={`my-3 w-full`}*/}
+                {/*  errorMsg={errors.username?.message ?? ''}*/}
+                {/*  id={`username`}*/}
+                {/*  register={register}*/}
+                {/*  type={`text`}*/}
+                {/*  icon={*/}
+                {/*    <FaUser*/}
+                {/*      size={20}*/}
+                {/*      className={`${*/}
+                {/*        errors.username?.message ? 'text-red-500' : ''*/}
+                {/*      }`}*/}
+                {/*    />*/}
+                {/*  }*/}
+                {/*/>*/}
 
                 <TextInput
                   label={`Staff ID`}

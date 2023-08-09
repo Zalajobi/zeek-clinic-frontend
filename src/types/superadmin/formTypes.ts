@@ -49,7 +49,7 @@ export type AdminAddProviderInput = {
   relationship_status: string;
   religion: string;
   // password?: string;
-  username: string;
+  // username: string;
   is_consultant: boolean;
   is_specialist: boolean;
   appointments: boolean;
@@ -96,7 +96,7 @@ export const AdminAddProviderInputSchema = yup
       .string()
       .required('Relationship Status is a required field'),
     religion: yup.string().required('Religion is a required field'),
-    username: yup.string().required('Username is required'),
+    // username: yup.string().required('Username is required'),
     address: yup.string().required('Address is required'),
     is_consultant: yup.boolean().default(false),
     is_specialist: yup.boolean().default(false),
