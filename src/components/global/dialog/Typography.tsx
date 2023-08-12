@@ -2,6 +2,9 @@ import { ReactNode } from 'react';
 import clsx from 'clsx';
 import { textSize } from '../../../lib/types';
 import { textSizeClassMap } from '../../../lib/constants/textClassMaps';
+import { TbFileInvoice } from 'react-icons/tb';
+import Text from './Text';
+import { Link } from 'react-router-dom';
 
 interface TypographyProps {
   text: string | number;
@@ -19,6 +22,13 @@ interface TypographyWithLinkProps {
   className?: string;
   iconBefore?: ReactNode;
   iconAfter?: ReactNode;
+}
+
+interface BeautifulLinkProps {
+  to: string;
+  text: string;
+  icon: ReactNode;
+  className?: string;
 }
 
 export const Typography = ({
@@ -66,5 +76,26 @@ export const TypographyWithLink = ({
       className={`text-[#C4C4C6] text-[700] text-base not-italic hover:cursor-pointer hover:no-underline hover:text-[#C4C4C6] ${className}`}>
       {iconBefore} {text} {iconAfter}
     </a>
+  );
+};
+
+export const BeautifulLink = ({
+  to,
+  icon,
+  text,
+  className = '',
+}: BeautifulLinkProps) => {
+  return (
+    <Link
+      to={to}
+      className={`flex flex-row items-center justify-center bg-white rounded-[30px] p-4 hover:no-underline ${className}`}>
+      {icon}
+
+      <Text
+        text={text}
+        weight={900}
+        className={`!text-[#3975ae]`}
+      />
+    </Link>
   );
 };

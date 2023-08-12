@@ -30,3 +30,35 @@ export interface AppointmentTableRowData {
   for: ReactNode;
   action: ReactNode;
 }
+
+export interface ProviderPageSiteResponseData {
+  address: string;
+  name: string;
+  email: string;
+  country: string;
+  phone: string;
+  id: string;
+}
+
+export interface ProvidersPageProvidersData {
+  email: string;
+  id: string;
+  status: string;
+  created_at: string;
+  personalInfo: {
+    phone: string;
+    first_name: string;
+    last_name: string;
+    middle_name: string;
+    title: string;
+    gender: string;
+    dob: any;
+    country: string;
+    profile_pic: string;
+    id: string;
+  };
+  department: {
+    name: string;
+    id: string;
+  };
+}
