@@ -9,10 +9,10 @@ import { SidebarItemProps } from '../../../types/common';
 import SidebarItems from '../SidebarItems';
 import { AdminSideBarItems } from './index';
 
-const Sidebar = () => {
+const Sidebar = ({ siteId }: { siteId: string }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const sidebarItems = AdminSideBarItems(showSidebar);
+  const sidebarItems = AdminSideBarItems(showSidebar, siteId);
 
   return (
     <Fragment>

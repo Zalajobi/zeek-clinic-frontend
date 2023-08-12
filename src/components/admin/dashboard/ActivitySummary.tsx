@@ -47,7 +47,7 @@ const ActivitySummary = () => {
           boldHeader={'5453'}
           lightHeader={`Visits`}
           descriptionContext={`1291`}
-          description={'Patients visits in the last 7 days'}
+          description={'AdminPatients visits in the last 7 days'}
           contextColour={`#F7777B`}
           bgColour={`#FDE8E9`}
         />

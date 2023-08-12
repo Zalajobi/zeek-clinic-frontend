@@ -4,7 +4,7 @@ import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
 import ProviderPageRoutes from '../../components/admin/providers/ProviderPageRoutes';
 
-const AdminProviderPage = () => {
+const AdminProvider = () => {
   const { siteData } = useAdminProviderPage();
 
   // console.log(navigate);
@@ -14,7 +14,7 @@ const AdminProviderPage = () => {
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
           <Typography
-            text={`Welcome To ${siteData?.name}`}
+            text={`Welcome To ${siteData?.name ?? ''}`}
             Tag={`h1`}
             size={`2xl`}
             className={`text-left`}
@@ -27,4 +27,4 @@ const AdminProviderPage = () => {
   );
 };
 
-export default AdminProviderPage;
+export default AdminProvider;

@@ -17,7 +17,7 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
       <div className="relative flex h-screen flex-1 overflow-y-auto bg-white text-brand-body-text bg-[#f1f3f7] dark:bg-ds-dark-800 dark:text-ds-dark-300">
-        <Sidebar />
+        <Sidebar siteId={requestData?.siteId ?? ''} />
 
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
           <Header

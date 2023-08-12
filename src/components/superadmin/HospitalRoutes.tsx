@@ -19,7 +19,7 @@ const HospitalRoutes = () => {
               color={`#3975ae`}
             />
           }
-          text={`Acttivity`}
+          text={`Activity`}
           to={`#`}
         />
 

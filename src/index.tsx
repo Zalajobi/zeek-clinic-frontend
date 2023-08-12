@@ -16,7 +16,9 @@ import CareGiverDashboard from './pages/provider';
 import HospitalOrganizations from './pages/superadmin/HospitalOrganizations';
 import OrganizationSite from './pages/superadmin/OrganizationSite';
 import AdminDashboard from './pages/admin';
-import AdminProviderPage from './pages/admin/adminProviderPage';
+import AdminProvider from './pages/admin/AdminProvider';
+import AdminSiteInformation from './pages/admin/AdminSiteInformation';
+import AdminPatient from './pages/admin/auth/AdminPatient';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -52,7 +54,17 @@ const router = createBrowserRouter([
 
       {
         path: '/admin/providers',
-        element: <AdminProviderPage />,
+        element: <AdminProvider />,
+      },
+
+      {
+        path: '/admin/patients',
+        element: <AdminPatient />,
+      },
+
+      {
+        path: '/admin/site/details/:siteId',
+        element: <AdminSiteInformation />,
       },
 
       {
