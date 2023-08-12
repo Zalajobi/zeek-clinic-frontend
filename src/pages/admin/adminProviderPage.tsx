@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
 import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
+import ProviderPageRoutes from '../../components/admin/providers/ProviderPageRoutes';
 
 const AdminProviderPage = () => {
   const { siteData } = useAdminProviderPage();
@@ -18,6 +19,8 @@ const AdminProviderPage = () => {
             size={`2xl`}
             className={`text-left`}
           />
+
+          <ProviderPageRoutes siteId={siteData?.id ?? ''} />
         </div>
       </AdminBaseTemplate>
     </Fragment>
