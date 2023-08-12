@@ -12,6 +12,7 @@ import {
 export const useAdminProviderPage = () => {
   const navigate = useNavigate();
   const [siteData, setSiteData] = useState<ProviderPageSiteResponseData>();
+  // const [adminId, setAdminId] = useState<string>('');
   const [providerData, setProviderData] = useState<
     ProvidersPageProvidersData[]
   >([]);

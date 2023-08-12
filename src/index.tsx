@@ -18,7 +18,8 @@ import OrganizationSite from './pages/superadmin/OrganizationSite';
 import AdminDashboard from './pages/admin';
 import AdminProvider from './pages/admin/AdminProvider';
 import AdminSiteInformation from './pages/admin/AdminSiteInformation';
-import AdminPatient from './pages/admin/auth/AdminPatient';
+import AdminPatient from './pages/admin/AdminPatient';
+import AdminProfile from './pages/admin/AdminProfile';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -53,12 +54,17 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/admin/providers',
+        path: '/admin/profile/:id',
+        element: <AdminProfile />,
+      },
+
+      {
+        path: '/admin/providers/:siteId',
         element: <AdminProvider />,
       },
 
       {
-        path: '/admin/patients',
+        path: '/admin/patients/:siteId',
         element: <AdminPatient />,
       },
 

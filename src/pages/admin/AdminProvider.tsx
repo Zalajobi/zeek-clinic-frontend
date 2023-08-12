@@ -5,7 +5,8 @@ import { Typography } from '../../components/global/dialog/Typography';
 import ProviderPageRoutes from '../../components/admin/providers/ProviderPageRoutes';
 
 const AdminProvider = () => {
-  const { siteData } = useAdminProviderPage();
+  const { siteData, providerData } = useAdminProviderPage();
+  const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   // console.log(navigate);
 
@@ -20,7 +21,10 @@ const AdminProvider = () => {
             className={`text-left`}
           />
 
-          <ProviderPageRoutes siteId={siteData?.id ?? ''} />
+          <ProviderPageRoutes
+            siteId={siteData?.id ?? ''}
+            id={adminData?.id}
+          />
         </div>
       </AdminBaseTemplate>
     </Fragment>

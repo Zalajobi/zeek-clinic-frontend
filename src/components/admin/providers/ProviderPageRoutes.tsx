@@ -4,9 +4,10 @@ import { BeautifulLink } from '../../global/dialog/Typography';
 
 interface ProviderPageRoutesProps {
   siteId: string;
+  id: string;
 }
 
-const ProviderPageRoutes = ({ siteId }: ProviderPageRoutesProps) => {
+const ProviderPageRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
   return (
     <Fragment>
       <div
@@ -45,6 +46,18 @@ const ProviderPageRoutes = ({ siteId }: ProviderPageRoutesProps) => {
           }
           text={`Patients`}
           to={`/admin/patients`}
+        />
+
+        <BeautifulLink
+          icon={
+            <MdInfo
+              size={20}
+              className={`mr-2`}
+              color={`#3975ae`}
+            />
+          }
+          text={`Profile`}
+          to={`/admin/profile/${id}`}
         />
       </div>
     </Fragment>

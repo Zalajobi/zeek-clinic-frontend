@@ -30,6 +30,19 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
       },
 
       {
+        item: 'Admin',
+        Icon: (
+          <FaUserFriends
+            size={30}
+            fontWeight={40}
+            className={`text-gray-500 hover:text-gray-800`}
+          />
+        ),
+        route: `#`,
+        showSidebar: showSidebar,
+      },
+
+      {
         item: 'Patients',
         Icon: (
           <FaUserInjured
@@ -43,55 +56,16 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
       },
 
       {
-        item: 'Staffs',
+        item: 'Care Provider',
         Icon: (
-          <FaUserFriends
+          <FaUserMd
             size={30}
             fontWeight={40}
             className={`text-gray-500 hover:text-gray-800`}
           />
         ),
+        route: `/admin/providers/${siteId}`,
         showSidebar: showSidebar,
-        child: [
-          {
-            item: 'Admin',
-            Icon: (
-              <FaUsersCog
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: '#',
-            showSidebar: showSidebar,
-          },
-
-          {
-            item: 'Providers',
-            Icon: (
-              <FaUserMd
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: `/admin/providers/${siteId}`,
-            showSidebar: showSidebar,
-          },
-
-          // {
-          //   item: 'Nurse',
-          //   Icon: (
-          //     <FaUserNurse
-          //       size={30}
-          //       fontWeight={40}
-          //       className={`text-gray-500 hover:text-gray-800`}
-          //     />
-          //   ),
-          //   route: '#',
-          //   showSidebar: showSidebar,
-          // },
-        ],
       },
 
       {
