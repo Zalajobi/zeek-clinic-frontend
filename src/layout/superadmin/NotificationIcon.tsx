@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { TiMessages } from 'react-icons/ti';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
-import Text from '../../components/global/dialog/Text';
+import { Typography } from '../../components/global/dialog/Typography';
 
 const NotificationIcon = () => {
   return (
@@ -46,11 +46,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -73,11 +74,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -100,11 +102,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -127,11 +130,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -154,11 +158,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -181,11 +186,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -208,11 +214,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -235,11 +242,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -262,11 +270,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
@@ -289,11 +298,12 @@ const NotificationIcon = () => {
                     />
 
                     <div className="flex flex-col ml-1">
-                      <Text
+                      <Typography
                         text={`Notification From`}
                         size={`xs`}
                         className={`text-gray-500 leading-[10px]`}
                         weight={400}
+                        Tag={`p`}
                       />
                       <p
                         className={`group flex flex-row w-full items-center py-2 text-sm text-justify truncate mx-w-[200px]`}>
