@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 
 const AdminProfile = () => {
   return (

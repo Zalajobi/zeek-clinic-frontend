@@ -94,7 +94,7 @@ export const BeautifulLink = ({
       <Text
         text={text}
         weight={900}
-        className={`!text-[#3975ae]`}
+        className={`!text-[#3975ae] ml-1`}
       />
     </Link>
   );

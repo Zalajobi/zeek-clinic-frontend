@@ -1,27 +1,31 @@
 import { Fragment } from 'react';
-import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
-import ProviderPageRoutes from '../../components/admin/providers/ProviderPageRoutes';
+import AdminRoutes from '../../components/admin/AdminRoutes';
+import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
+import { ProviderPageSiteResponseData } from '../../types/admin';
 
 const AdminProvider = () => {
-  const { siteData, providerData } = useAdminProviderPage();
+  const { siteData } = useAdminProviderPage();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
-  // console.log(navigate);
+  console.log(siteData);
 
   return (
     <Fragment>
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
           <Typography
-            text={`Welcome To ${siteData?.name ?? ''}`}
+            text={`Welcome`}
             Tag={`h1`}
             size={`2xl`}
             className={`text-left`}
           />
 
-          <ProviderPageRoutes
+          <AdminSiteInfo data={siteData as ProviderPageSiteResponseData} />
+
+          <AdminRoutes
             siteId={siteData?.id ?? ''}
             id={adminData?.id}
           />

@@ -5,7 +5,7 @@ import { CgArrowsH } from 'react-icons/cg';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { HiPlusSm } from 'react-icons/hi';
 
-import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
+import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
 import Text from '../../components/global/dialog/Text';
 import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
 import Table from '../../components/global/table/Table';

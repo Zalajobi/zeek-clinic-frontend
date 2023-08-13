@@ -39,6 +39,9 @@ export interface ProviderPageSiteResponseData {
   country: string;
   phone: string;
   id: string;
+  state: string;
+  city: string;
+  created_at: string;
 }
 
 export interface ProvidersPageProvidersData {

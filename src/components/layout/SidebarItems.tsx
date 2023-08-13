@@ -37,7 +37,7 @@ const SidebarItems = ({
       ) : (
         <li>
           <a
-            href="#"
+            href="src/components/layout/SidebarItems#"
             className={`flex flex-row items-center h-16 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800 hover:no-underline`}
             onClick={() => setOpen(!open)}
             onMouseEnter={() => setOpen(!open)}>

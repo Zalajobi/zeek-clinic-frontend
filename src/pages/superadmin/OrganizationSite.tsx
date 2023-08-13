@@ -4,7 +4,7 @@ import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
 
-import SuperadminBaseTemplate from '../../components/templates/superadmin/SuperadminBaseTemplate';
+import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
 import {
   SuperadminSiteDataColumn,
