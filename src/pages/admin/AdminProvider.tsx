@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
 import AdminRoutes from '../../components/admin/AdminRoutes';

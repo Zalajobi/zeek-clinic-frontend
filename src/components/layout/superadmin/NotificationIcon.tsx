@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { TiMessages } from 'react-icons/ti';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
-import { Typography } from '../../components/global/dialog/Typography';
+import { Typography } from '../../global/dialog/Typography';
 
 const NotificationIcon = () => {
   return (

@@ -4,8 +4,8 @@ import { AiFillCaretDown, AiFillSetting } from 'react-icons/ai';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { TiMessages } from 'react-icons/ti';
 import { RiLockPasswordLine, RiLogoutBoxLine } from 'react-icons/ri';
-import MaleUserIcon from '../../assets/img/global/male-user-iconn.png';
-import Text from '../../components/global/dialog/Text';
+import MaleUserIcon from '../../../assets/img/global/male-user-iconn.png';
+import { Typography } from '../../global/dialog/Typography';
 
 type BaseInformationProps = {
   name: string;
@@ -40,11 +40,12 @@ const BaseInformation = ({ name, role }: BaseInformationProps) => {
                   />
                 </div>
 
-                <Text
+                <Typography
                   text={role}
                   size={`xs`}
                   className={`text-gray-500 leading-[10px] capitalize`}
                   weight={400}
+                  Tag={`p`}
                 />
               </div>
             </Menu.Button>

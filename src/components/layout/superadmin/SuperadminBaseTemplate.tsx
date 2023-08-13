@@ -1,8 +1,8 @@
 import { Fragment, ReactNode, useEffect } from 'react';
-import { ToasterConfig } from '../../components/global/Toast';
+import { ToasterConfig } from '../../global/Toast';
 import Header from '../Header';
 import Sidebar from './Sidebar';
-import { useSuperadminBaseTemplate } from '../../hooks/superadmin/useSuperadminBaseTemplate';
+import { useSuperadminBaseTemplate } from '../../../hooks/superadmin/useSuperadminBaseTemplate';
 
 const SuperadminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {

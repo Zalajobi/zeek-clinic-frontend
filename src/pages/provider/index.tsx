@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import ProviderBaseTemplate from '../../layout/providers/ProviderBaseTemplate';
+import ProviderBaseTemplate from '../../components/layout/providers/ProviderBaseTemplate';
 
 const CareGiverDashboard = () => {
   return (

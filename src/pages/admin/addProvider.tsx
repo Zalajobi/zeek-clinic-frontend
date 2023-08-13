@@ -8,7 +8,7 @@ import { IoMdPersonAdd } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
-import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
 import {
   CheckboxInput,

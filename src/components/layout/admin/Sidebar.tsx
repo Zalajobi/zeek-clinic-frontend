@@ -1,11 +1,11 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/img/global/logo.png';
+import Logo from '../../../assets/img/global/logo.png';
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../types/common';
+import { SidebarItemProps } from '../../../types/common';
 import SidebarItems from '../SidebarItems';
 import { AdminSideBarItems } from './index';
 

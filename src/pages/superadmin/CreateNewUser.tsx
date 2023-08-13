@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
-import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
+import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
 import {
   availableTitles,
   genderSelectInput,
