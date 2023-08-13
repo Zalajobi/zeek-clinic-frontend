@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import { SidebarItemProps } from '../../types/common';
-import { Typography } from '../global/dialog/Typography';
+import { SidebarItemProps } from '../types/common';
+import { Typography } from '../components/global/dialog/Typography';
 
 const SidebarItems = ({
   item,
@@ -37,7 +37,7 @@ const SidebarItems = ({
       ) : (
         <li>
           <a
-            href="src/components/layout/SidebarItems#"
+            href="src/layout/SidebarItems#"
             className={`flex flex-row items-center h-16 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800 hover:no-underline`}
             onClick={() => setOpen(!open)}
             onMouseEnter={() => setOpen(!open)}>

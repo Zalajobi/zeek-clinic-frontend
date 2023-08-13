@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/img/global/logo.png';
+import Logo from '../../assets/img/global/logo.png';
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
   MdOutlineAdminPanelSettings,
   MdOutlinePayments,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../../types/common';
+import { SidebarItemProps } from '../../types/common';
 import { RxDashboard } from 'react-icons/rx';
 import { TbFaceMask } from 'react-icons/tb';
 import { HiOutlineClipboardList } from 'react-icons/hi';

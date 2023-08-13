@@ -19,6 +19,7 @@ export const useAdminProviderPage = () => {
 
   useEffect(() => {
     const getData = async () => {
+      // const
       const baseData = JSON.parse(localStorage.getItem('adminData') as string);
       const response = (await axiosGetRequest(
         `/account/providers/site/providers/get/${baseData.siteId}`

@@ -12,8 +12,8 @@ import { TbFaceMask } from 'react-icons/tb';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { GrOrganization } from 'react-icons/gr';
-import Logo from '../../../assets/img/global/logo.png';
-import { SidebarItemProps } from '../../../types/common';
+import Logo from '../../assets/img/global/logo.png';
+import { SidebarItemProps } from '../../types/common';
 import SidebarItems from '../SidebarItems';
 
 const Sidebar = () => {

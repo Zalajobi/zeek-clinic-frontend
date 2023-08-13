@@ -4,8 +4,8 @@ import { AiFillCaretDown, AiFillSetting } from 'react-icons/ai';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { TiMessages } from 'react-icons/ti';
 import { RiLockPasswordLine, RiLogoutBoxLine } from 'react-icons/ri';
-import MaleUserIcon from '../../../assets/img/global/male-user-iconn.png';
-import Text from '../../global/dialog/Text';
+import MaleUserIcon from '../../assets/img/global/male-user-iconn.png';
+import Text from '../../components/global/dialog/Text';
 
 type BaseInformationProps = {
   name: string;
