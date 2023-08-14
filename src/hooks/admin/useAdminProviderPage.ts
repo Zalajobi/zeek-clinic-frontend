@@ -118,20 +118,18 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    console.log(response);
-
-    // if (response.success) {
-    //   setHospitalData(
-    //     response?.datadata?.hospitals as GetHospitalResponseData[]
-    //   );
-    //   setTotalHospitals(response?.datadata?.count as number);
-    //   setNoOfPages(
-    //     Math.ceil(
-    //       response?.datadata?.count /
-    //       (perPage === 'All' ? response?.datadata?.count : perPage)
-    //     )
-    //   );
-    // }
+    if (response.success) {
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+      setNoOfPages(
+        Math.ceil(
+          response?.datadata?.count /
+            (perPage === 'All' ? response?.datadata?.count : perPage)
+        )
+      );
+    }
   };
 
   const onUpdateSelectTo = async (value: Date) => {
@@ -159,28 +157,29 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    // if (response.success) {
-    //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-    //   setTotalHospitals(response?.data?.count as number);
-    //   setNoOfPages(
-    //     Math.ceil(
-    //       response?.data?.count /
-    //       (perPage === 'All' ? response?.data?.count : perPage)
-    //     )
-    //   );
-    // }
-
-    console.log(response);
+    if (response.success) {
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+      setNoOfPages(
+        Math.ceil(
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
+        )
+      );
+    }
   };
 
   const onUpdateSearchProvider = async (value: string) => {
+    console.log(value);
     setSearchProvider(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
       from_date: providerFrom,
       to_date: providerTo,
-      search: value,
+      search: value as string,
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
@@ -192,19 +191,20 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    // if (response.success) {
-    //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-    //   setTotalHospitals(response?.data?.count as number);
-    //   setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-    //   setNoOfPages(
-    //     Math.ceil(
-    //       response?.data?.count /
-    //       (perPage === 'All' ? response?.data?.count : perPage)
-    //     )
-    //   );
-    // }
-
-    console.log(response);
+    if (response.success) {
+      console.log(response.data);
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
+      setNoOfPages(
+        Math.ceil(
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
+        )
+      );
+    }
   };
 
   const onUpdateStatusFilterTab = async (
@@ -237,19 +237,19 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    // if (response.success) {
-    //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-    //   setTotalHospitals(response?.data?.count as number);
-    //   setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-    //   setNoOfPages(
-    //     Math.ceil(
-    //       response?.data?.count /
-    //       (perPage === 'All' ? response?.data?.count : perPage)
-    //     )
-    //   );
-    // }
-
-    console.log(response);
+    if (response.success) {
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
+      setNoOfPages(
+        Math.ceil(
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
+        )
+      );
+    }
   };
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
@@ -276,12 +276,12 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    // if (response.success) {
-    //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-    //   setTotalHospitals(response?.data?.count as number);
-    // }
-
-    console.log(response);
+    if (response.success) {
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+    }
   };
 
   const onClickNext = async (value: number) => {
@@ -312,18 +312,18 @@ export const useAdminProviderPage = () => {
         params
       );
 
-      // if (response.success) {
-      //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-      //   setTotalHospitals(response?.data?.count as number);
-      //   setNoOfPages(
-      //     Math.ceil(
-      //       response?.data?.count /
-      //       (perPage === 'All' ? response?.data?.count : perPage)
-      //     )
-      //   );
-      // }
-
-      console.log(response);
+      if (response.success) {
+        setProviderData(
+          response?.data?.providers as ProvidersPageProvidersData[]
+        );
+        setTotalProviders(response?.data?.count as number);
+        setNoOfPages(
+          Math.ceil(
+            response?.data?.count /
+              (perPage === 'All' ? response?.data?.count : perPage)
+          )
+        );
+      }
     }
   };
 
@@ -355,18 +355,18 @@ export const useAdminProviderPage = () => {
         params
       );
 
-      // if (response.success) {
-      //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-      //   setTotalHospitals(response?.data?.count as number);
-      //   setNoOfPages(
-      //     Math.ceil(
-      //       response?.data?.count /
-      //       (perPage === 'All' ? response?.data?.count : perPage)
-      //     )
-      //   );
-      // }
-
-      console.log(response);
+      if (response.success) {
+        setProviderData(
+          response?.data?.providers as ProvidersPageProvidersData[]
+        );
+        setTotalProviders(response?.data?.count as number);
+        setNoOfPages(
+          Math.ceil(
+            response?.data?.count /
+              (perPage === 'All' ? response?.data?.count : perPage)
+          )
+        );
+      }
     }
   };
 
@@ -392,20 +392,20 @@ export const useAdminProviderPage = () => {
       params
     );
 
-    // if (response.success) {
-    //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-    //   setTotalHospitals(response?.data?.count as number);
-    //   // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
-    //   setResultTo(perPage === 'All' ? response?.data?.count : perPage * 1);
-    //   setNoOfPages(
-    //     Math.ceil(
-    //       response?.data?.count /
-    //       (perPage === 'All' ? response?.data?.count : perPage)
-    //     )
-    //   );
-    // }
-
-    console.log(response);
+    if (response.success) {
+      setProviderData(
+        response?.data?.providers as ProvidersPageProvidersData[]
+      );
+      setTotalProviders(response?.data?.count as number);
+      // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
+      setResultTo(perPage === 'All' ? response?.data?.count : perPage * 1);
+      setNoOfPages(
+        Math.ceil(
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
+        )
+      );
+    }
   };
 
   const onEnterPageNumber = async (value: number | string) => {
@@ -439,18 +439,18 @@ export const useAdminProviderPage = () => {
         params
       );
 
-      // if (response.success) {
-      //   setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-      //   setTotalHospitals(response?.data?.count as number);
-      //   setNoOfPages(
-      //     Math.ceil(
-      //       response?.data?.count /
-      //       (perPage === 'All' ? response?.data?.count : perPage)
-      //     )
-      //   );
-      // }
-
-      console.log(response);
+      if (response.success) {
+        setProviderData(
+          response?.data?.providers as ProvidersPageProvidersData[]
+        );
+        setTotalProviders(response?.data?.count as number);
+        setNoOfPages(
+          Math.ceil(
+            response?.data?.count /
+              (perPage === 'All' ? response?.data?.count : perPage)
+          )
+        );
+      }
     }
   };
 
