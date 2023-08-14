@@ -25,6 +25,7 @@ import {
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
 import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
+import { AdminTable } from '../../components/global/table/AdminTable';
 
 const HospitalOrganizations = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -181,84 +182,29 @@ const HospitalOrganizations = () => {
           />
         </div>
 
-        <div
-          className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
-         border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
-          <div className="w-full relative my-4 sm:rounded-lg px-10">
-            <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-              <div className="w-full md:w-3/4">
-                <BasicSearchInput
-                  id={`searchOrg`}
-                  placeholder={`Search...`}
-                  value={searchOrganisation}
-                  change={(e) => onUpdateSearchOrganisation(e.target.value)}
-                  inputClass={`!min-h-[58px]`}
-                  labelClass={`!top-[12px] !text-[15px]`}
-                  className={`!mb-0`}
-                />
-              </div>
-
-              <TableHeaderDropdown
-                value={perPage}
-                items={itemsPerPage}
-                change={onUpdatePerPageItem}
-              />
-
-              <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-                <div className="flex items-center w-full space-x-3 md:w-auto">
-                  <DateInput
-                    label={`From`}
-                    placeholder={`DD/MM/YYYY`}
-                    className={`my-3`}
-                    change={(e) => onUpdateSelectFrom(new Date(e.target.value))}
-                    value={hospitalFilterFrom as Date}
-                    id={`from`}
-                    icon={<FaCalendarAlt size={20} />}
-                  />
-
-                  <CgArrowsH size={40} />
-
-                  <DateInput
-                    label={`To`}
-                    placeholder={`DD/MM/YYYY`}
-                    className={`my-3`}
-                    change={(e) => onUpdateSelectTo(new Date(e.target.value))}
-                    value={hospitalFilterTo as Date}
-                    id={`to`}
-                    icon={<FaCalendarAlt size={20} />}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <SelectInput
-                  label={`Country`}
-                  options={allHospitalCountries}
-                  className={`w-full min-h-[59px]`}
-                  id={'country'}
-                  enableFilter={true}
-                  change={(e) => filterByCountry(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-
-          <Table
-            columns={columns}
-            data={data}
-          />
-
-          <TableFooter
-            noOfPages={noOfPages}
-            total={totalHospitals}
-            from={resultFrom}
-            to={resultTo}
-            onNext={onClickNext}
-            onPrevious={onClickPrevious}
-            currentPage={currentPage}
-            enterPageNumber={onEnterPageNumber}
-          />
-        </div>
+        <AdminTable
+          tableColumns={columns}
+          tableData={data}
+          query={searchOrganisation}
+          onUpdateQuery={(e) => onUpdateSearchOrganisation(e.target.value)}
+          perPage={perPage}
+          onUpdatePerPageItem={onUpdatePerPageItem}
+          filterFromDate={hospitalFilterFrom as Date}
+          onUpdateFilterFromDate={onUpdateSelectFrom}
+          filterToDate={hospitalFilterTo as Date}
+          onUpdateFilterToDate={onUpdateSelectTo}
+          noOfPages={noOfPages}
+          totalCount={totalHospitals}
+          resultFrom={resultFrom}
+          resultTo={resultTo}
+          onClickNext={onClickNext}
+          onClickPrevious={onClickPrevious}
+          currentPage={currentPage}
+          onEnterPageNumber={onEnterPageNumber}
+          disableCountryFilter={true}
+          countries={allHospitalCountries}
+          onUpdateCountryFilter={filterByCountry}
+        />
       </div>
 
       <CreateHospitalModal />

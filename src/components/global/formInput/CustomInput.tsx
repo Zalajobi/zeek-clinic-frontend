@@ -4,6 +4,7 @@ import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
 import moment from 'moment';
+import { SelectInputFieldProps } from '../../../types/common';
 
 interface TextInputProps {
   label: string;
@@ -32,10 +33,7 @@ interface TextInputWithoutLabelProps {
 
 interface SelectInputProps {
   id: string;
-  options: {
-    value: string;
-    placeholder: string;
-  }[];
+  options: SelectInputFieldProps[];
   register?: UseFormRegister<any>;
   label: string;
   errorMsg?: string;
