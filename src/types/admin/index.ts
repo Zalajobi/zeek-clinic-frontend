@@ -65,4 +65,16 @@ export interface ProvidersPageProvidersData {
     name: string;
     id: string;
   };
+  unit: {
+    name: string;
+    id: string;
+  };
+  servicearea: {
+    name: string;
+    id: string;
+  };
+  primary_role: {
+    name: string;
+    id: string;
+  };
 }

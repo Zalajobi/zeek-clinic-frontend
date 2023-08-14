@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
@@ -6,6 +6,7 @@ import AdminRoutes from '../../components/admin/AdminRoutes';
 import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
 import { ProviderPageSiteResponseData } from '../../types/admin';
 import { ApplicationTable } from '../../components/global/table/ApplicationTable';
+import { AdminProviderDataColumn } from '../../components/tables/AdminTable';
 
 const AdminProvider = () => {
   const {
@@ -34,7 +35,10 @@ const AdminProvider = () => {
   } = useAdminProviderPage();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
-  const columns: any = [];
+  const columns = useMemo(
+    () => AdminProviderDataColumn(),
+    [providerData, currentPage]
+  );
   const data: any = [];
 
   return (
@@ -74,6 +78,7 @@ const AdminProvider = () => {
             onClickPrevious={onClickPrevious}
             currentPage={currentPage}
             onEnterPageNumber={onEnterPageNumber}
+            containerClassName={`mt-8`}
           />
         </div>
       </AdminBaseTemplate>
