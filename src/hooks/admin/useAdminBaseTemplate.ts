@@ -14,14 +14,24 @@ export const useAdminBaseTemplate = () => {
     const getHeaderData = async () => {
       const response = await axiosGetRequest('/account/admin/profile/get-data');
 
+      console.log(response);
+
       if (response.success) {
+        console.log(response.data);
+        localStorage.setItem('adminData', JSON.stringify(response?.data));
         setRequestData(response?.data as AdminHeaderBaseTemplateData);
       }
     };
 
-    getHeaderData().catch((err) => {
-      navigate('/admin/login');
-    });
+    const adminData = localStorage.getItem('adminData');
+
+    if (!adminData) {
+      getHeaderData().catch((err) => {
+        navigate('/admin/login');
+      });
+    } else {
+      setRequestData(JSON.parse(adminData) as AdminHeaderBaseTemplateData);
+    }
 
     initTE({ Datepicker, Input, Select, Ripple, Modal });
   }, []);

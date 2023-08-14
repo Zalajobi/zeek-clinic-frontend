@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaEye, FaPhone, FaCity, FaUser } from 'react-icons/fa';
+import { FaCalendarAlt, FaPhone, FaCity } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
@@ -8,7 +8,7 @@ import { IoMdPersonAdd } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
-import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
@@ -150,7 +150,10 @@ export const AddProvider = () => {
                   id={`gender`}
                   errorMsg={errors.gender?.message ?? ''}
                 />
+              </div>
 
+              <div
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
                 <DateInput
                   label={`Date Or Birth`}
                   placeholder={`DD/MM/YYYY`}
@@ -184,23 +187,23 @@ export const AddProvider = () => {
                   }
                 />
 
-                <TextInput
-                  label={`Password`}
-                  placeholder={`********`}
-                  className={`my-3 w-full`}
-                  errorMsg={errors.password?.message ?? ''}
-                  id={`password`}
-                  register={register}
-                  type={`password`}
-                  icon={
-                    <FaEye
-                      size={20}
-                      className={`${
-                        errors.password?.message ? 'text-red-500' : ''
-                      }`}
-                    />
-                  }
-                />
+                {/*<TextInput*/}
+                {/*  label={`Username`}*/}
+                {/*  placeholder={`john_doe`}*/}
+                {/*  className={`my-3 w-full`}*/}
+                {/*  errorMsg={errors.username?.message ?? ''}*/}
+                {/*  id={`username`}*/}
+                {/*  register={register}*/}
+                {/*  type={`text`}*/}
+                {/*  icon={*/}
+                {/*    <FaUser*/}
+                {/*      size={20}*/}
+                {/*      className={`${*/}
+                {/*        errors.username?.message ? 'text-red-500' : ''*/}
+                {/*      }`}*/}
+                {/*    />*/}
+                {/*  }*/}
+                {/*/>*/}
 
                 <TextInput
                   label={`Staff ID`}
@@ -222,25 +225,7 @@ export const AddProvider = () => {
               </div>
 
               <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
-                <TextInput
-                  label={`Username`}
-                  placeholder={`john_doe`}
-                  className={`my-3 w-full`}
-                  errorMsg={errors.username?.message ?? ''}
-                  id={`username`}
-                  register={register}
-                  type={`text`}
-                  icon={
-                    <FaUser
-                      size={20}
-                      className={`${
-                        errors.username?.message ? 'text-red-500' : ''
-                      }`}
-                    />
-                  }
-                />
-
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
                 <SelectInput
                   label={`Relationship Status`}
                   options={relationshipStatus}
@@ -262,10 +247,7 @@ export const AddProvider = () => {
                   errorMsg={errors.religion?.message ?? ''}
                   enableFilter={true}
                 />
-              </div>
 
-              <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
                 <SelectInput
                   label={`Department`}
                   options={departments}

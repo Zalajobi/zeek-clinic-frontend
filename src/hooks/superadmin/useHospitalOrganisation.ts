@@ -27,7 +27,6 @@ export const useHospitalOrganisation = () => {
   const [allHospitalCountries, setAllHospitalCountries] = useState<
     SelectInputFieldProps[]
   >([]);
-  const [showCreateHospitalModal, setShowCreateHospitalModal] = useState(false);
   const [selectAllHospitals, setSelectAllHospitals] = useState(false);
 
   let selectedHospitals: string[] = [];
@@ -463,9 +462,6 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const onUpdateShowCreateHospitalModal = () =>
-    setShowCreateHospitalModal(!showCreateHospitalModal);
-
   const onUpdateSelectedRow = (
     event: ChangeEvent<HTMLInputElement>,
     id: string
@@ -490,7 +486,6 @@ export const useHospitalOrganisation = () => {
     resultFrom,
     resultTo,
     allHospitalCountries,
-    showCreateHospitalModal,
     selectAllHospitals,
     hospitalFilterFrom,
     hospitalFilterTo,
@@ -507,7 +502,6 @@ export const useHospitalOrganisation = () => {
     onEnterPageNumber,
     filterByCountry,
     onUpdateSelectedRow,
-    onUpdateShowCreateHospitalModal,
     onUpdateSelectAllHospitals,
   };
 };

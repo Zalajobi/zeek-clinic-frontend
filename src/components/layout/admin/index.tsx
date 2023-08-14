@@ -3,7 +3,7 @@ import { MdDashboard, MdLocalActivity, MdReport } from 'react-icons/md';
 import {
   FaUserFriends,
   FaUserInjured,
-  FaUserNurse,
+  // FaUserNurse,
   FaUserMd,
   FaUsersCog,
   FaPaperclip,
@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa';
 import { SidebarItemProps } from '../../../types/common';
 
-export const AdminSideBarItems = (showSidebar: boolean) => {
+export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
     return [
       {
@@ -30,6 +30,19 @@ export const AdminSideBarItems = (showSidebar: boolean) => {
       },
 
       {
+        item: 'Admin',
+        Icon: (
+          <FaUserFriends
+            size={30}
+            fontWeight={40}
+            className={`text-gray-500 hover:text-gray-800`}
+          />
+        ),
+        route: `#`,
+        showSidebar: showSidebar,
+      },
+
+      {
         item: 'Patients',
         Icon: (
           <FaUserInjured
@@ -38,61 +51,21 @@ export const AdminSideBarItems = (showSidebar: boolean) => {
             className={`text-gray-500 hover:text-gray-800`}
           />
         ),
-        route: '#',
+        route: `/admin/patients/${siteId}`,
         showSidebar: showSidebar,
       },
 
       {
-        item: 'Staffs',
+        item: 'Care Provider',
         Icon: (
-          <FaUserFriends
+          <FaUserMd
             size={30}
             fontWeight={40}
             className={`text-gray-500 hover:text-gray-800`}
           />
         ),
-        // route: '/patient',
+        route: `/admin/providers/${siteId}`,
         showSidebar: showSidebar,
-        child: [
-          {
-            item: 'Admin',
-            Icon: (
-              <FaUsersCog
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: '#',
-            showSidebar: showSidebar,
-          },
-
-          {
-            item: 'Doctor',
-            Icon: (
-              <FaUserMd
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: '#',
-            showSidebar: showSidebar,
-          },
-
-          {
-            item: 'Nurse',
-            Icon: (
-              <FaUserNurse
-                size={30}
-                fontWeight={40}
-                className={`text-gray-500 hover:text-gray-800`}
-              />
-            ),
-            route: '#',
-            showSidebar: showSidebar,
-          },
-        ],
       },
 
       {
