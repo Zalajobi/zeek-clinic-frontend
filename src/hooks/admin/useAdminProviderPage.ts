@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
@@ -37,6 +37,7 @@ export const useAdminProviderPage = () => {
   const [providerData, setProviderData] = useState<
     ProvidersPageProvidersData[]
   >([]);
+  const [selectAllProviders, setSelectAllProviders] = useState(false);
 
   useEffect(() => {
     getData().then((response) => {
@@ -453,6 +454,19 @@ export const useAdminProviderPage = () => {
     }
   };
 
+  const onUpdateSelectedRow = (
+    event: ChangeEvent<HTMLInputElement>,
+    id: string
+  ) => {
+    // if (event.target.checked) selectedHospitals.push(id);
+    // else selectedHospitals = selectedHospitals.filter((item) => item !== id);
+    console.log(`Selected Provider With ID ${id}`);
+  };
+
+  const onUpdateSelectAllProviders = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectAllProviders(event.target.checked);
+  };
+
   return {
     // Values
     navigate,
@@ -467,6 +481,7 @@ export const useAdminProviderPage = () => {
     searchProvider,
     perPage,
     noOfPages,
+    selectAllProviders,
 
     // Functions
     onUpdateSelectFrom,
@@ -478,5 +493,7 @@ export const useAdminProviderPage = () => {
     onClickPrevious,
     filterByCountry,
     onEnterPageNumber,
+    onUpdateSelectedRow,
+    onUpdateSelectAllProviders,
   };
 };

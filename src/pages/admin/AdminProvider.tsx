@@ -6,7 +6,11 @@ import AdminRoutes from '../../components/admin/AdminRoutes';
 import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
 import { ProviderPageSiteResponseData } from '../../types/admin';
 import { ApplicationTable } from '../../components/global/table/ApplicationTable';
-import { AdminProviderDataColumn } from '../../components/tables/AdminTable';
+import {
+  AdminProviderDataColumn,
+  AdminProviderDataRow,
+} from '../../components/tables/AdminTable';
+import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
 
 const AdminProvider = () => {
   const {
@@ -22,6 +26,7 @@ const AdminProvider = () => {
     searchProvider,
     perPage,
     noOfPages,
+    selectAllProviders,
 
     // Functions
     onUpdateSelectFrom,
@@ -32,14 +37,27 @@ const AdminProvider = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
+    onUpdateSelectedRow,
+    onUpdateSelectAllProviders,
   } = useAdminProviderPage();
+
+  console.log(providerData);
+
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   const columns = useMemo(
     () => AdminProviderDataColumn(),
     [providerData, currentPage]
   );
-  const data: any = [];
+  const data = useMemo(
+    () =>
+      AdminProviderDataRow(
+        providerData,
+        onUpdateSelectedRow,
+        selectAllProviders
+      ) ?? [],
+    [providerData, currentPage]
+  );
 
   return (
     <Fragment>

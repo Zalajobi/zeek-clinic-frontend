@@ -49,6 +49,7 @@ export interface ProvidersPageProvidersData {
   id: string;
   status: string;
   created_at: string;
+  siteId: string;
   personalInfo: {
     phone: string;
     first_name: string;
