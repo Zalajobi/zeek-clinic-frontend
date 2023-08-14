@@ -5,7 +5,7 @@ import input = Simulate.input;
 import { axiosGetRequest } from '../../lib/axios';
 import {
   ProviderPageSiteResponseData,
-  ProvidersPageProvidersData,
+  ProviderAndRelationAPIResponse,
 } from '../../types/admin';
 import { customPromiseRequest } from '../../lib/requests';
 import toast from 'react-hot-toast';
@@ -35,7 +35,7 @@ export const useAdminProviderPage = () => {
   const [resultTo, setResultTo] = useState<number>(0);
   const [totalProviders, setTotalProviders] = useState<number>(0);
   const [providerData, setProviderData] = useState<
-    ProvidersPageProvidersData[]
+    ProviderAndRelationAPIResponse[]
   >([]);
   const [selectAllProviders, setSelectAllProviders] = useState(false);
 
@@ -76,7 +76,7 @@ export const useAdminProviderPage = () => {
 
       setTotalProviders(count);
       setProviderData(
-        providerData?.value?.data?.providers as ProvidersPageProvidersData[]
+        providerData?.value?.data?.providers as ProviderAndRelationAPIResponse[]
       );
 
       setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)));
@@ -120,7 +120,7 @@ export const useAdminProviderPage = () => {
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setNoOfPages(
@@ -159,7 +159,7 @@ export const useAdminProviderPage = () => {
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setNoOfPages(
@@ -194,7 +194,7 @@ export const useAdminProviderPage = () => {
     if (response.success) {
       console.log(response.data);
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
@@ -239,7 +239,7 @@ export const useAdminProviderPage = () => {
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
@@ -278,7 +278,7 @@ export const useAdminProviderPage = () => {
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
     }
@@ -314,7 +314,7 @@ export const useAdminProviderPage = () => {
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(
@@ -357,7 +357,7 @@ export const useAdminProviderPage = () => {
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(
@@ -394,7 +394,7 @@ export const useAdminProviderPage = () => {
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
@@ -441,7 +441,7 @@ export const useAdminProviderPage = () => {
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(

@@ -44,7 +44,7 @@ export interface ProviderPageSiteResponseData {
   created_at: string;
 }
 
-export interface ProvidersPageProvidersData {
+export interface ProviderAndRelationAPIResponse {
   email: string;
   id: string;
   status: string;
@@ -59,6 +59,9 @@ export interface ProvidersPageProvidersData {
     gender: string;
     dob: any;
     country: string;
+    state: string;
+    city: string;
+    address: string;
     profile_pic: string;
     id: string;
   };

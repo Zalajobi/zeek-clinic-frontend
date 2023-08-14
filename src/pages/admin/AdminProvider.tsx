@@ -64,7 +64,7 @@ const AdminProvider = () => {
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
           <Typography
-            text={`Welcome`}
+            text={`Welcome Back, ${adminData?.personalInfo?.first_name ?? ''}`}
             Tag={`h1`}
             size={`2xl`}
             className={`text-left`}

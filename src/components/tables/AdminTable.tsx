@@ -3,7 +3,7 @@ import { TbArrowsMoveVertical } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 import Status from '../global/Status';
-import { ProvidersPageProvidersData } from '../../types/admin';
+import { ProviderAndRelationAPIResponse } from '../../types/admin';
 import { ProvidersPageRowData } from '../../types/admin/table';
 
 export const AdminProviderDataColumn = (
@@ -196,13 +196,13 @@ export const AdminProviderDataColumn = (
 };
 
 export const AdminProviderDataRow = (
-  data: ProvidersPageProvidersData[],
+  data: ProviderAndRelationAPIResponse[],
   onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void,
   selected: boolean
 ) => {
   const rowItems: ProvidersPageRowData[] = [];
 
-  data?.map((item: ProvidersPageProvidersData, idx: number) => {
+  data?.map((item: ProviderAndRelationAPIResponse, idx: number) => {
     rowItems.push({
       checkbox: (
         <th
