@@ -20,6 +20,7 @@ import AdminProvider from './pages/admin/AdminProvider';
 import AdminSiteInformation from './pages/admin/AdminSiteInformation';
 import AdminPatient from './pages/admin/AdminPatient';
 import AdminProfile from './pages/admin/AdminProfile';
+import AdminProviderDetails from './pages/admin/AdminProviderDetails';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
       {
         path: '/admin/profile/:id',
         element: <AdminProfile />,
+      },
+
+      {
+        path: '/admin/provider/details/:id',
+        element: <AdminProviderDetails />,
       },
 
       {

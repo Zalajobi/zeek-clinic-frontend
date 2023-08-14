@@ -43,8 +43,6 @@ const AdminProvider = () => {
     onUpdateSelectAllProviders,
   } = useAdminProviderPage();
 
-  console.log(providerData);
-
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   const columns = useMemo(
