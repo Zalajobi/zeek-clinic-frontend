@@ -1,35 +1,23 @@
 import { useMemo } from 'react';
 import { Tab } from '@headlessui/react';
 import { TiExportOutline } from 'react-icons/ti';
-import { CgArrowsH } from 'react-icons/cg';
-import { FaCalendarAlt } from 'react-icons/fa';
 import { HiPlusSm } from 'react-icons/hi';
 
 import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
 import Text from '../../components/global/dialog/Text';
 import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
-import Table from '../../components/global/table/Table';
-import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
 import {
   SuperadminHospitalDataColumn,
   SuperadminHospitalDataRow,
 } from '../../components/tables/SuperadminTable';
-import TableFooter from '../../components/global/table/TableFooter';
 import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
-import {
-  DateInput,
-  SelectInput,
-} from '../../components/global/formInput/CustomInput';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
-import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
-import { AdminTable } from '../../components/global/table/AdminTable';
+import { ApplicationTable } from '../../components/global/table/ApplicationTable';
 
 const HospitalOrganizations = () => {
-  const itemsPerPage = ['All', 10, 20, 50, 100];
-
   const {
     //Value
     searchOrganisation,
@@ -42,7 +30,6 @@ const HospitalOrganizations = () => {
     resultFrom,
     resultTo,
     allHospitalCountries,
-    showCreateHospitalModal,
     selectAllHospitals,
     hospitalFilterFrom,
     hospitalFilterTo,
@@ -58,7 +45,6 @@ const HospitalOrganizations = () => {
     onClickPrevious,
     onEnterPageNumber,
     filterByCountry,
-    onUpdateShowCreateHospitalModal,
     onUpdateSelectedRow,
     onUpdateSelectAllHospitals,
   } = useHospitalOrganisation();
@@ -182,7 +168,7 @@ const HospitalOrganizations = () => {
           />
         </div>
 
-        <AdminTable
+        <ApplicationTable
           tableColumns={columns}
           tableData={data}
           query={searchOrganisation}

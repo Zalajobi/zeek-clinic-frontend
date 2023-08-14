@@ -33,7 +33,7 @@ interface AdminTableProps {
   onUpdateCountryFilter?: (event: string) => void;
 }
 
-export const AdminTable = ({
+export const ApplicationTable = ({
   tableColumns,
   tableData,
   query,
