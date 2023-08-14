@@ -9,15 +9,15 @@ import { SidebarItemProps } from '../../../types/common';
 import SidebarItems from '../SidebarItems';
 import { AdminSideBarItems } from './index';
 
-const Sidebar = () => {
+const Sidebar = ({ siteId }: { siteId: string }) => {
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const sidebarItems = AdminSideBarItems(showSidebar);
+  const sidebarItems = AdminSideBarItems(showSidebar, siteId);
 
   return (
     <Fragment>
       <aside
-        className={`md:h-100 w-screen shrink-0 overflow-x-scroll bg-brand-secondary-background !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
+        className={`md:h-100 w-screen shrink-0 overflow-x-scroll bg-white !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
           showSidebar ? 'md:w-auto' : 'md:w-[13rem]'
         } no-scroll md:overflow-y-scroll`}>
         <div

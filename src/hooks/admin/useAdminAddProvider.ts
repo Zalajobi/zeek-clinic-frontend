@@ -39,45 +39,43 @@ export const useAdminAddProvider = () => {
         temporaryUnitStore: SelectInputFieldProps[] = [];
 
       Country.getAllCountries().map((country) => {
-        countriesUpdate.push({
+        return countriesUpdate.push({
           value: country.isoCode,
           placeholder: country.name,
         });
       });
       setAllCountries(countriesUpdate);
 
-      const response = <AccountServiceApiResponse>(
-        await axiosGetRequest(
-          `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
-        )
-      );
+      const response = (await axiosGetRequest(
+        `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+      )) as AccountServiceApiResponse;
 
       if (response.success) {
         const data = response.data as AdminCreateProviderResponseData;
 
         data.departments.map((item) => {
-          temporaryDeptStore.push({
+          return temporaryDeptStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.roles.map((item) => {
-          temporaryRoleStore.push({
+          return temporaryRoleStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.serviceAreas.map((item) => {
-          temporaryServiceAreaStore.push({
+          return temporaryServiceAreaStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.units.map((item) => {
-          temporaryUnitStore.push({
+          return temporaryUnitStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
@@ -100,7 +98,7 @@ export const useAdminAddProvider = () => {
     let countryStates: SelectInputFieldProps[] = [];
 
     State.getStatesOfCountry(value).map((country) => {
-      countryStates.push({
+      return countryStates.push({
         value: country.isoCode,
         placeholder: country.name,
       });
@@ -120,12 +118,10 @@ export const useAdminAddProvider = () => {
       profilePic,
     };
 
-    const response = <AccountServiceApiResponse>(
-      await axiosPostRequest(
-        `account/providers/admin/create-new/provider`,
-        addAdminData
-      )
-    );
+    const response = (await axiosPostRequest(
+      `account/providers/admin/create-new/provider`,
+      addAdminData
+    )) as AccountServiceApiResponse;
 
     if (response.success) {
       toast.success(response.message);
