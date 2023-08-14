@@ -227,7 +227,7 @@ export const AdminProviderDataRow = (
 
       name: (
         <Link
-          to={`/admin/provider/${item?.id}`}
+          to={`/admin/provider/details/${item?.id}`}
           className={`text-black hover:text-gray-500 decoration-0`}>
           <b className={`font-extrabold`}>
             {' '}
