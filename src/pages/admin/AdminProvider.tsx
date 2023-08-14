@@ -10,7 +10,7 @@ import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
 } from '../../components/tables/AdminTable';
-import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
+// import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
 
 const AdminProvider = () => {
   const {

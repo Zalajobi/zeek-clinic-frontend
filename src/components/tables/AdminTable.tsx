@@ -75,7 +75,7 @@ export const AdminProviderDataColumn = () => {
           <span
             className="flex shrink-0 flex-row gap-1"
             onClick={() => console.log('Role')}>
-            Department
+            Role
             <TbArrowsMoveVertical size={15} />
           </span>
         </Fragment>
@@ -184,7 +184,7 @@ export const AdminProviderDataColumn = () => {
     {
       Header: (
         <Fragment>
-          <span className="flex shrink-0 flex-col gap-1">Status</span>
+          <span className="flex shrink-0 flex-col gap-1">Action</span>
         </Fragment>
       ),
       accessor: 'action',
