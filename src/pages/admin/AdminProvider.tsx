@@ -10,6 +10,7 @@ import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
 } from '../../components/tables/AdminTable';
+import ProvidersTab from '../../components/admin/providers/ProvidersTab';
 // import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
 
 const AdminProvider = () => {
@@ -27,6 +28,7 @@ const AdminProvider = () => {
     perPage,
     noOfPages,
     selectAllProviders,
+    providerStatus,
 
     // Functions
     onUpdateSelectFrom,
@@ -46,7 +48,7 @@ const AdminProvider = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   const columns = useMemo(
-    () => AdminProviderDataColumn(),
+    () => AdminProviderDataColumn(onUpdateSelectAllProviders),
     [providerData, currentPage]
   );
   const data = useMemo(
@@ -75,6 +77,11 @@ const AdminProvider = () => {
           <AdminRoutes
             siteId={siteData?.id ?? ''}
             id={adminData?.id}
+          />
+
+          <ProvidersTab
+            activeTab={providerStatus}
+            click={onUpdateStatusFilterTab}
           />
 
           <ApplicationTable

@@ -1,13 +1,14 @@
 import { ChangeEvent, Fragment } from 'react';
 import { TbArrowsMoveVertical } from 'react-icons/tb';
-import { HospitalRowData } from '../../types/superadmin';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 import Status from '../global/Status';
 import { ProvidersPageProvidersData } from '../../types/admin';
 import { ProvidersPageRowData } from '../../types/admin/table';
 
-export const AdminProviderDataColumn = () => {
+export const AdminProviderDataColumn = (
+  onUpdateSelectAllProviders: (event: ChangeEvent<HTMLInputElement>) => void
+) => {
   const columnItem = [
     {
       Header: (
@@ -19,7 +20,7 @@ export const AdminProviderDataColumn = () => {
                       focus:ring-offset-2 group-hover:ring-2 group-hover:ring-offset-2 border-custom-gray-100 bg-white
                       ring-custom-primary-400"
               type="checkbox"
-              // onChange={onUpdateSelectAllHospitals}
+              onChange={onUpdateSelectAllProviders}
             />
           </div>
         </div>

@@ -482,6 +482,7 @@ export const useAdminProviderPage = () => {
     perPage,
     noOfPages,
     selectAllProviders,
+    providerStatus,
 
     // Functions
     onUpdateSelectFrom,
