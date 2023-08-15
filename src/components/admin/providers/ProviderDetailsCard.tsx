@@ -17,7 +17,7 @@ const ProviderDetailsCard = ({
     <Fragment>
       <Fragment>
         <CustomTransparentCard
-          className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 mt-10 text-sm font-extrabold`}>
+          className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold`}>
           {/*Name*/}
           <div className={`flex flex-row items-center py-3`}>
             <Typography
@@ -107,23 +107,6 @@ const ProviderDetailsCard = ({
             />
           </div>
 
-          {/*Unit*/}
-          <div className={`flex flex-row items-center py-3`}>
-            <Typography
-              text={`Unit:`}
-              Tag={'p'}
-              size={'sm'}
-              className={`text-[color:var(--label-color)]`}
-            />
-
-            <Typography
-              text={data?.unit?.name ?? ''}
-              Tag={'p'}
-              size={'sm'}
-              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-            />
-          </div>
-
           {/*Assigned Patient Count*/}
           <div className={`flex flex-row items-center py-3`}>
             <Typography
@@ -135,6 +118,23 @@ const ProviderDetailsCard = ({
 
             <Typography
               text={patientCount ?? 0}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            />
+          </div>
+
+          {/*Unit*/}
+          <div className={`flex flex-row items-center py-3`}>
+            <Typography
+              text={`Unit:`}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--label-color)]`}
+            />
+
+            <Typography
+              text={data?.unit?.name ?? ''}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}

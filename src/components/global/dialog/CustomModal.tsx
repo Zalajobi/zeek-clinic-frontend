@@ -24,8 +24,7 @@ export const CustomBasicModal = ({
         aria-labelledby={targetModalId}
         aria-modal={true}
         role={`dialog`}
-        // aria-hidden={true}
-      >
+        aria-hidden={true}>
         <div
           data-te-modal-dialog-ref
           className="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px] min-[1200px]:max-w-[1140px]">

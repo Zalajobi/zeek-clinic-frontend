@@ -17,7 +17,6 @@ export const useAdminBaseTemplate = () => {
       console.log(response);
 
       if (response.success) {
-        console.log(response.data);
         localStorage.setItem('adminData', JSON.stringify(response?.data));
         setRequestData(response?.data as AdminHeaderBaseTemplateData);
       }

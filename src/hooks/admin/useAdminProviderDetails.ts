@@ -22,7 +22,6 @@ export const useAdminProviderDetails = () => {
     )) as AccountServiceApiResponse;
 
     if (response.success) {
-      console.log(response.data);
       setProviderData(response.data.provider as ProviderAndRelationAPIResponse);
       setPrimaryPatientCount(response.data.patientCount as number);
     }
