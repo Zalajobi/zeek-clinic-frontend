@@ -14,8 +14,6 @@ export const useAdminBaseTemplate = () => {
     const getHeaderData = async () => {
       const response = await axiosGetRequest('/account/admin/profile/get-data');
 
-      console.log(response);
-
       if (response.success) {
         localStorage.setItem('adminData', JSON.stringify(response?.data));
         setRequestData(response?.data as AdminHeaderBaseTemplateData);

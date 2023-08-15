@@ -13,7 +13,15 @@ import { CgExport } from 'react-icons/cg';
 import AdminEditProviderModal from '../../components/admin/providers/AdminEditProviderModal';
 
 const AdminProviderDetails = () => {
-  const { providerData, primaryPatientCount } = useAdminProviderDetails();
+  const {
+    // Value
+    providerData,
+    primaryPatientCount,
+    editProviderModalSection,
+
+    // Function
+    onUndateProviderModalSection,
+  } = useAdminProviderDetails();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   return (
@@ -64,6 +72,8 @@ const AdminProviderDetails = () => {
 
         <AdminEditProviderModal
           name={providerData?.personalInfo?.first_name ?? ''}
+          currentModal={editProviderModalSection}
+          updateCurrentModal={onUndateProviderModalSection}
         />
       </AdminBaseTemplate>
     </Fragment>

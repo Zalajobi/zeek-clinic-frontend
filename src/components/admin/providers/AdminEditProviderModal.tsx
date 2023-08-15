@@ -4,16 +4,40 @@ import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
 } from '../../global/CustomButton';
+import { Tab } from '@headlessui/react';
+import { Typography } from '../../global/dialog/Typography';
+import {
+  AdminEditGeneratePasswordTab,
+  AdminEditMoveProviderTab,
+  AdminEditPersonalInformationModalTab,
+} from './AdminEditProviderModalTabViews';
 
 interface AdminEditProviderModalProps {
   name: string;
+  currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
+  updateCurrentModal: (
+    value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
+  ) => void;
 }
 
-const AdminEditProviderModal = ({ name }: AdminEditProviderModalProps) => {
+const views = {
+  Personal: AdminEditPersonalInformationModalTab,
+  MoveProvider: AdminEditMoveProviderTab,
+  GeneratePassword: AdminEditGeneratePasswordTab,
+};
+
+const AdminEditProviderModal = ({
+  name,
+  currentModal,
+  updateCurrentModal,
+}: AdminEditProviderModalProps) => {
+  const CurrentView = views[currentModal];
+
   return (
     <CustomBasicModal
       targetModalId={`editProvider`}
       title={`Edit ${name}`}
+      bodyClassName={`px-0 py-0`}
       footer={
         <Fragment>
           <BasicOutlineButton
@@ -31,7 +55,63 @@ const AdminEditProviderModal = ({ name }: AdminEditProviderModalProps) => {
           />
         </Fragment>
       }>
-      Edit Provider
+      <div className={`grid grid-cols-[25%_75%] gap-4`}>
+        <div className={`w-full h-full border-r-black border-r`}>
+          <div className={`flex flex-col item-center justify-start px-4`}>
+            <Tab.Group>
+              <Tab.List
+                className={`flex flex-col space-x-1 rounded-xl bg-white p-1`}>
+                <Tab
+                  className={`w-full rounded-lg py-5 my-2 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
+                  ${
+                    currentModal === 'Personal'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => updateCurrentModal('Personal')}>
+                  <Typography
+                    text={`Personal Information`}
+                    Tag={`p`}
+                    weight={500}
+                  />
+                </Tab>
+
+                <Tab
+                  className={`w-full rounded-lg py-5 my-2 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
+                  ${
+                    currentModal === 'MoveProvider'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => updateCurrentModal('MoveProvider')}>
+                  <Typography
+                    text={`Move Provider`}
+                    Tag={`p`}
+                    weight={500}
+                  />
+                </Tab>
+
+                <Tab
+                  className={`w-full rounded-lg py-5 my-2 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
+                  ${
+                    currentModal === 'GeneratePassword'
+                      ? 'bg-[#EEF7FF] shadow'
+                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
+                  }`}
+                  onClick={() => updateCurrentModal('GeneratePassword')}>
+                  <Typography
+                    text={`Generate Password`}
+                    Tag={`p`}
+                    weight={500}
+                  />
+                </Tab>
+              </Tab.List>
+            </Tab.Group>
+          </div>
+        </div>
+
+        <CurrentView />
+      </div>
     </CustomBasicModal>
   );
 };

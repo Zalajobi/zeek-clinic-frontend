@@ -6,6 +6,8 @@ interface CustomBasicModalProps {
   title: string;
   children: ReactNode;
   footer: ReactNode;
+  className?: string;
+  bodyClassName?: string;
 }
 
 export const CustomBasicModal = ({
@@ -13,12 +15,14 @@ export const CustomBasicModal = ({
   title,
   children,
   footer,
+  className = '',
+  bodyClassName = '',
 }: CustomBasicModalProps) => {
   return (
     <Fragment>
       <div
         data-te-modal-init
-        className="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        className={`fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none ${className}`}
         id={targetModalId}
         tabIndex={-1}
         aria-labelledby={targetModalId}
@@ -61,7 +65,9 @@ export const CustomBasicModal = ({
             </div>
 
             {/*Modal Body*/}
-            <div className="relative p-4 overflow-y-auto">{children}</div>
+            <div className={`relative p-4 overflow-y-auto ${bodyClassName}`}>
+              {children}
+            </div>
 
             {/*Modal Footer */}
             <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">

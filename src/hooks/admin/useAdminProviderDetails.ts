@@ -9,6 +9,9 @@ export const useAdminProviderDetails = () => {
   const [providerData, setProviderData] =
     useState<ProviderAndRelationAPIResponse>();
   const [primaryPatientCount, setPrimaryPatientCount] = useState<number>(0);
+  const [editProviderModalSection, setEditProviderModalSection] = useState<
+    'Personal' | 'GeneratePassword' | 'MoveProvider'
+  >('Personal');
 
   useEffect(() => {
     getData().then((response) => {
@@ -27,9 +30,21 @@ export const useAdminProviderDetails = () => {
     }
   };
 
+  const onUndateProviderModalSection = (
+    value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
+  ) => {
+    console.log(value);
+    setEditProviderModalSection((editProviderModalSection) => value);
+  };
+
   return {
+    // Value
     id,
     providerData,
     primaryPatientCount,
+    editProviderModalSection,
+
+    // Function
+    onUndateProviderModalSection,
   };
 };
