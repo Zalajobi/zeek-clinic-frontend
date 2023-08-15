@@ -6,10 +6,8 @@ import ProviderDetailsCard from '../../components/admin/providers/ProviderDetail
 import { ProviderAndRelationAPIResponse } from '../../types/admin';
 
 const AdminProviderDetails = () => {
-  const { providerData } = useAdminProviderDetails();
+  const { providerData, primaryPatientCount } = useAdminProviderDetails();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
-
-  console.log(providerData);
 
   return (
     <Fragment>
@@ -24,6 +22,7 @@ const AdminProviderDetails = () => {
 
           <ProviderDetailsCard
             data={providerData as ProviderAndRelationAPIResponse}
+            patientCount={primaryPatientCount}
           />
         </div>
       </AdminBaseTemplate>

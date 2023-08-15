@@ -8,6 +8,7 @@ export const useAdminProviderDetails = () => {
   const { id } = useParams();
   const [providerData, setProviderData] =
     useState<ProviderAndRelationAPIResponse>();
+  const [primaryPatientCount, setPrimaryPatientCount] = useState<number>(0);
 
   useEffect(() => {
     getData().then((response) => {
@@ -21,12 +22,15 @@ export const useAdminProviderDetails = () => {
     )) as AccountServiceApiResponse;
 
     if (response.success) {
-      setProviderData(response.data as ProviderAndRelationAPIResponse);
+      console.log(response.data);
+      setProviderData(response.data.provider as ProviderAndRelationAPIResponse);
+      setPrimaryPatientCount(response.data.patientCount as number);
     }
   };
 
   return {
     id,
     providerData,
+    primaryPatientCount,
   };
 };
