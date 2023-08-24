@@ -1,9 +1,11 @@
-import { ChangeEvent, Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
 import moment from 'moment';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import { SelectInputFieldProps } from '../../../types/common';
 
 interface TextInputProps {
@@ -422,5 +424,23 @@ export const CustomInputLabel = ({
       htmlFor={forItem}>
       {label}
     </label>
+  );
+};
+
+export const PhoneNumberInput = () => {
+  const [value, setPhoneNumberValue] = useState('');
+
+  const setValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumberValue(event.target.value);
+  };
+
+  return (
+    <Fragment>
+      <PhoneInput
+        placeholder="Enter phone number"
+        value={value}
+        onChange={(value) => console.log(value)}
+      />
+    </Fragment>
   );
 };
