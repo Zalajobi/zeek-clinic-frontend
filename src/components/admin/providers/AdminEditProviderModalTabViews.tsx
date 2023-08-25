@@ -6,14 +6,28 @@ import {
   SelectInput,
   TextInput,
 } from '../../global/formInput/CustomInput';
-import { useForm } from 'react-hook-form';
+import {
+  DeepRequired,
+  FieldErrors,
+  FieldErrorsImpl,
+  useForm,
+  UseFormRegister,
+} from 'react-hook-form';
 import {
   AdminEditPersonalInformation,
   AdminEditPersonalInformationSchema,
 } from '../../../types/admin/provider';
 import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
 
-export const AdminEditPersonalInformationModalTab = () => {
+interface AdminEditProviderModalTabViewsProps {
+  register: UseFormRegister<any>;
+  errors: any;
+}
+
+export const AdminEditPersonalInformationModalTab = ({
+  register,
+  errors,
+}: AdminEditProviderModalTabViewsProps) => {
   const {
     // Value
     allCountries,
@@ -26,19 +40,11 @@ export const AdminEditPersonalInformationModalTab = () => {
     onUpdateCountry,
   } = useAdminUpdateProviderInformationTabs();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AdminEditPersonalInformation>({
-    resolver: yupResolver(AdminEditPersonalInformationSchema),
-  });
-
   return (
     <Fragment>
       <div
         className={`w-full h-full flex flex-col item-center justify-start px-8 py-4`}>
-        <div className={`grid grid-cols-5 gap-4`}>
+        <div className={`grid grid-cols-5 gap-4 mb-2`}>
           {/*Title*/}
           <SelectInput
             label={`Title`}
@@ -68,7 +74,7 @@ export const AdminEditPersonalInformationModalTab = () => {
           />
         </div>
 
-        <div className={`grid grid-cols-2 gap-4`}>
+        <div className={`grid grid-cols-2 gap-4 my-2`}>
           {/*Middle Name*/}
           <TextInput
             label={`Other Name`}
@@ -89,7 +95,7 @@ export const AdminEditPersonalInformationModalTab = () => {
           />
         </div>
 
-        <div className={`grid grid-cols-3 gap-4`}>
+        <div className={`grid grid-cols-3 gap-4 my-2`}>
           {/*Country*/}
           <SelectInput
             label={`Country`}

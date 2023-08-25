@@ -11,6 +11,13 @@ import {
   AdminEditMoveProviderTab,
   AdminEditPersonalInformationModalTab,
 } from './AdminEditProviderModalTabViews';
+import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
+import { useForm } from 'react-hook-form';
+import {
+  AdminEditPersonalInformation,
+  AdminEditPersonalInformationSchema,
+} from '../../../types/admin/provider';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface AdminEditProviderModalProps {
   name: string;
@@ -20,17 +27,42 @@ interface AdminEditProviderModalProps {
   ) => void;
 }
 
-const views = {
-  Personal: AdminEditPersonalInformationModalTab,
-  MoveProvider: AdminEditMoveProviderTab,
-  GeneratePassword: AdminEditGeneratePasswordTab,
-};
-
 const AdminEditProviderModal = ({
   name,
   currentModal,
   updateCurrentModal,
 }: AdminEditProviderModalProps) => {
+  const {
+    // Value
+    allCountries,
+    allCountryStates,
+    country,
+    countryCode,
+    phoneCode,
+
+    // Function
+    onUpdateCountry,
+  } = useAdminUpdateProviderInformationTabs();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AdminEditPersonalInformation>({
+    resolver: yupResolver(AdminEditPersonalInformationSchema),
+  });
+
+  const views = {
+    Personal: (
+      <AdminEditPersonalInformationModalTab
+        errors={errors}
+        register={register}
+      />
+    ),
+    MoveProvider: <AdminEditMoveProviderTab />,
+    GeneratePassword: <AdminEditGeneratePasswordTab />,
+  };
+
   const CurrentView = views[currentModal];
 
   return (
@@ -55,8 +87,8 @@ const AdminEditProviderModal = ({
           />
         </Fragment>
       }>
-      <div className={`grid grid-cols-[25%_75%] gap-4`}>
-        <div className={`w-full h-full border-r-black border-r`}>
+      <div className={`grid grid-cols-[25%_75%] gap-4 w-full h-[800px]`}>
+        <div className={`w-full h-full border-r-[#e5e7eb] border-r`}>
           <div className={`flex flex-col item-center justify-start px-4`}>
             <Tab.Group>
               <Tab.List
@@ -110,7 +142,7 @@ const AdminEditProviderModal = ({
           </div>
         </div>
 
-        <CurrentView />
+        {CurrentView}
       </div>
     </CustomBasicModal>
   );

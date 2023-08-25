@@ -32,7 +32,7 @@ export const CustomBasicModal = ({
         <div
           data-te-modal-dialog-ref
           className="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px] min-[1200px]:max-w-[1140px]">
-          <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+          <div className="pointer-events-auto min-h-[900px] relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
             <div className="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
               {/*Modal Title*/}
               <Typography
@@ -65,7 +65,8 @@ export const CustomBasicModal = ({
             </div>
 
             {/*Modal Body*/}
-            <div className={`relative p-4 overflow-y-auto ${bodyClassName}`}>
+            <div
+              className={`relative p-4 overflow-y-auto min-h-[800px] ${bodyClassName}`}>
               {children}
             </div>
 
