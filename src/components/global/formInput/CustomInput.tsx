@@ -80,82 +80,74 @@ export const TextInput = ({
 }: TextInputProps) => {
   return (
     <Fragment>
-      <div
-        className={`relative w-full min-w-[100px] ${className}`}
-        data-te-input-wrapper-init>
-        {prefix && (
-          <div>
-            <Typography
-              className="absolute top-2/4 grid h-5 w-18 -translate-y-2/4 place-items-center text-blue-gray-500 ml-[10px]
-              peer-[:not(:placeholder-shown)]:top-[67%] focus:top-[67%] peer-focus:top-[67%] text-[#C4C4C6]
-              [&:not(:placeholder-shown)]:top-[67%] [&:not(:placeholder-shown)]:top-[67%]"
-              Tag={`span`}
-              text={prefix}
-            />
-          </div>
-        )}
+      <div className={`min-w-[100px] ${className}`}>
+        <div className="w-full">
+          <div className="relative h-[58px] w-full min-w-[200px]">
+            <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
+              {icon}
+            </div>
 
-        {register ? (
-          <input
-            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
-          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
-          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
-          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
-          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
-          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
-          ${prefix ? 'pl-[70px]' : ''}`}
-            placeholder={placeholder}
-            {...register(id)}
-            id={id}
-            type={type}
-          />
-        ) : (
-          <input
-            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
-          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
-          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
-          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
-          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
-          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
-          ${prefix ? 'pl-[70px]' : ''}`}
-            placeholder={placeholder}
-            onChange={change}
-            value={value}
-            id={id}
-            type={type}
-          />
-        )}
+            {register && (
+              <input
+                className={`peer h-full w-full rounded-[7px] border border-blue-gray-200 
+              bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 
+              transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 
+              placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-500 focus:border-t-transparent 
+              focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                placeholder={placeholder}
+                id={id}
+                {...register(id)}
+              />
+            )}
 
-        {icon && (
-          <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-            {icon}
-          </div>
-        )}
+            {change && (
+              <input
+                className={`peer h-full w-full rounded-[7px] border border-blue-gray-200 
+              bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 
+              transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 
+              placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-500 focus:border-t-transparent 
+              focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
+                placeholder={placeholder}
+                onChange={change}
+                value={value}
+                id={id}
+              />
+            )}
 
-        <label
-          className={`pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 
-          py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 
-          peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary 
-          peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] 
-          peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 
-          dark:peer-focus:text-primary ${errorMsg ? 'text-red-500' : ''}`}
-          htmlFor={id}>
-          {label}
-        </label>
-
-        {errorMsg && (
-          <div
-            className="absolute w-full text-sm text-neutral-500 peer-focus:text-primary dark:text-neutral-200 dark:peer-focus:text-primary"
-            data-te-input-helper-ref>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`italic text-xs font-thin ${
-                errorMsg ? 'text-red-500' : ''
+            <label
+              className={`before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex 
+              h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all 
+              before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 
+              before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 
+              before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block 
+              after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r 
+              after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm 
+              peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 
+              peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent 
+              peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-500 peer-focus:before:border-t-2 
+              peer-focus:before:border-l-2 peer-focus:before:border-gray-500 peer-focus:after:border-t-2 
+              peer-focus:after:border-r-2 peer-focus:after:border-gray-500 peer-disabled:text-transparent 
+              peer-disabled:before:border-transparent peer-disabled:after:border-transparent 
+              peer-disabled:peer-placeholder-shown:text-blue-gray-500 ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
               }`}
-            />
+              htmlFor={id}>
+              {label}
+            </label>
           </div>
-        )}
+
+          {errorMsg && (
+            <div className="absolute w-full text-sm text-neutral-500 peer-focus:text-primary dark:text-neutral-200 dark:peer-focus:text-primary">
+              <Typography
+                Tag={`span`}
+                text={errorMsg}
+                className={`italic text-xs font-thin ${
+                  errorMsg ? 'text-red-500' : ''
+                }`}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Fragment>
   );
