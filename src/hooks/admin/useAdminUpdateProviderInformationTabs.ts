@@ -48,9 +48,7 @@ export const useAdminUpdateProviderInformationTabs = () => {
     // Value
     allCountries,
     allCountryStates,
-    country,
     countryCode,
-    phoneCode,
 
     // Function
     onUpdateCountry,

@@ -33,9 +33,7 @@ export const AdminEditPersonalInformationModalTab = ({
     // Value
     allCountries,
     allCountryStates,
-    country,
     countryCode,
-    phoneCode,
 
     // Function
     onUpdateCountry,

@@ -11,7 +11,6 @@ import {
   AdminEditMoveProviderTab,
   AdminEditPersonalInformationModalTab,
 } from './AdminEditProviderModalTabViews';
-import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
 import { useForm } from 'react-hook-form';
 import {
   AdminEditPersonalInformation,
@@ -32,18 +31,6 @@ const AdminEditProviderModal = ({
   currentModal,
   updateCurrentModal,
 }: AdminEditProviderModalProps) => {
-  const {
-    // Value
-    allCountries,
-    allCountryStates,
-    country,
-    countryCode,
-    phoneCode,
-
-    // Function
-    onUpdateCountry,
-  } = useAdminUpdateProviderInformationTabs();
-
   const {
     register,
     handleSubmit,
