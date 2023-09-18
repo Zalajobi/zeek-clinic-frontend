@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { availableTitles } from '../../../lib/constants/constants';
 import {
   DateInput,
+  PhoneNumberInput,
   SelectInput,
   TextInput,
 } from '../../global/formInput/CustomInput';
@@ -38,6 +39,7 @@ export const AdminEditPersonalInformationModalTab = ({
 
     // Function
     onUpdateCountry,
+    onUpdatePhoneNumber,
   } = useAdminUpdateProviderInformationTabs();
 
   return (
@@ -119,16 +121,9 @@ export const AdminEditPersonalInformationModalTab = ({
             errorMsg={errors.state?.message ?? ''}
           />
 
-          {/*Phone*/}
-          <TextInput
-            label={`Phone Number`}
-            placeholder={`+2347053980998`}
-            className={`my-3 w-full`}
-            errorMsg={errors.phone?.message ?? ''}
-            id={`phone`}
-            register={register}
-            type={`tel`}
-            prefix={`${phoneCode ? '+' + phoneCode : ''}`}
+          <PhoneNumberInput
+            country={countryCode}
+            change={onUpdatePhoneNumber}
           />
         </div>
       </div>

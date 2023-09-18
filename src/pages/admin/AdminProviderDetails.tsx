@@ -28,14 +28,16 @@ const AdminProviderDetails = () => {
     <Fragment>
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
-          <Typography
-            text={`Welcome Back, ${adminData?.personalInfo?.first_name ?? ''}`}
-            Tag={`h1`}
-            size={`2xl`}
-            className={`text-left`}
-          />
+          <div className={`grid grid-cols-[80%_20%] gap-4`}>
+            <Typography
+              text={`Welcome Back, ${
+                adminData?.personalInfo?.first_name ?? ''
+              }`}
+              Tag={`h1`}
+              size={`2xl`}
+              className={`text-left`}
+            />
 
-          <div className={`w-full flex flex-col my-10`}>
             <div className={`w-full flex justify-end mb-6`}>
               <ModalButtonOutlineLunch
                 text={`Edit`}
@@ -62,7 +64,9 @@ const AdminProviderDetails = () => {
                 }
               />
             </div>
+          </div>
 
+          <div className={`w-full flex flex-col my-10`}>
             <ProviderDetailsCard
               data={providerData as ProviderAndRelationAPIResponse}
               patientCount={primaryPatientCount}

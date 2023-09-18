@@ -11,6 +11,7 @@ export const useAdminUpdateProviderInformationTabs = () => {
   const [country, setCountry] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string | number>();
 
   useEffect(() => {
     let countriesUpdate: SelectInputFieldProps[] = [];
@@ -23,6 +24,8 @@ export const useAdminUpdateProviderInformationTabs = () => {
     });
     setAllCountries(countriesUpdate);
   }, []);
+
+  const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -51,5 +54,6 @@ export const useAdminUpdateProviderInformationTabs = () => {
 
     // Function
     onUpdateCountry,
+    onUpdatePhoneNumber,
   };
 };

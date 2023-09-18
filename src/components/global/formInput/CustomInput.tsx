@@ -6,6 +6,7 @@ import change = Simulate.change;
 import moment from 'moment';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import flags from 'react-phone-number-input/flags';
 import { SelectInputFieldProps } from '../../../types/common';
 
 interface TextInputProps {
@@ -419,20 +420,24 @@ export const CustomInputLabel = ({
   );
 };
 
-export const PhoneNumberInput = () => {
-  const [value, setPhoneNumberValue] = useState('');
-
-  const setValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumberValue(event.target.value);
-  };
-
+export const PhoneNumberInput = ({
+  country,
+  change,
+}: {
+  country: string;
+  change: (value: string | number) => void;
+}) => {
   return (
     <Fragment>
-      <PhoneInput
-        placeholder="Enter phone number"
-        value={value}
-        onChange={(value) => console.log(value)}
-      />
+      <div
+        className={`relative w-full min-w-[100px] min-h-[80px] date_picker-input-global-component flex items-center justify-center`}>
+        <PhoneInput
+          placeholder="Enter phone number"
+          label={`Phone Number`}
+          country="US"
+          onChange={(value) => change(value as string)}
+        />
+      </div>
     </Fragment>
   );
 };

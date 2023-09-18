@@ -29,6 +29,7 @@ export const useAdminAddProvider = () => {
   const [roles, setRoles] = useState<SelectInputFieldProps[]>([]);
   const [serviceArea, setServiceArea] = useState<SelectInputFieldProps[]>([]);
   const [units, setUnits] = useState<SelectInputFieldProps[]>([]);
+  const [countryCode, setCountryCode] = useState<string>('');
 
   useEffect(() => {
     const getAddProviderData = async () => {
@@ -107,6 +108,7 @@ export const useAdminAddProvider = () => {
     setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
+    setCountryCode(value);
   };
 
   const onSubmit = async (data: AdminAddProviderInput) => {
@@ -143,6 +145,7 @@ export const useAdminAddProvider = () => {
     roles,
     serviceArea,
     units,
+    countryCode,
 
     // Functions
     setProfilePic,

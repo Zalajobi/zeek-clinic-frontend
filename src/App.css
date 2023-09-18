@@ -68,6 +68,33 @@
   backdrop-filter: blur(4px);
 }
 
+.PhoneInput {
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  height: 55px;
+  padding: 5px 10px;
+}
+.PhoneInputInput {
+  height: 100%;
+  border: none;
+}
+
+.PhoneInput:focus,
+.PhoneInputInput--focus {
+  border: none;
+}
+
+.PhoneInputInput {
+  display: block !important;
+  min-height: auto !important;
+  width: 100%;
+  border-radius: 4px !important;
+  background-color: transparent !important;
+  border-width: 0 !important;
+  cursor: pointer;
+  padding: 0.32rem 14px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

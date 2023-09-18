@@ -51,6 +51,7 @@ export const AddProvider = () => {
     roles,
     serviceArea,
     units,
+    countryCode,
 
     // Functions
     setProfilePic,
@@ -109,7 +110,10 @@ export const AddProvider = () => {
                   }
                 />
 
-                <PhoneNumberInput />
+                <PhoneNumberInput
+                  country={countryCode}
+                  change={(value) => console.log(value)}
+                />
 
                 <TextInput
                   label={`Last Name`}
