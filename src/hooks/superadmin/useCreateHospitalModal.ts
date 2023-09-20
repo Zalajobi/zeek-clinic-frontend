@@ -59,10 +59,7 @@ export const useCreateHospitalModal = () => {
         logo,
         country_code: countryCode,
       };
-      const response = await axiosPostRequest(
-        '/account/hospital/create',
-        hospitalData
-      );
+      const response = await axiosPostRequest('/hospital/create', hospitalData);
 
       if (response.success) toast.success(response.message);
       else toast.error(response.message);

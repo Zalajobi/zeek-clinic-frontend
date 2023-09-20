@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { axiosGetRequest } from '../../lib/axios';
+import { axiosGetRequestUserService } from '../../lib/axios';
 import { AdminHeaderBaseTemplateData } from '../../types/admin';
 import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
 
@@ -12,7 +12,9 @@ export const useAdminBaseTemplate = () => {
 
   useEffect(() => {
     const getHeaderData = async () => {
-      const response = await axiosGetRequest('/account/admin/profile/get-data');
+      const response = await axiosGetRequestUserService(
+        '/admin/profile/get-data'
+      );
 
       if (response.success) {
         localStorage.setItem('adminData', JSON.stringify(response?.data));

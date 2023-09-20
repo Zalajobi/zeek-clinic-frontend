@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
+import { axiosGetRequestUserService, axiosPostRequest } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
 import {
   AdminCreateProviderResponseData,
@@ -47,8 +47,8 @@ export const useAdminAddProvider = () => {
       });
       setAllCountries(countriesUpdate);
 
-      const response = (await axiosGetRequest(
-        `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+      const response = (await axiosGetRequestUserService(
+        `/admin/provider/create-new/roles-departments-areas-units/${siteId}`
       )) as AccountServiceApiResponse;
 
       if (response.success) {

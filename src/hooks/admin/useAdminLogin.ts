@@ -11,7 +11,7 @@ export const useAdminLogin = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   const handleLogin = async () => {
-    const response = await axiosPostRequest('/account/admin/login', {
+    const response = await axiosPostRequest('/admin/login', {
       email,
       password,
     });

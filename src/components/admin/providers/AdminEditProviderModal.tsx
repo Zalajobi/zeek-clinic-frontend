@@ -22,12 +22,14 @@ import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useA
 interface AdminEditProviderModalProps {
   name: string;
   currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
+  siteId: string;
   updateCurrentModal: (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => void;
 }
 
 const AdminEditProviderModal = ({
+  siteId,
   name,
   currentModal,
   updateCurrentModal,
@@ -37,11 +39,19 @@ const AdminEditProviderModal = ({
     allCountries,
     allCountryStates,
     countryCode,
+    departments,
+    roles,
+    serviceAreas,
+    units,
+    // isLoading,
+    // error,
 
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,
-  } = useAdminUpdateProviderInformationTabs();
+  } = useAdminUpdateProviderInformationTabs(siteId);
+
+  console.log(departments);
 
   const {
     register,

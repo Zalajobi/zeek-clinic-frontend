@@ -64,7 +64,7 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
       hospital_id: hospitalId,
     };
 
-    const response = await axiosPostRequest('/account/site/create', siteData);
+    const response = await axiosPostRequest('/site/create', siteData);
 
     if (response.success) {
       toast.success(response.message);

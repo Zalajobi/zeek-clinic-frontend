@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
 import input = Simulate.input;
-import { axiosGetRequest } from '../../lib/axios';
+import { axiosGetRequestUserService } from '../../lib/axios';
 import {
   ProviderPageSiteResponseData,
   ProviderAndRelationAPIResponse,
@@ -57,10 +57,10 @@ export const useAdminProviderPage = () => {
     };
 
     const [siteInfo, providerData] = await customPromiseRequest([
-      axiosGetRequest(`/account/site/admin/get/information/${siteId}`),
+      axiosGetRequestUserService(`/site/admin/get/information/${siteId}`),
 
-      axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       ),
     ]);
@@ -113,8 +113,8 @@ export const useAdminProviderPage = () => {
     );
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -125,8 +125,8 @@ export const useAdminProviderPage = () => {
       setTotalProviders(response?.data?.count as number);
       setNoOfPages(
         Math.ceil(
-          response?.datadata?.count /
-            (perPage === 'All' ? response?.datadata?.count : perPage)
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
         )
       );
     }
@@ -152,8 +152,8 @@ export const useAdminProviderPage = () => {
             (perPage !== 'All' ? perPage : 0)
     );
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -186,8 +186,8 @@ export const useAdminProviderPage = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -232,8 +232,8 @@ export const useAdminProviderPage = () => {
       status: tab === 'ALL' ? '' : tab,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -271,8 +271,8 @@ export const useAdminProviderPage = () => {
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -307,8 +307,8 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 
@@ -350,8 +350,8 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 
@@ -387,8 +387,8 @@ export const useAdminProviderPage = () => {
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
@@ -434,8 +434,8 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 

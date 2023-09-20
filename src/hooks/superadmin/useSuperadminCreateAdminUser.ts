@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CreateAdminUserInput } from '../../types/superadmin/forms';
 import { SelectInputFieldProps } from '../../types/common';
 import { AccountServiceApiResponse } from '../../types/apiResponses';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
+import { axiosGetRequestUserService, axiosPostRequest } from '../../lib/axios';
 import { AllCountries } from '../../types/superadmin/formTypes';
 
 interface DepartmentRoleProps {
@@ -42,8 +42,8 @@ export const useSuperadminCreateAdminUser = () => {
     setAllCountries(countriesUpdate);
 
     const superadminGetRolesAndDepartments = async () => {
-      const response = (await axiosGetRequest(
-        '/account/super-admin/get/available-admin/roles_and_departments',
+      const response = (await axiosGetRequestUserService(
+        '/super-admin/get/available-admin/roles_and_departments',
         { siteId }
       )) as AccountServiceApiResponse;
 
@@ -93,7 +93,7 @@ export const useSuperadminCreateAdminUser = () => {
     };
 
     const { success, message } = await axiosPostRequest(
-      '/account/admin/create-admin',
+      '/admin/create-admin',
       adminData
     );
 

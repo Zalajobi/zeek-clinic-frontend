@@ -21,6 +21,7 @@ import AdminSiteInformation from './pages/admin/AdminSiteInformation';
 import AdminPatient from './pages/admin/AdminPatient';
 import AdminProfile from './pages/admin/AdminProfile';
 import AdminProviderDetails from './pages/admin/AdminProviderDetails';
+import QueryClientProviderWrapper from './lib/api';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -158,7 +159,9 @@ const router = createBrowserRouter([
 ]);
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProviderWrapper>
+      <RouterProvider router={router} />
+    </QueryClientProviderWrapper>
   </StrictMode>
 );
 

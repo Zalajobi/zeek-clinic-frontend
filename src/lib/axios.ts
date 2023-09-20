@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AccountServiceApiResponse } from '../types/apiResponses';
 
 // interface AxiosPostRequestNoAuthProps {
 //   url: string
@@ -6,7 +7,7 @@ import axios from 'axios';
 // }
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_DEV_BASE_URL,
+  baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
   timeout: 7500,
 });
 
@@ -30,7 +31,7 @@ export const axiosPutRequest = async (url: string, data: any) => {
   return request.data;
 };
 
-export const axiosGetRequest = async (url: string, params?: any) => {
+export const axiosGetRequestUserService = async (url: string, params?: any) => {
   const request = await instance.get(url, {
     headers: {
       token: localStorage.getItem('token') as string,
@@ -38,5 +39,5 @@ export const axiosGetRequest = async (url: string, params?: any) => {
     params,
   });
 
-  return request.data;
+  return request.data as AccountServiceApiResponse;
 };

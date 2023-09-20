@@ -3,7 +3,7 @@ import { Tab } from '@headlessui/react';
 import { TiExportOutline } from 'react-icons/ti';
 import { HiPlusSm } from 'react-icons/hi';
 
-import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
+import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
 import Text from '../../components/global/dialog/Text';
 import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
 import {

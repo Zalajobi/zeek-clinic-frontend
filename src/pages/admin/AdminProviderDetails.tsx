@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { FaUserEdit } from 'react-icons/fa';
-import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
 import { useAdminProviderDetails } from '../../hooks/admin/useAdminProviderDetails';
 import { Typography } from '../../components/global/dialog/Typography';
 import ProviderDetailsCard from '../../components/admin/providers/ProviderDetailsCard';
@@ -90,6 +90,7 @@ const AdminProviderDetails = () => {
         </div>
 
         <AdminEditProviderModal
+          siteId={providerData?.siteId ?? ''}
           name={providerData?.personalInfo?.first_name ?? ''}
           currentModal={editProviderModalSection}
           updateCurrentModal={onUndateProviderModalSection}

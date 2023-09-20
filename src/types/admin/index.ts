@@ -50,35 +50,49 @@ export interface ProviderAndRelationAPIResponse {
   status: string;
   created_at: string;
   siteId: string;
-  personalInfo: {
-    phone: string;
-    first_name: string;
-    last_name: string;
-    middle_name: string;
-    title: string;
-    gender: string;
-    dob: any;
-    country: string;
-    state: string;
-    city: string;
-    address: string;
-    profile_pic: string;
-    id: string;
-  };
-  department: {
-    name: string;
-    id: string;
-  };
-  unit: {
-    name: string;
-    id: string;
-  };
-  servicearea: {
-    name: string;
-    id: string;
-  };
-  primary_role: {
-    name: string;
-    id: string;
-  };
+  personalInfo: UserServicePersonalInfoResponseData;
+  department: UserServiceDepartmentResponseData;
+  unit: UserServiceUnitResponseData;
+  servicearea: UserServiceServiceAreaResponseData;
+  primary_role: UserServiceRoleResponseData;
+}
+
+export interface UserServiceUnitResponseData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserServiceRoleResponseData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserServiceServiceAreaResponseData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserServiceDepartmentResponseData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserServicePersonalInfoResponseData {
+  phone: string;
+  first_name: string;
+  last_name: string;
+  middle_name: string;
+  title: string;
+  gender: string;
+  dob: any;
+  country: string;
+  state: string;
+  city: string;
+  address: string;
+  profile_pic: string;
+  id: string;
 }

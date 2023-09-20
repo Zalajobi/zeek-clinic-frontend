@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { axiosGetRequest } from '../../lib/axios';
+import { axiosGetRequestUserService } from '../../lib/axios';
 import { useNavigate } from 'react-router-dom';
 import { SuperadminBaseData } from '../../types/superadmin';
 import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
@@ -14,8 +14,8 @@ export const useSuperadminBaseTemplate = () => {
   useEffect(() => {
     initTE({ Datepicker, Input, Select, Ripple, Modal });
     const getHeaderData = async () => {
-      const response = await axiosGetRequest(
-        '/account/super-admin/profile/get-data'
+      const response = await axiosGetRequestUserService(
+        '/super-admin/profile/get-data'
       );
 
       if (response.success)
