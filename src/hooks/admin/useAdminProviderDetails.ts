@@ -15,7 +15,7 @@ export const useAdminProviderDetails = () => {
 
   useEffect(() => {
     getData().then((response) => {
-      console.log(response);
+      return null;
     });
   }, [id]);
 
@@ -33,7 +33,6 @@ export const useAdminProviderDetails = () => {
   const onUndateProviderModalSection = (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => {
-    console.log(value);
     setEditProviderModalSection((editProviderModalSection) => value);
   };
 

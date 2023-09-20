@@ -68,8 +68,23 @@ const AdminProviderDetails = () => {
 
           <div className={`w-full flex flex-col my-10`}>
             <ProviderDetailsCard
-              data={providerData as ProviderAndRelationAPIResponse}
-              patientCount={primaryPatientCount}
+              title={providerData?.personalInfo.title ?? ''}
+              firstName={providerData?.personalInfo.first_name ?? ''}
+              middleName={providerData?.personalInfo?.middle_name ?? ''}
+              lastName={providerData?.personalInfo.last_name ?? ''}
+              email={providerData?.email ?? ''}
+              phone={providerData?.personalInfo.phone ?? ''}
+              dob={providerData?.personalInfo.dob ?? ''}
+              role={providerData?.primary_role.name ?? ''}
+              unit={providerData?.unit.name ?? ''}
+              department={providerData?.department.name ?? ''}
+              serviceArea={providerData?.servicearea.name ?? ''}
+              createdAt={providerData?.created_at ?? ''}
+              patientCount={primaryPatientCount.toString()}
+              country={providerData?.personalInfo.country ?? ''}
+              state={providerData?.personalInfo.state ?? ''}
+              city={providerData?.personalInfo.city ?? ''}
+              address={providerData?.personalInfo.address ?? ''}
             />
           </div>
         </div>

@@ -118,6 +118,11 @@ const router = createBrowserRouter([
         path: '/superadmin/hospital/:hospitalId',
         element: <OrganizationSite />,
       },
+
+      {
+        path: '/superadmin/site/:hospitalId',
+        element: <OrganizationSite />,
+      },
     ],
   },
 

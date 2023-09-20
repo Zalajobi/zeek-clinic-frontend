@@ -2,17 +2,46 @@ import { Fragment } from 'react';
 import { Typography } from '../../global/dialog/Typography';
 import { CustomTransparentCard } from '../../global/card/CustomCard';
 import moment from 'moment';
-import { ProviderAndRelationAPIResponse } from '../../../types/admin';
+
+interface ProviderDetailsCardProps {
+  title: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  dob: string;
+  role: string;
+  unit: string;
+  department: string;
+  serviceArea: string;
+  createdAt: string;
+  patientCount: string;
+  country: string;
+  state: string;
+  city: string;
+  address: string;
+}
 
 const ProviderDetailsCard = ({
-  data,
+  title,
+  firstName,
+  middleName,
+  lastName,
+  email,
+  phone,
+  dob,
+  role,
+  unit,
+  department,
+  serviceArea,
+  createdAt,
   patientCount,
-}: {
-  data: ProviderAndRelationAPIResponse;
-  patientCount: number;
-}) => {
-  console.log(data);
-
+  country,
+  state,
+  city,
+  address,
+}: ProviderDetailsCardProps) => {
   return (
     <Fragment>
       <Fragment>
@@ -28,11 +57,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={`${data?.personalInfo?.title ?? ''} ${
-                data?.personalInfo?.first_name ?? ''
-              } ${data?.personalInfo?.middle_name ?? ''} ${
-                data?.personalInfo?.last_name?.toUpperCase() ?? ''
-              }`}
+              text={`${title} ${firstName} ${middleName} ${lastName}`}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -49,7 +74,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.email}
+              text={email}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -66,7 +91,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.personalInfo?.phone ?? ''}
+              text={phone}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -83,7 +108,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={moment(data?.personalInfo?.dob).format('MMM DD. YYYY')}
+              text={moment(dob).format('MMM DD. YYYY')}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -100,7 +125,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.primary_role?.name ?? ''}
+              text={role}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -134,7 +159,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.unit?.name ?? ''}
+              text={unit}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -151,7 +176,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.department?.name ?? ''}
+              text={department}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -168,7 +193,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.servicearea?.name ?? ''}
+              text={serviceArea}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -185,7 +210,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={moment(data?.created_at).format('MMM DD. YYYY')}
+              text={moment(createdAt).format('MMM DD. YYYY')}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -202,7 +227,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.personalInfo?.country}
+              text={country}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -219,7 +244,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.personalInfo?.state}
+              text={state}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -236,7 +261,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.personalInfo?.city}
+              text={city}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -253,7 +278,7 @@ const ProviderDetailsCard = ({
             />
 
             <Typography
-              text={data?.personalInfo?.address}
+              text={address}
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}

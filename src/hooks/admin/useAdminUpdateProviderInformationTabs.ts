@@ -18,20 +18,23 @@ export const useAdminUpdateProviderInformationTabs = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [id]);
 
   const getData = async () => {
-    let countriesUpdate: SelectInputFieldProps[] = [];
+    let countryUpdate: SelectInputFieldProps[] = [];
 
     Country.getAllCountries().map((country) => {
-      return countriesUpdate.push({
+      return countryUpdate.push({
         value: country.isoCode,
         placeholder: country.name,
       });
     });
-    setAllCountries(countriesUpdate);
+    setAllCountries(countryUpdate);
 
-    console.log(id);
+    const response = await axiosGetRequest(
+      `/account/site/department-roles-service_area-unit/${id}`
+    );
+    console.log(response);
   };
 
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
