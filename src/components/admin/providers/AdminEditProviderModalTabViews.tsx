@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { availableTitles } from '../../../lib/constants/constants';
 import {
   DateInput,
@@ -7,39 +6,28 @@ import {
   SelectInput,
   TextInput,
 } from '../../global/formInput/CustomInput';
-import {
-  DeepRequired,
-  FieldErrors,
-  FieldErrorsImpl,
-  useForm,
-  UseFormRegister,
-} from 'react-hook-form';
-import {
-  AdminEditPersonalInformation,
-  AdminEditPersonalInformationSchema,
-} from '../../../types/admin/provider';
-import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
+import { UseFormRegister } from 'react-hook-form';
+import { SelectInputFieldProps } from '../../../types/common';
 
 interface AdminEditProviderModalTabViewsProps {
   register: UseFormRegister<any>;
   errors: any;
+  onUpdatePhoneNumber: (value: string | number) => void;
+  countryCode: string;
+  allCountries: SelectInputFieldProps[];
+  allCountryStates: SelectInputFieldProps[];
+  onUpdateCountry: (value: string) => void;
 }
 
 export const AdminEditPersonalInformationModalTab = ({
   register,
   errors,
+  onUpdatePhoneNumber,
+  countryCode,
+  allCountries,
+  allCountryStates,
+  onUpdateCountry,
 }: AdminEditProviderModalTabViewsProps) => {
-  const {
-    // Value
-    allCountries,
-    allCountryStates,
-    countryCode,
-
-    // Function
-    onUpdateCountry,
-    onUpdatePhoneNumber,
-  } = useAdminUpdateProviderInformationTabs();
-
   return (
     <Fragment>
       <div
@@ -132,7 +120,8 @@ export const AdminEditPersonalInformationModalTab = ({
 export const AdminEditMoveProviderTab = () => {
   return (
     <Fragment>
-      <h1>Move Provider</h1>
+      <div
+        className={`w-full h-full flex flex-col item-center justify-start px-8 py-4`}></div>
     </Fragment>
   );
 };

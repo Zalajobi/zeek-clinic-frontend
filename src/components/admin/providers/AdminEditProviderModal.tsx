@@ -17,6 +17,7 @@ import {
   AdminEditPersonalInformationSchema,
 } from '../../../types/admin/provider';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
 
 interface AdminEditProviderModalProps {
   name: string;
@@ -32,6 +33,17 @@ const AdminEditProviderModal = ({
   updateCurrentModal,
 }: AdminEditProviderModalProps) => {
   const {
+    // Value
+    allCountries,
+    allCountryStates,
+    countryCode,
+
+    // Function
+    onUpdateCountry,
+    onUpdatePhoneNumber,
+  } = useAdminUpdateProviderInformationTabs();
+
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -44,6 +56,11 @@ const AdminEditProviderModal = ({
       <AdminEditPersonalInformationModalTab
         errors={errors}
         register={register}
+        allCountries={allCountries}
+        allCountryStates={allCountryStates}
+        countryCode={countryCode}
+        onUpdatePhoneNumber={onUpdatePhoneNumber}
+        onUpdateCountry={onUpdateCountry}
       />
     ),
     MoveProvider: <AdminEditMoveProviderTab />,

@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { SelectInputFieldProps } from '../../types/common';
 import { Country, State } from 'country-state-city';
 import { AllCountries } from '../../types/superadmin/formTypes';
+import { useParams } from 'react-router-dom';
+import { axiosGetRequest } from '../../lib/axios';
 
 export const useAdminUpdateProviderInformationTabs = () => {
+  const { id } = useParams();
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
@@ -14,6 +17,10 @@ export const useAdminUpdateProviderInformationTabs = () => {
   const [phoneNumber, setPhoneNumber] = useState<string | number>();
 
   useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
     let countriesUpdate: SelectInputFieldProps[] = [];
 
     Country.getAllCountries().map((country) => {
@@ -23,7 +30,9 @@ export const useAdminUpdateProviderInformationTabs = () => {
       });
     });
     setAllCountries(countriesUpdate);
-  }, []);
+
+    console.log(id);
+  };
 
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
