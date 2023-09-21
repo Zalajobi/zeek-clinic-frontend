@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { axiosPostRequest } from '../../lib/axios';
+import { axiosPostRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export const useAdminLogin = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   const handleLogin = async () => {
-    const response = await axiosPostRequest('/admin/login', {
+    const response = await axiosPostRequestUserService('/admin/login', {
       email,
       password,
     });

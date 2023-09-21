@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { Simulate } from 'react-dom/test-utils';
 
 import { AllCountries } from '../../types/superadmin/formTypes';
-import { axiosPostRequest } from '../../lib/axios';
+import { axiosPostRequestUserService } from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
 import { CreateHospitalInput } from '../../types/superadmin/forms';
 import input = Simulate.input;
@@ -59,7 +59,10 @@ export const useCreateHospitalModal = () => {
         logo,
         country_code: countryCode,
       };
-      const response = await axiosPostRequest('/hospital/create', hospitalData);
+      const response = await axiosPostRequestUserService(
+        '/hospital/create',
+        hospitalData
+      );
 
       if (response.success) toast.success(response.message);
       else toast.error(response.message);

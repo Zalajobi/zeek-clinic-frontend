@@ -6,7 +6,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CreateAdminUserInput } from '../../types/superadmin/forms';
 import { SelectInputFieldProps } from '../../types/common';
 import { AccountServiceApiResponse } from '../../types/apiResponses';
-import { axiosGetRequestUserService, axiosPostRequest } from '../../lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '../../lib/axios';
 import { AllCountries } from '../../types/superadmin/formTypes';
 
 interface DepartmentRoleProps {
@@ -92,7 +95,7 @@ export const useSuperadminCreateAdminUser = () => {
       phone: `+${phoneCode}${data?.phone}`,
     };
 
-    const { success, message } = await axiosPostRequest(
+    const { success, message } = await axiosPostRequestUserService(
       '/admin/create-admin',
       adminData
     );

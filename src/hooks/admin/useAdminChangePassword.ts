@@ -6,7 +6,10 @@ import {
   matchNumbersRegex,
   matchUpperCaseRegex,
 } from '../../lib/constants/constants';
-import { axiosGetRequestUserService, axiosPutRequest } from '../../lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPutRequestUserService,
+} from '../../lib/axios';
 
 export const useAdminChangePassword = () => {
   const navigate = useNavigate();
@@ -66,7 +69,7 @@ export const useAdminChangePassword = () => {
       return;
     }
 
-    const response = await axiosPutRequest('/admin/reset_password', {
+    const response = await axiosPutRequestUserService('/admin/reset_password', {
       password: newPassword,
       token: authToken,
     });

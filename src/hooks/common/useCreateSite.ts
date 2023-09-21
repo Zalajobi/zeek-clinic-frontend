@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import { AllCountries } from '../../types/superadmin/formTypes';
-import { axiosPostRequest } from '../../lib/axios';
+import { axiosPostRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import { SelectInputFieldProps } from '../../types/common';
 import { initTE, Select } from 'tw-elements';
@@ -64,7 +64,10 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
       hospital_id: hospitalId,
     };
 
-    const response = await axiosPostRequest('/site/create', siteData);
+    const response = await axiosPostRequestUserService(
+      '/site/create',
+      siteData
+    );
 
     if (response.success) {
       toast.success(response.message);

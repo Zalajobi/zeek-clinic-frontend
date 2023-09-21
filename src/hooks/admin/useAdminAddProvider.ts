@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-import { axiosGetRequestUserService, axiosPostRequest } from '../../lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '../../lib/axios';
 import { SelectInputFieldProps } from '../../types/common';
 import {
   AdminCreateProviderResponseData,
@@ -120,7 +123,7 @@ export const useAdminAddProvider = () => {
       profilePic,
     };
 
-    const response = (await axiosPostRequest(
+    const response = (await axiosPostRequestUserService(
       `account/providers/admin/create-new/provider`,
       addAdminData
     )) as AccountServiceApiResponse;
