@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { ReactQueryDataUserService } from '../../lib/reactQuery';
+import { AccountServiceApiResponse } from '../../types/apiResponses';
+import { useQuery } from 'react-query';
+import { axiosGetRequestUserService } from '../../lib/axios';
 
 export const useAdminProviderDetails = () => {
   const { id } = useParams();
@@ -8,21 +10,31 @@ export const useAdminProviderDetails = () => {
     'Personal' | 'GeneratePassword' | 'MoveProvider'
   >('Personal');
 
-  // Initial Data
-  const { responseData, isLoading, error } = ReactQueryDataUserService(
-    `/providers/admin/details/${id}`,
-    'getProviderDetails',
-    id
+  const {
+    data: providerData,
+    isLoading: providerDataLoading,
+    isError: providerDataError,
+  } = useQuery<AccountServiceApiResponse>('providerDetails', function () {
+    return axiosGetRequestUserService(`/providers/admin/details/${id}`);
+  });
+
+  const {
+    data: unitDeptData,
+    isLoading: unitDeptIsLoading,
+    isError: unitDeptIsError,
+  } = useQuery<AccountServiceApiResponse>(
+    'getUnitAreaRoleAndDept',
+    function () {
+      return axiosGetRequestUserService(
+        `/site/department-roles-service_area-unit/${providerData?.data?.provider?.siteId}`
+      );
+    },
+    {
+      enabled: !providerDataLoading && !providerDataError, // Enable Query B when Query A has successfully loaded
+    }
   );
 
-  // Site And Role Data
-  // const [unitRole, unitRoleIsLoading, unitRoleError] = ReactQueryDataUserService(
-  //   `/site/department-roles-service_area-unit/${siteId}`,
-  //   'getUnitAreaRoleAndDept',
-  //     siteId,
-  // );
-
-  const onUndateProviderModalSection = (
+  const onUpdateProviderModalSection = (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => {
     setEditProviderModalSection((editProviderModalSection) => value);
@@ -32,11 +44,14 @@ export const useAdminProviderDetails = () => {
     // Value
     id,
     editProviderModalSection,
-    responseData,
-    isLoading,
-    error,
+    providerData,
+    providerDataLoading,
+    providerDataError,
+    unitDeptData,
+    unitDeptIsLoading,
+    unitDeptIsError,
 
     // Function
-    onUndateProviderModalSection,
+    onUpdateProviderModalSection,
   };
 };

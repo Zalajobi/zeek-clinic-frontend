@@ -6,24 +6,6 @@ export const ToasterConfig = () => {
 };
 
 export const LoadingSpinner = ({ message }: { message: string }) => {
-  const containerStyle = {
-    position: 'fixed',
-    zIndex: 9999,
-    inset: '16px',
-    pointerEvents: 'none',
-  };
-
-  const contentStyle = {
-    zIndex: 9999,
-    left: '0px',
-    right: '0px',
-    display: 'flex',
-    position: 'absolute',
-    transition: 'all 230ms cubic-bezier(0.21, 1.02, 0.73, 1) 0s',
-    transform: 'translateY(0px); top: 0px',
-    justifyContent: 'flex-end',
-  };
-
   return (
     <div
       style={{

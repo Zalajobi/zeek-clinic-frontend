@@ -43,8 +43,6 @@ const AdminEditProviderModal = ({
     roles,
     serviceAreas,
     units,
-    // isLoading,
-    // error,
 
     // Function
     onUpdateCountry,

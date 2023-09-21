@@ -1,13 +1,10 @@
-export interface AdminCreateProviderApiDataChildObject {
-  name: string;
-  id: string;
-}
+import { UserServiceRoleResponseData } from './admin';
 
 export interface AdminCreateProviderResponseData {
-  departments: AdminCreateProviderApiDataChildObject[];
-  roles: AdminCreateProviderApiDataChildObject[];
-  serviceAreas: AdminCreateProviderApiDataChildObject[];
-  units: AdminCreateProviderApiDataChildObject[];
+  departments: UserServiceRoleResponseData[];
+  roles: UserServiceRoleResponseData[];
+  serviceAreas: UserServiceRoleResponseData[];
+  units: UserServiceRoleResponseData[];
 }
 
 export type AccountServiceApiResponse = {

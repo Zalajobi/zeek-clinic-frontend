@@ -10,6 +10,7 @@ import {
   UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '../../types/admin';
+import { ReactQueryDataUserService } from '../../lib/reactQuery';
 
 export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
   const { id } = useParams();
@@ -28,12 +29,18 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
     useState<UserServiceServiceAreaResponseData>();
   const [units, setUnits] = useState<UserServiceUnitResponseData[]>();
 
-  // const { data, isLoading, error } = useQuery<AccountServiceApiResponse, boolean, Error>('getUnitAreaRoleAndDept',
-  //     function () {
-  //   return axiosGetRequestUserService(`/site/department-roles-service_area-unit/${siteId}`)
-  // });
+  // Site And Role Data
+  const { responseData, isLoading, error } = ReactQueryDataUserService(
+    `/site/department-roles-service_area-unit/${siteId}`,
+    'getUnitAreaRoleAndDept',
+    siteId
+  );
 
-  const getData = async () => {
+  useEffect(() => {
+    getCountryData();
+  }, []);
+
+  const getCountryData = () => {
     let countryUpdate: SelectInputFieldProps[] = [];
 
     Country.getAllCountries().map((country) => {
@@ -43,42 +50,7 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
       });
     });
     setAllCountries(countryUpdate);
-
-    if (siteId) {
-      const response = await axiosGetRequestUserService(
-        `/site/department-roles-service_area-unit/${siteId}`
-      );
-
-      if (response.success) {
-        const { department, role, serviceArea, unit } = response.data;
-        setServiceAreas(serviceArea);
-        setDepartments(department);
-        setRoles(role);
-        setUnits(unit);
-      }
-    }
   };
-
-  // if (data) {
-  //   const apiResponse = data as unknown as AccountServiceApiResponse
-  //   if (apiResponse.success) {
-  //     const { department, role, serviceArea, unit} = apiResponse.data
-  //     setServiceAreas(serviceArea)
-  //     setDepartments(department)
-  //     setRoles(role)
-  //     setUnits(unit)
-  //   }
-  // }
-
-  // toast.promise(data as any, {
-  //   error: 'Something Went Wrong',
-  //   loading: 'Loading Data...',
-  //   success: 'Data Retrieved Success'
-  //   // success: 'Data Retrieved Success',
-  //   // error: 'Something Went Wrong'
-  // })
-
-  console.log(siteId);
 
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
@@ -108,9 +80,9 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
     roles,
     serviceAreas,
     units,
-    // isLoading,
-    // error,
-
+    isLoading,
+    error,
+    responseData,
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,
