@@ -4,20 +4,21 @@ import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
 import { useAdminProviderDetails } from '../../hooks/admin/useAdminProviderDetails';
 import { Typography } from '../../components/global/dialog/Typography';
 import ProviderDetailsCard from '../../components/admin/providers/ProviderDetailsCard';
-import { ProviderAndRelationAPIResponse } from '../../types/admin';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
 import AdminEditProviderModal from '../../components/admin/providers/AdminEditProviderModal';
+import toast from 'react-hot-toast';
 
 const AdminProviderDetails = () => {
   const {
     // Value
-    providerData,
-    primaryPatientCount,
     editProviderModalSection,
+    responseData,
+    isLoading,
+    error,
 
     // Function
     onUndateProviderModalSection,
@@ -26,6 +27,12 @@ const AdminProviderDetails = () => {
 
   return (
     <Fragment>
+      {isLoading &&
+        // <Spinner/>
+        toast.loading(`Loading Data...`)}
+
+      {error && toast.error(`Error Retrieving Data...`)}
+
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
           <div className={`grid grid-cols-[80%_20%] gap-4`}>
@@ -68,30 +75,36 @@ const AdminProviderDetails = () => {
 
           <div className={`w-full flex flex-col my-10`}>
             <ProviderDetailsCard
-              title={providerData?.personalInfo.title ?? ''}
-              firstName={providerData?.personalInfo.first_name ?? ''}
-              middleName={providerData?.personalInfo?.middle_name ?? ''}
-              lastName={providerData?.personalInfo.last_name ?? ''}
-              email={providerData?.email ?? ''}
-              phone={providerData?.personalInfo.phone ?? ''}
-              dob={providerData?.personalInfo.dob ?? ''}
-              role={providerData?.primary_role.name ?? ''}
-              unit={providerData?.unit.name ?? ''}
-              department={providerData?.department.name ?? ''}
-              serviceArea={providerData?.servicearea.name ?? ''}
-              createdAt={providerData?.created_at ?? ''}
-              patientCount={primaryPatientCount.toString()}
-              country={providerData?.personalInfo.country ?? ''}
-              state={providerData?.personalInfo.state ?? ''}
-              city={providerData?.personalInfo.city ?? ''}
-              address={providerData?.personalInfo.address ?? ''}
+              title={responseData?.data?.provider?.personalInfo.title ?? ''}
+              firstName={
+                responseData?.data?.provider?.personalInfo.first_name ?? ''
+              }
+              middleName={
+                responseData?.data?.provider?.personalInfo?.middle_name ?? ''
+              }
+              lastName={
+                responseData?.data?.provider?.personalInfo.last_name ?? ''
+              }
+              email={responseData?.data?.provider?.email ?? ''}
+              phone={responseData?.data?.provider?.personalInfo.phone ?? ''}
+              dob={responseData?.data?.provider?.personalInfo.dob ?? ''}
+              role={responseData?.data?.provider?.primary_role.name ?? ''}
+              unit={responseData?.data?.provider?.unit.name ?? ''}
+              department={responseData?.data?.provider?.department.name ?? ''}
+              serviceArea={responseData?.data?.provider?.servicearea.name ?? ''}
+              createdAt={responseData?.data?.provider?.created_at ?? ''}
+              patientCount={responseData?.data?.patientCount?.toString()}
+              country={responseData?.data?.provider?.personalInfo.country ?? ''}
+              state={responseData?.data?.provider?.personalInfo.state ?? ''}
+              city={responseData?.data?.provider?.personalInfo.city ?? ''}
+              address={responseData?.data?.provider?.personalInfo.address ?? ''}
             />
           </div>
         </div>
 
         <AdminEditProviderModal
-          siteId={providerData?.siteId ?? ''}
-          name={providerData?.personalInfo?.first_name ?? ''}
+          siteId={responseData?.data?.provider?.siteId ?? ''}
+          name={responseData?.data?.provider?.personalInfo?.first_name ?? ''}
           currentModal={editProviderModalSection}
           updateCurrentModal={onUndateProviderModalSection}
         />

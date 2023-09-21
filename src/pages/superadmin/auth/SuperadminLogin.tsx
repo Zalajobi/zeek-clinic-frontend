@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import Text from '../../../components/global/dialog/Text';
 import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
-import { Button } from 'flowbite-react';
 import CheckBox from '../../../components/global/formInput/CheckBox';
 import LoginImage from '../../../assets/img/admin/login.png';
 import { ToasterConfig } from '../../../components/global/Toast';
 import useSuperadminLogin from '../../../hooks/superadmin/useSuperadminLogin';
+import { BasicFilledButton } from '../../../components/global/CustomButton';
 
 const SuperadminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } =
@@ -62,11 +62,12 @@ const SuperadminLogin = () => {
                 </div>
               </div>
 
-              <Button
-                onClick={handleLogin}
-                className={`my-4`}>
-                Submit
-              </Button>
+              <BasicFilledButton
+                type={`primary`}
+                text={`Submit`}
+                click={handleLogin}
+                className={`my-4`}
+              />
             </div>
           </div>
 

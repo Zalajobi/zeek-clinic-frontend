@@ -10,8 +10,8 @@ export interface AdminCreateProviderResponseData {
   units: AdminCreateProviderApiDataChildObject[];
 }
 
-export interface AccountServiceApiResponse {
+export type AccountServiceApiResponse = {
   data: any;
   message: string;
   success: boolean;
-}
+};

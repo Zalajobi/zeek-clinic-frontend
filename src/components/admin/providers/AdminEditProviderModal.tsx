@@ -51,8 +51,6 @@ const AdminEditProviderModal = ({
     onUpdatePhoneNumber,
   } = useAdminUpdateProviderInformationTabs(siteId);
 
-  console.log(departments);
-
   const {
     register,
     handleSubmit,

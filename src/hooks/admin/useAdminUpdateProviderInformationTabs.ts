@@ -78,6 +78,8 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
   //   // error: 'Something Went Wrong'
   // })
 
+  console.log(siteId);
+
   const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
   const onUpdateCountry = (value: string) => {

@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import Text from '../../../components/global/dialog/Text';
 import { useAdminForgotPassword } from '../../../hooks/admin/useAdminForgotPassword';
 import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
-import { Button } from 'flowbite-react';
 import { ToasterConfig } from '../../../components/global/Toast';
+import { BasicFilledButton } from '../../../components/global/CustomButton';
 
 const ForgotPassword = () => {
   const { setEmail, resetPassword } = useAdminForgotPassword();
@@ -47,11 +47,12 @@ const ForgotPassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <Button
-                onClick={resetPassword}
-                className={`my-4`}>
-                Reset Password
-              </Button>
+              <BasicFilledButton
+                type={`primary`}
+                text={`Submit`}
+                click={resetPassword}
+                className={`my-4`}
+              />
             </div>
           </div>
         </div>

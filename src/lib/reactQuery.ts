@@ -5,15 +5,25 @@ import { axiosGetRequestUserService } from './axios';
 export function ReactQueryDataUserService(
   url: string,
   key: string,
+  options?: any,
   stateMonitor?: string | boolean | number
 ) {
-  const { data, isLoading, error } = useQuery<
+  const { status, isLoading, error, data } = useQuery<
     AccountServiceApiResponse,
-    boolean,
     Error
-  >([key, stateMonitor], function () {
-    return axiosGetRequestUserService(url);
-  });
+  >(
+    [key, stateMonitor],
+    function () {
+      return axiosGetRequestUserService(url);
+    },
+    options
+  );
+  const responseData = data;
 
-  return [data, isLoading, error];
+  return {
+    responseData,
+    isLoading,
+    error,
+    status,
+  };
 }
