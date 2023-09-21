@@ -3,12 +3,7 @@ import { SelectInputFieldProps } from '../../types/common';
 import { Country, State } from 'country-state-city';
 import { AllCountries } from '../../types/superadmin/formTypes';
 import { useParams } from 'react-router-dom';
-import {
-  UserServiceDepartmentResponseData,
-  UserServiceRoleResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '../../types/admin';
+import { UserServiceRoleResponseData } from '../../types/admin';
 import { convertObjectToGlobalSelectInputProps } from '../../util';
 
 export const useAdminUpdateProviderInformationTabs = (
