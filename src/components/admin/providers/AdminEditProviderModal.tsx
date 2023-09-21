@@ -52,10 +52,13 @@ const AdminEditProviderModal = ({
     rolesSelectField,
     serviceAreasSelectField,
     unitsSelectField,
+    tempPassword,
 
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,
+    generatePassword,
+    onUpdateTempPassword,
   } = useAdminUpdateProviderInformationTabs(
     fetchData,
     department,
@@ -94,7 +97,15 @@ const AdminEditProviderModal = ({
         register={register}
       />
     ),
-    GeneratePassword: <AdminEditGeneratePasswordTab />,
+    GeneratePassword: (
+      <AdminEditGeneratePasswordTab
+        errors={errors}
+        register={register}
+        generatePassword={generatePassword}
+        password={tempPassword}
+        updatePassword={(value) => onUpdateTempPassword(value)}
+      />
+    ),
   };
 
   const CurrentView = views[currentModal];

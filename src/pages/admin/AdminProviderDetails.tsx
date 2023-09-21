@@ -31,13 +31,11 @@ const AdminProviderDetails = () => {
 
   return (
     <Fragment>
-      {providerDataLoading && unitDeptIsLoading && (
-        <LoadingSpinner message={`Loading Data...`} />
-      )}
+      {providerDataLoading ||
+        (unitDeptIsLoading && <LoadingSpinner message={`Loading Data...`} />)}
 
-      {providerDataError &&
-        unitDeptIsError &&
-        toast.error(`Error Retrieving Data...`)}
+      {providerDataError ||
+        (unitDeptIsError && toast.error(`Error Retrieving Data...`))}
 
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>

@@ -38,5 +38,13 @@ export const AdminEditProvidersInformationSchema = yup
     role: yup.string(),
     serviceArea: yup.string(),
     unit: yup.string(),
+    // password: yup
+    //   .string()
+    //   .min(8, 'Must be at least Eight(8) characters long')
+    //   .matches(
+    //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    //     'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    //   )
+    //   .optional()
   })
   .required();

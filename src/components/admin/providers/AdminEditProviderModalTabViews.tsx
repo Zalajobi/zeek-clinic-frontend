@@ -9,6 +9,7 @@ import {
 } from '../../global/formInput/CustomInput';
 import { UseFormRegister } from 'react-hook-form';
 import { SelectInputFieldProps } from '../../../types/common';
+import { BasicFilledButton } from '../../global/CustomButton';
 
 interface AdminEditProviderModalTabViewsProps {
   register: UseFormRegister<any>;
@@ -27,6 +28,14 @@ interface AdminEditMoveProviderTabProps {
   roles: SelectInputFieldProps[];
   serviceArea: SelectInputFieldProps[];
   unit: SelectInputFieldProps[];
+}
+
+interface AdminEditGeneratePasswordTabProps {
+  register: UseFormRegister<any>;
+  errors: any;
+  password: string;
+  updatePassword: (value: string) => void;
+  generatePassword: () => void;
 }
 
 export const AdminEditProvidersInformationModalTab = ({
@@ -186,10 +195,34 @@ export const AdminEditMoveProviderTab = ({
   );
 };
 
-export const AdminEditGeneratePasswordTab = () => {
+export const AdminEditGeneratePasswordTab = ({
+  register,
+  errors,
+  password,
+  generatePassword,
+  updatePassword,
+}: AdminEditGeneratePasswordTabProps) => {
   return (
     <Fragment>
-      <h1>Generate Password</h1>
+      <div
+        className={`w-full h-[100px] flex item-center justify-start px-8 py-4`}>
+        <div className={`w-full grid grid-cols-1 gap-6 lg:grid-cols-[70%_30%]`}>
+          <TextInput
+            label={`Password`}
+            className={`w-full`}
+            id={`password`}
+            value={password}
+            change={(event) => updatePassword(event.target.value)}
+          />
+
+          <BasicFilledButton
+            type={`primary`}
+            text={`Generate Password`}
+            className={`h-[58px]`}
+            click={generatePassword}
+          />
+        </div>
+      </div>
     </Fragment>
   );
 };

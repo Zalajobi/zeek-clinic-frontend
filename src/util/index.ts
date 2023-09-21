@@ -32,3 +32,23 @@ export const convertObjectToGlobalSelectInputProps = (
 
   return selectData;
 };
+
+export const generateRandomCharacters = (min?: number): string => {
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const allowedChars =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$!%*?&';
+  const minLength = min ?? 10;
+
+  let randomCharacters = '';
+
+  while (randomCharacters.length < minLength || !regex.test(randomCharacters)) {
+    randomCharacters = '';
+    for (let i = 0; i < minLength; i++) {
+      const randomIndex = Math.floor(Math.random() * allowedChars.length);
+      randomCharacters += allowedChars.charAt(randomIndex);
+    }
+  }
+
+  return randomCharacters;
+};

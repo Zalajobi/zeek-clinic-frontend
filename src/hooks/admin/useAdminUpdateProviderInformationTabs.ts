@@ -4,7 +4,10 @@ import { Country, State } from 'country-state-city';
 import { AllCountries } from '../../types/superadmin/formTypes';
 import { useParams } from 'react-router-dom';
 import { UserServiceRoleResponseData } from '../../types/admin';
-import { convertObjectToGlobalSelectInputProps } from '../../util';
+import {
+  convertObjectToGlobalSelectInputProps,
+  generateRandomCharacters,
+} from '../../util';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
@@ -21,6 +24,7 @@ export const useAdminUpdateProviderInformationTabs = (
   const [country, setCountry] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
+  const [tempPassword, setTempPassword] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string | number>();
   const [departmentsSelectField, setDepartmentsSelectField] = useState<
     SelectInputFieldProps[]
@@ -90,6 +94,16 @@ export const useAdminUpdateProviderInformationTabs = (
     setCountryCode(countryInfo?.isoCode);
   };
 
+  const generatePassword = () => {
+    const password = generateRandomCharacters(15);
+    setTempPassword(password);
+  };
+
+  const onUpdateTempPassword = (value: string) => {
+    console.log(value);
+    setTempPassword(value);
+  };
+
   return {
     // Value
     allCountries,
@@ -99,9 +113,12 @@ export const useAdminUpdateProviderInformationTabs = (
     rolesSelectField,
     serviceAreasSelectField,
     unitsSelectField,
+    tempPassword,
 
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,
+    generatePassword,
+    onUpdateTempPassword,
   };
 };
