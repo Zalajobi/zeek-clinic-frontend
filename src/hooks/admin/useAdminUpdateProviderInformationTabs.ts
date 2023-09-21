@@ -8,6 +8,7 @@ import {
   convertObjectToGlobalSelectInputProps,
   generateRandomCharacters,
 } from '../../util';
+import { AdminEditProvidersInformation } from '../../types/admin/provider';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
@@ -22,8 +23,6 @@ export const useAdminUpdateProviderInformationTabs = (
     SelectInputFieldProps[]
   >([]);
   const [country, setCountry] = useState('');
-  const [countryCode, setCountryCode] = useState('');
-  const [phoneCode, setPhoneCode] = useState('');
   const [tempPassword, setTempPassword] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string | number>();
   const [departmentsSelectField, setDepartmentsSelectField] = useState<
@@ -63,35 +62,28 @@ export const useAdminUpdateProviderInformationTabs = (
       );
     }
 
-    Country.getAllCountries().map((country) => {
-      return countryUpdate.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-    });
-    setAllCountries(countryUpdate);
+    setAllCountries(
+      convertObjectToGlobalSelectInputProps(
+        Country.getAllCountries(),
+        'isoCode',
+        'name'
+      )
+    );
   };
 
-  const onUpdatePhoneNumber = (value: string | number) => {
-    console.log(phoneNumber);
-    setPhoneNumber(value);
-  };
+  const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-    let countryStates: SelectInputFieldProps[] = [];
 
-    State.getStatesOfCountry(value).map((country) => {
-      return countryStates.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-    });
-
-    setAllCountryStates(countryStates);
+    setAllCountryStates(
+      convertObjectToGlobalSelectInputProps(
+        State.getStatesOfCountry(value),
+        'name',
+        'name'
+      )
+    );
     setCountry(countryInfo?.name);
-    setPhoneCode(countryInfo?.phonecode);
-    setCountryCode(countryInfo?.isoCode);
   };
 
   const generatePassword = () => {
@@ -99,16 +91,26 @@ export const useAdminUpdateProviderInformationTabs = (
     setTempPassword(password);
   };
 
-  const onUpdateTempPassword = (value: string) => {
-    console.log(value);
-    setTempPassword(value);
+  const onUpdateTempPassword = (value: string) => setTempPassword(value);
+
+  const handleUpdateProviderDetails = async (
+    data: AdminEditProvidersInformation
+  ) => {
+    const updateData = {
+      ...data,
+      tempPassword,
+      country,
+      phone: phoneNumber,
+    };
+
+    console.log(updateData);
   };
 
   return {
     // Value
     allCountries,
     allCountryStates,
-    countryCode,
+    country,
     departmentsSelectField,
     rolesSelectField,
     serviceAreasSelectField,
@@ -120,5 +122,6 @@ export const useAdminUpdateProviderInformationTabs = (
     onUpdatePhoneNumber,
     generatePassword,
     onUpdateTempPassword,
+    handleUpdateProviderDetails,
   };
 };

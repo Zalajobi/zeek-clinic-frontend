@@ -47,7 +47,7 @@ const AdminEditProviderModal = ({
     // Value
     allCountries,
     allCountryStates,
-    countryCode,
+    country,
     departmentsSelectField,
     rolesSelectField,
     serviceAreasSelectField,
@@ -59,6 +59,7 @@ const AdminEditProviderModal = ({
     onUpdatePhoneNumber,
     generatePassword,
     onUpdateTempPassword,
+    handleUpdateProviderDetails,
   } = useAdminUpdateProviderInformationTabs(
     fetchData,
     department,
@@ -82,7 +83,7 @@ const AdminEditProviderModal = ({
         register={register}
         allCountries={allCountries}
         allCountryStates={allCountryStates}
-        countryCode={countryCode}
+        country={country}
         onUpdatePhoneNumber={onUpdatePhoneNumber}
         onUpdateCountry={onUpdateCountry}
       />
@@ -118,7 +119,7 @@ const AdminEditProviderModal = ({
       footer={
         <Fragment>
           <BasicOutlineButton
-            click={() => console.log('Edit Provider')}
+            click={handleSubmit(handleUpdateProviderDetails)}
             text={`Save`}
             type={`secondary`}
             className={`min-w-[200px] mx-5`}

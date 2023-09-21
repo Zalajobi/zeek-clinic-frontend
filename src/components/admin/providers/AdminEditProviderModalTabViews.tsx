@@ -15,7 +15,7 @@ interface AdminEditProviderModalTabViewsProps {
   register: UseFormRegister<any>;
   errors: any;
   onUpdatePhoneNumber: (value: string | number) => void;
-  countryCode: string;
+  country: string;
   allCountries: SelectInputFieldProps[];
   allCountryStates: SelectInputFieldProps[];
   onUpdateCountry: (value: string) => void;
@@ -42,7 +42,7 @@ export const AdminEditProvidersInformationModalTab = ({
   register,
   errors,
   onUpdatePhoneNumber,
-  countryCode,
+  country,
   allCountries,
   allCountryStates,
   onUpdateCountry,
@@ -127,7 +127,7 @@ export const AdminEditProvidersInformationModalTab = ({
           />
 
           <PhoneNumberInput
-            country={countryCode}
+            country={country}
             change={onUpdatePhoneNumber}
           />
         </div>
@@ -144,7 +144,6 @@ export const AdminEditMoveProviderTab = ({
   register,
   errors,
 }: AdminEditMoveProviderTabProps) => {
-  initTE({ Select });
   return (
     <Fragment>
       <div
@@ -155,9 +154,10 @@ export const AdminEditMoveProviderTab = ({
             label={`Department`}
             options={departments}
             className={`my-3`}
-            id={`departments`}
+            register={register}
+            id={`department`}
             enableFilter={true}
-            change={(event) => console.log(event)}
+            errorMsg={errors.department?.message ?? ''}
           />
 
           {/*roles*/}
@@ -165,9 +165,10 @@ export const AdminEditMoveProviderTab = ({
             label={`Role`}
             options={roles}
             className={`my-3`}
-            id={`roles`}
+            register={register}
+            id={`role`}
             enableFilter={true}
-            change={(event) => console.log(event)}
+            errorMsg={errors.role?.message ?? ''}
           />
 
           {/*Service Area*/}
@@ -175,9 +176,10 @@ export const AdminEditMoveProviderTab = ({
             label={`Service Area`}
             options={serviceArea}
             className={`my-3`}
-            id={`serviceArea`}
+            register={register}
+            id={`servicearea`}
             enableFilter={true}
-            change={(event) => console.log(event)}
+            errorMsg={errors.servicearea?.message ?? ''}
           />
 
           {/*Unit*/}
@@ -185,9 +187,10 @@ export const AdminEditMoveProviderTab = ({
             label={`Unit`}
             options={unit}
             className={`my-3`}
+            register={register}
             id={`unit`}
             enableFilter={true}
-            change={(event) => console.log(event)}
+            errorMsg={errors.unit?.message ?? ''}
           />
         </div>
       </div>
