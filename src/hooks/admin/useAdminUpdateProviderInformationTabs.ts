@@ -45,8 +45,6 @@ export const useAdminUpdateProviderInformationTabs = (
   }, [id, departments]);
 
   const getCountryData = () => {
-    let countryUpdate: SelectInputFieldProps[] = [];
-
     if (departments) {
       setDepartmentsSelectField(
         convertObjectToGlobalSelectInputProps(departments, 'name', 'name')
