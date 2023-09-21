@@ -3,16 +3,21 @@ import { SelectInputFieldProps } from '../../types/common';
 import { Country, State } from 'country-state-city';
 import { AllCountries } from '../../types/superadmin/formTypes';
 import { useParams } from 'react-router-dom';
-import { axiosGetRequestUserService } from '../../lib/axios';
 import {
   UserServiceDepartmentResponseData,
   UserServiceRoleResponseData,
   UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '../../types/admin';
-import { ReactQueryDataUserService } from '../../lib/reactQuery';
+import { convertObjectToGlobalSelectInputProps } from '../../util';
 
-export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
+export const useAdminUpdateProviderInformationTabs = (
+  fetchData: boolean,
+  departments: UserServiceRoleResponseData[],
+  roles: UserServiceRoleResponseData[],
+  serviceAreas: UserServiceRoleResponseData[],
+  units: UserServiceRoleResponseData[]
+) => {
   const { id } = useParams();
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [allCountryStates, setAllCountryStates] = useState<
@@ -22,26 +27,42 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
   const [countryCode, setCountryCode] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState<string | number>();
-  const [departments, setDepartments] =
-    useState<UserServiceDepartmentResponseData[]>();
-  const [roles, setRoles] = useState<UserServiceRoleResponseData[]>();
-  const [serviceAreas, setServiceAreas] =
-    useState<UserServiceServiceAreaResponseData>();
-  const [units, setUnits] = useState<UserServiceUnitResponseData[]>();
-
-  // Site And Role Data
-  const { responseData, isLoading, error } = ReactQueryDataUserService(
-    `/site/department-roles-service_area-unit/${siteId}`,
-    'getUnitAreaRoleAndDept',
-    siteId
-  );
+  const [departmentsSelectField, setDepartmentsSelectField] = useState<
+    SelectInputFieldProps[]
+  >([]);
+  const [rolesSelectField, setRolesSelectField] = useState<
+    SelectInputFieldProps[]
+  >([]);
+  const [serviceAreasSelectField, setServiceAreasSelectField] = useState<
+    SelectInputFieldProps[]
+  >([]);
+  const [unitsSelectField, setUnitsSelectField] = useState<
+    SelectInputFieldProps[]
+  >([]);
 
   useEffect(() => {
-    getCountryData();
-  }, []);
+    if (!fetchData) {
+      getCountryData();
+    }
+  }, [id, departments]);
 
   const getCountryData = () => {
     let countryUpdate: SelectInputFieldProps[] = [];
+
+    if (departments) {
+      setDepartmentsSelectField(
+        convertObjectToGlobalSelectInputProps(departments, 'name', 'name')
+      );
+      setRolesSelectField(
+        convertObjectToGlobalSelectInputProps(roles, 'name', 'name')
+      );
+      setServiceAreasSelectField(
+        convertObjectToGlobalSelectInputProps(serviceAreas, 'name', 'name')
+      );
+      setUnitsSelectField(
+        convertObjectToGlobalSelectInputProps(units, 'name', 'name')
+      );
+    }
 
     Country.getAllCountries().map((country) => {
       return countryUpdate.push({
@@ -52,7 +73,10 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
     setAllCountries(countryUpdate);
   };
 
-  const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
+  const onUpdatePhoneNumber = (value: string | number) => {
+    console.log(phoneNumber);
+    setPhoneNumber(value);
+  };
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -76,13 +100,11 @@ export const useAdminUpdateProviderInformationTabs = (siteId: string) => {
     allCountries,
     allCountryStates,
     countryCode,
-    departments,
-    roles,
-    serviceAreas,
-    units,
-    isLoading,
-    error,
-    responseData,
+    departmentsSelectField,
+    rolesSelectField,
+    serviceAreasSelectField,
+    unitsSelectField,
+
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,

@@ -1,3 +1,5 @@
+import { SelectInputFieldProps } from '../types/common';
+
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();
   const date = new Date(timestamp);
@@ -12,4 +14,21 @@ export const formatTimeOrDays = (timestamp: string): string => {
     const daysDifference = Math.floor(timeDifference / oneDay);
     return `${daysDifference} day(s) ago`;
   }
+};
+
+export const convertObjectToGlobalSelectInputProps = (
+  data: any,
+  valueKey: string,
+  placeholderKey: string
+): SelectInputFieldProps[] => {
+  const selectData: SelectInputFieldProps[] = [];
+
+  data.map((item: any) => {
+    return selectData.push({
+      value: item[valueKey],
+      placeholder: item[placeholderKey],
+    });
+  });
+
+  return selectData;
 };

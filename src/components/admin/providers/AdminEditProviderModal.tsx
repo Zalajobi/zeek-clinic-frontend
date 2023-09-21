@@ -9,57 +9,72 @@ import { Typography } from '../../global/dialog/Typography';
 import {
   AdminEditGeneratePasswordTab,
   AdminEditMoveProviderTab,
-  AdminEditPersonalInformationModalTab,
+  AdminEditProvidersInformationModalTab,
 } from './AdminEditProviderModalTabViews';
 import { useForm } from 'react-hook-form';
 import {
-  AdminEditPersonalInformation,
-  AdminEditPersonalInformationSchema,
+  AdminEditProvidersInformation,
+  AdminEditProvidersInformationSchema,
 } from '../../../types/admin/provider';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
+import { UserServiceRoleResponseData } from '../../../types/admin';
 
 interface AdminEditProviderModalProps {
   name: string;
+  fetchData: boolean;
   currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
-  siteId: string;
+  department: UserServiceRoleResponseData[];
+  role: UserServiceRoleResponseData[];
+  serviceArea: UserServiceRoleResponseData[];
+  unit: UserServiceRoleResponseData[];
   updateCurrentModal: (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => void;
 }
 
 const AdminEditProviderModal = ({
-  siteId,
   name,
   currentModal,
   updateCurrentModal,
+  department,
+  role,
+  serviceArea,
+  unit,
+  fetchData,
 }: AdminEditProviderModalProps) => {
   const {
     // Value
     allCountries,
     allCountryStates,
     countryCode,
-    departments,
-    roles,
-    serviceAreas,
-    units,
+    departmentsSelectField,
+    rolesSelectField,
+    serviceAreasSelectField,
+    unitsSelectField,
 
     // Function
     onUpdateCountry,
     onUpdatePhoneNumber,
-  } = useAdminUpdateProviderInformationTabs(siteId);
+  } = useAdminUpdateProviderInformationTabs(
+    fetchData,
+    department,
+    role,
+    serviceArea,
+    unit
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AdminEditPersonalInformation>({
-    resolver: yupResolver(AdminEditPersonalInformationSchema),
+  } = useForm<AdminEditProvidersInformation>({
+    resolver: yupResolver(AdminEditProvidersInformationSchema),
   });
 
   const views = {
     Personal: (
-      <AdminEditPersonalInformationModalTab
+      <AdminEditProvidersInformationModalTab
         errors={errors}
         register={register}
         allCountries={allCountries}
@@ -69,7 +84,16 @@ const AdminEditProviderModal = ({
         onUpdateCountry={onUpdateCountry}
       />
     ),
-    MoveProvider: <AdminEditMoveProviderTab />,
+    MoveProvider: (
+      <AdminEditMoveProviderTab
+        departments={departmentsSelectField}
+        roles={rolesSelectField}
+        serviceArea={serviceAreasSelectField}
+        unit={unitsSelectField}
+        errors={errors}
+        register={register}
+      />
+    ),
     GeneratePassword: <AdminEditGeneratePasswordTab />,
   };
 

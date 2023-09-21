@@ -29,8 +29,6 @@ const AdminProviderDetails = () => {
   } = useAdminProviderDetails();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
-  console.log(unitDeptData);
-
   return (
     <Fragment>
       {providerDataLoading && unitDeptIsLoading && (
@@ -111,10 +109,14 @@ const AdminProviderDetails = () => {
         </div>
 
         <AdminEditProviderModal
-          siteId={providerData?.data?.provider?.siteId ?? ''}
           name={providerData?.data?.provider?.personalInfo?.first_name ?? ''}
           currentModal={editProviderModalSection}
           updateCurrentModal={onUpdateProviderModalSection}
+          department={unitDeptData?.data?.department}
+          role={unitDeptData?.data?.role}
+          serviceArea={unitDeptData?.data?.serviceArea}
+          unit={unitDeptData?.data?.unit}
+          fetchData={unitDeptIsLoading}
         />
       </AdminBaseTemplate>
     </Fragment>

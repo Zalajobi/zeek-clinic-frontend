@@ -1,17 +1,21 @@
 import * as yup from 'yup';
 
-export type AdminEditPersonalInformation = {
-  phone: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  title: string;
-  dob: string;
-  country: string;
-  state: string;
+export type AdminEditProvidersInformation = {
+  phone?: string;
+  first_name?: string;
+  last_name?: string;
+  middle_name?: string;
+  title?: string;
+  dob?: string;
+  country?: string;
+  state?: string;
+  department?: string;
+  role?: string;
+  serviceArea?: string;
+  unit?: string;
 };
 
-export const AdminEditPersonalInformationSchema = yup
+export const AdminEditProvidersInformationSchema = yup
   .object({
     phone: yup.number(),
     first_name: yup
@@ -30,5 +34,9 @@ export const AdminEditPersonalInformationSchema = yup
     dob: yup.string(),
     country: yup.string(),
     state: yup.string(),
+    department: yup.string(),
+    role: yup.string(),
+    serviceArea: yup.string(),
+    unit: yup.string(),
   })
   .required();
