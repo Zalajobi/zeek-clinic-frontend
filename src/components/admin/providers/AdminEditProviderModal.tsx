@@ -19,6 +19,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
 import { UserServiceRoleResponseData } from '../../../types/admin';
+import { LoadingSpinner } from '../../global/Toast';
 
 interface AdminEditProviderModalProps {
   name: string;
@@ -53,6 +54,7 @@ const AdminEditProviderModal = ({
     serviceAreasSelectField,
     unitsSelectField,
     tempPassword,
+    showLoading,
 
     // Function
     onUpdateCountry,
@@ -133,6 +135,10 @@ const AdminEditProviderModal = ({
           />
         </Fragment>
       }>
+      {showLoading && (
+        <LoadingSpinner message={`Updating Provider Details...`} />
+      )}
+
       <div className={`grid grid-cols-[25%_75%] gap-4 w-full h-[800px]`}>
         <div className={`w-full h-full border-r-[#e5e7eb] border-r`}>
           <div className={`flex flex-col item-center justify-start px-4`}>

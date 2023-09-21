@@ -9,6 +9,10 @@ import {
   generateRandomCharacters,
 } from '../../util';
 import { AdminEditProvidersInformation } from '../../types/admin/provider';
+import { useMutation, useQueryClient } from 'react-query';
+import axios from 'axios';
+import { axiosPutRequestUserService } from '../../lib/axios';
+import toast from 'react-hot-toast';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
@@ -18,6 +22,8 @@ export const useAdminUpdateProviderInformationTabs = (
   units: UserServiceRoleResponseData[]
 ) => {
   const { id } = useParams();
+  const queryClient = useQueryClient();
+  const [showLoading, setShowLoading] = useState<boolean>(false);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
@@ -91,6 +97,31 @@ export const useAdminUpdateProviderInformationTabs = (
 
   const onUpdateTempPassword = (value: string) => setTempPassword(value);
 
+  const mutation = useMutation({
+    mutationFn: (data: any) => {
+      return axiosPutRequestUserService(`/providers/update/${id}`, data);
+    },
+
+    onError: (error) => {
+      toast.error('Unable To Update Provider Information', {
+        duration: 5000,
+      });
+    },
+
+    onSuccess: (result) => {
+      toast.success('Update Successfully', {
+        duration: 5000,
+      });
+
+      setShowLoading(false);
+      queryClient.resetQueries('providerDetails');
+    },
+
+    onMutate: () => {
+      setShowLoading(true);
+    },
+  });
+
   const handleUpdateProviderDetails = async (
     data: AdminEditProvidersInformation
   ) => {
@@ -101,7 +132,7 @@ export const useAdminUpdateProviderInformationTabs = (
       phone: phoneNumber,
     };
 
-    console.log(updateData);
+    mutation.mutate(updateData);
   };
 
   return {
@@ -114,6 +145,7 @@ export const useAdminUpdateProviderInformationTabs = (
     serviceAreasSelectField,
     unitsSelectField,
     tempPassword,
+    showLoading,
 
     // Function
     onUpdateCountry,
@@ -121,5 +153,6 @@ export const useAdminUpdateProviderInformationTabs = (
     generatePassword,
     onUpdateTempPassword,
     handleUpdateProviderDetails,
+    setShowLoading,
   };
 };
