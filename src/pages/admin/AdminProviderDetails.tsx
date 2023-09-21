@@ -11,6 +11,7 @@ import {
 import { CgExport } from 'react-icons/cg';
 import AdminEditProviderModal from '../../components/admin/providers/AdminEditProviderModal';
 import toast from 'react-hot-toast';
+import { LoadingSpinner } from '../../components/global/Toast';
 
 const AdminProviderDetails = () => {
   const {
@@ -27,9 +28,7 @@ const AdminProviderDetails = () => {
 
   return (
     <Fragment>
-      {isLoading &&
-        // <Spinner/>
-        toast.loading(`Loading Data...`)}
+      {isLoading && <LoadingSpinner message={`Loading Data...`} />}
 
       {error && toast.error(`Error Retrieving Data...`)}
 
