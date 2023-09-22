@@ -10,12 +10,12 @@ import {
 } from '../../util';
 import { AdminEditProvidersInformation } from '../../types/admin/provider';
 import { useMutation, useQueryClient } from 'react-query';
-import axios from 'axios';
 import { axiosPutRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
+  siteId: string,
   departments: UserServiceRoleResponseData[],
   roles: UserServiceRoleResponseData[],
   serviceAreas: UserServiceRoleResponseData[],
@@ -48,21 +48,21 @@ export const useAdminUpdateProviderInformationTabs = (
     if (!fetchData) {
       getCountryData();
     }
-  }, [id, departments]);
+  }, [id, departments, siteId]);
 
   const getCountryData = () => {
     if (departments) {
       setDepartmentsSelectField(
-        convertObjectToGlobalSelectInputProps(departments, 'name', 'name')
+        convertObjectToGlobalSelectInputProps(departments, 'id', 'name')
       );
       setRolesSelectField(
-        convertObjectToGlobalSelectInputProps(roles, 'name', 'name')
+        convertObjectToGlobalSelectInputProps(roles, 'id', 'name')
       );
       setServiceAreasSelectField(
-        convertObjectToGlobalSelectInputProps(serviceAreas, 'name', 'name')
+        convertObjectToGlobalSelectInputProps(serviceAreas, 'id', 'name')
       );
       setUnitsSelectField(
-        convertObjectToGlobalSelectInputProps(units, 'name', 'name')
+        convertObjectToGlobalSelectInputProps(units, 'id', 'name')
       );
     }
 
@@ -99,19 +99,22 @@ export const useAdminUpdateProviderInformationTabs = (
 
   const mutation = useMutation({
     mutationFn: (data: any) => {
-      return axiosPutRequestUserService(`/providers/update/${id}`, data);
+      return axiosPutRequestUserService(
+        `/providers/update/${id}/${siteId}`,
+        data
+      );
     },
 
     onError: (error) => {
-      toast.error('Unable To Update Provider Information', {
-        duration: 5000,
-      });
+      toast.error('Unable To Update Provider Information');
+      setShowLoading(false);
     },
 
     onSuccess: (result) => {
-      toast.success('Update Successfully', {
-        duration: 5000,
-      });
+      // toast.success('Update Successfully');
+      console.log(result);
+      if (toast?.success) toast.success(result?.message);
+      else toast.error('Something Went Wrong');
 
       setShowLoading(false);
       queryClient.resetQueries('providerDetails');
@@ -127,11 +130,10 @@ export const useAdminUpdateProviderInformationTabs = (
   ) => {
     const updateData = {
       ...data,
-      tempPassword,
+      password: tempPassword,
       country,
       phone: phoneNumber,
     };
-
     mutation.mutate(updateData);
   };
 

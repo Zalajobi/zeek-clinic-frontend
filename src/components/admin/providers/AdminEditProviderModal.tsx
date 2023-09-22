@@ -24,6 +24,7 @@ import { LoadingSpinner } from '../../global/Toast';
 interface AdminEditProviderModalProps {
   name: string;
   fetchData: boolean;
+  siteId: string;
   currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
   department: UserServiceRoleResponseData[];
   role: UserServiceRoleResponseData[];
@@ -43,6 +44,7 @@ const AdminEditProviderModal = ({
   serviceArea,
   unit,
   fetchData,
+  siteId,
 }: AdminEditProviderModalProps) => {
   const {
     // Value
@@ -64,6 +66,7 @@ const AdminEditProviderModal = ({
     handleUpdateProviderDetails,
   } = useAdminUpdateProviderInformationTabs(
     fetchData,
+    siteId,
     department,
     role,
     serviceArea,

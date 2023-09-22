@@ -115,6 +115,7 @@ const AdminProviderDetails = () => {
           serviceArea={unitDeptData?.data?.serviceArea}
           unit={unitDeptData?.data?.unit}
           fetchData={unitDeptIsLoading}
+          siteId={providerData?.data?.provider?.siteId}
         />
       </AdminBaseTemplate>
     </Fragment>

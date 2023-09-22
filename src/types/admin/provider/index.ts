@@ -13,6 +13,7 @@ export type AdminEditProvidersInformation = {
   role?: string;
   serviceArea?: string;
   unit?: string;
+  staff_id?: string;
 };
 
 export const AdminEditProvidersInformationSchema = yup
@@ -38,6 +39,7 @@ export const AdminEditProvidersInformationSchema = yup
     role: yup.string(),
     serviceArea: yup.string(),
     unit: yup.string(),
+    staff_id: yup.string(),
     // password: yup
     //   .string()
     //   .min(8, 'Must be at least Eight(8) characters long')

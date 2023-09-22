@@ -91,6 +91,15 @@ export const AdminEditProvidersInformationModalTab = ({
             register={register}
           />
 
+          {/*Middle Name*/}
+          <TextInput
+            label={`Staff ID`}
+            className={`my-3`}
+            errorMsg={errors.staff_id?.message ?? ''}
+            id={`staff_id`}
+            register={register}
+          />
+
           {/*DOB*/}
           <DateInput
             label={`Date Or Birth`}
@@ -100,9 +109,7 @@ export const AdminEditProvidersInformationModalTab = ({
             id={`dob`}
             register={register}
           />
-        </div>
 
-        <div className={`grid grid-cols-3 gap-4 my-2`}>
           {/*Country*/}
           <SelectInput
             label={`Country`}
@@ -126,6 +133,7 @@ export const AdminEditProvidersInformationModalTab = ({
             errorMsg={errors.state?.message ?? ''}
           />
 
+          {/*Phonne Number*/}
           <PhoneNumberInput
             country={country}
             change={onUpdatePhoneNumber}
