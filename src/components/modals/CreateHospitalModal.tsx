@@ -103,7 +103,6 @@ const CreateHospitalModal = () => {
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
-                enableFilter={true}
                 change={(e) => onUpdateCountry(e.target.value)}
               />
 
@@ -114,7 +113,6 @@ const CreateHospitalModal = () => {
                 register={register}
                 id={'state'}
                 errorMsg={errors.state?.message ?? ''}
-                enableFilter={true}
               />
 
               <TextInput

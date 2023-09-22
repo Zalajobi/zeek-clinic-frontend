@@ -117,7 +117,6 @@ export const AdminEditProvidersInformationModalTab = ({
             className={`my-3`}
             register={register}
             id={`country`}
-            enableFilter={true}
             errorMsg={errors.country?.message ?? ''}
             change={(e) => onUpdateCountry(e.target.value)}
           />
@@ -129,7 +128,6 @@ export const AdminEditProvidersInformationModalTab = ({
             className={`my-3`}
             register={register}
             id={`state`}
-            enableFilter={true}
             errorMsg={errors.state?.message ?? ''}
           />
 
@@ -164,7 +162,6 @@ export const AdminEditMoveProviderTab = ({
             className={`my-3`}
             register={register}
             id={`department`}
-            enableFilter={true}
             errorMsg={errors.department?.message ?? ''}
           />
 
@@ -175,7 +172,6 @@ export const AdminEditMoveProviderTab = ({
             className={`my-3`}
             register={register}
             id={`role`}
-            enableFilter={true}
             errorMsg={errors.role?.message ?? ''}
           />
 
@@ -186,7 +182,6 @@ export const AdminEditMoveProviderTab = ({
             className={`my-3`}
             register={register}
             id={`servicearea`}
-            enableFilter={true}
             errorMsg={errors.servicearea?.message ?? ''}
           />
 
@@ -197,7 +192,6 @@ export const AdminEditMoveProviderTab = ({
             className={`my-3`}
             register={register}
             id={`unit`}
-            enableFilter={true}
             errorMsg={errors.unit?.message ?? ''}
           />
         </div>

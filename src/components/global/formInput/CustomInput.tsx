@@ -42,7 +42,6 @@ interface SelectInputProps {
   errorMsg?: string;
   className?: string;
   change?: (event: ChangeEvent<HTMLSelectElement>) => void;
-  enableFilter?: boolean;
 }
 
 interface DateInputProps {
@@ -195,18 +194,16 @@ export const SelectInput = ({
   className = '',
   id,
   register,
-  enableFilter = false,
   change,
 }: SelectInputProps) => {
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
+        className={`relative h-[58px] w-full min-w-[100px] select-input-global-component ${className}`}>
         {register ? (
           <select
-            data-te-select-init={true}
-            data-te-select-size="lg"
-            data-te-select-filter={enableFilter}
+            className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500
+              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {
                 if (change) {
@@ -215,7 +212,7 @@ export const SelectInput = ({
               },
             })}
             id={id}>
-            <option value="">Select {label}</option>
+            <option selected>Select {label}</option>
             {options.map((item, idx) => {
               return (
                 <option
@@ -228,12 +225,11 @@ export const SelectInput = ({
           </select>
         ) : (
           <select
-            data-te-select-init={true}
-            data-te-select-size="lg"
-            data-te-select-filter={enableFilter}
+            className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500
+              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             onChange={change}
             id={id}>
-            <option value="">Select {label}</option>
+            <option selected>Select {label}</option>
             {options.map((item, idx) => {
               return (
                 <option
@@ -245,8 +241,6 @@ export const SelectInput = ({
             })}
           </select>
         )}
-
-        <label data-te-select-label-ref>{label}</label>
 
         {errorMsg && (
           <>

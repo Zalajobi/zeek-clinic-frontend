@@ -240,7 +240,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'relationship_status'}
                   errorMsg={errors.relationship_status?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -252,7 +251,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'religion'}
                   errorMsg={errors.religion?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -262,7 +260,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'department'}
                   errorMsg={errors.department?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -272,7 +269,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'role'}
                   errorMsg={errors.role?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -282,7 +278,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'serviceArea'}
                   errorMsg={errors.serviceArea?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -292,7 +287,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'unit'}
                   errorMsg={errors.unit?.message ?? ''}
-                  enableFilter={true}
                 />
               </div>
 
@@ -305,7 +299,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'country'}
                   errorMsg={errors.country?.message ?? ''}
-                  enableFilter={true}
                   change={(e) => onUpdateCountry(e.target.value)}
                 />
 
@@ -316,7 +309,6 @@ export const AddProvider = () => {
                   register={register}
                   id={'state'}
                   errorMsg={errors.state?.message ?? ''}
-                  enableFilter={true}
                 />
 
                 <TextInput

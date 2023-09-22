@@ -256,7 +256,6 @@ const OrganizationSite = () => {
                     options={countryFilterList}
                     className={`w-full min-h-[59px]`}
                     id={'country'}
-                    enableFilter={true}
                     change={(e) => onUpdateFilterByCountry(e.target.value)}
                   />
 
@@ -265,7 +264,6 @@ const OrganizationSite = () => {
                     options={stateFilterList}
                     className={`w-full min-h-[59px]`}
                     id={'state'}
-                    enableFilter={true}
                     change={(e) => onUpdateFilterByState(e.target.value)}
                   />
                 </div>

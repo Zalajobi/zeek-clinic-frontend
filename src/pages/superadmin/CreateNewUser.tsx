@@ -153,7 +153,6 @@ const CreateNewUser = () => {
                 register={register}
                 id={'marital_status'}
                 errorMsg={errors.marital_status?.message ?? ''}
-                enableFilter={true}
               />
 
               {/*Religion*/}
@@ -166,7 +165,6 @@ const CreateNewUser = () => {
                 register={register}
                 id={'religion'}
                 errorMsg={errors.religion?.message ?? ''}
-                enableFilter={true}
               />
 
               {/*Staff ID*/}
@@ -200,7 +198,6 @@ const CreateNewUser = () => {
                 className={`my-3`}
                 register={register}
                 id={`role`}
-                enableFilter={true}
                 errorMsg={errors.role?.message ?? ''}
               />
 
@@ -211,7 +208,6 @@ const CreateNewUser = () => {
                 className={`my-3`}
                 register={register}
                 id={`country`}
-                enableFilter={true}
                 errorMsg={errors.country?.message ?? ''}
                 change={(e) => onUpdateCountry(e.target.value)}
               />
@@ -223,7 +219,6 @@ const CreateNewUser = () => {
                 className={`my-3`}
                 register={register}
                 id={`state`}
-                enableFilter={true}
                 errorMsg={errors.state?.message ?? ''}
               />
 
