@@ -80,68 +80,52 @@ export const TextInput = ({
 }: TextInputProps) => {
   return (
     <Fragment>
-      <div className={`min-w-[100px] ${className}`}>
+      <div className={`min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`block text-sm font-medium mb-2 dark:text-white ${
+              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+            }`}>
+            {label}
+          </label>
+
           <div className="relative h-[58px] w-full min-w-[200px]">
-            <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-              {icon}
-            </div>
-
-            {register && (
-              <input
-                className={`peer h-full w-full rounded-[7px] border border-blue-gray-200 
-              bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 
-              transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 
-              placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-500 focus:border-t-transparent 
-              focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
-                placeholder={placeholder}
-                id={id}
-                {...register(id)}
-              />
+            {register ? (
+              <>
+                <input
+                  type={type}
+                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  {...register(id)}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            ) : (
+              <>
+                <input
+                  type={type}
+                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  onChange={change}
+                  value={value}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
             )}
-
-            {change && (
-              <input
-                className={`peer h-full w-full rounded-[7px] border border-blue-gray-200 
-              bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 
-              transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 
-              placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-500 focus:border-t-transparent 
-              focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50`}
-                placeholder={placeholder}
-                onChange={change}
-                value={value}
-                id={id}
-              />
-            )}
-
-            <label
-              className={`before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex 
-              h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all 
-              before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 
-              before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 
-              before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block 
-              after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r 
-              after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm 
-              peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 
-              peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent 
-              peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-500 peer-focus:before:border-t-2 
-              peer-focus:before:border-l-2 peer-focus:before:border-gray-500 peer-focus:after:border-t-2 
-              peer-focus:after:border-r-2 peer-focus:after:border-gray-500 peer-disabled:text-transparent 
-              peer-disabled:before:border-transparent peer-disabled:after:border-transparent 
-              peer-disabled:peer-placeholder-shown:text-blue-gray-500 ${
-                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-              }`}
-              htmlFor={id}>
-              {label}
-            </label>
           </div>
-
           {errorMsg && (
-            <div className="absolute w-full text-sm text-neutral-500 peer-focus:text-primary dark:text-neutral-200 dark:peer-focus:text-primary">
+            <div className="text-sm text-red-600 mt-2">
               <Typography
                 Tag={`span`}
                 text={errorMsg}
-                className={`italic text-xs font-thin ${
+                className={`italic text-xs font-bold ${
                   errorMsg ? 'text-red-500' : ''
                 }`}
               />
@@ -199,7 +183,12 @@ export const SelectInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-[58px] w-full min-w-[100px] select-input-global-component ${className}`}>
+        className={`relative h-[58px] w-full min-w-[100px] select-input-global-component my-2 ${className}`}>
+        <label
+          htmlFor="select-2"
+          className="block text-sm font-medium mb-2 dark:text-white">
+          {label}
+        </label>
         {register ? (
           <select
             className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500
@@ -247,7 +236,7 @@ export const SelectInput = ({
             <Typography
               Tag={`span`}
               text={errorMsg}
-              className={`italic text-xs font-thin ${
+              className={`text-sm text-green-600 mt-2 ${
                 errorMsg ? 'text-red-500' : ''
               }`}
             />

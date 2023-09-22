@@ -16,5 +16,9 @@ module.exports = {
       error: '#FAECEC',
     },
   },
-  plugins: [require('tw-elements/dist/plugin.cjs'), require('preline/plugin')],
+  plugins: [
+    require('flowbite/plugin'),
+    require('tw-elements/dist/plugin.cjs'),
+    require('preline/plugin'),
+  ],
 };
