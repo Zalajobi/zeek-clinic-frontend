@@ -54,10 +54,6 @@
   width: 100%;
 }
 
-.date_picker-input-global-component input {
-  min-height: 58px;
-}
-
 .glassmorphism {
   border-top: 2px solid #ffffff75;
   border-left: 2px solid #ffffff75;

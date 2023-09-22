@@ -6,7 +6,6 @@ import change = Simulate.change;
 import moment from 'moment';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import flags from 'react-phone-number-input/flags';
 import { SelectInputFieldProps } from '../../../types/common';
 
 interface TextInputProps {
@@ -261,69 +260,58 @@ export const DateInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[100px] min-h-[58px] date_picker-input-global-component ${className}`}
-        data-te-datepicker-init
-        data-te-inline={true}
-        data-te-input-wrapper-init
-        data-te-format={'m-d-yyyy'}>
-        {register ? (
-          <input
-            data-te-datepicker-toggle-ref
-            data-te-datepicker-toggle-button-ref
-            type="text"
-            className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
-            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
-            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
-            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
-            placeholder={placeholder}
-            {...register(id)}
-            value={moment(value).format('MMM DD. YYYY')}
-            id={id}
-          />
-        ) : (
-          <input
-            data-te-datepicker-toggle-ref
-            data-te-datepicker-toggle-button-ref
-            type="text"
-            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6]
-            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
-            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
-            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-            placeholder={placeholder}
-            onInput={change}
-            id={id}
-          />
-        )}
+        className={`relative h-10 w-full min-w-[100px] min-h-[58px] ${className}`}>
+        <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`block text-sm font-medium mb-2 dark:text-white ${
+              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+            }`}>
+            {label}
+          </label>
 
-        {icon && (
-          <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-            {icon}
+          <div className="relative h-[58px] w-full min-w-[200px]">
+            {register ? (
+              <>
+                <input
+                  type={`date`}
+                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  {...register(id)}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            ) : (
+              <>
+                <input
+                  type={`date`}
+                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  onChange={change}
+                  // value={value}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            )}
           </div>
-        )}
-
-        <label
-          htmlFor={id}
-          className={`pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] 
-          leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] 
-          peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] 
-          peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 
-          dark:peer-focus:text-primary`}>
-          {label}
-        </label>
-
-        {errorMsg && (
-          <>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`italic text-xs font-thin ${
-                errorMsg ? 'text-red-500' : ''
-              }`}
-            />
-          </>
-        )}
+          {errorMsg && (
+            <div className="text-sm text-red-600 mt-2">
+              <Typography
+                Tag={`span`}
+                text={errorMsg}
+                className={`italic text-xs font-bold ${
+                  errorMsg ? 'text-red-500' : ''
+                }`}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Fragment>
   );
