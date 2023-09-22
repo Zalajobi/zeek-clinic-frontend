@@ -111,6 +111,7 @@ export const AddProvider = () => {
                 />
 
                 <PhoneNumberInput
+                  label={`Phone Number`}
                   country={countryCode}
                   change={(value) => console.log(value)}
                 />

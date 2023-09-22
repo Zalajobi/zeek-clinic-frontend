@@ -182,7 +182,7 @@ export const SelectInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-[58px] w-full min-w-[100px] select-input-global-component my-2 ${className}`}>
+        className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
         <label
           htmlFor="select-2"
           className="block text-sm font-medium mb-2 dark:text-white">
@@ -260,7 +260,7 @@ export const DateInput = ({
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[100px] min-h-[58px] ${className}`}>
+        className={`relative h-10 w-full min-h-[100px] min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
           <label
             htmlFor={id}
@@ -394,20 +394,32 @@ export const CustomInputLabel = ({
 export const PhoneNumberInput = ({
   country,
   change,
+  label,
+  className = '',
 }: {
   country: string;
+  label: string;
   change: (value: string | number) => void;
+  className?: string;
 }) => {
   return (
     <Fragment>
       <div
-        className={`relative w-full min-w-[100px] min-h-[80px] date_picker-input-global-component flex items-center justify-center`}>
-        <PhoneInput
-          placeholder="Enter phone number"
-          label={`Phone Number`}
-          country="US"
-          onChange={(value) => change(value as string)}
-        />
+        className={`relative h-10 w-full min-w-[100px] min-h-[100px] my-3 ${className}`}>
+        <div className="w-full">
+          <label className={`block text-sm font-medium mb-2 dark:text-white`}>
+            {label}
+          </label>
+        </div>
+
+        <div className="relative h-[58px] w-full min-w-[200px]">
+          <PhoneInput
+            placeholder="Enter phone number"
+            label={`Phone Number`}
+            country="US"
+            onChange={(value) => change(value as string)}
+          />
+        </div>
       </div>
     </Fragment>
   );

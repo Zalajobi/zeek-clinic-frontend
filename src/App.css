@@ -67,11 +67,11 @@
 .PhoneInput {
   border: 1px solid #e5e7eb;
   border-radius: 5px;
-  height: 55px;
+  min-height: 60px;
   padding: 5px 10px;
 }
 .PhoneInputInput {
-  height: 100%;
+  min-height: 50px;
   border: none;
 }
 

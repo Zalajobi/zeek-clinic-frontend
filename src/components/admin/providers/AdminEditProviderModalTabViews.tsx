@@ -1,5 +1,4 @@
-import { Fragment } from 'react';
-import { Select, initTE } from 'tw-elements';
+import React, { Fragment, useState } from 'react';
 import { availableTitles } from '../../../lib/constants/constants';
 import {
   DateInput,
@@ -131,10 +130,11 @@ export const AdminEditProvidersInformationModalTab = ({
             errorMsg={errors.state?.message ?? ''}
           />
 
-          {/*Phonne Number*/}
+          {/*Phone Number*/}
           <PhoneNumberInput
             country={country}
             change={onUpdatePhoneNumber}
+            label={'Phone Number'}
           />
         </div>
       </div>
@@ -210,12 +210,14 @@ export const AdminEditGeneratePasswordTab = ({
   return (
     <Fragment>
       <div
-        className={`w-full h-[100px] flex item-center justify-start px-8 py-4`}>
-        <div className={`w-full grid grid-cols-1 gap-6 lg:grid-cols-[70%_30%]`}>
+        className={`w-full h-[200px] flex item-center justify-start px-8 py-4`}>
+        <div
+          className={`w-[90%] grid grid-cols-1 gap-4 items-center lg:grid-cols-[70%_30%]`}>
           <TextInput
             label={`Password`}
             className={`w-full`}
             id={`password`}
+            type={`text`}
             value={password}
             change={(event) => updatePassword(event.target.value)}
           />
@@ -223,7 +225,7 @@ export const AdminEditGeneratePasswordTab = ({
           <BasicFilledButton
             type={`primary`}
             text={`Generate Password`}
-            className={`h-[58px]`}
+            className={`h-[58px] w-[180px] mt-[30px]`}
             click={generatePassword}
           />
         </div>
