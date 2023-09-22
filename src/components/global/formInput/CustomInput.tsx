@@ -3,7 +3,6 @@ import { UseFormRegister } from 'react-hook-form';
 import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
-import moment from 'moment';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { SelectInputFieldProps } from '../../../types/common';
@@ -200,7 +199,11 @@ export const SelectInput = ({
               },
             })}
             id={id}>
-            <option selected>Select {label}</option>
+            <option
+              selected
+              disabled>
+              Select {label}
+            </option>
             {options.map((item, idx) => {
               return (
                 <option
@@ -217,7 +220,11 @@ export const SelectInput = ({
               focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             onChange={change}
             id={id}>
-            <option selected>Select {label}</option>
+            <option
+              selected
+              disabled>
+              Select {label}
+            </option>
             {options.map((item, idx) => {
               return (
                 <option
