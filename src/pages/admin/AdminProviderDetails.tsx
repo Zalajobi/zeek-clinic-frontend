@@ -12,6 +12,7 @@ import { CgExport } from 'react-icons/cg';
 import AdminEditProviderModal from '../../components/admin/providers/AdminEditProviderModal';
 import toast from 'react-hot-toast';
 import { LoadingSpinner } from '../../components/global/Toast';
+import ProviderSummaryCard from '../../components/admin/providers/ProviderSummaryCard';
 
 const AdminProviderDetails = () => {
   const {
@@ -78,31 +79,42 @@ const AdminProviderDetails = () => {
           </div>
 
           <div className={`w-full flex flex-col my-10`}>
-            <ProviderDetailsCard
-              title={providerData?.data?.provider?.personalInfo.title ?? ''}
-              firstName={
-                providerData?.data?.provider?.personalInfo.first_name ?? ''
-              }
-              middleName={
-                providerData?.data?.provider?.personalInfo?.middle_name ?? ''
-              }
-              lastName={
-                providerData?.data?.provider?.personalInfo.last_name ?? ''
-              }
-              email={providerData?.data?.provider?.email ?? ''}
-              phone={providerData?.data?.provider?.personalInfo.phone ?? ''}
-              dob={providerData?.data?.provider?.personalInfo.dob ?? ''}
-              role={providerData?.data?.provider?.primary_role.name ?? ''}
-              unit={providerData?.data?.provider?.unit.name ?? ''}
-              department={providerData?.data?.provider?.department.name ?? ''}
-              serviceArea={providerData?.data?.provider?.servicearea.name ?? ''}
-              createdAt={providerData?.data?.provider?.created_at ?? ''}
-              patientCount={providerData?.data?.patientCount?.toString()}
-              country={providerData?.data?.provider?.personalInfo.country ?? ''}
-              state={providerData?.data?.provider?.personalInfo.state ?? ''}
-              city={providerData?.data?.provider?.personalInfo.city ?? ''}
-              address={providerData?.data?.provider?.personalInfo.address ?? ''}
-            />
+            <div
+              className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-[70%_30%]`}>
+              <ProviderDetailsCard
+                title={providerData?.data?.provider?.personalInfo.title ?? ''}
+                firstName={
+                  providerData?.data?.provider?.personalInfo.first_name ?? ''
+                }
+                middleName={
+                  providerData?.data?.provider?.personalInfo?.middle_name ?? ''
+                }
+                lastName={
+                  providerData?.data?.provider?.personalInfo.last_name ?? ''
+                }
+                email={providerData?.data?.provider?.email ?? ''}
+                phone={providerData?.data?.provider?.personalInfo.phone ?? ''}
+                dob={providerData?.data?.provider?.personalInfo.dob ?? ''}
+                role={providerData?.data?.provider?.primary_role.name ?? ''}
+                unit={providerData?.data?.provider?.unit.name ?? ''}
+                department={providerData?.data?.provider?.department.name ?? ''}
+                serviceArea={
+                  providerData?.data?.provider?.servicearea.name ?? ''
+                }
+                createdAt={providerData?.data?.provider?.created_at ?? ''}
+                patientCount={providerData?.data?.patientCount?.toString()}
+                country={
+                  providerData?.data?.provider?.personalInfo.country ?? ''
+                }
+                state={providerData?.data?.provider?.personalInfo.state ?? ''}
+                city={providerData?.data?.provider?.personalInfo.city ?? ''}
+                address={
+                  providerData?.data?.provider?.personalInfo.address ?? ''
+                }
+              />
+
+              <ProviderSummaryCard />
+            </div>
           </div>
         </div>
 

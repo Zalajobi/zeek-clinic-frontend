@@ -111,8 +111,6 @@ export const useAdminUpdateProviderInformationTabs = (
     },
 
     onSuccess: (result) => {
-      // toast.success('Update Successfully');
-      console.log(result);
       if (toast?.success) toast.success(result?.message);
       else toast.error('Something Went Wrong');
 
