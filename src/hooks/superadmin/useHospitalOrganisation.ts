@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { axiosGetRequestUserService } from '../../lib/axios';
-import { GetHospitalResponseData } from '../../typeSpec/superadmin';
 import toast from 'react-hot-toast';
-import { customPromiseRequest } from '../../lib/requests';
-import { SelectInputFieldProps } from '../../typeSpec/common';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { GetHospitalResponseData } from '@typeSpec/superadmin';
+import { customPromiseRequest } from '@lib/requests';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const useHospitalOrganisation = () => {
   const navigate = useNavigate();

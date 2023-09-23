@@ -1,11 +1,10 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
-import { textSize } from '../../../lib/types';
-import { textSizeClassMap } from '../../../lib/constants/textClassMaps';
-import { TbFileInvoice } from 'react-icons/tb';
-import Text from './Text';
 import { Link } from 'react-router-dom';
-import { TypographySkeleton } from './Skeletons';
+import { textSize } from '@lib/types';
+import { textSizeClassMap } from '@lib/constants/textClassMaps';
+import Text from '@components/global/dialog/Text';
+import { TypographySkeleton } from '@components/global/dialog/Skeletons';
 
 interface TypographyProps {
   text: string | number;

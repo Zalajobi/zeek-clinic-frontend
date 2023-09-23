@@ -1,5 +1,5 @@
 import { Fragment, ReactNode } from 'react';
-import { Typography } from './Typography';
+import { Typography } from '@components/global/dialog/Typography';
 
 interface CustomBasicModalProps {
   targetModalId: string;

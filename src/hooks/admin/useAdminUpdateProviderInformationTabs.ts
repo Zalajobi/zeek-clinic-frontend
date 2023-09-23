@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { SelectInputFieldProps } from '../../typeSpec/common';
 import { Country, State } from 'country-state-city';
-import { AllCountries } from '../../typeSpec/superadmin/formTypes';
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
-import { UserServiceRoleResponseData } from '../../typeSpec/admin';
+import { useMutation, useQueryClient } from 'react-query';
 import {
   convertObjectToGlobalSelectInputProps,
   generateRandomCharacters,
 } from '../../util';
-import { AdminEditProvidersInformation } from '../../typeSpec/admin/provider';
-import { useMutation, useQueryClient } from 'react-query';
-import { axiosPutRequestUserService } from '../../lib/axios';
-import toast from 'react-hot-toast';
+import { UserServiceRoleResponseData } from '@typeSpec/admin';
+import { AdminEditProvidersInformation } from '@typeSpec/admin/provider';
+import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { axiosPutRequestUserService } from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,

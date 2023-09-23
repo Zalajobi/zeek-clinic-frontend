@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { AccountServiceApiResponse } from '../../typeSpec/apiResponses';
 import { useQuery } from 'react-query';
-import { axiosGetRequestUserService } from '../../lib/axios';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+import { axiosGetRequestUserService } from '@lib/axios';
 
 export const useAdminProviderDetails = () => {
   const { id } = useParams();

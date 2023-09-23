@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import { HospitalOrganizationData } from '../../../typeSpec/superadmin';
 import moment from 'moment/moment';
-import Status from '../../global/Status';
-import { Typography } from '../../global/dialog/Typography';
-import { CustomTransparentCard } from '../../global/card/CustomCard';
+import { HospitalOrganizationData } from '@typeSpec/superadmin';
+import Status from '@components/global/Status';
+import { Typography } from '@components/global/dialog/Typography';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
 interface HospitalDetailsProps {
   data: HospitalOrganizationData | null;

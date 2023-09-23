@@ -1,7 +1,7 @@
-import { uploadProfileImage } from '../../../util/useS3Upload';
 import { ImUpload } from 'react-icons/im';
 import Dropzone from 'react-dropzone';
-import { BasicFilledButton } from '../CustomButton';
+import { uploadProfileImage } from '@util/useS3Upload';
+import { BasicFilledButton } from '@components/global/CustomButton';
 
 interface ImageUploadProps {
   bucketFolder: string;

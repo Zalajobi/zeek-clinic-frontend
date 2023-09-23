@@ -7,7 +7,7 @@ import {
   textSpacingClassMap,
   textStyleClassMap,
   textVariantNumericClassMap,
-} from '../../../lib/constants/textClassMaps';
+} from '@lib/constants/textClassMaps';
 import {
   textAlign,
   textBreak,
@@ -16,7 +16,7 @@ import {
   textSpacing,
   textStyle,
   textVariantNumeric,
-} from '../../../lib/types';
+} from '@lib/types';
 
 interface TextProps {
   text: string;

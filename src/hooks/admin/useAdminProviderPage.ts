@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
-import { axiosGetRequestUserService } from '../../lib/axios';
+import toast from 'react-hot-toast';
+import { axiosGetRequestUserService } from '@lib/axios';
 import {
   ProviderPageSiteResponseData,
   ProviderAndRelationAPIResponse,
-} from '../../typeSpec/admin';
-import { customPromiseRequest } from '../../lib/requests';
-import toast from 'react-hot-toast';
+} from '@typeSpec/admin';
+import { customPromiseRequest } from '@lib/requests';
+import input = Simulate.input;
 
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();

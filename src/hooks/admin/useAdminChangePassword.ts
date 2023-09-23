@@ -5,11 +5,11 @@ import {
   matchLowerCaseRegex,
   matchNumbersRegex,
   matchUpperCaseRegex,
-} from '../../lib/constants/constants';
+} from '@lib/constants/constants';
 import {
   axiosGetRequestUserService,
   axiosPutRequestUserService,
-} from '../../lib/axios';
+} from '@lib/axios';
 
 export const useAdminChangePassword = () => {
   const navigate = useNavigate();

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 export const ToasterConfig = () => {

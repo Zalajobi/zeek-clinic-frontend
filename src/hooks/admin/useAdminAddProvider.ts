@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
+import toast from 'react-hot-toast';
 import {
   axiosGetRequestUserService,
   axiosPostRequestUserService,
-} from '../../lib/axios';
-import { SelectInputFieldProps } from '../../typeSpec/common';
+} from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
 import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
-} from '../../typeSpec/apiResponses';
+} from '@typeSpec/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
-} from '../../typeSpec/superadmin/formTypes';
-import toast from 'react-hot-toast';
+} from '@typeSpec/superadmin/formTypes';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();

@@ -8,14 +8,8 @@ import {
   HospitalRowData,
   SiteRowData,
   SuperadminSiteData,
-} from '../../typeSpec/superadmin';
-import Status from '../global/Status';
-
-interface SuperadminHospitalDataRowProps {
-  data: GetHospitalResponseData[];
-  onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
-  selected: boolean;
-}
+} from '@typeSpec/superadmin';
+import Status from '@components/global/Status';
 
 export const SuperadminHospitalDataColumn = (
   onClickSortParameters: (

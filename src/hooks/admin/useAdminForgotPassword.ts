@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { axiosPostRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
+import { axiosPostRequestUserService } from '@lib/axios';
 
 export const useAdminForgotPassword = () => {
   const [email, setEmail] = useState('');

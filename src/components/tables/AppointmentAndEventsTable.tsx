@@ -1,9 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AppointmentTableData,
-  AppointmentTableRowData,
-} from '../../typeSpec/admin';
+import { AppointmentTableData, AppointmentTableRowData } from '@typeSpec/admin';
 
 export const AppointmentAndEventsTableColumn = () => {
   const columnItem = [

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { axiosGetRequestUserService } from '../../lib/axios';
-import { AdminHeaderBaseTemplateData } from '../../typeSpec/admin';
 import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { AdminHeaderBaseTemplateData } from '@typeSpec/admin';
 
 export const useAdminBaseTemplate = () => {
   const navigate = useNavigate();

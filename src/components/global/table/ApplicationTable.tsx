@@ -1,12 +1,15 @@
-import { BasicSearchInput } from '../formInput/SearchInputs';
-import TableHeaderDropdown from './TableHeaderDropdown';
-import { DateInput, SelectInput } from '../formInput/CustomInput';
+import { ChangeEvent, Fragment } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
-import Table from './Table';
-import TableFooter from './TableFooter';
-import { ChangeEvent, Fragment } from 'react';
-import { SelectInputFieldProps } from '../../../typeSpec/common';
+import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
+import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
+import {
+  DateInput,
+  SelectInput,
+} from '@components/global/formInput/CustomInput';
+import Table from '@components/global/table/Table';
+import TableFooter from '@components/global/table/TableFooter';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 interface AdminTableProps {
   tableColumns: any;

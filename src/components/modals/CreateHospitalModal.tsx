@@ -2,15 +2,18 @@ import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useCreateHospitalModal } from '../../hooks/superadmin/useCreateHospitalModal';
-import ImageUpload from '../global/formInput/ImageUpload';
-import { CustomBasicModal } from '../global/dialog/CustomModal';
+import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../global/CustomButton';
-import { CustomTransparentCard } from '../global/card/CustomCard';
-import { SelectInput, TextInput } from '../global/formInput/CustomInput';
+} from '@components/global/CustomButton';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import {
+  SelectInput,
+  TextInput,
+} from '@components/global/formInput/CustomInput';
 import {
   CreateHospitalInput,
   CreateHospitalInputSchema,

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { axiosPostRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { axiosPostRequestUserService } from '@lib/axios';
 
 export const useSuperadminLogin = () => {
   const navigate = useNavigate();

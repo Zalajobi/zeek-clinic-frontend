@@ -3,14 +3,14 @@ import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { CreateAdminUserInput } from '../../typeSpec/superadmin/forms';
-import { SelectInputFieldProps } from '../../typeSpec/common';
-import { AccountServiceApiResponse } from '../../typeSpec/apiResponses';
+import { CreateAdminUserInput } from '@typeSpec/superadmin/forms';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import {
   axiosGetRequestUserService,
   axiosPostRequestUserService,
-} from '../../lib/axios';
-import { AllCountries } from '../../typeSpec/superadmin/formTypes';
+} from '@lib/axios';
+import { AllCountries } from '@typeSpec/superadmin/formTypes';
 
 interface DepartmentRoleProps {
   name: string;

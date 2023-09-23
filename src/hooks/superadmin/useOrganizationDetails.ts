@@ -1,15 +1,14 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { axiosGetRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import {
   HospitalOrganizationData,
   SuperadminSiteData,
-} from '../../typeSpec/superadmin';
-import * as queryString from 'querystring';
-import { SelectInputFieldProps } from '../../typeSpec/common';
-import { customPromiseRequest } from '../../lib/requests';
-import { AccountServiceApiResponse } from '../../typeSpec/apiResponses';
+} from '@typeSpec/superadmin';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { customPromiseRequest } from '@lib/requests';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-import { AllCountries } from '../../typeSpec/superadmin/formTypes';
-import { axiosPostRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';
-import { SelectInputFieldProps } from '../../typeSpec/common';
 import { initTE, Select } from 'tw-elements';
-import { CreateSiteInput } from '../../typeSpec/superadmin/forms';
+import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { axiosPostRequestUserService } from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 
 export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
   const navigate = useNavigate();

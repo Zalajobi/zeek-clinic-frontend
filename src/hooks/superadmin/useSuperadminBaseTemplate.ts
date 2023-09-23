@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { axiosGetRequestUserService } from '../../lib/axios';
 import { useNavigate } from 'react-router-dom';
-import { SuperadminBaseData } from '../../typeSpec/superadmin';
 import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
 import { Simulate } from 'react-dom/test-utils';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { SuperadminBaseData } from '@typeSpec/superadmin';
 import input = Simulate.input;
 
 export const useSuperadminBaseTemplate = () => {

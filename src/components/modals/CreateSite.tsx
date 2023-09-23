@@ -1,14 +1,14 @@
 import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ImageUpload from '../global/formInput/ImageUpload';
-import { useCreateSite } from '../../hooks/common/useCreateSite';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { useCreateSite } from '@hooks/common/useCreateSite';
 import {
   CheckboxInput,
   SelectInput,
   TextInput,
-} from '../global/formInput/CustomInput';
-import { CustomTransparentCard } from '../global/card/CustomCard';
+} from '@components/global/formInput/CustomInput';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
   CreateSiteInput,
   CreateSiteInputSchema,
@@ -16,8 +16,8 @@ import {
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../global/CustomButton';
-import { CustomBasicModal } from '../global/dialog/CustomModal';
+} from '@components/global/CustomButton';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 
 interface CreateSiteModalProps {
   totalSites: number;
