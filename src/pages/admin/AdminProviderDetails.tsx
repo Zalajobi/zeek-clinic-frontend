@@ -82,6 +82,7 @@ const AdminProviderDetails = () => {
             <div
               className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-[70%_30%]`}>
               <ProviderDetailsCard
+                isLoading={providerDataLoading}
                 title={providerData?.data?.provider?.personalInfo.title ?? ''}
                 firstName={
                   providerData?.data?.provider?.personalInfo.first_name ?? ''
