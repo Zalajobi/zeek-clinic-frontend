@@ -1,5 +1,6 @@
 // import ampq from 'amqplib';
-import { USER_SERVICE_EXCHANGE } from './constants/constants';
+
+// import {USER_SERVICE_EXCHANGE} from "@lib/constants/constants";
 
 export const customPromiseRequest = async (requests: any[]) => {
   return await Promise.allSettled(requests);
@@ -18,5 +19,5 @@ export const customPromiseRequest = async (requests: any[]) => {
 //
 //   return [connection, channel];
 //
-//   // USER_SERVICE_EXCHANGE
+//   USER_SERVICE_EXCHANGE
 // }

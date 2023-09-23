@@ -1,4 +1,4 @@
-import { SelectInputFieldProps } from '../../typeSpec/common';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const matchLowerCaseRegex = /[a-z]/g;
 export const matchUpperCaseRegex = /[A-Z]/g;
