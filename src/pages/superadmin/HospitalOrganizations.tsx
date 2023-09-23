@@ -3,19 +3,19 @@ import { Tab } from '@headlessui/react';
 import { TiExportOutline } from 'react-icons/ti';
 import { HiPlusSm } from 'react-icons/hi';
 
-import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
-import Text from '../../components/global/dialog/Text';
-import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
+import Text from '@components/global/dialog/Text';
+import { useHospitalOrganisation } from '@hooks/superadmin/useHospitalOrganisation';
 import {
   SuperadminHospitalDataColumn,
   SuperadminHospitalDataRow,
-} from '../../components/tables/SuperadminTable';
-import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
+} from '@components/tables/SuperadminTable';
+import CreateHospitalModal from '@components/modals/CreateHospitalModal';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../../components/global/CustomButton';
-import { ApplicationTable } from '../../components/global/table/ApplicationTable';
+} from '@components/global/CustomButton';
+import { ApplicationTable } from '@components/global/table/ApplicationTable';
 
 const HospitalOrganizations = () => {
   const {

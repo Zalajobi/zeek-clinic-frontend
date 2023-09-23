@@ -4,30 +4,30 @@ import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
 
-import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
-import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
+import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
-} from '../../components/tables/SuperadminTable';
-import { SuperadminSiteData } from '../../typeSpec/superadmin';
-import Table from '../../components/global/table/Table';
-import TableFooter from '../../components/global/table/TableFooter';
-import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
-import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
-import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
-import CreateSite from '../../components/modals/CreateSite';
+} from '@components/tables/SuperadminTable';
+import { SuperadminSiteData } from '@typeSpec/superadmin';
+import Table from '@components/global/table/Table';
+import TableFooter from '@components/global/table/TableFooter';
+import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
+import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
+import HospitalRoutes from '@components/superadmin/HospitalRoutes';
+import CreateSite from '@components/modals/CreateSite';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../../components/global/CustomButton';
-import { Typography } from '../../components/global/dialog/Typography';
+} from '@components/global/CustomButton';
+import { Typography } from '@components/global/dialog/Typography';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
   DateInput,
   SelectInput,
-} from '../../components/global/formInput/CustomInput';
-import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
+} from '@components/global/formInput/CustomInput';
+import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];

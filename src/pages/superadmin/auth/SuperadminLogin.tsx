@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
-import Text from '../../../components/global/dialog/Text';
-import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
-import CheckBox from '../../../components/global/formInput/CheckBox';
-import LoginImage from '../../../assets/img/admin/login.png';
-import { ToasterConfig } from '../../../components/global/Toast';
-import useSuperadminLogin from '../../../hooks/superadmin/useSuperadminLogin';
-import { BasicFilledButton } from '../../../components/global/CustomButton';
+import Text from '@components/global/dialog/Text';
+import TextInputLabel from '@components/global/formInput/TextInputLabel';
+import CheckBox from '@components/global/formInput/CheckBox';
+import LoginImage from '@assets/img/admin/login.png';
+import { ToasterConfig } from '@components/global/Toast';
+import useSuperadminLogin from '@hooks/superadmin/useSuperadminLogin';
+import { BasicFilledButton } from '@components/global/CustomButton';
 
 const SuperadminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } =

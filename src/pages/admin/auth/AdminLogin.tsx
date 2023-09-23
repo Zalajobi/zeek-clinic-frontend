@@ -1,17 +1,16 @@
 import { Fragment } from 'react';
-import Text from '../../../components/global/dialog/Text';
-import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
-import useAdminLogin from '../../../hooks/admin/useAdminLogin';
 import { FcGoogle } from 'react-icons/fc';
 import { GrGithub } from 'react-icons/gr';
-import CheckBox from '../../../components/global/formInput/CheckBox';
-import LoginImage from '../../../assets/img/admin/login.png';
-import { ToasterConfig } from '../../../components/global/Toast';
+import Text from '@components/global/dialog/Text';
+import useAdminLogin from '@hooks/admin/useAdminLogin';
+import CheckBox from '@components/global/formInput/CheckBox';
+import LoginImage from '@assets/img/admin/login.png';
+import { ToasterConfig } from '@components/global/Toast';
 import {
   BasicFilledButton,
   BasicOutlineButton,
-} from '../../../components/global/CustomButton';
-import { TextInput } from '../../../components/global/formInput/CustomInput';
+} from '@components/global/CustomButton';
+import { TextInput } from '@components/global/formInput/CustomInput';
 
 const AdminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } =

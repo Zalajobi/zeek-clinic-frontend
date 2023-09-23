@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
-import ActivitySummary from '../../components/admin/dashboard/ActivitySummary';
-import ActivityReport from '../../components/admin/dashboard/ActivityReport';
-import AppointmentAndEvents from '../../components/admin/dashboard/AppointmentAndEvents';
-import DoctorsList from '../../components/admin/dashboard/DoctorsList';
+import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
+import ActivitySummary from '@components/admin/dashboard/ActivitySummary';
+import ActivityReport from '@components/admin/dashboard/ActivityReport';
+import AppointmentAndEvents from '@components/admin/dashboard/AppointmentAndEvents';
+import DoctorsList from '@components/admin/dashboard/DoctorsList';
 
 const AdminDashboard = () => {
   return (

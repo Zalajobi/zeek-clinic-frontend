@@ -7,28 +7,28 @@ import { BiRename } from 'react-icons/bi';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
-import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
-import ImageUpload from '../../components/global/formInput/ImageUpload';
+import useAdminAddProvider from '@hooks/admin/useAdminAddProvider';
+import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
+import ImageUpload from '@components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
   PhoneNumberInput,
   SelectInput,
   TextInput,
-} from '../../components/global/formInput/CustomInput';
+} from '@components/global/formInput/CustomInput';
 import {
   genderSelectInput,
   providersTitleSelectInput,
   relationshipStatus,
   religions,
-} from '../../lib/constants/constants';
+} from '@lib/constants/constants';
 import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
-} from '../../typeSpec/superadmin/formTypes';
-import { BasicFilledButton } from '../../components/global/CustomButton';
-import { Typography } from '../../components/global/dialog/Typography';
+} from '@typeSpec/superadmin/formTypes';
+import { BasicFilledButton } from '@components/global/CustomButton';
+import { Typography } from '@components/global/dialog/Typography';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()

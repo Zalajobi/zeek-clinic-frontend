@@ -1,17 +1,16 @@
 import { Fragment, useMemo } from 'react';
-import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
-import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
-import { Typography } from '../../components/global/dialog/Typography';
-import AdminRoutes from '../../components/admin/AdminRoutes';
-import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
-import { ProviderPageSiteResponseData } from '../../typeSpec/admin';
-import { ApplicationTable } from '../../components/global/table/ApplicationTable';
+import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
+import { useAdminProviderPage } from '@hooks/admin/useAdminProviderPage';
+import { Typography } from '@components/global/dialog/Typography';
+import AdminRoutes from '@components/admin/AdminRoutes';
+import AdminSiteInfo from '@components/admin/AdminSiteInfo';
+import { ProviderPageSiteResponseData } from '@typeSpec/admin';
+import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
-} from '../../components/tables/AdminTable';
-import ProvidersTab from '../../components/admin/providers/ProvidersTab';
-// import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
+} from '@components/tables/AdminTable';
+import ProvidersTab from '@components/admin/providers/ProvidersTab';
 
 const AdminProvider = () => {
   const {
