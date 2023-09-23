@@ -12,9 +12,9 @@ import { TbFaceMask } from 'react-icons/tb';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { GrOrganization } from 'react-icons/gr';
-import Logo from '../../assets/img/global/logo.png';
-import { SidebarItemProps } from '../../typeSpec/common';
-import SidebarItems from '../SidebarItems';
+import Logo from '@assets/img/global/logo.png';
+import { SidebarItemProps } from '@typeSpec/common';
+import SidebarItems from '@layout/SidebarItems';
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);

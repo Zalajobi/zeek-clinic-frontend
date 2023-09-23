@@ -1,8 +1,8 @@
 import { Fragment, ReactNode } from 'react';
-import Sidebar from './Sidebar';
-import Header from '../Header';
-import { ToasterConfig } from '../../components/global/Toast';
-import { useAdminBaseTemplate } from '../../hooks/admin/useAdminBaseTemplate';
+import Sidebar from '@layout/admin/Sidebar';
+import Header from '@layout/Header';
+import { ToasterConfig } from '@components/global/Toast';
+import { useAdminBaseTemplate } from '@hooks/admin/useAdminBaseTemplate';
 
 const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {

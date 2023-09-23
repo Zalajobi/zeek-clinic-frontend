@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/img/global/logo.png';
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../typeSpec/common';
-import SidebarItems from '../SidebarItems';
-import { AdminSideBarItems } from './index';
+import Logo from '@assets/img/global/logo.png';
+import { SidebarItemProps } from '@typeSpec/common';
+import SidebarItems from '@layout/SidebarItems';
+import { AdminSideBarItems } from '@layout/admin';
 
 const Sidebar = ({ siteId }: { siteId: string }) => {
   const [showSidebar, setShowSidebar] = useState(false);

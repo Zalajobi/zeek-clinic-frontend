@@ -1,18 +1,18 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/img/global/logo.png';
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
   MdOutlineAdminPanelSettings,
   MdOutlinePayments,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../typeSpec/common';
-import { RxDashboard } from 'react-icons/rx';
 import { TbFaceMask } from 'react-icons/tb';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import SidebarItems from '../SidebarItems';
+import { RxDashboard } from 'react-icons/rx';
+import Logo from '@assets/img/global/logo.png';
+import { SidebarItemProps } from '@typeSpec/common';
+import SidebarItems from '@layout/SidebarItems';
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);

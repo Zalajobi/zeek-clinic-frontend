@@ -1,7 +1,7 @@
 import { ChangeEvent, Fragment } from 'react';
-import Search from './superadmin/Search';
-import BaseInformation from './superadmin/BaseInformation';
-import NotificationIcon from './superadmin/NotificationIcon';
+import Search from '@layout/superadmin/Search';
+import BaseInformation from '@layout/superadmin/BaseInformation';
+import NotificationIcon from '@layout/superadmin/NotificationIcon';
 
 interface HeaderProps {
   name: string;

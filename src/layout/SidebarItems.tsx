@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import { SidebarItemProps } from '../typeSpec/common';
-import { Typography } from '../components/global/dialog/Typography';
+import { SidebarItemProps } from '@typeSpec/common';
+import { Typography } from '@components/global/dialog/Typography';
 
 const SidebarItems = ({
   item,

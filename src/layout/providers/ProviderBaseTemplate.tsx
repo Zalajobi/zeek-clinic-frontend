@@ -1,8 +1,8 @@
 import { Fragment, ReactNode } from 'react';
-import Sidebar from './Sidebar';
-import Header from '../Header';
-import { useProviderBaseTemplate } from '../../hooks/provider/useProviderBaseTemplate';
-import { ToasterConfig } from '../../components/global/Toast';
+import Sidebar from '@layout/providers/Sidebar';
+import Header from '@layout/Header';
+import { useProviderBaseTemplate } from '@hooks/provider/useProviderBaseTemplate';
+import { ToasterConfig } from '@components/global/Toast';
 
 const ProviderBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {

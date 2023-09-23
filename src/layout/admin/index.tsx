@@ -3,15 +3,13 @@ import { MdDashboard, MdLocalActivity, MdReport } from 'react-icons/md';
 import {
   FaUserFriends,
   FaUserInjured,
-  // FaUserNurse,
   FaUserMd,
-  FaUsersCog,
   FaPaperclip,
   FaHospitalUser,
   FaCalendarDay,
   FaUserPlus,
 } from 'react-icons/fa';
-import { SidebarItemProps } from '../../typeSpec/common';
+import { SidebarItemProps } from '@typeSpec/common';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
