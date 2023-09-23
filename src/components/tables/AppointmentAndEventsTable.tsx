@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   AppointmentTableData,
   AppointmentTableRowData,
-} from '../../types/admin';
+} from '../../typeSpec/admin';
 
 export const AppointmentAndEventsTableColumn = () => {
   const columnItem = [

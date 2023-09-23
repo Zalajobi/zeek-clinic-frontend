@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AccountServiceApiResponse } from '../types/apiResponses';
+import { AccountServiceApiResponse } from '../typeSpec/apiResponses';
 
 // interface axiosPostRequestUserServiceNoAuthProps {
 //   url: string

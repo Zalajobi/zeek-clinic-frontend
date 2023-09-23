@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { HospitalOrganizationData } from '../../../types/superadmin';
+import { HospitalOrganizationData } from '../../../typeSpec/superadmin';
 import moment from 'moment/moment';
 import Status from '../../global/Status';
 import { Typography } from '../../global/dialog/Typography';

@@ -11,7 +11,7 @@ import {
   FaCalendarDay,
   FaUserPlus,
 } from 'react-icons/fa';
-import { SidebarItemProps } from '../../types/common';
+import { SidebarItemProps } from '../../typeSpec/common';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')

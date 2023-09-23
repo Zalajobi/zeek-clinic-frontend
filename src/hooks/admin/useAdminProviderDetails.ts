@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { AccountServiceApiResponse } from '../../types/apiResponses';
+import { AccountServiceApiResponse } from '../../typeSpec/apiResponses';
 import { useQuery } from 'react-query';
 import { axiosGetRequestUserService } from '../../lib/axios';
 

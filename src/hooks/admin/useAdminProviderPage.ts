@@ -6,7 +6,7 @@ import { axiosGetRequestUserService } from '../../lib/axios';
 import {
   ProviderPageSiteResponseData,
   ProviderAndRelationAPIResponse,
-} from '../../types/admin';
+} from '../../typeSpec/admin';
 import { customPromiseRequest } from '../../lib/requests';
 import toast from 'react-hot-toast';
 

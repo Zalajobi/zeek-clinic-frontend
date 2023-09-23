@@ -1,4 +1,4 @@
-import { SelectInputFieldProps } from '../types/common';
+import { SelectInputFieldProps } from '../typeSpec/common';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();

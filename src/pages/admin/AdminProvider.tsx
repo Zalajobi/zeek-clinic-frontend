@@ -4,7 +4,7 @@ import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
 import { Typography } from '../../components/global/dialog/Typography';
 import AdminRoutes from '../../components/admin/AdminRoutes';
 import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
-import { ProviderPageSiteResponseData } from '../../types/admin';
+import { ProviderPageSiteResponseData } from '../../typeSpec/admin';
 import { ApplicationTable } from '../../components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,

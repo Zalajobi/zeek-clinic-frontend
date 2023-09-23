@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
-import { CustomTransparentCard } from '../../../global/card/CustomCard';
-import { Typography } from '../../../global/dialog/Typography';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import { Typography } from '@components/global/dialog/Typography';
 
 interface ProviderSummaryCardProps {
   patients: string | number;

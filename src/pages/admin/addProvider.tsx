@@ -26,7 +26,7 @@ import {
 import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
-} from '../../types/superadmin/formTypes';
+} from '../../typeSpec/superadmin/formTypes';
 import { BasicFilledButton } from '../../components/global/CustomButton';
 import { Typography } from '../../components/global/dialog/Typography';
 

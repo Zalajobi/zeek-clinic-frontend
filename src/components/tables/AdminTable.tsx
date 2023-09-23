@@ -3,8 +3,8 @@ import { TbArrowsMoveVertical } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 import Status from '../global/Status';
-import { ProviderAndRelationAPIResponse } from '../../types/admin';
-import { ProvidersPageRowData } from '../../types/admin/table';
+import { ProviderAndRelationAPIResponse } from '../../typeSpec/admin';
+import { ProvidersPageRowData } from '../../typeSpec/admin/table';
 
 export const AdminProviderDataColumn = (
   onUpdateSelectAllProviders: (event: ChangeEvent<HTMLInputElement>) => void

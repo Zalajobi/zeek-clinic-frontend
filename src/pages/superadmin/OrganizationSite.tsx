@@ -10,7 +10,7 @@ import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
 } from '../../components/tables/SuperadminTable';
-import { SuperadminSiteData } from '../../types/superadmin';
+import { SuperadminSiteData } from '../../typeSpec/superadmin';
 import Table from '../../components/global/table/Table';
 import TableFooter from '../../components/global/table/TableFooter';
 import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';

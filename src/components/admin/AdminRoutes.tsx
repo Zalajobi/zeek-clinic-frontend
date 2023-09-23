@@ -8,10 +8,10 @@ import {
 } from 'react-icons/fa';
 import { MdInfo, MdPersonAdd } from 'react-icons/md';
 import { TbMessageCircle2Filled } from 'react-icons/tb';
-import { BeautifulLink } from '../global/dialog/Typography';
 import { RiAdminFill, RiBuilding2Fill, RiShieldUserFill } from 'react-icons/ri';
 import { SiHomeassistantcommunitystore, SiWebmoney } from 'react-icons/si';
 import { IoMdAddCircle } from 'react-icons/io';
+import { BeautifulLink } from '@components/global/dialog/Typography';
 
 interface ProviderPageRoutesProps {
   siteId: string;

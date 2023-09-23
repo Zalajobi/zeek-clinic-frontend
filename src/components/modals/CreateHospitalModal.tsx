@@ -14,7 +14,7 @@ import { SelectInput, TextInput } from '../global/formInput/CustomInput';
 import {
   CreateHospitalInput,
   CreateHospitalInputSchema,
-} from '../../types/superadmin/forms';
+} from '../../typeSpec/superadmin/forms';
 
 const CreateHospitalModal = () => {
   const {

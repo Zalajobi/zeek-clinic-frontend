@@ -7,7 +7,7 @@ import {
   MdOutlineAdminPanelSettings,
   MdOutlinePayments,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../types/common';
+import { SidebarItemProps } from '../../typeSpec/common';
 import { RxDashboard } from 'react-icons/rx';
 import { TbFaceMask } from 'react-icons/tb';
 import { HiOutlineClipboardList } from 'react-icons/hi';

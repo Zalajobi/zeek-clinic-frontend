@@ -20,7 +20,7 @@ import {
 import {
   CreateAdminUserInput,
   CreateAdminUserInputSchema,
-} from '../../types/superadmin/forms';
+} from '../../typeSpec/superadmin/forms';
 import { BasicFilledButton } from '../../components/global/CustomButton';
 
 const CreateNewUser = () => {

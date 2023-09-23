@@ -5,7 +5,7 @@ import { Simulate } from 'react-dom/test-utils';
 import change = Simulate.change;
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import { SelectInputFieldProps } from '../../../types/common';
+import { SelectInputFieldProps } from '../../../typeSpec/common';
 
 interface TextInputProps {
   label: string;

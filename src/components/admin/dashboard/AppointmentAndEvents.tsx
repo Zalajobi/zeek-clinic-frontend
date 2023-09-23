@@ -1,12 +1,15 @@
 import { Fragment, useMemo } from 'react';
-import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
-import Table from '../../global/table/Table';
+import {
+  Typography,
+  TypographyWithLink,
+} from '@components/global/dialog/Typography';
+import Table from '@components/global/table/Table';
 import {
   AppointmentAndEventsTableColumn,
   AppointmentAndEventsTableRowData,
-} from '../../tables/AppointmentAndEventsTable';
-import { AppointmentTableData } from '../../../types/admin';
-import { CustomTransparentCard } from '../../global/card/CustomCard';
+} from '@components/tables/AppointmentAndEventsTable';
+import { AppointmentTableData } from '@typeSpec/admin';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
 const AppointmentAndEvents = () => {
   const testData: AppointmentTableData[] = [

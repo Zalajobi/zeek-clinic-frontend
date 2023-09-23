@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { FaHospitalUser, FaUserMd, FaUserNurse } from 'react-icons/fa';
-import SummaryCard from './SummaryCard';
 import { RiAdminFill } from 'react-icons/ri';
+import SummaryCard from '@components/admin/dashboard/SummaryCard';
 
 const ActivitySummary = () => {
   return (

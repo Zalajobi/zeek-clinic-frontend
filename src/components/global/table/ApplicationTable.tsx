@@ -6,7 +6,7 @@ import { CgArrowsH } from 'react-icons/cg';
 import Table from './Table';
 import TableFooter from './TableFooter';
 import { ChangeEvent, Fragment } from 'react';
-import { SelectInputFieldProps } from '../../../types/common';
+import { SelectInputFieldProps } from '../../../typeSpec/common';
 
 interface AdminTableProps {
   tableColumns: any;

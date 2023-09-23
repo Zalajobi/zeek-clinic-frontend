@@ -23,7 +23,7 @@
       "@layout/*": ["layout/*"],
       "@lib/*": ["lib/*"],
       "@pages/*": ["pages/*"],
-      "@types/*": ["types/*"],
+      "@typeSpec/*": ["typeSpec/*"],
       "@util/*": ["util/*"]
     }
   },

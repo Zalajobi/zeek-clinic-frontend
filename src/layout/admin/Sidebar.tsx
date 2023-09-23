@@ -5,7 +5,7 @@ import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
-import { SidebarItemProps } from '../../types/common';
+import { SidebarItemProps } from '../../typeSpec/common';
 import SidebarItems from '../SidebarItems';
 import { AdminSideBarItems } from './index';
 

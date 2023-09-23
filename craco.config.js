@@ -8,7 +8,7 @@ module.exports = {
       '@layout': path.resolve(__dirname, 'src/layout'),
       '@lib': path.resolve(__dirname, 'src/lib'),
       '@pages': path.resolve(__dirname, 'src/pages'),
-      '@types': path.resolve(__dirname, 'src/types'),
+      '@typeSpec': path.resolve(__dirname, 'src/typeSpec'),
       '@util': path.resolve(__dirname, 'src/util'),
     },
   },

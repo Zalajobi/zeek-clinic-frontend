@@ -1,8 +1,11 @@
 import { Fragment } from 'react';
-import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
-import { PieChart3D } from '../../global/Charts';
-import HospitalReport from './HospitalReport';
-import { CustomTransparentCard } from '../../global/card/CustomCard';
+import {
+  Typography,
+  TypographyWithLink,
+} from '@components/global/dialog/Typography';
+import { PieChart3D } from '@components/global/Charts';
+import HospitalReport from '@components/admin/dashboard/HospitalReport';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
 const ActivityReport = () => {
   const data = [

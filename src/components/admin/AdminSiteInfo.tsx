@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import { ProviderPageSiteResponseData } from '../../types/admin';
-import { Typography } from '../global/dialog/Typography';
+import { ProviderPageSiteResponseData } from '@typeSpec/admin';
+import { Typography } from '@components/global/dialog/Typography';
 import moment from 'moment/moment';
-import { CustomTransparentCard } from '../global/card/CustomCard';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
 const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
   return (

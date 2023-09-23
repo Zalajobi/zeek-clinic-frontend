@@ -5,15 +5,15 @@ import {
   axiosGetRequestUserService,
   axiosPostRequestUserService,
 } from '../../lib/axios';
-import { SelectInputFieldProps } from '../../types/common';
+import { SelectInputFieldProps } from '../../typeSpec/common';
 import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
-} from '../../types/apiResponses';
+} from '../../typeSpec/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
-} from '../../types/superadmin/formTypes';
+} from '../../typeSpec/superadmin/formTypes';
 import toast from 'react-hot-toast';
 
 export const useAdminAddProvider = () => {

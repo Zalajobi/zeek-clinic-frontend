@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { BsEnvelopeFill, BsEnvelopeOpenFill } from 'react-icons/bs';
-import { Typography } from '../../global/dialog/Typography';
-import { formatTimeOrDays } from '../../../util';
-import ListView from '../../global/views/ListView';
+import { Typography } from '@components/global/dialog/Typography';
+import { formatTimeOrDays } from '@util/index';
+import ListView from '@components/global/views/ListView';
 
 interface HospitalReportProps {
   data: {

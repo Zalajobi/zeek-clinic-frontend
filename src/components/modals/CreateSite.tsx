@@ -12,7 +12,7 @@ import { CustomTransparentCard } from '../global/card/CustomCard';
 import {
   CreateSiteInput,
   CreateSiteInputSchema,
-} from '../../types/superadmin/forms';
+} from '../../typeSpec/superadmin/forms';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,

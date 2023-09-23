@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { SelectInputFieldProps } from '../../types/common';
+import { SelectInputFieldProps } from '../../typeSpec/common';
 import { Country, State } from 'country-state-city';
-import { AllCountries } from '../../types/superadmin/formTypes';
+import { AllCountries } from '../../typeSpec/superadmin/formTypes';
 import { useParams } from 'react-router-dom';
-import { UserServiceRoleResponseData } from '../../types/admin';
+import { UserServiceRoleResponseData } from '../../typeSpec/admin';
 import {
   convertObjectToGlobalSelectInputProps,
   generateRandomCharacters,
 } from '../../util';
-import { AdminEditProvidersInformation } from '../../types/admin/provider';
+import { AdminEditProvidersInformation } from '../../typeSpec/admin/provider';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosPutRequestUserService } from '../../lib/axios';
 import toast from 'react-hot-toast';

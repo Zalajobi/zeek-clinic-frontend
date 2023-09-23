@@ -5,11 +5,11 @@ import toast from 'react-hot-toast';
 import {
   HospitalOrganizationData,
   SuperadminSiteData,
-} from '../../types/superadmin';
+} from '../../typeSpec/superadmin';
 import * as queryString from 'querystring';
-import { SelectInputFieldProps } from '../../types/common';
+import { SelectInputFieldProps } from '../../typeSpec/common';
 import { customPromiseRequest } from '../../lib/requests';
-import { AccountServiceApiResponse } from '../../types/apiResponses';
+import { AccountServiceApiResponse } from '../../typeSpec/apiResponses';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();

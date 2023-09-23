@@ -8,7 +8,7 @@ import {
   HospitalRowData,
   SiteRowData,
   SuperadminSiteData,
-} from '../../types/superadmin';
+} from '../../typeSpec/superadmin';
 import Status from '../global/Status';
 
 interface SuperadminHospitalDataRowProps {
