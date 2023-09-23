@@ -39,10 +39,10 @@
     "yup": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "precommit": "pretty-quick --staged",
     "prepare": "husky install .husky"
   },
@@ -66,6 +66,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.332.0",
+    "@craco/craco": "^7.1.0",
     "@types/amqplib": "^0.10.1",
     "@types/react-table": "^7.7.14",
     "clsx": "^1.2.1",
