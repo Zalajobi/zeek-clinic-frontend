@@ -2,14 +2,24 @@ import { Fragment } from 'react';
 import { CustomTransparentCard } from '../../global/card/CustomCard';
 import { Typography } from '../../global/dialog/Typography';
 
-interface ProviderSummaryCardProps {}
+interface ProviderSummaryCardProps {
+  patients: string | number;
+  visits: string | number;
+  appointments: string | number;
+  orders: string | number;
+}
 
-const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
+const ProviderSummaryCard = ({
+  patients,
+  visits,
+  appointments,
+  orders,
+}: ProviderSummaryCardProps) => {
   return (
     <Fragment>
       <div className={`w-full grid grid-cols-2 gap-4`}>
         <CustomTransparentCard
-          className={`min-h-[140px] max-h-[200px] bg-[#3F596F] border-0`}>
+          className={`min-h-[140px] max-h-[200px] !bg-[#3F596F] !border-0`}>
           <Typography
             className={`text-white`}
             text={`Primary Patients`}
@@ -20,7 +30,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
 
           <Typography
             className={`text-center mt-[20px] text-white`}
-            text={`200`}
+            text={patients}
             size={`4xl`}
             Tag={`h1`}
             weight={800}
@@ -28,7 +38,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
         </CustomTransparentCard>
 
         <CustomTransparentCard
-          className={`min-h-[140px] max-h-[200px] bg-[#9CBDC6] border-0`}>
+          className={`min-h-[140px] max-h-[200px] !bg-[#9CBDC6] !border-0`}>
           <Typography
             className={`text-white`}
             text={`Visits`}
@@ -39,7 +49,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
 
           <Typography
             className={`text-center mt-[20px] text-white`}
-            text={`200`}
+            text={visits}
             size={`4xl`}
             Tag={`h1`}
             weight={800}
@@ -47,7 +57,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
         </CustomTransparentCard>
 
         <CustomTransparentCard
-          className={`min-h-[140px] max-h-[200px] bg-[#83AAB9] border-0`}>
+          className={`min-h-[140px] max-h-[200px] !bg-[#83AAB9] !border-0`}>
           <Typography
             className={`text-white`}
             text={`Appointments`}
@@ -58,7 +68,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
 
           <Typography
             className={`text-center mt-[20px] text-white`}
-            text={`200`}
+            text={appointments}
             size={`4xl`}
             Tag={`h1`}
             weight={800}
@@ -66,7 +76,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
         </CustomTransparentCard>
 
         <CustomTransparentCard
-          className={`min-h-[140px] max-h-[200px] bg-[#9AB3B8] border-0`}>
+          className={`min-h-[140px] max-h-[200px] !bg-[#9AB3B8] !border-0`}>
           <Typography
             className={`text-white`}
             text={`Orders`}
@@ -77,7 +87,7 @@ const ProviderSummaryCard = ({}: ProviderSummaryCardProps) => {
 
           <Typography
             className={`text-center mt-[20px] text-white`}
-            text={`200`}
+            text={orders}
             size={`4xl`}
             Tag={`h1`}
             weight={800}

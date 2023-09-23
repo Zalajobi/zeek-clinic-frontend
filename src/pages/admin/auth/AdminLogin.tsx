@@ -11,6 +11,7 @@ import {
   BasicFilledButton,
   BasicOutlineButton,
 } from '../../../components/global/CustomButton';
+import { TextInput } from '../../../components/global/formInput/CustomInput';
 
 const AdminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } =
@@ -45,24 +46,20 @@ const AdminLogin = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4 my-3">
-                <TextInputLabel
-                  forItem={`email`}
-                  labelText={`Email`}
-                  type={`email`}
+                <TextInput
+                  label={`Email`}
                   id={`email`}
-                  handleChange={(e) => setEmail(e?.target?.value)}
-                  required={true}
-                  inputPlaceholder={`JohnDoe@gmail.com`}
+                  change={(e) => setEmail(e.target.value)}
+                  placeholder={`JohnDoe@gmail.com`}
+                  type={'email'}
                 />
 
-                <TextInputLabel
-                  forItem={`password`}
-                  labelText={`Password`}
-                  type={`password`}
+                <TextInput
+                  label={`Password`}
                   id={`password`}
-                  handleChange={(e) => setPassword(e?.target?.value)}
-                  required={true}
-                  inputPlaceholder={`********`}
+                  change={(e) => setPassword(e.target.value)}
+                  placeholder={`********`}
+                  type={'password'}
                 />
               </div>
 

@@ -113,7 +113,12 @@ const AdminProviderDetails = () => {
                 }
               />
 
-              <ProviderSummaryCard />
+              <ProviderSummaryCard
+                patients={321}
+                visits={261}
+                appointments={537}
+                orders={632}
+              />
             </div>
           </div>
         </div>
