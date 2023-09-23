@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Typography } from '../../global/dialog/Typography';
 import { CustomTransparentCard } from '../../global/card/CustomCard';
 import moment from 'moment';
-import { TypographySkeleton } from '../../global/dialog/Skeletons';
 
 interface ProviderDetailsCardProps {
   title: string;
@@ -59,16 +58,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={`${title} ${firstName} ${middleName} ${lastName}`}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={`${title} ${firstName} ${middleName} ${lastName}`}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Email*/}
@@ -80,16 +76,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={email}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={email}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Phone*/}
@@ -101,16 +94,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={phone}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={phone}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*DOB*/}
@@ -122,16 +112,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={moment(dob).format('MMM DD. YYYY')}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={moment(dob).format('MMM DD. YYYY')}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Role*/}
@@ -143,16 +130,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={role}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={role}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Assigned Patient Count*/}
@@ -164,16 +148,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={patientCount ?? 0}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={patientCount ?? 0}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Unit*/}
@@ -185,16 +166,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={unit}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={unit}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Department*/}
@@ -206,16 +184,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={department}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={department}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Service Area*/}
@@ -227,16 +202,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={serviceArea}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={serviceArea}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Registered On*/}
@@ -248,16 +220,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={moment(createdAt).format('MMM DD. YYYY')}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={moment(createdAt).format('MMM DD. YYYY')}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*Country*/}
@@ -269,16 +238,13 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={country}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={country}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              isLoading={isLoading}
+            />
           </div>
 
           {/*State*/}
@@ -290,16 +256,12 @@ const ProviderDetailsCard = ({
               className={`text-[color:var(--label-color)]`}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={state}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={state}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            />
           </div>
 
           {/*City*/}
@@ -309,18 +271,15 @@ const ProviderDetailsCard = ({
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--label-color)]`}
+              isLoading={isLoading}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={city}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={city}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            />
           </div>
 
           {/*Address*/}
@@ -330,18 +289,15 @@ const ProviderDetailsCard = ({
               Tag={'p'}
               size={'sm'}
               className={`text-[color:var(--label-color)]`}
+              isLoading={isLoading}
             />
 
-            {isLoading ? (
-              <TypographySkeleton />
-            ) : (
-              <Typography
-                text={address}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            )}
+            <Typography
+              text={address}
+              Tag={'p'}
+              size={'sm'}
+              className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            />
           </div>
         </CustomTransparentCard>
       </Fragment>
