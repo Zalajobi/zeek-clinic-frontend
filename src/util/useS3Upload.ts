@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk';
-import { S3UploadResponse } from '../typeSpec/common';
+import { S3UploadResponse } from '@typeSpec/common';
 
 const bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
 const region = process.env.REACT_APP_AWS_REGION;

@@ -1,4 +1,4 @@
-import { UserServiceRoleResponseData } from './admin';
+import { UserServiceRoleResponseData } from '@typeSpec/admin';
 
 export interface AdminCreateProviderResponseData {
   departments: UserServiceRoleResponseData[];
