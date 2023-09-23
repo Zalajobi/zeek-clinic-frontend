@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
-import { Typography } from '../../global/dialog/Typography';
-import { CustomTransparentCard } from '../../global/card/CustomCard';
+import { Typography } from '../../../global/dialog/Typography';
+import { CustomTransparentCard } from '../../../global/card/CustomCard';
 import moment from 'moment';
 
 interface ProviderDetailsCardProps {

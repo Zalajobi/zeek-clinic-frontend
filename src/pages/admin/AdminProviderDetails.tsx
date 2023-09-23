@@ -3,16 +3,16 @@ import { FaUserEdit } from 'react-icons/fa';
 import AdminBaseTemplate from '../../layout/admin/AdminBaseTemplate';
 import { useAdminProviderDetails } from '../../hooks/admin/useAdminProviderDetails';
 import { Typography } from '../../components/global/dialog/Typography';
-import ProviderDetailsCard from '../../components/admin/providers/ProviderDetailsCard';
+import ProviderDetailsCard from '../../components/admin/providers/details/ProviderDetailsCard';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
 } from '../../components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
-import AdminEditProviderModal from '../../components/admin/providers/AdminEditProviderModal';
+import AdminEditProviderModal from '../../components/admin/providers/details/AdminEditProviderModal';
 import toast from 'react-hot-toast';
 import { LoadingSpinner } from '../../components/global/Toast';
-import ProviderSummaryCard from '../../components/admin/providers/ProviderSummaryCard';
+import ProviderSummaryCard from '../../components/admin/providers/details/ProviderSummaryCard';
 
 const AdminProviderDetails = () => {
   const {

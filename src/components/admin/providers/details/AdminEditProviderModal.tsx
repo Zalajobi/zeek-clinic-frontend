@@ -1,11 +1,11 @@
-import { CustomBasicModal } from '../../global/dialog/CustomModal';
+import { CustomBasicModal } from '../../../global/dialog/CustomModal';
 import { Fragment } from 'react';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../../global/CustomButton';
+} from '../../../global/CustomButton';
 import { Tab } from '@headlessui/react';
-import { Typography } from '../../global/dialog/Typography';
+import { Typography } from '../../../global/dialog/Typography';
 import {
   AdminEditGeneratePasswordTab,
   AdminEditMoveProviderTab,
@@ -15,11 +15,11 @@ import { useForm } from 'react-hook-form';
 import {
   AdminEditProvidersInformation,
   AdminEditProvidersInformationSchema,
-} from '../../../types/admin/provider';
+} from '../../../../types/admin/provider';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAdminUpdateProviderInformationTabs } from '../../../hooks/admin/useAdminUpdateProviderInformationTabs';
-import { UserServiceRoleResponseData } from '../../../types/admin';
-import { LoadingSpinner } from '../../global/Toast';
+import { useAdminUpdateProviderInformationTabs } from '../../../../hooks/admin/useAdminUpdateProviderInformationTabs';
+import { UserServiceRoleResponseData } from '../../../../types/admin';
+import { LoadingSpinner } from '../../../global/Toast';
 
 interface AdminEditProviderModalProps {
   name: string;

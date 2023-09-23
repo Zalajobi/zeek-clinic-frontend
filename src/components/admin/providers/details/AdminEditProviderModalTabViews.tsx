@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
-import { availableTitles } from '../../../lib/constants/constants';
+import { availableTitles } from '../../../../lib/constants/constants';
 import {
   DateInput,
   PhoneNumberInput,
   SelectInput,
   TextInput,
-} from '../../global/formInput/CustomInput';
+} from '../../../global/formInput/CustomInput';
 import { UseFormRegister } from 'react-hook-form';
-import { SelectInputFieldProps } from '../../../types/common';
-import { BasicFilledButton } from '../../global/CustomButton';
+import { SelectInputFieldProps } from '../../../../types/common';
+import { BasicFilledButton } from '../../../global/CustomButton';
 
 interface AdminEditProviderModalTabViewsProps {
   register: UseFormRegister<any>;
