@@ -48,7 +48,7 @@ const ProviderDetailsCard = ({
     <Fragment>
       <Fragment>
         <CustomTransparentCard
-          className={`w-full grid grid-cols-1 items-center gap-4 !bg-white px-6 py-9 text-sm font-extrabold lg:grid-cols-3`}>
+          className={`w-full grid grid-cols-1 items-center gap-4 !bg-white px-6 py-9 text-sm font-extrabold lg:grid-cols-3 lg:col-span-3`}>
           {/*Name*/}
           <div className={`flex flex-row items-center py-3`}>
             <Typography

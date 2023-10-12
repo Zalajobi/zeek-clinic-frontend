@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';
@@ -6,6 +6,13 @@ import PhoneInput from 'react-phone-number-input';
 import { Typography } from '@components/global/dialog/Typography';
 import change = Simulate.change;
 import { SelectInputFieldProps } from '@typeSpec/common';
+import {
+  Menu,
+  Button,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+} from '@material-tailwind/react';
 
 interface TextInputProps {
   label: string;
@@ -61,6 +68,12 @@ interface CheckboxInputProps {
   change?: (event: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   disabled?: boolean;
+}
+
+interface CustomDropDownMenuSelectProps {
+  items: string[] | number[];
+  value: string | number;
+  onSelect: (value: string | number) => void;
 }
 
 export const TextInput = ({
@@ -428,6 +441,36 @@ export const PhoneNumberInput = ({
           />
         </div>
       </div>
+    </Fragment>
+  );
+};
+
+export const CustomDropDownMenuSelect = ({
+  items,
+  value,
+  onSelect,
+}: CustomDropDownMenuSelectProps) => {
+  return (
+    <Fragment>
+      <Menu
+        animate={{
+          mount: { y: 0 },
+          unmount: { y: 25 },
+        }}>
+        <MenuHandler>
+          <Button>{value}</Button>
+        </MenuHandler>
+
+        {items.length > 0 && (
+          <MenuList className={`max-h-72`}>
+            {items?.map((item) => (
+              <div>
+                <MenuItem onClick={() => onSelect(item)}>{item}</MenuItem>
+              </div>
+            ))}
+          </MenuList>
+        )}
+      </Menu>
     </Fragment>
   );
 };

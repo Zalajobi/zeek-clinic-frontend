@@ -13,6 +13,8 @@ import {
 import AdminEditProviderModal from '@components/admin/providers/details/AdminEditProviderModal';
 import { LoadingSpinner } from '@components/global/Toast';
 import ProviderSummaryCard from '@components/admin/providers/details/ProviderSummaryCard';
+import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
+import { CustomCard } from '@components/global/card/CustomCard';
 
 const AdminProviderDetails = () => {
   const {
@@ -79,8 +81,7 @@ const AdminProviderDetails = () => {
           </div>
 
           <div className={`w-full flex flex-col my-10`}>
-            <div
-              className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-[70%_30%]`}>
+            <div className={`w-full grid gap-6 grid-cols-1 lg:grid-cols-4`}>
               <ProviderDetailsCard
                 isLoading={providerDataLoading}
                 title={providerData?.data?.provider?.personalInfo.title ?? ''}
@@ -120,6 +121,14 @@ const AdminProviderDetails = () => {
                 appointments={537}
                 orders={632}
               />
+            </div>
+
+            <div className={`w-full grid gap-6 grid-cols-2 my-6`}>
+              <UpcomingAppontments />
+
+              <CustomCard className={`w-full bg-white`}>
+                <h1>HELLO WORLD</h1>
+              </CustomCard>
             </div>
           </div>
         </div>
