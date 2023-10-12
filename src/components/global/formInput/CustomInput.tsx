@@ -97,7 +97,7 @@ export const TextInput = ({
         <div className="w-full">
           <label
             htmlFor={id}
-            className={`block text-sm font-medium mb-2 dark:text-white ${
+            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
               errorMsg ? '!text-red-500' : '!text-blue-gray-200'
             }`}>
             {label}
@@ -108,7 +108,7 @@ export const TextInput = ({
               <>
                 <input
                   type={type}
-                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  className={`py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
                   placeholder={placeholder}
                   id={id}
                   {...register(id)}
@@ -199,12 +199,12 @@ export const SelectInput = ({
         className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
         <label
           htmlFor="select-2"
-          className="block text-sm font-medium mb-2 dark:text-white">
+          className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
           {label}
         </label>
         {register ? (
           <select
-            className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500
+            className="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500
               focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {

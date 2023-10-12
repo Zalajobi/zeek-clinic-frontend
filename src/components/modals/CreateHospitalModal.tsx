@@ -19,7 +19,11 @@ import {
   CreateHospitalInputSchema,
 } from '../../typeSpec/superadmin/forms';
 
-const CreateHospitalModal = () => {
+interface CreateHospitalModalProps {
+  open: boolean;
+  handler: () => void;
+}
+const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
   const {
     register,
     handleSubmit,
@@ -53,15 +57,18 @@ const CreateHospitalModal = () => {
               className={`min-w-[200px] mx-5`}
             />
 
-            <ModalButtonOutlineLunch
-              data-te-modal-dismiss
+            <BasicOutlineButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
+              click={handler}
             />
           </Fragment>
         }
-        title={`Add New Organization`}>
+        title={`Add New Organization`}
+        handler={handler}
+        open={open}
+        size={`lg`}>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
           <CustomTransparentCard

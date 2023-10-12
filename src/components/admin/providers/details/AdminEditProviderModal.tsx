@@ -1,5 +1,5 @@
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
@@ -46,6 +46,9 @@ const AdminEditProviderModal = ({
   fetchData,
   siteId,
 }: AdminEditProviderModalProps) => {
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(!open);
+
   const {
     // Value
     allCountries,
@@ -118,6 +121,9 @@ const AdminEditProviderModal = ({
 
   return (
     <CustomBasicModal
+      size={`lg`}
+      open={open}
+      handler={handleOpenModal}
       targetModalId={`editProvider`}
       title={`Edit ${name}`}
       bodyClassName={`px-0 py-0`}
@@ -130,11 +136,11 @@ const AdminEditProviderModal = ({
             className={`min-w-[200px] mx-5`}
           />
 
-          <ModalButtonOutlineLunch
-            data-te-modal-dismiss
+          <BasicOutlineButton
             text={`Cancel`}
             type={`danger`}
             className={`min-w-[200px] mx-5`}
+            click={handleOpenModal}
           />
         </Fragment>
       }>

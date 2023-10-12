@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ImageUpload from '@components/global/formInput/ImageUpload';
@@ -25,6 +25,9 @@ interface CreateSiteModalProps {
 }
 
 const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(!open);
+
   const {
     register,
     handleSubmit,
@@ -58,15 +61,18 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
               className={`min-w-[200px] mx-5`}
             />
 
-            <ModalButtonOutlineLunch
+            <BasicOutlineButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
-              targetModalId={''}
+              click={handleOpenModal}
             />
           </Fragment>
         }
-        title={`Add New Site`}>
+        title={`Add New Site`}
+        handler={handleOpenModal}
+        open={open}
+        size={'lg'}>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
           <CustomTransparentCard
