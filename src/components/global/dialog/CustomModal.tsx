@@ -9,7 +9,6 @@ import {
 } from '@material-tailwind/react';
 
 interface CustomBasicModalProps {
-  targetModalId: string;
   title: string;
   children: ReactNode;
   footer: ReactNode;
@@ -21,7 +20,6 @@ interface CustomBasicModalProps {
 }
 
 export const CustomBasicModal = ({
-  targetModalId,
   title,
   children,
   open,
@@ -88,8 +86,8 @@ export const CustomBasicModal = ({
         </DialogBody>
 
         {/*Modal Footer */}
-        <DialogFooter className={`h-[100px]`}>
-          <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+        <DialogFooter className={`h-[100px] border border-t-gray-300`}>
+          <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
             {footer}
           </div>
         </DialogFooter>

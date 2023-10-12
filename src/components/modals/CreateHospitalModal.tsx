@@ -47,7 +47,6 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
   return (
     <Fragment>
       <CustomBasicModal
-        targetModalId={`createOrg`}
         footer={
           <Fragment>
             <BasicOutlineButton

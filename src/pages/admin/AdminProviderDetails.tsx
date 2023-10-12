@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { FaUserEdit } from 'react-icons/fa';
 import { CgExport } from 'react-icons/cg';
 import toast from 'react-hot-toast';
@@ -31,6 +31,8 @@ const AdminProviderDetails = () => {
     onUpdateProviderModalSection,
   } = useAdminProviderDetails();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(!open);
 
   return (
     <Fragment>
@@ -53,17 +55,17 @@ const AdminProviderDetails = () => {
             />
 
             <div className={`w-full flex justify-end mb-6`}>
-              <ModalButtonOutlineLunch
+              <BasicOutlineButton
                 text={`Edit`}
                 type={`primary`}
                 className={`mr-4 min-w-[130px]`}
-                targetModalId={`editProvider`}
                 iconBefore={
                   <FaUserEdit
                     size={20}
                     className={`mr-3`}
                   />
                 }
+                click={handleOpenModal}
               />
 
               <BasicOutlineButton
@@ -134,6 +136,8 @@ const AdminProviderDetails = () => {
         </div>
 
         <AdminEditProviderModal
+          open={open}
+          handler={handleOpenModal}
           name={providerData?.data?.provider?.personalInfo?.first_name ?? ''}
           currentModal={editProviderModalSection}
           updateCurrentModal={onUpdateProviderModalSection}

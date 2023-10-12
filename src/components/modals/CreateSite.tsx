@@ -51,7 +51,6 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
   return (
     <Fragment>
       <CustomBasicModal
-        targetModalId={`createSite`}
         footer={
           <Fragment>
             <BasicOutlineButton

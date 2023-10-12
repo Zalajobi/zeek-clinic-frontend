@@ -176,7 +176,6 @@ const OrganizationSite = () => {
                     className={`mr-2`}
                   />
                 }
-                targetModalId={`createSite`}
                 text={`Add New Site`}
                 type={`primary`}
                 className={`h-[38px] w-[180px]`}

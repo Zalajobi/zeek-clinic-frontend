@@ -33,6 +33,8 @@ interface AdminEditProviderModalProps {
   updateCurrentModal: (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => void;
+  handler: () => void;
+  open: boolean;
 }
 
 const AdminEditProviderModal = ({
@@ -45,10 +47,9 @@ const AdminEditProviderModal = ({
   unit,
   fetchData,
   siteId,
+  handler,
+  open,
 }: AdminEditProviderModalProps) => {
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(!open);
-
   const {
     // Value
     allCountries,
@@ -123,8 +124,7 @@ const AdminEditProviderModal = ({
     <CustomBasicModal
       size={`lg`}
       open={open}
-      handler={handleOpenModal}
-      targetModalId={`editProvider`}
+      handler={handler}
       title={`Edit ${name}`}
       bodyClassName={`px-0 py-0`}
       footer={
@@ -140,7 +140,7 @@ const AdminEditProviderModal = ({
             text={`Cancel`}
             type={`danger`}
             className={`min-w-[200px] mx-5`}
-            click={handleOpenModal}
+            click={handler}
           />
         </Fragment>
       }>

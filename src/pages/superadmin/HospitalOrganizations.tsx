@@ -154,7 +154,6 @@ const HospitalOrganizations = () => {
                 className={`mr-2`}
               />
             }
-            // targetModalId={`createOrg`}
             text={`Add New Organization`}
             type={`primary`}
             className={`h-[38px] w-full py-6`}
