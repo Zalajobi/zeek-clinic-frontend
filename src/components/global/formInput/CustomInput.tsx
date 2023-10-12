@@ -71,9 +71,11 @@ interface CheckboxInputProps {
 }
 
 interface CustomDropDownMenuSelectProps {
-  items: string[] | number[];
-  value: string | number;
-  onSelect: (value: string | number) => void;
+  items: any[];
+  value: any;
+  onSelect: (value: any) => void;
+  className?: string;
+  prefixIcon?: ReactNode;
 }
 
 export const TextInput = ({
@@ -449,6 +451,8 @@ export const CustomDropDownMenuSelect = ({
   items,
   value,
   onSelect,
+  className = '',
+  prefixIcon,
 }: CustomDropDownMenuSelectProps) => {
   return (
     <Fragment>
@@ -458,12 +462,15 @@ export const CustomDropDownMenuSelect = ({
           unmount: { y: 25 },
         }}>
         <MenuHandler>
-          <Button>{value}</Button>
+          <Button
+            className={`flex items-center justify-center p-2 ${className}`}>
+            {prefixIcon} {value}
+          </Button>
         </MenuHandler>
 
         {items.length > 0 && (
           <MenuList className={`max-h-72`}>
-            {items?.map((item) => (
+            {items?.map((item: any) => (
               <div>
                 <MenuItem onClick={() => onSelect(item)}>{item}</MenuItem>
               </div>

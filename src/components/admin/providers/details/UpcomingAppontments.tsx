@@ -36,11 +36,6 @@ const UpcomingAppointments = () => {
               setSelectedTimeframe(value as string)
             }
           />
-          {/*<TableHeaderDropdown*/}
-          {/*    value={timeframe}*/}
-          {/*    items={selectTimeframe}*/}
-          {/*    change={value => setTimeframe(value)}*/}
-          {/*/>*/}
         </div>
       </CustomCard>
     </Fragment>

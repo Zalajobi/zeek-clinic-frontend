@@ -8,7 +8,7 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
   return (
     <Fragment>
       <CustomTransparentCard
-        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 mt-10 text-sm font-extrabold`}>
+        className={`w-full grid grid-cols-4 items-center gap-4 !bg-white px-6 py-9 mt-10 text-sm font-extrabold`}>
         <div className={`col-span-4`}>
           <Typography
             text={`Site Information`}

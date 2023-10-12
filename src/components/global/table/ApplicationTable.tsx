@@ -1,9 +1,11 @@
 import { ChangeEvent, Fragment } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
+import { MdArrowDropDown } from 'react-icons/md';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
 import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
 import {
+  CustomDropDownMenuSelect,
   DateInput,
   SelectInput,
 } from '@components/global/formInput/CustomInput';
@@ -75,16 +77,21 @@ export const ApplicationTable = ({
                 placeholder={`Search...`}
                 value={query}
                 change={onUpdateQuery}
-                inputClass={`!min-h-[58px]`}
-                labelClass={`!top-[12px] !text-[15px]`}
                 className={`!mb-0`}
               />
             </div>
 
-            <TableHeaderDropdown
-              value={perPage}
+            <CustomDropDownMenuSelect
               items={itemsPerPage}
-              change={onUpdatePerPageItem}
+              value={perPage}
+              onSelect={onUpdatePerPageItem}
+              className={`bg-white border border-gray-300 text-black w-[80px] font-medium rounded-lg text-base`}
+              prefixIcon={
+                <MdArrowDropDown
+                  className={`text-black`}
+                  size={30}
+                />
+              }
             />
 
             <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">

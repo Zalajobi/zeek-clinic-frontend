@@ -209,7 +209,6 @@ const OrganizationSite = () => {
                     value={searchSite}
                     change={(e) => onUpdateSearchSite(e.target.value)}
                     inputClass={`!min-h-[58px]`}
-                    labelClass={`!top-[12px] !text-[15px]`}
                     className={`!mb-0`}
                   />
                 </div>
