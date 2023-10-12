@@ -8,6 +8,7 @@ import Logo from '@assets/img/global/logo.png';
 import { SidebarItemProps } from '@typeSpec/common';
 import SidebarItems from '@layout/SidebarItems';
 import { AdminSideBarItems } from '@layout/admin';
+import { Card, List } from '@material-tailwind/react';
 
 const Sidebar = ({ siteId }: { siteId: string }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -16,23 +17,25 @@ const Sidebar = ({ siteId }: { siteId: string }) => {
 
   return (
     <Fragment>
-      <aside
-        className={`md:h-100 w-screen shrink-0 overflow-x-scroll bg-white !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
+      <Card
+        className={`h-[calc(100vh-2rem)] w-full max-w-[20rem] py-4 shadow-xl shadow-blue-gray-900/5 overflow-x-scroll ${
           showSidebar ? 'md:w-auto' : 'md:w-[13rem]'
         } no-scroll md:overflow-y-scroll`}>
         <div
-          className={`sticky top-0 z-50 hidden flex items-center bg-white py-2 px-4 justify-center h-20 shadow-md md:flex ${
+          className={`sticky top-0 z-50 hidden flex items-center bg-white px-4 justify-center h-20 md:flex ${
             showSidebar ? 'justify-center' : 'justify-between'
           }`}>
-          <Link to="/admin">
-            <img
-              src={Logo}
-              alt="Logo"
-              width={50}
-              height={50}
-              // className={`${showSidebar ? 'hidden' : ''}`}
-            />
-          </Link>
+          <div className="mb-2 flex items-center gap-4 p-4">
+            <Link to="/admin">
+              <img
+                src={Logo}
+                alt="Brand Logo"
+                className="h-8 w-8"
+                width={40}
+                height={40}
+              />
+            </Link>
+          </div>
 
           <button
             className="grid h-5 w-5 cursor-pointer place-items-center rounded-lg border-brand-background p-1 outline-none transition-colors hover:bg-brand-background focus:outline-none dark:border-ds-dark-400 hover:dark:bg-ds-dark-600/50"
@@ -47,7 +50,9 @@ const Sidebar = ({ siteId }: { siteId: string }) => {
           </button>
         </div>
 
-        <ul className="flex py-4 overflow-hidden     md:flex-col">
+        <hr className="my-2 border-blue-gray-50" />
+
+        <List className="flex py-2 px-4 overflow-hidden md:overflow-y-scroll md:flex-col">
           {sidebarItems.length >= 1 &&
             sidebarItems.map((sidebar: SidebarItemProps, idx: number) => {
               return (
@@ -63,8 +68,8 @@ const Sidebar = ({ siteId }: { siteId: string }) => {
                 </>
               );
             })}
-        </ul>
-      </aside>
+        </List>
+      </Card>
     </Fragment>
   );
 };

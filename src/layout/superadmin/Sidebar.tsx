@@ -1,199 +1,40 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
-  MdOutlinePayments,
-  MdOutlineAdminPanelSettings,
 } from 'react-icons/md';
-import { RxDashboard } from 'react-icons/rx';
-import { GiDoctorFace } from 'react-icons/gi';
-import { TbFaceMask } from 'react-icons/tb';
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import { HiOutlineClipboardList } from 'react-icons/hi';
-import { GrOrganization } from 'react-icons/gr';
 import Logo from '@assets/img/global/logo.png';
 import { SidebarItemProps } from '@typeSpec/common';
 import SidebarItems from '@layout/SidebarItems';
+import { Card, List } from '@material-tailwind/react';
+import { SuperAdminSidebarItems } from '@layout/admin';
 
 const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const SuperadminSidebar = [
-    {
-      item: 'Dashboard',
-      Icon: (
-        <RxDashboard
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/superadmin',
-      showSidebar: showSidebar,
-    },
-    {
-      item: 'Organisation',
-      Icon: (
-        <GrOrganization
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/superadmin/organisations',
-      showSidebar: showSidebar,
-    },
-
-    {
-      item: 'Doctor',
-      Icon: (
-        <GiDoctorFace
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/doctor',
-      showSidebar: showSidebar,
-    },
-
-    {
-      item: 'Patient',
-      Icon: (
-        <TbFaceMask
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/patient',
-      showSidebar: showSidebar,
-    },
-
-    {
-      item: 'Payment',
-      Icon: (
-        <MdOutlinePayments
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      // route: '/patient',
-      showSidebar: showSidebar,
-      child: [
-        {
-          item: 'Invoice',
-          Icon: (
-            <TbFaceMask
-              size={showSidebar ? 40 : 20}
-              fontWeight={40}
-              color={`black`}
-            />
-          ),
-          route: '/patient',
-          showSidebar: showSidebar,
-        },
-
-        {
-          item: 'Receipt',
-          Icon: (
-            <TbFaceMask
-              size={showSidebar ? 40 : 20}
-              fontWeight={40}
-              color={`black`}
-            />
-          ),
-          route: '/patient',
-          showSidebar: showSidebar,
-        },
-      ],
-    },
-
-    {
-      item: 'Admin',
-      Icon: (
-        <MdOutlineAdminPanelSettings
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-        />
-      ),
-      showSidebar: showSidebar,
-      child: [
-        {
-          item: 'View',
-          Icon: (
-            <HiOutlineClipboardList
-              size={showSidebar ? 40 : 20}
-              fontWeight={40}
-            />
-          ),
-          route: '/superadmin',
-          showSidebar: showSidebar,
-        },
-
-        {
-          item: 'Create',
-          Icon: (
-            <AiOutlineUserAdd
-              size={showSidebar ? 40 : 20}
-              fontWeight={40}
-            />
-          ),
-          route: '/superadmin/create/new_admin',
-          showSidebar: showSidebar,
-        },
-      ],
-    },
-
-    {
-      item: 'Pharmacy',
-      Icon: (
-        <TbFaceMask
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/patient',
-      showSidebar: showSidebar,
-    },
-
-    {
-      item: 'Store',
-      Icon: (
-        <TbFaceMask
-          size={showSidebar ? 40 : 20}
-          fontWeight={40}
-          color={`black`}
-        />
-      ),
-      route: '/patient',
-      showSidebar: showSidebar,
-    },
-  ] as SidebarItemProps[];
+  const { superAdminSidebar, showSidebar, setShowSidebar } =
+    SuperAdminSidebarItems();
 
   return (
     <Fragment>
-      <aside
-        className={`md:h-100 w-screen shrink-0 overflow-x-scroll border-r border-r-custom-gray-100 bg-brand-secondary-background !shadow-lg dark:border-r-ds-dark-400 dark:bg-ds-dark-700 ${
+      <Card
+        className={`h-[calc(100vh-2rem)] w-full max-w-[20rem] py-4 shadow-xl shadow-blue-gray-900/5 overflow-x-scroll ${
           showSidebar ? 'md:w-auto' : 'md:w-[13rem]'
         } no-scroll md:overflow-y-scroll`}>
         <div
-          className={`sticky top-0 z-50 hidden h-14 shrink-0 flex-row items-center border-b
-           bg-brand-secondary-background py-2 px-4 dark:border-b-ds-dark-400 dark:bg-ds-dark-700 md:flex ${
-             showSidebar ? 'justify-center' : 'justify-between'
-           }`}>
-          <Link to="/superadmin">
-            <img
-              src={Logo}
-              alt="Logo"
-              width={50}
-              height={50}
-              // className={`${showSidebar ? 'hidden' : ''}`}
-            />
-          </Link>
+          className={`sticky top-0 z-50 hidden flex items-center bg-white px-4 justify-center h-20 md:flex ${
+            showSidebar ? 'justify-center' : 'justify-between'
+          }`}>
+          <div className="mb-2 flex items-center gap-4 p-4">
+            <Link to="/admin">
+              <img
+                src={Logo}
+                alt="Brand Logo"
+                className="h-8 w-8"
+                width={40}
+                height={40}
+              />
+            </Link>
+          </div>
 
           <button
             className="grid h-5 w-5 cursor-pointer place-items-center rounded-lg border-brand-background p-1 outline-none transition-colors hover:bg-brand-background focus:outline-none dark:border-ds-dark-400 hover:dark:bg-ds-dark-600/50"
@@ -208,9 +49,11 @@ const Sidebar = () => {
           </button>
         </div>
 
-        <div className="mt-2 flex md:flex-col">
-          {SuperadminSidebar.length >= 1 &&
-            SuperadminSidebar.map((sidebar: SidebarItemProps, idx: number) => {
+        <hr className="my-2 border-blue-gray-50" />
+
+        <List className="flex py-2 px-4 overflow-hidden md:overflow-y-scroll md:flex-col">
+          {superAdminSidebar.length >= 1 &&
+            superAdminSidebar.map((sidebar: SidebarItemProps, idx: number) => {
               return (
                 <>
                   <SidebarItems
@@ -224,8 +67,8 @@ const Sidebar = () => {
                 </>
               );
             })}
-        </div>
-      </aside>
+        </List>
+      </Card>
     </Fragment>
   );
 };

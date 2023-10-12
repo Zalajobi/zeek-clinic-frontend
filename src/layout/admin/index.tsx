@@ -1,5 +1,11 @@
 import { TbFaceMask, TbMessageCircle2Filled } from 'react-icons/tb';
-import { MdDashboard, MdLocalActivity, MdReport } from 'react-icons/md';
+import {
+  MdDashboard,
+  MdLocalActivity,
+  MdOutlineAdminPanelSettings,
+  MdOutlinePayments,
+  MdReport,
+} from 'react-icons/md';
 import {
   FaUserFriends,
   FaUserInjured,
@@ -10,6 +16,12 @@ import {
   FaUserPlus,
 } from 'react-icons/fa';
 import { SidebarItemProps } from '@typeSpec/common';
+import { RxDashboard } from 'react-icons/rx';
+import { GrOrganization } from 'react-icons/gr';
+import { GiDoctorFace } from 'react-icons/gi';
+import { HiOutlineClipboardList } from 'react-icons/hi';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { useState } from 'react';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
@@ -20,7 +32,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <MdDashboard
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: '/admin',
@@ -33,7 +45,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaUserFriends
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: `#`,
@@ -46,7 +58,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaUserInjured
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: `/admin/patients/${siteId}`,
@@ -59,7 +71,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaUserMd
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: `/admin/providers/${siteId}`,
@@ -72,7 +84,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <MdLocalActivity
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: '#',
@@ -85,7 +97,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <MdReport
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         // route: '/patient',
@@ -98,7 +110,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaPaperclip
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         // route: '/patient',
@@ -111,7 +123,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaHospitalUser
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         // route: '/patient',
@@ -124,7 +136,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <TbMessageCircle2Filled
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: '#',
@@ -137,7 +149,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaCalendarDay
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         // route: '/patient',
@@ -150,7 +162,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <TbFaceMask
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: '#',
@@ -163,7 +175,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           <FaUserPlus
             size={30}
             fontWeight={40}
-            className={`text-gray-500 hover:text-gray-800`}
+            className={`text-gray-500`}
           />
         ),
         route: '#',
@@ -172,4 +184,174 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
     ] as SidebarItemProps[];
 
   return [] as SidebarItemProps[];
+};
+
+export const SuperAdminSidebarItems = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const superAdminSidebar = [
+    {
+      item: 'Dashboard',
+      Icon: (
+        <MdDashboard
+          size={30}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/superadmin',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Organisation',
+      Icon: (
+        <GrOrganization
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/superadmin/organisations',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Doctor',
+      Icon: (
+        <GiDoctorFace
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/doctor',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Patient',
+      Icon: (
+        <TbFaceMask
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/patient',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Payment',
+      Icon: (
+        <MdOutlinePayments
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      // route: '/patient',
+      showSidebar: showSidebar,
+      child: [
+        {
+          item: 'Invoice',
+          Icon: (
+            <TbFaceMask
+              size={40}
+              fontWeight={40}
+              className={`text-gray-500`}
+            />
+          ),
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+
+        {
+          item: 'Receipt',
+          Icon: (
+            <TbFaceMask
+              size={40}
+              fontWeight={40}
+              className={`text-gray-500`}
+            />
+          ),
+          route: '/patient',
+          showSidebar: showSidebar,
+        },
+      ],
+    },
+
+    {
+      item: 'Admin',
+      Icon: (
+        <MdOutlineAdminPanelSettings
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      showSidebar: showSidebar,
+      child: [
+        {
+          item: 'View',
+          Icon: (
+            <HiOutlineClipboardList
+              size={40}
+              fontWeight={40}
+              className={`text-gray-500`}
+            />
+          ),
+          route: '/superadmin',
+          showSidebar: showSidebar,
+        },
+
+        {
+          item: 'Create',
+          Icon: (
+            <AiOutlineUserAdd
+              size={40}
+              fontWeight={40}
+              className={`text-gray-500`}
+            />
+          ),
+          route: '/superadmin/create/new_admin',
+          showSidebar: showSidebar,
+        },
+      ],
+    },
+
+    {
+      item: 'Pharmacy',
+      Icon: (
+        <TbFaceMask
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/patient',
+      showSidebar: showSidebar,
+    },
+
+    {
+      item: 'Store',
+      Icon: (
+        <TbFaceMask
+          size={40}
+          fontWeight={40}
+          className={`text-gray-500`}
+        />
+      ),
+      route: '/patient',
+      showSidebar: showSidebar,
+    },
+  ] as SidebarItemProps[];
+
+  return {
+    superAdminSidebar,
+    showSidebar,
+
+    setShowSidebar,
+  };
 };
