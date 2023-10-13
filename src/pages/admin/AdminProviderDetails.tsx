@@ -13,6 +13,7 @@ import ProviderSummaryCard from '@components/admin/providers/details/ProviderSum
 import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
 import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
+import ProvidersPrimaryPatients from '@components/admin/providers/details/ProvidersPrimaryPatients';
 
 const AdminProviderDetails = () => {
   const {
@@ -130,6 +131,8 @@ const AdminProviderDetails = () => {
 
             <div className={`w-full grid gap-6 grid-cols-6 my-6`}>
               <ProviderPersonalHealthRecords />
+
+              <ProvidersPrimaryPatients className={`col-span-4`} />
 
               <ProviderSummaryCard
                 patients={321}

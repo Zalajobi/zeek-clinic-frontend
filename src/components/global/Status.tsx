@@ -8,6 +8,23 @@ interface StatusProps {
 }
 
 const Status = ({ status, className }: StatusProps) => {
+  const colorPick = () => {
+    if (status === 'PENDING') return 'teal';
+
+    if (status === 'ACTIVE') return 'green';
+
+    if (status === 'ARCHIVED') return 'cyan';
+
+    if (status === 'DECEASED') return 'red';
+
+    if (status === 'DISCHARGED') return 'orange';
+
+    if (status === 'INPATIENT') return 'purple';
+
+    if (status === 'OUTPATIENT') return 'blue';
+
+    return 'red';
+  };
   return (
     <Fragment>
       <div className="w-max">
@@ -15,15 +32,7 @@ const Status = ({ status, className }: StatusProps) => {
           size="sm"
           variant="ghost"
           value={status}
-          color={
-            status === 'PENDING'
-              ? 'teal'
-              : status === 'ACTIVE'
-              ? 'green'
-              : status === 'ARCHIVED'
-              ? 'cyan'
-              : 'red'
-          }
+          color={colorPick()}
         />
       </div>
     </Fragment>
