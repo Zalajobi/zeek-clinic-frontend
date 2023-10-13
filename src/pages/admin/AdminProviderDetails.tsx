@@ -11,7 +11,6 @@ import AdminEditProviderModal from '@components/admin/providers/details/AdminEdi
 import { LoadingSpinner } from '@components/global/Toast';
 import ProviderSummaryCard from '@components/admin/providers/details/ProviderSummaryCard';
 import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
-import { CustomCard } from '@components/global/card/CustomCard';
 import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 
@@ -116,16 +115,28 @@ const AdminProviderDetails = () => {
                 }
               />
 
+              <img
+                className="w-full h-full min-h-96 object-cover object-center rounded-lg shadow-xl shadow-blue-gray-900/50"
+                src={
+                  providerData?.data?.provider?.personalInfo?.profile_pic ??
+                  'https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80'
+                }
+                alt={
+                  providerData?.data?.provider?.personalInfo.first_name ?? ''
+                }
+                loading={`eager`}
+              />
+            </div>
+
+            <div className={`w-full grid gap-6 grid-cols-6 my-6`}>
+              <ProviderPersonalHealthRecords />
+
               <ProviderSummaryCard
                 patients={321}
                 visits={261}
                 appointments={537}
                 orders={632}
               />
-            </div>
-
-            <div className={`w-full grid gap-6 grid-cols-2 my-6`}>
-              <ProviderPersonalHealthRecords />
 
               <UpcomingAppontments />
 

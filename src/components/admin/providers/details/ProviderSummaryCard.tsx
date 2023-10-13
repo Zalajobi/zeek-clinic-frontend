@@ -17,7 +17,7 @@ const ProviderSummaryCard = ({
 }: ProviderSummaryCardProps) => {
   return (
     <Fragment>
-      <div className={`w-full grid grid-cols-2 gap-4`}>
+      <div className={`w-full grid grid-cols-2 gap-4 col-span-2`}>
         <CustomTransparentCard
           className={`min-h-[140px] max-h-[200px] !bg-[#3F596F] !border-0`}>
           <Typography

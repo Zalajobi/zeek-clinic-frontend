@@ -17,7 +17,8 @@ const ProviderRecentOrders = () => {
 
   return (
     <Fragment>
-      <CustomCard className={`w-full !bg-[#fff] flex flex-col min-h-[450px]`}>
+      <CustomCard
+        className={`w-full !bg-[#fff] flex flex-col min-h-[450px] col-span-3`}>
         <div className={`flex items-center justify-center`}>
           <Typography
             text={`Recent Orders`}

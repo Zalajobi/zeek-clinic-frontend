@@ -5,7 +5,7 @@ import { Typography } from '@components/global/dialog/Typography';
 const ProviderPersonalHealthRecords = () => {
   return (
     <Fragment>
-      <CustomCard className={`w-full bg-white grid grid-cols-8 col-span-2`}>
+      <CustomCard className={`w-full bg-white grid grid-cols-8 col-span-6`}>
         <div className={`flex flex-col items-center justify-center py-3`}>
           <Typography
             text={`Height (ft)`}
