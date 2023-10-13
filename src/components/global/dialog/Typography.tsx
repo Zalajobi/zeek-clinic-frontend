@@ -78,6 +78,7 @@ export const TypographyWithLink = ({
   className = '',
   iconBefore,
   iconAfter,
+
   to,
 }: TypographyWithLinkProps) => {
   return (

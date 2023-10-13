@@ -9,7 +9,7 @@ import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
-} from '@components/tables/SuperadminTable';
+} from '@components/tables/row-col-mapping/SuperadminTable';
 import { SuperadminSiteData } from '@typeSpec/superadmin';
 import Table from '@components/global/table/Table';
 import TableFooter from '@components/global/table/TableFooter';

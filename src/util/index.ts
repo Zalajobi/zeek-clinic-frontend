@@ -1,4 +1,5 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
+import moment from 'moment';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();
@@ -51,4 +52,14 @@ export const generateRandomCharacters = (min?: number): string => {
   }
 
   return randomCharacters;
+};
+
+export const calculateAge = (givenDate: Date): string | number => {
+  const currentDate = new Date();
+
+  if (currentDate.getFullYear() === givenDate.getFullYear())
+    return moment(currentDate.getFullYear() - givenDate.getFullYear()).format(
+      'MMM DD. YYYY'
+    );
+  else return currentDate.getFullYear() - givenDate.getFullYear();
 };

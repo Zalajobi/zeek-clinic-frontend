@@ -1,15 +1,18 @@
 import { ReactNode } from 'react';
+import {
+  // @ts-ignore
+  PersonalInfoResponseData,
+  UserServiceDepartmentResponseData,
+  UserServicePersonalInfoResponseData,
+  UserServiceRoleResponseData,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
+} from '@typeSpec/index';
 
 export interface AdminHeaderBaseTemplateData {
   role: string;
   siteId: string;
-  personalInfo: AdminHeaderBaseTemplateDataPersonalInfo;
-}
-
-export interface AdminHeaderBaseTemplateDataPersonalInfo {
-  first_name: string;
-  last_name: string;
-  dob?: any;
+  personalInfo: PersonalInfoResponseData;
 }
 
 export interface AppointmentTableData {
@@ -57,44 +60,4 @@ export interface ProviderAndRelationAPIResponse {
   unit: UserServiceUnitResponseData;
   servicearea: UserServiceServiceAreaResponseData;
   primary_role: UserServiceRoleResponseData;
-}
-
-export interface UserServiceUnitResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServiceRoleResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServiceServiceAreaResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServiceDepartmentResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServicePersonalInfoResponseData {
-  phone: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  title: string;
-  gender: string;
-  dob: any;
-  country: string;
-  state: string;
-  city: string;
-  address: string;
-  profile_pic: string;
-  id: string;
 }

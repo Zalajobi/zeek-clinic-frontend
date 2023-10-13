@@ -1,10 +1,15 @@
-import { UserServiceRoleResponseData } from '@typeSpec/admin';
+import {
+  UserServiceDepartmentResponseData,
+  UserServiceRoleResponseData,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
+} from '@typeSpec/index';
 
 export interface AdminCreateProviderResponseData {
-  departments: UserServiceRoleResponseData[];
+  departments: UserServiceDepartmentResponseData[];
   roles: UserServiceRoleResponseData[];
-  serviceAreas: UserServiceRoleResponseData[];
-  units: UserServiceRoleResponseData[];
+  serviceAreas: UserServiceServiceAreaResponseData[];
+  units: UserServiceUnitResponseData[];
 }
 
 export type AccountServiceApiResponse = {

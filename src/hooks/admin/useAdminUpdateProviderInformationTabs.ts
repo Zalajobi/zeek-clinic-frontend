@@ -7,19 +7,24 @@ import {
   convertObjectToGlobalSelectInputProps,
   generateRandomCharacters,
 } from '../../util';
-import { UserServiceRoleResponseData } from '@typeSpec/admin';
 import { AdminEditProvidersInformation } from '@typeSpec/admin/provider';
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
 import { axiosPutRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
+import {
+  UserServiceDepartmentResponseData,
+  UserServiceRoleResponseData,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
+} from '@typeSpec/index';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
   siteId: string,
-  departments: UserServiceRoleResponseData[],
+  departments: UserServiceDepartmentResponseData[],
   roles: UserServiceRoleResponseData[],
-  serviceAreas: UserServiceRoleResponseData[],
-  units: UserServiceRoleResponseData[]
+  serviceAreas: UserServiceServiceAreaResponseData[],
+  units: UserServiceUnitResponseData[]
 ) => {
   const { id } = useParams();
   const queryClient = useQueryClient();

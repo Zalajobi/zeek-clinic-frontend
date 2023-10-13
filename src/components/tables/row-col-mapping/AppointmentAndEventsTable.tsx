@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { AppointmentTableData, AppointmentTableRowData } from '@typeSpec/admin';
+import { Avatar } from '@material-tailwind/react';
 
 export const AppointmentAndEventsTableColumn = () => {
   const columnItem = [

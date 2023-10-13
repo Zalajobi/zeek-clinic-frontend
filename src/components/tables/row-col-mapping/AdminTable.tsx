@@ -32,9 +32,7 @@ export const AdminProviderDataColumn = (
     {
       Header: (
         <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Name')}>
+          <span className="flex shrink-0 flex-row gap-1">
             Name
             <TbArrowsMoveVertical size={15} />
           </span>

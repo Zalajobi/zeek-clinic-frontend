@@ -9,7 +9,7 @@ import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
-} from '@components/tables/AdminTable';
+} from '@components/tables/row-col-mapping/AdminTable';
 import ProvidersTab from '@components/admin/providers/ProvidersTab';
 
 const AdminProvider = () => {

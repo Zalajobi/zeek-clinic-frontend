@@ -14,6 +14,10 @@ import UpcomingAppontments from '@components/admin/providers/details/UpcomingApp
 import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 import ProvidersPrimaryPatients from '@components/admin/providers/details/ProvidersPrimaryPatients';
+import {
+  UserServicePatientDetailsResponse,
+  UserServicePersonalInfoResponseData,
+} from '@typeSpec/index';
 
 const AdminProviderDetails = () => {
   const {
@@ -26,7 +30,6 @@ const AdminProviderDetails = () => {
     unitDeptIsLoading,
     unitDeptIsError,
     primaryPatientsData,
-    primaryPatientsDataError,
     primaryPatientsDataLoading,
 
     // Function
@@ -35,8 +38,6 @@ const AdminProviderDetails = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(!open);
-
-  console.log(primaryPatientsData);
 
   return (
     <Fragment>
@@ -137,7 +138,13 @@ const AdminProviderDetails = () => {
             <div className={`w-full grid gap-6 grid-cols-6 my-6`}>
               <ProviderPersonalHealthRecords />
 
-              <ProvidersPrimaryPatients className={`col-span-4`} />
+              <ProvidersPrimaryPatients
+                className={`col-span-4`}
+                loading={primaryPatientsDataLoading}
+                data={
+                  primaryPatientsData?.data as UserServicePatientDetailsResponse[]
+                }
+              />
 
               <ProviderSummaryCard
                 patients={321}

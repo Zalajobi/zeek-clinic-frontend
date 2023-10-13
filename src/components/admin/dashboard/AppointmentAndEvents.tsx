@@ -7,7 +7,7 @@ import Table from '@components/global/table/Table';
 import {
   AppointmentAndEventsTableColumn,
   AppointmentAndEventsTableRowData,
-} from '@components/tables/AppointmentAndEventsTable';
+} from '@components/tables/row-col-mapping/AppointmentAndEventsTable';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import { testAppointmentData } from '@util/constants';
 

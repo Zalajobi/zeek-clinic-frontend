@@ -9,7 +9,7 @@ import { useHospitalOrganisation } from '@hooks/superadmin/useHospitalOrganisati
 import {
   SuperadminHospitalDataColumn,
   SuperadminHospitalDataRow,
-} from '@components/tables/SuperadminTable';
+} from '@components/tables/row-col-mapping/SuperadminTable';
 import CreateHospitalModal from '@components/modals/CreateHospitalModal';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';

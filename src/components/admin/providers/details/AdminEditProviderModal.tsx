@@ -18,18 +18,23 @@ import {
 } from '../../../../typeSpec/admin/provider';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAdminUpdateProviderInformationTabs } from '@hooks/admin/useAdminUpdateProviderInformationTabs';
-import { UserServiceRoleResponseData } from '@typeSpec/admin';
 import { LoadingSpinner } from '@components/global/Toast';
+import {
+  UserServiceDepartmentResponseData,
+  UserServiceRoleResponseData,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
+} from '@typeSpec/index';
 
 interface AdminEditProviderModalProps {
   name: string;
   fetchData: boolean;
   siteId: string;
   currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
-  department: UserServiceRoleResponseData[];
+  department: UserServiceDepartmentResponseData[];
   role: UserServiceRoleResponseData[];
-  serviceArea: UserServiceRoleResponseData[];
-  unit: UserServiceRoleResponseData[];
+  serviceArea: UserServiceServiceAreaResponseData[];
+  unit: UserServiceUnitResponseData[];
   updateCurrentModal: (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => void;
