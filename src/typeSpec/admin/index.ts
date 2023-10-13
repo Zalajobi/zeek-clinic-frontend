@@ -14,6 +14,7 @@ export interface AdminHeaderBaseTemplateDataPersonalInfo {
 
 export interface AppointmentTableData {
   id: string;
+  img?: string;
   title: string;
   first_name: string;
   last_name: string;
@@ -45,6 +46,7 @@ export interface ProviderPageSiteResponseData {
 }
 
 export interface ProviderAndRelationAPIResponse {
+  img?: string;
   email: string;
   id: string;
   status: string;

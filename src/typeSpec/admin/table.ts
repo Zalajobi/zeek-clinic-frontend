@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface ProvidersPageRowData {
-  checkbox: ReactNode;
+  checkbox?: ReactNode;
   name: ReactNode;
   email: ReactNode;
   phone: ReactNode;

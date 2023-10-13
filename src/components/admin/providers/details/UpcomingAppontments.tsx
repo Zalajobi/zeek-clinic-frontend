@@ -19,7 +19,7 @@ const UpcomingAppointments = () => {
 
   return (
     <Fragment>
-      <CustomCard className={`w-full !bg-[#fff] flex flex-col min-h-[300px]`}>
+      <CustomCard className={`w-full !bg-[#fff] flex flex-col min-h-[450px]`}>
         <div className={`flex items-center justify-center`}>
           <Typography
             text={`Upcoming Appointments`}

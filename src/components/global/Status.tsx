@@ -1,23 +1,33 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
+import { Chip } from '@material-tailwind/react';
 
 interface StatusProps {
   // status?: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED'
-  status?: string
-  className?: string
+  status?: string;
+  className?: string;
 }
 
-const Status = ({status, className}:StatusProps) => {
-
+const Status = ({ status, className }: StatusProps) => {
   return (
     <Fragment>
-      <div className={`py-1 px-2 rounded-lg text-black hover:text-gray-500 decoration-0 capitalize ${className}`} style={{
-        backgroundColor: status === 'PENDING' ? '#FDEFE2' : status === 'ACTIVE' ? '#D9FFEF' : status === 'ARCHIVED' ? '#F1F7FF' : '#FCDFDF',
-        color: status === 'PENDING' ? '#C5A88E' : status === 'ACTIVE' ? '#2A5542' : status === 'ARCHIVED' ? '#727C94' : '#5C2725',
-      }}>
-        <p className={`font-bold text-center`}>{status?.toLowerCase()}</p>
+      <div className="w-max">
+        <Chip
+          size="sm"
+          variant="ghost"
+          value={status}
+          color={
+            status === 'PENDING'
+              ? 'teal'
+              : status === 'ACTIVE'
+              ? 'green'
+              : status === 'ARCHIVED'
+              ? 'cyan'
+              : 'red'
+          }
+        />
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default Status;
