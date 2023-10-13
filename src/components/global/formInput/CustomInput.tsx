@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
+import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';

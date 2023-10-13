@@ -29,6 +29,7 @@ import {
 } from '@typeSpec/superadmin/formTypes';
 import { BasicFilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
+import { CustomCard } from '@components/global/card/CustomCard';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -72,16 +73,16 @@ export const AddProvider = () => {
 
           <div
             className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
-            <div
+            <CustomCard
               className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b] max-h-[400px]`}>
               <ImageUpload
                 bucketFolder={`/profile_image/providers`}
                 url={profilePic}
                 updateImageUrl={setProfilePic}
               />
-            </div>
+            </CustomCard>
 
-            <div
+            <CustomCard
               className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b]`}>
               <div
                 className={`w-full grid gap-6 grid-cols-1 mb-2 lg:grid-cols-5`}>
@@ -108,12 +109,6 @@ export const AddProvider = () => {
                       }`}
                     />
                   }
-                />
-
-                <PhoneNumberInput
-                  label={`Phone Number`}
-                  country={countryCode}
-                  change={(value) => console.log(value)}
                 />
 
                 <TextInput
@@ -420,7 +415,7 @@ export const AddProvider = () => {
                   className={`min-w-[100px] max-w-[200px]`}
                 />
               </div>
-            </div>
+            </CustomCard>
           </div>
         </div>
       </AdminBaseTemplate>
