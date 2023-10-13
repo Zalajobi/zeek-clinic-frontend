@@ -25,6 +25,9 @@ const AdminProviderDetails = () => {
     unitDeptData,
     unitDeptIsLoading,
     unitDeptIsError,
+    primaryPatientsData,
+    primaryPatientsDataError,
+    primaryPatientsDataLoading,
 
     // Function
     onUpdateProviderModalSection,
@@ -32,6 +35,8 @@ const AdminProviderDetails = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(!open);
+
+  console.log(primaryPatientsData);
 
   return (
     <Fragment>

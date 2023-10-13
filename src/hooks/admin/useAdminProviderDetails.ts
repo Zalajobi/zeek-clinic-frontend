@@ -19,6 +19,16 @@ export const useAdminProviderDetails = () => {
   });
 
   const {
+    data: primaryPatientsData,
+    isLoading: primaryPatientsDataLoading,
+    isError: primaryPatientsDataError,
+  } = useQuery<AccountServiceApiResponse>('primaryPatients', function () {
+    return axiosGetRequestUserService(
+      `/patients/provider/primary-patient/all/${id}`
+    );
+  });
+
+  const {
     data: unitDeptData,
     isLoading: unitDeptIsLoading,
     isError: unitDeptIsError,
@@ -50,6 +60,9 @@ export const useAdminProviderDetails = () => {
     unitDeptData,
     unitDeptIsLoading,
     unitDeptIsError,
+    primaryPatientsData,
+    primaryPatientsDataError,
+    primaryPatientsDataLoading,
 
     // Function
     onUpdateProviderModalSection,
