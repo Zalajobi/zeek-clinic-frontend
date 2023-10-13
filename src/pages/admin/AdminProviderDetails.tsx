@@ -15,8 +15,11 @@ import ProviderRecentOrders from '@components/admin/providers/details/ProviderRe
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 import ProvidersPrimaryPatients from '@components/admin/providers/details/ProvidersPrimaryPatients';
 import {
+  UserServiceDepartmentResponseData,
   UserServicePatientDetailsResponse,
   UserServicePersonalInfoResponseData,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
 } from '@typeSpec/index';
 
 const AdminProviderDetails = () => {
@@ -139,19 +142,28 @@ const AdminProviderDetails = () => {
               <ProviderPersonalHealthRecords />
 
               <ProvidersPrimaryPatients
-                className={`col-span-4`}
+                className={`col-span-6`}
                 loading={primaryPatientsDataLoading}
+                department={
+                  unitDeptData?.data
+                    ?.department as UserServiceDepartmentResponseData[]
+                }
+                serviceArea={
+                  unitDeptData?.data
+                    ?.serviceArea as UserServiceServiceAreaResponseData[]
+                }
+                unit={unitDeptData?.data?.unit as UserServiceUnitResponseData[]}
                 data={
                   primaryPatientsData?.data as UserServicePatientDetailsResponse[]
                 }
               />
 
-              <ProviderSummaryCard
-                patients={321}
-                visits={261}
-                appointments={537}
-                orders={632}
-              />
+              {/*<ProviderSummaryCard*/}
+              {/*  patients={321}*/}
+              {/*  visits={261}*/}
+              {/*  appointments={537}*/}
+              {/*  orders={632}*/}
+              {/*/>*/}
 
               <UpcomingAppontments />
 

@@ -204,7 +204,7 @@ export const SelectInput = ({
         </label>
         {register ? (
           <select
-            className="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500
+            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
               focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {
@@ -231,7 +231,7 @@ export const SelectInput = ({
           </select>
         ) : (
           <select
-            className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500
+            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
               focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             onChange={change}
             id={id}>

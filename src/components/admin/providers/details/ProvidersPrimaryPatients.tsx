@@ -1,14 +1,18 @@
 import { CustomCard } from '@components/global/card/CustomCard';
-import { Fragment, SetStateAction, useMemo, useState } from 'react';
+import { Fragment, SetStateAction, useMemo } from 'react';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomDropDownMenuSelect } from '@components/global/formInput/CustomInput';
-import { UserServicePatientDetailsResponse } from '@typeSpec/index';
+import {
+  UserServiceDepartmentResponseData,
+  UserServicePatientDetailsResponse,
+  UserServiceServiceAreaResponseData,
+  UserServiceUnitResponseData,
+} from '@typeSpec/index';
 import {
   ProviderPrimaryPatientColumnData,
   ProviderPrimaryPatientRowData,
 } from '@components/tables/row-col-mapping/patient/ProviderPrimaryPatientTable';
 import Table from '@components/global/table/Table';
-import { useNavigate } from 'react-router-dom';
 import { MovePatientActionModal } from '@components/patient/modals/quickAction/SingleActionModals';
 import { useProvidersPrimaryPatients } from '@hooks/patient/useProvidersPrimaryPatients';
 
@@ -16,12 +20,18 @@ interface ProvidersPrimaryPatientProps {
   data: UserServicePatientDetailsResponse[];
   loading: boolean;
   className?: string;
+  department?: UserServiceDepartmentResponseData[];
+  serviceArea?: UserServiceServiceAreaResponseData[];
+  unit?: UserServiceUnitResponseData[];
 }
 
 const ProvidersPrimaryPatients = ({
   data,
   loading,
   className = '',
+  department,
+  serviceArea,
+  unit,
 }: ProvidersPrimaryPatientProps) => {
   const {
     // Values
@@ -31,15 +41,25 @@ const ProvidersPrimaryPatients = ({
     selectTimeframe,
     selectedTimeframe,
     patientName,
-    patientId,
     patientProfilePic,
+    departmentsSelectField,
+    serviceAreasSelectField,
+    unitsSelectField,
 
     // Functions
     // onUpdatePopoverAction,
     handleOpenMovePatientModal,
     setSelectedTimeframe,
     setOpenMovePatientModal,
-  } = useProvidersPrimaryPatients();
+    setDepartmentId,
+    setServiceAreaId,
+    setUnitId,
+    movePatient,
+  } = useProvidersPrimaryPatients(
+    department ?? [],
+    serviceArea ?? [],
+    unit ?? []
+  );
 
   const tableCol = useMemo(() => ProviderPrimaryPatientColumnData(), []);
 
@@ -57,7 +77,7 @@ const ProvidersPrimaryPatients = ({
   return (
     <Fragment>
       <CustomCard
-        className={`w-full !bg-[#fff] flex overflow-scroll flex-col h-[450px] ${className}`}>
+        className={`w-full !bg-[#fff] flex overflow-scroll flex-col h-[600px] ${className}`}>
         <div className={`flex items-center justify-center`}>
           <Typography
             text={`Primary Patients`}
@@ -89,6 +109,13 @@ const ProvidersPrimaryPatients = ({
         open={openMovePatientModal}
         name={patientName}
         profile_pic={patientProfilePic}
+        departments={departmentsSelectField ?? []}
+        serviceAreas={serviceAreasSelectField ?? []}
+        units={unitsSelectField ?? []}
+        onUpdateDepartment={setDepartmentId}
+        onUpdateServiceArea={setServiceAreaId}
+        onUpdateUnit={setUnitId}
+        onSubmit={movePatient}
       />
     </Fragment>
   );
