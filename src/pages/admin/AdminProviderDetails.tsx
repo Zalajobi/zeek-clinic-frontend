@@ -6,15 +6,14 @@ import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { useAdminProviderDetails } from '@hooks/admin/useAdminProviderDetails';
 import { Typography } from '@components/global/dialog/Typography';
 import ProviderDetailsCard from '@components/admin/providers/details/ProviderDetailsCard';
-import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '@components/global/CustomButton';
+import { BasicOutlineButton } from '@components/global/CustomButton';
 import AdminEditProviderModal from '@components/admin/providers/details/AdminEditProviderModal';
 import { LoadingSpinner } from '@components/global/Toast';
 import ProviderSummaryCard from '@components/admin/providers/details/ProviderSummaryCard';
 import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
 import { CustomCard } from '@components/global/card/CustomCard';
+import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
+import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 
 const AdminProviderDetails = () => {
   const {
@@ -126,11 +125,11 @@ const AdminProviderDetails = () => {
             </div>
 
             <div className={`w-full grid gap-6 grid-cols-2 my-6`}>
+              <ProviderPersonalHealthRecords />
+
               <UpcomingAppontments />
 
-              <CustomCard className={`w-full bg-white`}>
-                <h1>HELLO WORLD</h1>
-              </CustomCard>
+              <ProviderRecentOrders />
             </div>
           </div>
         </div>

@@ -192,7 +192,6 @@ export const useAdminProviderPage = () => {
     );
 
     if (response.success) {
-      console.log(response.data);
       setProviderData(
         response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
