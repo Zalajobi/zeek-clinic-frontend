@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Chart } from 'react-google-charts';
 
 interface CustomChartProps {

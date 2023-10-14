@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from 'react';
-import { CustomCard } from '@components/global/card/CustomCard';
-import { Typography } from '@components/global/dialog/Typography';
+import Typography from '../../global/Typography';
+import CustomCard from '../../global/card/CustomCard';
 
 interface SummaryCardProps {
   icon: ReactNode;

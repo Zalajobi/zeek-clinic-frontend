@@ -1,43 +1,42 @@
-import axios from 'axios';
-import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+import axios from "axios";
 
-// interface axiosPostRequestUserServiceNoAuthProps {
+// interface AxiosPostRequestNoAuthProps {
 //   url: string
 //   data: any
 // }
 
 const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
+  baseURL: process.env.REACT_APP_DEV_BASE_URL,
   timeout: 7500,
-});
+})
 
-export const axiosPostRequestUserService = async (url: string, data: any) => {
+export const axiosPostRequest = async (url:string, data:any) => {
   const request = await instance.post(url, data, {
     headers: {
-      token: localStorage.getItem('token') as string,
-    },
-  });
+      token: localStorage.getItem('token') as string
+    }
+  })
 
-  return request.data;
-};
+  return request.data
+}
 
-export const axiosPutRequestUserService = async (url: string, data: any) => {
+export const axiosPutRequest = async (url:string, data:any) => {
   const request = await instance.put(url, data, {
     headers: {
-      token: localStorage.getItem('token') as string,
-    },
-  });
+      token: localStorage.getItem('token') as string
+    }
+  })
 
-  return request.data;
-};
+  return request.data
+}
 
-export const axiosGetRequestUserService = async (url: string, params?: any) => {
+export const axiosGetRequest = async (url:string, params?:any) => {
   const request = await instance.get(url, {
     headers: {
-      token: localStorage.getItem('token') as string,
+      token: localStorage.getItem('token') as string
     },
-    params,
-  });
+    params
+  })
 
-  return request.data as AccountServiceApiResponse;
-};
+  return request.data
+}
