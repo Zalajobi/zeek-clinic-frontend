@@ -7,11 +7,6 @@ import {
 } from '@material-tailwind/react';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  UserServiceDepartmentResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { SelectInput } from '@components/global/formInput/CustomInput';
 import { BasicOutlineButton } from '@components/global/CustomButton';

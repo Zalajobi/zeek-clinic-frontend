@@ -9,7 +9,6 @@ import ProviderDetailsCard from '@components/admin/providers/details/ProviderDet
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import AdminEditProviderModal from '@components/admin/providers/details/AdminEditProviderModal';
 import { LoadingSpinner } from '@components/global/Toast';
-import ProviderSummaryCard from '@components/admin/providers/details/ProviderSummaryCard';
 import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
 import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
@@ -17,7 +16,6 @@ import ProvidersPrimaryPatients from '@components/admin/providers/details/Provid
 import {
   UserServiceDepartmentResponseData,
   UserServicePatientDetailsResponse,
-  UserServicePersonalInfoResponseData,
   UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '@typeSpec/index';

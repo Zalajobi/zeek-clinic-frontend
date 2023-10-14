@@ -7,6 +7,9 @@ import {
   UserServiceUnitResponseData,
 } from '@typeSpec/index';
 import { convertObjectToGlobalSelectInputProps } from '@util/index';
+import { useMutation, useQueryClient } from 'react-query';
+import { axiosPutRequestUserService } from '@lib/axios';
+import toast from 'react-hot-toast';
 
 const selectTimeframe = ['All', '1 Day(s)', '7 Day(s)', '2 Week(s)', '1 Month'];
 
@@ -16,6 +19,7 @@ export const useProvidersPrimaryPatients = (
   units: UserServiceUnitResponseData[]
 ) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [openPopoverAction, setOpenPopoverAction] = useState(false);
   const [openMovePatientModal, setOpenMovePatientModal] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState(
@@ -27,6 +31,7 @@ export const useProvidersPrimaryPatients = (
   const [departmentId, setDepartmentId] = useState('');
   const [serviceAreaId, setServiceAreaId] = useState('');
   const [unitId, setUnitId] = useState('');
+  const [movePatientLoading, setMovePatientLoading] = useState(false);
   const [departmentsSelectField, setDepartmentsSelectField] = useState<
     SelectInputFieldProps[]
   >([]);
@@ -36,6 +41,29 @@ export const useProvidersPrimaryPatients = (
   const [unitsSelectField, setUnitsSelectField] = useState<
     SelectInputFieldProps[]
   >([]);
+
+  const movePatientMutate = useMutation({
+    mutationFn: (data: any) => {
+      return axiosPutRequestUserService(`/patients/move/${patientId}`, data);
+    },
+
+    onError: (error) => {
+      toast.error(`Unable To Move ${patientName}`);
+      setMovePatientLoading(!movePatientLoading);
+    },
+
+    onSuccess: (result) => {
+      if (toast?.success) toast.success(result?.message);
+      else toast.error('Something Went Wrong');
+
+      setMovePatientLoading(!movePatientLoading);
+      queryClient.resetQueries('providerPrimaryPatients');
+    },
+
+    onMutate: () => {
+      setMovePatientLoading(!movePatientLoading);
+    },
+  });
 
   useEffect(() => {
     setDepartmentsSelectField(
@@ -65,11 +93,14 @@ export const useProvidersPrimaryPatients = (
   };
 
   const movePatient = () => {
-    console.log({
+    setOpenMovePatientModal(!openMovePatientModal);
+    const data = {
       departmentId,
-      serviceAreaId,
+      serviceareaId: serviceAreaId,
       unitId,
-    });
+    };
+
+    movePatientMutate.mutate(data);
   };
 
   return {
@@ -85,6 +116,7 @@ export const useProvidersPrimaryPatients = (
     departmentsSelectField,
     serviceAreasSelectField,
     unitsSelectField,
+    movePatientLoading,
 
     // Functions
     onUpdatePopoverAction,

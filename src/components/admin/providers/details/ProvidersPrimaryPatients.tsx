@@ -15,6 +15,7 @@ import Table from '@components/global/table/Table';
 import { MovePatientActionModal } from '@components/patient/modals/quickAction/SingleActionModals';
 import { useProvidersPrimaryPatients } from '@hooks/patient/useProvidersPrimaryPatients';
 import { Button } from '@material-tailwind/react';
+import { LoadingSpinner } from '@components/global/Toast';
 
 interface ProvidersPrimaryPatientProps {
   data: UserServicePatientDetailsResponse[];
@@ -44,6 +45,7 @@ const ProvidersPrimaryPatients = ({
     departmentsSelectField,
     serviceAreasSelectField,
     unitsSelectField,
+    movePatientLoading,
 
     // Functions
     handleOpenMovePatientModal,
@@ -73,6 +75,10 @@ const ProvidersPrimaryPatients = ({
 
   return (
     <Fragment>
+      {movePatientLoading && (
+        <LoadingSpinner message={`Moving ${patientName}...`} />
+      )}
+
       <CustomCard
         className={`w-full !bg-[#fff] flex overflow-scroll flex-col h-[600px] ${className}`}>
         <div className={`flex items-center justify-center`}>

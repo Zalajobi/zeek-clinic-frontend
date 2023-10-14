@@ -22,11 +22,14 @@ export const useAdminProviderDetails = () => {
     data: primaryPatientsData,
     isLoading: primaryPatientsDataLoading,
     isError: primaryPatientsDataError,
-  } = useQuery<AccountServiceApiResponse>('primaryPatients', function () {
-    return axiosGetRequestUserService(
-      `/patients/provider/primary-patient/all/${id}`
-    );
-  });
+  } = useQuery<AccountServiceApiResponse>(
+    'providerPrimaryPatients',
+    function () {
+      return axiosGetRequestUserService(
+        `/patients/provider/primary-patient/all/${id}`
+      );
+    }
+  );
 
   const {
     data: unitDeptData,
