@@ -1,7 +1,6 @@
 import { CustomCard } from '@components/global/card/CustomCard';
-import { Fragment, SetStateAction, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Typography } from '@components/global/dialog/Typography';
-import { CustomDropDownMenuSelect } from '@components/global/formInput/CustomInput';
 import {
   UserServiceDepartmentResponseData,
   UserServicePatientDetailsResponse,
@@ -15,10 +14,12 @@ import {
 import Table from '@components/global/table/Table';
 import { MovePatientActionModal } from '@components/patient/modals/quickAction/SingleActionModals';
 import { useProvidersPrimaryPatients } from '@hooks/patient/useProvidersPrimaryPatients';
+import { Button } from '@material-tailwind/react';
 
 interface ProvidersPrimaryPatientProps {
   data: UserServicePatientDetailsResponse[];
   loading: boolean;
+  siteId: string;
   className?: string;
   department?: UserServiceDepartmentResponseData[];
   serviceArea?: UserServiceServiceAreaResponseData[];
@@ -28,6 +29,7 @@ interface ProvidersPrimaryPatientProps {
 const ProvidersPrimaryPatients = ({
   data,
   loading,
+  siteId,
   className = '',
   department,
   serviceArea,
@@ -36,10 +38,7 @@ const ProvidersPrimaryPatients = ({
   const {
     // Values
     navigate,
-    // openPopoverAction,
     openMovePatientModal,
-    selectTimeframe,
-    selectedTimeframe,
     patientName,
     patientProfilePic,
     departmentsSelectField,
@@ -47,9 +46,7 @@ const ProvidersPrimaryPatients = ({
     unitsSelectField,
 
     // Functions
-    // onUpdatePopoverAction,
     handleOpenMovePatientModal,
-    setSelectedTimeframe,
     setOpenMovePatientModal,
     setDepartmentId,
     setServiceAreaId,
@@ -87,13 +84,12 @@ const ProvidersPrimaryPatients = ({
             className={`mr-auto`}
           />
 
-          <CustomDropDownMenuSelect
-            items={selectTimeframe}
-            value={selectedTimeframe}
-            onSelect={(value: SetStateAction<string | number>) =>
-              setSelectedTimeframe(value as string)
-            }
-          />
+          <Button
+            size={`sm`}
+            onClick={() => navigate(`/admin/patients/${siteId}`)}
+            variant={`text`}>
+            View
+          </Button>
         </div>
 
         <div className={`flex items-center justify-center mt-5`}>

@@ -156,6 +156,7 @@ const AdminProviderDetails = () => {
                 data={
                   primaryPatientsData?.data as UserServicePatientDetailsResponse[]
                 }
+                siteId={adminData?.siteId ?? ''}
               />
 
               {/*<ProviderSummaryCard*/}
