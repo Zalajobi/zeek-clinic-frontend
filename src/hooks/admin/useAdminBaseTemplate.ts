@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { axiosGetRequest } from '../../lib/axios';
-import { AdminHeaderBaseTemplateData } from '../../types/admin';
+import { useEffect, useState } from 'react';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { AdminHeaderBaseTemplateData } from '@typeSpec/admin';
 
 export const useAdminBaseTemplate = () => {
   const navigate = useNavigate();
@@ -11,21 +11,28 @@ export const useAdminBaseTemplate = () => {
 
   useEffect(() => {
     const getHeaderData = async () => {
-      const response = await axiosGetRequest('/account/admin/profile/get-data');
+      const response = await axiosGetRequestUserService(
+        '/admin/profile/get-data'
+      );
 
       if (response.success) {
+        localStorage.setItem('adminData', JSON.stringify(response?.data));
         setRequestData(response?.data as AdminHeaderBaseTemplateData);
       }
     };
 
-    getHeaderData().catch((err) => {
-      navigate('/admin/login');
-    });
+    const adminData = localStorage.getItem('adminData');
+
+    if (!adminData) {
+      getHeaderData().catch((err) => {
+        navigate('/admin/login');
+      });
+    } else {
+      setRequestData(JSON.parse(adminData) as AdminHeaderBaseTemplateData);
+    }
   }, []);
 
-  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value as string);
-  };
+  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 
   return {
     navigate,

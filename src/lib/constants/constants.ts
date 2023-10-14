@@ -1,25 +1,84 @@
-import { SelectInputFieldProps } from '../../types/common';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const matchLowerCaseRegex = /[a-z]/g;
 export const matchUpperCaseRegex = /[A-Z]/g;
 export const matchNumbersRegex = /[0-9]/g;
 
-export const availableTitles = [
-  'Dr.',
-  'Esq.',
-  'Hon.',
-  'Jr.',
-  'Mr.',
-  'Mrs.',
-  'Ms.',
-  'Messrs.',
-  'Mmes.',
-  'Msgr.',
-  'Prof.',
-  'Rev.',
-  'Rt.',
-  'Sr.',
-  'St.',
+export const availableTitles: SelectInputFieldProps[] = [
+  {
+    value: 'Dr.',
+    placeholder: 'Dr.',
+  },
+
+  {
+    value: 'Esq.',
+    placeholder: 'Esq.',
+  },
+
+  {
+    value: 'Hon.',
+    placeholder: 'Hon.',
+  },
+
+  {
+    value: 'Jr.',
+    placeholder: 'Jr.',
+  },
+
+  {
+    value: 'Mr.',
+    placeholder: 'Mr.',
+  },
+
+  {
+    value: 'Mrs.',
+    placeholder: 'Mrs.',
+  },
+
+  {
+    value: 'Ms.',
+    placeholder: 'Ms.',
+  },
+
+  {
+    value: 'Messrs.',
+    placeholder: 'Messrs.',
+  },
+
+  {
+    value: 'Mmes.',
+    placeholder: 'Mmes.',
+  },
+
+  {
+    value: 'Msgr.',
+    placeholder: 'Msgr.',
+  },
+
+  {
+    value: 'Prof.',
+    placeholder: 'Prof.',
+  },
+
+  {
+    value: 'Rev.',
+    placeholder: 'Rev.',
+  },
+
+  {
+    value: 'Rt.',
+    placeholder: 'Rt.',
+  },
+
+  {
+    value: 'Sr.',
+    placeholder: 'Sr.',
+  },
+
+  {
+    value: 'St.',
+    placeholder: 'St.',
+  },
 ];
 
 export const providersTitleSelectInput: SelectInputFieldProps[] = [
@@ -309,3 +368,5 @@ export const religions: SelectInputFieldProps[] = [
   { value: 'christianity', placeholder: 'Christianity' },
   { value: 'zoroastrianism', placeholder: 'Zoroastrianism' },
 ];
+
+export const USER_SERVICE_EXCHANGE = 'zeek-clinic-user-service';

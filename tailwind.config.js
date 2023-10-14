@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
-    './node_modules/tw-elements/dist/js/**/*.js',
-  ],
+const withMT = require('@material-tailwind/react/utils/withMT');
+
+module.exports = withMT({
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
     fontFamily: {
@@ -16,5 +14,5 @@ module.exports = {
       error: '#FAECEC',
     },
   },
-  plugins: [require('flowbite/plugin'), require('tw-elements/dist/plugin.cjs')],
-};
+  plugins: [],
+});

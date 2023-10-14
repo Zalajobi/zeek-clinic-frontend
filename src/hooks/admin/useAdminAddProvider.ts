@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-import { Datepicker, Input, initTE, Select, Ripple } from 'tw-elements';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
-import { SelectInputFieldProps } from '../../types/common';
+import toast from 'react-hot-toast';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
 import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
-} from '../../types/apiResponses';
+} from '@typeSpec/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
-} from '../../types/superadmin/formTypes';
-import toast from 'react-hot-toast';
+} from '@typeSpec/superadmin/formTypes';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -30,6 +32,7 @@ export const useAdminAddProvider = () => {
   const [roles, setRoles] = useState<SelectInputFieldProps[]>([]);
   const [serviceArea, setServiceArea] = useState<SelectInputFieldProps[]>([]);
   const [units, setUnits] = useState<SelectInputFieldProps[]>([]);
+  const [countryCode, setCountryCode] = useState<string>('');
 
   useEffect(() => {
     const getAddProviderData = async () => {
@@ -40,45 +43,43 @@ export const useAdminAddProvider = () => {
         temporaryUnitStore: SelectInputFieldProps[] = [];
 
       Country.getAllCountries().map((country) => {
-        countriesUpdate.push({
+        return countriesUpdate.push({
           value: country.isoCode,
           placeholder: country.name,
         });
       });
       setAllCountries(countriesUpdate);
 
-      const response = <AccountServiceApiResponse>(
-        await axiosGetRequest(
-          `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
-        )
-      );
+      const response = (await axiosGetRequestUserService(
+        `/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+      )) as AccountServiceApiResponse;
 
       if (response.success) {
         const data = response.data as AdminCreateProviderResponseData;
 
         data.departments.map((item) => {
-          temporaryDeptStore.push({
+          return temporaryDeptStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.roles.map((item) => {
-          temporaryRoleStore.push({
+          return temporaryRoleStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.serviceAreas.map((item) => {
-          temporaryServiceAreaStore.push({
+          return temporaryServiceAreaStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.units.map((item) => {
-          temporaryUnitStore.push({
+          return temporaryUnitStore.push({
             value: item?.id,
             placeholder: item?.name,
           });
@@ -91,24 +92,17 @@ export const useAdminAddProvider = () => {
       }
     };
 
-    initTE({ Datepicker, Input, Select, Ripple });
-
     getAddProviderData().catch((err) => {
       console.log(err);
     });
   }, [siteId]);
-
-  // const datepickerDisableFuture = document.getElementById('datepicker-disable-future');
-  // new Datepicker(datepickerDisableFuture, {
-  //   disableFuture: true
-  // });
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
     let countryStates: SelectInputFieldProps[] = [];
 
     State.getStatesOfCountry(value).map((country) => {
-      countryStates.push({
+      return countryStates.push({
         value: country.isoCode,
         placeholder: country.name,
       });
@@ -117,6 +111,7 @@ export const useAdminAddProvider = () => {
     setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
+    setCountryCode(value);
   };
 
   const onSubmit = async (data: AdminAddProviderInput) => {
@@ -128,12 +123,10 @@ export const useAdminAddProvider = () => {
       profilePic,
     };
 
-    const response = <AccountServiceApiResponse>(
-      await axiosPostRequest(
-        `account/providers/admin/create-new/provider`,
-        addAdminData
-      )
-    );
+    const response = (await axiosPostRequestUserService(
+      `account/providers/admin/create-new/provider`,
+      addAdminData
+    )) as AccountServiceApiResponse;
 
     if (response.success) {
       toast.success(response.message);
@@ -155,6 +148,7 @@ export const useAdminAddProvider = () => {
     roles,
     serviceArea,
     units,
+    countryCode,
 
     // Functions
     setProfilePic,

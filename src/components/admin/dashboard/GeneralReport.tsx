@@ -1,20 +1,12 @@
 import { Fragment } from 'react';
-import CustomCard from '../../global/card/CustomCard';
-import Typography from '../../global/Typography';
-import TypographyLink from '../../global/TypographyLink';
-import CustomInnerCard from '../../global/card/CustomInnerCard';
+import {
+  Typography,
+  TypographyWithLink,
+} from '@components/global/dialog/Typography';
+import CustomInnerCard from '@components/global/card/CustomInnerCard';
+import { CustomCard } from '@components/global/card/CustomCard';
 
 const GeneralReport = () => {
-  const date = new Date();
-  const report = [
-    {
-      message: 'Room 501 AC is not working',
-      reportBy: 'Steeve',
-      reportTime: date.getUTCDate(),
-      viewed: true,
-    },
-  ];
-
   return (
     <Fragment>
       <CustomCard
@@ -26,7 +18,7 @@ const GeneralReport = () => {
             className={`text-start text-[20px] mr-auto`}
           />
 
-          <TypographyLink
+          <TypographyWithLink
             text={`View All`}
             to={`/admin`}
             className={`text-[13px] ml-auto hover:cursor-pointer hover:no-underline hover:text-[#C4C4C6]`}

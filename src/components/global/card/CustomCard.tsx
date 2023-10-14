@@ -5,7 +5,7 @@ interface CustomCardProps {
   className?: string;
 }
 
-const CustomCard = ({ children, className }: CustomCardProps) => {
+export const CustomCard = ({ children, className = '' }: CustomCardProps) => {
   return (
     <Fragment>
       <div
@@ -16,4 +16,16 @@ const CustomCard = ({ children, className }: CustomCardProps) => {
   );
 };
 
-export default CustomCard;
+export const CustomTransparentCard = ({
+  children,
+  className = '',
+}: CustomCardProps) => {
+  return (
+    <Fragment>
+      <div
+        className={`glassmorphism rounded-lg shadow-xl shadow-blue-gray-900/50 p-4 ${className}`}>
+        {children}
+      </div>
+    </Fragment>
+  );
+};

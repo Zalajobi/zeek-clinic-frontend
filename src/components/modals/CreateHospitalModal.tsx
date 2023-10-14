@@ -1,24 +1,32 @@
-import {Button, Label, Modal, Select, TextInput} from 'flowbite-react';
-import { Fragment } from 'react'
-import {useCreateHospitalModal} from "../../hooks/superadmin/useCreateHospitalModal";
-import Text from "../global/Text";
-import ImageUpload from "../global/input/ImageUpload";
-import {useForm} from "react-hook-form";
+import { Fragment } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
+import { BasicOutlineButton } from '@components/global/CustomButton';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
-  AllCountries, AllStatesAndCities,
+  SelectInput,
+  TextInput,
+} from '@components/global/formInput/CustomInput';
+import {
   CreateHospitalInput,
   CreateHospitalInputSchema,
-} from "../../types/superadmin/formTypes";
-import {yupResolver} from "@hookform/resolvers/yup";
+} from '@typeSpec/superadmin/forms';
 
 interface CreateHospitalModalProps {
-  showModal: boolean
-  close: () => void
+  open: boolean;
+  handler: () => void;
 }
-
-const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<CreateHospitalInput>({
-    resolver: yupResolver(CreateHospitalInputSchema)
+const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateHospitalInput>({
+    resolver: yupResolver(CreateHospitalInputSchema),
   });
 
   const {
@@ -31,226 +39,130 @@ const CreateHospitalModal = ({showModal, close}:CreateHospitalModalProps) => {
     createNewOrganization,
     setLogo,
     onUpdateCountry,
-  } = useCreateHospitalModal()
+  } = useCreateHospitalModal();
 
   return (
     <Fragment>
-      <Modal
-        onClose={close}
-        dismissible
-        position="center"
-        show={showModal}
-        size="6xl"
-      >
-        <Modal.Header>
-          <Text
-            text={`Add Organization`}
-            size="2xl"
-            weight={600}
-            className="text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
-          />
-        </Modal.Header>
-        <Modal.Body>
-          <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
-            <div className={`grid grid-cols-6 gap-4 items-center`}>
-              <div className={`col-span-2`}>
-                <ImageUpload bucketFolder={`/hospital_image`} url={logo} updateImageUrl={setLogo}/>
-              </div>
+      <CustomBasicModal
+        footer={
+          <Fragment>
+            <BasicOutlineButton
+              click={handleSubmit(createNewOrganization)}
+              text={`Add Organization`}
+              type={`secondary`}
+              className={`min-w-[200px] mx-5`}
+            />
 
-              <div className={`col-span-4 grid grid-cols-2 gap-4`}>
-                <div>
-                  <div className="mb-2 block w-full">
-                    <Label
-                      htmlFor="name"
-                      value="Company Name"
-                    />
-                  </div>
+            <BasicOutlineButton
+              text={`Decline`}
+              type={`danger`}
+              className={`min-w-[200px] mx-5`}
+              click={handler}
+            />
+          </Fragment>
+        }
+        title={`Add New Organization`}
+        handler={handler}
+        open={open}
+        size={`lg`}>
+        <div
+          className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+          <CustomTransparentCard
+            className={`w-full h-full p-4 rounded-2xl max-h-[400px]`}>
+            <ImageUpload
+              bucketFolder={`/hospital_image`}
+              url={logo}
+              updateImageUrl={setLogo}
+              label={`Site Logo`}
+            />
+          </CustomTransparentCard>
 
-                  <TextInput
-                    id="name"
-                    placeholder="Zeek Clinic"
-                    required={false}
-                    color={errors.name?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.name?.message}</span></Fragment>}
-                    {...register("name")}
-                  />
-                </div>
+          <CustomTransparentCard className={`w-full h-full p-4 rounded-2xl`}>
+            <div
+              className={`w-full grid gap-6 grid-cols-1 mb-6 lg:grid-cols-2`}>
+              <TextInput
+                label={`Company Name`}
+                className={`my-3`}
+                errorMsg={errors.name?.message ?? ''}
+                id={`name`}
+                register={register}
+                placeholder={`John Hopkins`}
+              />
 
-                <div>
-                  <div className="mb-2 block w-full">
-                    <Label
-                      htmlFor="email"
-                      value="Email"
-                    />
-                  </div>
-
-                  <TextInput
-                    id="email"
-                    placeholder="john@doe.com"
-                    required={false}
-                    type={`email`}
-                    color={errors.email?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.email?.message}</span></Fragment>}
-                    {...register("email")}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="countries"
-                      value="Select your country"
-                      color={errors.country?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <Select
-                    id="countries"
-                    required={false}
-                    helperText={<Fragment><span className="font-medium">{errors.country?.message}</span></Fragment>}
-                    {...register("country", {
-                      onChange: (e) => onUpdateCountry(e?.target?.value)
-                    })}
-                    color={errors.country?.message ? 'failure' : 'gray'}
-                  >
-                    <option value={``}>
-                      Select Country
-                    </option>
-                    {allCountries?.map((item:AllCountries, idx:number) => {
-                      return (
-                        <option value={item?.isoCode} key={idx}>
-                          {item?.name}
-                        </option>
-                      )
-                    })}
-                  </Select>
-                </div>
-
-                <div>
-                  <div className={`mb-2 block`}>
-                    <div className="mb-2 block">
-                      <Label
-                        htmlFor="countries"
-                        value="Select State"
-                        color={errors.state?.message ? 'failure' : 'gray'}
-                      />
-                    </div>
-                    <Select
-                      id="state"
-                      required={false}
-                      helperText={<Fragment><span className="font-medium">{errors.state?.message}</span></Fragment>}
-                      {...register("state")}
-                      color={errors.state?.message ? 'failure' : 'gray'}
-                    >
-                      <option value={``}>
-                        Select State
-                      </option>
-                      {allCountryStates?.map((item:AllStatesAndCities, idx:number) => {
-                        return (
-                          <option value={`${item?.name} (${item?.isoCode})`} key={idx}>
-                            {item?.name}
-                          </option>
-                        )
-                      })}
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="city"
-                      value="City"
-                      color={errors.city?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-                  <TextInput
-                    id="city"
-                    placeholder="city"
-                    required={false}
-                    color={errors.city?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.city?.message}</span></Fragment>}
-                    {...register("city")}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="phone"
-                      value="Phone Number"
-                      color={errors.phone?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-
-                  <TextInput
-                    id="phone"
-                    placeholder="+2347053980998"
-                    required={false}
-                    type={`tel`}
-                    color={errors.phone?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.phone?.message}</span></Fragment>}
-                    {...register("phone")}
-                  />
-                </div>
-
-                <div>
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="zip_code"
-                      value="Zip Code"
-                      color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    />
-                  </div>
-
-                  <TextInput
-                    id="zip_code"
-                    placeholder="101231"
-                    required={false}
-                    type={`text`}
-                    color={errors.zip_code?.message ? 'failure' : 'gray'}
-                    helperText={<Fragment><span className="font-medium">{errors.zip_code?.message}</span></Fragment>}
-                    {...register("zip_code")}
-                  />
-                </div>
-
-                <div>
-                  <div id="address" className={`w-full`}>
-                    <div className="mb-2 block">
-                      <Label
-                        htmlFor="address"
-                        value="Address"
-                        color={errors.address?.message ? 'failure' : 'gray'}
-                      />
-                    </div>
-                    <TextInput
-                      id="address"
-                      required={false}
-                      color={errors.address?.message ? 'failure' : 'gray'}
-                      helperText={<Fragment><span className="font-medium">{errors.address?.message}</span></Fragment>}
-                      {...register("address")}
-                    />
-                  </div>
-                </div>
-
-              </div>
+              <TextInput
+                label={`Email`}
+                className={`my-3`}
+                errorMsg={errors.email?.message ?? ''}
+                id={`email`}
+                type={`email`}
+                register={register}
+                placeholder={`john@doe.com`}
+              />
             </div>
 
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleSubmit(createNewOrganization)}>
-            I accept
-          </Button>
-          <Button
-            color="gray"
-            onClick={close}
-          >
-            Decline
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Fragment>
-  )
-}
+            <div
+              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
+              <SelectInput
+                label={`Country`}
+                options={allCountries}
+                className={`w-full my-3`}
+                register={register}
+                id={'country'}
+                errorMsg={errors.country?.message ?? ''}
+                change={(e) => onUpdateCountry(e.target.value)}
+              />
 
-export default CreateHospitalModal
+              <SelectInput
+                label={`State`}
+                options={allCountryStates}
+                className={`w-full my-3`}
+                register={register}
+                id={'state'}
+                errorMsg={errors.state?.message ?? ''}
+              />
+
+              <TextInput
+                label={`city`}
+                className={`my-3`}
+                errorMsg={errors.city?.message ?? ''}
+                id={`city`}
+                register={register}
+                placeholder={`Baltimore`}
+              />
+
+              <TextInput
+                label={`Zip Code`}
+                className={`my-3`}
+                errorMsg={errors.zip_code?.message ?? ''}
+                id={`zip_code`}
+                type={'number'}
+                register={register}
+                placeholder={`101231`}
+              />
+
+              <TextInput
+                label={`Address`}
+                className={`my-3`}
+                errorMsg={errors.address?.message ?? ''}
+                id={`address`}
+                register={register}
+              />
+
+              <TextInput
+                label={`Phone`}
+                className={`my-3`}
+                errorMsg={errors.phone?.message ?? ''}
+                type={'tel'}
+                id={`zip_code`}
+                register={register}
+                placeholder={`+170539802`}
+              />
+            </div>
+          </CustomTransparentCard>
+        </div>
+      </CustomBasicModal>
+    </Fragment>
+  );
+};
+
+export default CreateHospitalModal;

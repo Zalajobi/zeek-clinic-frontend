@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { FaHospitalUser, FaUserMd, FaUserNurse } from 'react-icons/fa';
-import SummaryCard from './SummaryCard';
 import { RiAdminFill } from 'react-icons/ri';
+import SummaryCard from '@components/admin/dashboard/SummaryCard';
 
 const ActivitySummary = () => {
   return (
@@ -47,7 +47,7 @@ const ActivitySummary = () => {
           boldHeader={'5453'}
           lightHeader={`Visits`}
           descriptionContext={`1291`}
-          description={'Patients visits in the last 7 days'}
+          description={'AdminPatients visits in the last 7 days'}
           contextColour={`#F7777B`}
           bgColour={`#FDE8E9`}
         />
