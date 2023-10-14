@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from 'react';
+import { Fragment, useMemo } from 'react';
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { useAdminProviderPage } from '@hooks/admin/useAdminProviderPage';
 import { Typography } from '@components/global/dialog/Typography';
@@ -46,7 +46,7 @@ const AdminProvider = () => {
 
   const columns = useMemo(
     () => AdminProviderDataColumn(onUpdateSelectAllProviders),
-    [providerData, currentPage]
+    [onUpdateSelectAllProviders]
   );
   const data = useMemo(
     () =>
@@ -55,7 +55,7 @@ const AdminProvider = () => {
         onUpdateSelectedRow,
         selectAllProviders
       ) ?? [],
-    [providerData, currentPage]
+    [providerData, onUpdateSelectedRow, selectAllProviders]
   );
 
   return (

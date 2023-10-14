@@ -5,10 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
 import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
-import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '@components/global/CustomButton';
+import { BasicOutlineButton } from '@components/global/CustomButton';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
   SelectInput,
@@ -17,7 +14,7 @@ import {
 import {
   CreateHospitalInput,
   CreateHospitalInputSchema,
-} from '../../typeSpec/superadmin/forms';
+} from '@typeSpec/superadmin/forms';
 
 interface CreateHospitalModalProps {
   open: boolean;

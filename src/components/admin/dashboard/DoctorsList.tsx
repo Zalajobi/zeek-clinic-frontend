@@ -97,6 +97,7 @@ const DoctorsList = () => {
                           <img
                             src={item?.profile_img}
                             className={`w-full h-full overflow-hidden`}
+                            alt={item?.profile_img ?? ''}
                           />
                         </>
                       ) : (

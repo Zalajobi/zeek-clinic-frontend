@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { Datepicker, initTE, Input, Ripple, Select, Modal } from 'tw-elements';
+import { useEffect, useState } from 'react';
 import { axiosGetRequestUserService } from '@lib/axios';
 import { AdminHeaderBaseTemplateData } from '@typeSpec/admin';
 
@@ -31,14 +30,9 @@ export const useAdminBaseTemplate = () => {
     } else {
       setRequestData(JSON.parse(adminData) as AdminHeaderBaseTemplateData);
     }
-
-    initTE({ Datepicker, Input, Select, Ripple, Modal });
   }, []);
 
-  const onUpdateQuerySearch = (event: string) => {
-    console.log(event);
-    setQuerySearch(event);
-  };
+  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 
   return {
     navigate,

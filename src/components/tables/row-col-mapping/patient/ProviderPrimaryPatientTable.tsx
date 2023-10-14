@@ -347,6 +347,8 @@ export const ProviderPrimaryPatientRowData = (
         </>
       ),
     });
+
+    return;
   });
 
   return rowItems;

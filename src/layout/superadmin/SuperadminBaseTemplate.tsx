@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useEffect } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { ToasterConfig } from '@components/global/Toast';
 import Header from '@layout/Header';
 import Sidebar from '@layout/superadmin/Sidebar';

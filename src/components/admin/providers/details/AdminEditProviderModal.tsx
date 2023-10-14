@@ -1,9 +1,6 @@
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
-import { Fragment, useState } from 'react';
-import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '@components/global/CustomButton';
+import { Fragment } from 'react';
+import { BasicOutlineButton } from '@components/global/CustomButton';
 import { Tab } from '@headlessui/react';
 import { Typography } from '@components/global/dialog/Typography';
 import {
@@ -15,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import {
   AdminEditProvidersInformation,
   AdminEditProvidersInformationSchema,
-} from '../../../../typeSpec/admin/provider';
+} from '@typeSpec/admin/provider';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAdminUpdateProviderInformationTabs } from '@hooks/admin/useAdminUpdateProviderInformationTabs';
 import { LoadingSpinner } from '@components/global/Toast';

@@ -64,6 +64,8 @@ export const useHospitalOrganisation = () => {
             value: item?.country,
             placeholder: item?.country,
           });
+
+          return;
         });
 
         // console.log(distinctCountries?.value?.data)
@@ -102,7 +104,7 @@ export const useHospitalOrganisation = () => {
       toast.error('Something went wrong');
       // navigate('/superadmin/login');
     });
-  }, [navigate]);
+  }, []);
 
   const onUpdateSelectFrom = async (value: Date | null) => {
     console.log(value);

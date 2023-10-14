@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
-import { Simulate } from 'react-dom/test-utils';
 
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
-import input = Simulate.input;
 
 export const useCreateHospitalModal = () => {
   const [phoneCode, setPhoneCode] = useState('');
@@ -28,9 +26,11 @@ export const useCreateHospitalModal = () => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
     setAllCountries(countriesUpdate);
-  }, [input]);
+  }, []);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -41,6 +41,8 @@ export const useCreateHospitalModal = () => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
 
     setAllCountryStates(countryStates);
