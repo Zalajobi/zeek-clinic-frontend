@@ -35,8 +35,9 @@ export const useAdminBaseTemplate = () => {
     initTE({ Datepicker, Input, Select, Ripple, Modal });
   }, []);
 
-  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value as string);
+  const onUpdateQuerySearch = (event: string) => {
+    console.log(event);
+    setQuerySearch(event);
   };
 
   return {

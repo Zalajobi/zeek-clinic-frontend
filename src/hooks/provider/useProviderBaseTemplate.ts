@@ -19,9 +19,7 @@ export const useProviderBaseTemplate = () => {
     //   })/
   }, [navigate]);
 
-  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value as string);
-  };
+  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 
   return {
     // Values
