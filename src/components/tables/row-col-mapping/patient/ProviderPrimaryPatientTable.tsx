@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { TbArrowsMoveVertical } from 'react-icons/tb';
 import { UserServicePatientDetailsResponse } from '@typeSpec/index';
 import { ProviderPrimaryPatient } from '@typeSpec/patient';
@@ -12,7 +12,7 @@ import {
 } from '@material-tailwind/react';
 import { Link, NavigateFunction } from 'react-router-dom';
 import Status from '@components/global/Status';
-// import {calculateAge} from "@util/index";
+import { calculateAge } from '@util/index';
 import moment from 'moment';
 
 export const ProviderPrimaryPatientColumnData = () => {
@@ -220,9 +220,7 @@ export const ProviderPrimaryPatientRowData = (
       age: (
         <>
           <Typography
-            text={
-              moment(item?.personalInfo?.dob).format('MMM DD. YYYY') ?? '--'
-            }
+            text={calculateAge(item?.personalInfo?.dob) ?? '--'}
             Tag={`p`}
             isLoading={isLoading}
             className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -308,7 +306,7 @@ export const ProviderPrimaryPatientRowData = (
                 size="sm"
                 variant={`text`}
                 className={`my-2 w-full`}
-                onClick={() => navigate('#')}>
+                onClick={() => navigate(`/admin/patient/details/${item?.id}`)}>
                 View Patient
               </Button>
 
@@ -316,8 +314,8 @@ export const ProviderPrimaryPatientRowData = (
                 size="sm"
                 variant={`text`}
                 className={`my-2 w-full`}
-                onClick={() => navigate('#')}>
-                Receipt & Invoice
+                onClick={() => navigate(`/admin/patient/billing/${item?.id}`)}>
+                Billing
               </Button>
 
               <Button
