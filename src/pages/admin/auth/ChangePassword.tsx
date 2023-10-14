@@ -1,13 +1,16 @@
-import { Fragment } from 'react';
-import { useAdminChangePassword } from '@hooks/admin/useAdminChangePassword';
-import Text from '@components/global/dialog/Text';
-import TextInputLabel from '@components/global/formInput/TextInputLabel';
-import { ToasterConfig } from '@components/global/Toast';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { Fragment } from 'react'
+import { useAdminChangePassword } from "../../../hooks/admin/useAdminChangePassword";
+import Text from "../../../components/global/Text";
+import TextInputLabel from "../../../components/global/input/TextInputLabel";
+import {Button} from "flowbite-react";
+import {ToasterConfig} from "../../../components/global/Toast";
 
 const ChangePassword = () => {
-  const { onUpdateNewPassword, onUpdateVerifyPassword, handlePasswordSubmit } =
-    useAdminChangePassword();
+  const {
+    onUpdateNewPassword,
+    onUpdateVerifyPassword,
+    handlePasswordSubmit,
+  } = useAdminChangePassword()
 
   return (
     <Fragment>
@@ -15,26 +18,12 @@ const ChangePassword = () => {
         <div className="max-w-screen-md flex flex-col items-center justify-center h-full w-full p-20">
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
             <div className="flex flex-col w-full">
-              <Text
-                text={`Forgot Password`}
-                className={`text-[#111928] dark:text-white mb-4`}
-                size="2xl"
-                weight={700}
-              />
+              <Text text={`Forgot Password`} className={`text-[#111928] dark:text-white mb-4`} size="2xl" weight={700}/>
 
               <div className="flex flex-row w-full">
-                <Text
-                  text={`Already have an account`}
-                  weight={500}
-                  size={'sm'}
-                  className={`text-[#6B7280] dark:text-white mr-2`}
-                />
+                <Text text={`Already have an account`} weight={500} size={"sm"} className={`text-[#6B7280] dark:text-white mr-2`}/>
 
-                <a
-                  className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer"
-                  href="/admin/login">
-                  Signin
-                </a>
+                <a className="text-sm font-medium text-[#1C64F2] leading-[27px] hover:cursor-pointer" href="/admin/login">Signin</a>
               </div>
 
               <TextInputLabel
@@ -59,20 +48,15 @@ const ChangePassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <BasicFilledButton
-                type={`primary`}
-                text={`Change Password`}
-                click={handlePasswordSubmit}
-                className={`my-4`}
-              />
+              <Button onClick={handlePasswordSubmit} className={`my-4`}>Change Password</Button>
             </div>
           </div>
         </div>
       </div>
 
-      <ToasterConfig />
+      <ToasterConfig/>
     </Fragment>
-  );
-};
+  )
+}
 
-export default ChangePassword;
+export default ChangePassword

@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { axiosGetRequest } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import {
   HospitalOrganizationData,
   SuperadminSiteData,
-} from '@typeSpec/superadmin';
-import { axiosGetRequestUserService } from '@lib/axios';
-import { SelectInputFieldProps } from '@typeSpec/common';
-import { customPromiseRequest } from '@lib/requests';
-import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+} from '../../types/superadmin';
+import * as queryString from 'querystring';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
@@ -30,43 +28,51 @@ export const useOrganizationDetails = () => {
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [countryFilterList, setCountryFilterList] = useState<
-    SelectInputFieldProps[]
+    { country: string }[]
   >([]);
-  const [stateFilterList, setStateFilterList] = useState<
-    SelectInputFieldProps[]
-  >([]);
+  const [stateFilterList, setStateFilterList] = useState<{ state: string }[]>(
+    []
+  );
+  const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
   const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      const [hospital, countryStates] = await customPromiseRequest([
-        axiosGetRequestUserService('/hospital/details', {
+      const response = await Promise.all([
+        await axiosGetRequest('/account/hospital/details', {
           id: hospitalId,
         }),
 
-        axiosGetRequestUserService(
-          '/site/get-distinct/country-and-state/organization',
+        axiosGetRequest(
+          '/account/site/get-distinct/country-and-state/organization',
           {
             hospital_id: hospitalId,
           }
         ),
       ]);
 
-      if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
-        setHospitalData(hospital?.value as AccountServiceApiResponse);
-      } else {
-        toast.error('Something went wrong getting hospital list');
-      }
-
-      if (
-        countryStates.status === 'fulfilled' &&
-        countryStates?.value?.success
-      ) {
-        setCountryAndStateSitesData(
-          countryStates.value as AccountServiceApiResponse
+      if (response[0].success && response[1].success) {
+        setOrganization(response[0].data.hospital as HospitalOrganizationData);
+        setSites(response[0]?.data?.sites);
+        setNoOfPages(
+          Math.ceil(
+            response[0].data.tableData.sites / (perPage !== 'All' ? perPage : 0)
+          )
         );
+        setTotalData(response[0].data.tableData.sites);
+        setResultFrom(response[0]?.data?.sites.length <= 0 ? 0 : 1);
+        setResultTo(
+          response[0]?.data?.sites.length <= 0
+            ? 0
+            : currentPage + 1 === noOfPages
+            ? response[0].data.tableData.sites
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+              (perPage !== 'All' ? perPage : 0)
+        );
+        setCountryFilterList(response[1].data.countries);
+        setStateFilterList(response[1].data.states);
       } else {
-        toast.error('Something went wrong getting site countries and states');
+        toast.error(response[0].message);
       }
     };
 
@@ -74,54 +80,6 @@ export const useOrganizationDetails = () => {
       toast.error('Response');
     });
   }, [hospitalId, refreshData]);
-
-  const setHospitalData = (responseData: AccountServiceApiResponse) => {
-    setOrganization(responseData.data.hospital as HospitalOrganizationData);
-    setSites(responseData?.data?.sites);
-    setNoOfPages(
-      Math.ceil(
-        responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
-      )
-    );
-    setTotalData(responseData.data.tableData.sites);
-    setResultFrom(responseData?.data?.sites.length <= 0 ? 0 : 1);
-    setResultTo(
-      responseData?.data?.sites.length <= 0
-        ? 0
-        : currentPage + 1 === noOfPages
-        ? responseData.data.tableData.sites
-        : currentPage * (perPage !== 'All' ? perPage : 0) +
-          (perPage !== 'All' ? perPage : 0)
-    );
-  };
-
-  const setCountryAndStateSitesData = (
-    responseData: AccountServiceApiResponse
-  ) => {
-    let tempCountriesFilter: SelectInputFieldProps[] = [],
-      stateFilter: SelectInputFieldProps[] = [];
-
-    responseData.data.countries.map((item: { country: string }) => {
-      tempCountriesFilter.push({
-        value: item?.country,
-        placeholder: item?.country,
-      });
-
-      return;
-    });
-
-    responseData.data.states.map((item: { state: string }) => {
-      stateFilter.push({
-        value: item?.state,
-        placeholder: item?.state,
-      });
-
-      return;
-    });
-
-    setCountryFilterList(tempCountriesFilter);
-    setStateFilterList(stateFilter);
-  };
 
   const onUpdateActiveTab = async (
     tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'
@@ -142,8 +100,8 @@ export const useOrganizationDetails = () => {
       state,
     };
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -185,8 +143,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+      const response = await axiosGetRequest(
+        '/account/site/organization/table-filter',
         params
       );
 
@@ -228,8 +186,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+      const response = await axiosGetRequest(
+        '/account/site/organization/table-filter',
         params
       );
 
@@ -246,8 +204,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectFrom = async (value: string) => {
-    setDateFilterFrom(new Date(value));
+  const onUpdateSelectFrom = async (value: Date | null) => {
+    setDateFilterFrom(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -263,8 +221,8 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
     setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -289,8 +247,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectTo = async (value: string) => {
-    setDateFilterTo(new Date(value));
+  const onUpdateSelectTo = async (value: Date | null) => {
+    setDateFilterTo(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -306,8 +264,8 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
     setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -360,8 +318,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+      const response = await axiosGetRequest(
+        '/account/site/organization/table-filter',
         params
       );
 
@@ -395,8 +353,8 @@ export const useOrganizationDetails = () => {
       state,
     };
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -413,15 +371,15 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSearchSite = async (value: string) => {
-    setSearchSite(value);
+  const onUpdateSearchSite = async (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchSite(event.target.value);
 
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
       from_date: dateFilterFrom,
       to_date: dateFilterTo,
-      search: value,
+      search: event.target.value,
       country: country,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
@@ -431,8 +389,8 @@ export const useOrganizationDetails = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -449,8 +407,10 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateFilterByCountry = async (value: string) => {
-    setCountry(value);
+  const onUpdateFilterByCountry = async (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setCountry(event.target.value);
 
     const params = {
       page: 0,
@@ -458,7 +418,7 @@ export const useOrganizationDetails = () => {
       from_date: dateFilterFrom,
       to_date: dateFilterTo,
       search: searchSite,
-      country: value,
+      country: event.target.value,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
@@ -467,8 +427,8 @@ export const useOrganizationDetails = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -485,8 +445,10 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateFilterByState = async (value: string) => {
-    setState(value);
+  const onUpdateFilterByState = async (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setState(event.target.value);
 
     const params = {
       page: 0,
@@ -497,14 +459,14 @@ export const useOrganizationDetails = () => {
       country: country,
       status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
-      state: value,
+      state: event.target.value,
     };
 
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+    const response = await axiosGetRequest(
+      '/account/site/organization/table-filter',
       params
     );
 
@@ -519,6 +481,11 @@ export const useOrganizationDetails = () => {
         )
       );
     }
+  };
+
+  const onUpdateShowCreateSiteModal = () => {
+    // console.log(!showCreateSiteModal)
+    setShowCreateSiteModal(!showCreateSiteModal);
   };
 
   const onUpdateDataRefresh = () => setRefreshData(!refreshData);
@@ -539,8 +506,7 @@ export const useOrganizationDetails = () => {
     country,
     countryFilterList,
     stateFilterList,
-    dateFilterFrom,
-    dateFilterTo,
+    showCreateSiteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -553,6 +519,7 @@ export const useOrganizationDetails = () => {
     onUpdateSearchSite,
     onUpdateFilterByCountry,
     onUpdateFilterByState,
+    onUpdateShowCreateSiteModal,
     onUpdateDataRefresh,
   };
 };
