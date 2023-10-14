@@ -1,17 +1,16 @@
-import { Fragment, useMemo } from 'react';
-import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
-import { useAdminProviderPage } from '../../hooks/admin/useAdminProviderPage';
-import { Typography } from '../../components/global/dialog/Typography';
-import AdminRoutes from '../../components/admin/AdminRoutes';
-import AdminSiteInfo from '../../components/admin/AdminSiteInfo';
-import { ProviderPageSiteResponseData } from '../../types/admin';
-import { ApplicationTable } from '../../components/global/table/ApplicationTable';
+import { Fragment, useMemo, useState } from 'react';
+import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
+import { useAdminProviderPage } from '@hooks/admin/useAdminProviderPage';
+import { Typography } from '@components/global/dialog/Typography';
+import AdminRoutes from '@components/admin/AdminRoutes';
+import AdminSiteInfo from '@components/admin/AdminSiteInfo';
+import { ProviderPageSiteResponseData } from '@typeSpec/admin';
+import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
-} from '../../components/tables/AdminTable';
-import ProvidersTab from '../../components/admin/providers/ProvidersTab';
-// import { SuperadminHospitalDataRow } from '../../components/tables/SuperadminTable';
+} from '@components/tables/row-col-mapping/AdminTable';
+import ProvidersTab from '@components/admin/providers/ProvidersTab';
 
 const AdminProvider = () => {
   const {
@@ -43,8 +42,6 @@ const AdminProvider = () => {
     onUpdateSelectAllProviders,
   } = useAdminProviderPage();
 
-  console.log(providerData);
-
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   const columns = useMemo(
@@ -66,7 +63,7 @@ const AdminProvider = () => {
       <AdminBaseTemplate>
         <div className={`flex flex-col w-full`}>
           <Typography
-            text={`Welcome`}
+            text={`Welcome Back, ${adminData?.personalInfo?.first_name ?? ''}`}
             Tag={`h1`}
             size={`2xl`}
             className={`text-left`}

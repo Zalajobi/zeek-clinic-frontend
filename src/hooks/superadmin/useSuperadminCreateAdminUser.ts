@@ -3,11 +3,14 @@ import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { CreateAdminUserInput } from '../../types/superadmin/forms';
-import { SelectInputFieldProps } from '../../types/common';
-import { AccountServiceApiResponse } from '../../types/apiResponses';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
-import { AllCountries } from '../../types/superadmin/formTypes';
+import { CreateAdminUserInput } from '@typeSpec/superadmin/forms';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
+import { AllCountries } from '@typeSpec/superadmin/formTypes';
 
 interface DepartmentRoleProps {
   name: string;
@@ -42,8 +45,8 @@ export const useSuperadminCreateAdminUser = () => {
     setAllCountries(countriesUpdate);
 
     const superadminGetRolesAndDepartments = async () => {
-      const response = (await axiosGetRequest(
-        '/account/super-admin/get/available-admin/roles_and_departments',
+      const response = (await axiosGetRequestUserService(
+        '/super-admin/get/available-admin/roles_and_departments',
         { siteId }
       )) as AccountServiceApiResponse;
 
@@ -92,8 +95,8 @@ export const useSuperadminCreateAdminUser = () => {
       phone: `+${phoneCode}${data?.phone}`,
     };
 
-    const { success, message } = await axiosPostRequest(
-      '/account/admin/create-admin',
+    const { success, message } = await axiosPostRequestUserService(
+      '/admin/create-admin',
       adminData
     );
 

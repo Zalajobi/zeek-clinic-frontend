@@ -1,12 +1,17 @@
-import { BasicSearchInput } from '../formInput/SearchInputs';
-import TableHeaderDropdown from './TableHeaderDropdown';
-import { DateInput, SelectInput } from '../formInput/CustomInput';
+import { ChangeEvent, Fragment } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
-import Table from './Table';
-import TableFooter from './TableFooter';
-import { ChangeEvent, Fragment } from 'react';
-import { SelectInputFieldProps } from '../../../types/common';
+import { MdArrowDropDown } from 'react-icons/md';
+import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
+import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
+import {
+  CustomDropDownMenuSelect,
+  DateInput,
+  SelectInput,
+} from '@components/global/formInput/CustomInput';
+import Table from '@components/global/table/Table';
+import TableFooter from '@components/global/table/TableFooter';
+import { SelectInputFieldProps } from '@typeSpec/common';
 
 interface AdminTableProps {
   tableColumns: any;
@@ -65,31 +70,36 @@ export const ApplicationTable = ({
         className={`relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
       border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700 ${containerClassName}`}>
         <div className="w-full relative my-4 sm:rounded-lg px-10">
-          <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+          <div className="flex flex-col items-baseline space-y-3 md:flex-row md:space-y-0 md:space-x-4 h-[90px]">
             <div className="w-full md:w-3/4">
               <BasicSearchInput
                 id={`searchOrg`}
-                placeholder={`Search...`}
+                placeholder={` `}
                 value={query}
                 change={onUpdateQuery}
-                inputClass={`!min-h-[58px]`}
-                labelClass={`!top-[12px] !text-[15px]`}
+                inputClass={`h-[58px]`}
                 className={`!mb-0`}
               />
             </div>
 
-            <TableHeaderDropdown
-              value={perPage}
+            <CustomDropDownMenuSelect
               items={itemsPerPage}
-              change={onUpdatePerPageItem}
+              value={perPage}
+              onSelect={onUpdatePerPageItem}
+              className={`bg-white border border-gray-300 text-black w-[80px] font-medium rounded-lg text-base h-[58px]`}
+              prefixIcon={
+                <MdArrowDropDown
+                  className={`text-black`}
+                  size={30}
+                />
+              }
             />
 
             <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-              <div className="flex items-center w-full space-x-3 md:w-auto">
+              <div className="flex items-center justify-center w-full space-x-3 md:w-auto">
                 <DateInput
                   label={`From`}
                   placeholder={`DD/MM/YYYY`}
-                  className={`my-3`}
                   change={(e) =>
                     onUpdateFilterFromDate(new Date(e.target.value))
                   }
@@ -103,7 +113,6 @@ export const ApplicationTable = ({
                 <DateInput
                   label={`To`}
                   placeholder={`DD/MM/YYYY`}
-                  className={`my-3`}
                   change={(e) => onUpdateFilterToDate(new Date(e.target.value))}
                   value={filterToDate as Date}
                   id={`to`}
@@ -119,7 +128,6 @@ export const ApplicationTable = ({
                   options={countries ?? []}
                   className={`w-full min-h-[59px]`}
                   id={'country'}
-                  enableFilter={true}
                   change={(e) =>
                     onUpdateCountryFilter
                       ? onUpdateCountryFilter(e.target.value as string)

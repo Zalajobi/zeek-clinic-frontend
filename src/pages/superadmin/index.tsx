@@ -1,4 +1,4 @@
-import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 
 const SuperadminDashboard = () => {
   return (

@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
-import { axiosGetRequest } from '../../lib/axios';
+import toast from 'react-hot-toast';
+import { axiosGetRequestUserService } from '@lib/axios';
 import {
   ProviderPageSiteResponseData,
-  ProvidersPageProvidersData,
-} from '../../types/admin';
-import { customPromiseRequest } from '../../lib/requests';
-import toast from 'react-hot-toast';
+  ProviderAndRelationAPIResponse,
+} from '@typeSpec/admin';
+import { customPromiseRequest } from '@lib/requests';
+import input = Simulate.input;
 
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();
@@ -35,7 +35,7 @@ export const useAdminProviderPage = () => {
   const [resultTo, setResultTo] = useState<number>(0);
   const [totalProviders, setTotalProviders] = useState<number>(0);
   const [providerData, setProviderData] = useState<
-    ProvidersPageProvidersData[]
+    ProviderAndRelationAPIResponse[]
   >([]);
   const [selectAllProviders, setSelectAllProviders] = useState(false);
 
@@ -57,10 +57,10 @@ export const useAdminProviderPage = () => {
     };
 
     const [siteInfo, providerData] = await customPromiseRequest([
-      axiosGetRequest(`/account/site/admin/get/information/${siteId}`),
+      axiosGetRequestUserService(`/site/admin/get/information/${siteId}`),
 
-      axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       ),
     ]);
@@ -76,7 +76,7 @@ export const useAdminProviderPage = () => {
 
       setTotalProviders(count);
       setProviderData(
-        providerData?.value?.data?.providers as ProvidersPageProvidersData[]
+        providerData?.value?.data?.providers as ProviderAndRelationAPIResponse[]
       );
 
       setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)));
@@ -113,20 +113,20 @@ export const useAdminProviderPage = () => {
     );
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setNoOfPages(
         Math.ceil(
-          response?.datadata?.count /
-            (perPage === 'All' ? response?.datadata?.count : perPage)
+          response?.data?.count /
+            (perPage === 'All' ? response?.data?.count : perPage)
         )
       );
     }
@@ -152,14 +152,14 @@ export const useAdminProviderPage = () => {
             (perPage !== 'All' ? perPage : 0)
     );
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setNoOfPages(
@@ -186,15 +186,14 @@ export const useAdminProviderPage = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
-      console.log(response.data);
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
@@ -232,14 +231,14 @@ export const useAdminProviderPage = () => {
       status: tab === 'ALL' ? '' : tab,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
@@ -271,14 +270,14 @@ export const useAdminProviderPage = () => {
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
     }
@@ -307,14 +306,14 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(
@@ -350,14 +349,14 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(
@@ -387,14 +386,14 @@ export const useAdminProviderPage = () => {
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
-    const response = await axiosGetRequest(
-      `/account/providers/admin/get-providers/pagination/${siteId}`,
+    const response = await axiosGetRequestUserService(
+      `/providers/admin/get-providers/pagination/${siteId}`,
       params
     );
 
     if (response.success) {
       setProviderData(
-        response?.data?.providers as ProvidersPageProvidersData[]
+        response?.data?.providers as ProviderAndRelationAPIResponse[]
       );
       setTotalProviders(response?.data?.count as number);
       // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
@@ -434,14 +433,14 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequest(
-        `/account/providers/admin/get-providers/pagination/${siteId}`,
+      const response = await axiosGetRequestUserService(
+        `/providers/admin/get-providers/pagination/${siteId}`,
         params
       );
 
       if (response.success) {
         setProviderData(
-          response?.data?.providers as ProvidersPageProvidersData[]
+          response?.data?.providers as ProviderAndRelationAPIResponse[]
         );
         setTotalProviders(response?.data?.count as number);
         setNoOfPages(

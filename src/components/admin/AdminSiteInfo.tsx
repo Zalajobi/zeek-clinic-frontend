@@ -1,14 +1,14 @@
 import { Fragment } from 'react';
-import { ProviderPageSiteResponseData } from '../../types/admin';
-import { Typography } from '../global/dialog/Typography';
+import { ProviderPageSiteResponseData } from '@typeSpec/admin';
+import { Typography } from '@components/global/dialog/Typography';
 import moment from 'moment/moment';
-import { CustomTransparentCard } from '../global/card/CustomCard';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
 const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
   return (
     <Fragment>
       <CustomTransparentCard
-        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 mt-10 text-sm font-extrabold`}>
+        className={`w-full grid grid-cols-4 items-center gap-4 !bg-white px-6 py-9 mt-10 text-sm font-extrabold`}>
         <div className={`col-span-4`}>
           <Typography
             text={`Site Information`}

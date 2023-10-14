@@ -4,22 +4,24 @@ import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import AddProvider from './pages/admin/addProvider';
-import AdminLogin from './pages/admin/auth/AdminLogin';
-import ForgotPassword from './pages/admin/auth/ForgotPassword';
-import ChangePassword from './pages/admin/auth/ChangePassword';
-import AdminSignup from './pages/admin/auth/AdminSignup';
-import CreateNewUser from './pages/superadmin/CreateNewUser';
-import SuperadminLogin from './pages/superadmin/auth/SuperadminLogin';
-import SuperadminDashboard from './pages/superadmin';
-import CareGiverDashboard from './pages/provider';
-import HospitalOrganizations from './pages/superadmin/HospitalOrganizations';
-import OrganizationSite from './pages/superadmin/OrganizationSite';
-import AdminDashboard from './pages/admin';
-import AdminProvider from './pages/admin/AdminProvider';
-import AdminSiteInformation from './pages/admin/AdminSiteInformation';
-import AdminPatient from './pages/admin/AdminPatient';
-import AdminProfile from './pages/admin/AdminProfile';
+import AddProvider from '@pages/admin/addProvider';
+import AdminLogin from '@pages/admin/auth/AdminLogin';
+import ForgotPassword from '@pages/admin/auth/ForgotPassword';
+import ChangePassword from '@pages/admin/auth/ChangePassword';
+import AdminSignup from '@pages/admin/auth/AdminSignup';
+import CreateNewUser from '@pages/superadmin/CreateNewUser';
+import SuperadminLogin from '@pages/superadmin/auth/SuperadminLogin';
+import SuperadminDashboard from '@pages/superadmin';
+import CareGiverDashboard from '@pages/provider';
+import HospitalOrganizations from '@pages/superadmin/HospitalOrganizations';
+import OrganizationSite from '@pages/superadmin/OrganizationSite';
+import AdminDashboard from '@pages/admin';
+import AdminProvider from '@pages/admin/AdminProvider';
+import AdminSiteInformation from '@pages/admin/AdminSiteInformation';
+import AdminPatient from '@pages/admin/AdminPatient';
+import AdminProfile from '@pages/admin/AdminProfile';
+import AdminProviderDetails from '@pages/admin/AdminProviderDetails';
+import QueryClientProviderWrapper from '@lib/api';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -56,6 +58,11 @@ const router = createBrowserRouter([
       {
         path: '/admin/profile/:id',
         element: <AdminProfile />,
+      },
+
+      {
+        path: '/admin/provider/details/:id',
+        element: <AdminProviderDetails />,
       },
 
       {
@@ -112,6 +119,11 @@ const router = createBrowserRouter([
         path: '/superadmin/hospital/:hospitalId',
         element: <OrganizationSite />,
       },
+
+      {
+        path: '/superadmin/site/:hospitalId',
+        element: <OrganizationSite />,
+      },
     ],
   },
 
@@ -147,7 +159,9 @@ const router = createBrowserRouter([
 ]);
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProviderWrapper>
+      <RouterProvider router={router} />
+    </QueryClientProviderWrapper>
   </StrictMode>
 );
 

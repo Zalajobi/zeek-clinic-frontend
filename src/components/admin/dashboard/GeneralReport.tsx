@@ -1,19 +1,12 @@
 import { Fragment } from 'react';
-import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
-import CustomInnerCard from '../../global/card/CustomInnerCard';
-import { CustomCard } from '../../global/card/CustomCard';
+import {
+  Typography,
+  TypographyWithLink,
+} from '@components/global/dialog/Typography';
+import CustomInnerCard from '@components/global/card/CustomInnerCard';
+import { CustomCard } from '@components/global/card/CustomCard';
 
 const GeneralReport = () => {
-  const date = new Date();
-  const report = [
-    {
-      message: 'Room 501 AC is not working',
-      reportBy: 'Steeve',
-      reportTime: date.getUTCDate(),
-      viewed: true,
-    },
-  ];
-
   return (
     <Fragment>
       <CustomCard

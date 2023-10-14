@@ -1,23 +1,23 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ImageUpload from '../global/formInput/ImageUpload';
-import { useCreateSite } from '../../hooks/common/useCreateSite';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { useCreateSite } from '@hooks/common/useCreateSite';
 import {
   CheckboxInput,
   SelectInput,
   TextInput,
-} from '../global/formInput/CustomInput';
-import { CustomTransparentCard } from '../global/card/CustomCard';
+} from '@components/global/formInput/CustomInput';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
   CreateSiteInput,
   CreateSiteInputSchema,
-} from '../../types/superadmin/forms';
+} from '../../typeSpec/superadmin/forms';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../global/CustomButton';
-import { CustomBasicModal } from '../global/dialog/CustomModal';
+} from '@components/global/CustomButton';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 
 interface CreateSiteModalProps {
   totalSites: number;
@@ -25,6 +25,9 @@ interface CreateSiteModalProps {
 }
 
 const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(!open);
+
   const {
     register,
     handleSubmit,
@@ -48,7 +51,6 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
   return (
     <Fragment>
       <CustomBasicModal
-        targetModalId={`createSite`}
         footer={
           <Fragment>
             <BasicOutlineButton
@@ -58,15 +60,18 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
               className={`min-w-[200px] mx-5`}
             />
 
-            <ModalButtonOutlineLunch
+            <BasicOutlineButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
-              targetModalId={''}
+              click={handleOpenModal}
             />
           </Fragment>
         }
-        title={`Add New Site`}>
+        title={`Add New Site`}
+        handler={handleOpenModal}
+        open={open}
+        size={'lg'}>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
           <CustomTransparentCard
@@ -109,7 +114,6 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
-                enableFilter={true}
                 change={(e) => onUpdateCountry(e.target.value)}
               />
 
@@ -120,7 +124,6 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
                 register={register}
                 id={'state'}
                 errorMsg={errors.state?.message ?? ''}
-                enableFilter={true}
               />
 
               <TextInput

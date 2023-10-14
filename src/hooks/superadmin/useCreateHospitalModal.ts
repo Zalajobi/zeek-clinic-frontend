@@ -3,10 +3,10 @@ import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { Simulate } from 'react-dom/test-utils';
 
-import { AllCountries } from '../../types/superadmin/formTypes';
-import { axiosPostRequest } from '../../lib/axios';
-import { SelectInputFieldProps } from '../../types/common';
-import { CreateHospitalInput } from '../../types/superadmin/forms';
+import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { axiosPostRequestUserService } from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
 import input = Simulate.input;
 
 export const useCreateHospitalModal = () => {
@@ -59,8 +59,8 @@ export const useCreateHospitalModal = () => {
         logo,
         country_code: countryCode,
       };
-      const response = await axiosPostRequest(
-        '/account/hospital/create',
+      const response = await axiosPostRequestUserService(
+        '/hospital/create',
         hospitalData
       );
 

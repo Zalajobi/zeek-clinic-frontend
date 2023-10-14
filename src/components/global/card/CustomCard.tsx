@@ -22,7 +22,10 @@ export const CustomTransparentCard = ({
 }: CustomCardProps) => {
   return (
     <Fragment>
-      <div className={`glassmorphism p-4 ${className}`}>{children}</div>
+      <div
+        className={`glassmorphism rounded-lg shadow-xl shadow-blue-gray-900/50 p-4 ${className}`}>
+        {children}
+      </div>
     </Fragment>
   );
 };

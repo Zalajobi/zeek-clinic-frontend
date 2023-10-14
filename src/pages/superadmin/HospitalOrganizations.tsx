@@ -1,21 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { TiExportOutline } from 'react-icons/ti';
 import { HiPlusSm } from 'react-icons/hi';
 
-import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
-import Text from '../../components/global/dialog/Text';
-import { useHospitalOrganisation } from '../../hooks/superadmin/useHospitalOrganisation';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
+import Text from '@components/global/dialog/Text';
+import { useHospitalOrganisation } from '@hooks/superadmin/useHospitalOrganisation';
 import {
   SuperadminHospitalDataColumn,
   SuperadminHospitalDataRow,
-} from '../../components/tables/SuperadminTable';
-import CreateHospitalModal from '../../components/modals/CreateHospitalModal';
+} from '@components/tables/row-col-mapping/SuperadminTable';
+import CreateHospitalModal from '@components/modals/CreateHospitalModal';
+import { BasicOutlineButton } from '@components/global/CustomButton';
+import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '../../components/global/CustomButton';
-import { ApplicationTable } from '../../components/global/table/ApplicationTable';
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+} from '@material-tailwind/react';
 
 const HospitalOrganizations = () => {
   const {
@@ -49,7 +53,8 @@ const HospitalOrganizations = () => {
     onUpdateSelectAllHospitals,
   } = useHospitalOrganisation();
 
-  // const data = useMemo(() => hospitalData ?? [], [hospitalData]);
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(!open);
 
   const data = useMemo(
     () =>
@@ -142,17 +147,17 @@ const HospitalOrganizations = () => {
             </Tab.Group>
           </div>
 
-          <ModalButtonOutlineLunch
+          <BasicOutlineButton
             iconBefore={
               <HiPlusSm
                 size={20}
                 className={`mr-2`}
               />
             }
-            targetModalId={`createOrg`}
             text={`Add New Organization`}
             type={`primary`}
             className={`h-[38px] w-full py-6`}
+            click={handleOpenModal}
           />
 
           <BasicOutlineButton
@@ -193,7 +198,10 @@ const HospitalOrganizations = () => {
         />
       </div>
 
-      <CreateHospitalModal />
+      <CreateHospitalModal
+        open={open}
+        handler={handleOpenModal}
+      />
     </SuperadminBaseTemplate>
   );
 };

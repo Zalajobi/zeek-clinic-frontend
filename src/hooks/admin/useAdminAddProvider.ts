@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
-import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
-import { SelectInputFieldProps } from '../../types/common';
+import toast from 'react-hot-toast';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
 import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
-} from '../../types/apiResponses';
+} from '@typeSpec/apiResponses';
 import {
   AdminAddProviderInput,
   AllCountries,
-} from '../../types/superadmin/formTypes';
-import toast from 'react-hot-toast';
+} from '@typeSpec/superadmin/formTypes';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -29,6 +32,7 @@ export const useAdminAddProvider = () => {
   const [roles, setRoles] = useState<SelectInputFieldProps[]>([]);
   const [serviceArea, setServiceArea] = useState<SelectInputFieldProps[]>([]);
   const [units, setUnits] = useState<SelectInputFieldProps[]>([]);
+  const [countryCode, setCountryCode] = useState<string>('');
 
   useEffect(() => {
     const getAddProviderData = async () => {
@@ -46,8 +50,8 @@ export const useAdminAddProvider = () => {
       });
       setAllCountries(countriesUpdate);
 
-      const response = (await axiosGetRequest(
-        `/account/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+      const response = (await axiosGetRequestUserService(
+        `/admin/provider/create-new/roles-departments-areas-units/${siteId}`
       )) as AccountServiceApiResponse;
 
       if (response.success) {
@@ -107,6 +111,7 @@ export const useAdminAddProvider = () => {
     setAllCountryStates(countryStates);
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
+    setCountryCode(value);
   };
 
   const onSubmit = async (data: AdminAddProviderInput) => {
@@ -118,7 +123,7 @@ export const useAdminAddProvider = () => {
       profilePic,
     };
 
-    const response = (await axiosPostRequest(
+    const response = (await axiosPostRequestUserService(
       `account/providers/admin/create-new/provider`,
       addAdminData
     )) as AccountServiceApiResponse;
@@ -143,6 +148,7 @@ export const useAdminAddProvider = () => {
     roles,
     serviceArea,
     units,
+    countryCode,
 
     // Functions
     setProfilePic,

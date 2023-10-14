@@ -2,21 +2,28 @@ import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useCreateHospitalModal } from '../../hooks/superadmin/useCreateHospitalModal';
-import ImageUpload from '../global/formInput/ImageUpload';
-import { CustomBasicModal } from '../global/dialog/CustomModal';
+import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../global/CustomButton';
-import { CustomTransparentCard } from '../global/card/CustomCard';
-import { SelectInput, TextInput } from '../global/formInput/CustomInput';
+} from '@components/global/CustomButton';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import {
+  SelectInput,
+  TextInput,
+} from '@components/global/formInput/CustomInput';
 import {
   CreateHospitalInput,
   CreateHospitalInputSchema,
-} from '../../types/superadmin/forms';
+} from '../../typeSpec/superadmin/forms';
 
-const CreateHospitalModal = () => {
+interface CreateHospitalModalProps {
+  open: boolean;
+  handler: () => void;
+}
+const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
   const {
     register,
     handleSubmit,
@@ -40,7 +47,6 @@ const CreateHospitalModal = () => {
   return (
     <Fragment>
       <CustomBasicModal
-        targetModalId={`createOrg`}
         footer={
           <Fragment>
             <BasicOutlineButton
@@ -50,15 +56,18 @@ const CreateHospitalModal = () => {
               className={`min-w-[200px] mx-5`}
             />
 
-            <ModalButtonOutlineLunch
-              data-te-modal-dismiss
+            <BasicOutlineButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
+              click={handler}
             />
           </Fragment>
         }
-        title={`Add New Organization`}>
+        title={`Add New Organization`}
+        handler={handler}
+        open={open}
+        size={`lg`}>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
           <CustomTransparentCard
@@ -103,7 +112,6 @@ const CreateHospitalModal = () => {
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
-                enableFilter={true}
                 change={(e) => onUpdateCountry(e.target.value)}
               />
 
@@ -114,7 +122,6 @@ const CreateHospitalModal = () => {
                 register={register}
                 id={'state'}
                 errorMsg={errors.state?.message ?? ''}
-                enableFilter={true}
               />
 
               <TextInput

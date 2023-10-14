@@ -4,30 +4,30 @@ import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
 
-import SuperadminBaseTemplate from '../../components/layout/superadmin/SuperadminBaseTemplate';
-import { useOrganizationDetails } from '../../hooks/superadmin/useOrganizationDetails';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
+import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
 import {
   SuperadminSiteDataColumn,
   SuperadminSiteDataRow,
-} from '../../components/tables/SuperadminTable';
-import { SuperadminSiteData } from '../../types/superadmin';
-import Table from '../../components/global/table/Table';
-import TableFooter from '../../components/global/table/TableFooter';
-import TableHeaderDropdown from '../../components/global/table/TableHeaderDropdown';
-import HospitalDetails from '../../components/superadmin/hospital/HospitalDetails';
-import HospitalRoutes from '../../components/superadmin/HospitalRoutes';
-import CreateSite from '../../components/modals/CreateSite';
+} from '@components/tables/row-col-mapping/SuperadminTable';
+import { SuperadminSiteData } from '@typeSpec/superadmin';
+import Table from '@components/global/table/Table';
+import TableFooter from '@components/global/table/TableFooter';
+import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
+import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
+import HospitalRoutes from '@components/superadmin/HospitalRoutes';
+import CreateSite from '@components/modals/CreateSite';
 import {
   BasicOutlineButton,
   ModalButtonOutlineLunch,
-} from '../../components/global/CustomButton';
-import { Typography } from '../../components/global/dialog/Typography';
+} from '@components/global/CustomButton';
+import { Typography } from '@components/global/dialog/Typography';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
   DateInput,
   SelectInput,
-} from '../../components/global/formInput/CustomInput';
-import { BasicSearchInput } from '../../components/global/formInput/SearchInputs';
+} from '@components/global/formInput/CustomInput';
+import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -176,7 +176,6 @@ const OrganizationSite = () => {
                     className={`mr-2`}
                   />
                 }
-                targetModalId={`createSite`}
                 text={`Add New Site`}
                 type={`primary`}
                 className={`h-[38px] w-[180px]`}
@@ -209,7 +208,6 @@ const OrganizationSite = () => {
                     value={searchSite}
                     change={(e) => onUpdateSearchSite(e.target.value)}
                     inputClass={`!min-h-[58px]`}
-                    labelClass={`!top-[12px] !text-[15px]`}
                     className={`!mb-0`}
                   />
                 </div>
@@ -256,7 +254,6 @@ const OrganizationSite = () => {
                     options={countryFilterList}
                     className={`w-full min-h-[59px]`}
                     id={'country'}
-                    enableFilter={true}
                     change={(e) => onUpdateFilterByCountry(e.target.value)}
                   />
 
@@ -265,7 +262,6 @@ const OrganizationSite = () => {
                     options={stateFilterList}
                     className={`w-full min-h-[59px]`}
                     id={'state'}
-                    enableFilter={true}
                     change={(e) => onUpdateFilterByState(e.target.value)}
                   />
                 </div>

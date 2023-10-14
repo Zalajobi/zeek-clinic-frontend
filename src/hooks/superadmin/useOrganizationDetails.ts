@@ -1,15 +1,14 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { axiosGetRequest } from '../../lib/axios';
 import toast from 'react-hot-toast';
 import {
   HospitalOrganizationData,
   SuperadminSiteData,
-} from '../../types/superadmin';
-import * as queryString from 'querystring';
-import { SelectInputFieldProps } from '../../types/common';
-import { customPromiseRequest } from '../../lib/requests';
-import { AccountServiceApiResponse } from '../../types/apiResponses';
+} from '@typeSpec/superadmin';
+import { axiosGetRequestUserService } from '@lib/axios';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import { customPromiseRequest } from '@lib/requests';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
@@ -41,12 +40,12 @@ export const useOrganizationDetails = () => {
   useEffect(() => {
     const getData = async () => {
       const [hospital, countryStates] = await customPromiseRequest([
-        axiosGetRequest('/account/hospital/details', {
+        axiosGetRequestUserService('/hospital/details', {
           id: hospitalId,
         }),
 
-        axiosGetRequest(
-          '/account/site/get-distinct/country-and-state/organization',
+        axiosGetRequestUserService(
+          '/site/get-distinct/country-and-state/organization',
           {
             hospital_id: hospitalId,
           }
@@ -139,8 +138,8 @@ export const useOrganizationDetails = () => {
       state,
     };
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -182,8 +181,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+      const response = await axiosGetRequestUserService(
+        '/site/organization/table-filter',
         params
       );
 
@@ -225,8 +224,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+      const response = await axiosGetRequestUserService(
+        '/site/organization/table-filter',
         params
       );
 
@@ -260,8 +259,8 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
     setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -303,8 +302,8 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
     setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -357,8 +356,8 @@ export const useOrganizationDetails = () => {
         state,
       };
 
-      const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+      const response = await axiosGetRequestUserService(
+        '/site/organization/table-filter',
         params
       );
 
@@ -392,8 +391,8 @@ export const useOrganizationDetails = () => {
       state,
     };
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -428,8 +427,8 @@ export const useOrganizationDetails = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -464,8 +463,8 @@ export const useOrganizationDetails = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 
@@ -500,8 +499,8 @@ export const useOrganizationDetails = () => {
     setResultFrom(1);
     setCurrentPage(0);
 
-    const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+    const response = await axiosGetRequestUserService(
+      '/site/organization/table-filter',
       params
     );
 

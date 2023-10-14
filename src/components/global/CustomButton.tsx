@@ -2,7 +2,7 @@ import { Fragment, ReactNode } from 'react';
 import clsx from 'clsx';
 
 interface ButtonProps {
-  type:
+  type?:
     | 'primary'
     | 'secondary'
     | 'success'

@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
-import Text from '../../../components/global/dialog/Text';
-import TextInputLabel from '../../../components/global/formInput/TextInputLabel';
-import { Button } from 'flowbite-react';
-import CheckBox from '../../../components/global/formInput/CheckBox';
-import LoginImage from '../../../assets/img/admin/login.png';
-import { ToasterConfig } from '../../../components/global/Toast';
-import useSuperadminLogin from '../../../hooks/superadmin/useSuperadminLogin';
+import Text from '@components/global/dialog/Text';
+import TextInputLabel from '@components/global/formInput/TextInputLabel';
+import CheckBox from '@components/global/formInput/CheckBox';
+import LoginImage from '@assets/img/admin/login.png';
+import { ToasterConfig } from '@components/global/Toast';
+import useSuperadminLogin from '@hooks/superadmin/useSuperadminLogin';
+import { BasicFilledButton } from '@components/global/CustomButton';
 
 const SuperadminLogin = () => {
   const { setEmail, setPassword, handleLogin, rememberMe, setRememberMe } =
@@ -14,7 +14,7 @@ const SuperadminLogin = () => {
   return (
     <Fragment>
       <div className="flex items-center justify-center bg-[#F9FAFB] dark:bg-black h-screen">
-        <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-20">
+        <div className="max-w-screen-xl items-center justify-center h-full w-full grid grid-colsw-1 md:grid-cols-2 gap-4 p-20">
           <div className="w-full flex flex-row rounded-[10px] shadow-2xl bg-white p-10 dark:bg-[#1F2A37]">
             <div className="flex flex-col w-full">
               <Text
@@ -62,11 +62,12 @@ const SuperadminLogin = () => {
                 </div>
               </div>
 
-              <Button
-                onClick={handleLogin}
-                className={`my-4`}>
-                Submit
-              </Button>
+              <BasicFilledButton
+                type={`primary`}
+                text={`Submit`}
+                click={handleLogin}
+                className={`my-4`}
+              />
             </div>
           </div>
 

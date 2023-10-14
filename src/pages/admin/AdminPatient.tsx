@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import AdminBaseTemplate from '../../components/layout/admin/AdminBaseTemplate';
+import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 
 const AdminPatient = () => {
   return (

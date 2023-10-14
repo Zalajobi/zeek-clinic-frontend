@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
-import { textSize } from '../../../lib/types';
-import { textSizeClassMap } from '../../../lib/constants/textClassMaps';
-import { TbFileInvoice } from 'react-icons/tb';
-import Text from './Text';
 import { Link } from 'react-router-dom';
+import { textSize } from '@lib/types';
+import { textSizeClassMap } from '@lib/constants/textClassMaps';
+import Text from '@components/global/dialog/Text';
+import { TypographySkeleton } from '@components/global/dialog/Skeletons';
 
 interface TypographyProps {
   text: string | number;
@@ -14,6 +14,8 @@ interface TypographyProps {
   iconAfter?: ReactNode;
   size?: textSize;
   weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+  isLoading?: boolean;
+  skeletonClassName?: string;
 }
 
 interface TypographyWithLinkProps {
@@ -39,6 +41,8 @@ export const Typography = ({
   Tag = 'p',
   size = 'base',
   weight,
+  isLoading = false,
+  skeletonClassName = '',
 }: TypographyProps) => {
   const classes = clsx(
     `text-[#0E0F17] font-bold ${className}`,
@@ -58,7 +62,13 @@ export const Typography = ({
       style={{
         fontWeight: weight,
       }}>
-      {iconBefore} {text} {iconAfter}
+      {isLoading ? (
+        <TypographySkeleton className={skeletonClassName} />
+      ) : (
+        <>
+          {iconBefore} {text} {iconAfter}
+        </>
+      )}
     </Tag>
   );
 };
@@ -68,6 +78,7 @@ export const TypographyWithLink = ({
   className = '',
   iconBefore,
   iconAfter,
+
   to,
 }: TypographyWithLinkProps) => {
   return (

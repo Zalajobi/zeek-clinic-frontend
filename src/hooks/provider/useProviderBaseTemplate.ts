@@ -1,5 +1,5 @@
-import {ChangeEvent, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useProviderBaseTemplate = () => {
   const navigate = useNavigate();
@@ -8,23 +8,18 @@ export const useProviderBaseTemplate = () => {
 
   useEffect(() => {
     // const getHeaderData = async () => {
-    //   const response = await axiosGetRequest('/account/super-admin/profile/get-data')
+    //   const response = await axiosGetRequestUserService('/super-admin/profile/get-data')
     //
     //   if (response.success)
     //     setRequestData(response?.data as SuperadminBaseData)
     // }
-
     // getHeaderData()
     //   .catch(err => {
     //     navigate('/superadmin/login')
     //   })/
-  }, [navigate] );
+  }, [navigate]);
 
-
-  const onUpdateQuerySearch = (event:ChangeEvent<HTMLInputElement>) => {
-    setQuerySearch(event?.target?.value as string)
-  }
-
+  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 
   return {
     // Values
@@ -32,6 +27,6 @@ export const useProviderBaseTemplate = () => {
     // requestData,
 
     // Functions
-    onUpdateQuerySearch
-  }
-}
+    onUpdateQuerySearch,
+  };
+};

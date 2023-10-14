@@ -1,8 +1,11 @@
 import { Fragment } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { CustomTransparentCard } from '../../global/card/CustomCard';
-import { Typography, TypographyWithLink } from '../../global/dialog/Typography';
-import ListView from '../../global/views/ListView';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import {
+  Typography,
+  TypographyWithLink,
+} from '@components/global/dialog/Typography';
+import ListView from '@components/global/views/ListView';
 
 const DoctorsList = () => {
   const dummyDoctorsListData = [

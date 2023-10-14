@@ -1,10 +1,18 @@
 import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Typography } from '../dialog/Typography';
 import { Simulate } from 'react-dom/test-utils';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import { Typography } from '@components/global/dialog/Typography';
 import change = Simulate.change;
-import moment from 'moment';
-import { SelectInputFieldProps } from '../../../types/common';
+import { SelectInputFieldProps } from '@typeSpec/common';
+import {
+  Menu,
+  Button,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+} from '@material-tailwind/react';
 
 interface TextInputProps {
   label: string;
@@ -39,7 +47,6 @@ interface SelectInputProps {
   errorMsg?: string;
   className?: string;
   change?: (event: ChangeEvent<HTMLSelectElement>) => void;
-  enableFilter?: boolean;
 }
 
 interface DateInputProps {
@@ -63,6 +70,14 @@ interface CheckboxInputProps {
   disabled?: boolean;
 }
 
+interface CustomDropDownMenuSelectProps {
+  items: any[];
+  value: any;
+  onSelect: (value: any) => void;
+  className?: string;
+  prefixIcon?: ReactNode;
+}
+
 export const TextInput = ({
   label,
   id,
@@ -78,82 +93,58 @@ export const TextInput = ({
 }: TextInputProps) => {
   return (
     <Fragment>
-      <div
-        className={`relative w-full min-w-[100px] ${className}`}
-        data-te-input-wrapper-init>
-        {prefix && (
-          <div>
-            <Typography
-              className="absolute top-2/4 grid h-5 w-18 -translate-y-2/4 place-items-center text-blue-gray-500 ml-[10px]
-              peer-[:not(:placeholder-shown)]:top-[67%] focus:top-[67%] peer-focus:top-[67%] text-[#C4C4C6]
-              [&:not(:placeholder-shown)]:top-[67%] [&:not(:placeholder-shown)]:top-[67%]"
-              Tag={`span`}
-              text={prefix}
-            />
+      <div className={`min-w-[100px] my-2 ${className}`}>
+        <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+            }`}>
+            {label}
+          </label>
+
+          <div className="relative h-[58px] w-full min-w-[200px]">
+            {register ? (
+              <>
+                <input
+                  type={type}
+                  className={`py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  {...register(id)}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            ) : (
+              <>
+                <input
+                  type={type}
+                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  placeholder={placeholder}
+                  id={id}
+                  onChange={change}
+                  value={value}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            )}
           </div>
-        )}
-
-        {register ? (
-          <input
-            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
-          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
-          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
-          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
-          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
-          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
-          ${prefix ? 'pl-[70px]' : ''}`}
-            placeholder={placeholder}
-            {...register(id)}
-            id={id}
-            type={type}
-          />
-        ) : (
-          <input
-            className={`peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent 
-          bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 
-          ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] 
-          focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 
-          dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary 
-          [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] 
-          ${prefix ? 'pl-[70px]' : ''}`}
-            placeholder={placeholder}
-            onChange={change}
-            value={value}
-            id={id}
-            type={type}
-          />
-        )}
-
-        {icon && (
-          <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-            {icon}
-          </div>
-        )}
-
-        <label
-          className={`pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 
-          py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 
-          peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary 
-          peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] 
-          peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 
-          dark:peer-focus:text-primary ${errorMsg ? 'text-red-500' : ''}`}
-          htmlFor={id}>
-          {label}
-        </label>
-
-        {errorMsg && (
-          <div
-            className="absolute w-full text-sm text-neutral-500 peer-focus:text-primary dark:text-neutral-200 dark:peer-focus:text-primary"
-            data-te-input-helper-ref>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`italic text-xs font-thin ${
-                errorMsg ? 'text-red-500' : ''
-              }`}
-            />
-          </div>
-        )}
+          {errorMsg && (
+            <div className="text-sm text-red-600 mt-2">
+              <Typography
+                Tag={`span`}
+                text={errorMsg}
+                className={`italic text-xs font-bold ${
+                  errorMsg ? 'text-red-500' : ''
+                }`}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Fragment>
   );
@@ -200,18 +191,21 @@ export const SelectInput = ({
   className = '',
   id,
   register,
-  enableFilter = false,
   change,
 }: SelectInputProps) => {
   return (
     <Fragment>
       <div
-        className={`relative h-10 w-full min-w-[100px] select-input-global-component ${className}`}>
+        className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
+        <label
+          htmlFor="select-2"
+          className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
+          {label}
+        </label>
         {register ? (
           <select
-            data-te-select-init={true}
-            data-te-select-size="lg"
-            data-te-select-filter={enableFilter}
+            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
+              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {
                 if (change) {
@@ -220,7 +214,11 @@ export const SelectInput = ({
               },
             })}
             id={id}>
-            <option value="">Select {label}</option>
+            <option
+              selected
+              disabled>
+              Select {label}
+            </option>
             {options.map((item, idx) => {
               return (
                 <option
@@ -233,12 +231,15 @@ export const SelectInput = ({
           </select>
         ) : (
           <select
-            data-te-select-init={true}
-            data-te-select-size="lg"
-            data-te-select-filter={enableFilter}
+            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
+              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             onChange={change}
             id={id}>
-            <option value="">Select {label}</option>
+            <option
+              selected
+              disabled>
+              Select {label}
+            </option>
             {options.map((item, idx) => {
               return (
                 <option
@@ -251,14 +252,12 @@ export const SelectInput = ({
           </select>
         )}
 
-        <label data-te-select-label-ref>{label}</label>
-
         {errorMsg && (
           <>
             <Typography
               Tag={`span`}
               text={errorMsg}
-              className={`italic text-xs font-thin ${
+              className={`text-sm text-green-600 mt-2 ${
                 errorMsg ? 'text-red-500' : ''
               }`}
             />
@@ -282,70 +281,79 @@ export const DateInput = ({
 }: DateInputProps) => {
   return (
     <Fragment>
-      <div
-        className={`relative h-10 w-full min-w-[100px] min-h-[58px] date_picker-input-global-component ${className}`}
-        data-te-datepicker-init
-        data-te-inline={true}
-        data-te-input-wrapper-init
-        data-te-format={'m-d-yyyy'}>
-        {register ? (
-          <input
-            data-te-datepicker-toggle-ref
-            data-te-datepicker-toggle-button-ref
-            type="text"
-            className={`peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] 
-            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
-            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
-            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
-            placeholder={placeholder}
-            {...register(id)}
-            value={moment(value).format('MMM DD. YYYY')}
-            id={id}
-          />
-        ) : (
-          <input
-            data-te-datepicker-toggle-ref
-            data-te-datepicker-toggle-button-ref
-            type="text"
-            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6]
-            outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary
-            data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-            dark:placeholder:text-neutral-200 dark:peer-focus:text-primary
-            [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-            placeholder={placeholder}
-            onInput={change}
-            id={id}
-          />
-        )}
+      <div className={`relative h-10 w-full min-w-[100px] ${className}`}>
+        <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex
+              h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all
+              before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5
+              before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200
+              before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block
+              after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r
+              after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm
+              peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500
+              peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent
+              peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2
+              peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2
+              peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent
+              peer-disabled:before:border-transparent peer-disabled:after:border-transparent
+              peer-disabled:peer-placeholder-shown:text-blue-gray-500 ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+              }`}>
+            {label}
+          </label>
 
-        {icon && (
-          <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-            {icon}
+          <div className="relative h-[58px] w-full min-w-[200px]">
+            {register ? (
+              <>
+                <input
+                  type={`date`}
+                  className={`peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent 
+                  px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all
+                  placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200
+                  focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0
+                  disabled:bg-blue-gray-50`}
+                  placeholder={placeholder}
+                  id={id}
+                  {...register(id)}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            ) : (
+              <>
+                <input
+                  type={`date`}
+                  className={`peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent
+                  px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all
+                  placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200
+                  focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0
+                  disabled:bg-blue-gray-50`}
+                  placeholder={placeholder}
+                  id={id}
+                  onChange={change}
+                  // value={value}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
+                  {icon}
+                </div>
+              </>
+            )}
           </div>
-        )}
-
-        <label
-          htmlFor={id}
-          className={`pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] 
-          leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] 
-          peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] 
-          peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 
-          dark:peer-focus:text-primary`}>
-          {label}
-        </label>
-
-        {errorMsg && (
-          <>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`italic text-xs font-thin ${
-                errorMsg ? 'text-red-500' : ''
-              }`}
-            />
-          </>
-        )}
+          {errorMsg && (
+            <div className="text-sm text-red-600 mt-2">
+              <Typography
+                Tag={`span`}
+                text={errorMsg}
+                className={`italic text-xs font-bold ${
+                  errorMsg ? 'text-red-500' : ''
+                }`}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Fragment>
   );
@@ -422,5 +430,74 @@ export const CustomInputLabel = ({
       htmlFor={forItem}>
       {label}
     </label>
+  );
+};
+
+export const PhoneNumberInput = ({
+  country,
+  change,
+  label,
+  className = '',
+}: {
+  country: string;
+  label: string;
+  change: (value: string | number) => void;
+  className?: string;
+}) => {
+  return (
+    <Fragment>
+      <div
+        className={`relative h-10 w-full min-w-[100px] min-h-[100px] my-3 ${className}`}>
+        <div className="w-full">
+          <label className={`block text-sm font-medium mb-2 dark:text-white`}>
+            {label}
+          </label>
+        </div>
+
+        <div className="relative h-[58px] w-full min-w-[200px]">
+          <PhoneInput
+            placeholder="Enter phone number"
+            label={`Phone Number`}
+            country="US"
+            onChange={(value) => change(value as string)}
+          />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export const CustomDropDownMenuSelect = ({
+  items,
+  value,
+  onSelect,
+  className = '',
+  prefixIcon,
+}: CustomDropDownMenuSelectProps) => {
+  return (
+    <Fragment>
+      <Menu
+        animate={{
+          mount: { y: 0 },
+          unmount: { y: 25 },
+        }}>
+        <MenuHandler>
+          <Button
+            className={`flex items-center justify-center p-2 ${className}`}>
+            {prefixIcon} {value}
+          </Button>
+        </MenuHandler>
+
+        {items.length > 0 && (
+          <MenuList className={`max-h-72`}>
+            {items?.map((item: any) => (
+              <div>
+                <MenuItem onClick={() => onSelect(item)}>{item}</MenuItem>
+              </div>
+            ))}
+          </MenuList>
+        )}
+      </Menu>
+    </Fragment>
   );
 };

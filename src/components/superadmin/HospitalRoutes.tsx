@@ -2,9 +2,7 @@ import { Fragment } from 'react';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { FaUserLock, FaUserInjured, FaUserNurse } from 'react-icons/fa';
 import { TbActivityHeartbeat, TbFileInvoice } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
-import Text from '../global/dialog/Text';
-import { BeautifulLink } from '../global/dialog/Typography';
+import { BeautifulLink } from '@components/global/dialog/Typography';
 
 const HospitalRoutes = () => {
   return (
