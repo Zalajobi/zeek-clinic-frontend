@@ -70,7 +70,7 @@ const ProvidersPrimaryPatients = ({
         navigate,
         handleOpenMovePatientModal
       ),
-    [data]
+    [data, loading, navigate, handleOpenMovePatientModal]
   );
 
   return (

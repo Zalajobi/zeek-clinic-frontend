@@ -53,7 +53,7 @@ export const useOrganizationDetails = () => {
       ]);
 
       if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
-        setHospitalData(<AccountServiceApiResponse>hospital?.value);
+        setHospitalData(hospital?.value as AccountServiceApiResponse);
       } else {
         toast.error('Something went wrong getting hospital list');
       }
@@ -63,7 +63,7 @@ export const useOrganizationDetails = () => {
         countryStates?.value?.success
       ) {
         setCountryAndStateSitesData(
-          <AccountServiceApiResponse>countryStates.value
+          countryStates.value as AccountServiceApiResponse
         );
       } else {
         toast.error('Something went wrong getting site countries and states');
@@ -106,6 +106,8 @@ export const useOrganizationDetails = () => {
         value: item?.country,
         placeholder: item?.country,
       });
+
+      return;
     });
 
     responseData.data.states.map((item: { state: string }) => {
@@ -113,6 +115,8 @@ export const useOrganizationDetails = () => {
         value: item?.state,
         placeholder: item?.state,
       });
+
+      return;
     });
 
     setCountryFilterList(tempCountriesFilter);

@@ -19,7 +19,6 @@ const SidebarItems = ({
   showSidebar,
   child,
 }: SidebarItemProps) => {
-  const [open, setOpen] = useState(false);
   const [show, setShow] = useState(0);
 
   const handleOpen = (value: number) => {

@@ -13,7 +13,6 @@ import ImageUpload from '@components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
-  PhoneNumberInput,
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
@@ -52,7 +51,6 @@ export const AddProvider = () => {
     roles,
     serviceArea,
     units,
-    countryCode,
 
     // Functions
     setProfilePic,

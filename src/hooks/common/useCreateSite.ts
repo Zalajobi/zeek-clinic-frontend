@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
@@ -8,7 +8,6 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 
 export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
-  const navigate = useNavigate();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
@@ -26,6 +25,8 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
     setAllCountries(countriesUpdate);
   }, []);
@@ -41,6 +42,8 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
 
     setAllCountryStates(countryStates);

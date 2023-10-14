@@ -280,6 +280,8 @@ export const AdminProviderDataRow = (
         </>
       ),
     });
+
+    return;
   });
 
   return rowItems;

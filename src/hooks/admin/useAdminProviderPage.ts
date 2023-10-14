@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Simulate } from 'react-dom/test-utils';
 import toast from 'react-hot-toast';
 import { axiosGetRequestUserService } from '@lib/axios';
 import {
@@ -8,7 +7,6 @@ import {
   ProviderAndRelationAPIResponse,
 } from '@typeSpec/admin';
 import { customPromiseRequest } from '@lib/requests';
-import input = Simulate.input;
 
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();
@@ -43,7 +41,7 @@ export const useAdminProviderPage = () => {
     getData().then((response) => {
       console.log(response);
     });
-  }, [input]);
+  }, []);
 
   const getData = async () => {
     const params = {

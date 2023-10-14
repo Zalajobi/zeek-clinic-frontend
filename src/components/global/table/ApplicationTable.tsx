@@ -3,7 +3,6 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
 import { MdArrowDropDown } from 'react-icons/md';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
-import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
 import {
   CustomDropDownMenuSelect,
   DateInput,

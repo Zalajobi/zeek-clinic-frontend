@@ -13,13 +13,6 @@ import {
 import CreateHospitalModal from '@components/modals/CreateHospitalModal';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
-import {
-  Button,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-} from '@material-tailwind/react';
 
 const HospitalOrganizations = () => {
   const {
@@ -63,7 +56,7 @@ const HospitalOrganizations = () => {
         onUpdateSelectedRow,
         selectAllHospitals
       ) ?? [],
-    [hospitalData, currentPage]
+    [hospitalData, onUpdateSelectedRow, selectAllHospitals]
   );
 
   const columns = useMemo(
@@ -72,7 +65,7 @@ const HospitalOrganizations = () => {
         onClickSortParameters,
         onUpdateSelectAllHospitals
       ),
-    [hospitalData, currentPage]
+    [onClickSortParameters, onUpdateSelectAllHospitals]
   );
 
   return (

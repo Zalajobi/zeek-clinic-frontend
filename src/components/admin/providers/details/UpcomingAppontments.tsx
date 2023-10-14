@@ -1,7 +1,6 @@
 import { CustomCard } from '@components/global/card/CustomCard';
 import { Fragment, SetStateAction, useState } from 'react';
 import { Typography } from '@components/global/dialog/Typography';
-import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
 import { CustomDropDownMenuSelect } from '@components/global/formInput/CustomInput';
 
 const UpcomingAppointments = () => {
@@ -15,7 +14,6 @@ const UpcomingAppointments = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState(
     selectTimeframe[2]
   );
-  const [timeframe, setTimeframe] = useState('7 Days');
 
   return (
     <Fragment>

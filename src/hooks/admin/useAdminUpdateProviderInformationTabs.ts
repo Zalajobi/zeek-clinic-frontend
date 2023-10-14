@@ -53,7 +53,7 @@ export const useAdminUpdateProviderInformationTabs = (
     if (!fetchData) {
       getCountryData();
     }
-  }, [id, departments, siteId]);
+  }, []);
 
   const getCountryData = () => {
     if (departments) {

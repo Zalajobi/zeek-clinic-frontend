@@ -16,7 +16,6 @@ import {
   FaUserPlus,
 } from 'react-icons/fa';
 import { SidebarItemProps } from '@typeSpec/common';
-import { RxDashboard } from 'react-icons/rx';
 import { GrOrganization } from 'react-icons/gr';
 import { GiDoctorFace } from 'react-icons/gi';
 import { HiOutlineClipboardList } from 'react-icons/hi';

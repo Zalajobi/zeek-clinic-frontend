@@ -244,6 +244,8 @@ export const SuperadminHospitalDataRow = (
         </>
       ),
     });
+
+    return;
   });
 
   return rowItems;
@@ -471,6 +473,8 @@ export const SuperadminSiteDataRow = (
         </>
       ),
     });
+
+    return;
   });
 
   return rowItems;

@@ -63,7 +63,7 @@ const OrganizationSite = () => {
     onUpdateDataRefresh,
   } = useOrganizationDetails();
 
-  const columns = useMemo(() => SuperadminSiteDataColumn(), [sites]);
+  const columns = useMemo(() => SuperadminSiteDataColumn(), []);
 
   const data = useMemo(
     () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],

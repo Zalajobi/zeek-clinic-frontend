@@ -65,6 +65,4 @@ export const calculateAge = (givenDate: Date): string | number => {
 
   if (age > 0) return `${age} Year(s)`;
   else return `${ageDate.getUTCMonth()} Month(s)`;
-
-  return '--';
 };

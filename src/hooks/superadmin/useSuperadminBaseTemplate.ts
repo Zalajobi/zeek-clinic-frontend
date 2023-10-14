@@ -1,9 +1,7 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Simulate } from 'react-dom/test-utils';
 import { axiosGetRequestUserService } from '@lib/axios';
 import { SuperadminBaseData } from '@typeSpec/superadmin';
-import input = Simulate.input;
 
 export const useSuperadminBaseTemplate = () => {
   const navigate = useNavigate();
@@ -23,7 +21,7 @@ export const useSuperadminBaseTemplate = () => {
     getHeaderData().catch((err) => {
       navigate('/superadmin/login');
     });
-  }, [input]);
+  }, []);
 
   const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 
