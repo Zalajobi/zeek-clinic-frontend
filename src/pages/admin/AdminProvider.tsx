@@ -9,7 +9,6 @@ import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
 } from '@components/tables/row-col-mapping/AdminTable';
-import ProvidersTab from '@components/admin/providers/ProvidersTab';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -18,6 +17,7 @@ import {
   setResultTo,
   setTotalProviders,
 } from '../../redux/reducers/tableReducer';
+import HorizontalTabs from '@components/global/HorizontalTabs';
 
 const AdminProvider = () => {
   const dispatch = useDispatch();
@@ -39,6 +39,7 @@ const AdminProvider = () => {
     providerData,
     providerDataLoading,
     actions,
+    tabLabelValue,
 
     // Functions
     onUpdateSelectFrom,
@@ -163,9 +164,11 @@ const AdminProvider = () => {
             id={adminData?.id}
           />
 
-          <ProvidersTab
+          <HorizontalTabs
+            className={`w-[75%] rounded-2xl`}
+            changeTabFunction={onUpdateStatusFilterTab}
+            labelValue={tabLabelValue}
             activeTab={providerStatus}
-            click={onUpdateStatusFilterTab}
           />
 
           <ApplicationTable

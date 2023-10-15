@@ -10,6 +10,47 @@ import { setResultFrom } from '../../redux/reducers/tableReducer';
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();
   const dispatch = useDispatch();
+  const tabLabelValue = [
+    {
+      label: 'All',
+      value: 'ALL',
+    },
+
+    {
+      label: 'Active',
+      value: 'ACTIVE',
+    },
+
+    {
+      label: 'Pending',
+      value: 'PENDING',
+    },
+
+    {
+      label: 'On Leave',
+      value: 'ON_LEAVE',
+    },
+
+    {
+      label: 'On Break',
+      value: 'ON_BREAK',
+    },
+
+    {
+      label: 'Suspended',
+      value: 'SUSPENDED',
+    },
+
+    {
+      label: 'Terminated',
+      value: 'TERMINATED',
+    },
+
+    {
+      label: 'Unavailable',
+      value: 'UNAVAILABLE',
+    },
+  ];
   const { noOfPages } = useSelector((state: any) => state.adminProviderTable);
 
   // Fetch Params
@@ -216,6 +257,7 @@ export const useAdminProviderPage = () => {
     providerDataLoading,
     providerDataError,
     actions,
+    tabLabelValue,
 
     // Functions
     onUpdateSelectFrom,
