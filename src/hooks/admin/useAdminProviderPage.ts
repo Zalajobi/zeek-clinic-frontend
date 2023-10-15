@@ -182,16 +182,6 @@ export const useAdminProviderPage = () => {
         setResultFrom((pageNumber - 1) * (perPage !== 'All' ? perPage : 0) + 1)
       );
 
-      const params = {
-        page: pageNumber - 1,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: providerFrom,
-        to_date: providerTo,
-        search: searchProvider,
-        country: countryFilter,
-        status: providerStatus === 'ALL' ? '' : providerStatus,
-      };
-
       setRefetchProvidersData(!refetchProvidersData);
     }
   };
