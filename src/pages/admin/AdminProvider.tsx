@@ -39,7 +39,6 @@ const AdminProvider = () => {
     providerData,
     providerDataLoading,
     actions,
-    // providerDataError,
 
     // Functions
     onUpdateSelectFrom,
