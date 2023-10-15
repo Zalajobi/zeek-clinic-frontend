@@ -1,115 +1,108 @@
 import { useEffect, useState } from 'react';
-import { Country, State } from 'country-state-city';
-import toast from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
-
-import { CreateAdminUserInput } from '@typeSpec/superadmin/forms';
-import { SelectInputFieldProps } from '@typeSpec/common';
-import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import {
-  axiosGetRequestUserService,
-  axiosPostRequestUserService,
-} from '@lib/axios';
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
-
-interface DepartmentRoleProps {
-  name: string;
-  description?: string;
-  id?: string;
-}
+  AllCountries,
+  AllStatesAndCities,
+  CreateUserInput,
+} from '../../types/superadmin/formTypes';
+import { Country, State, City } from 'country-state-city';
+import { axiosGetRequest, axiosPostRequest } from '../../lib/axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export const useSuperadminCreateAdminUser = () => {
-  const { siteId } = useParams();
   const navigate = useNavigate();
   const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('None');
   const [countryCode, setCountryCode] = useState('');
   const [profileImgURL, setProfileImgURL] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string | number>('');
 
-  const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
+  const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
   const [allCountryStates, setAllCountryStates] = useState<
-    SelectInputFieldProps[]
-  >([]);
-  const [allRoles, setAllRoles] = useState<SelectInputFieldProps[]>([]);
+    AllStatesAndCities[] | null
+  >(null);
+  const [allStateCities, setAllStateCities] = useState<
+    AllStatesAndCities[] | null
+  >(null);
+  const [allDepartments, setAllDepartments] = useState<string[]>([]);
+  const [allRoles, setAllRoles] = useState<string[]>([]);
   const [phoneCode, setPhoneCode] = useState('');
 
   useEffect(() => {
-    let countriesUpdate: SelectInputFieldProps[] = [],
-      rolesList: SelectInputFieldProps[] = [];
-
-    Country.getAllCountries().map((country) => {
-      return countriesUpdate.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-    });
-    setAllCountries(countriesUpdate);
+    setAllCountries(Country.getAllCountries() as AllCountries[]);
 
     const superadminGetRolesAndDepartments = async () => {
-      const response = (await axiosGetRequestUserService(
-        '/super-admin/get/available-admin/roles_and_departments',
-        { siteId }
-      )) as AccountServiceApiResponse;
+      const response = await axiosGetRequest(
+        '/account/super-admin/create/roles_and_departments'
+      );
+      const allDepartments: string[] = [];
+      const allRoles: string[] = [];
 
       if (response?.success) {
-        response?.data?.role?.map((item: DepartmentRoleProps) => {
-          return rolesList.push({
-            placeholder: item.name,
-            value: item.name,
-          });
-        });
+        for (const dept in response?.data?.department) {
+          allDepartments.push(dept);
+        }
 
-        setAllRoles(rolesList);
+        for (const role in response?.data?.role) {
+          allRoles.push(role);
+        }
       } else {
         toast.error(response?.message);
+        navigate('/superadmin/login');
       }
+
+      setAllDepartments(allDepartments);
+      setAllRoles(allRoles);
     };
     superadminGetRolesAndDepartments().catch((err) => {
-      toast.error(err?.message);
+      navigate('/superadmin/login');
     });
-  }, [siteId]);
+  }, [navigate]);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-    let countryStates: SelectInputFieldProps[] = [];
-
-    State.getStatesOfCountry(value).map((country) => {
-      return countryStates.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-    });
-
-    setAllCountryStates(countryStates);
+    setAllCountryStates(
+      State.getStatesOfCountry(value) as unknown as AllStatesAndCities[]
+    );
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
   };
 
-  const handleCreateAdmin = async (data: CreateAdminUserInput) => {
+  const onUpdateState = (value: string) => {
+    setAllStateCities(
+      City.getCitiesOfState(
+        countryCode,
+        value
+      ) as unknown as AllStatesAndCities[]
+    );
+    setState(value);
+  };
+
+  const onUpdateCity = (value: string) => setCity(value ?? 'None');
+
+  const onUpdatePhoneNumber = (value: string | number) => setPhoneNumber(value);
+
+  const handleCreateAdmin = async (data: CreateUserInput) => {
     const adminData = {
       ...data,
       country,
+      city,
+      state,
       country_code: countryCode,
-      profile_pic: profileImgURL,
-      siteId,
-      phone: `+${phoneCode}${data?.phone}`,
+      call_code: phoneCode,
+      profile_img_url: profileImgURL,
+      phone_number: phoneNumber,
     };
 
-    const { success, message } = await axiosPostRequestUserService(
-      '/admin/create-admin',
+    const { success, message } = await axiosPostRequest(
+      '/account/super-admin/create/admin',
       adminData
     );
 
-    if (success) {
-      toast.success(message);
-      setTimeout(() => {
-        rerouteToURL('/superadmin');
-      }, 3000);
-    } else toast.error(message);
-  };
-
-  const rerouteToURL = (url: string) => {
-    navigate(url);
+    if (success) toast.success(message);
+    else toast.error(message);
   };
 
   return {
@@ -117,12 +110,16 @@ export const useSuperadminCreateAdminUser = () => {
     allCountries,
     phoneCode,
     allCountryStates,
+    allStateCities,
+    allDepartments,
     allRoles,
     profileImgURL,
 
     handleCreateAdmin,
     onUpdateCountry,
+    onUpdateState,
+    onUpdateCity,
     setProfileImgURL,
-    rerouteToURL,
+    onUpdatePhoneNumber,
   };
 };

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { axiosGetRequest } from '../../lib/axios';
 import { useNavigate } from 'react-router-dom';
-import { axiosGetRequestUserService } from '@lib/axios';
-import { SuperadminBaseData } from '@typeSpec/superadmin';
+import { SuperadminBaseData } from '../../types/superadmin';
 
 export const useSuperadminBaseTemplate = () => {
   const navigate = useNavigate();
@@ -10,8 +10,8 @@ export const useSuperadminBaseTemplate = () => {
 
   useEffect(() => {
     const getHeaderData = async () => {
-      const response = await axiosGetRequestUserService(
-        '/super-admin/profile/get-data'
+      const response = await axiosGetRequest(
+        '/account/super-admin/profile/get-data'
       );
 
       if (response.success)
@@ -21,9 +21,11 @@ export const useSuperadminBaseTemplate = () => {
     getHeaderData().catch((err) => {
       navigate('/superadmin/login');
     });
-  }, []);
+  }, [navigate]);
 
-  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
+  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuerySearch(event?.target?.value as string);
+  };
 
   return {
     // Values

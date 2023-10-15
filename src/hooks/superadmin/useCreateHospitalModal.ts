@@ -1,51 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
-import { axiosPostRequestUserService } from '@lib/axios';
-import { SelectInputFieldProps } from '@typeSpec/common';
-import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
+import {
+  AllCountries,
+  AllStatesAndCities,
+  CreateHospitalInput,
+} from '../../types/superadmin/formTypes';
+import { axiosPostRequest } from '../../lib/axios';
 
 export const useCreateHospitalModal = () => {
+  const navigate = useNavigate();
+
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
-    SelectInputFieldProps[]
-  >([]);
-  const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
+    AllStatesAndCities[] | null
+  >(null);
+  const [allCountries, setAllCountries] = useState<AllCountries[] | null>(null);
 
   const [country, setCountry] = useState('');
   const [logo, setLogo] = useState('');
 
   useEffect(() => {
-    let countriesUpdate: SelectInputFieldProps[] = [];
-
-    Country.getAllCountries().map((country) => {
-      countriesUpdate.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-
-      return;
-    });
-    setAllCountries(countriesUpdate);
-  }, []);
+    setAllCountries(Country.getAllCountries() as AllCountries[]);
+  }, [navigate]);
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-    let countryStates: SelectInputFieldProps[] = [];
-
-    State.getStatesOfCountry(value).map((country) => {
-      countryStates.push({
-        value: country.isoCode,
-        placeholder: country.name,
-      });
-
-      return;
-    });
-
-    setAllCountryStates(countryStates);
+    setAllCountryStates(
+      State.getStatesOfCountry(value) as unknown as AllStatesAndCities[]
+    );
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
@@ -61,8 +47,8 @@ export const useCreateHospitalModal = () => {
         logo,
         country_code: countryCode,
       };
-      const response = await axiosPostRequestUserService(
-        '/hospital/create',
+      const response = await axiosPostRequest(
+        '/account/hospital/create',
         hospitalData
       );
 

@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import Text from '@components/global/dialog/Text';
-import { useAdminForgotPassword } from '@hooks/admin/useAdminForgotPassword';
-import TextInputLabel from '@components/global/formInput/TextInputLabel';
-import { ToasterConfig } from '@components/global/Toast';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import Text from '../../../components/global/Text';
+import { useAdminForgotPassword } from '../../../hooks/admin/useAdminForgotPassword';
+import TextInputLabel from '../../../components/global/input/TextInputLabel';
+import { Button } from 'flowbite-react';
+import { ToasterConfig } from '../../../components/global/Toast';
 
 const ForgotPassword = () => {
   const { setEmail, resetPassword } = useAdminForgotPassword();
@@ -47,12 +47,11 @@ const ForgotPassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <BasicFilledButton
-                type={`primary`}
-                text={`Submit`}
-                click={resetPassword}
-                className={`my-4`}
-              />
+              <Button
+                onClick={resetPassword}
+                className={`my-4`}>
+                Reset Password
+              </Button>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useProviderBaseTemplate = () => {
@@ -8,7 +8,7 @@ export const useProviderBaseTemplate = () => {
 
   useEffect(() => {
     // const getHeaderData = async () => {
-    //   const response = await axiosGetRequestUserService('/super-admin/profile/get-data')
+    //   const response = await axiosGetRequest('/account/super-admin/profile/get-data')
     //
     //   if (response.success)
     //     setRequestData(response?.data as SuperadminBaseData)
@@ -19,7 +19,9 @@ export const useProviderBaseTemplate = () => {
     //   })/
   }, [navigate]);
 
-  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
+  const onUpdateQuerySearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuerySearch(event?.target?.value as string);
+  };
 
   return {
     // Values

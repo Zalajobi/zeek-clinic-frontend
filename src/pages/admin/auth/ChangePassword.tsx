@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import { useAdminChangePassword } from '@hooks/admin/useAdminChangePassword';
-import Text from '@components/global/dialog/Text';
-import TextInputLabel from '@components/global/formInput/TextInputLabel';
-import { ToasterConfig } from '@components/global/Toast';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { useAdminChangePassword } from '../../../hooks/admin/useAdminChangePassword';
+import Text from '../../../components/global/Text';
+import TextInputLabel from '../../../components/global/input/TextInputLabel';
+import { Button } from 'flowbite-react';
+import { ToasterConfig } from '../../../components/global/Toast';
 
 const ChangePassword = () => {
   const { onUpdateNewPassword, onUpdateVerifyPassword, handlePasswordSubmit } =
@@ -59,12 +59,11 @@ const ChangePassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <BasicFilledButton
-                type={`primary`}
-                text={`Change Password`}
-                click={handlePasswordSubmit}
-                className={`my-4`}
-              />
+              <Button
+                onClick={handlePasswordSubmit}
+                className={`my-4`}>
+                Change Password
+              </Button>
             </div>
           </div>
         </div>

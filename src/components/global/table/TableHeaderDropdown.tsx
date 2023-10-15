@@ -15,17 +15,17 @@ const TableHeaderDropdown = ({
 }: TableHeaderDropdownProps) => {
   return (
     <Fragment>
-      <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3 min-h-[58px]">
+      <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
         <Menu
           as="div"
-          className="relative inline-block text-left min-h-[58px]">
+          className="relative inline-block text-left">
           <div>
             <Menu.Button
-              className="w-[106px] min-h-[58px] flex items-center justify-center w-full p-2 text-sm font-medium
+              className="flex items-center justify-center w-full p-2 text-sm font-medium
                         text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none
                         hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200
                         dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600
-                        dark:hover:text-white dark:hover:bg-gray-700">
+                        dark:hover:text-white dark:hover:bg-gray-700 w-[106px]">
               <IoMdArrowDropdown
                 size={20}
                 className={`mr-2 ml-1`}

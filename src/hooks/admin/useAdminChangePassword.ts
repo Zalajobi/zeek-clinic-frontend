@@ -5,11 +5,8 @@ import {
   matchLowerCaseRegex,
   matchNumbersRegex,
   matchUpperCaseRegex,
-} from '@lib/constants/constants';
-import {
-  axiosGetRequestUserService,
-  axiosPutRequestUserService,
-} from '@lib/axios';
+} from '../../lib/constants/constants';
+import { axiosGetRequest, axiosPutRequest } from '../../lib/axios';
 
 export const useAdminChangePassword = () => {
   const navigate = useNavigate();
@@ -24,11 +21,11 @@ export const useAdminChangePassword = () => {
     verifyToken(searchParams.get('token') as string).then((r) =>
       console.log(r)
     );
-  }, []);
+  }, [searchParams]);
 
   const verifyToken = async (token: string) => {
-    const response = await axiosGetRequestUserService(
-      `/admin/jwt_token/verify?token=${token}`
+    const response = await axiosGetRequest(
+      `/account/admin/jwt_token/verify?token=${token}`
     );
 
     if (!response.success) {
@@ -69,7 +66,7 @@ export const useAdminChangePassword = () => {
       return;
     }
 
-    const response = await axiosPutRequestUserService('/admin/reset_password', {
+    const response = await axiosPutRequest('/account/admin/reset_password', {
       password: newPassword,
       token: authToken,
     });

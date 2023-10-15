@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaPhone, FaCity } from 'react-icons/fa';
+import { FaCalendarAlt, FaEye, FaPhone, FaCity, FaUser } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
@@ -7,28 +7,27 @@ import { BiRename } from 'react-icons/bi';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import useAdminAddProvider from '@hooks/admin/useAdminAddProvider';
-import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import useAdminAddProvider from '../../hooks/admin/useAdminAddProvider';
+import AdminBaseTemplate from '../../components/templates/admin/AdminBaseTemplate';
+import Typography from '../../components/global/Typography';
+import ImageUpload from '../../components/global/input/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
   SelectInput,
   TextInput,
-} from '@components/global/formInput/CustomInput';
+} from '../../components/global/input/CustomInput';
 import {
   genderSelectInput,
   providersTitleSelectInput,
   relationshipStatus,
   religions,
-} from '@lib/constants/constants';
+} from '../../lib/constants/constants';
 import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
-} from '@typeSpec/superadmin/formTypes';
-import { BasicFilledButton } from '@components/global/CustomButton';
-import { Typography } from '@components/global/dialog/Typography';
-import { CustomCard } from '@components/global/card/CustomCard';
+} from '../../types/superadmin/formTypes';
+import { BasicOutlineButton } from '../../components/global/CustomButton';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -71,16 +70,16 @@ export const AddProvider = () => {
 
           <div
             className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
-            <CustomCard
+            <div
               className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b] max-h-[400px]`}>
               <ImageUpload
                 bucketFolder={`/profile_image/providers`}
                 url={profilePic}
                 updateImageUrl={setProfilePic}
               />
-            </CustomCard>
+            </div>
 
-            <CustomCard
+            <div
               className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b]`}>
               <div
                 className={`w-full grid gap-6 grid-cols-1 mb-2 lg:grid-cols-5`}>
@@ -151,10 +150,7 @@ export const AddProvider = () => {
                   id={`gender`}
                   errorMsg={errors.gender?.message ?? ''}
                 />
-              </div>
 
-              <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
                 <DateInput
                   label={`Date Or Birth`}
                   placeholder={`DD/MM/YYYY`}
@@ -188,23 +184,23 @@ export const AddProvider = () => {
                   }
                 />
 
-                {/*<TextInput*/}
-                {/*  label={`Username`}*/}
-                {/*  placeholder={`john_doe`}*/}
-                {/*  className={`my-3 w-full`}*/}
-                {/*  errorMsg={errors.username?.message ?? ''}*/}
-                {/*  id={`username`}*/}
-                {/*  register={register}*/}
-                {/*  type={`text`}*/}
-                {/*  icon={*/}
-                {/*    <FaUser*/}
-                {/*      size={20}*/}
-                {/*      className={`${*/}
-                {/*        errors.username?.message ? 'text-red-500' : ''*/}
-                {/*      }`}*/}
-                {/*    />*/}
-                {/*  }*/}
-                {/*/>*/}
+                <TextInput
+                  label={`Password`}
+                  placeholder={`********`}
+                  className={`my-3 w-full`}
+                  errorMsg={errors.password?.message ?? ''}
+                  id={`password`}
+                  register={register}
+                  type={`password`}
+                  icon={
+                    <FaEye
+                      size={20}
+                      className={`${
+                        errors.password?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
 
                 <TextInput
                   label={`Staff ID`}
@@ -226,7 +222,25 @@ export const AddProvider = () => {
               </div>
 
               <div
-                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
+                <TextInput
+                  label={`Username`}
+                  placeholder={`john_doe`}
+                  className={`my-3 w-full`}
+                  errorMsg={errors.username?.message ?? ''}
+                  id={`username`}
+                  register={register}
+                  type={`text`}
+                  icon={
+                    <FaUser
+                      size={20}
+                      className={`${
+                        errors.username?.message ? 'text-red-500' : ''
+                      }`}
+                    />
+                  }
+                />
+
                 <SelectInput
                   label={`Relationship Status`}
                   options={relationshipStatus}
@@ -234,6 +248,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'relationship_status'}
                   errorMsg={errors.relationship_status?.message ?? ''}
+                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -245,8 +260,12 @@ export const AddProvider = () => {
                   register={register}
                   id={'religion'}
                   errorMsg={errors.religion?.message ?? ''}
+                  enableFilter={true}
                 />
+              </div>
 
+              <div
+                className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-2`}>
                 <SelectInput
                   label={`Department`}
                   options={departments}
@@ -254,6 +273,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'department'}
                   errorMsg={errors.department?.message ?? ''}
+                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -263,6 +283,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'role'}
                   errorMsg={errors.role?.message ?? ''}
+                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -272,6 +293,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'serviceArea'}
                   errorMsg={errors.serviceArea?.message ?? ''}
+                  enableFilter={true}
                 />
 
                 <SelectInput
@@ -281,6 +303,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'unit'}
                   errorMsg={errors.unit?.message ?? ''}
+                  enableFilter={true}
                 />
               </div>
 
@@ -293,6 +316,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'country'}
                   errorMsg={errors.country?.message ?? ''}
+                  enableFilter={true}
                   change={(e) => onUpdateCountry(e.target.value)}
                 />
 
@@ -303,6 +327,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'state'}
                   errorMsg={errors.state?.message ?? ''}
+                  enableFilter={true}
                 />
 
                 <TextInput
@@ -400,20 +425,21 @@ export const AddProvider = () => {
               </div>
 
               <div className={`w-full flex justify-center mt-8`}>
-                <BasicFilledButton
+                <BasicOutlineButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
-                  type={`dark`}
+                  type={`success`}
                   iconBefore={
                     <IoMdPersonAdd
                       size={15}
                       className={`mr-1`}
                     />
                   }
+                  curvedEdges={false}
                   className={`min-w-[100px] max-w-[200px]`}
                 />
               </div>
-            </CustomCard>
+            </div>
           </div>
         </div>
       </AdminBaseTemplate>
