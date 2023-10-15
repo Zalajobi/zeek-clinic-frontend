@@ -23,6 +23,8 @@ import AdminProfile from '@pages/admin/AdminProfile';
 import AdminProviderDetails from '@pages/admin/AdminProviderDetails';
 import QueryClientProviderWrapper from '@lib/api';
 import AdminDepartmentsPage from '@pages/admin/AdminDepartmentsPage';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -166,7 +168,9 @@ const router = createBrowserRouter([
 root.render(
   <StrictMode>
     <QueryClientProviderWrapper>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </QueryClientProviderWrapper>
   </StrictMode>
 );

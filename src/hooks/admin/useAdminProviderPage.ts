@@ -1,18 +1,24 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { axiosGetRequestUserService } from '@lib/axios';
-import {
-  // ProviderPageSiteResponseData,
-  ProviderAndRelationAPIResponse,
-} from '@typeSpec/admin';
-import { customPromiseRequest } from '@lib/requests';
 import { useQuery } from 'react-query';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+import { useDispatch, useSelector } from 'react-redux';
+import { setResultFrom } from '../../redux/reducers/tableReducer';
 
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { noOfPages } = useSelector((state: any) => state.adminProviderTable);
+
+  // Fetch Params
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
+  const [providerFrom, setProviderFrom] = useState<Date>();
+  const [providerTo, setProviderTo] = useState<Date>();
+  const [searchProvider, setSearchProvider] = useState<string>('');
+  const [countryFilter, setCountryFilter] = useState<string>('');
   const [providerStatus, setProviderStatus] = useState<
     | 'ALL'
     | 'ACTIVE'
@@ -23,26 +29,21 @@ export const useAdminProviderPage = () => {
     | 'TERMINATED'
     | 'UNAVAILABLE'
   >('ALL');
-  const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [countryFilter, setCountryFilter] = useState<string>('');
-  const [searchProvider, setSearchProvider] = useState<string>('');
-  const [providerFrom, setProviderFrom] = useState<Date>();
-  const [providerTo, setProviderTo] = useState<Date>();
-  const [noOfPages, setNoOfPages] = useState<number>(0);
-  const [resultFrom, setResultFrom] = useState<number>(0);
-  const [resultTo, setResultTo] = useState<number>(0);
-  const [totalProviders, setTotalProviders] = useState<number>(0);
-  const [providerData, setProviderData] = useState<
-    ProviderAndRelationAPIResponse[]
-  >([]);
-  const [selectAllProviders, setSelectAllProviders] = useState(false);
 
-  useEffect(() => {
-    getData().then((response) => {
-      console.log(response);
-    });
-  }, []);
+  const [refetchProvidersData, setRefetchProvidersData] = useState(false);
+  const [selectAllProviders, setSelectAllProviders] = useState(false);
+  const [actions, setActions] = useState<
+    | 'page-load'
+    | 'selectFrom'
+    | 'selectTo'
+    | 'search'
+    | 'tab'
+    | 'perPage'
+    | 'nextPage'
+    | 'previousPage'
+    | 'countryFilter'
+    | 'pageNumber'
+  >('page-load');
 
   const {
     data: siteData,
@@ -57,163 +58,57 @@ export const useAdminProviderPage = () => {
     }
   );
 
-  const getData = async () => {
-    const params = {
-      page: currentPage,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: providerFrom,
-      to_date: providerTo,
-      search: searchProvider,
-      country: countryFilter,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
+  const {
+    data: providerData,
+    isLoading: providerDataLoading,
+    isError: providerDataError,
+  } = useQuery<AccountServiceApiResponse>(
+    ['providerTableData', refetchProvidersData],
+    function () {
+      const params = {
+        page: currentPage,
+        per_page: perPage === 'All' ? 0 : perPage,
+        from_date: providerFrom,
+        to_date: providerTo,
+        search: searchProvider,
+        country: countryFilter,
+        status: providerStatus === 'ALL' ? '' : providerStatus,
+      };
 
-    const [providerData] = await customPromiseRequest([
-      axiosGetRequestUserService(
+      return axiosGetRequestUserService(
         `/providers/admin/get-providers/pagination/${siteId}`,
         params
-      ),
-    ]);
-
-    // if (siteInfo?.status === 'fulfilled' && siteInfo?.value?.success) {
-    //   setSiteData(siteInfo?.value?.data as ProviderPageSiteResponseData);
-    // } else {
-    //   toast.error('Error getting site data');
-    // }
-
-    if (providerData?.status === 'fulfilled' && providerData?.value?.success) {
-      const count = providerData?.value?.data?.count as number;
-
-      setTotalProviders(count);
-      setProviderData(
-        providerData?.value?.data?.providers as ProviderAndRelationAPIResponse[]
       );
-
-      setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)));
-      setResultTo(
-        currentPage + 1 === noOfPages
-          ? count
-          : currentPage * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
-      );
-      setResultFrom(1);
-    } else {
-      toast.error('Error getting providers data');
     }
-  };
+  );
 
   const onUpdateSelectFrom = async (value: Date) => {
     setProviderFrom(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: value,
-      to_date: providerTo,
-      search: searchProvider,
-      country: countryFilter,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
-
-    setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
-    setResultTo(
-      1 === noOfPages
-        ? totalProviders
-        : currentPage * (perPage !== 'All' ? perPage : 0) +
-            (perPage !== 'All' ? perPage : 0)
-    );
+    setActions('selectFrom');
     setCurrentPage(0);
+    dispatch(setResultFrom((perPage !== 'All' ? perPage : 0) + 1));
 
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onUpdateSelectTo = async (value: Date) => {
     setProviderTo(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: providerFrom,
-      to_date: value,
-      search: searchProvider,
-      country: countryFilter,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
-
-    setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
-    setResultTo(
-      currentPage + 1 === noOfPages
-        ? totalProviders
-        : currentPage * (perPage !== 'All' ? perPage : 0) +
-            (perPage !== 'All' ? perPage : 0)
+    dispatch(
+      setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1)
     );
+    setCurrentPage(0);
+    setActions('selectTo');
 
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onUpdateSearchProvider = async (value: string) => {
-    console.log(value);
     setSearchProvider(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: providerFrom,
-      to_date: providerTo,
-      search: value as string,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
-
-    setResultFrom(1);
+    dispatch(setResultFrom(1));
     setCurrentPage(0);
+    setActions('search');
 
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onUpdateStatusFilterTab = async (
@@ -228,111 +123,30 @@ export const useAdminProviderPage = () => {
       | 'UNAVAILABLE'
   ) => {
     setProviderStatus(tab);
-    setResultFrom(1);
+    dispatch(setResultFrom(1));
     setCurrentPage(0);
+    setActions('tab');
 
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: providerFrom,
-      to_date: providerTo,
-      search: searchProvider,
-      country: countryFilter,
-      status: tab === 'ALL' ? '' : tab,
-    };
-
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
     setPerPage(value);
-    setNoOfPages(
-      Math.ceil(totalProviders / (value === 'All' ? totalProviders : value))
-    );
-    setResultFrom(1);
-    setResultTo(value === 'All' ? totalProviders : value);
+    dispatch(setResultFrom(1));
     setCurrentPage(0);
+    setActions('tab');
 
-    const params = {
-      page: 0,
-      per_page: value === 'All' ? 0 : value,
-      from_date: providerFrom,
-      to_date: providerTo,
-      search: searchProvider,
-      country: countryFilter,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
-
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
       setCurrentPage(value);
+      dispatch(setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1));
+      setActions('nextPage');
 
-      setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
-      setResultTo(
-        value + 1 === noOfPages
-          ? totalProviders
-          : value * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
-      );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: providerFrom,
-        to_date: providerTo,
-        search: searchProvider,
-        country: countryFilter,
-        status: providerStatus === 'ALL' ? '' : providerStatus,
-      };
-
-      const response = await axiosGetRequestUserService(
-        `/providers/admin/get-providers/pagination/${siteId}`,
-        params
-      );
-
-      if (response.success) {
-        setProviderData(
-          response?.data?.providers as ProviderAndRelationAPIResponse[]
-        );
-        setTotalProviders(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
+      setRefetchProvidersData(!refetchProvidersData);
     }
   };
 
@@ -340,81 +154,20 @@ export const useAdminProviderPage = () => {
     if (value === -1) toast.error('You are on the first page');
     else {
       setCurrentPage(value);
+      dispatch(setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1));
+      setActions('previousPage');
 
-      setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
-      setResultTo(
-        value + 1 === noOfPages
-          ? totalProviders
-          : value * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
-      );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: providerFrom,
-        to_date: providerTo,
-        search: searchProvider,
-        country: countryFilter,
-        status: providerStatus === 'ALL' ? '' : providerStatus,
-      };
-
-      const response = await axiosGetRequestUserService(
-        `/providers/admin/get-providers/pagination/${siteId}`,
-        params
-      );
-
-      if (response.success) {
-        setProviderData(
-          response?.data?.providers as ProviderAndRelationAPIResponse[]
-        );
-        setTotalProviders(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
+      setRefetchProvidersData(!refetchProvidersData);
     }
   };
 
   const filterByCountry = async (value: string) => {
     setCountryFilter(value);
-    setResultFrom(1);
+    dispatch(setResultFrom(1));
     setCurrentPage(0);
+    setActions('previousPage');
 
-    // setResultTo((value + 1 === noOfPages) ? totalHospitals : ((value) * (perPage !== 'All' ? perPage : 0)) + (perPage !== 'All' ? perPage : 0))
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: providerFrom,
-      to_date: providerTo,
-      search: searchProvider,
-      country: value,
-      status: providerStatus === 'ALL' ? '' : providerStatus,
-    };
-
-    const response = await axiosGetRequestUserService(
-      `/providers/admin/get-providers/pagination/${siteId}`,
-      params
-    );
-
-    if (response.success) {
-      setProviderData(
-        response?.data?.providers as ProviderAndRelationAPIResponse[]
-      );
-      setTotalProviders(response?.data?.count as number);
-      // setResultTo(perPage === 'All' ? response?.data?.count : perPage)
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage * 1);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+    setRefetchProvidersData(!refetchProvidersData);
   };
 
   const onEnterPageNumber = async (value: number | string) => {
@@ -424,13 +177,9 @@ export const useAdminProviderPage = () => {
     else {
       const pageNumber = value ? Number(value) : 0;
       setCurrentPage(pageNumber - 1);
-
-      setResultFrom((pageNumber - 1) * (perPage !== 'All' ? perPage : 0) + 1);
-      setResultTo(
-        pageNumber - 1 === noOfPages
-          ? totalProviders
-          : (pageNumber - 1) * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
+      setActions('pageNumber');
+      dispatch(
+        setResultFrom((pageNumber - 1) * (perPage !== 'All' ? perPage : 0) + 1)
       );
 
       const params = {
@@ -443,23 +192,7 @@ export const useAdminProviderPage = () => {
         status: providerStatus === 'ALL' ? '' : providerStatus,
       };
 
-      const response = await axiosGetRequestUserService(
-        `/providers/admin/get-providers/pagination/${siteId}`,
-        params
-      );
-
-      if (response.success) {
-        setProviderData(
-          response?.data?.providers as ProviderAndRelationAPIResponse[]
-        );
-        setTotalProviders(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
+      setRefetchProvidersData(!refetchProvidersData);
     }
   };
 
@@ -478,13 +211,8 @@ export const useAdminProviderPage = () => {
 
   return {
     // Values
-    navigate,
-    providerData,
-    totalProviders,
     providerFrom,
     providerTo,
-    resultFrom,
-    resultTo,
     currentPage,
     searchProvider,
     perPage,
@@ -494,6 +222,10 @@ export const useAdminProviderPage = () => {
     siteData,
     siteDataLoading,
     siteDataError,
+    providerData,
+    providerDataLoading,
+    providerDataError,
+    actions,
 
     // Functions
     onUpdateSelectFrom,

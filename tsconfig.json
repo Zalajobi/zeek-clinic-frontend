@@ -25,6 +25,7 @@
       "@pages/*": ["pages/*"],
       "@typeSpec/*": ["typeSpec/*"],
       "@util/*": ["util/*"]
+      //      "@redux/*": ["redux/*"]
     }
   },
   "include": ["src"]

@@ -11,25 +11,35 @@ import {
 } from '@components/tables/row-col-mapping/AdminTable';
 import ProvidersTab from '@components/admin/providers/ProvidersTab';
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setNoOfPages,
+  setResultFrom,
+  setResultTo,
+  setTotalProviders,
+} from '../../redux/reducers/tableReducer';
 
 const AdminProvider = () => {
+  const dispatch = useDispatch();
+  const { resultFrom, noOfPages, totalProviders, resultTo } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
   const {
     // Values
-    providerData,
-    totalProviders,
     providerFrom,
     providerTo,
-    resultFrom,
-    resultTo,
     currentPage,
     searchProvider,
     perPage,
-    noOfPages,
     selectAllProviders,
     providerStatus,
     siteData,
     siteDataLoading,
     siteDataError,
+    providerData,
+    providerDataLoading,
+    actions,
+    // providerDataError,
 
     // Functions
     onUpdateSelectFrom,
@@ -44,6 +54,69 @@ const AdminProvider = () => {
     onUpdateSelectAllProviders,
   } = useAdminProviderPage();
 
+  if (!providerDataLoading) {
+    // console.log(providersData?.data?.providers)
+    const count = providerData?.data?.count;
+    dispatch(setTotalProviders(count));
+    dispatch(
+      setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)))
+    );
+
+    if (actions === 'page-load') {
+      dispatch(setResultFrom(1));
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (
+      actions === 'selectFrom' ||
+      actions === 'selectTo' ||
+      actions === 'search' ||
+      actions === 'tab'
+    ) {
+      dispatch(
+        setResultTo(
+          1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'nextPage' || actions === 'previousPage') {
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'countryFilter') {
+      dispatch(setResultTo(perPage === 'All' ? count : perPage * 1));
+    }
+
+    if (actions === 'pageNumber') {
+      dispatch(
+        setResultTo(
+          currentPage === noOfPages
+            ? totalProviders
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+  }
+
   if (siteDataError) toast.error('Something Went Wrong Getting Site Data');
 
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -55,11 +128,11 @@ const AdminProvider = () => {
   const data = useMemo(
     () =>
       AdminProviderDataRow(
-        providerData,
+        providerData?.data?.providers,
         onUpdateSelectedRow,
         selectAllProviders
       ) ?? [],
-    [providerData, onUpdateSelectedRow, selectAllProviders]
+    [providerData?.data?.providers, onUpdateSelectedRow, selectAllProviders]
   );
 
   return (
