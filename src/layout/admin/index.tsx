@@ -16,7 +16,6 @@ import {
   FaUserPlus,
 } from 'react-icons/fa';
 import { SidebarItemProps } from '@typeSpec/common';
-import { RxDashboard } from 'react-icons/rx';
 import { GrOrganization } from 'react-icons/gr';
 import { GiDoctorFace } from 'react-icons/gi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
@@ -24,6 +23,8 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import { useState } from 'react';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
+  const adminData = JSON.parse(localStorage.getItem('adminData') as string);
+
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
     return [
       {
@@ -126,7 +127,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
             className={`text-gray-500`}
           />
         ),
-        // route: '/patient',
+        route: `/admin/departments/${adminData?.siteId as string}`,
         showSidebar: showSidebar,
       },
 

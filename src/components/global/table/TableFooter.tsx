@@ -1,7 +1,6 @@
 import { IconButton, Typography } from '@material-tailwind/react';
 import { Fragment } from 'react';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
-import { TextInputWithoutLabel } from '../formInput/CustomInput';
 
 interface TableFooterProps {
   noOfPages: number;

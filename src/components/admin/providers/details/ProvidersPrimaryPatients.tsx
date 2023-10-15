@@ -12,7 +12,7 @@ import {
   ProviderPrimaryPatientRowData,
 } from '@components/tables/row-col-mapping/patient/ProviderPrimaryPatientTable';
 import Table from '@components/global/table/Table';
-import { MovePatientActionModal } from '@components/patient/modals/quickAction/SingleActionModals';
+import { MovePatientActionModal } from '@components/modals/quickAction/MovePatientActionModal';
 import { useProvidersPrimaryPatients } from '@hooks/patient/useProvidersPrimaryPatients';
 import { Button } from '@material-tailwind/react';
 import { LoadingSpinner } from '@components/global/Toast';
@@ -70,7 +70,7 @@ const ProvidersPrimaryPatients = ({
         navigate,
         handleOpenMovePatientModal
       ),
-    [data]
+    [data, loading, navigate, handleOpenMovePatientModal]
   );
 
   return (

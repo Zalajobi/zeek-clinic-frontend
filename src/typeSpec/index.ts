@@ -18,9 +18,14 @@ export interface UserServiceDepartmentResponseData {
 }
 
 export interface UserServiceUnitResponseData {
+  created_at: Date;
+  description: string;
   id: string;
   name: string;
-  description: string;
+  patients: number;
+  providers: number;
+  siteId: string;
+  updated_at: Date;
 }
 
 export interface UserServiceRoleResponseData {

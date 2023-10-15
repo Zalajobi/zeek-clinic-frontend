@@ -24,7 +24,7 @@ export const useAdminChangePassword = () => {
     verifyToken(searchParams.get('token') as string).then((r) =>
       console.log(r)
     );
-  }, [searchParams]);
+  }, []);
 
   const verifyToken = async (token: string) => {
     const response = await axiosGetRequestUserService(

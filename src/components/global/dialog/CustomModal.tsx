@@ -1,7 +1,6 @@
 import { Fragment, ReactNode } from 'react';
 import { Typography } from '@components/global/dialog/Typography';
 import {
-  Button,
   Dialog,
   DialogBody,
   DialogFooter,

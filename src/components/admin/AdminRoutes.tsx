@@ -175,8 +175,8 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
               color={`#3975ae`}
             />
           }
-          text={`Department`}
-          to={`/admin/appointments/${id}`}
+          text={`Departments`}
+          to={`/admin/departments/${siteId}`}
         />
 
         <BeautifulLink

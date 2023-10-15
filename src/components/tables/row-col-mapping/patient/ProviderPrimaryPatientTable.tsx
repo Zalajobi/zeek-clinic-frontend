@@ -182,7 +182,7 @@ export const ProviderPrimaryPatientRowData = (
           />
 
           <Link
-            to={`#`}
+            to={`/admin/patient/details/${item?.id}`}
             className={`text-black hover:text-gray-500 decoration-0`}>
             <b className={`font-extrabold`}>
               {`${item.personalInfo?.title ?? ''} ${
@@ -347,6 +347,8 @@ export const ProviderPrimaryPatientRowData = (
         </>
       ),
     });
+
+    return;
   });
 
   return rowItems;

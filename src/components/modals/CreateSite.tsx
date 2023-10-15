@@ -12,11 +12,8 @@ import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
   CreateSiteInput,
   CreateSiteInputSchema,
-} from '../../typeSpec/superadmin/forms';
-import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '@components/global/CustomButton';
+} from '@typeSpec/superadmin/forms';
+import { BasicOutlineButton } from '@components/global/CustomButton';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 
 interface CreateSiteModalProps {

@@ -3,7 +3,6 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
 import { MdArrowDropDown } from 'react-icons/md';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
-import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
 import {
   CustomDropDownMenuSelect,
   DateInput,
@@ -20,10 +19,6 @@ interface AdminTableProps {
   onUpdateQuery: (event: ChangeEvent<HTMLInputElement>) => void;
   perPage: 'All' | 10 | 20 | 50 | 100;
   onUpdatePerPageItem: (value: 'All' | 10 | 20 | 50 | 100) => void;
-  filterFromDate: Date;
-  onUpdateFilterFromDate: (date: Date) => void;
-  filterToDate: Date;
-  onUpdateFilterToDate: (date: Date) => void;
   noOfPages: number;
   totalCount: number;
   resultFrom: number;
@@ -36,6 +31,10 @@ interface AdminTableProps {
   disableCountryFilter?: boolean;
   countries?: SelectInputFieldProps[];
   onUpdateCountryFilter?: (event: string) => void;
+  filterFromDate?: Date;
+  onUpdateFilterFromDate?: (date: Date) => void;
+  filterToDate?: Date;
+  onUpdateFilterToDate?: (date: Date) => void;
 }
 
 export const ApplicationTable = ({
@@ -95,31 +94,35 @@ export const ApplicationTable = ({
               }
             />
 
-            <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-              <div className="flex items-center justify-center w-full space-x-3 md:w-auto">
-                <DateInput
-                  label={`From`}
-                  placeholder={`DD/MM/YYYY`}
-                  change={(e) =>
-                    onUpdateFilterFromDate(new Date(e.target.value))
-                  }
-                  value={filterFromDate as Date}
-                  id={`from`}
-                  icon={<FaCalendarAlt size={20} />}
-                />
+            {onUpdateFilterFromDate && onUpdateFilterToDate && (
+              <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                <div className="flex items-center justify-center w-full space-x-3 md:w-auto">
+                  <DateInput
+                    label={`From`}
+                    placeholder={`DD/MM/YYYY`}
+                    change={(e) =>
+                      onUpdateFilterFromDate(new Date(e.target.value))
+                    }
+                    value={filterFromDate as Date}
+                    id={`from`}
+                    icon={<FaCalendarAlt size={20} />}
+                  />
 
-                <CgArrowsH size={40} />
+                  <CgArrowsH size={40} />
 
-                <DateInput
-                  label={`To`}
-                  placeholder={`DD/MM/YYYY`}
-                  change={(e) => onUpdateFilterToDate(new Date(e.target.value))}
-                  value={filterToDate as Date}
-                  id={`to`}
-                  icon={<FaCalendarAlt size={20} />}
-                />
+                  <DateInput
+                    label={`To`}
+                    placeholder={`DD/MM/YYYY`}
+                    change={(e) =>
+                      onUpdateFilterToDate(new Date(e.target.value))
+                    }
+                    value={filterToDate as Date}
+                    id={`to`}
+                    icon={<FaCalendarAlt size={20} />}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {disableCountryFilter && (
               <div>

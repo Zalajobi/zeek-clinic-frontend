@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
-import { initTE, Select } from 'tw-elements';
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 
 export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
-  const navigate = useNavigate();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
@@ -27,12 +25,11 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
     setAllCountries(countriesUpdate);
-
-    // initTE({ Select, Datepicker, Input, Ripple });
-    initTE({ Select });
-  }, [navigate]);
+  }, []);
 
   const onUpdateLogo = (logo: string) => setLogo(logo);
 
@@ -45,6 +42,8 @@ export const useCreateSite = (reloadPage: () => void, totalSites: number) => {
         value: country.isoCode,
         placeholder: country.name,
       });
+
+      return;
     });
 
     setAllCountryStates(countryStates);
