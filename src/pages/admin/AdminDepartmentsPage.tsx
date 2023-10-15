@@ -44,6 +44,7 @@ const AdminDepartmentsPage = () => {
     showOnDeleteModal,
     showOnEditModal,
     departmentName,
+    deptDesc,
 
     // Functions
     onUpdateSelectFrom,
@@ -225,6 +226,7 @@ const AdminDepartmentsPage = () => {
         updateDepartmentInformation={updateDepartmentInformation}
         onUpdateDeptName={onUpdateDepartmentName}
         onUpdateDeptDescription={onUpdateDepartmentDescription}
+        descriptionPlaceholder={deptDesc}
       />
     </AdminBaseTemplate>
   );

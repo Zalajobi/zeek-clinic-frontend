@@ -10,6 +10,7 @@ module.exports = {
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@typeSpec': path.resolve(__dirname, 'src/typeSpec'),
       '@util': path.resolve(__dirname, 'src/util'),
+      '@redux/*': path.resolve(__dirname, 'src/redux'),
     },
   },
 };

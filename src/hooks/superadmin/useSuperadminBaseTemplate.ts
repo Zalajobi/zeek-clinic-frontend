@@ -21,7 +21,7 @@ export const useSuperadminBaseTemplate = () => {
     getHeaderData().catch((err) => {
       navigate('/superadmin/login');
     });
-  }, []);
+  }, [navigate]);
 
   const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
 

@@ -16,6 +16,7 @@ interface EditDepartmentModalProps {
   open: boolean;
   handler: () => void;
   nameOfDepartment: string;
+  descriptionPlaceholder: string;
   updateDepartmentInformation: () => void;
   onUpdateDeptName: (value: string) => void;
   onUpdateDeptDescription: (value: string) => void;
@@ -25,6 +26,7 @@ const EditDepartmentModal = ({
   open,
   handler,
   nameOfDepartment,
+  descriptionPlaceholder,
   updateDepartmentInformation,
   onUpdateDeptName,
   onUpdateDeptDescription,
@@ -52,12 +54,14 @@ const EditDepartmentModal = ({
           <Input
             size="lg"
             onChange={(event) => onUpdateDeptName(event.target.value)}
+            placeholder={nameOfDepartment}
             label="Name"
           />
 
           <Textarea
             label="Description"
             onChange={(event) => onUpdateDeptDescription(event.target.value)}
+            placeholder={descriptionPlaceholder}
           />
         </DialogBody>
 
