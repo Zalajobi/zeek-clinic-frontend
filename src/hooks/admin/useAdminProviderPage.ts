@@ -3,15 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { axiosGetRequestUserService } from '@lib/axios';
 import {
-  ProviderPageSiteResponseData,
+  // ProviderPageSiteResponseData,
   ProviderAndRelationAPIResponse,
 } from '@typeSpec/admin';
 import { customPromiseRequest } from '@lib/requests';
+import { useQuery } from 'react-query';
+import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 
 export const useAdminProviderPage = () => {
   const { siteId } = useParams();
   const navigate = useNavigate();
-  const [siteData, setSiteData] = useState<ProviderPageSiteResponseData>();
   const [providerStatus, setProviderStatus] = useState<
     | 'ALL'
     | 'ACTIVE'
@@ -43,6 +44,19 @@ export const useAdminProviderPage = () => {
     });
   }, []);
 
+  const {
+    data: siteData,
+    isLoading: siteDataLoading,
+    isError: siteDataError,
+  } = useQuery<AccountServiceApiResponse>(
+    ['siteInfoData', siteId],
+    function () {
+      return axiosGetRequestUserService(
+        `/site/admin/get/information/${siteId}`
+      );
+    }
+  );
+
   const getData = async () => {
     const params = {
       page: currentPage,
@@ -54,20 +68,18 @@ export const useAdminProviderPage = () => {
       status: providerStatus === 'ALL' ? '' : providerStatus,
     };
 
-    const [siteInfo, providerData] = await customPromiseRequest([
-      axiosGetRequestUserService(`/site/admin/get/information/${siteId}`),
-
+    const [providerData] = await customPromiseRequest([
       axiosGetRequestUserService(
         `/providers/admin/get-providers/pagination/${siteId}`,
         params
       ),
     ]);
 
-    if (siteInfo?.status === 'fulfilled' && siteInfo?.value?.success) {
-      setSiteData(siteInfo?.value?.data as ProviderPageSiteResponseData);
-    } else {
-      toast.error('Error getting site data');
-    }
+    // if (siteInfo?.status === 'fulfilled' && siteInfo?.value?.success) {
+    //   setSiteData(siteInfo?.value?.data as ProviderPageSiteResponseData);
+    // } else {
+    //   toast.error('Error getting site data');
+    // }
 
     if (providerData?.status === 'fulfilled' && providerData?.value?.success) {
       const count = providerData?.value?.data?.count as number;
@@ -467,7 +479,6 @@ export const useAdminProviderPage = () => {
   return {
     // Values
     navigate,
-    siteData,
     providerData,
     totalProviders,
     providerFrom,
@@ -480,6 +491,9 @@ export const useAdminProviderPage = () => {
     noOfPages,
     selectAllProviders,
     providerStatus,
+    siteData,
+    siteDataLoading,
+    siteDataError,
 
     // Functions
     onUpdateSelectFrom,

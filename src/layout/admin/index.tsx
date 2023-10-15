@@ -23,6 +23,8 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import { useState } from 'react';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
+  const adminData = JSON.parse(localStorage.getItem('adminData') as string);
+
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
     return [
       {
@@ -125,7 +127,7 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
             className={`text-gray-500`}
           />
         ),
-        // route: '/patient',
+        route: `/admin/departments/${adminData?.siteId as string}`,
         showSidebar: showSidebar,
       },
 

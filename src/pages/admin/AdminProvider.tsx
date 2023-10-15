@@ -4,18 +4,17 @@ import { useAdminProviderPage } from '@hooks/admin/useAdminProviderPage';
 import { Typography } from '@components/global/dialog/Typography';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
-import { ProviderPageSiteResponseData } from '@typeSpec/admin';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
 } from '@components/tables/row-col-mapping/AdminTable';
 import ProvidersTab from '@components/admin/providers/ProvidersTab';
+import toast from 'react-hot-toast';
 
 const AdminProvider = () => {
   const {
     // Values
-    siteData,
     providerData,
     totalProviders,
     providerFrom,
@@ -28,6 +27,9 @@ const AdminProvider = () => {
     noOfPages,
     selectAllProviders,
     providerStatus,
+    siteData,
+    siteDataLoading,
+    siteDataError,
 
     // Functions
     onUpdateSelectFrom,
@@ -41,6 +43,8 @@ const AdminProvider = () => {
     onUpdateSelectedRow,
     onUpdateSelectAllProviders,
   } = useAdminProviderPage();
+
+  if (siteDataError) toast.error('Something Went Wrong Getting Site Data');
 
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
@@ -69,10 +73,21 @@ const AdminProvider = () => {
             className={`text-left`}
           />
 
-          <AdminSiteInfo data={siteData as ProviderPageSiteResponseData} />
+          <AdminSiteInfo
+            dataLoading={siteDataLoading}
+            id={siteData?.data?.id ?? ''}
+            address={siteData?.data?.address ?? ''}
+            name={siteData?.data?.name ?? ''}
+            email={siteData?.data?.email ?? ''}
+            country={siteData?.data?.country ?? ''}
+            phone={siteData?.data?.phone ?? ''}
+            state={siteData?.data?.state ?? ''}
+            city={siteData?.data?.city ?? ''}
+            created_at={siteData?.data?.city ?? ''}
+          />
 
           <AdminRoutes
-            siteId={siteData?.id ?? ''}
+            siteId={siteData?.data?.id ?? ''}
             id={adminData?.id}
           />
 
