@@ -6,11 +6,127 @@ import AdminRoutes from '@components/admin/AdminRoutes';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
 import { TiPlus } from 'react-icons/ti';
+import {
+  DepartmentsPatientAndDoctorCountDataColumn,
+  DepartmentsPatientAndDoctorCountTableRowData,
+} from '@components/tables/row-col-mapping/DepartmentsTable';
+import { useMemo } from 'react';
+import {
+  setNoOfPages,
+  setResultFrom,
+  setResultTo,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationTable } from '@components/global/table/ApplicationTable';
 
 const AdminDepartmentsPage = () => {
-  const { siteData, siteDataLoading } = useAdminDepartmentsPage();
-
+  const dispatch = useDispatch();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
+  const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
+  const {
+    // Values
+    siteData,
+    siteDataLoading,
+    siteDataError,
+    departmentData,
+    departmentDataError,
+    departmentDataLoading,
+    currentPage,
+    perPage,
+    departmentFrom,
+    departmentTo,
+    searchDepartment,
+    actions,
+    navigate,
+
+    // Functions
+    onUpdateSelectFrom,
+    onUpdateSelectTo,
+    onUpdateSearchDepartment,
+    onUpdatePerPageItem,
+    onClickNext,
+    onClickPrevious,
+    onEnterPageNumber,
+  } = useAdminDepartmentsPage();
+
+  if (departmentData && !departmentDataLoading && !departmentDataError) {
+    console.log(`departmentData?.data`);
+    console.log(departmentData?.data);
+    const count = departmentData?.data?.count;
+
+    dispatch(setTotalDataCount(count));
+    dispatch(
+      setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)))
+    );
+
+    if (actions === 'page-load') {
+      dispatch(setResultFrom(1));
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (
+      actions === 'selectFrom' ||
+      actions === 'selectTo' ||
+      actions === 'search' ||
+      actions === 'tab'
+    ) {
+      dispatch(
+        setResultTo(
+          1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'nextPage' || actions === 'previousPage') {
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'pageNumber') {
+      dispatch(
+        setResultTo(
+          currentPage === noOfPages
+            ? totalDataCount
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+  }
+
+  const columns = useMemo(
+    () => DepartmentsPatientAndDoctorCountDataColumn(),
+    []
+  );
+
+  const data = useMemo(
+    () =>
+      DepartmentsPatientAndDoctorCountTableRowData(
+        departmentData?.data?.departments,
+        departmentDataLoading,
+        navigate
+      ) ?? [],
+    [departmentData?.data?.departments, departmentDataLoading, navigate]
+  );
 
   return (
     <AdminBaseTemplate>
@@ -66,6 +182,28 @@ const AdminDepartmentsPage = () => {
         <AdminRoutes
           siteId={siteData?.data?.id ?? ''}
           id={adminData?.id}
+        />
+
+        <ApplicationTable
+          tableColumns={columns}
+          tableData={data}
+          query={searchDepartment}
+          onUpdateQuery={(e) => onUpdateSearchDepartment(e.target.value)}
+          perPage={perPage}
+          onUpdatePerPageItem={onUpdatePerPageItem}
+          filterFromDate={departmentFrom as Date}
+          onUpdateFilterFromDate={onUpdateSelectFrom}
+          filterToDate={departmentTo as Date}
+          onUpdateFilterToDate={onUpdateSelectTo}
+          noOfPages={noOfPages}
+          totalCount={totalDataCount}
+          resultFrom={resultFrom}
+          resultTo={resultTo}
+          onClickNext={onClickNext}
+          onClickPrevious={onClickPrevious}
+          currentPage={currentPage}
+          onEnterPageNumber={onEnterPageNumber}
+          containerClassName={`mt-8`}
         />
       </div>
     </AdminBaseTemplate>

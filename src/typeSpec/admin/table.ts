@@ -15,3 +15,13 @@ export interface ProvidersPageRowData {
   created_at: ReactNode;
   action: ReactNode;
 }
+
+export interface DepartmentsPatientAndProviderCountRowData {
+  created_at: ReactNode;
+  description: ReactNode;
+  name: ReactNode;
+  patients: ReactNode;
+  providers: ReactNode;
+  action: ReactNode;
+  updated_at: ReactNode;
+}

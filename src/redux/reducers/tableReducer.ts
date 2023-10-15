@@ -5,7 +5,7 @@ export const adminProviderTableListSlice = createSlice({
   initialState: {
     resultTo: 0,
     noOfPages: 0,
-    totalProviders: 0,
+    totalDataCount: 0,
     resultFrom: 0,
   },
 
@@ -16,8 +16,8 @@ export const adminProviderTableListSlice = createSlice({
     setNoOfPages: (state, action) => {
       state.noOfPages = action.payload;
     },
-    setTotalProviders: (state, action) => {
-      state.totalProviders = action.payload;
+    setTotalDataCount: (state, action) => {
+      state.totalDataCount = action.payload;
     },
     setResultFrom: (state, action) => {
       state.resultFrom = action.payload;
@@ -25,7 +25,7 @@ export const adminProviderTableListSlice = createSlice({
   },
 });
 
-export const { setResultTo, setNoOfPages, setTotalProviders, setResultFrom } =
+export const { setResultTo, setNoOfPages, setTotalDataCount, setResultFrom } =
   adminProviderTableListSlice.actions;
 
 export default adminProviderTableListSlice.reducer;

@@ -15,13 +15,13 @@ import {
   setNoOfPages,
   setResultFrom,
   setResultTo,
-  setTotalProviders,
+  setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
 import HorizontalTabs from '@components/global/HorizontalTabs';
 
 const AdminProvider = () => {
   const dispatch = useDispatch();
-  const { resultFrom, noOfPages, totalProviders, resultTo } = useSelector(
+  const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
     (state: any) => state.adminProviderTable
   );
   const {
@@ -57,7 +57,7 @@ const AdminProvider = () => {
   if (!providerDataLoading) {
     // console.log(providersData?.data?.providers)
     const count = providerData?.data?.count;
-    dispatch(setTotalProviders(count));
+    dispatch(setTotalDataCount(count));
     dispatch(
       setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)))
     );
@@ -109,7 +109,7 @@ const AdminProvider = () => {
       dispatch(
         setResultTo(
           currentPage === noOfPages
-            ? totalProviders
+            ? totalDataCount
             : currentPage * (perPage !== 'All' ? perPage : 0) +
                 (perPage !== 'All' ? perPage : 0)
         )
@@ -125,6 +125,7 @@ const AdminProvider = () => {
     () => AdminProviderDataColumn(onUpdateSelectAllProviders),
     [onUpdateSelectAllProviders]
   );
+
   const data = useMemo(
     () =>
       AdminProviderDataRow(
@@ -183,7 +184,7 @@ const AdminProvider = () => {
             filterToDate={providerTo as Date}
             onUpdateFilterToDate={onUpdateSelectTo}
             noOfPages={noOfPages}
-            totalCount={totalProviders}
+            totalCount={totalDataCount}
             resultFrom={resultFrom}
             resultTo={resultTo}
             onClickNext={onClickNext}

@@ -26,7 +26,7 @@ const HorizontalTabs = ({
               <a
                 className={`text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit py-2 transition-all ease-in-out px-3 ${
                   activeTab === value
-                    ? 'bg-[#6090be] shadow-lg shadow-green-950 text-white'
+                    ? '!bg-[#6090be] shadow-lg shadow-green-950 text-white'
                     : 'text-black hover:bg-blue-gray-500 hover:text-white'
                 }`}
                 data-tab-target=""
