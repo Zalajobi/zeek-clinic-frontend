@@ -5,7 +5,6 @@ import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
-import { TiPlus } from 'react-icons/ti';
 import {
   DepartmentsPatientAndDoctorCountDataColumn,
   DepartmentsPatientAndDoctorCountTableRowData,
@@ -19,6 +18,7 @@ import {
 } from '../../redux/reducers/tableReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
+import { WarningModal } from '@components/modals/GlobalModal';
 
 const AdminDepartmentsPage = () => {
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ const AdminDepartmentsPage = () => {
     searchDepartment,
     actions,
     navigate,
+    showOnDeleteModal,
 
     // Functions
     onUpdateSelectFrom,
@@ -49,6 +50,9 @@ const AdminDepartmentsPage = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
+    onDeleteDepartment,
+    setShowOnDeleteModal,
+    proceedDeleteDepartment,
   } = useAdminDepartmentsPage();
 
   if (departmentData && !departmentDataLoading && !departmentDataError) {
@@ -120,9 +124,15 @@ const AdminDepartmentsPage = () => {
       DepartmentsPatientAndDoctorCountTableRowData(
         departmentData?.data?.departments,
         departmentDataLoading,
-        navigate
+        navigate,
+        onDeleteDepartment
       ) ?? [],
-    [departmentData?.data?.departments, departmentDataLoading, navigate]
+    [
+      departmentData?.data?.departments,
+      departmentDataLoading,
+      navigate,
+      onDeleteDepartment,
+    ]
   );
 
   return (
@@ -137,18 +147,6 @@ const AdminDepartmentsPage = () => {
           />
 
           <div className={`w-full flex justify-end mb-6`}>
-            <BasicOutlineButton
-              text={`Create`}
-              type={`primary`}
-              className={`mr-4 min-w-[130px]`}
-              iconBefore={
-                <TiPlus
-                  size={20}
-                  className={`mr-3`}
-                />
-              }
-            />
-
             <BasicOutlineButton
               type={`primary`}
               text={`Export`}
@@ -203,6 +201,12 @@ const AdminDepartmentsPage = () => {
           containerClassName={`mt-8`}
         />
       </div>
+
+      <WarningModal
+        open={showOnDeleteModal}
+        handler={() => setShowOnDeleteModal(!showOnDeleteModal)}
+        proceed={proceedDeleteDepartment}
+      />
     </AdminBaseTemplate>
   );
 };

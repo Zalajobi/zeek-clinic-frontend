@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverHandler,
 } from '@material-tailwind/react';
+import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
 
 export const DepartmentsPatientAndDoctorCountDataColumn = () => {
   return [
@@ -85,7 +86,8 @@ export const DepartmentsPatientAndDoctorCountDataColumn = () => {
 export const DepartmentsPatientAndDoctorCountTableRowData = (
   data: UserServiceUnitResponseData[],
   isLoading: boolean,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  onDeleteDepartment: (id: string, name: string) => void
 ) => {
   const rowItems: DepartmentsPatientAndProviderCountRowData[] = [];
 
@@ -171,23 +173,33 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
                 size="sm"
                 variant={`text`}
                 className={`my-2 w-full`}
-                onClick={() => navigate(`/admin/patient/details/${item?.id}`)}>
+                onClick={() =>
+                  navigate(`/admin/department/details/${item?.id}`)
+                }>
                 View
               </Button>
 
               <Button
                 size="sm"
-                variant={`text`}
-                className={`my-2 w-full`}
-                onClick={() => navigate(`/admin/patient/billing/${item?.id}`)}>
+                className={`my-2 w-full flex items-center`}
+                color={`red`}
+                onClick={() => onDeleteDepartment(item?.id, item?.name)}>
+                <MdDeleteForever
+                  color={`white`}
+                  className={`mr-1`}
+                />
                 Delete
               </Button>
 
               <Button
                 size="sm"
-                variant={`text`}
-                className={`my-2 w-full`}
+                color={`blue`}
+                className={`my-2 w-full flex items-center`}
                 onClick={() => navigate('#')}>
+                <MdModeEdit
+                  color={`white`}
+                  className={`mr-1`}
+                />
                 Edit
               </Button>
             </PopoverContent>

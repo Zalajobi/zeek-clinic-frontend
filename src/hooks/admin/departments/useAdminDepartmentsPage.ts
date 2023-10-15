@@ -20,6 +20,9 @@ export const useAdminDepartmentsPage = () => {
   const [departmentTo, setDepartmentTo] = useState<Date>();
   const [searchDepartment, setSearchDepartment] = useState('');
 
+  const [departmentId, setDepartmentId] = useState('');
+  const [deptDeleteName, setDeptDeleteName] = useState('');
+  const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
   const [refetchProvidersData, setRefetchProvidersData] = useState(false);
   const [actions, setActions] = useState<
     | 'page-load'
@@ -144,6 +147,19 @@ export const useAdminDepartmentsPage = () => {
     }
   };
 
+  const onDeleteDepartment = (id: string, name: string) => {
+    setShowOnDeleteModal(!showOnDeleteModal);
+    setDeptDeleteName(name);
+    setDepartmentId(id);
+  };
+
+  const proceedDeleteDepartment = () => {
+    setShowOnDeleteModal(!showOnDeleteModal);
+    setTimeout(() => {
+      toast.success(`Deleted ${deptDeleteName}`);
+    }, 5000);
+  };
+
   return {
     // Values
     siteData,
@@ -160,6 +176,7 @@ export const useAdminDepartmentsPage = () => {
     actions,
     navigate,
     refetchProvidersData,
+    showOnDeleteModal,
 
     // Functions
     onUpdateSelectFrom,
@@ -169,5 +186,8 @@ export const useAdminDepartmentsPage = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
+    onDeleteDepartment,
+    setShowOnDeleteModal,
+    proceedDeleteDepartment,
   };
 };
