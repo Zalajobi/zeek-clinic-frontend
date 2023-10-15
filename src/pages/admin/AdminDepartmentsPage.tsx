@@ -19,6 +19,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import { WarningModal } from '@components/modals/GlobalModal';
+import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentModal';
 
 const AdminDepartmentsPage = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,8 @@ const AdminDepartmentsPage = () => {
     actions,
     navigate,
     showOnDeleteModal,
+    showOnEditModal,
+    departmentName,
 
     // Functions
     onUpdateSelectFrom,
@@ -50,9 +53,14 @@ const AdminDepartmentsPage = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
-    onDeleteDepartment,
+    showOnDeleteDepartmentModalHandler,
     setShowOnDeleteModal,
     proceedDeleteDepartment,
+    showOnEditDepartmentModalHandler,
+    setShowOnEditModal,
+    updateDepartmentInformation,
+    onUpdateDepartmentName,
+    onUpdateDepartmentDescription,
   } = useAdminDepartmentsPage();
 
   if (departmentData && !departmentDataLoading && !departmentDataError) {
@@ -125,13 +133,15 @@ const AdminDepartmentsPage = () => {
         departmentData?.data?.departments,
         departmentDataLoading,
         navigate,
-        onDeleteDepartment
+        showOnDeleteDepartmentModalHandler,
+        showOnEditDepartmentModalHandler
       ) ?? [],
     [
       departmentData?.data?.departments,
       departmentDataLoading,
       navigate,
-      onDeleteDepartment,
+      showOnDeleteDepartmentModalHandler,
+      showOnEditDepartmentModalHandler,
     ]
   );
 
@@ -206,6 +216,15 @@ const AdminDepartmentsPage = () => {
         open={showOnDeleteModal}
         handler={() => setShowOnDeleteModal(!showOnDeleteModal)}
         proceed={proceedDeleteDepartment}
+      />
+
+      <EditDepartmentModal
+        open={showOnEditModal}
+        handler={() => setShowOnEditModal(!showOnEditModal)}
+        nameOfDepartment={departmentName}
+        updateDepartmentInformation={updateDepartmentInformation}
+        onUpdateDeptName={onUpdateDepartmentName}
+        onUpdateDeptDescription={onUpdateDepartmentDescription}
       />
     </AdminBaseTemplate>
   );

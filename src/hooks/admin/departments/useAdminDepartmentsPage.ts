@@ -20,9 +20,13 @@ export const useAdminDepartmentsPage = () => {
   const [departmentTo, setDepartmentTo] = useState<Date>();
   const [searchDepartment, setSearchDepartment] = useState('');
 
+  // Edit Department
+  const [departmentName, setDepartmentName] = useState('');
+  const [departmentDescription, setDepartmentDescription] = useState('');
+
   const [departmentId, setDepartmentId] = useState('');
-  const [deptDeleteName, setDeptDeleteName] = useState('');
   const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
+  const [showOnEditModal, setShowOnEditModal] = useState(false);
   const [refetchProvidersData, setRefetchProvidersData] = useState(false);
   const [actions, setActions] = useState<
     | 'page-load'
@@ -147,18 +151,36 @@ export const useAdminDepartmentsPage = () => {
     }
   };
 
-  const onDeleteDepartment = (id: string, name: string) => {
+  const showOnDeleteDepartmentModalHandler = (id: string, name: string) => {
     setShowOnDeleteModal(!showOnDeleteModal);
-    setDeptDeleteName(name);
+    setDepartmentName(name);
     setDepartmentId(id);
   };
 
   const proceedDeleteDepartment = () => {
     setShowOnDeleteModal(!showOnDeleteModal);
     setTimeout(() => {
-      toast.success(`Deleted ${deptDeleteName}`);
+      toast.success(`Deleted ${departmentName}`);
     }, 5000);
   };
+
+  const showOnEditDepartmentModalHandler = (id: string, name: string) => {
+    setShowOnEditModal(!showOnEditModal);
+    setDepartmentName(name);
+    setDepartmentId(id);
+  };
+
+  const updateDepartmentInformation = async () => {
+    setShowOnEditModal(!setShowOnEditModal);
+    setTimeout(() => {
+      toast.success(`Updated ${departmentName}`);
+    }, 3000);
+  };
+
+  const onUpdateDepartmentName = (value: string) => setDepartmentName(value);
+
+  const onUpdateDepartmentDescription = (value: string) =>
+    setDepartmentDescription(value);
 
   return {
     // Values
@@ -177,6 +199,8 @@ export const useAdminDepartmentsPage = () => {
     navigate,
     refetchProvidersData,
     showOnDeleteModal,
+    showOnEditModal,
+    departmentName,
 
     // Functions
     onUpdateSelectFrom,
@@ -186,8 +210,13 @@ export const useAdminDepartmentsPage = () => {
     onClickNext,
     onClickPrevious,
     onEnterPageNumber,
-    onDeleteDepartment,
+    showOnDeleteDepartmentModalHandler,
     setShowOnDeleteModal,
     proceedDeleteDepartment,
+    showOnEditDepartmentModalHandler,
+    setShowOnEditModal,
+    updateDepartmentInformation,
+    onUpdateDepartmentName,
+    onUpdateDepartmentDescription,
   };
 };

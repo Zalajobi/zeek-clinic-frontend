@@ -87,7 +87,8 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
   data: UserServiceUnitResponseData[],
   isLoading: boolean,
   navigate: NavigateFunction,
-  onDeleteDepartment: (id: string, name: string) => void
+  showOnDeleteDepartmentModalHandler: (id: string, name: string) => void,
+  showEditDepartmentModalHandler: (id: string, name: string) => void
 ) => {
   const rowItems: DepartmentsPatientAndProviderCountRowData[] = [];
 
@@ -95,7 +96,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
     rowItems.push({
       name: (
         <Link
-          to={`#`}
+          to={`/admin/department/details/${item?.id}`}
           className={`text-black hover:text-gray-500 decoration-0`}>
           <b className={`font-extrabold`}>{item?.name ?? ''}</b>
         </Link>
@@ -183,7 +184,9 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
                 size="sm"
                 className={`my-2 w-full flex items-center`}
                 color={`red`}
-                onClick={() => onDeleteDepartment(item?.id, item?.name)}>
+                onClick={() =>
+                  showOnDeleteDepartmentModalHandler(item?.id, item?.name)
+                }>
                 <MdDeleteForever
                   color={`white`}
                   className={`mr-1`}
@@ -195,7 +198,9 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
                 size="sm"
                 color={`blue`}
                 className={`my-2 w-full flex items-center`}
-                onClick={() => navigate('#')}>
+                onClick={() =>
+                  showEditDepartmentModalHandler(item?.id, item?.name)
+                }>
                 <MdModeEdit
                   color={`white`}
                   className={`mr-1`}
