@@ -1,7 +1,10 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
-import { axiosGetRequestUserService } from '@lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPutRequestUserService,
+} from '@lib/axios';
 import { useState } from 'react';
 import { setResultFrom } from '../../../redux/reducers/tableReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +12,7 @@ import toast from 'react-hot-toast';
 
 export const useAdminDepartmentsPage = () => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { siteId } = useParams();
   const { noOfPages } = useSelector((state: any) => state.adminProviderTable);
@@ -22,6 +26,7 @@ export const useAdminDepartmentsPage = () => {
 
   // Edit Department
   const [departmentName, setDepartmentName] = useState('');
+  const [updateDepartmentName, setUpdateDepartmentName] = useState('');
   const [departmentDescription, setDepartmentDescription] = useState('');
 
   const [departmentId, setDepartmentId] = useState('');
@@ -74,6 +79,30 @@ export const useAdminDepartmentsPage = () => {
       );
     }
   );
+
+  const updateDepartmentMutate = useMutation({
+    mutationFn: (data: any) => {
+      return axiosPutRequestUserService(
+        `/department/admin/update/${departmentId}`,
+        data
+      );
+    },
+
+    onError: () => {
+      toast.error(`Something Went Wrong`);
+    },
+
+    onSuccess: (result) => {
+      if (toast?.success) toast.success(result?.message);
+      else toast.error('Something Went Wrong');
+
+      queryClient.resetQueries('departmentDataFetch');
+    },
+
+    onMutate: () => {
+      toast.custom(`Updating ${departmentName}`);
+    },
+  });
 
   const onUpdateSelectFrom = async (value: Date) => {
     setDepartmentFrom(value);
@@ -161,7 +190,7 @@ export const useAdminDepartmentsPage = () => {
     setShowOnDeleteModal(!showOnDeleteModal);
     setTimeout(() => {
       toast.success(`Deleted ${departmentName}`);
-    }, 5000);
+    }, 3000);
   };
 
   const showOnEditDepartmentModalHandler = (id: string, name: string) => {
@@ -173,11 +202,16 @@ export const useAdminDepartmentsPage = () => {
   const updateDepartmentInformation = async () => {
     setShowOnEditModal(!setShowOnEditModal);
     setTimeout(() => {
-      toast.success(`Updated ${departmentName}`);
-    }, 3000);
+      const data = {
+        name: updateDepartmentName,
+        description: departmentDescription,
+      };
+      updateDepartmentMutate.mutate(data);
+    }, 500);
   };
 
-  const onUpdateDepartmentName = (value: string) => setDepartmentName(value);
+  const onUpdateDepartmentName = (value: string) =>
+    setUpdateDepartmentName(value);
 
   const onUpdateDepartmentDescription = (value: string) =>
     setDepartmentDescription(value);

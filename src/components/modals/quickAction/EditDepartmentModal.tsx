@@ -40,11 +40,9 @@ const EditDepartmentModal = ({
         }}>
         <DialogHeader>
           <div className={`flex items-center gap-3`}>
-            <Link
-              to={`#`}
-              className={`text-black hover:text-gray-500 decoration-0`}>
-              <b className={`font-extrabold`}>{nameOfDepartment}</b>
-            </Link>
+            <p className={`text-black hover:text-gray-500 decoration-0`}>
+              <b className={`font-extrabold`}>Update {nameOfDepartment}</b>
+            </p>
           </div>
         </DialogHeader>
 
