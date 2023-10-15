@@ -1,10 +1,32 @@
 import { Fragment } from 'react';
-import { ProviderPageSiteResponseData } from '@typeSpec/admin';
 import { Typography } from '@components/global/dialog/Typography';
 import moment from 'moment/moment';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
 
-const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
+interface AdminSiteInfoProps {
+  address: string;
+  name: string;
+  email: string;
+  country: string;
+  phone: string;
+  id: string;
+  state: string;
+  city: string;
+  created_at: string;
+  dataLoading: boolean;
+}
+const AdminSiteInfo = ({
+  address,
+  name,
+  email,
+  country,
+  phone,
+  id,
+  state,
+  city,
+  created_at,
+  dataLoading,
+}: AdminSiteInfoProps) => {
   return (
     <Fragment>
       <CustomTransparentCard
@@ -27,10 +49,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.name as string}
+            text={name}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -43,10 +66,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.email as string}
+            text={email}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -59,10 +83,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.phone as string}
+            text={phone}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -75,10 +100,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={moment(data?.created_at).format('MMM DD. YYYY')}
+            text={moment(created_at).format('MMM DD. YYYY')}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -91,10 +117,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.country as string}
+            text={country}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -107,10 +134,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.state as string}
+            text={state}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -123,10 +151,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.city as string}
+            text={city}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
 
@@ -139,10 +168,11 @@ const AdminSiteInfo = ({ data }: { data: ProviderPageSiteResponseData }) => {
           />
 
           <Typography
-            text={data?.address as string}
+            text={address}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+            isLoading={dataLoading}
           />
         </div>
       </CustomTransparentCard>

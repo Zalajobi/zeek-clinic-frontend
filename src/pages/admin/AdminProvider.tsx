@@ -4,30 +4,42 @@ import { useAdminProviderPage } from '@hooks/admin/useAdminProviderPage';
 import { Typography } from '@components/global/dialog/Typography';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
-import { ProviderPageSiteResponseData } from '@typeSpec/admin';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   AdminProviderDataColumn,
   AdminProviderDataRow,
 } from '@components/tables/row-col-mapping/AdminTable';
-import ProvidersTab from '@components/admin/providers/ProvidersTab';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setNoOfPages,
+  setResultFrom,
+  setResultTo,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
+import HorizontalTabs from '@components/global/HorizontalTabs';
 
 const AdminProvider = () => {
+  const dispatch = useDispatch();
+  const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
   const {
     // Values
-    siteData,
-    providerData,
-    totalProviders,
     providerFrom,
     providerTo,
-    resultFrom,
-    resultTo,
     currentPage,
     searchProvider,
     perPage,
-    noOfPages,
     selectAllProviders,
     providerStatus,
+    siteData,
+    siteDataLoading,
+    siteDataError,
+    providerData,
+    providerDataLoading,
+    actions,
+    tabLabelValue,
 
     // Functions
     onUpdateSelectFrom,
@@ -42,20 +54,86 @@ const AdminProvider = () => {
     onUpdateSelectAllProviders,
   } = useAdminProviderPage();
 
+  if (!providerDataLoading) {
+    // console.log(providersData?.data?.providers)
+    const count = providerData?.data?.count;
+    dispatch(setTotalDataCount(count));
+    dispatch(
+      setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)))
+    );
+
+    if (actions === 'page-load') {
+      dispatch(setResultFrom(1));
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (
+      actions === 'selectFrom' ||
+      actions === 'selectTo' ||
+      actions === 'search' ||
+      actions === 'tab'
+    ) {
+      dispatch(
+        setResultTo(
+          1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'nextPage' || actions === 'previousPage') {
+      dispatch(
+        setResultTo(
+          currentPage + 1 === noOfPages
+            ? count
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+
+    if (actions === 'countryFilter') {
+      dispatch(setResultTo(perPage === 'All' ? count : perPage * 1));
+    }
+
+    if (actions === 'pageNumber') {
+      dispatch(
+        setResultTo(
+          currentPage === noOfPages
+            ? totalDataCount
+            : currentPage * (perPage !== 'All' ? perPage : 0) +
+                (perPage !== 'All' ? perPage : 0)
+        )
+      );
+    }
+  }
+
+  if (siteDataError) toast.error('Something Went Wrong Getting Site Data');
+
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   const columns = useMemo(
     () => AdminProviderDataColumn(onUpdateSelectAllProviders),
     [onUpdateSelectAllProviders]
   );
+
   const data = useMemo(
     () =>
       AdminProviderDataRow(
-        providerData,
+        providerData?.data?.providers,
         onUpdateSelectedRow,
         selectAllProviders
       ) ?? [],
-    [providerData, onUpdateSelectedRow, selectAllProviders]
+    [providerData?.data?.providers, onUpdateSelectedRow, selectAllProviders]
   );
 
   return (
@@ -69,16 +147,29 @@ const AdminProvider = () => {
             className={`text-left`}
           />
 
-          <AdminSiteInfo data={siteData as ProviderPageSiteResponseData} />
+          <AdminSiteInfo
+            dataLoading={siteDataLoading}
+            id={siteData?.data?.id ?? ''}
+            address={siteData?.data?.address ?? ''}
+            name={siteData?.data?.name ?? ''}
+            email={siteData?.data?.email ?? ''}
+            country={siteData?.data?.country ?? ''}
+            phone={siteData?.data?.phone ?? ''}
+            state={siteData?.data?.state ?? ''}
+            city={siteData?.data?.city ?? ''}
+            created_at={siteData?.data?.city ?? ''}
+          />
 
           <AdminRoutes
-            siteId={siteData?.id ?? ''}
+            siteId={siteData?.data?.id ?? ''}
             id={adminData?.id}
           />
 
-          <ProvidersTab
+          <HorizontalTabs
+            className={`w-[75%] rounded-2xl`}
+            changeTabFunction={onUpdateStatusFilterTab}
+            labelValue={tabLabelValue}
             activeTab={providerStatus}
-            click={onUpdateStatusFilterTab}
           />
 
           <ApplicationTable
@@ -93,7 +184,7 @@ const AdminProvider = () => {
             filterToDate={providerTo as Date}
             onUpdateFilterToDate={onUpdateSelectTo}
             noOfPages={noOfPages}
-            totalCount={totalProviders}
+            totalCount={totalDataCount}
             resultFrom={resultFrom}
             resultTo={resultTo}
             onClickNext={onClickNext}
