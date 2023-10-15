@@ -88,7 +88,11 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
   isLoading: boolean,
   navigate: NavigateFunction,
   showOnDeleteDepartmentModalHandler: (id: string, name: string) => void,
-  showEditDepartmentModalHandler: (id: string, name: string) => void
+  showEditDepartmentModalHandler: (
+    id: string,
+    name: string,
+    description: string
+  ) => void
 ) => {
   const rowItems: DepartmentsPatientAndProviderCountRowData[] = [];
 
@@ -199,7 +203,11 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
                 color={`blue`}
                 className={`my-2 w-full flex items-center`}
                 onClick={() =>
-                  showEditDepartmentModalHandler(item?.id, item?.name)
+                  showEditDepartmentModalHandler(
+                    item?.id,
+                    item?.name,
+                    item?.description
+                  )
                 }>
                 <MdModeEdit
                   color={`white`}

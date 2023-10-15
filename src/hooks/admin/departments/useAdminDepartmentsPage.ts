@@ -28,6 +28,7 @@ export const useAdminDepartmentsPage = () => {
   const [departmentName, setDepartmentName] = useState('');
   const [updateDepartmentName, setUpdateDepartmentName] = useState('');
   const [departmentDescription, setDepartmentDescription] = useState('');
+  const [deptDesc, setDeptDesc] = useState('');
 
   const [departmentId, setDepartmentId] = useState('');
   const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
@@ -193,10 +194,15 @@ export const useAdminDepartmentsPage = () => {
     }, 3000);
   };
 
-  const showOnEditDepartmentModalHandler = (id: string, name: string) => {
+  const showOnEditDepartmentModalHandler = (
+    id: string,
+    name: string,
+    description: string
+  ) => {
     setShowOnEditModal(!showOnEditModal);
     setDepartmentName(name);
     setDepartmentId(id);
+    setDeptDesc(description);
   };
 
   const updateDepartmentInformation = async () => {
@@ -235,6 +241,7 @@ export const useAdminDepartmentsPage = () => {
     showOnDeleteModal,
     showOnEditModal,
     departmentName,
+    deptDesc,
 
     // Functions
     onUpdateSelectFrom,
