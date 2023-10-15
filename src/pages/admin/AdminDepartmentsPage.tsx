@@ -30,7 +30,6 @@ const AdminDepartmentsPage = () => {
     // Values
     siteData,
     siteDataLoading,
-    siteDataError,
     departmentData,
     departmentDataError,
     departmentDataLoading,
@@ -53,8 +52,6 @@ const AdminDepartmentsPage = () => {
   } = useAdminDepartmentsPage();
 
   if (departmentData && !departmentDataLoading && !departmentDataError) {
-    console.log(`departmentData?.data`);
-    console.log(departmentData?.data);
     const count = departmentData?.data?.count;
 
     dispatch(setTotalDataCount(count));

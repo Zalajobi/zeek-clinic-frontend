@@ -38,7 +38,7 @@ export const useAdminDepartmentsPage = () => {
     isLoading: siteDataLoading,
     isError: siteDataError,
   } = useQuery<AccountServiceApiResponse>(
-    ['siteInfoData', siteId, refetchProvidersData],
+    ['siteInfoData', siteId],
     function () {
       return axiosGetRequestUserService(
         `/site/admin/get/information/${siteId}`
@@ -51,7 +51,7 @@ export const useAdminDepartmentsPage = () => {
     isLoading: departmentDataLoading,
     isError: departmentDataError,
   } = useQuery<AccountServiceApiResponse>(
-    ['departmentData', siteId],
+    ['departmentDataFetch', refetchProvidersData],
     function () {
       const params = {
         page: currentPage,
@@ -159,6 +159,7 @@ export const useAdminDepartmentsPage = () => {
     searchDepartment,
     actions,
     navigate,
+    refetchProvidersData,
 
     // Functions
     onUpdateSelectFrom,
