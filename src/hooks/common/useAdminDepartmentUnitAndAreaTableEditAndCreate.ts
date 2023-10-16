@@ -109,7 +109,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else if (type === 'units') {
         return axiosPutRequestUserService(
-          `/department/admin/update/${editItemId}`,
+          `/unit/admin/update/${editItemId}`,
           data
         );
       } else {
@@ -274,10 +274,9 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     setNewEditItemInfo({ ...newEditItemInfo, description: value });
 
   const updateItemInformation = async () => {
-    // setShowEditModal(!showEditModal);
+    setShowEditModal(!showEditModal);
     setTimeout(() => {
-      // updateItemInfoMutate.mutate(newEditItemInfo);
-      console.log(newEditItemInfo);
+      updateItemInfoMutate.mutate(newEditItemInfo);
     }, 500);
   };
 
