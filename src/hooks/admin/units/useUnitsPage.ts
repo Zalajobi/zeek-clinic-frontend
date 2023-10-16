@@ -7,11 +7,8 @@ import { useState } from 'react';
 export const useAdminDepartmentsPage = () => {
   const { siteId } = useParams();
 
-  // Create Department
-  const [showNewDepartmentModal, setShowNewDepartmentModal] = useState(false);
-
-  const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
-  const [showOnEditModal, setShowOnEditModal] = useState(false);
+  // Create New Unit
+  const [showCreateUnitModal, setShowCreateUnitModal] = useState(false);
 
   const {
     data: siteData,
@@ -26,19 +23,16 @@ export const useAdminDepartmentsPage = () => {
     }
   );
 
+  // Create New Unit
   return {
     // Values
     siteData,
     siteDataLoading,
     siteDataError,
-    showOnDeleteModal,
-    showOnEditModal,
-    showNewDepartmentModal,
+    showCreateUnitModal,
     siteId,
 
     // Functions
-    setShowOnDeleteModal,
-    setShowOnEditModal,
-    setShowNewDepartmentModal,
+    setShowCreateUnitModal,
   };
 };

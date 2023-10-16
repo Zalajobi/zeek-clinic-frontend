@@ -1,26 +1,26 @@
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
-import { useAdminDepartmentsPage } from '@hooks/admin/departments/useAdminDepartmentsPage';
+import { useAdminDepartmentsPage } from '@hooks/admin/units/useUnitsPage';
 import { Typography } from '@components/global/dialog/Typography';
+import { BasicOutlineButton } from '@components/global/CustomButton';
+import { FaPlus } from 'react-icons/fa';
+import { CgExport } from 'react-icons/cg';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
-import { BasicOutlineButton } from '@components/global/CustomButton';
-import { CgExport } from 'react-icons/cg';
-import { FaPlus } from 'react-icons/fa';
 import { LoadingSpinner } from '@components/global/Toast';
 import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
 
-const AdminDepartmentsPage = () => {
+const AdminUnitsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
   const {
     // Values
     siteData,
     siteDataLoading,
-    showNewDepartmentModal,
     siteDataError,
+    showCreateUnitModal,
     siteId,
 
     // Functions
-    setShowNewDepartmentModal,
+    setShowCreateUnitModal,
   } = useAdminDepartmentsPage();
 
   return (
@@ -28,7 +28,7 @@ const AdminDepartmentsPage = () => {
       <LoadingSpinner
         message={siteData?.message as string}
         error={!siteData?.success || siteDataError}
-        success={siteData?.success && !siteDataLoading}
+        success={siteData?.success}
         loading={siteDataLoading}
       />
 
@@ -46,7 +46,7 @@ const AdminDepartmentsPage = () => {
               type={`primary`}
               text={`Create New`}
               className={`ml-4 min-w-[130px]`}
-              click={() => setShowNewDepartmentModal(!showNewDepartmentModal)}
+              click={() => setShowCreateUnitModal(!showCreateUnitModal)}
               iconBefore={
                 <FaPlus
                   size={20}
@@ -88,11 +88,11 @@ const AdminDepartmentsPage = () => {
         />
 
         <AdminDepartmentUnitAndAreaTableEditAndCreate
-          type={`departments`}
+          type={`units`}
           siteId={siteId as string}
-          openNewItemModal={showNewDepartmentModal}
+          openNewItemModal={showCreateUnitModal}
           handleNewItemModal={() =>
-            setShowNewDepartmentModal(!showNewDepartmentModal)
+            setShowCreateUnitModal(!showCreateUnitModal)
           }
         />
       </div>
@@ -100,4 +100,4 @@ const AdminDepartmentsPage = () => {
   );
 };
 
-export default AdminDepartmentsPage;
+export default AdminUnitsPage;

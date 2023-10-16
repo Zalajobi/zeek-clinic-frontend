@@ -10,13 +10,16 @@ import {
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
-  open: boolean;
-  handler: () => void;
+  type: 'departments' | 'units' | 'area';
   nameOfDepartment: string;
   descriptionPlaceholder: string;
+  open: boolean;
+  handler: () => void;
   updateDepartmentInformation: () => void;
   onUpdateDeptName: (value: string) => void;
   onUpdateDeptDescription: (value: string) => void;
+  onUpdateEditTotalBeds: (value: number) => void;
+  onUpdateEditOccupiedBeds: (value: number) => void;
 }
 
 const EditDepartmentModal = ({
@@ -27,6 +30,9 @@ const EditDepartmentModal = ({
   updateDepartmentInformation,
   onUpdateDeptName,
   onUpdateDeptDescription,
+  onUpdateEditOccupiedBeds,
+  onUpdateEditTotalBeds,
+  type,
 }: EditDepartmentModalProps) => {
   return (
     <Fragment>
@@ -54,6 +60,28 @@ const EditDepartmentModal = ({
             placeholder={nameOfDepartment}
             label="Name"
           />
+
+          {type === 'units' && (
+            <>
+              <Input
+                size="lg"
+                type={`number`}
+                onChange={(event) =>
+                  onUpdateEditTotalBeds(Number(event.target.value))
+                }
+                label="Total Bed(s)"
+              />
+
+              <Input
+                size="lg"
+                type={`number`}
+                onChange={(event) =>
+                  onUpdateEditOccupiedBeds(Number(event.target.value))
+                }
+                label="Occupied Bed(s)"
+              />
+            </>
+          )}
 
           <Textarea
             label="Description"
