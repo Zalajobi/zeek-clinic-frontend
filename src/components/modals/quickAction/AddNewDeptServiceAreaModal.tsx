@@ -85,7 +85,7 @@ export const AddNewDeptServiceAreaModal = ({
             />
 
             <BasicOutlineButton
-              // Disable Button Click activity if name and desccription hasn't met the condition
+              // Disable Button Click activity if name and description hasn't met the condition
               disabled={
                 !(newDescription && newDescription.length >= 20) ||
                 !(newName && newName.length >= 3)

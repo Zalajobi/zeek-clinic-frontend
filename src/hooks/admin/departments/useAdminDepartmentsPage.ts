@@ -26,51 +26,6 @@ export const useAdminDepartmentsPage = () => {
     }
   );
 
-  // const updateDepartmentMutate = useMutation({
-  //   mutationFn: (data: any) => {
-  //     return axiosPutRequestUserService(
-  //       `/department/admin/update/${departmentId}`,
-  //       data
-  //     );
-  //   },
-  //
-  //   onError: () => {
-  //     toast.error(`Something Went Wrong`);
-  //   },
-  //
-  //   onSuccess: (result) => {
-  //     if (result?.success) toast.success(result?.message);
-  //     else toast.error('Something Went Wrong');
-  //
-  //     queryClient.resetQueries('departmentDataFetch');
-  //   },
-  //
-  //   onMutate: () => {
-  //     toast.custom(`Updating ${departmentName}`);
-  //   },
-  // });
-
-  // const createDepartmentMutate = useMutation({
-  //   mutationFn: (data: any) => {
-  //     return axiosPostRequestUserService(`/department/create`, data);
-  //   },
-  //
-  //   onError: () => {
-  //     toast.error(`Something Went Wrong`);
-  //   },
-  //
-  //   onSuccess: (result) => {
-  //     if (result?.success) toast.success(result?.message);
-  //     else toast.error(result?.message);
-  //
-  //     queryClient.resetQueries('departmentDataFetch');
-  //   },
-  //
-  //   onMutate: () => {
-  //     toast.success(`Creating ${newDepartment.name} Department`);
-  //   },
-  // });
-
   return {
     // Values
     siteData,
@@ -79,6 +34,7 @@ export const useAdminDepartmentsPage = () => {
     showOnDeleteModal,
     showOnEditModal,
     showNewDepartmentModal,
+    siteId,
 
     // Functions
     setShowOnDeleteModal,

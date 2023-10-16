@@ -17,6 +17,7 @@ const AdminDepartmentsPage = () => {
     siteDataLoading,
     showNewDepartmentModal,
     siteDataError,
+    siteId,
 
     // Functions
     setShowNewDepartmentModal,
@@ -88,6 +89,7 @@ const AdminDepartmentsPage = () => {
 
         <AdminDepartmentUnitAndAreaTableEditAndCreate
           type={`departments`}
+          siteId={siteId as string}
           openNewItemModal={showNewDepartmentModal}
           handleNewItemModal={() =>
             setShowNewDepartmentModal(!showNewDepartmentModal)

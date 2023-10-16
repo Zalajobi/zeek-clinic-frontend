@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import {
   axiosGetRequestUserService,
+  axiosPostRequestUserService,
   axiosPutRequestUserService,
 } from '@lib/axios';
 import { setResultFrom } from '../../redux/reducers/tableReducer';
@@ -12,12 +13,12 @@ import toast from 'react-hot-toast';
 
 export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   type: 'departments' | 'units' | 'area',
+  siteId: string,
   handleNewItemModal: () => void
 ) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const { siteId } = useParams();
   const { noOfPages } = useSelector((state: any) => state.adminProviderTable);
 
   // Table Fetch Params
@@ -62,6 +63,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const [createNewItem, setCreateNewItem] = useState({
     name: '',
     description: '',
+    siteId,
   });
 
   // Get Table Data  Query
@@ -126,6 +128,23 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onSuccess: (result) => {
       if (result?.success) toast.success(result?.message);
       else toast.error('Something Went Wrong');
+
+      queryClient.resetQueries('fetchTableData');
+    },
+  });
+
+  const createItemMutate = useMutation({
+    mutationFn: (data: any) => {
+      return axiosPostRequestUserService(`/department/create`, data);
+    },
+
+    onError: () => {
+      toast.error(`Something Went Wrong`);
+    },
+
+    onSuccess: (result) => {
+      if (result?.success) toast.success(result?.message);
+      else toast.error(result?.message);
 
       queryClient.resetQueries('fetchTableData');
     },
@@ -223,9 +242,6 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   const proceedDeleteItem = () => {
     setShowDeleteModal(!showDeleteModal);
-    console.log({
-      deleteItemId,
-    });
     setTimeout(() => {
       toast.success(`Deleted ${deleteItemName}`);
     }, 3000);
@@ -257,7 +273,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     setCreateNewItem({ ...createNewItem, name: value });
 
   const onUpdateCreateNewItemDescription = (value: string) =>
-    setCreateNewItem({ ...createNewItem, name: value });
+    setCreateNewItem({ ...createNewItem, description: value });
 
   const submitCreateNewItem = () => {
     if (!createNewItem?.name || !createNewItem?.description)
@@ -265,8 +281,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     else {
       handleNewItemModal();
       setTimeout(() => {
-        toast.success('Item Created');
-        // createDepartmentMutate.mutate(newDepartment);
+        createItemMutate.mutate(createNewItem);
       }, 3000);
     }
   };

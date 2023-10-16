@@ -17,6 +17,7 @@ import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentMo
 import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 
 interface AdminDepartmentUnitAndAreaTableEditAndCreateProps {
+  siteId: string;
   type: 'departments' | 'units' | 'area';
   openNewItemModal: boolean;
   handleNewItemModal: () => void;
@@ -26,6 +27,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
   type,
   openNewItemModal,
   handleNewItemModal,
+  siteId,
 }: AdminDepartmentUnitAndAreaTableEditAndCreateProps) => {
   const dispatch = useDispatch();
   const {
@@ -64,7 +66,11 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateCreateNewItemName,
     onUpdateCreateNewItemDescription,
     submitCreateNewItem,
-  } = useAdminDepartmentUnitAndAreaTableEditAndCreate(type, handleNewItemModal);
+  } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
+    type,
+    siteId,
+    handleNewItemModal
+  );
 
   const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
     (state: any) => state.adminProviderTable
