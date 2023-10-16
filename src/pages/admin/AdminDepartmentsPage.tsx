@@ -5,169 +5,29 @@ import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
-import {
-  DepartmentsPatientAndDoctorCountDataColumn,
-  DepartmentsPatientAndDoctorCountTableRowData,
-} from '@components/tables/row-col-mapping/DepartmentsTable';
-import { useMemo } from 'react';
-import {
-  setNoOfPages,
-  setResultFrom,
-  setResultTo,
-  setTotalDataCount,
-} from '../../redux/reducers/tableReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationTable } from '@components/global/table/ApplicationTable';
-import { WarningModal } from '@components/modals/GlobalModal';
-import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentModal';
 import { FaPlus } from 'react-icons/fa';
-import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 import { LoadingSpinner } from '@components/global/Toast';
+import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
 
 const AdminDepartmentsPage = () => {
-  const dispatch = useDispatch();
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
-  const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
-    (state: any) => state.adminProviderTable
-  );
   const {
     // Values
     siteData,
     siteDataLoading,
-    departmentData,
-    departmentDataError,
-    departmentDataLoading,
-    currentPage,
-    perPage,
-    departmentFrom,
-    departmentTo,
-    searchDepartment,
-    actions,
-    navigate,
-    showOnDeleteModal,
-    showOnEditModal,
-    departmentName,
-    deptDesc,
     showNewDepartmentModal,
     siteDataError,
 
     // Functions
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
-    onUpdateSearchDepartment,
-    onUpdatePerPageItem,
-    onClickNext,
-    onClickPrevious,
-    onEnterPageNumber,
-    showOnDeleteDepartmentModalHandler,
-    setShowOnDeleteModal,
-    proceedDeleteDepartment,
-    showOnEditDepartmentModalHandler,
-    setShowOnEditModal,
-    updateDepartmentInformation,
-    onUpdateDepartmentName,
-    onUpdateDepartmentDescription,
-    onUpdateNewDepartmentDescription,
-    onUpdateNewDepartmentName,
     setShowNewDepartmentModal,
-    createNewDepartment,
   } = useAdminDepartmentsPage();
-
-  if (departmentData && !departmentDataLoading && !departmentDataError) {
-    const count = departmentData?.data?.count;
-
-    dispatch(setTotalDataCount(count));
-    dispatch(
-      setNoOfPages(Math.ceil(count / (perPage === 'All' ? count : perPage)))
-    );
-
-    if (actions === 'page-load') {
-      dispatch(setResultFrom(1));
-      dispatch(
-        setResultTo(
-          currentPage + 1 === noOfPages
-            ? count
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-                (perPage !== 'All' ? perPage : 0)
-        )
-      );
-    }
-
-    if (
-      actions === 'selectFrom' ||
-      actions === 'selectTo' ||
-      actions === 'search' ||
-      actions === 'tab'
-    ) {
-      dispatch(
-        setResultTo(
-          1 === noOfPages
-            ? count
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-                (perPage !== 'All' ? perPage : 0)
-        )
-      );
-    }
-
-    if (actions === 'nextPage' || actions === 'previousPage') {
-      dispatch(
-        setResultTo(
-          currentPage + 1 === noOfPages
-            ? count
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-                (perPage !== 'All' ? perPage : 0)
-        )
-      );
-    }
-
-    if (actions === 'pageNumber') {
-      dispatch(
-        setResultTo(
-          currentPage === noOfPages
-            ? totalDataCount
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-                (perPage !== 'All' ? perPage : 0)
-        )
-      );
-    }
-  }
-
-  const columns = useMemo(
-    () => DepartmentsPatientAndDoctorCountDataColumn(),
-    []
-  );
-
-  const data = useMemo(
-    () =>
-      DepartmentsPatientAndDoctorCountTableRowData(
-        departmentData?.data?.departments,
-        departmentDataLoading,
-        navigate,
-        showOnDeleteDepartmentModalHandler,
-        showOnEditDepartmentModalHandler
-      ) ?? [],
-    [
-      departmentData?.data?.departments,
-      departmentDataLoading,
-      navigate,
-      showOnDeleteDepartmentModalHandler,
-      showOnEditDepartmentModalHandler,
-    ]
-  );
 
   return (
     <AdminBaseTemplate>
       <LoadingSpinner
         message={siteData?.message as string}
-        error={
-          !siteData?.success ||
-          siteDataError ||
-          siteDataError ||
-          departmentDataError
-        }
-        success={
-          siteData?.success && !siteDataLoading && !departmentDataLoading
-        }
+        error={!siteData?.success || siteDataError}
+        success={siteData?.success && !siteDataLoading}
         loading={siteDataLoading}
       />
 
@@ -226,53 +86,14 @@ const AdminDepartmentsPage = () => {
           id={adminData?.id}
         />
 
-        <ApplicationTable
-          tableColumns={columns}
-          tableData={data}
-          query={searchDepartment}
-          onUpdateQuery={(e) => onUpdateSearchDepartment(e.target.value)}
-          perPage={perPage}
-          onUpdatePerPageItem={onUpdatePerPageItem}
-          filterFromDate={departmentFrom as Date}
-          onUpdateFilterFromDate={onUpdateSelectFrom}
-          filterToDate={departmentTo as Date}
-          onUpdateFilterToDate={onUpdateSelectTo}
-          noOfPages={noOfPages}
-          totalCount={totalDataCount}
-          resultFrom={resultFrom}
-          resultTo={resultTo}
-          onClickNext={onClickNext}
-          onClickPrevious={onClickPrevious}
-          currentPage={currentPage}
-          onEnterPageNumber={onEnterPageNumber}
-          containerClassName={`mt-8`}
+        <AdminDepartmentUnitAndAreaTableEditAndCreate
+          type={`departments`}
+          openNewItemModal={showNewDepartmentModal}
+          handleNewItemModal={() =>
+            setShowNewDepartmentModal(!showNewDepartmentModal)
+          }
         />
       </div>
-
-      <WarningModal
-        open={showOnDeleteModal}
-        handler={() => setShowOnDeleteModal(!showOnDeleteModal)}
-        proceed={proceedDeleteDepartment}
-      />
-
-      <EditDepartmentModal
-        open={showOnEditModal}
-        handler={() => setShowOnEditModal(!showOnEditModal)}
-        nameOfDepartment={departmentName}
-        updateDepartmentInformation={updateDepartmentInformation}
-        onUpdateDeptName={onUpdateDepartmentName}
-        onUpdateDeptDescription={onUpdateDepartmentDescription}
-        descriptionPlaceholder={deptDesc}
-      />
-
-      <AddNewDeptServiceAreaModal
-        updateDescription={onUpdateNewDepartmentDescription}
-        updateName={onUpdateNewDepartmentName}
-        handler={() => setShowNewDepartmentModal(!showNewDepartmentModal)}
-        name={`Department`}
-        open={showNewDepartmentModal}
-        submit={createNewDepartment}
-      />
     </AdminBaseTemplate>
   );
 };

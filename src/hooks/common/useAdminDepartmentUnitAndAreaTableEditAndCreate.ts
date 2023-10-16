@@ -6,8 +6,6 @@ import { axiosGetRequestUserService } from '@lib/axios';
 import { setResultFrom } from '../../redux/reducers/tableReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { ThemeProvider } from '@material-tailwind/react';
-import value = ThemeProvider.propTypes.value;
 
 export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   type: 'departments' | 'units' | 'area'

@@ -17,11 +17,17 @@ import { WarningModal } from '@components/modals/GlobalModal';
 import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentModal';
 import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 
+interface AdminDepartmentUnitAndAreaTableEditAndCreateProps {
+  type: 'departments' | 'units' | 'area';
+  openNewItemModal: boolean;
+  handleNewItemModal: () => void;
+}
+
 const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
   type,
-}: {
-  type: 'departments' | 'units' | 'area';
-}) => {
+  openNewItemModal,
+  handleNewItemModal,
+}: AdminDepartmentUnitAndAreaTableEditAndCreateProps) => {
   const dispatch = useDispatch();
   const {
     // Values
