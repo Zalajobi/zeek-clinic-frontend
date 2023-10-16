@@ -89,7 +89,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else if (type === 'units') {
         return axiosGetRequestUserService(
-          `/department/list/paginated/${siteId}`,
+          `/unit/list/paginated/${siteId}`,
           params
         );
       } else {
@@ -235,6 +235,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   // Delete Item Functions Start
   const showOnDeleteModalHandler = (id: string, name: string) => {
+    console.log(deleteItemId);
     setShowDeleteModal(!showDeleteModal);
     setDeleteItemName(name);
     setDeleteItemId(id);

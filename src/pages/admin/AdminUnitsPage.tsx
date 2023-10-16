@@ -5,9 +5,9 @@ import { BasicOutlineButton } from '@components/global/CustomButton';
 import { FaPlus } from 'react-icons/fa';
 import { CgExport } from 'react-icons/cg';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
-import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { LoadingSpinner } from '@components/global/Toast';
+import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
 
 const AdminUnitsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -17,15 +17,11 @@ const AdminUnitsPage = () => {
     siteDataLoading,
     siteDataError,
     showCreateUnitModal,
+    siteId,
 
     // Functions
     setShowCreateUnitModal,
-    createNewUnit,
-    onUpdateNewUnitDescription,
-    onUpdateNewUnitName,
   } = useAdminDepartmentsPage();
-
-  console.log(siteData);
 
   return (
     <AdminBaseTemplate>
@@ -90,16 +86,16 @@ const AdminUnitsPage = () => {
           siteId={siteData?.data?.id ?? ''}
           id={adminData?.id}
         />
-      </div>
 
-      <AddNewDeptServiceAreaModal
-        updateDescription={onUpdateNewUnitDescription}
-        updateName={onUpdateNewUnitName}
-        handler={() => setShowCreateUnitModal(!showCreateUnitModal)}
-        name={`Department`}
-        open={showCreateUnitModal}
-        submit={createNewUnit}
-      />
+        <AdminDepartmentUnitAndAreaTableEditAndCreate
+          type={`units`}
+          siteId={siteId as string}
+          openNewItemModal={showCreateUnitModal}
+          handleNewItemModal={() =>
+            setShowCreateUnitModal(!showCreateUnitModal)
+          }
+        />
+      </div>
     </AdminBaseTemplate>
   );
 };

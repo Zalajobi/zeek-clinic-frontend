@@ -9,7 +9,7 @@ import {
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
-interface AddNewDeptServiceAreaModal {
+interface AddNewDeptServiceAreaModalProps {
   name: string;
   open: boolean;
   handler: () => void;
@@ -25,7 +25,7 @@ export const AddNewDeptServiceAreaModal = ({
   updateName,
   updateDescription,
   submit,
-}: AddNewDeptServiceAreaModal) => {
+}: AddNewDeptServiceAreaModalProps) => {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
 
