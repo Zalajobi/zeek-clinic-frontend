@@ -42,8 +42,10 @@ const AdminProviderDetails = () => {
 
   return (
     <Fragment>
-      {providerDataLoading ||
-        (unitDeptIsLoading && <LoadingSpinner message={`Loading Data...`} />)}
+      <LoadingSpinner
+        message={`Loading Data...`}
+        loading={unitDeptIsLoading || providerDataLoading}
+      />
 
       {providerDataError ||
         (unitDeptIsError && toast.error(`Error Retrieving Data...`))}

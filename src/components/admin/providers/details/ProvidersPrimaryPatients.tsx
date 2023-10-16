@@ -75,9 +75,10 @@ const ProvidersPrimaryPatients = ({
 
   return (
     <Fragment>
-      {movePatientLoading && (
-        <LoadingSpinner message={`Moving ${patientName}...`} />
-      )}
+      <LoadingSpinner
+        message={`Moving ${patientName}...`}
+        loading={movePatientLoading}
+      />
 
       <CustomCard
         className={`w-full !bg-[#fff] flex overflow-scroll flex-col h-[600px] ${className}`}>
