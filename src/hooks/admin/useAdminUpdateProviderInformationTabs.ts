@@ -116,7 +116,7 @@ export const useAdminUpdateProviderInformationTabs = (
     },
 
     onSuccess: (result) => {
-      if (toast?.success) toast.success(result?.message);
+      if (result?.success) toast.success(result?.message);
       else toast.error('Something Went Wrong');
 
       setShowLoading(false);

@@ -3,12 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import {
   axiosGetRequestUserService,
+  axiosPostRequestUserService,
   axiosPutRequestUserService,
 } from '@lib/axios';
 import { useState } from 'react';
 import { setResultFrom } from '../../../redux/reducers/tableReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import { date } from 'yup';
 
 export const useAdminDepartmentsPage = () => {
   const dispatch = useDispatch();
@@ -29,6 +31,14 @@ export const useAdminDepartmentsPage = () => {
   const [updateDepartmentName, setUpdateDepartmentName] = useState('');
   const [departmentDescription, setDepartmentDescription] = useState('');
   const [deptDesc, setDeptDesc] = useState('');
+
+  // Create Department
+  const [newDepartment, setNewDepartment] = useState({
+    name: '',
+    description: '',
+    siteId,
+  });
+  const [showNewDepartmentModal, setShowNewDepartmentModal] = useState(false);
 
   const [departmentId, setDepartmentId] = useState('');
   const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
@@ -94,7 +104,7 @@ export const useAdminDepartmentsPage = () => {
     },
 
     onSuccess: (result) => {
-      if (toast?.success) toast.success(result?.message);
+      if (result?.success) toast.success(result?.message);
       else toast.error('Something Went Wrong');
 
       queryClient.resetQueries('departmentDataFetch');
@@ -102,6 +112,27 @@ export const useAdminDepartmentsPage = () => {
 
     onMutate: () => {
       toast.custom(`Updating ${departmentName}`);
+    },
+  });
+
+  const createDepartmentMutate = useMutation({
+    mutationFn: (data: any) => {
+      return axiosPostRequestUserService(`/department/create`, data);
+    },
+
+    onError: () => {
+      toast.error(`Something Went Wrong`);
+    },
+
+    onSuccess: (result) => {
+      if (result?.success) toast.success(result?.message);
+      else toast.error(result?.message);
+
+      queryClient.resetQueries('departmentDataFetch');
+    },
+
+    onMutate: () => {
+      toast.success(`Creating ${newDepartment.name} Department`);
     },
   });
 
@@ -222,6 +253,21 @@ export const useAdminDepartmentsPage = () => {
   const onUpdateDepartmentDescription = (value: string) =>
     setDepartmentDescription(value);
 
+  // Create New Department
+  const onUpdateNewDepartmentDescription = (description: string) =>
+    setNewDepartment({ ...newDepartment, description });
+
+  const onUpdateNewDepartmentName = (name: string) =>
+    setNewDepartment({ ...newDepartment, name });
+
+  const createNewDepartment = () => {
+    setShowNewDepartmentModal(!showNewDepartmentModal);
+    toast('Creating New Department');
+    setTimeout(() => {
+      createDepartmentMutate.mutate(newDepartment);
+    }, 500);
+  };
+
   return {
     // Values
     siteData,
@@ -242,6 +288,7 @@ export const useAdminDepartmentsPage = () => {
     showOnEditModal,
     departmentName,
     deptDesc,
+    showNewDepartmentModal,
 
     // Functions
     onUpdateSelectFrom,
@@ -259,5 +306,9 @@ export const useAdminDepartmentsPage = () => {
     updateDepartmentInformation,
     onUpdateDepartmentName,
     onUpdateDepartmentDescription,
+    onUpdateNewDepartmentDescription,
+    onUpdateNewDepartmentName,
+    setShowNewDepartmentModal,
+    createNewDepartment,
   };
 };
