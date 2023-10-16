@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Dialog,
   DialogBody,
@@ -26,6 +26,9 @@ export const AddNewDeptServiceAreaModal = ({
   updateDescription,
   submit,
 }: AddNewDeptServiceAreaModal) => {
+  const [newName, setNewName] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+
   return (
     <Fragment>
       <Fragment>
@@ -49,13 +52,27 @@ export const AddNewDeptServiceAreaModal = ({
             className={`grid gap-4 grid-cols-2 my-2`}>
             <Input
               size="lg"
-              onChange={(event) => updateName(event.target.value)}
+              max={50}
+              min={3}
+              onChange={(event) => {
+                updateName(event.target.value);
+                setNewName(event.target.value);
+              }}
+              success={!!(newName && newName.length >= 3)}
+              error={newName.length < 3 && newName.length > 1}
               label="Name"
             />
 
             <Textarea
               label="Description"
-              onChange={(event) => updateDescription(event.target.value)}
+              maxLength={1000}
+              minLength={20}
+              success={!!(newDescription && newDescription.length >= 20)}
+              error={newDescription.length < 20 && newDescription.length >= 1}
+              onChange={(event) => {
+                updateDescription(event.target.value);
+                setNewDescription(event.target.value);
+              }}
             />
           </DialogBody>
 
@@ -68,6 +85,11 @@ export const AddNewDeptServiceAreaModal = ({
             />
 
             <BasicOutlineButton
+              // Disable Button Click activity if name and desccription hasn't met the condition
+              disabled={
+                !(newDescription && newDescription.length >= 20) ||
+                !(newName && newName.length >= 3)
+              }
               text={`Create ${name}`}
               click={submit}
               type={`success`}

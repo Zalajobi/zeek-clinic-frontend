@@ -261,11 +261,14 @@ export const useAdminDepartmentsPage = () => {
     setNewDepartment({ ...newDepartment, name });
 
   const createNewDepartment = () => {
-    setShowNewDepartmentModal(!showNewDepartmentModal);
-    toast('Creating New Department');
-    setTimeout(() => {
-      createDepartmentMutate.mutate(newDepartment);
-    }, 500);
+    if (!newDepartment?.name || !newDepartment?.description)
+      toast.error(`Name and Description are required`);
+    else {
+      setShowNewDepartmentModal(!showNewDepartmentModal);
+      setTimeout(() => {
+        createDepartmentMutate.mutate(newDepartment);
+      }, 500);
+    }
   };
 
   return {
