@@ -24,4 +24,6 @@ export interface DepartmentsPatientAndProviderCountRowData {
   providers: ReactNode;
   action: ReactNode;
   updated_at: ReactNode;
+  total_beds?: ReactNode;
+  occupied_beds?: ReactNode;
 }

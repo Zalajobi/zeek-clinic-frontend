@@ -136,8 +136,8 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
   }
 
   const columns = useMemo(
-    () => DepartmentsPatientAndDoctorCountDataColumn(),
-    []
+    () => DepartmentsPatientAndDoctorCountDataColumn(type),
+    [type]
   );
 
   const data = useMemo(
@@ -146,6 +146,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         tableData?.data[`${type}`],
         tableDataLoading,
         navigate,
+        type,
         showOnDeleteModalHandler,
         showOnEditModalHandler
       ) ?? [],

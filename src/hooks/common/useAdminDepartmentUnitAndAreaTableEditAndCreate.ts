@@ -63,6 +63,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const [createNewItem, setCreateNewItem] = useState({
     name: '',
     description: '',
+    total_beds: 0,
     siteId,
   });
 
