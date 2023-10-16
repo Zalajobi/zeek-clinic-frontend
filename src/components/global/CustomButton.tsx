@@ -16,6 +16,7 @@ interface ButtonProps {
   iconBefore?: ReactNode;
   iconAfter?: ReactNode;
   hasRings?: boolean;
+  disabled?: boolean;
 }
 
 interface ModalButtonLunchProps {
@@ -43,6 +44,7 @@ export const BasicOutlineButton = ({
   iconBefore,
   iconAfter,
   hasRings = false,
+  disabled = false,
 }: ButtonProps) => {
   const classes = clsx(
     `text-[14px] font-bold flex flex-row rounded-[8px] px-[18px] py-[5px] items-center justify-center border
@@ -72,7 +74,7 @@ export const BasicOutlineButton = ({
         onClick={click}
         type="button"
         className={classes}
-        data-te-ripple-init>
+        disabled={disabled}>
         {iconBefore}
 
         {text}
@@ -119,8 +121,7 @@ export const BasicLightButton = ({
       <button
         onClick={click}
         type="button"
-        className={classes}
-        data-te-ripple-init>
+        className={classes}>
         {iconBefore}
 
         {text}
@@ -166,8 +167,7 @@ export const BasicFilledButton = ({
       <button
         onClick={click}
         type="button"
-        className={classes}
-        data-te-ripple-init>
+        className={classes}>
         {iconBefore}
 
         {text}
@@ -214,11 +214,7 @@ export const ModalButtonOutlineLunch = ({
       {targetModalId ? (
         <button
           type="button"
-          className={classes}
-          data-te-toggle="modal"
-          data-te-target={`#${targetModalId}`}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}
@@ -228,9 +224,7 @@ export const ModalButtonOutlineLunch = ({
       ) : (
         <button
           type="button"
-          className={classes}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}
@@ -278,11 +272,7 @@ export const ModalButtonLightLunch = ({
       {targetModalId ? (
         <button
           type="button"
-          className={classes}
-          data-te-toggle="modal"
-          data-te-target={`#${targetModalId}`}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}
@@ -292,9 +282,7 @@ export const ModalButtonLightLunch = ({
       ) : (
         <button
           type="button"
-          className={classes}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}
@@ -341,11 +329,7 @@ export const ModalButtonFilledLunch = ({
       {targetModalId ? (
         <button
           type="button"
-          className={classes}
-          data-te-toggle="modal"
-          data-te-target={`#${targetModalId}`}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}
@@ -355,9 +339,7 @@ export const ModalButtonFilledLunch = ({
       ) : (
         <button
           type="button"
-          className={classes}
-          data-te-ripple-init
-          data-te-modal-dismiss>
+          className={classes}>
           {iconBefore}
 
           {text}

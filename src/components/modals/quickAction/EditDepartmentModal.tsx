@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import {
-  Avatar,
   Dialog,
   DialogBody,
   DialogFooter,
@@ -8,14 +7,13 @@ import {
   Input,
   Textarea,
 } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
-import { TextInput } from '@components/global/formInput/CustomInput';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
   open: boolean;
   handler: () => void;
   nameOfDepartment: string;
+  descriptionPlaceholder: string;
   updateDepartmentInformation: () => void;
   onUpdateDeptName: (value: string) => void;
   onUpdateDeptDescription: (value: string) => void;
@@ -25,6 +23,7 @@ const EditDepartmentModal = ({
   open,
   handler,
   nameOfDepartment,
+  descriptionPlaceholder,
   updateDepartmentInformation,
   onUpdateDeptName,
   onUpdateDeptDescription,
@@ -52,12 +51,14 @@ const EditDepartmentModal = ({
           <Input
             size="lg"
             onChange={(event) => onUpdateDeptName(event.target.value)}
+            placeholder={nameOfDepartment}
             label="Name"
           />
 
           <Textarea
             label="Description"
             onChange={(event) => onUpdateDeptDescription(event.target.value)}
+            placeholder={descriptionPlaceholder}
           />
         </DialogBody>
 
