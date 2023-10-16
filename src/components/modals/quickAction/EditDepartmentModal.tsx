@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import {
-  Avatar,
   Dialog,
   DialogBody,
   DialogFooter,
@@ -8,8 +7,6 @@ import {
   Input,
   Textarea,
 } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
-import { TextInput } from '@components/global/formInput/CustomInput';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {

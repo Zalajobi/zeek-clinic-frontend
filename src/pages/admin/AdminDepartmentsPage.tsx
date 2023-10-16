@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import { WarningModal } from '@components/modals/GlobalModal';
 import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentModal';
+import { FaPlus } from 'react-icons/fa';
+import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 
 const AdminDepartmentsPage = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const AdminDepartmentsPage = () => {
     showOnEditModal,
     departmentName,
     deptDesc,
+    showNewDepartmentModal,
 
     // Functions
     onUpdateSelectFrom,
@@ -62,6 +65,10 @@ const AdminDepartmentsPage = () => {
     updateDepartmentInformation,
     onUpdateDepartmentName,
     onUpdateDepartmentDescription,
+    onUpdateNewDepartmentDescription,
+    onUpdateNewDepartmentName,
+    setShowNewDepartmentModal,
+    createNewDepartment,
   } = useAdminDepartmentsPage();
 
   if (departmentData && !departmentDataLoading && !departmentDataError) {
@@ -160,6 +167,19 @@ const AdminDepartmentsPage = () => {
           <div className={`w-full flex justify-end mb-6`}>
             <BasicOutlineButton
               type={`primary`}
+              text={`Create New`}
+              className={`ml-4 min-w-[130px]`}
+              click={() => setShowNewDepartmentModal(!showNewDepartmentModal)}
+              iconBefore={
+                <FaPlus
+                  size={20}
+                  className={`mr-2`}
+                />
+              }
+            />
+
+            <BasicOutlineButton
+              type={`primary`}
               text={`Export`}
               className={`ml-4 min-w-[130px]`}
               iconBefore={
@@ -227,6 +247,15 @@ const AdminDepartmentsPage = () => {
         onUpdateDeptName={onUpdateDepartmentName}
         onUpdateDeptDescription={onUpdateDepartmentDescription}
         descriptionPlaceholder={deptDesc}
+      />
+
+      <AddNewDeptServiceAreaModal
+        updateDescription={onUpdateNewDepartmentDescription}
+        updateName={onUpdateNewDepartmentName}
+        handler={() => setShowNewDepartmentModal(!showNewDepartmentModal)}
+        name={`Department`}
+        open={showNewDepartmentModal}
+        submit={createNewDepartment}
       />
     </AdminBaseTemplate>
   );
