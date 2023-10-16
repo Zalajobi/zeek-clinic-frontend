@@ -66,6 +66,10 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateCreateNewItemName,
     onUpdateCreateNewItemDescription,
     submitCreateNewItem,
+    onUpdateEditTotalBeds,
+    onUpdateEditOccupiedBeds,
+    onUpdateCreateNewItemTotalBeds,
+    onUpdateCreateNewItemOccupiedBeds,
   } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
     type,
     siteId,
@@ -191,6 +195,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
       />
 
       <EditDepartmentModal
+        type={type}
         open={showEditModal}
         handler={() => setShowEditModal(!showEditModal)}
         nameOfDepartment={editItemName}
@@ -198,6 +203,8 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         onUpdateDeptName={onUpdateEditItemName}
         onUpdateDeptDescription={onUpdateEditItemDescription}
         descriptionPlaceholder={editItemDescription}
+        onUpdateEditTotalBeds={onUpdateEditTotalBeds}
+        onUpdateEditOccupiedBeds={onUpdateEditOccupiedBeds}
       />
 
       <AddNewDeptServiceAreaModal
@@ -213,6 +220,8 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         }
         open={openNewItemModal}
         submit={submitCreateNewItem}
+        onUpdateCreateTotalBeds={onUpdateCreateNewItemTotalBeds}
+        onUpdateCreateOccupiedBeds={onUpdateCreateNewItemOccupiedBeds}
       />
     </Fragment>
   );

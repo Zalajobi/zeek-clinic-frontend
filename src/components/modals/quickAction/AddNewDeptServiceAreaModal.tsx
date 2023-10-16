@@ -16,6 +16,8 @@ interface AddNewDeptServiceAreaModalProps {
   updateName: (value: string) => void;
   updateDescription: (value: string) => void;
   submit: () => void;
+  onUpdateCreateTotalBeds: (value: number) => void;
+  onUpdateCreateOccupiedBeds: (value: number) => void;
 }
 
 export const AddNewDeptServiceAreaModal = ({
@@ -25,6 +27,8 @@ export const AddNewDeptServiceAreaModal = ({
   updateName,
   updateDescription,
   submit,
+  onUpdateCreateTotalBeds,
+  onUpdateCreateOccupiedBeds,
 }: AddNewDeptServiceAreaModalProps) => {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
@@ -62,6 +66,28 @@ export const AddNewDeptServiceAreaModal = ({
               error={newName.length < 3 && newName.length > 1}
               label="Name"
             />
+
+            {name === 'Unit' && (
+              <>
+                <Input
+                  size="lg"
+                  type={`number`}
+                  onChange={(event) =>
+                    onUpdateCreateTotalBeds(Number(event.target.value))
+                  }
+                  label="Total Bed(s)"
+                />
+
+                <Input
+                  size="lg"
+                  type={`number`}
+                  onChange={(event) =>
+                    onUpdateCreateOccupiedBeds(Number(event.target.value))
+                  }
+                  label="Occupied Bed(s)"
+                />
+              </>
+            )}
 
             <Textarea
               label="Description"

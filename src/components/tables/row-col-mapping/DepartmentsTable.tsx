@@ -235,7 +235,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         total_beds: (
           <>
             <Typography
-              text={item?.total_beds}
+              text={item?.total_beds ?? 0}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -246,7 +246,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         occupied_beds: (
           <>
             <Typography
-              text={item?.total_beds - item?.occupied_beds}
+              text={(item?.total_beds ?? 0) - (item?.occupied_beds ?? 0)}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}

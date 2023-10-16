@@ -54,16 +54,14 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const [editItemName, setEditItemName] = useState('');
   const [editItemId, setEditItemId] = useState('');
   const [editItemDescription, setEditItemDescription] = useState('');
-  const [newEditItemInfo, setNewEditItemInfo] = useState({
-    name: '',
-    description: '',
-  });
+  const [newEditItemInfo, setNewEditItemInfo] = useState({});
 
   // Create New Item
   const [createNewItem, setCreateNewItem] = useState({
     name: '',
     description: '',
     total_beds: 0,
+    occupied_beds: 0,
     siteId,
   });
 
@@ -136,7 +134,13 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   const createItemMutate = useMutation({
     mutationFn: (data: any) => {
-      return axiosPostRequestUserService(`/department/create`, data);
+      if (type === 'departments') {
+        return axiosPostRequestUserService(`/department/create`, data);
+      } else if (type === 'units') {
+        return axiosPostRequestUserService(`/unit/create`, data);
+      } else {
+        return axiosPostRequestUserService(`/department/create`, data);
+      }
     },
 
     onError: () => {
@@ -260,13 +264,20 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const onUpdateEditItemName = (value: string) =>
     setNewEditItemInfo({ ...newEditItemInfo, name: value });
 
+  const onUpdateEditTotalBeds = (value: number) =>
+    setNewEditItemInfo({ ...newEditItemInfo, total_beds: value });
+
+  const onUpdateEditOccupiedBeds = (value: number) =>
+    setNewEditItemInfo({ ...newEditItemInfo, occupied_beds: value });
+
   const onUpdateEditItemDescription = (value: string) =>
     setNewEditItemInfo({ ...newEditItemInfo, description: value });
 
   const updateItemInformation = async () => {
-    setShowEditModal(!showEditModal);
+    // setShowEditModal(!showEditModal);
     setTimeout(() => {
-      updateItemInfoMutate.mutate(newEditItemInfo);
+      // updateItemInfoMutate.mutate(newEditItemInfo);
+      console.log(newEditItemInfo);
     }, 500);
   };
 
@@ -276,6 +287,12 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   const onUpdateCreateNewItemDescription = (value: string) =>
     setCreateNewItem({ ...createNewItem, description: value });
+
+  const onUpdateCreateNewItemTotalBeds = (value: number) =>
+    setCreateNewItem({ ...createNewItem, total_beds: value });
+
+  const onUpdateCreateNewItemOccupiedBeds = (value: number) =>
+    setCreateNewItem({ ...createNewItem, occupied_beds: value });
 
   const submitCreateNewItem = () => {
     if (!createNewItem?.name || !createNewItem?.description)
@@ -324,5 +341,9 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateCreateNewItemName,
     onUpdateCreateNewItemDescription,
     submitCreateNewItem,
+    onUpdateEditTotalBeds,
+    onUpdateEditOccupiedBeds,
+    onUpdateCreateNewItemTotalBeds,
+    onUpdateCreateNewItemOccupiedBeds,
   };
 };
