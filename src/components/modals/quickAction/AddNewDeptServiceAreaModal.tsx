@@ -9,13 +9,15 @@ import {
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
-interface AddNewDeptServiceAreaModal {
+interface AddNewDeptServiceAreaModalProps {
   name: string;
   open: boolean;
   handler: () => void;
   updateName: (value: string) => void;
   updateDescription: (value: string) => void;
   submit: () => void;
+  onUpdateCreateTotalBeds: (value: number) => void;
+  onUpdateCreateOccupiedBeds: (value: number) => void;
 }
 
 export const AddNewDeptServiceAreaModal = ({
@@ -25,7 +27,9 @@ export const AddNewDeptServiceAreaModal = ({
   updateName,
   updateDescription,
   submit,
-}: AddNewDeptServiceAreaModal) => {
+  onUpdateCreateTotalBeds,
+  onUpdateCreateOccupiedBeds,
+}: AddNewDeptServiceAreaModalProps) => {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
 
@@ -63,6 +67,28 @@ export const AddNewDeptServiceAreaModal = ({
               label="Name"
             />
 
+            {name === 'Unit' && (
+              <>
+                <Input
+                  size="lg"
+                  type={`number`}
+                  onChange={(event) =>
+                    onUpdateCreateTotalBeds(Number(event.target.value))
+                  }
+                  label="Total Bed(s)"
+                />
+
+                <Input
+                  size="lg"
+                  type={`number`}
+                  onChange={(event) =>
+                    onUpdateCreateOccupiedBeds(Number(event.target.value))
+                  }
+                  label="Occupied Bed(s)"
+                />
+              </>
+            )}
+
             <Textarea
               label="Description"
               maxLength={1000}
@@ -85,7 +111,7 @@ export const AddNewDeptServiceAreaModal = ({
             />
 
             <BasicOutlineButton
-              // Disable Button Click activity if name and desccription hasn't met the condition
+              // Disable Button Click activity if name and description hasn't met the condition
               disabled={
                 !(newDescription && newDescription.length >= 20) ||
                 !(newName && newName.length >= 3)

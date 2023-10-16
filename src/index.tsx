@@ -25,6 +25,7 @@ import QueryClientProviderWrapper from '@lib/api';
 import AdminDepartmentsPage from '@pages/admin/AdminDepartmentsPage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -96,6 +97,11 @@ const router = createBrowserRouter([
       {
         path: '/admin/departments/:siteId',
         element: <AdminDepartmentsPage />,
+      },
+
+      {
+        path: '/admin/units/:siteId',
+        element: <AdminUnitsPage />,
       },
     ],
   },

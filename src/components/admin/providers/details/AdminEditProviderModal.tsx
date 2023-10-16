@@ -146,9 +146,10 @@ const AdminEditProviderModal = ({
           />
         </Fragment>
       }>
-      {showLoading && (
-        <LoadingSpinner message={`Updating Provider Details...`} />
-      )}
+      <LoadingSpinner
+        message={`Updating Provider Details...`}
+        loading={showLoading}
+      />
 
       <div className={`grid grid-cols-[25%_75%] gap-4 w-full h-[800px]`}>
         <div className={`w-full h-full border-r-[#e5e7eb] border-r`}>
