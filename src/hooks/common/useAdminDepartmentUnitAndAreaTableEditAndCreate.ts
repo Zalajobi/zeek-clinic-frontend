@@ -1,16 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
-import { axiosGetRequestUserService } from '@lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPutRequestUserService,
+} from '@lib/axios';
 import { setResultFrom } from '../../redux/reducers/tableReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
 export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
-  type: 'departments' | 'units' | 'area'
+  type: 'departments' | 'units' | 'area',
+  handleNewItemModal: () => void
 ) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const { siteId } = useParams();
   const { noOfPages } = useSelector((state: any) => state.adminProviderTable);
@@ -39,7 +44,6 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   // Modal Handlers
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showCreateItemModal, setShowCreateItemModal] = useState(false);
 
   // Delete Item State
   const [deleteItemName, setDeleteItemName] = useState('');
@@ -60,6 +64,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     description: '',
   });
 
+  // Get Table Data  Query
   const {
     data: tableData,
     isLoading: tableDataLoading,
@@ -93,6 +98,38 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       }
     }
   );
+
+  const updateItemInfoMutate = useMutation({
+    mutationFn: (data: any) => {
+      if (type === 'departments') {
+        return axiosPutRequestUserService(
+          `/department/admin/update/${editItemId}`,
+          data
+        );
+      } else if (type === 'units') {
+        return axiosPutRequestUserService(
+          `/department/admin/update/${editItemId}`,
+          data
+        );
+      } else {
+        return axiosPutRequestUserService(
+          `/department/admin/update/${editItemId}`,
+          data
+        );
+      }
+    },
+
+    onError: () => {
+      toast.error(`Something Went Wrong`);
+    },
+
+    onSuccess: (result) => {
+      if (result?.success) toast.success(result?.message);
+      else toast.error('Something Went Wrong');
+
+      queryClient.resetQueries('fetchTableData');
+    },
+  });
 
   // Update Search Table Item
   const onUpdateSearchTable = async (value: string) => {
@@ -211,15 +248,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const updateItemInformation = async () => {
     setShowEditModal(!showEditModal);
     setTimeout(() => {
-      console.log({
-        newEditItemInfo,
-        editItemId,
-      });
-      // const data = {
-      //     name: updateDepartmentName,
-      //     description: departmentDescription,
-      // };
-      // updateDepartmentMutate.mutate(data);
+      updateItemInfoMutate.mutate(newEditItemInfo);
     }, 500);
   };
 
@@ -234,7 +263,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     if (!createNewItem?.name || !createNewItem?.description)
       toast.error(`Name and Description are required`);
     else {
-      setShowCreateItemModal(!showCreateItemModal);
+      handleNewItemModal();
       setTimeout(() => {
         toast.success('Item Created');
         // createDepartmentMutate.mutate(newDepartment);
@@ -258,7 +287,6 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     actions,
     editItemName,
     editItemDescription,
-    showCreateItemModal,
 
     // Functions
     showOnDeleteModalHandler,
@@ -276,7 +304,6 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateEditItemName,
     onUpdateEditItemDescription,
     updateItemInformation,
-    setShowCreateItemModal,
     onUpdateCreateNewItemName,
     onUpdateCreateNewItemDescription,
     submitCreateNewItem,

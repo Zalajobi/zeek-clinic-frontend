@@ -6,7 +6,6 @@ import {
   DepartmentsPatientAndDoctorCountTableRowData,
 } from '@components/tables/row-col-mapping/DepartmentsTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoadingSpinner } from '@components/global/Toast';
 import {
   setNoOfPages,
   setResultFrom,
@@ -45,7 +44,6 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     actions,
     editItemName,
     editItemDescription,
-    showCreateItemModal,
 
     // Functions
     showOnDeleteModalHandler,
@@ -63,11 +61,10 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateEditItemName,
     onUpdateEditItemDescription,
     updateItemInformation,
-    setShowCreateItemModal,
     onUpdateCreateNewItemName,
     onUpdateCreateNewItemDescription,
     submitCreateNewItem,
-  } = useAdminDepartmentUnitAndAreaTableEditAndCreate(type);
+  } = useAdminDepartmentUnitAndAreaTableEditAndCreate(type, handleNewItemModal);
 
   const { resultFrom, noOfPages, totalDataCount, resultTo } = useSelector(
     (state: any) => state.adminProviderTable
@@ -158,13 +155,6 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
 
   return (
     <Fragment>
-      <LoadingSpinner
-        message={tableData?.message as string}
-        error={tableDataError}
-        success={!tableDataLoading && !tableDataError}
-        loading={tableDataLoading}
-      />
-
       <ApplicationTable
         tableColumns={columns}
         tableData={data}
@@ -206,7 +196,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
       <AddNewDeptServiceAreaModal
         updateDescription={onUpdateCreateNewItemDescription}
         updateName={onUpdateCreateNewItemName}
-        handler={() => setShowCreateItemModal(!showCreateItemModal)}
+        handler={handleNewItemModal}
         name={
           type === 'departments'
             ? 'Department'
@@ -214,7 +204,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
             ? 'Unit'
             : 'Service Area'
         }
-        open={showCreateItemModal}
+        open={openNewItemModal}
         submit={submitCreateNewItem}
       />
     </Fragment>

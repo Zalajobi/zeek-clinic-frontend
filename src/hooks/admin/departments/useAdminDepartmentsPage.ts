@@ -1,11 +1,10 @@
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import { axiosGetRequestUserService } from '@lib/axios';
 import { useState } from 'react';
 
 export const useAdminDepartmentsPage = () => {
-  const navigate = useNavigate();
   const { siteId } = useParams();
 
   // Create Department
@@ -26,28 +25,6 @@ export const useAdminDepartmentsPage = () => {
       );
     }
   );
-
-  // const {
-  //   data: departmentData,
-  //   isLoading: departmentDataLoading,
-  //   isError: departmentDataError,
-  // } = useQuery<AccountServiceApiResponse>(
-  //   ['departmentDataFetch', refetchProvidersData],
-  //   function () {
-  //     const params = {
-  //       page: currentPage,
-  //       per_page: perPage === 'All' ? 0 : perPage,
-  //       from_date: departmentFrom,
-  //       to_date: departmentTo,
-  //       search: searchDepartment,
-  //     };
-  //
-  //     return axiosGetRequestUserService(
-  //       `/department/list/paginated/${siteId}`,
-  //       params
-  //     );
-  //   }
-  // );
 
   // const updateDepartmentMutate = useMutation({
   //   mutationFn: (data: any) => {

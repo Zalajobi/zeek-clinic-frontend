@@ -76,9 +76,8 @@ export const LoadingSpinner = ({
                     fill="currentFill"
                   />
                 </svg>
-                <span className="sr-only">Loading...</span>
               </div>
-
+              s
               <div
                 role="status"
                 aria-live="polite"
