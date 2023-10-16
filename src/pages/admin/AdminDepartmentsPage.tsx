@@ -22,6 +22,7 @@ import { WarningModal } from '@components/modals/GlobalModal';
 import EditDepartmentModal from '@components/modals/quickAction/EditDepartmentModal';
 import { FaPlus } from 'react-icons/fa';
 import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
+import { LoadingSpinner } from '@components/global/Toast';
 
 const AdminDepartmentsPage = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const AdminDepartmentsPage = () => {
     departmentName,
     deptDesc,
     showNewDepartmentModal,
+    siteDataError,
 
     // Functions
     onUpdateSelectFrom,
@@ -155,6 +157,20 @@ const AdminDepartmentsPage = () => {
 
   return (
     <AdminBaseTemplate>
+      <LoadingSpinner
+        message={siteData?.message as string}
+        error={
+          !siteData?.success ||
+          siteDataError ||
+          siteDataError ||
+          departmentDataError
+        }
+        success={
+          siteData?.success && !siteDataLoading && !departmentDataLoading
+        }
+        loading={siteDataLoading}
+      />
+
       <div className={`flex flex-col w-full`}>
         <div className={`grid grid-cols-[80%_20%] gap-4`}>
           <Typography

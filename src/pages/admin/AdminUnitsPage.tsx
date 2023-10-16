@@ -8,7 +8,6 @@ import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNewDeptServiceAreaModal';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { LoadingSpinner } from '@components/global/Toast';
-import toast from 'react-hot-toast';
 
 const AdminUnitsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -16,7 +15,7 @@ const AdminUnitsPage = () => {
     // Values
     siteData,
     siteDataLoading,
-    // siteDataError,
+    siteDataError,
     showCreateUnitModal,
 
     // Functions
@@ -32,7 +31,7 @@ const AdminUnitsPage = () => {
     <AdminBaseTemplate>
       <LoadingSpinner
         message={siteData?.message as string}
-        error={!siteData?.success}
+        error={!siteData?.success || siteDataError}
         success={siteData?.success}
         loading={siteDataLoading}
       />
