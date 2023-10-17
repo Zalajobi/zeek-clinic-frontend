@@ -5,6 +5,8 @@ import {
   DialogFooter,
   DialogHeader,
   Input,
+  Option,
+  Select,
   Textarea,
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
@@ -18,6 +20,7 @@ interface AddNewDeptServiceAreaModalProps {
   submit: () => void;
   onUpdateCreateTotalBeds: (value: number) => void;
   onUpdateCreateOccupiedBeds: (value: number) => void;
+  onUpdateCreateNewItemType: (value: string) => void;
 }
 
 export const AddNewDeptServiceAreaModal = ({
@@ -29,6 +32,7 @@ export const AddNewDeptServiceAreaModal = ({
   submit,
   onUpdateCreateTotalBeds,
   onUpdateCreateOccupiedBeds,
+  onUpdateCreateNewItemType,
 }: AddNewDeptServiceAreaModalProps) => {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
@@ -86,6 +90,43 @@ export const AddNewDeptServiceAreaModal = ({
                   }
                   label="Occupied Bed(s)"
                 />
+              </>
+            )}
+
+            {name === 'Service Area' && (
+              <>
+                <Select
+                  size="lg"
+                  label="Select Service-Area Type"
+                  onChange={(value) =>
+                    onUpdateCreateNewItemType(value as string)
+                  }>
+                  <Option
+                    className={`my-2`}
+                    value={`INPATIENT`}>
+                    INPATIENT
+                  </Option>
+                  <Option
+                    className={`my-2`}
+                    value={`PROCEDURE`}>
+                    PROCEDURE
+                  </Option>
+                  <Option
+                    className={`my-2`}
+                    value={`OUTPATIENT`}>
+                    OUTPATIENT
+                  </Option>
+                  <Option
+                    className={`my-2`}
+                    value={`EMERGENCY`}>
+                    EMERGENCY
+                  </Option>
+                  <Option
+                    className={`my-2`}
+                    value={`OTHERS`}>
+                    OTHERS
+                  </Option>
+                </Select>
               </>
             )}
 

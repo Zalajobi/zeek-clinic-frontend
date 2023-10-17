@@ -5,7 +5,9 @@ import {
   DialogFooter,
   DialogHeader,
   Input,
+  Select,
   Textarea,
+  Option,
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
@@ -20,6 +22,7 @@ interface EditDepartmentModalProps {
   onUpdateDeptDescription: (value: string) => void;
   onUpdateEditTotalBeds: (value: number) => void;
   onUpdateEditOccupiedBeds: (value: number) => void;
+  onUpdateEditType: (value: string) => void;
 }
 
 const EditDepartmentModal = ({
@@ -32,6 +35,7 @@ const EditDepartmentModal = ({
   onUpdateDeptDescription,
   onUpdateEditOccupiedBeds,
   onUpdateEditTotalBeds,
+  onUpdateEditType,
   type,
 }: EditDepartmentModalProps) => {
   return (
@@ -80,6 +84,41 @@ const EditDepartmentModal = ({
                 }
                 label="Occupied Bed(s)"
               />
+            </>
+          )}
+
+          {type === 'area' && (
+            <>
+              <Select
+                size="lg"
+                label="Select Service-Area Type"
+                onChange={(value) => onUpdateEditType(value as string)}>
+                <Option
+                  className={`my-2`}
+                  value={`INPATIENT`}>
+                  INPATIENT
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`PROCEDURE`}>
+                  PROCEDURE
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`OUTPATIENT`}>
+                  OUTPATIENT
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`EMERGENCY`}>
+                  EMERGENCY
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`OTHERS`}>
+                  OTHERS
+                </Option>
+              </Select>
             </>
           )}
 

@@ -62,6 +62,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     description: '',
     total_beds: 0,
     occupied_beds: 0,
+    type: '',
     siteId,
   });
 
@@ -114,7 +115,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else {
         return axiosPutRequestUserService(
-          `/department/admin/update/${editItemId}`,
+          `/service-area/admin/update/${editItemId}`,
           data
         );
       }
@@ -139,7 +140,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       } else if (type === 'units') {
         return axiosPostRequestUserService(`/unit/create`, data);
       } else {
-        return axiosPostRequestUserService(`/department/create`, data);
+        return axiosPostRequestUserService(`/service-area/create`, data);
       }
     },
 
@@ -273,6 +274,9 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const onUpdateEditItemDescription = (value: string) =>
     setNewEditItemInfo({ ...newEditItemInfo, description: value });
 
+  const onUpdateEditType = (value: string) =>
+    setNewEditItemInfo({ ...newEditItemInfo, type: value });
+
   const updateItemInformation = async () => {
     setShowEditModal(!showEditModal);
     setTimeout(() => {
@@ -289,6 +293,9 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   const onUpdateCreateNewItemTotalBeds = (value: number) =>
     setCreateNewItem({ ...createNewItem, total_beds: value });
+
+  const onUpdateCreateNewItemType = (value: string) =>
+    setCreateNewItem({ ...createNewItem, type: value });
 
   const onUpdateCreateNewItemOccupiedBeds = (value: number) =>
     setCreateNewItem({ ...createNewItem, occupied_beds: value });
@@ -344,5 +351,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateEditOccupiedBeds,
     onUpdateCreateNewItemTotalBeds,
     onUpdateCreateNewItemOccupiedBeds,
+    onUpdateEditType,
+    onUpdateCreateNewItemType,
   };
 };
