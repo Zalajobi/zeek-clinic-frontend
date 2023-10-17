@@ -93,7 +93,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else {
         return axiosGetRequestUserService(
-          `/department/list/paginated/${siteId}`,
+          `/service-area/list/paginated/${siteId}`,
           params
         );
       }
