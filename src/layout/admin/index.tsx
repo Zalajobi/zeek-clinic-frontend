@@ -21,6 +21,8 @@ import { GiDoctorFace } from 'react-icons/gi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { useState } from 'react';
+import { RiCommunityFill } from 'react-icons/ri';
+import { BsFillPieChartFill } from 'react-icons/bs';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -128,6 +130,31 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
           />
         ),
         route: `/admin/departments/${adminData?.siteId as string}`,
+        showSidebar: showSidebar,
+      },
+      {
+        item: 'Units',
+        Icon: (
+          <RiCommunityFill
+            size={30}
+            fontWeight={40}
+            className={`text-gray-500`}
+          />
+        ),
+        route: `/admin/units/${adminData?.siteId as string}`,
+        showSidebar: showSidebar,
+      },
+
+      {
+        item: 'Service Area',
+        Icon: (
+          <BsFillPieChartFill
+            size={30}
+            fontWeight={40}
+            className={`text-gray-500`}
+          />
+        ),
+        route: `/admin/service-area/${adminData?.siteId as string}`,
         showSidebar: showSidebar,
       },
 

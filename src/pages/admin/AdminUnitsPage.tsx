@@ -1,22 +1,22 @@
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
+import { BasicOutlineButton } from '@components/global/CustomButton';
+import { FaPlus } from 'react-icons/fa';
+import { CgExport } from 'react-icons/cg';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
-import { BasicOutlineButton } from '@components/global/CustomButton';
-import { CgExport } from 'react-icons/cg';
-import { FaPlus } from 'react-icons/fa';
 import { LoadingSpinner } from '@components/global/Toast';
 import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
 import { useAdminDepartmentUnitAndServiceAreaPage } from '@hooks/admin/common/useAdminDepartmentUnitAndServiceAreaPage';
 
-const AdminDepartmentsPage = () => {
+const AdminUnitsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
   const {
     // Values
     siteData,
     siteDataLoading,
-    showNewItemModal,
     siteDataError,
+    showNewItemModal,
     siteId,
 
     // Functions
@@ -28,7 +28,7 @@ const AdminDepartmentsPage = () => {
       <LoadingSpinner
         message={siteData?.message as string}
         error={!siteData?.success || siteDataError}
-        success={siteData?.success && !siteDataLoading}
+        success={siteData?.success}
         loading={siteDataLoading}
       />
 
@@ -88,7 +88,7 @@ const AdminDepartmentsPage = () => {
         />
 
         <AdminDepartmentUnitAndAreaTableEditAndCreate
-          type={`departments`}
+          type={`units`}
           siteId={siteId as string}
           openNewItemModal={showNewItemModal}
           handleNewItemModal={() => setShowNewItemModal(!showNewItemModal)}
@@ -98,4 +98,4 @@ const AdminDepartmentsPage = () => {
   );
 };
 
-export default AdminDepartmentsPage;
+export default AdminUnitsPage;

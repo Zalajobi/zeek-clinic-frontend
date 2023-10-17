@@ -8,8 +8,13 @@ import {
 } from 'react-icons/fa';
 import { MdInfo, MdPersonAdd } from 'react-icons/md';
 import { TbMessageCircle2Filled } from 'react-icons/tb';
-import { RiAdminFill, RiBuilding2Fill, RiShieldUserFill } from 'react-icons/ri';
-import { SiHomeassistantcommunitystore, SiWebmoney } from 'react-icons/si';
+import {
+  RiAdminFill,
+  RiBuilding2Fill,
+  RiCommunityFill,
+  RiShieldUserFill,
+} from 'react-icons/ri';
+import { SiWebmoney } from 'react-icons/si';
 import { IoMdAddCircle } from 'react-icons/io';
 import { BeautifulLink } from '@components/global/dialog/Typography';
 
@@ -22,7 +27,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
   return (
     <Fragment>
       <div
-        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 gap-4 md:grid-cols-6 lg:grid-cols-8`}>
+        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 gap-4 md:grid-cols- lg:grid-cols-7`}>
         <BeautifulLink
           icon={
             <FaUserMd
@@ -201,7 +206,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
             />
           }
           text={`Service Area`}
-          to={`/admin/appointments/${id}`}
+          to={`/admin/service-area/${id}`}
           className={`!w-full`}
         />
 
@@ -246,14 +251,14 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
 
         <BeautifulLink
           icon={
-            <SiHomeassistantcommunitystore
+            <RiCommunityFill
               size={20}
               className={`mr-2`}
               color={`#3975ae`}
             />
           }
-          text={`Unit`}
-          to={`/admin/appointments/${id}`}
+          text={`Units`}
+          to={`/admin/units/${id}`}
           className={`!w-full`}
         />
 
@@ -266,7 +271,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
             />
           }
           text={`Create Unit`}
-          to={`/admin/appointments/${id}`}
+          to={`/admin/units/${id}`}
           className={`!w-full`}
         />
 

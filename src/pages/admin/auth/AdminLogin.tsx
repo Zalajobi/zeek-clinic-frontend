@@ -77,7 +77,7 @@ const AdminLogin = () => {
               <BasicOutlineButton
                 type={`secondary`}
                 text={`Sign up with Google`}
-                click={() => console.log('Signin with Google')}
+                click={() => {}}
                 className={`!text-[#111928] font-medium !border-black dark:text-white my-3`}
                 iconBefore={
                   <FcGoogle
@@ -90,7 +90,7 @@ const AdminLogin = () => {
               <BasicOutlineButton
                 type={`secondary`}
                 text={`Sign up with Github`}
-                click={() => console.log('Signin with Github')}
+                click={() => {}}
                 className={`!text-[#111928] font-medium !border-black dark:text-white my-3`}
                 iconBefore={
                   <GrGithub

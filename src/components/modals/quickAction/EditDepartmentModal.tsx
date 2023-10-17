@@ -5,18 +5,24 @@ import {
   DialogFooter,
   DialogHeader,
   Input,
+  Select,
   Textarea,
+  Option,
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
-  open: boolean;
-  handler: () => void;
+  type: 'departments' | 'units' | 'area';
   nameOfDepartment: string;
   descriptionPlaceholder: string;
+  open: boolean;
+  handler: () => void;
   updateDepartmentInformation: () => void;
   onUpdateDeptName: (value: string) => void;
   onUpdateDeptDescription: (value: string) => void;
+  onUpdateEditTotalBeds: (value: number) => void;
+  onUpdateEditOccupiedBeds: (value: number) => void;
+  onUpdateEditType: (value: string) => void;
 }
 
 const EditDepartmentModal = ({
@@ -27,6 +33,10 @@ const EditDepartmentModal = ({
   updateDepartmentInformation,
   onUpdateDeptName,
   onUpdateDeptDescription,
+  onUpdateEditOccupiedBeds,
+  onUpdateEditTotalBeds,
+  onUpdateEditType,
+  type,
 }: EditDepartmentModalProps) => {
   return (
     <Fragment>
@@ -54,6 +64,63 @@ const EditDepartmentModal = ({
             placeholder={nameOfDepartment}
             label="Name"
           />
+
+          {type === 'units' && (
+            <>
+              <Input
+                size="lg"
+                type={`number`}
+                onChange={(event) =>
+                  onUpdateEditTotalBeds(Number(event.target.value))
+                }
+                label="Total Bed(s)"
+              />
+
+              <Input
+                size="lg"
+                type={`number`}
+                onChange={(event) =>
+                  onUpdateEditOccupiedBeds(Number(event.target.value))
+                }
+                label="Occupied Bed(s)"
+              />
+            </>
+          )}
+
+          {type === 'area' && (
+            <>
+              <Select
+                size="lg"
+                label="Select Service-Area Type"
+                onChange={(value) => onUpdateEditType(value as string)}>
+                <Option
+                  className={`my-2`}
+                  value={`INPATIENT`}>
+                  INPATIENT
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`PROCEDURE`}>
+                  PROCEDURE
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`OUTPATIENT`}>
+                  OUTPATIENT
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`EMERGENCY`}>
+                  EMERGENCY
+                </Option>
+                <Option
+                  className={`my-2`}
+                  value={`OTHERS`}>
+                  OTHERS
+                </Option>
+              </Select>
+            </>
+          )}
 
           <Textarea
             label="Description"

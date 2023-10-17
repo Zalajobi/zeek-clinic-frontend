@@ -26,6 +26,9 @@ export interface UserServiceUnitResponseData {
   providers: number;
   siteId: string;
   updated_at: Date;
+  type: string;
+  total_beds: number;
+  occupied_beds: number;
 }
 
 export interface UserServiceRoleResponseData {

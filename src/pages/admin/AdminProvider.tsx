@@ -55,7 +55,6 @@ const AdminProvider = () => {
   } = useAdminProviderPage();
 
   if (!providerDataLoading) {
-    // console.log(providersData?.data?.providers)
     const count = providerData?.data?.count;
     dispatch(setTotalDataCount(count));
     dispatch(
