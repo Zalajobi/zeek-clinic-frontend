@@ -134,7 +134,7 @@ export const ApplicationTable = ({
                   change={(e) =>
                     onUpdateCountryFilter
                       ? onUpdateCountryFilter(e.target.value as string)
-                      : console.log('')
+                      : {}
                   }
                 />
               </div>

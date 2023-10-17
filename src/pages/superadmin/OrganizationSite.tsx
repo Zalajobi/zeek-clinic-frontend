@@ -183,7 +183,7 @@ const OrganizationSite = () => {
 
               <BasicOutlineButton
                 text={`Export Sites`}
-                click={() => console.log('Export Sites')}
+                click={() => {}}
                 type={'primary'}
                 className={`h-[38px] w-[150px]`}
                 iconBefore={

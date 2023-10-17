@@ -276,7 +276,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Name')}>
+            onClick={() => {}}>
             Name
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -290,7 +290,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Email')}>
+            onClick={() => {}}>
             Email
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -304,7 +304,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Phone')}>
+            onClick={() => {}}>
             Phone
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -318,7 +318,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Country')}>
+            onClick={() => {}}>
             Country
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -332,7 +332,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('State')}>
+            onClick={() => {}}>
             State
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -346,7 +346,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('City')}>
+            onClick={() => {}}>
             City
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -360,7 +360,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Address')}>
+            onClick={() => {}}>
             Address
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -374,7 +374,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Status')}>
+            onClick={() => {}}>
             Status
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -388,7 +388,7 @@ export const SuperadminSiteDataColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Created On')}>
+            onClick={() => {}}>
             Registered On
             <TbArrowsMoveVertical size={15} />
           </span>
