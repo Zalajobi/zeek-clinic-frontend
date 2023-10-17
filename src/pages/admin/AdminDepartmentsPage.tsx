@@ -1,5 +1,4 @@
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
-import { useAdminDepartmentsPage } from '@hooks/admin/departments/useAdminDepartmentsPage';
 import { Typography } from '@components/global/dialog/Typography';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
@@ -8,6 +7,7 @@ import { CgExport } from 'react-icons/cg';
 import { FaPlus } from 'react-icons/fa';
 import { LoadingSpinner } from '@components/global/Toast';
 import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
+import { useAdminDepartmentUnitAndServiceAreaPage } from '@hooks/admin/common/useAdminDepartmentUnitAndServiceAreaPage';
 
 const AdminDepartmentsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -15,13 +15,13 @@ const AdminDepartmentsPage = () => {
     // Values
     siteData,
     siteDataLoading,
-    showNewDepartmentModal,
+    showNewItemModal,
     siteDataError,
     siteId,
 
     // Functions
-    setShowNewDepartmentModal,
-  } = useAdminDepartmentsPage();
+    setShowNewItemModal,
+  } = useAdminDepartmentUnitAndServiceAreaPage();
 
   return (
     <AdminBaseTemplate>
@@ -46,7 +46,7 @@ const AdminDepartmentsPage = () => {
               type={`primary`}
               text={`Create New`}
               className={`ml-4 min-w-[130px]`}
-              click={() => setShowNewDepartmentModal(!showNewDepartmentModal)}
+              click={() => setShowNewItemModal(!showNewItemModal)}
               iconBefore={
                 <FaPlus
                   size={20}
@@ -90,10 +90,8 @@ const AdminDepartmentsPage = () => {
         <AdminDepartmentUnitAndAreaTableEditAndCreate
           type={`departments`}
           siteId={siteId as string}
-          openNewItemModal={showNewDepartmentModal}
-          handleNewItemModal={() =>
-            setShowNewDepartmentModal(!showNewDepartmentModal)
-          }
+          openNewItemModal={showNewItemModal}
+          handleNewItemModal={() => setShowNewItemModal(!showNewItemModal)}
         />
       </div>
     </AdminBaseTemplate>

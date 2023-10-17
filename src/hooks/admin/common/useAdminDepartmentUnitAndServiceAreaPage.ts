@@ -4,11 +4,11 @@ import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import { axiosGetRequestUserService } from '@lib/axios';
 import { useState } from 'react';
 
-export const useAdminDepartmentsPage = () => {
+export const useAdminDepartmentUnitAndServiceAreaPage = () => {
   const { siteId } = useParams();
 
-  // Create Department
-  const [showNewDepartmentModal, setShowNewDepartmentModal] = useState(false);
+  // Create Item
+  const [showNewItemModal, setShowNewItemModal] = useState(false);
 
   const [showOnDeleteModal, setShowOnDeleteModal] = useState(false);
   const [showOnEditModal, setShowOnEditModal] = useState(false);
@@ -33,12 +33,12 @@ export const useAdminDepartmentsPage = () => {
     siteDataError,
     showOnDeleteModal,
     showOnEditModal,
-    showNewDepartmentModal,
+    showNewItemModal,
     siteId,
 
     // Functions
     setShowOnDeleteModal,
     setShowOnEditModal,
-    setShowNewDepartmentModal,
+    setShowNewItemModal,
   };
 };
