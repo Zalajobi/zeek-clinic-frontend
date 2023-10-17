@@ -27,7 +27,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
   return (
     <Fragment>
       <div
-        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 gap-4 md:grid-cols-6 lg:grid-cols-8`}>
+        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 gap-4 md:grid-cols- lg:grid-cols-7`}>
         <BeautifulLink
           icon={
             <FaUserMd
@@ -206,7 +206,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
             />
           }
           text={`Service Area`}
-          to={`/admin/appointments/${id}`}
+          to={`/admin/service-area/${id}`}
           className={`!w-full`}
         />
 
