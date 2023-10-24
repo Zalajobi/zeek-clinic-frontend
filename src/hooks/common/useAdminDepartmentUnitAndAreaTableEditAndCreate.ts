@@ -106,6 +106,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     }
   );
 
+  // Update Data
   const updateItemInfoMutate = useMutation({
     mutationFn: (data: any) => {
       if (type === 'departments') {
@@ -125,7 +126,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else {
         return axiosPutRequestUserService(
-          `/service-area/admin/update/${editItemId}`,
+          `/role/admin/update/${editItemId}`,
           data
         );
       }
@@ -143,6 +144,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     },
   });
 
+  // Create New Data
   const createItemMutate = useMutation({
     mutationFn: (data: any) => {
       if (type === 'departments') {
@@ -289,6 +291,78 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const onUpdateEditType = (value: string) =>
     setNewEditItemInfo({ ...newEditItemInfo, type: value });
 
+  const onUpdateEditNote = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, note: value });
+
+  const onUpdateEditPlan = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, plan: value });
+
+  const onUpdateEditProcedure = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, procedure: value });
+
+  const onUpdateEditLabTest = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, lab_test: value });
+
+  const onUpdateEditAppointment = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, appointment: value });
+
+  const onUpdateEditVitals = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, vitals: value });
+
+  const onUpdateEditMedicalSupply = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, med_supply: value });
+
+  const onUpdateEditAdmitPatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, admit_patient: value });
+
+  const onUpdateEditTransferPatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, transfer_patient: value });
+
+  const onUpdateEditMovePatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, move_patient: value });
+
+  const onUpdateEditDischargePatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, discharge: value });
+
+  const onUpdateEditTimeOfDeath = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, time_of_death: value });
+
+  const onUpdateEditReview = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, review: value });
+
+  const onUpdateEditLogs = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, logs: value });
+
+  const onUpdateEditPrescription = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, prescription: value });
+
+  const onUpdateEditDental = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, dental: value });
+
+  const onUpdateEditClerking = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, clerking: value });
+
+  const onUpdateEditRadiology = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, radiology: value });
+
+  const onUpdateEditConsult = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, consult: value });
+
+  const onUpdateEditReferral = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, referral: value });
+
+  const onUpdateEditReferExP = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, refer_outpx: value });
+
+  const onUpdateEditUpload = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, upload: value });
+
+  const onUpdateEditCharts = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, charts: value });
+
+  const onUpdateEditNursing = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, nursing: value });
+
   const updateItemInformation = async () => {
     setShowEditModal(!showEditModal);
     setTimeout(() => {
@@ -365,5 +439,29 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateCreateNewItemOccupiedBeds,
     onUpdateEditType,
     onUpdateCreateNewItemType,
+    onUpdateEditNote,
+    onUpdateEditPlan,
+    onUpdateEditProcedure,
+    onUpdateEditLabTest,
+    onUpdateEditAppointment,
+    onUpdateEditVitals,
+    onUpdateEditMedicalSupply,
+    onUpdateEditAdmitPatient,
+    onUpdateEditTransferPatient,
+    onUpdateEditMovePatient,
+    onUpdateEditDischargePatient,
+    onUpdateEditTimeOfDeath,
+    onUpdateEditReview,
+    onUpdateEditLogs,
+    onUpdateEditPrescription,
+    onUpdateEditDental,
+    onUpdateEditClerking,
+    onUpdateEditRadiology,
+    onUpdateEditConsult,
+    onUpdateEditReferral,
+    onUpdateEditReferExP,
+    onUpdateEditUpload,
+    onUpdateEditCharts,
+    onUpdateEditNursing,
   };
 };

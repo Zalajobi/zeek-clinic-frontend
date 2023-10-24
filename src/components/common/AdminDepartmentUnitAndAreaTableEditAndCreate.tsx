@@ -72,6 +72,30 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateCreateNewItemOccupiedBeds,
     onUpdateEditType,
     onUpdateCreateNewItemType,
+    onUpdateEditNote,
+    onUpdateEditPlan,
+    onUpdateEditProcedure,
+    onUpdateEditLabTest,
+    onUpdateEditAppointment,
+    onUpdateEditVitals,
+    onUpdateEditMedicalSupply,
+    onUpdateEditAdmitPatient,
+    onUpdateEditTransferPatient,
+    onUpdateEditMovePatient,
+    onUpdateEditDischargePatient,
+    onUpdateEditTimeOfDeath,
+    onUpdateEditReview,
+    onUpdateEditLogs,
+    onUpdateEditPrescription,
+    onUpdateEditDental,
+    onUpdateEditClerking,
+    onUpdateEditRadiology,
+    onUpdateEditConsult,
+    onUpdateEditReferral,
+    onUpdateEditReferExP,
+    onUpdateEditUpload,
+    onUpdateEditCharts,
+    onUpdateEditNursing,
   } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
     type,
     siteId,
@@ -208,6 +232,30 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         onUpdateEditTotalBeds={onUpdateEditTotalBeds}
         onUpdateEditOccupiedBeds={onUpdateEditOccupiedBeds}
         onUpdateEditType={onUpdateEditType}
+        onUpdateEditNote={onUpdateEditNote}
+        onUpdateEditPlan={onUpdateEditPlan}
+        onUpdateEditProcedure={onUpdateEditProcedure}
+        onUpdateEditLabTest={onUpdateEditLabTest}
+        onUpdateEditAppointment={onUpdateEditAppointment}
+        onUpdateEditVitals={onUpdateEditVitals}
+        onUpdateEditMedicalSupply={onUpdateEditMedicalSupply}
+        onUpdateEditAdmitPatient={onUpdateEditAdmitPatient}
+        onUpdateEditTransferPatient={onUpdateEditTransferPatient}
+        onUpdateEditMovePatient={onUpdateEditMovePatient}
+        onUpdateEditDischargePatient={onUpdateEditDischargePatient}
+        onUpdateEditTimeOfDeath={onUpdateEditTimeOfDeath}
+        onUpdateEditReview={onUpdateEditReview}
+        onUpdateEditLogs={onUpdateEditLogs}
+        onUpdateEditPrescription={onUpdateEditPrescription}
+        onUpdateEditDental={onUpdateEditDental}
+        onUpdateEditClerking={onUpdateEditClerking}
+        onUpdateEditRadiology={onUpdateEditRadiology}
+        onUpdateEditConsult={onUpdateEditConsult}
+        onUpdateEditReferral={onUpdateEditReferral}
+        onUpdateEditReferExP={onUpdateEditReferExP}
+        onUpdateEditUpload={onUpdateEditUpload}
+        onUpdateEditCharts={onUpdateEditCharts}
+        onUpdateEditNursing={onUpdateEditNursing}
       />
 
       <AddNewDeptServiceAreaModal
@@ -219,7 +267,9 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
             ? 'Department'
             : type === 'units'
             ? 'Unit'
-            : 'Service Area'
+            : type === 'area'
+            ? 'Service Area'
+            : 'Role'
         }
         open={openNewItemModal}
         submit={submitCreateNewItem}
