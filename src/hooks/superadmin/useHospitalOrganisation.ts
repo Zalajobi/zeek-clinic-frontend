@@ -7,7 +7,6 @@ import { customPromiseRequest } from '@lib/requests';
 import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const useHospitalOrganisation = () => {
-  const navigate = useNavigate();
   const [hospitalTabs, setHospitalTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED'
   >('ALL');
@@ -67,8 +66,6 @@ export const useHospitalOrganisation = () => {
 
           return;
         });
-
-        // console.log(distinctCountries?.value?.data)
         setAllHospitalCountries(tempCountriesFilter);
       } else {
         toast.error('Something went wrong getting organization countries');
@@ -107,7 +104,6 @@ export const useHospitalOrganisation = () => {
   }, []);
 
   const onUpdateSelectFrom = async (value: Date | null) => {
-    console.log(value);
     setHospitalFilterFrom(value);
     const params = {
       page: 0,

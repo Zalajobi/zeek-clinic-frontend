@@ -1,5 +1,4 @@
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
-import { useAdminDepartmentsPage } from '@hooks/admin/units/useUnitsPage';
 import { Typography } from '@components/global/dialog/Typography';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 import { FaPlus } from 'react-icons/fa';
@@ -8,6 +7,7 @@ import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { LoadingSpinner } from '@components/global/Toast';
 import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
+import { useAdminDepartmentUnitAndServiceAreaPage } from '@hooks/admin/common/useAdminDepartmentUnitAndServiceAreaPage';
 
 const AdminUnitsPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -16,12 +16,12 @@ const AdminUnitsPage = () => {
     siteData,
     siteDataLoading,
     siteDataError,
-    showCreateUnitModal,
+    showNewItemModal,
     siteId,
 
     // Functions
-    setShowCreateUnitModal,
-  } = useAdminDepartmentsPage();
+    setShowNewItemModal,
+  } = useAdminDepartmentUnitAndServiceAreaPage();
 
   return (
     <AdminBaseTemplate>
@@ -46,7 +46,7 @@ const AdminUnitsPage = () => {
               type={`primary`}
               text={`Create New`}
               className={`ml-4 min-w-[130px]`}
-              click={() => setShowCreateUnitModal(!showCreateUnitModal)}
+              click={() => setShowNewItemModal(!showNewItemModal)}
               iconBefore={
                 <FaPlus
                   size={20}
@@ -90,10 +90,8 @@ const AdminUnitsPage = () => {
         <AdminDepartmentUnitAndAreaTableEditAndCreate
           type={`units`}
           siteId={siteId as string}
-          openNewItemModal={showCreateUnitModal}
-          handleNewItemModal={() =>
-            setShowCreateUnitModal(!showCreateUnitModal)
-          }
+          openNewItemModal={showNewItemModal}
+          handleNewItemModal={() => setShowNewItemModal(!showNewItemModal)}
         />
       </div>
     </AdminBaseTemplate>
