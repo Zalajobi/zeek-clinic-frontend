@@ -46,7 +46,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Email')}>
+            onClick={() => {}}>
             Email
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -60,7 +60,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Phone')}>
+            onClick={() => {}}>
             Phone
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -74,7 +74,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Role')}>
+            onClick={() => {}}>
             Role
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -88,7 +88,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Department')}>
+            onClick={() => {}}>
             Department
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -102,7 +102,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Unit')}>
+            onClick={() => {}}>
             Unit
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -116,7 +116,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('serviceArea')}>
+            onClick={() => []}>
             Service Area
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -130,7 +130,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('gender')}>
+            onClick={() => {}}>
             Gender
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -144,7 +144,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Country')}>
+            onClick={() => {}}>
             Country
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -158,7 +158,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Status')}>
+            onClick={() => {}}>
             Status
             <TbArrowsMoveVertical size={15} />
           </span>
@@ -172,7 +172,7 @@ export const AdminProviderDataColumn = (
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Created On')}>
+            onClick={() => {}}>
             Registered On
             <TbArrowsMoveVertical size={15} />
           </span>

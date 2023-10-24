@@ -9,7 +9,7 @@ export const AppointmentAndEventsTableColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('name')}>
+            onClick={() => {}}>
             Name
           </span>
         </Fragment>
@@ -22,7 +22,7 @@ export const AppointmentAndEventsTableColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('date and time')}>
+            onClick={() => {}}>
             Date and Time
           </span>
         </Fragment>
@@ -35,7 +35,7 @@ export const AppointmentAndEventsTableColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('age')}>
+            onClick={() => {}}>
             Age
           </span>
         </Fragment>
@@ -48,7 +48,7 @@ export const AppointmentAndEventsTableColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('gender')}>
+            onClick={() => {}}>
             Gender
           </span>
         </Fragment>
@@ -61,7 +61,7 @@ export const AppointmentAndEventsTableColumn = () => {
         <Fragment>
           <span
             className="flex shrink-0 flex-row gap-1"
-            onClick={() => console.log('Appointment For')}>
+            onClick={() => {}}>
             Appointment For
           </span>
         </Fragment>

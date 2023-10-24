@@ -21,9 +21,7 @@ export const useAdminChangePassword = () => {
   useEffect(() => {
     setAuthToken(searchParams.get('token') as string);
 
-    verifyToken(searchParams.get('token') as string).then((r) =>
-      console.log(r)
-    );
+    verifyToken(searchParams.get('token') as string).then(() => {});
   }, []);
 
   const verifyToken = async (token: string) => {

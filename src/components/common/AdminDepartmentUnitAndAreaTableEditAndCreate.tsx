@@ -70,6 +70,8 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateEditOccupiedBeds,
     onUpdateCreateNewItemTotalBeds,
     onUpdateCreateNewItemOccupiedBeds,
+    onUpdateEditType,
+    onUpdateCreateNewItemType,
   } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
     type,
     siteId,
@@ -205,6 +207,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         descriptionPlaceholder={editItemDescription}
         onUpdateEditTotalBeds={onUpdateEditTotalBeds}
         onUpdateEditOccupiedBeds={onUpdateEditOccupiedBeds}
+        onUpdateEditType={onUpdateEditType}
       />
 
       <AddNewDeptServiceAreaModal
@@ -222,6 +225,7 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         submit={submitCreateNewItem}
         onUpdateCreateTotalBeds={onUpdateCreateNewItemTotalBeds}
         onUpdateCreateOccupiedBeds={onUpdateCreateNewItemOccupiedBeds}
+        onUpdateCreateNewItemType={onUpdateCreateNewItemType}
       />
     </Fragment>
   );
