@@ -12,7 +12,7 @@ import {
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
-  type: 'departments' | 'units' | 'area';
+  type: 'departments' | 'units' | 'area' | 'role';
   nameOfDepartment: string;
   descriptionPlaceholder: string;
   open: boolean;

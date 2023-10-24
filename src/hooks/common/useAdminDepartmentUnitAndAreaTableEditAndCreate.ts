@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
 export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
-  type: 'departments' | 'units' | 'area',
+  type: 'departments' | 'units' | 'area' | 'role',
   siteId: string,
   handleNewItemModal: () => void
 ) => {
@@ -92,6 +92,11 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
           `/unit/admin/list/paginated/${siteId}`,
           params
         );
+      } else if (type === 'area') {
+        return axiosGetRequestUserService(
+          `/service-area/admin/list/paginated/${siteId}`,
+          params
+        );
       } else {
         return axiosGetRequestUserService(
           `/service-area/admin/list/paginated/${siteId}`,
@@ -111,6 +116,11 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       } else if (type === 'units') {
         return axiosPutRequestUserService(
           `/unit/admin/update/${editItemId}`,
+          data
+        );
+      } else if (type == 'area') {
+        return axiosPutRequestUserService(
+          `/service-area/admin/update/${editItemId}`,
           data
         );
       } else {
@@ -139,6 +149,8 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         return axiosPostRequestUserService(`/department/admin/create`, data);
       } else if (type === 'units') {
         return axiosPostRequestUserService(`/unit/admin/create`, data);
+      } else if (type == 'area') {
+        return axiosPostRequestUserService(`/service-area/admin/create`, data);
       } else {
         return axiosPostRequestUserService(`/service-area/admin/create`, data);
       }

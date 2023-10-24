@@ -13,7 +13,7 @@ import {
 import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
 
 export const DepartmentsPatientAndDoctorCountDataColumn = (
-  type: 'departments' | 'units' | 'area'
+  type: 'departments' | 'units' | 'area' | 'role'
 ) => {
   if (type === 'units') {
     return [
@@ -171,7 +171,7 @@ export const DepartmentsPatientAndDoctorCountDataColumn = (
         accessor: 'action',
       },
     ];
-  } else {
+  } else if (type == 'area') {
     return [
       {
         Header: (
@@ -256,7 +256,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
   data: UserServiceUnitResponseData[],
   isLoading: boolean,
   navigate: NavigateFunction,
-  type: 'departments' | 'units' | 'area',
+  type: 'departments' | 'units' | 'area' | 'role',
   showOnDeleteDepartmentModalHandler: (id: string, name: string) => void,
   showEditDepartmentModalHandler: (
     id: string,

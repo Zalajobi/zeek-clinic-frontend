@@ -18,7 +18,7 @@ import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNe
 
 interface AdminDepartmentUnitAndAreaTableEditAndCreateProps {
   siteId: string;
-  type: 'departments' | 'units' | 'area';
+  type: 'departments' | 'units' | 'area' | 'role';
   openNewItemModal: boolean;
   handleNewItemModal: () => void;
 }
