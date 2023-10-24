@@ -29,6 +29,30 @@ export interface UserServiceUnitResponseData {
   type: string;
   total_beds: number;
   occupied_beds: number;
+  nursing: boolean;
+  charts: boolean;
+  upload: boolean;
+  refer_outpx: boolean;
+  referral: boolean;
+  consult: boolean;
+  radiology: boolean;
+  clerking: boolean;
+  dental: boolean;
+  logs: boolean;
+  review: boolean;
+  time_of_death: boolean;
+  discharge: boolean;
+  move_patient: boolean;
+  transfer_patient: boolean;
+  admit_patient: boolean;
+  med_supply: boolean;
+  vitals: boolean;
+  plan: boolean;
+  appointment: boolean;
+  lab_test: boolean;
+  procedure: boolean;
+  note: boolean;
+  prescription: boolean;
 }
 
 export interface UserServiceRoleResponseData {

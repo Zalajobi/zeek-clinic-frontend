@@ -6,6 +6,8 @@ import { CgExport } from 'react-icons/cg';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
 import { useAdminDepartmentUnitAndServiceAreaPage } from '@hooks/admin/common/useAdminDepartmentUnitAndServiceAreaPage';
+import AdminDepartmentUnitAndAreaTableEditAndCreate from '@components/common/AdminDepartmentUnitAndAreaTableEditAndCreate';
+import { LoadingSpinner } from '@components/global/Toast';
 
 const AdminRolesPage = () => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -23,6 +25,13 @@ const AdminRolesPage = () => {
   } = useAdminDepartmentUnitAndServiceAreaPage();
   return (
     <AdminBaseTemplate>
+      <LoadingSpinner
+        message={siteData?.message as string}
+        error={!siteData?.success || siteDataError}
+        success={siteData?.success && !siteDataLoading}
+        loading={siteDataLoading}
+      />
+
       <div className={`flex flex-col w-full`}>
         <div className={`grid grid-cols-[80%_20%] gap-4`}>
           <Typography
@@ -76,6 +85,13 @@ const AdminRolesPage = () => {
         <AdminRoutes
           siteId={siteData?.data?.id ?? ''}
           id={adminData?.id}
+        />
+
+        <AdminDepartmentUnitAndAreaTableEditAndCreate
+          type={`role`}
+          siteId={siteId as string}
+          openNewItemModal={showNewItemModal}
+          handleNewItemModal={() => setShowNewItemModal(!showNewItemModal)}
         />
       </div>
     </AdminBaseTemplate>

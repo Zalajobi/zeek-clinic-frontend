@@ -99,7 +99,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else {
         return axiosGetRequestUserService(
-          `/service-area/admin/list/paginated/${siteId}`,
+          `/role/admin/list/paginated/${siteId}`,
           params
         );
       }
@@ -118,7 +118,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
           `/unit/admin/update/${editItemId}`,
           data
         );
-      } else if (type == 'area') {
+      } else if (type === 'area') {
         return axiosPutRequestUserService(
           `/service-area/admin/update/${editItemId}`,
           data
@@ -149,7 +149,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         return axiosPostRequestUserService(`/department/admin/create`, data);
       } else if (type === 'units') {
         return axiosPostRequestUserService(`/unit/admin/create`, data);
-      } else if (type == 'area') {
+      } else if (type === 'area') {
         return axiosPostRequestUserService(`/service-area/admin/create`, data);
       } else {
         return axiosPostRequestUserService(`/service-area/admin/create`, data);
