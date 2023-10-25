@@ -27,4 +27,28 @@ export interface DepartmentsPatientAndProviderCountRowData {
   type?: ReactNode;
   total_beds?: ReactNode;
   occupied_beds?: ReactNode;
+  nursing?: ReactNode;
+  charts?: ReactNode;
+  upload?: ReactNode;
+  refer_outpx?: ReactNode;
+  referral?: ReactNode;
+  consult?: ReactNode;
+  radiology?: ReactNode;
+  clerking?: ReactNode;
+  dental?: ReactNode;
+  logs?: ReactNode;
+  review?: ReactNode;
+  time_of_death?: ReactNode;
+  discharge?: ReactNode;
+  move_patient?: ReactNode;
+  transfer_patient?: ReactNode;
+  admit_patient?: ReactNode;
+  med_supply?: ReactNode;
+  vitals?: ReactNode;
+  appointment?: ReactNode;
+  lab_test?: ReactNode;
+  procedure?: ReactNode;
+  note?: ReactNode;
+  prescription?: ReactNode;
+  plan?: ReactNode;
 }

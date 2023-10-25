@@ -232,7 +232,7 @@ const AdminRoutes = ({ siteId, id }: ProviderPageRoutesProps) => {
             />
           }
           text={`Role`}
-          to={`/admin/appointments/${id}`}
+          to={`/admin/roles/${siteId}`}
           className={`!w-full`}
         />
 

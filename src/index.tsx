@@ -27,6 +27,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 import AdminServiceAreaPage from '@pages/admin/AdminServiceAreaPage';
+import AdminRolesPage from '@pages/admin/AdminRolesPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -98,6 +99,11 @@ const router = createBrowserRouter([
       {
         path: '/admin/departments/:siteId',
         element: <AdminDepartmentsPage />,
+      },
+
+      {
+        path: '/admin/roles/:siteId',
+        element: <AdminRolesPage />,
       },
 
       {

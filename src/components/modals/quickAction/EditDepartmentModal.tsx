@@ -8,11 +8,12 @@ import {
   Select,
   Textarea,
   Option,
+  Switch,
 } from '@material-tailwind/react';
 import { BasicOutlineButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
-  type: 'departments' | 'units' | 'area';
+  type: 'departments' | 'units' | 'area' | 'role';
   nameOfDepartment: string;
   descriptionPlaceholder: string;
   open: boolean;
@@ -23,6 +24,30 @@ interface EditDepartmentModalProps {
   onUpdateEditTotalBeds: (value: number) => void;
   onUpdateEditOccupiedBeds: (value: number) => void;
   onUpdateEditType: (value: string) => void;
+  onUpdateEditNote: (value: boolean) => void;
+  onUpdateEditPlan: (value: boolean) => void;
+  onUpdateEditProcedure: (value: boolean) => void;
+  onUpdateEditLabTest: (value: boolean) => void;
+  onUpdateEditAppointment: (value: boolean) => void;
+  onUpdateEditVitals: (value: boolean) => void;
+  onUpdateEditMedicalSupply: (value: boolean) => void;
+  onUpdateEditAdmitPatient: (value: boolean) => void;
+  onUpdateEditTransferPatient: (value: boolean) => void;
+  onUpdateEditMovePatient: (value: boolean) => void;
+  onUpdateEditDischargePatient: (value: boolean) => void;
+  onUpdateEditTimeOfDeath: (value: boolean) => void;
+  onUpdateEditReview: (value: boolean) => void;
+  onUpdateEditLogs: (value: boolean) => void;
+  onUpdateEditPrescription: (value: boolean) => void;
+  onUpdateEditDental: (value: boolean) => void;
+  onUpdateEditClerking: (value: boolean) => void;
+  onUpdateEditRadiology: (value: boolean) => void;
+  onUpdateEditConsult: (value: boolean) => void;
+  onUpdateEditReferral: (value: boolean) => void;
+  onUpdateEditReferExP: (value: boolean) => void;
+  onUpdateEditUpload: (value: boolean) => void;
+  onUpdateEditCharts: (value: boolean) => void;
+  onUpdateEditNursing: (value: boolean) => void;
 }
 
 const EditDepartmentModal = ({
@@ -37,6 +62,30 @@ const EditDepartmentModal = ({
   onUpdateEditTotalBeds,
   onUpdateEditType,
   type,
+  onUpdateEditNote,
+  onUpdateEditPlan,
+  onUpdateEditProcedure,
+  onUpdateEditLabTest,
+  onUpdateEditAppointment,
+  onUpdateEditVitals,
+  onUpdateEditMedicalSupply,
+  onUpdateEditAdmitPatient,
+  onUpdateEditTransferPatient,
+  onUpdateEditMovePatient,
+  onUpdateEditDischargePatient,
+  onUpdateEditTimeOfDeath,
+  onUpdateEditReview,
+  onUpdateEditLogs,
+  onUpdateEditPrescription,
+  onUpdateEditDental,
+  onUpdateEditClerking,
+  onUpdateEditRadiology,
+  onUpdateEditConsult,
+  onUpdateEditReferral,
+  onUpdateEditReferExP,
+  onUpdateEditUpload,
+  onUpdateEditCharts,
+  onUpdateEditNursing,
 }: EditDepartmentModalProps) => {
   return (
     <Fragment>
@@ -127,6 +176,366 @@ const EditDepartmentModal = ({
             onChange={(event) => onUpdateDeptDescription(event.target.value)}
             placeholder={descriptionPlaceholder}
           />
+
+          {type === 'role' && (
+            <div className={`w-full col-span-2 grid grid-cols-3 gap-6 my-4`}>
+              <Switch
+                id="note"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Note`}
+                onChange={(event) => onUpdateEditNote(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="plan"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Plan`}
+                onChange={(event) => onUpdateEditPlan(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="procedure"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Procedure`}
+                onChange={(event) =>
+                  onUpdateEditProcedure(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="lab_test"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Lab Test`}
+                onChange={(event) => onUpdateEditLabTest(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="appointment"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Appointment`}
+                onChange={(event) =>
+                  onUpdateEditAppointment(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="lab_test"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Lab Test`}
+                onChange={(event) => onUpdateEditVitals(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="med_supply"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Medical Supply`}
+                onChange={(event) =>
+                  onUpdateEditMedicalSupply(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="admin_patient"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Admit Patient`}
+                onChange={(event) =>
+                  onUpdateEditAdmitPatient(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="transfer_patient"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Transfer Patient`}
+                onChange={(event) =>
+                  onUpdateEditTransferPatient(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="move_patient"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Move Patient`}
+                onChange={(event) =>
+                  onUpdateEditMovePatient(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="discharge_patient"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Discharge Patient`}
+                onChange={(event) =>
+                  onUpdateEditDischargePatient(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="time_of_death"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Time Of Death`}
+                onChange={(event) =>
+                  onUpdateEditTimeOfDeath(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="review"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Review`}
+                onChange={(event) => onUpdateEditReview(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="logs"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Logs`}
+                onChange={(event) => onUpdateEditLogs(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="prescription"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Prescription`}
+                onChange={(event) =>
+                  onUpdateEditPrescription(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="dental"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Dental`}
+                onChange={(event) => onUpdateEditDental(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="clerking"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Clerking`}
+                onChange={(event) => onUpdateEditClerking(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="radiology"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Radiology`}
+                onChange={(event) =>
+                  onUpdateEditRadiology(event.target.checked)
+                }
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="consult"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Consult`}
+                onChange={(event) => onUpdateEditConsult(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="referral"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Referral`}
+                onChange={(event) => onUpdateEditReferral(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="referExP"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Refer External Prescription`}
+                onChange={(event) => onUpdateEditReferExP(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="upload"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Upload`}
+                onChange={(event) => onUpdateEditUpload(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="chart"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Chart`}
+                onChange={(event) => onUpdateEditCharts(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+
+              <Switch
+                id="nursing"
+                ripple={true}
+                className="h-full w-full bg-red-400 checked:bg-[#2ec946] font-black"
+                containerProps={{
+                  className: 'w-11 h-6',
+                }}
+                label={`Nursing`}
+                onChange={(event) => onUpdateEditNursing(event.target.checked)}
+                circleProps={{
+                  className: 'before:hidden left-0.5 border-none',
+                }}
+              />
+            </div>
+          )}
         </DialogBody>
 
         <DialogFooter>
