@@ -96,6 +96,30 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateEditUpload,
     onUpdateEditCharts,
     onUpdateEditNursing,
+    onUpdateCreateNewNote,
+    onUpdateCreateNewPlan,
+    onUpdateCreateNewProcedure,
+    onUpdateCreateNewLabTest,
+    onUpdateCreateNewAppointment,
+    onUpdateCreateNewVitals,
+    onUpdateCreateNewMedicalSupply,
+    onUpdateCreateNewAdmitPatient,
+    onUpdateCreateNewTransferPatient,
+    onUpdateCreateNewMovePatient,
+    onUpdateCreateNewDischargePatient,
+    onUpdateCreateNewTimeOfDeath,
+    onUpdateCreateNewReview,
+    onUpdateCreateNewLogs,
+    onUpdateCreateNewPrescription,
+    onUpdateCreateNewDental,
+    onUpdateCreateNewClerking,
+    onUpdateCreateNewRadiology,
+    onUpdateCreateNewConsult,
+    onUpdateCreateNewReferral,
+    onUpdateCreateNewReferExP,
+    onUpdateCreateNewUpload,
+    onUpdateCreateNewCharts,
+    onUpdateCreateNewNursing,
   } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
     type,
     siteId,
@@ -276,6 +300,30 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         onUpdateCreateTotalBeds={onUpdateCreateNewItemTotalBeds}
         onUpdateCreateOccupiedBeds={onUpdateCreateNewItemOccupiedBeds}
         onUpdateCreateNewItemType={onUpdateCreateNewItemType}
+        onUpdateCreateNewNote={onUpdateCreateNewNote}
+        onUpdateCreateNewPlan={onUpdateCreateNewPlan}
+        onUpdateCreateNewProcedure={onUpdateCreateNewProcedure}
+        onUpdateCreateNewLabTest={onUpdateCreateNewLabTest}
+        onUpdateCreateNewAppointment={onUpdateCreateNewAppointment}
+        onUpdateCreateNewVitals={onUpdateCreateNewVitals}
+        onUpdateCreateNewMedicalSupply={onUpdateCreateNewMedicalSupply}
+        onUpdateCreateNewAdmitPatient={onUpdateCreateNewAdmitPatient}
+        onUpdateCreateNewTransferPatient={onUpdateCreateNewTransferPatient}
+        onUpdateCreateNewMovePatient={onUpdateCreateNewMovePatient}
+        onUpdateCreateNewDischargePatient={onUpdateCreateNewDischargePatient}
+        onUpdateCreateNewTimeOfDeath={onUpdateCreateNewTimeOfDeath}
+        onUpdateCreateNewReview={onUpdateCreateNewReview}
+        onUpdateCreateNewLogs={onUpdateCreateNewLogs}
+        onUpdateCreateNewPrescription={onUpdateCreateNewPrescription}
+        onUpdateCreateNewDental={onUpdateCreateNewDental}
+        onUpdateCreateNewClerking={onUpdateCreateNewClerking}
+        onUpdateCreateNewRadiology={onUpdateCreateNewRadiology}
+        onUpdateCreateNewConsult={onUpdateCreateNewConsult}
+        onUpdateCreateNewReferral={onUpdateCreateNewReferral}
+        onUpdateCreateNewReferExP={onUpdateCreateNewReferExP}
+        onUpdateCreateNewUpload={onUpdateCreateNewUpload}
+        onUpdateCreateNewCharts={onUpdateCreateNewCharts}
+        onUpdateCreateNewNursing={onUpdateCreateNewNursing}
       />
     </Fragment>
   );

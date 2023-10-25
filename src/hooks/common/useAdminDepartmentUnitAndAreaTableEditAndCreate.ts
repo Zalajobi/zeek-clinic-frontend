@@ -64,6 +64,30 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     occupied_beds: 0,
     type: '',
     siteId,
+    plan: false,
+    nursing: false,
+    charts: false,
+    upload: false,
+    refer_outpx: false,
+    referral: false,
+    consult: false,
+    radiology: false,
+    clerking: false,
+    dental: false,
+    logs: false,
+    review: false,
+    time_of_death: false,
+    discharge: false,
+    move_patient: false,
+    transfer_patient: false,
+    admit_patient: false,
+    med_supply: false,
+    vitals: false,
+    appointment: false,
+    lab_test: false,
+    procedure: false,
+    note: false,
+    prescription: false,
   });
 
   // Get Table Data  Query
@@ -154,7 +178,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       } else if (type === 'area') {
         return axiosPostRequestUserService(`/service-area/admin/create`, data);
       } else {
-        return axiosPostRequestUserService(`/service-area/admin/create`, data);
+        return axiosPostRequestUserService(`/role/admin/create`, data);
       }
     },
 
@@ -386,6 +410,78 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const onUpdateCreateNewItemOccupiedBeds = (value: number) =>
     setCreateNewItem({ ...createNewItem, occupied_beds: value });
 
+  const onUpdateCreateNewNote = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, note: value });
+
+  const onUpdateCreateNewPlan = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, plan: value });
+
+  const onUpdateCreateNewProcedure = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, procedure: value });
+
+  const onUpdateCreateNewLabTest = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, lab_test: value });
+
+  const onUpdateCreateNewAppointment = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, appointment: value });
+
+  const onUpdateCreateNewVitals = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, vitals: value });
+
+  const onUpdateCreateNewMedicalSupply = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, med_supply: value });
+
+  const onUpdateCreateNewAdmitPatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, admit_patient: value });
+
+  const onUpdateCreateNewTransferPatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, transfer_patient: value });
+
+  const onUpdateCreateNewMovePatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, move_patient: value });
+
+  const onUpdateCreateNewDischargePatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, discharge: value });
+
+  const onUpdateCreateNewTimeOfDeath = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, time_of_death: value });
+
+  const onUpdateCreateNewReview = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, review: value });
+
+  const onUpdateCreateNewLogs = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, logs: value });
+
+  const onUpdateCreateNewPrescription = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, prescription: value });
+
+  const onUpdateCreateNewDental = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, dental: value });
+
+  const onUpdateCreateNewClerking = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, clerking: value });
+
+  const onUpdateCreateNewRadiology = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, radiology: value });
+
+  const onUpdateCreateNewConsult = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, consult: value });
+
+  const onUpdateCreateNewReferral = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, referral: value });
+
+  const onUpdateCreateNewReferExP = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, refer_outpx: value });
+
+  const onUpdateCreateNewUpload = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, upload: value });
+
+  const onUpdateCreateNewCharts = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, charts: value });
+
+  const onUpdateCreateNewNursing = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, nursing: value });
+
   const submitCreateNewItem = () => {
     if (!createNewItem?.name || !createNewItem?.description)
       toast.error(`Name and Description are required`);
@@ -463,5 +559,29 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateEditUpload,
     onUpdateEditCharts,
     onUpdateEditNursing,
+    onUpdateCreateNewNote,
+    onUpdateCreateNewPlan,
+    onUpdateCreateNewProcedure,
+    onUpdateCreateNewLabTest,
+    onUpdateCreateNewAppointment,
+    onUpdateCreateNewVitals,
+    onUpdateCreateNewMedicalSupply,
+    onUpdateCreateNewAdmitPatient,
+    onUpdateCreateNewTransferPatient,
+    onUpdateCreateNewMovePatient,
+    onUpdateCreateNewDischargePatient,
+    onUpdateCreateNewTimeOfDeath,
+    onUpdateCreateNewReview,
+    onUpdateCreateNewLogs,
+    onUpdateCreateNewPrescription,
+    onUpdateCreateNewDental,
+    onUpdateCreateNewClerking,
+    onUpdateCreateNewRadiology,
+    onUpdateCreateNewConsult,
+    onUpdateCreateNewReferral,
+    onUpdateCreateNewReferExP,
+    onUpdateCreateNewUpload,
+    onUpdateCreateNewCharts,
+    onUpdateCreateNewNursing,
   };
 };
