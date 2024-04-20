@@ -39,7 +39,7 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
     createNewOrganization,
     setLogo,
     onUpdateCountry,
-  } = useCreateHospitalModal();
+  } = useCreateHospitalModal(handler);
 
   return (
     <Fragment>
@@ -153,7 +153,7 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 className={`my-3`}
                 errorMsg={errors.phone?.message ?? ''}
                 type={'tel'}
-                id={`zip_code`}
+                id={`phone`}
                 register={register}
                 placeholder={`+170539802`}
               />

@@ -7,7 +7,7 @@ import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
 
-export const useCreateHospitalModal = () => {
+export const useCreateHospitalModal = (handler: () => void) => {
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
@@ -66,8 +66,10 @@ export const useCreateHospitalModal = () => {
         hospitalData
       );
 
-      if (response.success) toast.success(response.message);
-      else toast.error(response.message);
+      if (response.success) {
+        handler();
+        toast.success(response.message);
+      } else toast.error(response.message);
     }
   };
 
