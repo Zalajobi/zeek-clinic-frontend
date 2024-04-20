@@ -7,7 +7,6 @@ import { customPromiseRequest } from '@lib/requests';
 import { SelectInputFieldProps } from '@typeSpec/common';
 
 export const useHospitalOrganisation = () => {
-  const navigate = useNavigate();
   const [hospitalTabs, setHospitalTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED'
   >('ALL');

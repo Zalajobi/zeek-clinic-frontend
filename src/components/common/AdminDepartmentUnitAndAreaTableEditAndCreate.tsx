@@ -18,7 +18,7 @@ import { AddNewDeptServiceAreaModal } from '@components/modals/quickAction/AddNe
 
 interface AdminDepartmentUnitAndAreaTableEditAndCreateProps {
   siteId: string;
-  type: 'departments' | 'units' | 'area';
+  type: 'departments' | 'units' | 'area' | 'role';
   openNewItemModal: boolean;
   handleNewItemModal: () => void;
 }
@@ -72,6 +72,54 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
     onUpdateCreateNewItemOccupiedBeds,
     onUpdateEditType,
     onUpdateCreateNewItemType,
+    onUpdateEditNote,
+    onUpdateEditPlan,
+    onUpdateEditProcedure,
+    onUpdateEditLabTest,
+    onUpdateEditAppointment,
+    onUpdateEditVitals,
+    onUpdateEditMedicalSupply,
+    onUpdateEditAdmitPatient,
+    onUpdateEditTransferPatient,
+    onUpdateEditMovePatient,
+    onUpdateEditDischargePatient,
+    onUpdateEditTimeOfDeath,
+    onUpdateEditReview,
+    onUpdateEditLogs,
+    onUpdateEditPrescription,
+    onUpdateEditDental,
+    onUpdateEditClerking,
+    onUpdateEditRadiology,
+    onUpdateEditConsult,
+    onUpdateEditReferral,
+    onUpdateEditReferExP,
+    onUpdateEditUpload,
+    onUpdateEditCharts,
+    onUpdateEditNursing,
+    onUpdateCreateNewNote,
+    onUpdateCreateNewPlan,
+    onUpdateCreateNewProcedure,
+    onUpdateCreateNewLabTest,
+    onUpdateCreateNewAppointment,
+    onUpdateCreateNewVitals,
+    onUpdateCreateNewMedicalSupply,
+    onUpdateCreateNewAdmitPatient,
+    onUpdateCreateNewTransferPatient,
+    onUpdateCreateNewMovePatient,
+    onUpdateCreateNewDischargePatient,
+    onUpdateCreateNewTimeOfDeath,
+    onUpdateCreateNewReview,
+    onUpdateCreateNewLogs,
+    onUpdateCreateNewPrescription,
+    onUpdateCreateNewDental,
+    onUpdateCreateNewClerking,
+    onUpdateCreateNewRadiology,
+    onUpdateCreateNewConsult,
+    onUpdateCreateNewReferral,
+    onUpdateCreateNewReferExP,
+    onUpdateCreateNewUpload,
+    onUpdateCreateNewCharts,
+    onUpdateCreateNewNursing,
   } = useAdminDepartmentUnitAndAreaTableEditAndCreate(
     type,
     siteId,
@@ -208,6 +256,30 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
         onUpdateEditTotalBeds={onUpdateEditTotalBeds}
         onUpdateEditOccupiedBeds={onUpdateEditOccupiedBeds}
         onUpdateEditType={onUpdateEditType}
+        onUpdateEditNote={onUpdateEditNote}
+        onUpdateEditPlan={onUpdateEditPlan}
+        onUpdateEditProcedure={onUpdateEditProcedure}
+        onUpdateEditLabTest={onUpdateEditLabTest}
+        onUpdateEditAppointment={onUpdateEditAppointment}
+        onUpdateEditVitals={onUpdateEditVitals}
+        onUpdateEditMedicalSupply={onUpdateEditMedicalSupply}
+        onUpdateEditAdmitPatient={onUpdateEditAdmitPatient}
+        onUpdateEditTransferPatient={onUpdateEditTransferPatient}
+        onUpdateEditMovePatient={onUpdateEditMovePatient}
+        onUpdateEditDischargePatient={onUpdateEditDischargePatient}
+        onUpdateEditTimeOfDeath={onUpdateEditTimeOfDeath}
+        onUpdateEditReview={onUpdateEditReview}
+        onUpdateEditLogs={onUpdateEditLogs}
+        onUpdateEditPrescription={onUpdateEditPrescription}
+        onUpdateEditDental={onUpdateEditDental}
+        onUpdateEditClerking={onUpdateEditClerking}
+        onUpdateEditRadiology={onUpdateEditRadiology}
+        onUpdateEditConsult={onUpdateEditConsult}
+        onUpdateEditReferral={onUpdateEditReferral}
+        onUpdateEditReferExP={onUpdateEditReferExP}
+        onUpdateEditUpload={onUpdateEditUpload}
+        onUpdateEditCharts={onUpdateEditCharts}
+        onUpdateEditNursing={onUpdateEditNursing}
       />
 
       <AddNewDeptServiceAreaModal
@@ -219,13 +291,39 @@ const AdminDepartmentUnitAndAreaTableEditAndCreate = ({
             ? 'Department'
             : type === 'units'
             ? 'Unit'
-            : 'Service Area'
+            : type === 'area'
+            ? 'Service Area'
+            : 'Role'
         }
         open={openNewItemModal}
         submit={submitCreateNewItem}
         onUpdateCreateTotalBeds={onUpdateCreateNewItemTotalBeds}
         onUpdateCreateOccupiedBeds={onUpdateCreateNewItemOccupiedBeds}
         onUpdateCreateNewItemType={onUpdateCreateNewItemType}
+        onUpdateCreateNewNote={onUpdateCreateNewNote}
+        onUpdateCreateNewPlan={onUpdateCreateNewPlan}
+        onUpdateCreateNewProcedure={onUpdateCreateNewProcedure}
+        onUpdateCreateNewLabTest={onUpdateCreateNewLabTest}
+        onUpdateCreateNewAppointment={onUpdateCreateNewAppointment}
+        onUpdateCreateNewVitals={onUpdateCreateNewVitals}
+        onUpdateCreateNewMedicalSupply={onUpdateCreateNewMedicalSupply}
+        onUpdateCreateNewAdmitPatient={onUpdateCreateNewAdmitPatient}
+        onUpdateCreateNewTransferPatient={onUpdateCreateNewTransferPatient}
+        onUpdateCreateNewMovePatient={onUpdateCreateNewMovePatient}
+        onUpdateCreateNewDischargePatient={onUpdateCreateNewDischargePatient}
+        onUpdateCreateNewTimeOfDeath={onUpdateCreateNewTimeOfDeath}
+        onUpdateCreateNewReview={onUpdateCreateNewReview}
+        onUpdateCreateNewLogs={onUpdateCreateNewLogs}
+        onUpdateCreateNewPrescription={onUpdateCreateNewPrescription}
+        onUpdateCreateNewDental={onUpdateCreateNewDental}
+        onUpdateCreateNewClerking={onUpdateCreateNewClerking}
+        onUpdateCreateNewRadiology={onUpdateCreateNewRadiology}
+        onUpdateCreateNewConsult={onUpdateCreateNewConsult}
+        onUpdateCreateNewReferral={onUpdateCreateNewReferral}
+        onUpdateCreateNewReferExP={onUpdateCreateNewReferExP}
+        onUpdateCreateNewUpload={onUpdateCreateNewUpload}
+        onUpdateCreateNewCharts={onUpdateCreateNewCharts}
+        onUpdateCreateNewNursing={onUpdateCreateNewNursing}
       />
     </Fragment>
   );

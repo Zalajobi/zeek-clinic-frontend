@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
 export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
-  type: 'departments' | 'units' | 'area',
+  type: 'departments' | 'units' | 'area' | 'role',
   siteId: string,
   handleNewItemModal: () => void
 ) => {
@@ -64,6 +64,30 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     occupied_beds: 0,
     type: '',
     siteId,
+    plan: false,
+    nursing: false,
+    charts: false,
+    upload: false,
+    refer_outpx: false,
+    referral: false,
+    consult: false,
+    radiology: false,
+    clerking: false,
+    dental: false,
+    logs: false,
+    review: false,
+    time_of_death: false,
+    discharge: false,
+    move_patient: false,
+    transfer_patient: false,
+    admit_patient: false,
+    med_supply: false,
+    vitals: false,
+    appointment: false,
+    lab_test: false,
+    procedure: false,
+    note: false,
+    prescription: false,
   });
 
   // Get Table Data  Query
@@ -84,23 +108,29 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
       if (type === 'departments') {
         return axiosGetRequestUserService(
-          `/department/list/paginated/${siteId}`,
+          `/department/admin/list/paginated/${siteId}`,
           params
         );
       } else if (type === 'units') {
         return axiosGetRequestUserService(
-          `/unit/list/paginated/${siteId}`,
+          `/unit/admin/list/paginated/${siteId}`,
+          params
+        );
+      } else if (type === 'area') {
+        return axiosGetRequestUserService(
+          `/service-area/admin/list/paginated/${siteId}`,
           params
         );
       } else {
         return axiosGetRequestUserService(
-          `/service-area/list/paginated/${siteId}`,
+          `/role/admin/list/paginated/${siteId}`,
           params
         );
       }
     }
   );
 
+  // Update Data
   const updateItemInfoMutate = useMutation({
     mutationFn: (data: any) => {
       if (type === 'departments') {
@@ -113,9 +143,14 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
           `/unit/admin/update/${editItemId}`,
           data
         );
-      } else {
+      } else if (type === 'area') {
         return axiosPutRequestUserService(
           `/service-area/admin/update/${editItemId}`,
+          data
+        );
+      } else {
+        return axiosPutRequestUserService(
+          `/role/admin/update/${editItemId}`,
           data
         );
       }
@@ -133,14 +168,17 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     },
   });
 
+  // Create New Data
   const createItemMutate = useMutation({
     mutationFn: (data: any) => {
       if (type === 'departments') {
-        return axiosPostRequestUserService(`/department/create`, data);
+        return axiosPostRequestUserService(`/department/admin/create`, data);
       } else if (type === 'units') {
-        return axiosPostRequestUserService(`/unit/create`, data);
+        return axiosPostRequestUserService(`/unit/admin/create`, data);
+      } else if (type === 'area') {
+        return axiosPostRequestUserService(`/service-area/admin/create`, data);
       } else {
-        return axiosPostRequestUserService(`/service-area/create`, data);
+        return axiosPostRequestUserService(`/role/admin/create`, data);
       }
     },
 
@@ -277,6 +315,78 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const onUpdateEditType = (value: string) =>
     setNewEditItemInfo({ ...newEditItemInfo, type: value });
 
+  const onUpdateEditNote = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, note: value });
+
+  const onUpdateEditPlan = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, plan: value });
+
+  const onUpdateEditProcedure = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, procedure: value });
+
+  const onUpdateEditLabTest = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, lab_test: value });
+
+  const onUpdateEditAppointment = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, appointment: value });
+
+  const onUpdateEditVitals = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, vitals: value });
+
+  const onUpdateEditMedicalSupply = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, med_supply: value });
+
+  const onUpdateEditAdmitPatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, admit_patient: value });
+
+  const onUpdateEditTransferPatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, transfer_patient: value });
+
+  const onUpdateEditMovePatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, move_patient: value });
+
+  const onUpdateEditDischargePatient = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, discharge: value });
+
+  const onUpdateEditTimeOfDeath = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, time_of_death: value });
+
+  const onUpdateEditReview = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, review: value });
+
+  const onUpdateEditLogs = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, logs: value });
+
+  const onUpdateEditPrescription = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, prescription: value });
+
+  const onUpdateEditDental = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, dental: value });
+
+  const onUpdateEditClerking = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, clerking: value });
+
+  const onUpdateEditRadiology = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, radiology: value });
+
+  const onUpdateEditConsult = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, consult: value });
+
+  const onUpdateEditReferral = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, referral: value });
+
+  const onUpdateEditReferExP = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, refer_outpx: value });
+
+  const onUpdateEditUpload = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, upload: value });
+
+  const onUpdateEditCharts = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, charts: value });
+
+  const onUpdateEditNursing = (value: boolean) =>
+    setNewEditItemInfo({ ...newEditItemInfo, nursing: value });
+
   const updateItemInformation = async () => {
     setShowEditModal(!showEditModal);
     setTimeout(() => {
@@ -299,6 +409,78 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
   const onUpdateCreateNewItemOccupiedBeds = (value: number) =>
     setCreateNewItem({ ...createNewItem, occupied_beds: value });
+
+  const onUpdateCreateNewNote = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, note: value });
+
+  const onUpdateCreateNewPlan = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, plan: value });
+
+  const onUpdateCreateNewProcedure = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, procedure: value });
+
+  const onUpdateCreateNewLabTest = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, lab_test: value });
+
+  const onUpdateCreateNewAppointment = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, appointment: value });
+
+  const onUpdateCreateNewVitals = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, vitals: value });
+
+  const onUpdateCreateNewMedicalSupply = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, med_supply: value });
+
+  const onUpdateCreateNewAdmitPatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, admit_patient: value });
+
+  const onUpdateCreateNewTransferPatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, transfer_patient: value });
+
+  const onUpdateCreateNewMovePatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, move_patient: value });
+
+  const onUpdateCreateNewDischargePatient = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, discharge: value });
+
+  const onUpdateCreateNewTimeOfDeath = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, time_of_death: value });
+
+  const onUpdateCreateNewReview = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, review: value });
+
+  const onUpdateCreateNewLogs = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, logs: value });
+
+  const onUpdateCreateNewPrescription = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, prescription: value });
+
+  const onUpdateCreateNewDental = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, dental: value });
+
+  const onUpdateCreateNewClerking = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, clerking: value });
+
+  const onUpdateCreateNewRadiology = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, radiology: value });
+
+  const onUpdateCreateNewConsult = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, consult: value });
+
+  const onUpdateCreateNewReferral = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, referral: value });
+
+  const onUpdateCreateNewReferExP = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, refer_outpx: value });
+
+  const onUpdateCreateNewUpload = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, upload: value });
+
+  const onUpdateCreateNewCharts = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, charts: value });
+
+  const onUpdateCreateNewNursing = (value: boolean) =>
+    setCreateNewItem({ ...createNewItem, nursing: value });
 
   const submitCreateNewItem = () => {
     if (!createNewItem?.name || !createNewItem?.description)
@@ -353,5 +535,53 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     onUpdateCreateNewItemOccupiedBeds,
     onUpdateEditType,
     onUpdateCreateNewItemType,
+    onUpdateEditNote,
+    onUpdateEditPlan,
+    onUpdateEditProcedure,
+    onUpdateEditLabTest,
+    onUpdateEditAppointment,
+    onUpdateEditVitals,
+    onUpdateEditMedicalSupply,
+    onUpdateEditAdmitPatient,
+    onUpdateEditTransferPatient,
+    onUpdateEditMovePatient,
+    onUpdateEditDischargePatient,
+    onUpdateEditTimeOfDeath,
+    onUpdateEditReview,
+    onUpdateEditLogs,
+    onUpdateEditPrescription,
+    onUpdateEditDental,
+    onUpdateEditClerking,
+    onUpdateEditRadiology,
+    onUpdateEditConsult,
+    onUpdateEditReferral,
+    onUpdateEditReferExP,
+    onUpdateEditUpload,
+    onUpdateEditCharts,
+    onUpdateEditNursing,
+    onUpdateCreateNewNote,
+    onUpdateCreateNewPlan,
+    onUpdateCreateNewProcedure,
+    onUpdateCreateNewLabTest,
+    onUpdateCreateNewAppointment,
+    onUpdateCreateNewVitals,
+    onUpdateCreateNewMedicalSupply,
+    onUpdateCreateNewAdmitPatient,
+    onUpdateCreateNewTransferPatient,
+    onUpdateCreateNewMovePatient,
+    onUpdateCreateNewDischargePatient,
+    onUpdateCreateNewTimeOfDeath,
+    onUpdateCreateNewReview,
+    onUpdateCreateNewLogs,
+    onUpdateCreateNewPrescription,
+    onUpdateCreateNewDental,
+    onUpdateCreateNewClerking,
+    onUpdateCreateNewRadiology,
+    onUpdateCreateNewConsult,
+    onUpdateCreateNewReferral,
+    onUpdateCreateNewReferExP,
+    onUpdateCreateNewUpload,
+    onUpdateCreateNewCharts,
+    onUpdateCreateNewNursing,
   };
 };

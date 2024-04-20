@@ -10,19 +10,18 @@ import {
   FaUserFriends,
   FaUserInjured,
   FaUserMd,
-  FaPaperclip,
   FaHospitalUser,
   FaCalendarDay,
   FaUserPlus,
 } from 'react-icons/fa';
-import { SidebarItemProps } from '@typeSpec/common';
 import { GrOrganization } from 'react-icons/gr';
 import { GiDoctorFace } from 'react-icons/gi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { useState } from 'react';
-import { RiCommunityFill } from 'react-icons/ri';
+import { RiCommunityFill, RiShieldUserFill } from 'react-icons/ri';
 import { BsFillPieChartFill } from 'react-icons/bs';
+import { SidebarItemProps } from '@typeSpec/common';
 
 export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
@@ -110,13 +109,13 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
       {
         item: 'Roles',
         Icon: (
-          <FaPaperclip
+          <RiShieldUserFill
             size={30}
             fontWeight={40}
             className={`text-gray-500`}
           />
         ),
-        // route: '/patient',
+        route: `/admin/roles/${adminData?.siteId as string}`,
         showSidebar: showSidebar,
       },
 
