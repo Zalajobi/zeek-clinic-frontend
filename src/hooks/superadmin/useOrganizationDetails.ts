@@ -43,12 +43,7 @@ export const useOrganizationDetails = () => {
           id: hospitalId,
         }),
 
-        axiosGetRequest(
-          '/account/site/get-distinct/country-and-state/organization',
-          {
-            hospital_id: hospitalId,
-          }
-        ),
+        axiosGetRequest(`/account/site/${hospitalId}/locations/distinct`),
       ]);
 
       if (response[0].success && response[1].success) {
@@ -101,7 +96,7 @@ export const useOrganizationDetails = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -144,7 +139,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+        '/account/site/organization/sites/filters',
         params
       );
 
@@ -187,7 +182,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+        '/account/site/organization/sites/filters',
         params
       );
 
@@ -222,7 +217,7 @@ export const useOrganizationDetails = () => {
     setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -265,7 +260,7 @@ export const useOrganizationDetails = () => {
     setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -319,7 +314,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequest(
-        '/account/site/organization/table-filter',
+        '/account/site/organization/sites/filters',
         params
       );
 
@@ -354,7 +349,7 @@ export const useOrganizationDetails = () => {
     };
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -390,7 +385,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -428,7 +423,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
@@ -466,7 +461,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequest(
-      '/account/site/organization/table-filter',
+      '/account/site/organization/sites/filters',
       params
     );
 
