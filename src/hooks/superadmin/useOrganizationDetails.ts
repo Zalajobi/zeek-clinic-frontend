@@ -44,12 +44,7 @@ export const useOrganizationDetails = () => {
           id: hospitalId,
         }),
 
-        axiosGetRequestUserService(
-          '/site/get-distinct/country-and-state/organization',
-          {
-            hospital_id: hospitalId,
-          }
-        ),
+        axiosGetRequestUserService(`/site/${hospitalId}/locations/distinct`),
       ]);
 
       if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
@@ -143,7 +138,7 @@ export const useOrganizationDetails = () => {
     };
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -186,7 +181,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+        '/site/organization/sites/filters',
         params
       );
 
@@ -229,7 +224,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+        '/site/organization/sites/filters',
         params
       );
 
@@ -264,7 +259,7 @@ export const useOrganizationDetails = () => {
     setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -307,7 +302,7 @@ export const useOrganizationDetails = () => {
     setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -361,7 +356,7 @@ export const useOrganizationDetails = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/site/organization/table-filter',
+        '/site/organization/sites/filters',
         params
       );
 
@@ -396,7 +391,7 @@ export const useOrganizationDetails = () => {
     };
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -432,7 +427,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -468,7 +463,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 
@@ -504,7 +499,7 @@ export const useOrganizationDetails = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequestUserService(
-      '/site/organization/table-filter',
+      '/site/organization/sites/filters',
       params
     );
 

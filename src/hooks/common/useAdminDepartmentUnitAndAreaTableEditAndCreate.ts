@@ -145,14 +145,11 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
         );
       } else if (type === 'area') {
         return axiosPutRequestUserService(
-          `/service-area/admin/update/${editItemId}`,
+          `/service-area/update/${editItemId}`,
           data
         );
       } else {
-        return axiosPutRequestUserService(
-          `/role/admin/update/${editItemId}`,
-          data
-        );
+        return axiosPutRequestUserService(`/role/update/${editItemId}`, data);
       }
     },
 
@@ -176,9 +173,9 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       } else if (type === 'units') {
         return axiosPostRequestUserService(`/unit/admin/create`, data);
       } else if (type === 'area') {
-        return axiosPostRequestUserService(`/service-area/admin/create`, data);
+        return axiosPostRequestUserService(`/service-area/create`, data);
       } else {
-        return axiosPostRequestUserService(`/role/admin/create`, data);
+        return axiosPostRequestUserService(`/role/create`, data);
       }
     },
 
