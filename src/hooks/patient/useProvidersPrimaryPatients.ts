@@ -44,7 +44,7 @@ export const useProvidersPrimaryPatients = (
 
   const movePatientMutate = useMutation({
     mutationFn: (data: any) => {
-      return axiosPutRequestUserService(`/patients/move/${patientId}`, data);
+      return axiosPutRequestUserService(`/patients/update/${patientId}`, data);
     },
 
     onError: (error) => {

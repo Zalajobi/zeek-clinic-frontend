@@ -51,7 +51,7 @@ export const useAdminAddProvider = () => {
       setAllCountries(countriesUpdate);
 
       const response = (await axiosGetRequestUserService(
-        `/admin/provider/create-new/roles-departments-areas-units/${siteId}`
+        `/admin/roles-departments-areas-units/${siteId}`
       )) as AccountServiceApiResponse;
 
       if (response.success) {
@@ -122,7 +122,7 @@ export const useAdminAddProvider = () => {
     };
 
     const response = (await axiosPostRequestUserService(
-      `account/providers/admin/create-new/provider`,
+      `account/provider/create`,
       addAdminData
     )) as AccountServiceApiResponse;
 

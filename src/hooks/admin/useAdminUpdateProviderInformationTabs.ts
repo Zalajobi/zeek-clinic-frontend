@@ -105,7 +105,7 @@ export const useAdminUpdateProviderInformationTabs = (
   const mutation = useMutation({
     mutationFn: (data: any) => {
       return axiosPutRequestUserService(
-        `/providers/update/${id}/${siteId}`,
+        `/provider/update/${id}/${siteId}`,
         data
       );
     },

@@ -108,24 +108,30 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
 
       if (type === 'departments') {
         return axiosGetRequestUserService(
-          `/department/admin/list/paginated/${siteId}`,
-          params
+          `/department/organization/roles/filters`,
+          {
+            ...params,
+            siteId,
+          }
         );
       } else if (type === 'units') {
-        return axiosGetRequestUserService(
-          `/unit/admin/list/paginated/${siteId}`,
-          params
-        );
+        return axiosGetRequestUserService(`/unit/organization/roles/filters`, {
+          ...params,
+          siteId,
+        });
       } else if (type === 'area') {
         return axiosGetRequestUserService(
-          `/service-area/admin/list/paginated/${siteId}`,
-          params
+          `/service-area/organization/roles/filters`,
+          {
+            ...params,
+            siteId,
+          }
         );
       } else {
-        return axiosGetRequestUserService(
-          `/role/admin/list/paginated/${siteId}`,
-          params
-        );
+        return axiosGetRequestUserService(`/role/organization/roles/filters`, {
+          ...params,
+          siteId,
+        });
       }
     }
   );
@@ -135,24 +141,18 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
     mutationFn: (data: any) => {
       if (type === 'departments') {
         return axiosPutRequestUserService(
-          `/department/admin/update/${editItemId}`,
+          `/department/update/${editItemId}`,
           data
         );
       } else if (type === 'units') {
-        return axiosPutRequestUserService(
-          `/unit/admin/update/${editItemId}`,
-          data
-        );
+        return axiosPutRequestUserService(`/unit/update/${editItemId}`, data);
       } else if (type === 'area') {
         return axiosPutRequestUserService(
-          `/service-area/admin/update/${editItemId}`,
+          `/service-area/update/${editItemId}`,
           data
         );
       } else {
-        return axiosPutRequestUserService(
-          `/role/admin/update/${editItemId}`,
-          data
-        );
+        return axiosPutRequestUserService(`/role/update/${editItemId}`, data);
       }
     },
 
@@ -172,13 +172,13 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
   const createItemMutate = useMutation({
     mutationFn: (data: any) => {
       if (type === 'departments') {
-        return axiosPostRequestUserService(`/department/admin/create`, data);
+        return axiosPostRequestUserService(`/department/create`, data);
       } else if (type === 'units') {
-        return axiosPostRequestUserService(`/unit/admin/create`, data);
+        return axiosPostRequestUserService(`/unit/create`, data);
       } else if (type === 'area') {
-        return axiosPostRequestUserService(`/service-area/admin/create`, data);
+        return axiosPostRequestUserService(`/service-area/create`, data);
       } else {
-        return axiosPostRequestUserService(`/role/admin/create`, data);
+        return axiosPostRequestUserService(`/role/create`, data);
       }
     },
 
