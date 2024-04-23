@@ -117,8 +117,11 @@ export const useAdminProviderPage = () => {
       };
 
       return axiosGetRequestUserService(
-        `/providers/admin/get-providers/pagination/${siteId}`,
-        params
+        `/provider/organization/providers/filters`,
+        {
+          ...params,
+          siteId,
+        }
       );
     }
   );

@@ -12,7 +12,7 @@ export const useAdminBaseTemplate = () => {
   useEffect(() => {
     const getHeaderData = async () => {
       const response = await axiosGetRequestUserService(
-        '/admin/profile/get-data'
+        '/admin/profile/details'
       );
 
       if (response.success) {

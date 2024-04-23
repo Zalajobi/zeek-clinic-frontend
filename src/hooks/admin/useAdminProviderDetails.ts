@@ -15,7 +15,7 @@ export const useAdminProviderDetails = () => {
     isLoading: providerDataLoading,
     isError: providerDataError,
   } = useQuery<AccountServiceApiResponse>('providerDetails', function () {
-    return axiosGetRequestUserService(`/providers/admin/details/${id}`);
+    return axiosGetRequestUserService(`/provider/details/${id}`);
   });
 
   const {
@@ -25,9 +25,7 @@ export const useAdminProviderDetails = () => {
   } = useQuery<AccountServiceApiResponse>(
     'providerPrimaryPatients',
     function () {
-      return axiosGetRequestUserService(
-        `/patients/provider/primary-patient/all/${id}`
-      );
+      return axiosGetRequestUserService(`/patient/care-giver/${id}`);
     }
   );
 

@@ -46,10 +46,10 @@ export const useHospitalOrganisation = () => {
 
       const [organization, distinctCountries] = await customPromiseRequest([
         axiosGetRequestUserService(
-          '/hospital/super-admin/get/all/pagination',
+          '/hospital/organization/hospitals/filters',
           params
         ),
-        axiosGetRequestUserService('/hospital/super-admin/countries/distinct'),
+        axiosGetRequestUserService('/hospital/distinct-countries'),
       ]);
 
       if (
@@ -125,7 +125,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -162,7 +162,7 @@ export const useHospitalOrganisation = () => {
     );
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -193,7 +193,7 @@ export const useHospitalOrganisation = () => {
     setCurrentPage(0);
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -228,7 +228,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -265,7 +265,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -320,7 +320,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/hospital/super-admin/get/all/pagination',
+        '/hospital/organization/hospitals/filters',
         params
       );
 
@@ -361,7 +361,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/hospital/super-admin/get/all/pagination',
+        '/hospital/organization/hospitals/filters',
         params
       );
 
@@ -396,7 +396,7 @@ export const useHospitalOrganisation = () => {
     };
 
     const response = await axiosGetRequestUserService(
-      '/hospital/super-admin/get/all/pagination',
+      '/hospital/organization/hospitals/filters',
       params
     );
 
@@ -441,7 +441,7 @@ export const useHospitalOrganisation = () => {
       };
 
       const response = await axiosGetRequestUserService(
-        '/hospital/super-admin/get/all/pagination',
+        '/hospital/organization/hospitals/filters',
         params
       );
 

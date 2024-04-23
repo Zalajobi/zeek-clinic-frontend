@@ -156,11 +156,11 @@ const OrganizationSite = () => {
                   <Tab
                     className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
                   ${
-                    activeTabs === 'DEACTIVATE'
+                    activeTabs === 'DEACTIVATED'
                       ? 'bg-[#EEF7FF] shadow'
                       : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
                   }`}
-                    onClick={() => onUpdateActiveTab('DEACTIVATE')}>
+                    onClick={() => onUpdateActiveTab('DEACTIVATED')}>
                     Deactivated
                   </Tab>
                 </Tab.List>

@@ -16,7 +16,7 @@ export const useOrganizationDetails = () => {
     useState<HospitalOrganizationData | null>(null);
   const [sites, setSites] = useState<SuperadminSiteData[] | null>(null);
   const [activeTabs, setActiveTabs] = useState<
-    'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'
+    'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
   >('ALL');
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -40,9 +40,7 @@ export const useOrganizationDetails = () => {
   useEffect(() => {
     const getData = async () => {
       const [hospital, countryStates] = await customPromiseRequest([
-        axiosGetRequestUserService('/hospital/details', {
-          id: hospitalId,
-        }),
+        axiosGetRequestUserService(`/hospital/details/${hospitalId}`),
 
         axiosGetRequestUserService(`/site/${hospitalId}/locations/distinct`),
       ]);
@@ -119,7 +117,7 @@ export const useOrganizationDetails = () => {
   };
 
   const onUpdateActiveTab = async (
-    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATE'
+    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
   ) => {
     setActiveTabs(tab);
     setResultFrom(1);
