@@ -100,9 +100,7 @@ export const ApplicationTable = ({
                   <DateInput
                     label={`From`}
                     placeholder={`DD/MM/YYYY`}
-                    change={(e) =>
-                      onUpdateFilterFromDate(new Date(e.target.value))
-                    }
+                    change={onUpdateFilterFromDate}
                     value={filterFromDate as Date}
                     id={`from`}
                     icon={<FaCalendarAlt size={20} />}
@@ -113,9 +111,7 @@ export const ApplicationTable = ({
                   <DateInput
                     label={`To`}
                     placeholder={`DD/MM/YYYY`}
-                    change={(e) =>
-                      onUpdateFilterToDate(new Date(e.target.value))
-                    }
+                    change={onUpdateFilterToDate}
                     value={filterToDate as Date}
                     id={`to`}
                     icon={<FaCalendarAlt size={20} />}

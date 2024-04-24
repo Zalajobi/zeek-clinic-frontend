@@ -158,7 +158,6 @@ const OrganizationSite = () => {
                   placeholder={`Search...`}
                   value={searchSite}
                   change={(e) => onUpdateSearchSite(e.target.value)}
-                  inputClass={`!min-h-[58px]`}
                   className={`!mb-0`}
                 />
               </div>
@@ -167,7 +166,7 @@ const OrganizationSite = () => {
                 value={perPage}
                 menuItems={itemsPerPage}
                 change={onUpdatePerPageItem}
-                buttonClass={`border-[#E9ECEF] min-w-[65px] h-[60px] p-1`}
+                buttonClass={`border-[#E9ECEF] min-w-[65px] h-[45px] p-1`}
               />
 
               <div
@@ -178,7 +177,7 @@ const OrganizationSite = () => {
                     label={`From`}
                     placeholder={`DD/MM/YYYY`}
                     className={`my-3`}
-                    change={(e) => onUpdateSelectFrom(e.target.value)}
+                    change={onUpdateSelectFrom}
                     value={dateFilterFrom as Date}
                     id={`from`}
                     icon={<FaCalendarAlt size={20} />}
@@ -190,7 +189,7 @@ const OrganizationSite = () => {
                     label={`To`}
                     placeholder={`DD/MM/YYYY`}
                     className={`my-3`}
-                    change={(e) => onUpdateSelectTo(e.target.value)}
+                    change={onUpdateSelectTo}
                     value={dateFilterTo as Date}
                     id={`to`}
                     icon={<FaCalendarAlt size={20} />}

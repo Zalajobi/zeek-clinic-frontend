@@ -1,6 +1,5 @@
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { Fragment } from 'react';
-import { OutlinedButton } from '@components/global/CustomButton';
 import { Tab } from '@headlessui/react';
 import { Typography } from '@components/global/dialog/Typography';
 import {
@@ -22,6 +21,7 @@ import {
   UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '@typeSpec/index';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface AdminEditProviderModalProps {
   name: string;

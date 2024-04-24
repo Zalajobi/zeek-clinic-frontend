@@ -258,8 +258,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectFrom = async (value: string) => {
-    setDateFilterFrom(new Date(value));
+  const onUpdateSelectFrom = async (value: Date) => {
+    setDateFilterFrom(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
@@ -301,8 +301,8 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  const onUpdateSelectTo = async (value: string) => {
-    setDateFilterTo(new Date(value));
+  const onUpdateSelectTo = async (value: Date) => {
+    setDateFilterTo(value);
     const params = {
       page: 0,
       per_page: perPage === 'All' ? 0 : perPage,
