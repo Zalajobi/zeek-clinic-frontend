@@ -72,7 +72,7 @@ export const ApplicationTable = ({
           <div className="flex flex-col items-baseline space-y-3 md:flex-row md:space-y-0 md:space-x-4 h-[90px]">
             <div className="w-full md:w-3/4">
               <BasicSearchInput
-                id={`searchOrg`}
+                // id={`searchOrg`}
                 placeholder={` `}
                 value={query}
                 change={onUpdateQuery}

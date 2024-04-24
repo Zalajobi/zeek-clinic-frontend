@@ -25,7 +25,7 @@ import {
   SelectInput,
 } from '@components/global/formInput/CustomInput';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
-import TableTabs from '@components/global/TableTabs';
+import { CustomTabHeader } from '@components/global/MenuTabs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -115,7 +115,7 @@ const OrganizationSite = () => {
 
           <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <TableTabs
+              <CustomTabHeader
                 onClick={onUpdateActiveTab}
                 tabItems={tabData}
               />
@@ -157,7 +157,7 @@ const OrganizationSite = () => {
               <div className="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 <div className="w-full md:w-3/4">
                   <BasicSearchInput
-                    id={`searchOrg`}
+                    // id={`searchOrg`}
                     placeholder={`Search...`}
                     value={searchSite}
                     change={(e) => onUpdateSearchSite(e.target.value)}

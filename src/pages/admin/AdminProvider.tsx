@@ -17,7 +17,7 @@ import {
   setResultTo,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
-import HorizontalTabs from '@components/global/HorizontalTabs';
+import { CustomTabHeader } from '@components/global/MenuTabs';
 
 const AdminProvider = () => {
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ const AdminProvider = () => {
     providerDataLoading,
     actions,
     tabLabelValue,
+    tabData,
 
     // Functions
     onUpdateSelectFrom,
@@ -164,11 +165,10 @@ const AdminProvider = () => {
             id={adminData?.id}
           />
 
-          <HorizontalTabs
+          <CustomTabHeader
             className={`w-[75%] rounded-2xl`}
-            changeTabFunction={onUpdateStatusFilterTab}
-            labelValue={tabLabelValue}
-            activeTab={providerStatus}
+            onClick={onUpdateStatusFilterTab}
+            tabItems={tabData}
           />
 
           <ApplicationTable

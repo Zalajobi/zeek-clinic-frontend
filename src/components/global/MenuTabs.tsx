@@ -1,4 +1,4 @@
-import { createElement, useState } from 'react';
+import { createElement, Fragment, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -7,6 +7,9 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
+  Tab,
+  Tabs,
+  TabsHeader,
 } from '@material-tailwind/react';
 import { Typography } from '@components/global/dialog/Typography';
 import { HiChevronDown } from 'react-icons/hi';
@@ -20,7 +23,18 @@ interface ProfileMenuProps {
   profileImg?: string;
 }
 
-const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
+interface CustomTabHeaderProps {
+  tabItems: {
+    label: string;
+    value: string;
+    icon?: any;
+  }[];
+  onClick: (value: any) => void;
+  orientation?: 'vertical' | 'horizontal';
+  className?: string;
+}
+
+export const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const closeMenu = () => setIsMenuOpen(false);
@@ -83,4 +97,36 @@ const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
   );
 };
 
-export default ProfileMenu;
+export const CustomTabHeader = ({
+  tabItems,
+  onClick,
+  orientation = 'horizontal',
+  className,
+}: CustomTabHeaderProps) => {
+  return (
+    <Fragment>
+      <Tabs
+        value={tabItems[0].value}
+        orientation={orientation}
+        className={`w-full rounded-lg md:w-max bg-gray-300 ${className}`}>
+        <TabsHeader>
+          {tabItems.map(({ label, value, icon }) => (
+            <Tab
+              key={value}
+              value={value}
+              onClick={() => onClick(value)}
+              className={`cursor-pointer`}>
+              {icon ? (
+                <div className={`flex items-center gap-2`}>
+                  {createElement(icon, { className: 'w-5 h-5' })}
+                </div>
+              ) : (
+                <>&nbsp;&nbsp;{label}&nbsp;&nbsp;</>
+              )}
+            </Tab>
+          ))}
+        </TabsHeader>
+      </Tabs>
+    </Fragment>
+  );
+};

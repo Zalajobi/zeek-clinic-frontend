@@ -3,7 +3,7 @@ import { HiUserCircle } from 'react-icons/hi';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { Input, Navbar } from '@material-tailwind/react';
 import { HiCog6Tooth, HiInboxArrowDown, HiLifebuoy } from 'react-icons/hi2';
-import ProfileMenu from '@components/global/ProfileMenu';
+import { ProfileMenu } from '@components/global/MenuTabs';
 import { Typography } from '@components/global/dialog/Typography';
 
 interface HeaderProps {
