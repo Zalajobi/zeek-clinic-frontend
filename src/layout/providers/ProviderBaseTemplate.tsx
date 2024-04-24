@@ -6,9 +6,6 @@ import { ToasterConfig } from '@components/global/Toast';
 
 const ProviderBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {
-    // Values
-    querySearch,
-
     // Functions
     onUpdateQuerySearch,
   } = useProviderBaseTemplate();
@@ -20,7 +17,7 @@ const ProviderBaseTemplate = ({ children }: { children: ReactNode }) => {
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
           <Header
             name={`John Doe`}
-            query={querySearch}
+            // query={querySearch}
             handleSearch={onUpdateQuerySearch}
             role={`Doctor`}
           />

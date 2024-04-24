@@ -18,182 +18,96 @@ import { GrOrganization } from 'react-icons/gr';
 import { GiDoctorFace } from 'react-icons/gi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import { useState } from 'react';
 import { RiCommunityFill, RiShieldUserFill } from 'react-icons/ri';
 import { BsFillPieChartFill } from 'react-icons/bs';
 import { SidebarItemProps } from '@typeSpec/common';
 
-export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
+export const AdminSideBarItems = (siteId: string) => {
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
   if (localStorage.getItem('role') === 'HUMAN_RESOURCES')
     return [
       {
         item: 'Dashboard',
-        Icon: (
-          <MdDashboard
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <MdDashboard size={20} />,
         route: '#',
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Admin',
-        Icon: (
-          <FaUserFriends
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaUserFriends size={20} />,
         route: `#`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Patients',
-        Icon: (
-          <FaUserInjured
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaUserInjured size={20} />,
         route: `/admin/patients/${siteId}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Care Provider',
-        Icon: (
-          <FaUserMd
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaUserMd size={20} />,
         route: `/admin/providers/${siteId}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Activity',
-        Icon: (
-          <MdLocalActivity
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <MdLocalActivity size={20} />,
         route: '#',
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Reports',
-        Icon: (
-          <MdReport
-            size={25}
-            fontWeight={25}
-          />
-        ),
-        // route: '/patient',
-        showSidebar: showSidebar,
+        Icon: <MdReport size={20} />,
       },
 
       {
         item: 'Roles',
-        Icon: (
-          <RiShieldUserFill
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <RiShieldUserFill size={20} />,
         route: `/admin/roles/${adminData?.siteId as string}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Departments',
-        Icon: (
-          <FaHospitalUser
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaHospitalUser size={20} />,
         route: `/admin/departments/${adminData?.siteId as string}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Units',
-        Icon: (
-          <RiCommunityFill
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <RiCommunityFill size={20} />,
         route: `/admin/units/${adminData?.siteId as string}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Service Area',
-        Icon: (
-          <BsFillPieChartFill
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <BsFillPieChartFill size={20} />,
         route: `/admin/service-area/${adminData?.siteId as string}`,
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Inbox',
-        Icon: (
-          <TbMessageCircle2Filled
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <TbMessageCircle2Filled size={20} />,
         route: '#',
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Appointment',
-        Icon: (
-          <FaCalendarDay
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaCalendarDay size={20} />,
         // route: '/patient',
-        showSidebar: showSidebar,
       },
 
       {
         item: 'History',
-        Icon: (
-          <TbFaceMask
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <TbFaceMask size={20} />,
         route: '#',
-        showSidebar: showSidebar,
       },
 
       {
         item: 'Profile',
-        Icon: (
-          <FaUserPlus
-            size={25}
-            fontWeight={25}
-          />
-        ),
+        Icon: <FaUserPlus size={20} />,
         route: '#',
-        showSidebar: showSidebar,
       },
     ] as SidebarItemProps[];
 
@@ -201,163 +115,82 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
 };
 
 export const SuperAdminSidebarItems = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-
   const superAdminSidebar = [
     {
       item: 'Dashboard',
-      Icon: (
-        <MdDashboard
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <MdDashboard size={20} />,
       route: '/superadmin',
-      showSidebar: showSidebar,
     },
 
     {
       item: 'Organisation',
-      Icon: (
-        <GrOrganization
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <GrOrganization size={20} />,
       route: '/superadmin/organisations',
-      showSidebar: showSidebar,
     },
 
     {
       item: 'Doctor',
-      Icon: (
-        <GiDoctorFace
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <GiDoctorFace size={20} />,
       route: '/doctor',
-      showSidebar: showSidebar,
     },
 
     {
       item: 'Patient',
-      Icon: (
-        <TbFaceMask
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <TbFaceMask size={20} />,
       route: '/patient',
-      showSidebar: showSidebar,
     },
 
     {
       item: 'Payment',
-      Icon: (
-        <MdOutlinePayments
-          size={25}
-          fontWeight={25}
-        />
-      ),
-      // route: '/patient',
-      showSidebar: showSidebar,
+      Icon: <MdOutlinePayments size={20} />,
       child: [
         {
           item: 'Invoice',
-          Icon: (
-            <TbFaceMask
-              size={40}
-              fontWeight={40}
-              className={`text-gray-500`}
-            />
-          ),
+          Icon: <TbFaceMask size={20} />,
           route: '/patient',
-          showSidebar: showSidebar,
         },
 
         {
           item: 'Receipt',
-          Icon: (
-            <TbFaceMask
-              size={40}
-              fontWeight={40}
-              className={`text-gray-500`}
-            />
-          ),
+          Icon: <TbFaceMask size={20} />,
           route: '/patient',
-          showSidebar: showSidebar,
         },
       ],
     },
 
     {
       item: 'Admin',
-      Icon: (
-        <MdOutlineAdminPanelSettings
-          size={25}
-          fontWeight={25}
-        />
-      ),
-      showSidebar: showSidebar,
+      Icon: <MdOutlineAdminPanelSettings size={20} />,
+
       child: [
         {
           item: 'View',
-          Icon: (
-            <HiOutlineClipboardList
-              size={40}
-              fontWeight={40}
-              className={`text-gray-500`}
-            />
-          ),
+          Icon: <HiOutlineClipboardList size={20} />,
           route: '/superadmin',
-          showSidebar: showSidebar,
         },
 
         {
           item: 'Create',
-          Icon: (
-            <AiOutlineUserAdd
-              size={40}
-              fontWeight={40}
-              className={`text-gray-500`}
-            />
-          ),
+          Icon: <AiOutlineUserAdd size={20} />,
           route: '/superadmin/create/new_admin',
-          showSidebar: showSidebar,
         },
       ],
     },
 
     {
       item: 'Pharmacy',
-      Icon: (
-        <TbFaceMask
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <TbFaceMask size={20} />,
       route: '/patient',
-      showSidebar: showSidebar,
     },
 
     {
       item: 'Store',
-      Icon: (
-        <TbFaceMask
-          size={25}
-          fontWeight={25}
-        />
-      ),
+      Icon: <TbFaceMask size={20} />,
       route: '/patient',
-      showSidebar: showSidebar,
     },
   ] as SidebarItemProps[];
 
   return {
     superAdminSidebar,
-    showSidebar,
-
-    setShowSidebar,
   };
 };

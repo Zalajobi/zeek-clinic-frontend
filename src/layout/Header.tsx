@@ -2,30 +2,18 @@ import { Fragment } from 'react';
 import { HiUserCircle } from 'react-icons/hi';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { Input, Navbar } from '@material-tailwind/react';
-import {
-  HiCog6Tooth,
-  HiInboxArrowDown,
-  HiLifebuoy,
-  HiPower,
-} from 'react-icons/hi2';
+import { HiCog6Tooth, HiInboxArrowDown, HiLifebuoy } from 'react-icons/hi2';
 import ProfileMenu from '@components/global/ProfileMenu';
 import { Typography } from '@components/global/dialog/Typography';
 
 interface HeaderProps {
   name: string;
-  query: string;
   role: string;
   handleSearch: (event: string) => void;
   profilePic?: string;
 }
 
-const Header = ({
-  name,
-  query,
-  role,
-  handleSearch,
-  profilePic,
-}: HeaderProps) => {
+const Header = ({ name, role, handleSearch, profilePic }: HeaderProps) => {
   const profileMenuItems = [
     {
       label: 'My Profile',
@@ -71,6 +59,7 @@ const Header = ({
               className: 'hidden',
             }}
             containerProps={{ className: 'min-w-[100px]' }}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
 

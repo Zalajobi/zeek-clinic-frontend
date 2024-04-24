@@ -28,7 +28,6 @@ const Sidebar = () => {
         />
       ),
       route: '/care',
-      showSidebar: showSidebar,
     },
 
     {
@@ -41,7 +40,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
 
     {
@@ -54,7 +52,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
 
     {
@@ -67,7 +64,6 @@ const Sidebar = () => {
         />
       ),
       // route: '/patient',
-      showSidebar: showSidebar,
       child: [
         {
           item: 'Order Lab',
@@ -79,7 +75,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
 
         {
@@ -92,7 +87,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
       ],
     },
@@ -107,7 +101,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
 
     {
@@ -120,7 +113,7 @@ const Sidebar = () => {
         />
       ),
       // route: '/patient',
-      showSidebar: showSidebar,
+
       child: [
         {
           item: 'Create Order',
@@ -132,7 +125,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
 
         {
@@ -145,7 +137,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
       ],
     },
@@ -160,7 +151,7 @@ const Sidebar = () => {
         />
       ),
       // route: '/patient',
-      showSidebar: showSidebar,
+
       child: [
         {
           item: 'Store',
@@ -172,7 +163,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
 
         {
@@ -185,7 +175,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
       ],
     },
@@ -199,7 +188,7 @@ const Sidebar = () => {
           color={`black`}
         />
       ),
-      showSidebar: showSidebar,
+
       child: [
         {
           item: 'Store',
@@ -211,7 +200,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
 
         {
@@ -224,7 +212,6 @@ const Sidebar = () => {
             />
           ),
           route: '#',
-          showSidebar: showSidebar,
         },
       ],
     },
@@ -239,7 +226,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
 
     {
@@ -252,7 +238,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
 
     {
@@ -265,7 +250,6 @@ const Sidebar = () => {
         />
       ),
       route: '#',
-      showSidebar: showSidebar,
     },
   ] as SidebarItemProps[];
 
@@ -312,7 +296,6 @@ const Sidebar = () => {
                     item={sidebar?.item}
                     route={sidebar?.route}
                     Icon={sidebar?.Icon}
-                    showSidebar={showSidebar}
                     key={idx}
                     child={sidebar?.child ? sidebar?.child : null}
                   />

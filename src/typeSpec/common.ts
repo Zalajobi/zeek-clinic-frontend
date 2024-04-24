@@ -10,7 +10,6 @@ export interface SidebarItemProps {
   item: string;
   Icon: ReactNode;
   route?: string;
-  showSidebar?: boolean;
   child?: ChildSidebarItemProps[] | null;
 }
 

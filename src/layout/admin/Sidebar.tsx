@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '@assets/img/global/logo.png';
 import { SidebarItemProps } from '@typeSpec/common';
@@ -8,9 +8,7 @@ import { Card, List } from '@material-tailwind/react';
 import { Typography } from '@components/global/dialog/Typography';
 
 const Sidebar = ({ siteId }: { siteId: string }) => {
-  const [showSidebar] = useState(false);
-
-  const sidebarItems = AdminSideBarItems(showSidebar, siteId);
+  const sidebarItems = AdminSideBarItems(siteId);
 
   return (
     <Fragment>
@@ -45,7 +43,6 @@ const Sidebar = ({ siteId }: { siteId: string }) => {
                     item={sidebar?.item}
                     route={sidebar?.route}
                     Icon={sidebar?.Icon}
-                    showSidebar={showSidebar}
                     key={idx}
                     child={sidebar?.child ? sidebar?.child : null}
                   />

@@ -7,16 +7,11 @@ import { useAdminBaseTemplate } from '@hooks/admin/useAdminBaseTemplate';
 const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {
     // Values
-    querySearch,
     requestData,
 
     // Functions
     onUpdateQuerySearch,
   } = useAdminBaseTemplate();
-
-  console.log({
-    requestData,
-  });
 
   return (
     <Fragment>
@@ -28,7 +23,6 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
             name={`${requestData?.personalInfo?.first_name ?? ''} ${
               requestData?.personalInfo?.last_name ?? ''
             }`}
-            query={querySearch}
             handleSearch={onUpdateQuerySearch}
             role={requestData?.role.replace('_', ' ') as string}
             profilePic={requestData?.personalInfo?.profile_pic}

@@ -12,13 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
 
-const SidebarItems = ({
-  item,
-  Icon,
-  route,
-  showSidebar,
-  child,
-}: SidebarItemProps) => {
+const SidebarItems = ({ item, Icon, route, child }: SidebarItemProps) => {
   const [show, setShow] = useState(0);
 
   const handleOpen = (value: number) => {
@@ -52,11 +46,9 @@ const SidebarItems = ({
               className="border-b-0 p-3">
               <ListItemPrefix>{Icon}</ListItemPrefix>
               <Typography
-                className={`font-bold text-black hover:!no-underline flex text-md ${
-                  showSidebar ? 'hidden' : 'flex'
-                }`}
+                className={`text-md font-bold flex`}
                 text={item ?? `Dashboard`}
-                Tag={`h5`}
+                Tag={`span`}
               />
             </AccordionHeader>
           </ListItem>
@@ -72,9 +64,7 @@ const SidebarItems = ({
                           <ListItemPrefix>{childItem?.Icon}</ListItemPrefix>
 
                           <Typography
-                            className={`text-sm font-bold text-gray-700 hover:!no-underline ${
-                              childItem?.showSidebar ? 'hidden' : 'flex'
-                            }`}
+                            className={`text-sm font-bold text-gray-700 hover:!no-underline flex`}
                             text={childItem?.item}
                             Tag={`span`}
                           />
