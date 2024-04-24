@@ -32,14 +32,12 @@ const AdminProvider = () => {
     searchProvider,
     perPage,
     selectAllProviders,
-    providerStatus,
     siteData,
     siteDataLoading,
     siteDataError,
     providerData,
     providerDataLoading,
     actions,
-    tabLabelValue,
     tabData,
 
     // Functions

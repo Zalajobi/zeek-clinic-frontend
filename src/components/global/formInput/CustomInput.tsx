@@ -43,7 +43,7 @@ interface SelectInputProps {
   id: string;
   options: SelectInputFieldProps[];
   register?: UseFormRegister<any>;
-  label: string;
+  label?: string;
   errorMsg?: string;
   className?: string;
   change?: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -197,11 +197,13 @@ export const SelectInput = ({
     <Fragment>
       <div
         className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
-        <label
-          htmlFor="select-2"
-          className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor="select-2"
+            className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
+            {label}
+          </label>
+        )}
         {register ? (
           <select
             className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
