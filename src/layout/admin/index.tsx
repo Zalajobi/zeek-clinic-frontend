@@ -32,12 +32,11 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Dashboard',
         Icon: (
           <MdDashboard
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
-        route: '/admin',
+        route: '#',
         showSidebar: showSidebar,
       },
 
@@ -45,9 +44,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Admin',
         Icon: (
           <FaUserFriends
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `#`,
@@ -58,9 +56,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Patients',
         Icon: (
           <FaUserInjured
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/patients/${siteId}`,
@@ -71,9 +68,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Care Provider',
         Icon: (
           <FaUserMd
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/providers/${siteId}`,
@@ -84,9 +80,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Activity',
         Icon: (
           <MdLocalActivity
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: '#',
@@ -97,9 +92,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Reports',
         Icon: (
           <MdReport
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         // route: '/patient',
@@ -110,9 +104,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Roles',
         Icon: (
           <RiShieldUserFill
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/roles/${adminData?.siteId as string}`,
@@ -123,21 +116,20 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Departments',
         Icon: (
           <FaHospitalUser
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/departments/${adminData?.siteId as string}`,
         showSidebar: showSidebar,
       },
+
       {
         item: 'Units',
         Icon: (
           <RiCommunityFill
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/units/${adminData?.siteId as string}`,
@@ -148,9 +140,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Service Area',
         Icon: (
           <BsFillPieChartFill
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: `/admin/service-area/${adminData?.siteId as string}`,
@@ -161,9 +152,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Inbox',
         Icon: (
           <TbMessageCircle2Filled
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: '#',
@@ -174,9 +164,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Appointment',
         Icon: (
           <FaCalendarDay
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         // route: '/patient',
@@ -187,9 +176,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'History',
         Icon: (
           <TbFaceMask
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: '#',
@@ -200,9 +188,8 @@ export const AdminSideBarItems = (showSidebar: boolean, siteId: string) => {
         item: 'Profile',
         Icon: (
           <FaUserPlus
-            size={30}
-            fontWeight={40}
-            className={`text-gray-500`}
+            size={25}
+            fontWeight={25}
           />
         ),
         route: '#',
@@ -221,9 +208,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Dashboard',
       Icon: (
         <MdDashboard
-          size={30}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/superadmin',
@@ -234,9 +220,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Organisation',
       Icon: (
         <GrOrganization
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/superadmin/organisations',
@@ -247,9 +232,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Doctor',
       Icon: (
         <GiDoctorFace
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/doctor',
@@ -260,9 +244,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Patient',
       Icon: (
         <TbFaceMask
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/patient',
@@ -273,9 +256,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Payment',
       Icon: (
         <MdOutlinePayments
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       // route: '/patient',
@@ -313,9 +295,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Admin',
       Icon: (
         <MdOutlineAdminPanelSettings
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       showSidebar: showSidebar,
@@ -352,9 +333,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Pharmacy',
       Icon: (
         <TbFaceMask
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/patient',
@@ -365,9 +345,8 @@ export const SuperAdminSidebarItems = () => {
       item: 'Store',
       Icon: (
         <TbFaceMask
-          size={40}
-          fontWeight={40}
-          className={`text-gray-500`}
+          size={25}
+          fontWeight={25}
         />
       ),
       route: '/patient',
