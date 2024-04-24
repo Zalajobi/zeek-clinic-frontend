@@ -79,6 +79,11 @@ export interface UserServicePersonalInfoResponseData {
   state: string;
   city: string;
   address: string;
+  address_two?: string;
   profile_pic: string;
   id: string;
+  zip_code: string;
+  religion: string;
+  marital_status: string;
+  created_at: string;
 }

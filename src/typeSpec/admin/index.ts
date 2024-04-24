@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 import {
-  // @ts-ignore
-  PersonalInfoResponseData,
   UserServiceDepartmentResponseData,
   UserServicePersonalInfoResponseData,
   UserServiceRoleResponseData,
@@ -12,7 +10,13 @@ import {
 export interface AdminHeaderBaseTemplateData {
   role: string;
   siteId: string;
-  personalInfo: PersonalInfoResponseData;
+  personalInfo: UserServicePersonalInfoResponseData;
+  email: string;
+  username: string;
+  staff_id: string;
+  password_reset_request_timestamp: string;
+  id: string;
+  created_at: string;
 }
 
 export interface AppointmentTableData {

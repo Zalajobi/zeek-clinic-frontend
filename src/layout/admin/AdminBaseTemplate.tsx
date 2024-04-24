@@ -14,6 +14,10 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
     onUpdateQuerySearch,
   } = useAdminBaseTemplate();
 
+  console.log({
+    requestData,
+  });
+
   return (
     <Fragment>
       <div className="h-auto relative flex flex-1 overflow-y-auto bg-[#f1f3f7] text-brand-body-text dark:bg-ds-dark-800 dark:text-ds-dark-300">
@@ -27,6 +31,7 @@ const AdminBaseTemplate = ({ children }: { children: ReactNode }) => {
             query={querySearch}
             handleSearch={onUpdateQuerySearch}
             role={requestData?.role.replace('_', ' ') as string}
+            profilePic={requestData?.personalInfo?.profile_pic}
           />
 
           <div

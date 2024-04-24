@@ -33,6 +33,7 @@ const Sidebar = ({ siteId }: { siteId: string }) => {
             text={`Dashboard`}
             className={`flex items-center justify-start !text-[25px]`}
           />
+          {/*<hr className="my-2 border-blue-gray-50"/>*/}
         </div>
 
         <List className="flex py-2 px-4 overflow-hidden md:overflow-y-scroll md:flex-col">
