@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { SelectInput } from '@components/global/formInput/CustomInput';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface MovePatientActionModal {
   handler: () => void;
@@ -96,14 +96,14 @@ export const MovePatientActionModal = ({
         </DialogBody>
 
         <DialogFooter>
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Cancel`}
             click={handler}
             type={`danger`}
             className={`mr-3 min-w-[200px]`}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Move Patient`}
             click={onSubmit}
             type={`success`}

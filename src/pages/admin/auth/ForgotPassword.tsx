@@ -3,7 +3,7 @@ import Text from '@components/global/dialog/Text';
 import { useAdminForgotPassword } from '@hooks/admin/useAdminForgotPassword';
 import TextInputLabel from '@components/global/formInput/TextInputLabel';
 import { ToasterConfig } from '@components/global/Toast';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { FilledButton } from '@components/global/CustomButton';
 
 const ForgotPassword = () => {
   const { setEmail, resetPassword } = useAdminForgotPassword();
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <BasicFilledButton
+              <FilledButton
                 type={`primary`}
                 text={`Submit`}
                 click={resetPassword}

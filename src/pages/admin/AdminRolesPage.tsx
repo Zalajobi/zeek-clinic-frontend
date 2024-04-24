@@ -1,6 +1,6 @@
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { FaPlus } from 'react-icons/fa';
 import { CgExport } from 'react-icons/cg';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
@@ -42,7 +42,7 @@ const AdminRolesPage = () => {
           />
 
           <div className={`w-full flex justify-end mb-6`}>
-            <BasicOutlineButton
+            <OutlinedButton
               type={`primary`}
               text={`Create New`}
               className={`ml-4 min-w-[130px]`}
@@ -55,7 +55,7 @@ const AdminRolesPage = () => {
               }
             />
 
-            <BasicOutlineButton
+            <OutlinedButton
               type={`primary`}
               text={`Export`}
               className={`ml-4 min-w-[130px]`}

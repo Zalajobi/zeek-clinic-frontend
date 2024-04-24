@@ -1,5 +1,5 @@
 import { Fragment, useMemo } from 'react';
-import { Tab } from '@headlessui/react';
+// import { Tab } from '@headlessui/react';
 import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 import { CgArrowsH, CgExport } from 'react-icons/cg';
@@ -17,10 +17,7 @@ import TableHeaderDropdown from '@components/global/table/TableHeaderDropdown';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSite from '@components/modals/CreateSite';
-import {
-  BasicOutlineButton,
-  ModalButtonOutlineLunch,
-} from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
@@ -28,6 +25,7 @@ import {
   SelectInput,
 } from '@components/global/formInput/CustomInput';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
+import TableTabs from '@components/global/TableTabs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -35,7 +33,6 @@ const OrganizationSite = () => {
   const {
     // Values
     organization,
-    activeTabs,
     sites,
     perPage,
     currentPage,
@@ -48,6 +45,7 @@ const OrganizationSite = () => {
     stateFilterList,
     dateFilterFrom,
     dateFilterTo,
+    tabData,
 
     // Functions
     onUpdateActiveTab,
@@ -64,7 +62,6 @@ const OrganizationSite = () => {
   } = useOrganizationDetails();
 
   const columns = useMemo(() => SuperadminSiteDataColumn(), []);
-
   const data = useMemo(
     () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],
     [sites]
@@ -86,7 +83,7 @@ const OrganizationSite = () => {
             </div>
 
             <div className={`ml-auto flex flex-row gap-4`}>
-              <BasicOutlineButton
+              <OutlinedButton
                 text={`Edit`}
                 type={'primary'}
                 className={`h-[38px] w-[140px]`}
@@ -98,9 +95,9 @@ const OrganizationSite = () => {
                 }
               />
 
-              <BasicOutlineButton
+              <OutlinedButton
                 text={`Export Data`}
-                type={'primary'}
+                type={'secondary'}
                 className={`h-[38px] w-[150px]`}
                 iconBefore={
                   <CgExport
@@ -117,59 +114,16 @@ const OrganizationSite = () => {
           <HospitalRoutes />
 
           <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
-            <div className={`max-w-md`}>
-              <Tab.Group>
-                <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
-                  <Tab
-                    className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    activeTabs === 'ALL'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                    onClick={() => onUpdateActiveTab('ALL')}>
-                    All
-                  </Tab>
-
-                  <Tab
-                    className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    activeTabs === 'ACTIVE'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                    onClick={() => onUpdateActiveTab('ACTIVE')}>
-                    Active
-                  </Tab>
-
-                  <Tab
-                    className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    activeTabs === 'PENDING'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                    onClick={() => onUpdateActiveTab('PENDING')}>
-                    Pending
-                  </Tab>
-
-                  <Tab
-                    className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    activeTabs === 'DEACTIVATED'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                    onClick={() => onUpdateActiveTab('DEACTIVATED')}>
-                    Deactivated
-                  </Tab>
-                </Tab.List>
-              </Tab.Group>
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+              <TableTabs
+                onClick={onUpdateActiveTab}
+                tabItems={tabData}
+              />
             </div>
 
             <div
               className={`w-full flex flex-row gap-4 items-center justify-end`}>
-              <ModalButtonOutlineLunch
+              <OutlinedButton
                 iconBefore={
                   <HiPlusSm
                     size={20}
@@ -181,7 +135,7 @@ const OrganizationSite = () => {
                 className={`h-[38px] w-[180px]`}
               />
 
-              <BasicOutlineButton
+              <OutlinedButton
                 text={`Export Sites`}
                 click={() => {}}
                 type={'primary'}

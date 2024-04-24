@@ -10,7 +10,7 @@ import {
   Option,
   Switch,
 } from '@material-tailwind/react';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface EditDepartmentModalProps {
   type: 'departments' | 'units' | 'area' | 'role';
@@ -539,14 +539,14 @@ const EditDepartmentModal = ({
         </DialogBody>
 
         <DialogFooter>
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Cancel`}
             click={handler}
             type={`danger`}
             className={`mr-3 min-w-[200px]`}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Update Department`}
             click={updateDepartmentInformation}
             type={`success`}

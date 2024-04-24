@@ -6,10 +6,7 @@ import useAdminLogin from '@hooks/admin/useAdminLogin';
 import CheckBox from '@components/global/formInput/CheckBox';
 import LoginImage from '@assets/img/admin/login.png';
 import { ToasterConfig } from '@components/global/Toast';
-import {
-  BasicFilledButton,
-  BasicOutlineButton,
-} from '@components/global/CustomButton';
+import { FilledButton, OutlinedButton } from '@components/global/CustomButton';
 import { TextInput } from '@components/global/formInput/CustomInput';
 
 const AdminLogin = () => {
@@ -74,7 +71,7 @@ const AdminLogin = () => {
                 <div className="w-[45%] h-px bg-[#E5E7EB]" />
               </div>
 
-              <BasicOutlineButton
+              <OutlinedButton
                 type={`secondary`}
                 text={`Sign up with Google`}
                 click={() => {}}
@@ -87,7 +84,7 @@ const AdminLogin = () => {
                 }
               />
 
-              <BasicOutlineButton
+              <OutlinedButton
                 type={`secondary`}
                 text={`Sign up with Github`}
                 click={() => {}}
@@ -116,7 +113,7 @@ const AdminLogin = () => {
                 </div>
               </div>
 
-              <BasicFilledButton
+              <FilledButton
                 type={`primary`}
                 text={`Submit`}
                 click={handleLogin}

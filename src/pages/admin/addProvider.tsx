@@ -26,7 +26,7 @@ import {
   AdminAddProviderInput,
   AdminAddProviderInputSchema,
 } from '@typeSpec/superadmin/formTypes';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { FilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
 
@@ -400,7 +400,7 @@ export const AddProvider = () => {
               </div>
 
               <div className={`w-full flex justify-center mt-8`}>
-                <BasicFilledButton
+                <FilledButton
                   click={handleSubmit(onSubmit)}
                   text={`Create Provider`}
                   type={`dark`}

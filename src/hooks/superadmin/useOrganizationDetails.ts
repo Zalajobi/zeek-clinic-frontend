@@ -37,6 +37,25 @@ export const useOrganizationDetails = () => {
   >([]);
   const [refreshData, setRefreshData] = useState(false);
 
+  const tabData = [
+    {
+      label: 'All',
+      value: 'ALL',
+    },
+    {
+      label: 'Pending',
+      value: 'PENDING',
+    },
+    {
+      label: 'Active',
+      value: 'ACTIVE',
+    },
+    {
+      label: 'Deactivated',
+      value: 'DEACTIVATED',
+    },
+  ];
+
   useEffect(() => {
     const getData = async () => {
       const [hospital, countryStates] = await customPromiseRequest([
@@ -534,6 +553,7 @@ export const useOrganizationDetails = () => {
     stateFilterList,
     dateFilterFrom,
     dateFilterTo,
+    tabData,
 
     // Functions
     onUpdateActiveTab,

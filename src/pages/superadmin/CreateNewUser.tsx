@@ -21,7 +21,7 @@ import {
   CreateAdminUserInput,
   CreateAdminUserInputSchema,
 } from '../../typeSpec/superadmin/forms';
-import { BasicFilledButton } from '../../components/global/CustomButton';
+import { FilledButton } from '../../components/global/CustomButton';
 
 const CreateNewUser = () => {
   const {
@@ -277,7 +277,7 @@ const CreateNewUser = () => {
             </div>
 
             <div className={`w-full flex items-center justify-center my-5`}>
-              <BasicFilledButton
+              <FilledButton
                 type={`danger`}
                 text={`Cancel`}
                 className={`mx-4 min-w-[200px]`}
@@ -285,7 +285,7 @@ const CreateNewUser = () => {
                 click={() => rerouteToURL('/superadmin')}
               />
 
-              <BasicFilledButton
+              <FilledButton
                 type={`secondary`}
                 text={`Add Provider`}
                 className={`mx-4 min-w-[200px]`}

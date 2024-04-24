@@ -6,7 +6,7 @@ import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { useAdminProviderDetails } from '@hooks/admin/useAdminProviderDetails';
 import { Typography } from '@components/global/dialog/Typography';
 import ProviderDetailsCard from '@components/admin/providers/details/ProviderDetailsCard';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import AdminEditProviderModal from '@components/admin/providers/details/AdminEditProviderModal';
 import { LoadingSpinner } from '@components/global/Toast';
 import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
@@ -63,7 +63,7 @@ const AdminProviderDetails = () => {
             />
 
             <div className={`w-full flex justify-end mb-6`}>
-              <BasicOutlineButton
+              <OutlinedButton
                 text={`Edit`}
                 type={`primary`}
                 className={`mr-4 min-w-[130px]`}
@@ -76,7 +76,7 @@ const AdminProviderDetails = () => {
                 click={handleOpenModal}
               />
 
-              <BasicOutlineButton
+              <OutlinedButton
                 type={`primary`}
                 text={`Export`}
                 className={`ml-4 min-w-[130px]`}
