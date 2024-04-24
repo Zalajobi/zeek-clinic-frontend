@@ -32,7 +32,7 @@ export const useAdminBaseTemplate = () => {
     }
   }, []);
 
-  const onUpdateQuerySearch = (event: string) => setQuerySearch(event);
+  const onUpdateQuerySearch = (value: string) => setQuerySearch(value);
 
   return {
     navigate,

@@ -7,7 +7,6 @@ import { useSuperadminBaseTemplate } from '@hooks/superadmin/useSuperadminBaseTe
 const SuperadminBaseTemplate = ({ children }: { children: ReactNode }) => {
   const {
     // Values
-    querySearch,
     requestData,
 
     // Functions
@@ -22,7 +21,6 @@ const SuperadminBaseTemplate = ({ children }: { children: ReactNode }) => {
         <div className="w-100 flex h-screen flex-1 flex-col overflow-y-auto">
           <Header
             name={`${requestData?.first_name} ${requestData?.last_name}`}
-            query={querySearch}
             handleSearch={onUpdateQuerySearch}
             role={`Superadmin`}
           />
