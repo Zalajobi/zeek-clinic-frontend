@@ -10,7 +10,7 @@ import {
   Switch,
   Textarea,
 } from '@material-tailwind/react';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface AddNewDeptServiceAreaModalProps {
   name: string;
@@ -581,14 +581,14 @@ export const AddNewDeptServiceAreaModal = ({
           </DialogBody>
 
           <DialogFooter>
-            <BasicOutlineButton
+            <OutlinedButton
               text={`Cancel`}
               click={handler}
               type={`danger`}
               className={`mr-3 min-w-[200px]`}
             />
 
-            <BasicOutlineButton
+            <OutlinedButton
               // Disable Button Click activity if name and description hasn't met the condition
               disabled={
                 !(newDescription && newDescription.length >= 20) ||

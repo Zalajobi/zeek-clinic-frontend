@@ -11,7 +11,7 @@ import {
   SuperadminHospitalDataRow,
 } from '@components/tables/row-col-mapping/SuperadminTable';
 import CreateHospitalModal from '@components/modals/CreateHospitalModal';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 
 const HospitalOrganizations = () => {
@@ -140,7 +140,7 @@ const HospitalOrganizations = () => {
             </Tab.Group>
           </div>
 
-          <BasicOutlineButton
+          <OutlinedButton
             iconBefore={
               <HiPlusSm
                 size={20}
@@ -153,7 +153,7 @@ const HospitalOrganizations = () => {
             click={handleOpenModal}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Export Organization`}
             type={'primary'}
             className={`h-[38px] w-full py-6`}

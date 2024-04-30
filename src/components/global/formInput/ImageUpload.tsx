@@ -1,7 +1,7 @@
 import { ImUpload } from 'react-icons/im';
 import Dropzone from 'react-dropzone';
 import { uploadProfileImage } from '@util/useS3Upload';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { FilledButton } from '@components/global/CustomButton';
 
 interface ImageUploadProps {
   bucketFolder: string;
@@ -85,7 +85,7 @@ const ImageUpload = ({
                   />
                 </div>
 
-                <BasicFilledButton
+                <FilledButton
                   text={`Change Image`}
                   className={`mt-2 min-w-full hover:!ring-0`}
                   type={`secondary`}

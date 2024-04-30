@@ -1,6 +1,5 @@
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { Fragment } from 'react';
-import { BasicOutlineButton } from '@components/global/CustomButton';
 import { Tab } from '@headlessui/react';
 import { Typography } from '@components/global/dialog/Typography';
 import {
@@ -22,6 +21,7 @@ import {
   UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '@typeSpec/index';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface AdminEditProviderModalProps {
   name: string;
@@ -131,14 +131,14 @@ const AdminEditProviderModal = ({
       bodyClassName={`px-0 py-0`}
       footer={
         <Fragment>
-          <BasicOutlineButton
+          <OutlinedButton
             click={handleSubmit(handleUpdateProviderDetails)}
             text={`Save`}
             type={`secondary`}
             className={`min-w-[200px] mx-5`}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Cancel`}
             type={`danger`}
             className={`min-w-[200px] mx-5`}

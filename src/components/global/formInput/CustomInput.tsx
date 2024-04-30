@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';
@@ -12,7 +12,16 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Popover,
+  PopoverHandler,
+  Input,
+  PopoverContent,
+  Select,
+  Option,
 } from '@material-tailwind/react';
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 interface TextInputProps {
   label: string;
@@ -43,10 +52,10 @@ interface SelectInputProps {
   id: string;
   options: SelectInputFieldProps[];
   register?: UseFormRegister<any>;
-  label: string;
+  label?: string;
   errorMsg?: string;
   className?: string;
-  change?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  change?: (event: string) => void;
 }
 
 interface DateInputProps {
@@ -57,7 +66,7 @@ interface DateInputProps {
   className?: string;
   errorMsg?: string;
   icon?: ReactNode;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  change?: (event: Date) => void;
   value?: Date;
 }
 
@@ -193,19 +202,15 @@ export const SelectInput = ({
   register,
   change,
 }: SelectInputProps) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const onUpdateSelectInputValue = (value: string | undefined) => {};
+
   return (
     <Fragment>
-      <div
-        className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
-        <label
-          htmlFor="select-2"
-          className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
-          {label}
-        </label>
+      <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
         {register ? (
           <select
-            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
-              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {
                 if (change) {
@@ -221,46 +226,26 @@ export const SelectInput = ({
             </option>
             {options.map((item, idx) => {
               return (
-                <option
-                  className={`!capitalize`}
-                  value={item.value}>
+                <option value={item.value}>
                   {item.placeholder.replaceAll('_', ' ')}
                 </option>
               );
             })}
           </select>
         ) : (
-          <select
-            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
-              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
-            onChange={change}
-            id={id}>
-            <option
-              selected
-              disabled>
-              Select {label}
-            </option>
-            {options.map((item, idx) => {
-              return (
-                <option
-                  className={`!capitalize`}
-                  value={item.value}>
-                  {item.placeholder.replaceAll('_', ' ')}
-                </option>
-              );
-            })}
-          </select>
-        )}
-
-        {errorMsg && (
           <>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`text-sm text-green-600 mt-2 ${
-                errorMsg ? 'text-red-500' : ''
-              }`}
-            />
+            <Select
+              label={`Select ${label}`}
+              value={inputValue}
+              onChange={onUpdateSelectInputValue}>
+              {options.map((item, idx) => {
+                return (
+                  <Option value={item.value}>
+                    {item.placeholder.replaceAll('_', ' ')}
+                  </Option>
+                );
+              })}
+            </Select>
           </>
         )}
       </div>
@@ -279,83 +264,80 @@ export const DateInput = ({
   change,
   value,
 }: DateInputProps) => {
-  return (
-    <Fragment>
-      <div className={`relative h-10 w-full min-w-[100px] ${className}`}>
-        <div className="w-full">
-          <label
-            htmlFor={id}
-            className={`before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex
-              h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all
-              before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5
-              before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200
-              before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block
-              after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r
-              after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm
-              peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500
-              peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent
-              peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2
-              peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2
-              peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent
-              peer-disabled:before:border-transparent peer-disabled:after:border-transparent
-              peer-disabled:peer-placeholder-shown:text-blue-gray-500 ${
-                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-              }`}>
-            {label}
-          </label>
+  const [date, setDate] = useState<Date>();
 
-          <div className="relative h-[58px] w-full min-w-[200px]">
-            {register ? (
-              <>
-                <input
-                  type={`date`}
-                  className={`peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent 
-                  px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all
-                  placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200
-                  focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0
-                  disabled:bg-blue-gray-50`}
-                  placeholder={placeholder}
-                  id={id}
-                  {...register(id)}
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
-              </>
-            ) : (
-              <>
-                <input
-                  type={`date`}
-                  className={`peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent
-                  px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all
-                  placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200
-                  focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0
-                  disabled:bg-blue-gray-50`}
-                  placeholder={placeholder}
-                  id={id}
-                  onChange={change}
-                  // value={value}
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
-              </>
-            )}
-          </div>
-          {errorMsg && (
-            <div className="text-sm text-red-600 mt-2">
-              <Typography
-                Tag={`span`}
-                text={errorMsg}
-                className={`italic text-xs font-bold ${
-                  errorMsg ? 'text-red-500' : ''
-                }`}
+  const updateDate = (value: any) => {
+    if (change) {
+      change(value);
+    }
+
+    setDate(value);
+  };
+
+  const dateClassNames = {
+    caption: 'flex justify-center py-2 mb-4 relative items-center',
+    caption_label: 'text-sm font-medium text-gray-900',
+    nav: 'flex items-center',
+    nav_button:
+      'h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300',
+    nav_button_previous: 'absolute left-1.5',
+    nav_button_next: 'absolute right-1.5',
+    table: 'w-full border-collapse',
+    head_row: 'flex font-medium text-gray-900',
+    head_cell: 'm-0.5 w-9 font-normal text-sm',
+    row: 'flex w-full mt-2',
+    cell: 'text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
+    day: 'h-9 w-9 p-0 font-normal',
+    day_range_end: 'day-range-end',
+    day_selected:
+      'rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white',
+    day_today: 'rounded-md bg-gray-200 text-gray-900',
+    day_outside:
+      'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
+    day_disabled: 'text-gray-500 opacity-50',
+    day_hidden: 'invisible',
+  };
+
+  return (
+    <Popover placement="bottom">
+      <PopoverHandler>
+        <Input
+          label={label}
+          onChange={() => null}
+          value={date ? format(date, 'PPP') : ''}
+        />
+      </PopoverHandler>
+      <PopoverContent>
+        <DayPicker
+          mode="single"
+          selected={value}
+          {...register?.(id, {
+            onChange: (event) => {
+              if (change) {
+                change(event);
+              }
+            },
+          })}
+          onSelect={updateDate}
+          showOutsideDays
+          classNames={dateClassNames}
+          components={{
+            IconLeft: ({ ...props }) => (
+              <BiChevronLeft
+                {...props}
+                className="h-4 w-4 stroke-2"
               />
-            </div>
-          )}
-        </div>
-      </div>
-    </Fragment>
+            ),
+            IconRight: ({ ...props }) => (
+              <BiChevronRight
+                {...props}
+                className="h-4 w-4 stroke-2"
+              />
+            ),
+          }}
+        />
+      </PopoverContent>
+    </Popover>
   );
 };
 

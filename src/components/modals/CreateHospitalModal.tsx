@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
 import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import {
   SelectInput,
@@ -46,14 +46,14 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
       <CustomBasicModal
         footer={
           <Fragment>
-            <BasicOutlineButton
+            <OutlinedButton
               click={handleSubmit(createNewOrganization)}
               text={`Add Organization`}
               type={`secondary`}
               className={`min-w-[200px] mx-5`}
             />
 
-            <BasicOutlineButton
+            <OutlinedButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
@@ -109,7 +109,7 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
-                change={(e) => onUpdateCountry(e.target.value)}
+                change={onUpdateCountry}
               />
 
               <SelectInput

@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { SelectInput } from '@components/global/formInput/CustomInput';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface MovePatientActionModal {
   handler: () => void;
@@ -74,7 +74,7 @@ export const MovePatientActionModal = ({
             label={`Department`}
             options={departments}
             className={`my-3`}
-            change={(event) => onUpdateDepartment(event.target.value)}
+            change={onUpdateDepartment}
             id={`department`}
           />
 
@@ -82,7 +82,7 @@ export const MovePatientActionModal = ({
             label={`Service Area`}
             options={serviceAreas}
             className={`my-3`}
-            change={(event) => onUpdateServiceArea(event.target.value)}
+            change={onUpdateServiceArea}
             id={`Service Area`}
           />
 
@@ -90,20 +90,20 @@ export const MovePatientActionModal = ({
             label={`Unit`}
             options={units}
             className={`my-3`}
-            change={(event) => onUpdateUnit(event.target.value)}
+            change={onUpdateUnit}
             id={`Unit`}
           />
         </DialogBody>
 
         <DialogFooter>
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Cancel`}
             click={handler}
             type={`danger`}
             className={`mr-3 min-w-[200px]`}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             text={`Move Patient`}
             click={onSubmit}
             type={`success`}

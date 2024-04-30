@@ -3,7 +3,7 @@ import { useAdminChangePassword } from '@hooks/admin/useAdminChangePassword';
 import Text from '@components/global/dialog/Text';
 import TextInputLabel from '@components/global/formInput/TextInputLabel';
 import { ToasterConfig } from '@components/global/Toast';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { FilledButton } from '@components/global/CustomButton';
 
 const ChangePassword = () => {
   const { onUpdateNewPassword, onUpdateVerifyPassword, handlePasswordSubmit } =
@@ -59,7 +59,7 @@ const ChangePassword = () => {
                 inputClassName={`mt-2`}
               />
 
-              <BasicFilledButton
+              <FilledButton
                 type={`primary`}
                 text={`Change Password`}
                 click={handlePasswordSubmit}

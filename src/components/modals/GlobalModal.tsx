@@ -6,7 +6,7 @@ import {
   DialogHeader,
   Typography,
 } from '@material-tailwind/react';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface WarningModalProps {
   proceed: () => void;
@@ -53,14 +53,14 @@ export const WarningModal = ({ proceed, handler, open }: WarningModalProps) => {
           </Typography>
         </DialogBody>
         <DialogFooter className="space-x-2">
-          <BasicOutlineButton
+          <OutlinedButton
             type={`primary`}
             className={`w-[150px]`}
             click={handler}
             text={`Cancel`}
           />
 
-          <BasicOutlineButton
+          <OutlinedButton
             type={`danger`}
             className={`w-[150px]`}
             click={proceed}

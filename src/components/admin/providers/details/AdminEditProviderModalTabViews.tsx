@@ -8,7 +8,7 @@ import {
   TextInput,
 } from '@components/global/formInput/CustomInput';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { BasicFilledButton } from '@components/global/CustomButton';
+import { FilledButton } from '@components/global/CustomButton';
 
 interface AdminEditProviderModalTabViewsProps {
   register: UseFormRegister<any>;
@@ -117,7 +117,7 @@ export const AdminEditProvidersInformationModalTab = ({
             register={register}
             id={`country`}
             errorMsg={errors.country?.message ?? ''}
-            change={(e) => onUpdateCountry(e.target.value)}
+            change={onUpdateCountry}
           />
 
           {/*State*/}
@@ -222,7 +222,7 @@ export const AdminEditGeneratePasswordTab = ({
             change={(event) => updatePassword(event.target.value)}
           />
 
-          <BasicFilledButton
+          <FilledButton
             type={`primary`}
             text={`Generate Password`}
             className={`h-[58px] w-[180px] mt-[30px]`}

@@ -72,7 +72,7 @@ export const ApplicationTable = ({
           <div className="flex flex-col items-baseline space-y-3 md:flex-row md:space-y-0 md:space-x-4 h-[90px]">
             <div className="w-full md:w-3/4">
               <BasicSearchInput
-                id={`searchOrg`}
+                // id={`searchOrg`}
                 placeholder={` `}
                 value={query}
                 change={onUpdateQuery}
@@ -100,9 +100,7 @@ export const ApplicationTable = ({
                   <DateInput
                     label={`From`}
                     placeholder={`DD/MM/YYYY`}
-                    change={(e) =>
-                      onUpdateFilterFromDate(new Date(e.target.value))
-                    }
+                    change={onUpdateFilterFromDate}
                     value={filterFromDate as Date}
                     id={`from`}
                     icon={<FaCalendarAlt size={20} />}
@@ -113,9 +111,7 @@ export const ApplicationTable = ({
                   <DateInput
                     label={`To`}
                     placeholder={`DD/MM/YYYY`}
-                    change={(e) =>
-                      onUpdateFilterToDate(new Date(e.target.value))
-                    }
+                    change={onUpdateFilterToDate}
                     value={filterToDate as Date}
                     id={`to`}
                     icon={<FaCalendarAlt size={20} />}
@@ -131,11 +127,7 @@ export const ApplicationTable = ({
                   options={countries ?? []}
                   className={`w-full min-h-[59px]`}
                   id={'country'}
-                  change={(e) =>
-                    onUpdateCountryFilter
-                      ? onUpdateCountryFilter(e.target.value as string)
-                      : {}
-                  }
+                  change={onUpdateCountryFilter}
                 />
               </div>
             )}

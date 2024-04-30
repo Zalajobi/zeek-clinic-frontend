@@ -13,7 +13,7 @@ import {
   CreateSiteInput,
   CreateSiteInputSchema,
 } from '@typeSpec/superadmin/forms';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 
 interface CreateSiteModalProps {
@@ -50,14 +50,14 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
       <CustomBasicModal
         footer={
           <Fragment>
-            <BasicOutlineButton
+            <OutlinedButton
               click={handleSubmit(createNewSite)}
               text={`Add Site`}
               type={`secondary`}
               className={`min-w-[200px] mx-5`}
             />
 
-            <BasicOutlineButton
+            <OutlinedButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
@@ -111,7 +111,7 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
                 register={register}
                 id={'country'}
                 errorMsg={errors.country?.message ?? ''}
-                change={(e) => onUpdateCountry(e.target.value)}
+                change={onUpdateCountry}
               />
 
               <SelectInput

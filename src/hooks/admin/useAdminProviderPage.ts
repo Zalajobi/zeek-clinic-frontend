@@ -71,6 +71,41 @@ export const useAdminProviderPage = () => {
     | 'UNAVAILABLE'
   >('ALL');
 
+  const tabData = [
+    {
+      label: 'All',
+      value: 'ALL',
+    },
+    {
+      label: 'Pending',
+      value: 'PENDING',
+    },
+    {
+      label: 'Active',
+      value: 'ACTIVE',
+    },
+    {
+      label: 'On Leave',
+      value: 'ON_LEAVE',
+    },
+    {
+      label: 'On Break',
+      value: 'ON_BREAK',
+    },
+    {
+      label: 'Suspended',
+      value: 'SUSPENDED',
+    },
+    {
+      label: 'Terminated',
+      value: 'TERMINATED',
+    },
+    {
+      label: 'Unavailable',
+      value: 'UNAVAILABLE',
+    },
+  ];
+
   const [refetchProvidersData, setRefetchProvidersData] = useState(false);
   const [selectAllProviders, setSelectAllProviders] = useState(false);
   const [actions, setActions] = useState<
@@ -261,6 +296,7 @@ export const useAdminProviderPage = () => {
     providerDataError,
     actions,
     tabLabelValue,
+    tabData,
 
     // Functions
     onUpdateSelectFrom,

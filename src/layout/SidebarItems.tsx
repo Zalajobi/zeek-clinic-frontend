@@ -46,7 +46,7 @@ const SidebarItems = ({ item, Icon, route, child }: SidebarItemProps) => {
               className="border-b-0 p-3">
               <ListItemPrefix>{Icon}</ListItemPrefix>
               <Typography
-                className={`text-md font-bold flex`}
+                className={`text-md font-bold flex mr-auto`}
                 text={item ?? `Dashboard`}
                 Tag={`span`}
               />

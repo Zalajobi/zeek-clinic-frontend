@@ -2,7 +2,7 @@ import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
 import AdminSiteInfo from '@components/admin/AdminSiteInfo';
 import AdminRoutes from '@components/admin/AdminRoutes';
-import { BasicOutlineButton } from '@components/global/CustomButton';
+import { OutlinedButton } from '@components/global/CustomButton';
 import { CgExport } from 'react-icons/cg';
 import { FaPlus } from 'react-icons/fa';
 import { LoadingSpinner } from '@components/global/Toast';
@@ -42,7 +42,7 @@ const AdminDepartmentsPage = () => {
           />
 
           <div className={`w-full flex justify-end mb-6`}>
-            <BasicOutlineButton
+            <OutlinedButton
               type={`primary`}
               text={`Create New`}
               className={`ml-4 min-w-[130px]`}
@@ -55,7 +55,7 @@ const AdminDepartmentsPage = () => {
               }
             />
 
-            <BasicOutlineButton
+            <OutlinedButton
               type={`primary`}
               text={`Export`}
               className={`ml-4 min-w-[130px]`}
