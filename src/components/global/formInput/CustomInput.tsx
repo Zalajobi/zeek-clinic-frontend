@@ -16,6 +16,8 @@ import {
   PopoverHandler,
   Input,
   PopoverContent,
+  Select,
+  Option,
 } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -53,7 +55,7 @@ interface SelectInputProps {
   label?: string;
   errorMsg?: string;
   className?: string;
-  change?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  change?: (event: string) => void;
 }
 
 interface DateInputProps {
@@ -200,21 +202,15 @@ export const SelectInput = ({
   register,
   change,
 }: SelectInputProps) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const onUpdateSelectInputValue = (value: string | undefined) => {};
+
   return (
     <Fragment>
-      <div
-        className={`relative min-h-[100px] w-full min-w-[100px] my-2 ${className}`}>
-        {label && (
-          <label
-            htmlFor="select-2"
-            className="block !text-[#464e5a] text-sm font-medium mb-2 dark:text-white">
-            {label}
-          </label>
-        )}
+      <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
         {register ? (
           <select
-            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
-              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
             {...register?.(id, {
               onChange: (event) => {
                 if (change) {
@@ -230,46 +226,26 @@ export const SelectInput = ({
             </option>
             {options.map((item, idx) => {
               return (
-                <option
-                  className={`!capitalize`}
-                  value={item.value}>
+                <option value={item.value}>
                   {item.placeholder.replaceAll('_', ' ')}
                 </option>
               );
             })}
           </select>
         ) : (
-          <select
-            className="py-3 px-4 pr-9 block w-full border-[2px] border-gray-200 rounded-md text-sm focus:border-blue-500
-              focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5"
-            onChange={change}
-            id={id}>
-            <option
-              selected
-              disabled>
-              Select {label}
-            </option>
-            {options.map((item, idx) => {
-              return (
-                <option
-                  className={`!capitalize`}
-                  value={item.value}>
-                  {item.placeholder.replaceAll('_', ' ')}
-                </option>
-              );
-            })}
-          </select>
-        )}
-
-        {errorMsg && (
           <>
-            <Typography
-              Tag={`span`}
-              text={errorMsg}
-              className={`text-sm text-green-600 mt-2 ${
-                errorMsg ? 'text-red-500' : ''
-              }`}
-            />
+            <Select
+              label={`Select ${label}`}
+              value={inputValue}
+              onChange={onUpdateSelectInputValue}>
+              {options.map((item, idx) => {
+                return (
+                  <Option value={item.value}>
+                    {item.placeholder.replaceAll('_', ' ')}
+                  </Option>
+                );
+              })}
+            </Select>
           </>
         )}
       </div>
@@ -298,6 +274,30 @@ export const DateInput = ({
     setDate(value);
   };
 
+  const dateClassNames = {
+    caption: 'flex justify-center py-2 mb-4 relative items-center',
+    caption_label: 'text-sm font-medium text-gray-900',
+    nav: 'flex items-center',
+    nav_button:
+      'h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300',
+    nav_button_previous: 'absolute left-1.5',
+    nav_button_next: 'absolute right-1.5',
+    table: 'w-full border-collapse',
+    head_row: 'flex font-medium text-gray-900',
+    head_cell: 'm-0.5 w-9 font-normal text-sm',
+    row: 'flex w-full mt-2',
+    cell: 'text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
+    day: 'h-9 w-9 p-0 font-normal',
+    day_range_end: 'day-range-end',
+    day_selected:
+      'rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white',
+    day_today: 'rounded-md bg-gray-200 text-gray-900',
+    day_outside:
+      'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
+    day_disabled: 'text-gray-500 opacity-50',
+    day_hidden: 'invisible',
+  };
+
   return (
     <Popover placement="bottom">
       <PopoverHandler>
@@ -320,30 +320,7 @@ export const DateInput = ({
           })}
           onSelect={updateDate}
           showOutsideDays
-          className="border-0"
-          classNames={{
-            caption: 'flex justify-center py-2 mb-4 relative items-center',
-            caption_label: 'text-sm font-medium text-gray-900',
-            nav: 'flex items-center',
-            nav_button:
-              'h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300',
-            nav_button_previous: 'absolute left-1.5',
-            nav_button_next: 'absolute right-1.5',
-            table: 'w-full border-collapse',
-            head_row: 'flex font-medium text-gray-900',
-            head_cell: 'm-0.5 w-9 font-normal text-sm',
-            row: 'flex w-full mt-2',
-            cell: 'text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
-            day: 'h-9 w-9 p-0 font-normal',
-            day_range_end: 'day-range-end',
-            day_selected:
-              'rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white',
-            day_today: 'rounded-md bg-gray-200 text-gray-900',
-            day_outside:
-              'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
-            day_disabled: 'text-gray-500 opacity-50',
-            day_hidden: 'invisible',
-          }}
+          classNames={dateClassNames}
           components={{
             IconLeft: ({ ...props }) => (
               <BiChevronLeft

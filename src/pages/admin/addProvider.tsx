@@ -293,7 +293,7 @@ export const AddProvider = () => {
                   register={register}
                   id={'country'}
                   errorMsg={errors.country?.message ?? ''}
-                  change={(e) => onUpdateCountry(e.target.value)}
+                  change={onUpdateCountry}
                 />
 
                 <SelectInput

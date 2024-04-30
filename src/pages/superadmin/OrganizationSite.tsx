@@ -151,14 +151,14 @@ const OrganizationSite = () => {
         <div
           className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
          border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
-          <div className="w-full relative my-4 sm:rounded-lg px-10">
-            <div className="flex flex-col items-center justify-center space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-              <div className="w-full md:w-3/4">
+          <div className="w-full relative my-4 sm:rounded-lg px-5">
+            <div className="w-[97%]] grid grid-cols-[22%_8%_45%_25%] gap-4">
+              <div className="w-full flex">
                 <BasicSearchInput
                   placeholder={`Search...`}
                   value={searchSite}
                   change={(e) => onUpdateSearchSite(e.target.value)}
-                  className={`!mb-0`}
+                  className={`!mb-0 w-full`}
                 />
               </div>
 
@@ -166,11 +166,11 @@ const OrganizationSite = () => {
                 value={perPage}
                 menuItems={itemsPerPage}
                 change={onUpdatePerPageItem}
-                buttonClass={`border-[#E9ECEF] min-w-[65px] h-[45px] p-1`}
+                buttonClass={`border-[#E9ECEF] w-full h-[45px]`}
               />
 
               <div
-                className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto
+                className="flex flex-col items-stretch justify-center flex-shrink-0 w-full space-y-2 pb-[10px] md:w-auto
                   md:flex-row md:space-y-0 md:items-center md:space-x-3">
                 <div className="flex items-center w-full space-x-3 md:w-auto">
                   <DateInput
@@ -198,23 +198,23 @@ const OrganizationSite = () => {
               </div>
 
               <div
-                className={`flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto 
+                className={`flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 pb-[10px] md:w-auto 
                   md:flex-row md:space-y-0 md:items-center md:space-x-3`}>
                 <SelectInput
-                  // label={`Country`}
+                  label={`Country`}
                   options={countryFilterList}
-                  className={`w-full min-h-[59px]`}
+                  className={`w-full`}
                   id={'country'}
-                  change={(e) => onUpdateFilterByCountry(e.target.value)}
+                  change={onUpdateFilterByCountry}
                 />
 
-                <SelectInput
-                  // label={`State`}
-                  options={stateFilterList}
-                  className={`w-full min-h-[59px]`}
-                  id={'state'}
-                  change={(e) => onUpdateFilterByState(e.target.value)}
-                />
+                {/*<SelectInput*/}
+                {/*  label={`State`}*/}
+                {/*  options={stateFilterList}*/}
+                {/*  className={`w-full`}*/}
+                {/*  id={'state'}*/}
+                {/*  change={onUpdateFilterByState}*/}
+                {/*/>*/}
               </div>
             </div>
           </div>

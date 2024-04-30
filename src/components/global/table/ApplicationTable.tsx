@@ -127,11 +127,7 @@ export const ApplicationTable = ({
                   options={countries ?? []}
                   className={`w-full min-h-[59px]`}
                   id={'country'}
-                  change={(e) =>
-                    onUpdateCountryFilter
-                      ? onUpdateCountryFilter(e.target.value as string)
-                      : {}
-                  }
+                  change={onUpdateCountryFilter}
                 />
               </div>
             )}

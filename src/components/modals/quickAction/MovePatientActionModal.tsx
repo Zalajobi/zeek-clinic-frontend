@@ -74,7 +74,7 @@ export const MovePatientActionModal = ({
             label={`Department`}
             options={departments}
             className={`my-3`}
-            change={(event) => onUpdateDepartment(event.target.value)}
+            change={onUpdateDepartment}
             id={`department`}
           />
 
@@ -82,7 +82,7 @@ export const MovePatientActionModal = ({
             label={`Service Area`}
             options={serviceAreas}
             className={`my-3`}
-            change={(event) => onUpdateServiceArea(event.target.value)}
+            change={onUpdateServiceArea}
             id={`Service Area`}
           />
 
@@ -90,7 +90,7 @@ export const MovePatientActionModal = ({
             label={`Unit`}
             options={units}
             className={`my-3`}
-            change={(event) => onUpdateUnit(event.target.value)}
+            change={onUpdateUnit}
             id={`Unit`}
           />
         </DialogBody>
