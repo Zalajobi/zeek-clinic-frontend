@@ -1,6 +1,6 @@
 import { useTable } from 'react-table';
 import { Fragment } from 'react';
-import { Card, CardBody } from '@material-tailwind/react';
+import { Card, CardBody, CardHeader } from '@material-tailwind/react';
 
 interface TableProps {
   columns: any[];
@@ -63,6 +63,32 @@ const Table = ({ columns, data, containerClass = '' }: TableProps) => {
         </Card>
       </div>
     </Fragment>
+  );
+};
+
+interface BasicTableProps {
+  cardClassName?: string;
+  cardHeadFloat?: boolean;
+  cardHeadShadow?: boolean;
+  cardHeadClassName?: string;
+}
+
+export const BasicTable = ({
+  cardClassName,
+  cardHeadFloat = false,
+  cardHeadShadow = false,
+  cardHeadClassName,
+}: BasicTableProps) => {
+  return (
+    <Card className={`h-full w-full ${cardClassName}`}>
+      <CardHeader
+        floated={cardHeadFloat}
+        shadow={cardHeadFloat}
+        className={`rounded-none ${cardHeadClassName}`}>
+        <div
+          className={`flex flex-col items-center justify-between gap-4 md:flex-grow`}></div>
+      </CardHeader>
+    </Card>
   );
 };
 
