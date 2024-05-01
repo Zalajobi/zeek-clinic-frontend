@@ -450,13 +450,43 @@ export const SuperAdminSiteDataColumns = () => {
     {
       key: 'status',
       value: 'Status',
+      sortable: false,
     },
     {
       key: 'created_at',
       value: 'Created At',
-      sortable: true,
+      sortable: false,
+    },
+    {
+      key: 'action',
+      value: 'Action',
+      sortable: false,
     },
   ];
+};
+
+export const SuperAdminSiteDataRows = (data: SuperadminSiteData[]) => {
+  const rowItems: any[] = [];
+
+  data?.map((item) => {
+    rowItems.push({
+      name: item?.name,
+      id: item?.id,
+      email: item?.email,
+      phone: item?.phone,
+      country: item?.country,
+      state: item?.state,
+      city: item?.city,
+      address: item?.address,
+      status: item?.status,
+      created_at: moment(item?.created_at).format('MMM DD. YYYY'),
+      logo: item?.logo,
+    });
+
+    return;
+  });
+
+  return rowItems;
 };
 
 export const SuperadminSiteDataRow = (

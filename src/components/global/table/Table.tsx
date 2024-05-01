@@ -1,6 +1,7 @@
 import { useTable } from 'react-table';
 import { Fragment } from 'react';
 import {
+  Avatar,
   Card,
   CardBody,
   CardHeader,
@@ -10,6 +11,8 @@ import {
 import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { HiChevronUpDown } from 'react-icons/hi2';
+import Status from '@components/global/Status';
+import { Link } from 'react-router-dom';
 
 interface TableProps {
   columns: any[];
@@ -93,6 +96,7 @@ interface BasicTableProps {
   cardBodyClasName?: string;
   columns: any[];
   data: any[];
+  url: string;
 }
 
 export const BasicTable = ({
@@ -109,8 +113,8 @@ export const BasicTable = ({
   cardBodyClasName,
   columns,
   data,
+  url,
 }: BasicTableProps) => {
-  console.log(columns);
   return (
     <Card className={`h-full w-full ${cardClassName}`}>
       <CardHeader
@@ -176,6 +180,82 @@ export const BasicTable = ({
               ))}
             </tr>
           </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr
+                key={index}
+                className={`border-y`}>
+                {columns.map((column, index) => (
+                  <>
+                    {/*For Status*/}
+                    {column.key === 'status' ? (
+                      <td
+                        key={index}
+                        className={`p-4 border-y text-black font-inter text-sm font-medium mx-1`}>
+                        <div className="w-max">
+                          <Status status={item[column.key]} />
+                        </div>
+                      </td>
+                    ) : // Title or Name
+                    column.key === 'name' || column.key === 'title' ? (
+                      <td key={index}>
+                        <Link
+                          to={`/${url}/${item?.id}`}
+                          className={`text-black decoration-0 pointer-cursor`}>
+                          <div
+                            className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
+                            <Avatar
+                              className={`border-gray-300 border ml-1`}
+                              src={item?.logo ?? item?.avatar}
+                              alt={'Logo'}
+                              size={'sm'}
+                            />
+                            <div className={`flex flex-col w-full`}>
+                              <Typography
+                                variant={'small'}
+                                color={'black'}
+                                className={
+                                  'font-inter font-bold truncate w-full'
+                                }>
+                                {item[column.key]}
+                              </Typography>
+
+                              <Typography
+                                variant={'small'}
+                                color={'blue-gray'}
+                                className={
+                                  'font-normal opacity-70 truncate w-full'
+                                }>
+                                {item?.email}
+                              </Typography>
+                            </div>
+                          </div>
+                        </Link>
+                      </td>
+                    ) : // Send Email
+                    column.key === 'email' ? (
+                      <td
+                        key={index}
+                        className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                        <a
+                          target={`_blank`}
+                          href={`mailto:${item[column.key]}`}
+                          className={`hover:cursor-pointer hover:text-gray-400`}>
+                          {item[column.key]}
+                        </a>
+                      </td>
+                    ) : (
+                      <td
+                        key={index}
+                        className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                        {item[column.key]}
+                      </td>
+                    )}
+                  </>
+                ))}
+              </tr>
+            ))}
+          </tbody>
         </table>
       </CardBody>
     </Card>

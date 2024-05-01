@@ -10,6 +10,7 @@ import {
   SuperadminSiteDataColumn,
   SuperAdminSiteDataColumns,
   SuperadminSiteDataRow,
+  SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
 import { SuperadminSiteData } from '@typeSpec/superadmin';
 import Table, { BasicTable } from '@components/global/table/Table';
@@ -65,6 +66,10 @@ const OrganizationSite = () => {
   const columns = useMemo(() => SuperadminSiteDataColumn(), []);
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
+  const rowData = useMemo(
+    () => SuperAdminSiteDataRows(sites as SuperadminSiteData[]) ?? [],
+    [sites]
+  );
 
   const data = useMemo(
     () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],
@@ -132,7 +137,8 @@ const OrganizationSite = () => {
           perPageMenuItems={itemsPerPage}
           perPageChange={onUpdatePerPageItem}
           columns={columnData}
-          data={data}
+          data={rowData}
+          url={'superadmin/site'}
         />
 
         <div className="relative overflow-x-auto overflow-y-auto shadow-lg flex flex-col rounded-lg border border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
