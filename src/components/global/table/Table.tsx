@@ -2,9 +2,12 @@ import { useTable } from 'react-table';
 import { Fragment } from 'react';
 import {
   Avatar,
+  Button,
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
+  IconButton,
   Input,
   Typography,
 } from '@material-tailwind/react';
@@ -13,6 +16,7 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { HiChevronUpDown } from 'react-icons/hi2';
 import Status from '@components/global/Status';
 import { Link } from 'react-router-dom';
+import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 
 interface TableProps {
   columns: any[];
@@ -97,6 +101,14 @@ interface BasicTableProps {
   columns: any[];
   data: any[];
   url: string;
+  noOfPages: number;
+  total: number;
+  from: number;
+  to: number;
+  currentPage: number;
+  onNext: (value: number) => void;
+  onPrevious: (value: number) => void;
+  enterPageNumber?: (value: number | string) => void;
 }
 
 export const BasicTable = ({
@@ -114,9 +126,17 @@ export const BasicTable = ({
   columns,
   data,
   url,
+  noOfPages,
+  total,
+  from,
+  to,
+  currentPage,
+  onNext,
+  onPrevious,
+  enterPageNumber,
 }: BasicTableProps) => {
   return (
-    <Card className={`h-full w-full ${cardClassName}`}>
+    <Card className={`w-full h-auto ${cardClassName}`}>
       <CardHeader
         floated={cardHeadFloat}
         shadow={cardHeadShadow}
@@ -258,6 +278,48 @@ export const BasicTable = ({
           </tbody>
         </table>
       </CardBody>
+
+      <CardFooter
+        className={`flex items-center justify-between border-t border-blue-gray-50 p-4`}>
+        <div className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
+          <p className="inline-block font-velasans-gx text-sm font-medium lg:flex-nowrap">
+            <b className="font-extrabold">
+              Showing results from {from} - {to}
+            </b>{' '}
+            of {total}
+          </p>
+
+          <div className="mt-3 flex flex-col items-center gap-6 divide-ds-gray-300 dark:divide-ds-dark-400 lg:mt-0 lg:flex-row lg:divide-x">
+            <div className="flex flex-col items-center gap-2 font-velasans-gx text-sm font-medium text-custom-description dark:text-ds-dark-300 sm:flex-row lg:whitespace-nowrap">
+              <div className="flex items-center gap-8">
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  onClick={() => onPrevious(currentPage - 1)}
+                  disabled={currentPage === 0}>
+                  <IoMdArrowDropleft size={20} />
+                </Button>
+
+                <Typography
+                  color="gray"
+                  className="font-normal">
+                  Page{' '}
+                  <strong className="text-gray-900">{currentPage + 1}</strong>{' '}
+                  of <strong className="text-gray-900">{noOfPages}</strong>
+                </Typography>
+
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  onClick={() => onNext(currentPage + 1)}
+                  disabled={currentPage + 1 === noOfPages}>
+                  <IoMdArrowDropright size={20} />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardFooter>
     </Card>
   );
 };
