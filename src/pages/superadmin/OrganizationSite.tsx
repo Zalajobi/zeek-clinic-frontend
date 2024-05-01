@@ -8,10 +8,11 @@ import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
 import {
   SuperadminSiteDataColumn,
+  SuperAdminSiteDataColumns,
   SuperadminSiteDataRow,
 } from '@components/tables/row-col-mapping/SuperadminTable';
 import { SuperadminSiteData } from '@typeSpec/superadmin';
-import Table from '@components/global/table/Table';
+import Table, { BasicTable } from '@components/global/table/Table';
 import TableFooter from '@components/global/table/TableFooter';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
@@ -24,7 +25,7 @@ import {
   SelectInput,
 } from '@components/global/formInput/CustomInput';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
-import { CustomTabHeader, DropdownMenu } from '@components/global/MenuTabs';
+import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
 import { Card } from '@material-tailwind/react';
 
 const OrganizationSite = () => {
@@ -62,6 +63,9 @@ const OrganizationSite = () => {
   } = useOrganizationDetails();
 
   const columns = useMemo(() => SuperadminSiteDataColumn(), []);
+
+  const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
+
   const data = useMemo(
     () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],
     [sites]
@@ -114,12 +118,22 @@ const OrganizationSite = () => {
 
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <CustomTabHeader
+            <CustomTabSelector
               onClick={onUpdateActiveTab}
               tabItems={tabData}
             />
           </div>
         </div>
+
+        <BasicTable
+          tabItems={tabData}
+          onSelectTab={onUpdateActiveTab}
+          perPageValue={perPage}
+          perPageMenuItems={itemsPerPage}
+          perPageChange={onUpdatePerPageItem}
+          columns={columnData}
+          data={data}
+        />
 
         <div className="relative overflow-x-auto overflow-y-auto shadow-lg flex flex-col rounded-lg border border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
           <div className="w-full grid grid-cols-[22%_8%_45%_12%_12%] gap-4">

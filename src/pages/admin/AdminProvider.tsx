@@ -17,7 +17,7 @@ import {
   setResultTo,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
-import { CustomTabHeader } from '@components/global/MenuTabs';
+import { CustomTabSelector } from '@components/global/MenuTabs';
 
 const AdminProvider = () => {
   const dispatch = useDispatch();
@@ -163,7 +163,7 @@ const AdminProvider = () => {
             id={adminData?.id}
           />
 
-          <CustomTabHeader
+          <CustomTabSelector
             className={`w-[75%] rounded-2xl`}
             onClick={onUpdateStatusFilterTab}
             tabItems={tabData}

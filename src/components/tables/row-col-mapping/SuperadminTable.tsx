@@ -410,6 +410,55 @@ export const SuperadminSiteDataColumn = () => {
   return columnItem;
 };
 
+export const SuperAdminSiteDataColumns = () => {
+  return [
+    {
+      key: 'name',
+      value: 'Name',
+      sortable: true,
+    },
+    {
+      key: 'email',
+      value: 'Email',
+      sortable: true,
+    },
+    {
+      key: 'phone',
+      value: 'Phone',
+      sortable: true,
+    },
+    {
+      key: 'country',
+      value: 'Country',
+      sortable: true,
+    },
+    {
+      key: 'state',
+      value: 'State',
+      sortable: true,
+    },
+    {
+      key: 'city',
+      value: 'City',
+      sortable: true,
+    },
+    {
+      key: 'address',
+      value: 'Address',
+      sortable: true,
+    },
+    {
+      key: 'status',
+      value: 'Status',
+    },
+    {
+      key: 'created_at',
+      value: 'Created At',
+      sortable: true,
+    },
+  ];
+};
+
 export const SuperadminSiteDataRow = (
   data: SuperadminSiteData[]
   // onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void

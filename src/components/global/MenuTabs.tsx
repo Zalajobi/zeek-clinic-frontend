@@ -26,7 +26,7 @@ interface ProfileMenuProps {
   profileImg?: string;
 }
 
-interface CustomTabHeaderProps {
+interface CustomTabSelectorProps {
   tabItems: {
     label: string;
     value: string;
@@ -120,18 +120,20 @@ export const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
   );
 };
 
-export const CustomTabHeader = ({
+export const CustomTabSelector = ({
   tabItems,
   onClick,
   orientation = 'horizontal',
   className,
-}: CustomTabHeaderProps) => {
+}: CustomTabSelectorProps) => {
   return (
     <Fragment>
       <Tabs
         value={tabItems[0].value}
         orientation={orientation}
-        className={`w-full rounded-lg md:w-max bg-gray-300 ${className}`}>
+        className={`w-full md:w-max rounded-lg bg-gray-100 ${
+          className ? className : ''
+        }`}>
         <TabsHeader>
           {tabItems.map(({ label, value, icon }) => (
             <Tab

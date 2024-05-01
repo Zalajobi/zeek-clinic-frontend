@@ -1,6 +1,15 @@
 import { useTable } from 'react-table';
 import { Fragment } from 'react';
-import { Card, CardBody, CardHeader } from '@material-tailwind/react';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Input,
+  Typography,
+} from '@material-tailwind/react';
+import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { HiChevronUpDown } from 'react-icons/hi2';
 
 interface TableProps {
   columns: any[];
@@ -71,6 +80,19 @@ interface BasicTableProps {
   cardHeadFloat?: boolean;
   cardHeadShadow?: boolean;
   cardHeadClassName?: string;
+  onSelectTab: (value: any) => void;
+  tabItems: {
+    label: string;
+    value: string;
+    icon?: any;
+  }[];
+  perPageValue?: string | number;
+  perPageMenuItems?: any[];
+  perPageChange?: (item: any) => void;
+  perPageBtnClass?: string;
+  cardBodyClasName?: string;
+  columns: any[];
+  data: any[];
 }
 
 export const BasicTable = ({
@@ -78,16 +100,84 @@ export const BasicTable = ({
   cardHeadFloat = false,
   cardHeadShadow = false,
   cardHeadClassName,
+  onSelectTab,
+  tabItems,
+  perPageValue,
+  perPageMenuItems,
+  perPageChange,
+  perPageBtnClass,
+  cardBodyClasName,
+  columns,
+  data,
 }: BasicTableProps) => {
+  console.log(columns);
   return (
     <Card className={`h-full w-full ${cardClassName}`}>
       <CardHeader
         floated={cardHeadFloat}
-        shadow={cardHeadFloat}
+        shadow={cardHeadShadow}
         className={`rounded-none ${cardHeadClassName}`}>
         <div
-          className={`flex flex-col items-center justify-between gap-4 md:flex-grow`}></div>
+          className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
+          <div className={`flex gap-4 items-center justify-center`}>
+            <CustomTabSelector
+              onClick={onSelectTab}
+              tabItems={tabItems}
+            />
+
+            {perPageValue && perPageMenuItems && perPageChange && (
+              <DropdownMenu
+                value={perPageValue}
+                menuItems={perPageMenuItems}
+                change={perPageChange}
+                buttonClass={`border-gray-100 w-44 h-[42px] ${
+                  perPageBtnClass ? perPageBtnClass : ''
+                }`}
+              />
+            )}
+          </div>
+
+          <div className="w-full md:w-72">
+            <Input
+              label="Search"
+              icon={<FaMagnifyingGlass className="h-5 w-5" />}
+              className={`border-t-gray-200`}
+            />
+          </div>
+        </div>
       </CardHeader>
+
+      <CardBody
+        className={`overflow-scroll px-0 ${
+          cardBodyClasName ? cardBodyClasName : ''
+        }`}>
+        <table className={`mt-4 w-full min-w-max table-auto text-left`}>
+          <thead>
+            <tr>
+              {columns.map((item, index) => (
+                <th
+                  key={item.key}
+                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
+                  <Typography
+                    variant={'small'}
+                    color={'blue-gray'}
+                    className={
+                      'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
+                    }>
+                    {item.value}{' '}
+                    {item.sortable && (
+                      <HiChevronUpDown
+                        strokeWidth={2}
+                        className={'h-4 w-4'}
+                      />
+                    )}
+                  </Typography>
+                </th>
+              ))}
+            </tr>
+          </thead>
+        </table>
+      </CardBody>
     </Card>
   );
 };
