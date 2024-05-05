@@ -28,7 +28,7 @@ import {
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100],
-    searchTableBy = ['Sort By'];
+    searchTableBy: string[] = [];
   const dispatch = useDispatch();
   let noOfPages = 0;
 
@@ -41,12 +41,12 @@ const OrganizationSite = () => {
     // noOfPages,
     resultFrom,
     resultTo,
-    totalData,
+    // totalData,
     searchSite,
-    countryFilterList,
-    stateFilterList,
-    dateFilterFrom,
-    dateFilterTo,
+    // countryFilterList,
+    // stateFilterList,
+    // dateFilterFrom,
+    // dateFilterTo,
     tabData,
     hospitalData,
     hospitalDataLoading,
@@ -54,20 +54,18 @@ const OrganizationSite = () => {
     siteCountDataLoading,
     sitesTableData,
     sitesTableDataLoading,
+    searchKey,
 
     // Functions
     onUpdateActiveTab,
     onClickNext,
     onClickPrevious,
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
     onUpdatePerPageItem,
     onUpdateSearchSite,
-    onUpdateFilterByCountry,
-    onUpdateFilterByState,
-    onUpdateDataRefresh,
     deleteSite,
+    onUpdateDataRefresh,
     getSiteDetailsAndEditModalController,
+    onUpdateSearchKey,
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
@@ -171,6 +169,8 @@ const OrganizationSite = () => {
           editRow={getSiteDetailsAndEditModalController}
           searchKeys={searchTableBy}
           dataLoading={sitesTableDataLoading}
+          searchKey={searchKey}
+          updateSearchKey={onUpdateSearchKey}
         />
       </div>
 

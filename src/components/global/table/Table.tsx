@@ -117,6 +117,8 @@ interface BasicTableProps {
   editRow?: (value: string) => void;
   searchKeys: string[];
   dataLoading: boolean;
+  searchKey: string;
+  updateSearchKey: (value: string) => void;
 }
 
 export const BasicTable = ({
@@ -141,6 +143,8 @@ export const BasicTable = ({
   editRow,
   searchKeys,
   dataLoading,
+  searchKey,
+  updateSearchKey,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto`}>
@@ -166,10 +170,10 @@ export const BasicTable = ({
 
           <div className="flex flex-col gap-4 items-center md:flex-row">
             <DropdownMenu
-              value={perPageValue}
+              value={searchKey}
               menuItems={searchKeys}
-              change={perPageChange}
-              buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-32`}
+              change={updateSearchKey}
+              buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-40`}
             />
 
             <div className={`w-full md:w-72`}>
