@@ -25,7 +25,7 @@ const HospitalDetails = ({
   return (
     <Fragment>
       <CustomTransparentCard
-        className={`w-full grid grid-cols-4 items-center gap-4 bg-white px-6 py-9 text-sm font-extrabold`}>
+        className={`w-full grid grid-cols-4 items-center gap-4 p-9`}>
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Name:`}
