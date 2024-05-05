@@ -171,6 +171,7 @@ const OrganizationSite = () => {
           dataLoading={sitesTableDataLoading}
           searchKey={searchKey}
           updateSearchKey={onUpdateSearchKey}
+          onUpdateSearch={onUpdateSearchSite}
         />
       </div>
 

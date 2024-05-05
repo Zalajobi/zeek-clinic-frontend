@@ -119,6 +119,7 @@ interface BasicTableProps {
   dataLoading: boolean;
   searchKey: string;
   updateSearchKey: (value: string) => void;
+  onUpdateSearch: (value: string) => void;
 }
 
 export const BasicTable = ({
@@ -145,6 +146,7 @@ export const BasicTable = ({
   dataLoading,
   searchKey,
   updateSearchKey,
+  onUpdateSearch,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto`}>
@@ -181,6 +183,7 @@ export const BasicTable = ({
                 label="Search..."
                 icon={<FaMagnifyingGlass className="h-5 w-5" />}
                 className={`border-t-[aliceblue]`}
+                onChange={(event) => onUpdateSearch(event.target.value)}
               />
             </div>
           </div>

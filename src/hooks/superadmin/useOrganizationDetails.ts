@@ -279,45 +279,16 @@ export const useOrganizationDetails = () => {
 
   // Update Search Key
   const onUpdateSearchKey = (value: string) => {
-    if (value !== 'Search By') {
-      setSearchKey(value);
-    }
+    if (value !== 'Search By') setSearchKey(value);
   };
 
+  // On Update Search Site
   const onUpdateSearchSite = async (value: string) => {
-    setSearchSite(value);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
+    setSearchSitePayload({
+      ...searchSitePayload,
       search: value,
-      country: country,
-      // status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setSites(response?.data?.sites as SitesDataKeyMap[]);
-      setTotalData(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      // setNoOfPages(
-      //   Math.ceil(
-      //     response?.data?.count /
-      //       (perPage === 'All' ? response?.data?.count : perPage)
-      //   )
-      // );
-    }
+      searchKey: revertDropdownOptionsToResponseKey(searchKey),
+    });
   };
 
   const onUpdateDataRefresh = () => setRefreshData(!refreshData);
