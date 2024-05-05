@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import toast from 'react-hot-toast';
-import { HospitalDetailsData, SitesDataKeyMap } from '@typeSpec/superadmin';
 import {
   axiosGetRequestUserService,
   axiosPostRequestUserService,
 } from '@lib/axios';
-import { SelectInputFieldProps } from '@typeSpec/common';
-import { customPromiseRequest } from '@lib/requests';
-import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { SearchSitesRequestPayload } from '@typeSpec/index';
@@ -21,10 +17,6 @@ export const useOrganizationDetails = () => {
   );
 
   const { hospitalId } = useParams();
-  const [organization, setOrganization] = useState<HospitalDetailsData | null>(
-    null
-  );
-  const [sites, setSites] = useState<SitesDataKeyMap[] | null>(null);
   const [searchSitePayload, setSearchSitePayload] =
     useState<SearchSitesRequestPayload>({
       hospitalId,
@@ -33,18 +25,6 @@ export const useOrganizationDetails = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [resultFrom, setResultFrom] = useState<number | null>(null);
   const [resultTo, setResultTo] = useState<number | null>(null);
-  const [totalData, setTotalData] = useState(0);
-  const [searchSite, setSearchSite] = useState('');
-  const [dateFilterTo, setDateFilterTo] = useState<Date | null>();
-  const [dateFilterFrom, setDateFilterFrom] = useState<Date | null>();
-  const [country, setCountry] = useState('');
-  const [state, setState] = useState('');
-  const [countryFilterList, setCountryFilterList] = useState<
-    SelectInputFieldProps[]
-  >([]);
-  const [stateFilterList, setStateFilterList] = useState<
-    SelectInputFieldProps[]
-  >([]);
   const [refreshData, setRefreshData] = useState(false);
   const [editSiteModalController, setEditSiteModalController] = useState(false);
   const [searchKey, setSearchKey] = useState('Search By');
@@ -71,35 +51,6 @@ export const useOrganizationDetails = () => {
       value: 'DEACTIVATED',
     },
   ];
-
-  useEffect(() => {
-    const getData = async () => {
-      const [countryStates] = await customPromiseRequest([
-        axiosGetRequestUserService(`/site/${hospitalId}/locations/distinct`),
-      ]);
-
-      // if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
-      //   setHospitalData(hospital?.value as AccountServiceApiResponse);
-      // } else {
-      //   toast.error('Something went wrong getting hospital list');
-      // }
-
-      if (
-        countryStates.status === 'fulfilled' &&
-        countryStates?.value?.success
-      ) {
-        setCountryAndStateSitesData(
-          countryStates.value as AccountServiceApiResponse
-        );
-      } else {
-        toast.error('Something went wrong getting site countries and states');
-      }
-    };
-
-    getData().catch((err) => {
-      toast.error('Response');
-    });
-  }, [hospitalId, refreshData]);
 
   // Get Hospital Details
   const { data: hospitalData, isLoading: hospitalDataLoading } = useQuery({
@@ -150,26 +101,6 @@ export const useOrganizationDetails = () => {
     },
   });
 
-  const setHospitalData = (responseData: AccountServiceApiResponse) => {
-    setOrganization(responseData.data.hospital as HospitalDetailsData);
-    setSites(responseData?.data?.sites);
-    // setNoOfPages(
-    //   Math.ceil(
-    //     responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
-    //   )
-    // );
-    setTotalData(responseData.data.tableData.sites);
-    setResultFrom(responseData?.data?.sites.length <= 0 ? 0 : 1);
-    setResultTo(
-      responseData?.data?.sites.length <= 0
-        ? 0
-        : currentPage + 1 === noOfPages
-        ? responseData.data.tableData.sites
-        : currentPage * (perPage !== 'All' ? perPage : 0) +
-          (perPage !== 'All' ? perPage : 0)
-    );
-  };
-
   // Request to Delete Site
   const deleteSite = async (siteId: string) => {
     console.log('Deleting SIte');
@@ -179,34 +110,6 @@ export const useOrganizationDetails = () => {
   const getSiteDetailsAndEditModalController = async (siteId: string) => {
     setEditSiteModalController(!editSiteModalController);
     console.log('Edit Site');
-  };
-
-  const setCountryAndStateSitesData = (
-    responseData: AccountServiceApiResponse
-  ) => {
-    let tempCountriesFilter: SelectInputFieldProps[] = [],
-      stateFilter: SelectInputFieldProps[] = [];
-
-    responseData.data.countries.map((item: { country: string }) => {
-      tempCountriesFilter.push({
-        value: item?.country,
-        placeholder: item?.country,
-      });
-
-      return;
-    });
-
-    responseData.data.states.map((item: { state: string }) => {
-      stateFilter.push({
-        value: item?.state,
-        placeholder: item?.state,
-      });
-
-      return;
-    });
-
-    setCountryFilterList(tempCountriesFilter);
-    setStateFilterList(stateFilter);
   };
 
   // Handle Change Tab
@@ -296,21 +199,11 @@ export const useOrganizationDetails = () => {
   return {
     // Values
     hospitalId,
-    organization,
-    // activeTabs,
-    sites,
     perPage,
     currentPage,
     noOfPages,
     resultFrom,
     resultTo,
-    totalData,
-    searchSite,
-    country,
-    countryFilterList,
-    stateFilterList,
-    dateFilterFrom,
-    dateFilterTo,
     tabData,
     hospitalData,
     hospitalDataLoading,

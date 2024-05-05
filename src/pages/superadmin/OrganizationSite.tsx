@@ -16,10 +16,7 @@ import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSite from '@components/modals/CreateSite';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
-import {
-  formatResponseKeyForDropdown,
-  revertDropdownOptionsToResponseKey,
-} from '@util/index';
+import { formatResponseKeyForDropdown } from '@util/index';
 import { useDispatch } from 'react-redux';
 import {
   setNoOfPages,
@@ -34,19 +31,11 @@ const OrganizationSite = () => {
 
   const {
     // Values
-    organization,
     // sites,
     perPage,
     currentPage,
-    // noOfPages,
     resultFrom,
     resultTo,
-    // totalData,
-    searchSite,
-    // countryFilterList,
-    // stateFilterList,
-    // dateFilterFrom,
-    // dateFilterTo,
     tabData,
     hospitalData,
     hospitalDataLoading,
@@ -177,7 +166,7 @@ const OrganizationSite = () => {
 
       <CreateSite
         reloadPage={onUpdateDataRefresh}
-        totalSites={organization?.site_count ?? (0 as number)}
+        totalSites={sitesTableData?.data?.totalRows ?? (0 as number)}
       />
     </SuperadminBaseTemplate>
   );
