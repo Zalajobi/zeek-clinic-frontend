@@ -254,13 +254,6 @@ export const useOrganizationDetails = () => {
 
   // Handle Next Page
   const onClickNext = async (value: number) => {
-    console.log({
-      // resultFrom,
-      noOfPages,
-      totalDataCount,
-      // resultTo,
-    });
-
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
       const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
@@ -281,46 +274,25 @@ export const useOrganizationDetails = () => {
     }
   };
 
+  // Handle Previous Page
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {
-      setCurrentPage(value);
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchSitePayload({
+        ...searchSitePayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
 
+      setCurrentPage(value);
       setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
       setResultTo(
         value + 1 === noOfPages
-          ? totalData
+          ? totalDataCount
           : value * (perPage !== 'All' ? perPage : 0) +
               (perPage !== 'All' ? perPage : 0)
       );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: dateFilterFrom,
-        to_date: dateFilterTo,
-        search: searchSite,
-        country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId,
-        state,
-      };
-
-      const response = await axiosGetRequestUserService(
-        '/site/organization/sites/filters',
-        params
-      );
-
-      if (response.success) {
-        setSites(response?.data?.sites as SitesDataKeyMap[]);
-        setTotalData(response?.data?.count as number);
-        // setNoOfPages(
-        //   Math.ceil(
-        //     response?.data?.count /
-        //       (perPage === 'All' ? response?.data?.count : perPage)
-        //   )
-        // );
-      }
     }
   };
 
