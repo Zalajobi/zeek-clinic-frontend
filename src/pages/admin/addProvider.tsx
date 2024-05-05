@@ -363,7 +363,7 @@ export const AddProvider = () => {
                   id={`phone`}
                   register={register}
                   type={`tel`}
-                  prefix={`${phoneCode ? '+' + phoneCode : ''}`}
+                  // prefix={`${phoneCode ? '+' + phoneCode : ''}`}
                   icon={
                     <FaPhone
                       size={20}

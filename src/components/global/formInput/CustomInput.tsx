@@ -18,6 +18,7 @@ import {
   PopoverContent,
   Select,
   Option,
+  Typography as MaterialTypography,
 } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -32,9 +33,9 @@ interface TextInputProps {
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
-  prefix?: string;
   change?: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  size?: 'lg' | 'md';
 }
 
 interface TextInputWithoutLabelProps {
@@ -56,6 +57,7 @@ interface SelectInputProps {
   errorMsg?: string;
   className?: string;
   change?: (event: string) => void;
+  size?: 'lg' | 'md';
 }
 
 interface DateInputProps {
@@ -96,9 +98,9 @@ export const TextInput = ({
   className = '',
   register,
   type = 'text',
-  prefix,
   change,
   value,
+  size,
 }: TextInputProps) => {
   return (
     <Fragment>
@@ -112,19 +114,18 @@ export const TextInput = ({
             {label}
           </label>
 
-          <div className="relative h-[58px] w-full min-w-[200px]">
+          <div className="relative w-full min-w-[200px]">
             {register ? (
               <>
-                <input
+                <Input
                   type={type}
-                  className={`py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5 border-[#E5E7EB]`}
+                  className={`border-t divide-solid border-t-gray-400`}
                   placeholder={placeholder}
                   id={id}
+                  size={size ?? 'lg'}
+                  label={label}
                   {...register(id)}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
               </>
             ) : (
               <>
@@ -143,15 +144,23 @@ export const TextInput = ({
             )}
           </div>
           {errorMsg && (
-            <div className="text-sm text-red-600 mt-2">
-              <Typography
-                Tag={`span`}
-                text={errorMsg}
-                className={`italic text-xs font-bold ${
-                  errorMsg ? 'text-red-500' : ''
-                }`}
-              />
-            </div>
+            <MaterialTypography
+              variant={'small'}
+              className="mt-2 flex items-center gap-1 font-normal"
+              color={'red'}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="-mt-px h-4 w-4">
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {errorMsg}
+            </MaterialTypography>
           )}
         </div>
       </div>
@@ -201,6 +210,7 @@ export const SelectInput = ({
   id,
   register,
   change,
+  size,
 }: SelectInputProps) => {
   return (
     <Fragment>
@@ -218,6 +228,7 @@ export const SelectInput = ({
         <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
           {register ? (
             <Select
+              size={size ?? 'lg'}
               onChange={(eventValue) => {
                 if (change) change(eventValue ?? '');
                 register?.(id, {

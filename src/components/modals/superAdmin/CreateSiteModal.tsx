@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ImageUpload from '@components/global/formInput/ImageUpload';
@@ -15,7 +15,6 @@ import {
 } from '@typeSpec/superadmin/forms';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
-import { useLoadGoogleCharts } from 'react-google-charts/dist/hooks';
 
 interface CreateSiteModalProps {
   open: boolean;
@@ -70,16 +69,17 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%]`}>
           {/*Image Upload*/}
-          <CustomTransparentCard className={`w-full h-full p-4 rounded-2xl`}>
+          <CustomTransparentCard
+            className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
             <ImageUpload
               bucketFolder={`/site_image`}
-              url={`logo`}
-              updateImageUrl={(url) => console.log(url)}
+              url={logo}
+              updateImageUrl={onUpdateLogo}
               label={`Site Logo`}
             />
           </CustomTransparentCard>
 
-          <CustomTransparentCard className={`w-full -h-full p-4 rounded-2xl`}>
+          <div className={`w-full -h-full p-4 rounded-2xl overflow-scroll`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2`}>
               <TextInput
@@ -155,7 +155,136 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
                 register={register}
               />
             </div>
-          </CustomTransparentCard>
+
+            <div
+              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-4`}>
+              <CheckboxInput
+                label={`Is Private`}
+                className={`my-3 w-full flex items-center`}
+                id={`is_private`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Appointment`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_appointment`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Care-Giver`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_caregiver`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Clinical`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_clinical`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Doctors`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_doctor`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Emergency`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_emergency`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Laboratory`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_laboratory`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Medical Supply`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_medical_supply`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Nursing`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_nursing`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has In-Patient`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_inpatient`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Out-Patient`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_outpatient`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Pharmacy`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_pharmacy`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Physical Therapy`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_physical_therapy`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Procedure`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_procedure`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Radiology`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_radiology`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Unit`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_unit`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Vital`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_vital`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Has Wallet`}
+                className={`my-3 w-full flex items-center`}
+                id={`has_wallet`}
+                register={register}
+              />
+            </div>
+          </div>
         </div>
       </CustomBasicModal>
     </Fragment>
