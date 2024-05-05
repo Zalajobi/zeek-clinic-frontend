@@ -6,7 +6,10 @@ import {
 } from '@typeSpec/superadmin';
 import Status from '@components/global/Status';
 import { Typography } from '@components/global/dialog/Typography';
-import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import {
+  CustomCard,
+  CustomTransparentCard,
+} from '@components/global/card/CustomCard';
 import { Spinner } from '@material-tailwind/react';
 
 interface HospitalDetailsProps {
@@ -24,8 +27,7 @@ const HospitalDetails = ({
 }: HospitalDetailsProps) => {
   return (
     <Fragment>
-      <CustomTransparentCard
-        className={`w-full grid grid-cols-4 items-center gap-4 p-9`}>
+      <CustomCard className={`w-full grid grid-cols-4 items-center gap-4 p-9`}>
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Name:`}
@@ -380,7 +382,7 @@ const HospitalDetails = ({
             </div>
           )}
         </div>
-      </CustomTransparentCard>
+      </CustomCard>
     </Fragment>
   );
 };

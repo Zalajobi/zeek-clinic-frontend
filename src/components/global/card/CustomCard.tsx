@@ -9,10 +9,10 @@ interface CustomCardProps {
 export const CustomCard = ({ children, className = '' }: CustomCardProps) => {
   return (
     <Fragment>
-      <div
-        className={`bg-white border border-gray-200 rounded-2xl shadow p-4 overflow-hidden ${className}`}>
+      <Card
+        className={`border-gray-200 rounded-2xl shadow p-4 overflow-hidden ${className}`}>
         {children}
-      </div>
+      </Card>
     </Fragment>
   );
 };
@@ -24,7 +24,7 @@ export const CustomTransparentCard = ({
   return (
     <Fragment>
       <Card
-        className={`rounded-lg shadow-xl shadow-blue-gray-900/50 p-4 ${className}`}>
+        className={`glassmorphism shadow-blue-gray-900/50 border-gray-200 rounded-2xl shadow p-4 overflow-hidden ${className}`}>
         {children}
       </Card>
     </Fragment>
