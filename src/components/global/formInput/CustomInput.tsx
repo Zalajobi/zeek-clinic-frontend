@@ -202,52 +202,58 @@ export const SelectInput = ({
   register,
   change,
 }: SelectInputProps) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const onUpdateSelectInputValue = (value: string | undefined) => {};
-
   return (
     <Fragment>
-      <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
-        {register ? (
-          <select
-            {...register?.(id, {
-              onChange: (event) => {
-                if (change) {
-                  change(event);
-                }
-              },
-            })}
-            id={id}>
-            <option
-              selected
-              disabled>
-              Select {label}
-            </option>
-            {options.map((item, idx) => {
-              return (
-                <option value={item.value}>
-                  {item.placeholder.replaceAll('_', ' ')}
-                </option>
-              );
-            })}
-          </select>
-        ) : (
-          <>
+      <div className={`min-w-[100px] my-2 ${className}`}>
+        <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+            }`}>
+            {label}
+          </label>
+        </div>
+
+        <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
+          {register ? (
             <Select
+              onChange={(eventValue) => {
+                if (change) change(eventValue ?? '');
+                register?.(id, {
+                  value: eventValue,
+                });
+              }}
               label={`Select ${label}`}
-              value={inputValue}
-              onChange={onUpdateSelectInputValue}>
+              id={id}>
               {options.map((item, idx) => {
                 return (
-                  <Option value={item.value}>
+                  <Option
+                    value={item.value}
+                    key={`${item}-${idx}`}>
                     {item.placeholder.replaceAll('_', ' ')}
                   </Option>
                 );
               })}
             </Select>
-          </>
-        )}
+          ) : (
+            <>
+              <Select
+                label={`Select ${label}`}
+                onChange={(value) => {
+                  if (change) change(value ?? '');
+                }}>
+                {options.map((item, idx) => {
+                  return (
+                    <Option value={item.value}>
+                      {item.placeholder.replaceAll('_', ' ')}
+                    </Option>
+                  );
+                })}
+              </Select>
+            </>
+          )}
+        </div>
       </div>
     </Fragment>
   );

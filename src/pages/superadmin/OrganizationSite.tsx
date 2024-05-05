@@ -13,7 +13,7 @@ import { SitesDataKeyMap } from '@typeSpec/superadmin';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
-import CreateSite from '@components/modals/CreateSite';
+import CreateSiteModal from '@components/modals/superAdmin/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { formatResponseKeyForDropdown } from '@util/index';
@@ -44,6 +44,7 @@ const OrganizationSite = () => {
     sitesTableData,
     sitesTableDataLoading,
     searchKey,
+    showCreateSiteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -55,6 +56,7 @@ const OrganizationSite = () => {
     onUpdateDataRefresh,
     getSiteDetailsAndEditModalController,
     onUpdateSearchKey,
+    onUpdateShowCreateSiteModal,
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
@@ -125,6 +127,7 @@ const OrganizationSite = () => {
               text={`Add Site`}
               type={`primary`}
               className={`h-[38px] w-[180px]`}
+              click={onUpdateShowCreateSiteModal}
             />
           </div>
         </div>
@@ -147,13 +150,13 @@ const OrganizationSite = () => {
           columns={columnData}
           data={rowData ?? []}
           url={'superadmin/site'}
-          noOfPages={noOfPages}
+          noOfPages={noOfPages ?? 0}
           total={sitesTableData?.data?.totalRows ?? 0}
           from={resultFrom ?? 1}
           to={resultTo ?? 10}
           onNext={onClickNext}
           onPrevious={onClickPrevious}
-          currentPage={currentPage}
+          currentPage={currentPage ?? -1}
           deleteRow={deleteSite}
           editRow={getSiteDetailsAndEditModalController}
           searchKeys={searchTableBy}
@@ -164,9 +167,9 @@ const OrganizationSite = () => {
         />
       </div>
 
-      <CreateSite
-        reloadPage={onUpdateDataRefresh}
-        totalSites={sitesTableData?.data?.totalRows ?? (0 as number)}
+      <CreateSiteModal
+        open={showCreateSiteModal}
+        handleOpen={onUpdateShowCreateSiteModal}
       />
     </SuperadminBaseTemplate>
   );

@@ -28,6 +28,7 @@ export const useOrganizationDetails = () => {
   const [refreshData, setRefreshData] = useState(false);
   const [editSiteModalController, setEditSiteModalController] = useState(false);
   const [searchKey, setSearchKey] = useState('Search By');
+  const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
 
   const tabData = [
     {
@@ -196,6 +197,10 @@ export const useOrganizationDetails = () => {
 
   const onUpdateDataRefresh = () => setRefreshData(!refreshData);
 
+  const onUpdateShowCreateSiteModal = () => {
+    setShowCreateSiteModal((cur) => !cur);
+  };
+
   return {
     // Values
     hospitalId,
@@ -212,6 +217,7 @@ export const useOrganizationDetails = () => {
     sitesTableData,
     sitesTableDataLoading,
     searchKey,
+    showCreateSiteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -223,5 +229,6 @@ export const useOrganizationDetails = () => {
     deleteSite,
     getSiteDetailsAndEditModalController,
     onUpdateSearchKey,
+    onUpdateShowCreateSiteModal,
   };
 };
