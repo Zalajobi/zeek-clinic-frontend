@@ -12,6 +12,7 @@ import { customPromiseRequest } from '@lib/requests';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { SearchSitesRequestPayload } from '@typeSpec/index';
 
 export const useOrganizationDetails = () => {
   const { totalDataCount, noOfPages } = useSelector(
@@ -23,26 +24,18 @@ export const useOrganizationDetails = () => {
     null
   );
   const [sites, setSites] = useState<SitesDataKeyMap[] | null>(null);
-  const [activeTabs, setActiveTabs] = useState<
-    'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
-  >('ALL');
-  const [searchSitePayload, setSearchSitePayload] = useState({
-    hospitalId,
-    search: undefined,
-    status: undefined,
-    country: undefined,
-    state: undefined,
-    from_date: undefined,
-    to_date: undefined,
-    startRow: 0,
-    endRow: 10,
-    sortModel: undefined,
-  });
+  // const [activeTabs, setActiveTabs] = useState<
+  //   'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED'
+  // >('ALL');
+  const [searchSitePayload, setSearchSitePayload] =
+    useState<SearchSitesRequestPayload>({
+      hospitalId,
+    });
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   // const [noOfPages, setNoOfPages] = useState(0);
-  const [resultFrom, setResultFrom] = useState(0);
-  const [resultTo, setResultTo] = useState(0);
+  const [resultFrom, setResultFrom] = useState<number | null>(null);
+  const [resultTo, setResultTo] = useState<number | null>(null);
   const [totalData, setTotalData] = useState(0);
   const [searchSite, setSearchSite] = useState('');
   const [dateFilterTo, setDateFilterTo] = useState<Date | null>();
@@ -65,15 +58,19 @@ export const useOrganizationDetails = () => {
       value: 'ALL',
     },
     {
-      label: 'Pending',
-      value: 'PENDING',
-    },
-    {
       label: 'Active',
       value: 'ACTIVE',
     },
     {
-      label: 'Deactivated',
+      label: 'Pending',
+      value: 'PENDING',
+    },
+    {
+      label: 'Closed',
+      value: 'CLOSED',
+    },
+    {
+      label: 'Suspended',
       value: 'DEACTIVATED',
     },
   ];
@@ -215,41 +212,14 @@ export const useOrganizationDetails = () => {
     setStateFilterList(stateFilter);
   };
 
+  // Change Tab
   const onUpdateActiveTab = async (
-    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
+    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED'
   ) => {
-    setActiveTabs(tab);
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: tab === 'ALL' ? '' : tab,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setSites(response?.data?.sites as SitesDataKeyMap[]);
-      setTotalData(response?.data?.count as number);
-      // setNoOfPages(
-      //   Math.ceil(
-      //     response?.data?.count /
-      //       (perPage === 'All' ? response?.data?.count : perPage)
-      //   )
-      // );
-    }
+    setSearchSitePayload({
+      ...searchSitePayload,
+      status: tab,
+    });
   };
 
   // Handle Next Page
@@ -305,7 +275,7 @@ export const useOrganizationDetails = () => {
       to_date: dateFilterTo,
       search: searchSite,
       country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
+      // status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
     };
@@ -348,7 +318,7 @@ export const useOrganizationDetails = () => {
       to_date: value,
       search: searchSite,
       country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
+      // status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
     };
@@ -405,7 +375,7 @@ export const useOrganizationDetails = () => {
         to_date: dateFilterTo,
         search: searchSite,
         country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
+        // status: activeTabs === 'ALL' ? '' : activeTabs,
         hospital_id: hospitalId,
         state,
       };
@@ -428,39 +398,18 @@ export const useOrganizationDetails = () => {
     }
   };
 
+  // On Change Items Per Page
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
+    const perPageItem = typeof value === 'string' ? 1000000 : value;
     setPerPage(value);
+
+    setSearchSitePayload({
+      ...searchSitePayload,
+      endRow: perPageItem,
+      startRow: 0,
+    });
     setResultFrom(1);
-    setCurrentPage(0);
-
-    const params = {
-      page: 0,
-      per_page: value === 'All' ? 0 : value,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(value === 'All' ? response?.data?.count : value);
-      setSites(response?.data?.sites as SitesDataKeyMap[]);
-      setTotalData(response?.data?.count as number);
-      // setNoOfPages(
-      //   Math.ceil(
-      //     response?.data?.count /
-      //       (value === 'All' ? response?.data?.count : value)
-      //   )
-      // );
-    }
+    setResultTo(perPageItem);
   };
 
   const onUpdateSearchSite = async (value: string) => {
@@ -473,7 +422,7 @@ export const useOrganizationDetails = () => {
       to_date: dateFilterTo,
       search: value,
       country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
+      // status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
     };
@@ -509,7 +458,7 @@ export const useOrganizationDetails = () => {
       to_date: dateFilterTo,
       search: searchSite,
       country: value,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
+      // status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state,
     };
@@ -545,7 +494,7 @@ export const useOrganizationDetails = () => {
       to_date: dateFilterTo,
       search: searchSite,
       country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
+      // status: activeTabs === 'ALL' ? '' : activeTabs,
       hospital_id: hospitalId,
       state: value,
     };
@@ -577,7 +526,7 @@ export const useOrganizationDetails = () => {
     // Values
     hospitalId,
     organization,
-    activeTabs,
+    // activeTabs,
     sites,
     perPage,
     currentPage,

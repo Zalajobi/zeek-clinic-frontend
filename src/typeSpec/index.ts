@@ -87,3 +87,33 @@ export interface UserServicePersonalInfoResponseData {
   marital_status: string;
   created_at: string;
 }
+
+// PAYLOADS
+export type SearchSitesRequestPayload = {
+  id?: string | undefined;
+  search?: string | undefined;
+  searchKey?: string | undefined;
+  zipCode?: string | undefined;
+  hospitalId?: string | undefined;
+  country?: string | undefined;
+  state?: string | undefined;
+  city?: string | undefined;
+  name?: string | undefined;
+  email?: string | undefined;
+  range?:
+    | {
+        from: Date | undefined;
+        to: Date | undefined;
+      }
+    | undefined;
+  sortModel?:
+    | {
+        sort: string;
+        colId: string;
+      }
+    | undefined;
+  greaterThan?: number | undefined;
+  status?: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED' | undefined;
+  startRow?: number | undefined;
+  endRow?: number | undefined;
+};

@@ -162,8 +162,8 @@ const OrganizationSite = () => {
           url={'superadmin/site'}
           noOfPages={noOfPages}
           total={sitesTableData?.data?.totalRows ?? 0}
-          from={resultFrom}
-          to={resultTo}
+          from={resultFrom ?? 1}
+          to={resultTo ?? 10}
           onNext={onClickNext}
           onPrevious={onClickPrevious}
           currentPage={currentPage}
