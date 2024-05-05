@@ -16,6 +16,10 @@ import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSite from '@components/modals/CreateSite';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
+import {
+  formatResponseKeyForDropdown,
+  revertDropdownOptionsToResponseKey,
+} from '@util/index';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -40,6 +44,8 @@ const OrganizationSite = () => {
     hospitalDataLoading,
     siteCountData,
     siteCountDataLoading,
+    sitesTableData,
+    sitesTableDataLoading,
 
     // Functions
     onUpdateActiveTab,
@@ -55,16 +61,20 @@ const OrganizationSite = () => {
     deleteSite,
     getSiteDetailsAndEditModalController,
   } = useOrganizationDetails();
-
-  console.log({
-    siteCountData,
-  });
+  const searchTableBy = ['Sort By'];
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
   const rowData = useMemo(
     () => SuperAdminSiteDataRows(sites as SuperadminSiteData[]) ?? [],
     [sites]
   );
+
+  columnData.map((column) => {
+    if (column.key !== 'action') {
+      searchTableBy.push(formatResponseKeyForDropdown(column.key));
+    }
+  });
+  console.log(sitesTableData);
 
   return (
     <SuperadminBaseTemplate>
@@ -123,10 +133,10 @@ const OrganizationSite = () => {
           perPageMenuItems={itemsPerPage}
           perPageChange={onUpdatePerPageItem}
           columns={columnData}
-          data={rowData}
+          data={sitesTableData?.data?.sites ?? []}
           url={'superadmin/site'}
           noOfPages={noOfPages}
-          total={totalData}
+          total={sitesTableData?.data?.totalRows ?? 0}
           from={resultFrom}
           to={resultTo}
           onNext={onClickNext}
@@ -134,6 +144,7 @@ const OrganizationSite = () => {
           currentPage={currentPage}
           deleteRow={deleteSite}
           editRow={getSiteDetailsAndEditModalController}
+          searchKeys={searchTableBy}
         />
       </div>
 

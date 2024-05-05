@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import toast from 'react-hot-toast';
 import { HospitalDetailsData, SuperadminSiteData } from '@typeSpec/superadmin';
-import { axiosGetRequestUserService } from '@lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { customPromiseRequest } from '@lib/requests';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
@@ -18,6 +21,18 @@ export const useOrganizationDetails = () => {
   const [activeTabs, setActiveTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
   >('ALL');
+  const [searchSitePayload, setSearchSitePayload] = useState({
+    hospitalId,
+    search: undefined,
+    status: undefined,
+    country: undefined,
+    state: undefined,
+    from_date: undefined,
+    to_date: undefined,
+    startRow: 0,
+    endRow: 10,
+    sortModel: undefined,
+  });
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [noOfPages, setNoOfPages] = useState(0);
@@ -110,6 +125,23 @@ export const useOrganizationDetails = () => {
       try {
         return await axiosGetRequestUserService(
           `/site/status-counts/organization/${hospitalId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Table Data
+  const { data: sitesTableData, isLoading: sitesTableDataLoading } = useQuery({
+    queryKey: ['getSiteTableData'],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(
+          `/site/search`,
+          searchSitePayload
         );
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -601,6 +633,8 @@ export const useOrganizationDetails = () => {
     hospitalDataLoading,
     siteCountData,
     siteCountDataLoading,
+    sitesTableData,
+    sitesTableDataLoading,
 
     // Functions
     onUpdateActiveTab,

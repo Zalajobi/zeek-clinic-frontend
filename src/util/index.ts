@@ -66,3 +66,17 @@ export const calculateAge = (givenDate: Date): string | number => {
   if (age > 0) return `${age} Year(s)`;
   else return `${ageDate.getUTCMonth()} Month(s)`;
 };
+
+export const formatResponseKeyForDropdown = (key: string) => {
+  return key
+    .split('_')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+export const revertDropdownOptionsToResponseKey = (key: string) => {
+  return key
+    .split(' ')
+    .map((word) => word.charAt(0).toLowerCase() + word.slice(1))
+    .join('_');
+};

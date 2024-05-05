@@ -24,6 +24,7 @@ import { Link } from 'react-router-dom';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
+import { FaUserPlus } from 'react-icons/fa';
 
 interface TableProps {
   columns: any[];
@@ -113,6 +114,7 @@ interface BasicTableProps {
   onPrevious: (value: number) => void;
   deleteRow?: (value: string) => void;
   editRow?: (value: string) => void;
+  searchKeys: string[];
 }
 
 export const BasicTable = ({
@@ -135,11 +137,10 @@ export const BasicTable = ({
   onPrevious,
   deleteRow,
   editRow,
+  searchKeys,
 }: BasicTableProps) => {
-  const keysDropDown = columns.map((item) => {
-    if (item.key !== 'action') {
-      return item.key;
-    }
+  console.log({
+    columnLength: columns.length,
   });
 
   return (
@@ -165,14 +166,12 @@ export const BasicTable = ({
           </div>
 
           <div className="flex flex-col gap-4 items-center md:flex-row">
-            {perPageValue && perPageMenuItems && perPageChange && (
-              <DropdownMenu
-                value={perPageValue}
-                menuItems={keysDropDown}
-                change={perPageChange}
-                buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-32`}
-              />
-            )}
+            <DropdownMenu
+              value={perPageValue}
+              menuItems={searchKeys}
+              change={perPageChange}
+              buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-32`}
+            />
 
             <div className={`w-full md:w-72`}>
               <Input
@@ -186,13 +185,178 @@ export const BasicTable = ({
       </CardHeader>
 
       <CardBody className={`overflow-scroll px-0`}>
-        <table className={`mt-4 w-full min-w-max table-auto text-left`}>
-          <thead>
-            <tr>
+        {data && data?.length < 0 ? (
+          <table className={`mt-4 w-full min-w-max table-auto text-left`}>
+            <thead>
+              <tr>
+                {columns.map((item, index) => (
+                  <th
+                    key={item.key}
+                    className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
+                    <Typography
+                      variant={'small'}
+                      color={'blue-gray'}
+                      className={
+                        'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
+                      }>
+                      {item.value}{' '}
+                      {item.sortable && (
+                        <HiChevronUpDown
+                          strokeWidth={2}
+                          className={'h-4 w-4'}
+                        />
+                      )}
+                    </Typography>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr
+                  key={index}
+                  className={`border-y`}>
+                  {columns.map((column, index) => (
+                    <>
+                      {/*For Status*/}
+                      {column.key === 'status' ? (
+                        <td
+                          key={index}
+                          className={`p-4 border-y text-black font-inter text-sm font-medium mx-1`}>
+                          <div className="w-max">
+                            <Status status={item[column.key]} />
+                          </div>
+                        </td>
+                      ) : // Title or Name
+                      column.key === 'name' || column.key === 'title' ? (
+                        <td key={index}>
+                          <Link
+                            to={`/${url}/${item?.id}`}
+                            className={`text-black decoration-0 pointer-cursor`}>
+                            <div
+                              className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
+                              <Avatar
+                                className={`border-gray-300 border ml-1`}
+                                src={item?.logo ?? item?.avatar}
+                                alt={'Logo'}
+                                size={'sm'}
+                              />
+                              <div className={`flex flex-col w-full`}>
+                                <Typography
+                                  variant={'small'}
+                                  color={'black'}
+                                  className={
+                                    'font-inter font-bold truncate w-full'
+                                  }>
+                                  {item[column.key]}
+                                </Typography>
+
+                                <Typography
+                                  variant={'small'}
+                                  color={'blue-gray'}
+                                  className={
+                                    'font-normal opacity-70 truncate w-full'
+                                  }>
+                                  {item?.email}
+                                </Typography>
+                              </div>
+                            </div>
+                          </Link>
+                        </td>
+                      ) : // Send Email
+                      column.key === 'email' ? (
+                        <td
+                          key={index}
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          <a
+                            target={`_blank`}
+                            href={`mailto:${item[column.key]}`}
+                            className={`hover:cursor-pointer hover:text-gray-400`}>
+                            {item[column.key]}
+                          </a>
+                        </td>
+                      ) : column.key === 'action' ? (
+                        <td key={index}>
+                          <Tooltip content="Action">
+                            <Menu
+                              animate={{
+                                mount: { y: 0 },
+                                unmount: { y: 25 },
+                              }}
+                              allowHover={false}>
+                              <MenuHandler>
+                                <IconButton variant="text">
+                                  <BsThreeDotsVertical className="h-4 w-4" />
+                                </IconButton>
+                              </MenuHandler>
+
+                              <MenuList className={`min-w-[150px] p-2`}>
+                                {editRow && (
+                                  <MenuItem
+                                    onClick={() => editRow(item.id)}
+                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}>
+                                    <IconButton
+                                      variant="text"
+                                      className={
+                                        'hover:bg-transparent active:bg-transparent'
+                                      }>
+                                      <HiPencil
+                                        className="h-4 w-4"
+                                        color={`blue`}
+                                        size={15}
+                                      />
+                                    </IconButton>{' '}
+                                    Edit
+                                  </MenuItem>
+                                )}
+
+                                {deleteRow && (
+                                  <MenuItem
+                                    onClick={() => deleteRow(item.id)}
+                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-red-900`}>
+                                    <IconButton
+                                      variant="text"
+                                      className={
+                                        'hover:bg-transparent active:bg-transparent'
+                                      }>
+                                      <MdDelete
+                                        className="h-4 w-4"
+                                        color={`red`}
+                                        size={15}
+                                      />
+                                    </IconButton>{' '}
+                                    Delete
+                                  </MenuItem>
+                                )}
+                              </MenuList>
+                            </Menu>
+                          </Tooltip>
+                        </td>
+                      ) : (
+                        <td
+                          key={index}
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          {item[column.key]}
+                        </td>
+                      )}
+                    </>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className={`flex flex-col w-full`}>
+            <div
+              className={`overflow-x-scroll grid`}
+              style={{
+                gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`,
+              }}>
               {columns.map((item, index) => (
-                <th
-                  key={item.key}
-                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
+                <div
+                  key={`${item.key}${index}`}
+                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}
+                  onClick={() => console.log(item.key)}>
                   <Typography
                     variant={'small'}
                     color={'blue-gray'}
@@ -207,144 +371,32 @@ export const BasicTable = ({
                       />
                     )}
                   </Typography>
-                </th>
+                </div>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr
-                key={index}
-                className={`border-y`}>
-                {columns.map((column, index) => (
-                  <>
-                    {/*For Status*/}
-                    {column.key === 'status' ? (
-                      <td
-                        key={index}
-                        className={`p-4 border-y text-black font-inter text-sm font-medium mx-1`}>
-                        <div className="w-max">
-                          <Status status={item[column.key]} />
-                        </div>
-                      </td>
-                    ) : // Title or Name
-                    column.key === 'name' || column.key === 'title' ? (
-                      <td key={index}>
-                        <Link
-                          to={`/${url}/${item?.id}`}
-                          className={`text-black decoration-0 pointer-cursor`}>
-                          <div
-                            className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
-                            <Avatar
-                              className={`border-gray-300 border ml-1`}
-                              src={item?.logo ?? item?.avatar}
-                              alt={'Logo'}
-                              size={'sm'}
-                            />
-                            <div className={`flex flex-col w-full`}>
-                              <Typography
-                                variant={'small'}
-                                color={'black'}
-                                className={
-                                  'font-inter font-bold truncate w-full'
-                                }>
-                                {item[column.key]}
-                              </Typography>
+            </div>
 
-                              <Typography
-                                variant={'small'}
-                                color={'blue-gray'}
-                                className={
-                                  'font-normal opacity-70 truncate w-full'
-                                }>
-                                {item?.email}
-                              </Typography>
-                            </div>
-                          </div>
-                        </Link>
-                      </td>
-                    ) : // Send Email
-                    column.key === 'email' ? (
-                      <td
-                        key={index}
-                        className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
-                        <a
-                          target={`_blank`}
-                          href={`mailto:${item[column.key]}`}
-                          className={`hover:cursor-pointer hover:text-gray-400`}>
-                          {item[column.key]}
-                        </a>
-                      </td>
-                    ) : column.key === 'action' ? (
-                      <td key={index}>
-                        <Tooltip content="Action">
-                          <Menu
-                            animate={{
-                              mount: { y: 0 },
-                              unmount: { y: 25 },
-                            }}
-                            allowHover={false}>
-                            <MenuHandler>
-                              <IconButton variant="text">
-                                <BsThreeDotsVertical className="h-4 w-4" />
-                              </IconButton>
-                            </MenuHandler>
+            <Fragment>
+              <div
+                className={`flex items-center justify-center w-full p-4 lg:p-8`}>
+                <div className={`flex flex-col`}>
+                  <Typography
+                    variant={'h6'}
+                    color={'gray'}
+                    className={'font-normal text-center mb-4'}>
+                    No Sites
+                  </Typography>
 
-                            <MenuList className={`min-w-[150px] p-2`}>
-                              {editRow && (
-                                <MenuItem
-                                  onClick={() => editRow(item.id)}
-                                  className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}>
-                                  <IconButton
-                                    variant="text"
-                                    className={
-                                      'hover:bg-transparent active:bg-transparent'
-                                    }>
-                                    <HiPencil
-                                      className="h-4 w-4"
-                                      color={`blue`}
-                                      size={15}
-                                    />
-                                  </IconButton>{' '}
-                                  Edit
-                                </MenuItem>
-                              )}
-
-                              {deleteRow && (
-                                <MenuItem
-                                  onClick={() => deleteRow(item.id)}
-                                  className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-red-900`}>
-                                  <IconButton
-                                    variant="text"
-                                    className={
-                                      'hover:bg-transparent active:bg-transparent'
-                                    }>
-                                    <MdDelete
-                                      className="h-4 w-4"
-                                      color={`red`}
-                                      size={15}
-                                    />
-                                  </IconButton>{' '}
-                                  Delete
-                                </MenuItem>
-                              )}
-                            </MenuList>
-                          </Menu>
-                        </Tooltip>
-                      </td>
-                    ) : (
-                      <td
-                        key={index}
-                        className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
-                        {item[column.key]}
-                      </td>
-                    )}
-                  </>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <Button
+                    className={`rounded-full flex`}
+                    ripple={true}
+                    onClick={() => console.log('Create Site')}>
+                    <FaUserPlus className={`w-4 h-4 mr-2`} /> Add New Site
+                  </Button>
+                </div>
+              </div>
+            </Fragment>
+          </div>
+        )}
       </CardBody>
 
       <CardFooter
