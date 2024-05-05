@@ -9,7 +9,7 @@ import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const useCreateSite = (reloadPage: () => void) => {
+export const useCreateSite = (handleOpen: () => void) => {
   const queryClient = useQueryClient();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
@@ -22,10 +22,19 @@ export const useCreateSite = (reloadPage: () => void) => {
   const [country, setCountry] = useState('');
 
   // Create Site
-  const { mutate: updateContactMutate } = useMutation(
+  const { mutate: createSiteMutation } = useMutation(
     async (data: any) => {
       try {
-        return await axiosPostRequestUserService(`/contact/update`, data);
+        const siteData = {
+          ...data,
+          phone: `${data.phone}`,
+          country,
+          logo,
+          country_code: countryCode,
+          hospital_id: hospitalId,
+        };
+
+        return await axiosPostRequestUserService(`/site/create`, siteData);
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           toast.error(error.response.data.error?.message);
@@ -34,13 +43,13 @@ export const useCreateSite = (reloadPage: () => void) => {
     },
     {
       onMutate: () => {
-        toast.loading('Updating Contact', { duration: 3 });
+        toast.loading('Creating Site', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) toast.success(result?.message);
         else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('contactsData');
+        queryClient.resetQueries('getSiteTableData');
       },
     }
   );
@@ -81,29 +90,8 @@ export const useCreateSite = (reloadPage: () => void) => {
   };
 
   const createNewSite = async (data: CreateSiteInput) => {
-    // const siteData = {
-    //   ...data,
-    //   totalSites: totalSites,
-    //   phone: `${data.phone}`,
-    //   country,
-    //   logo,
-    //   country_code: countryCode,
-    //   hospital_id: hospitalId,
-    // };
-    //
-    // const response = await axiosPostRequestUserService(
-    //   '/site/create',
-    //   siteData
-    // );
-    //
-    // if (response.success) {
-    //   toast.success(response.message);
-    //   reloadPage();
-    // } else toast.error(response.message);
-
-    console.log({
-      siteData: data,
-    });
+    createSiteMutation(data);
+    handleOpen();
   };
 
   return {
