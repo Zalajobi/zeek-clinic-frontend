@@ -90,21 +90,17 @@ const Table = ({ columns, data, containerClass = '' }: TableProps) => {
 };
 
 interface BasicTableProps {
-  cardClassName?: string;
   cardHeadFloat?: boolean;
   cardHeadShadow?: boolean;
-  cardHeadClassName?: string;
   onSelectTab: (value: any) => void;
   tabItems: {
     label: string;
     value: string;
     icon?: any;
   }[];
-  perPageValue?: string | number;
-  perPageMenuItems?: any[];
-  perPageChange?: (item: any) => void;
-  perPageBtnClass?: string;
-  cardBodyClasName?: string;
+  perPageValue: string | number;
+  perPageMenuItems: any[];
+  perPageChange: (item: any) => void;
   columns: any[];
   data: any[];
   url: string;
@@ -115,23 +111,18 @@ interface BasicTableProps {
   currentPage: number;
   onNext: (value: number) => void;
   onPrevious: (value: number) => void;
-  enterPageNumber?: (value: number | string) => void;
   deleteRow?: (value: string) => void;
   editRow?: (value: string) => void;
 }
 
 export const BasicTable = ({
-  cardClassName,
   cardHeadFloat = false,
   cardHeadShadow = false,
-  cardHeadClassName,
   onSelectTab,
   tabItems,
   perPageValue,
   perPageMenuItems,
   perPageChange,
-  perPageBtnClass,
-  cardBodyClasName,
   columns,
   data,
   url,
@@ -142,16 +133,21 @@ export const BasicTable = ({
   currentPage,
   onNext,
   onPrevious,
-  enterPageNumber,
   deleteRow,
   editRow,
 }: BasicTableProps) => {
+  const keysDropDown = columns.map((item) => {
+    if (item.key !== 'action') {
+      return item.key;
+    }
+  });
+
   return (
-    <Card className={`w-full h-auto ${cardClassName}`}>
+    <Card className={`w-full h-auto`}>
       <CardHeader
         floated={cardHeadFloat}
         shadow={cardHeadShadow}
-        className={`rounded-none ${cardHeadClassName}`}>
+        className={`rounded-none`}>
         <div
           className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
           <div className={`flex gap-4 items-center justify-center`}>
@@ -160,32 +156,36 @@ export const BasicTable = ({
               tabItems={tabItems}
             />
 
+            <DropdownMenu
+              value={perPageValue}
+              menuItems={perPageMenuItems}
+              change={perPageChange}
+              buttonClass={`border-gray-100 w-44 h-[42px]`}
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 items-center md:flex-row">
             {perPageValue && perPageMenuItems && perPageChange && (
               <DropdownMenu
                 value={perPageValue}
-                menuItems={perPageMenuItems}
+                menuItems={keysDropDown}
                 change={perPageChange}
-                buttonClass={`border-gray-100 w-44 h-[42px] ${
-                  perPageBtnClass ? perPageBtnClass : ''
-                }`}
+                buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-32`}
               />
             )}
-          </div>
 
-          <div className="w-full md:w-72">
-            <Input
-              label="Search"
-              icon={<FaMagnifyingGlass className="h-5 w-5" />}
-              className={`border-t-gray-200`}
-            />
+            <div className={`w-full md:w-72`}>
+              <Input
+                label="Search..."
+                icon={<FaMagnifyingGlass className="h-5 w-5" />}
+                className={`border-t-[aliceblue]`}
+              />
+            </div>
           </div>
         </div>
       </CardHeader>
 
-      <CardBody
-        className={`overflow-scroll px-0 ${
-          cardBodyClasName ? cardBodyClasName : ''
-        }`}>
+      <CardBody className={`overflow-scroll px-0`}>
         <table className={`mt-4 w-full min-w-max table-auto text-left`}>
           <thead>
             <tr>

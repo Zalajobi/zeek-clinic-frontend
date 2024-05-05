@@ -1,15 +1,27 @@
 import { Fragment } from 'react';
 import moment from 'moment/moment';
-import { HospitalOrganizationData } from '@typeSpec/superadmin';
+import {
+  HospitalDetailsData,
+  HospitalSiteCountData,
+} from '@typeSpec/superadmin';
 import Status from '@components/global/Status';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import { Spinner } from '@material-tailwind/react';
 
 interface HospitalDetailsProps {
-  data: HospitalOrganizationData | null;
+  data: HospitalDetailsData | null;
+  hospitalDataLoading: boolean;
+  siteData: HospitalSiteCountData | null;
+  siteDataLoading: boolean;
 }
 
-const HospitalDetails = ({ data }: HospitalDetailsProps) => {
+const HospitalDetails = ({
+  data,
+  hospitalDataLoading,
+  siteData,
+  siteDataLoading,
+}: HospitalDetailsProps) => {
   return (
     <Fragment>
       <CustomTransparentCard
@@ -22,12 +34,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.name as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.name ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -38,12 +58,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.email as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.email ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -54,12 +82,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.phone as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.phone ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -70,12 +106,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={moment(data?.created_at).format('MMM DD. YYYY')}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={moment(data?.created_at).format('MMM DD. YYYY')}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -86,12 +130,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.country as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.country ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -102,12 +154,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.state as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.state ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -118,12 +178,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.city as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.city ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -134,12 +202,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.address as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.address ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -150,12 +226,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.zip_code as string}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={data?.zip_code ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -166,12 +250,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.site_count as number}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {siteDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={siteData?.totalSites ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -182,12 +274,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.activeSites as number}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {siteDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={siteData?.activeSites ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -198,12 +298,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.pendingSites as number}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {siteDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={siteData?.pendingSites ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -214,12 +322,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.closedSites as number}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {siteDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={siteData?.closedSites ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -230,12 +346,20 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Typography
-            text={data?.deactivatedSites as number}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-          />
+          {siteDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <>
+              <Typography
+                text={siteData?.deactivatedSites ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </>
+          )}
         </div>
 
         <div className={`flex flex-row items-center py-3`}>
@@ -246,10 +370,15 @@ const HospitalDetails = ({ data }: HospitalDetailsProps) => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          <Status
-            className={`ml-3`}
-            status={data?.status ?? '--'}
-          />
+          {hospitalDataLoading ? (
+            <>
+              <Spinner className="h-4 w-4 ml-3" />
+            </>
+          ) : (
+            <div className={`ml-3`}>
+              <Status status={data?.status ?? '--'} />
+            </div>
+          )}
         </div>
       </CustomTransparentCard>
     </Fragment>

@@ -54,7 +54,7 @@ export interface SiteRowData {
   action: ReactNode;
 }
 
-export interface HospitalOrganizationData {
+export interface HospitalDetailsData {
   id: string;
   name: string;
   email: string;
@@ -70,10 +70,14 @@ export interface HospitalOrganizationData {
   country_code: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface HospitalSiteCountData {
   activeSites: number;
   closedSites: number;
-  pendingSites: number;
   deactivatedSites: number;
+  pendingSites: number;
+  totalSites: number;
 }
 
 export interface SuperadminSiteData {

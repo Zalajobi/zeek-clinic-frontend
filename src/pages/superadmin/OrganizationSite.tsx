@@ -36,6 +36,10 @@ const OrganizationSite = () => {
     dateFilterFrom,
     dateFilterTo,
     tabData,
+    hospitalData,
+    hospitalDataLoading,
+    siteCountData,
+    siteCountDataLoading,
 
     // Functions
     onUpdateActiveTab,
@@ -43,7 +47,6 @@ const OrganizationSite = () => {
     onClickPrevious,
     onUpdateSelectFrom,
     onUpdateSelectTo,
-    onEnterPageNumber,
     onUpdatePerPageItem,
     onUpdateSearchSite,
     onUpdateFilterByCountry,
@@ -52,6 +55,10 @@ const OrganizationSite = () => {
     deleteSite,
     getSiteDetailsAndEditModalController,
   } = useOrganizationDetails();
+
+  console.log({
+    siteCountData,
+  });
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
   const rowData = useMemo(
@@ -65,7 +72,7 @@ const OrganizationSite = () => {
         <div className={`flex flex-row gap-4`}>
           <div className={`mr-auto`}>
             <Typography
-              text={`Welcome To, ${organization?.name}`}
+              text={`Welcome To, ${hospitalData?.data?.name}`}
               size="4xl"
               weight={800}
               className="mb-8"
@@ -100,7 +107,12 @@ const OrganizationSite = () => {
           </div>
         </div>
 
-        <HospitalDetails data={organization ? organization : null} />
+        <HospitalDetails
+          data={hospitalData?.data ? hospitalData?.data : null}
+          siteData={siteCountData?.data ? siteCountData?.data : null}
+          siteDataLoading={siteCountDataLoading}
+          hospitalDataLoading={hospitalDataLoading}
+        />
 
         <HospitalRoutes />
 
@@ -120,7 +132,6 @@ const OrganizationSite = () => {
           onNext={onClickNext}
           onPrevious={onClickPrevious}
           currentPage={currentPage}
-          enterPageNumber={onEnterPageNumber}
           deleteRow={deleteSite}
           editRow={getSiteDetailsAndEditModalController}
         />

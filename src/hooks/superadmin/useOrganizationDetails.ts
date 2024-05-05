@@ -2,19 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import toast from 'react-hot-toast';
-import {
-  HospitalOrganizationData,
-  SuperadminSiteData,
-} from '@typeSpec/superadmin';
+import { HospitalDetailsData, SuperadminSiteData } from '@typeSpec/superadmin';
 import { axiosGetRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { customPromiseRequest } from '@lib/requests';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+import axios from 'axios';
 
 export const useOrganizationDetails = () => {
   const { hospitalId } = useParams();
-  const [organization, setOrganization] =
-    useState<HospitalOrganizationData | null>(null);
+  const [organization, setOrganization] = useState<HospitalDetailsData | null>(
+    null
+  );
   const [sites, setSites] = useState<SuperadminSiteData[] | null>(null);
   const [activeTabs, setActiveTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
@@ -61,17 +60,15 @@ export const useOrganizationDetails = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const [hospital, countryStates] = await customPromiseRequest([
-        axiosGetRequestUserService(`/hospital/details/${hospitalId}`),
-
+      const [countryStates] = await customPromiseRequest([
         axiosGetRequestUserService(`/site/${hospitalId}/locations/distinct`),
       ]);
 
-      if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
-        setHospitalData(hospital?.value as AccountServiceApiResponse);
-      } else {
-        toast.error('Something went wrong getting hospital list');
-      }
+      // if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
+      //   setHospitalData(hospital?.value as AccountServiceApiResponse);
+      // } else {
+      //   toast.error('Something went wrong getting hospital list');
+      // }
 
       if (
         countryStates.status === 'fulfilled' &&
@@ -90,8 +87,40 @@ export const useOrganizationDetails = () => {
     });
   }, [hospitalId, refreshData]);
 
+  // Get Hospital Details
+  const { data: hospitalData, isLoading: hospitalDataLoading } = useQuery({
+    queryKey: ['getHospitalDetails'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/hospital/details/${hospitalId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Site Count Data
+  const { data: siteCountData, isLoading: siteCountDataLoading } = useQuery({
+    queryKey: ['getSiteCountData'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/site/status-counts/organization/${hospitalId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
   const setHospitalData = (responseData: AccountServiceApiResponse) => {
-    setOrganization(responseData.data.hospital as HospitalOrganizationData);
+    setOrganization(responseData.data.hospital as HospitalDetailsData);
     setSites(responseData?.data?.sites);
     setNoOfPages(
       Math.ceil(
@@ -568,6 +597,10 @@ export const useOrganizationDetails = () => {
     dateFilterFrom,
     dateFilterTo,
     tabData,
+    hospitalData,
+    hospitalDataLoading,
+    siteCountData,
+    siteCountDataLoading,
 
     // Functions
     onUpdateActiveTab,
