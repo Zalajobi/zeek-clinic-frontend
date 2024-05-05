@@ -80,7 +80,7 @@ export interface HospitalSiteCountData {
   totalSites: number;
 }
 
-export interface SuperadminSiteData {
+export interface SitesDataKeyMap {
   id: string;
   address: string;
   hospital_id: string;

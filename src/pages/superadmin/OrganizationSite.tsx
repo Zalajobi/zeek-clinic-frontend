@@ -9,7 +9,7 @@ import {
   SuperAdminSiteDataColumns,
   SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
-import { SuperadminSiteData } from '@typeSpec/superadmin';
+import { SitesDataKeyMap } from '@typeSpec/superadmin';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
@@ -20,17 +20,25 @@ import {
   formatResponseKeyForDropdown,
   revertDropdownOptionsToResponseKey,
 } from '@util/index';
+import { useDispatch } from 'react-redux';
+import {
+  setNoOfPages,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
 
 const OrganizationSite = () => {
-  const itemsPerPage = ['All', 10, 20, 50, 100];
+  const itemsPerPage = ['All', 10, 20, 50, 100],
+    searchTableBy = ['Sort By'];
+  const dispatch = useDispatch();
+  let noOfPages = 0;
 
   const {
     // Values
     organization,
-    sites,
+    // sites,
     perPage,
     currentPage,
-    noOfPages,
+    // noOfPages,
     resultFrom,
     resultTo,
     totalData,
@@ -61,12 +69,30 @@ const OrganizationSite = () => {
     deleteSite,
     getSiteDetailsAndEditModalController,
   } = useOrganizationDetails();
-  const searchTableBy = ['Sort By'];
+
+  if (!sitesTableDataLoading) {
+    noOfPages =
+      typeof perPage === 'string'
+        ? 1
+        : Math.ceil(sitesTableData?.data?.totalRows / perPage);
+    dispatch(
+      setNoOfPages(
+        Math.ceil(
+          sitesTableData?.data?.totalRows /
+            (perPage === 'All' ? sitesTableData?.data?.totalRows : perPage)
+        )
+      )
+    );
+    dispatch(setTotalDataCount(sitesTableData?.data?.totalRows));
+  }
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
   const rowData = useMemo(
-    () => SuperAdminSiteDataRows(sites as SuperadminSiteData[]) ?? [],
-    [sites]
+    () =>
+      SuperAdminSiteDataRows(
+        sitesTableData?.data?.sites as SitesDataKeyMap[]
+      ) ?? [],
+    [sitesTableData?.data?.sites]
   );
 
   columnData.map((column) => {
@@ -74,7 +100,6 @@ const OrganizationSite = () => {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });
-  console.log(sitesTableData);
 
   return (
     <SuperadminBaseTemplate>
@@ -133,7 +158,7 @@ const OrganizationSite = () => {
           perPageMenuItems={itemsPerPage}
           perPageChange={onUpdatePerPageItem}
           columns={columnData}
-          data={sitesTableData?.data?.sites ?? []}
+          data={rowData ?? []}
           url={'superadmin/site'}
           noOfPages={noOfPages}
           total={sitesTableData?.data?.totalRows ?? 0}
@@ -145,6 +170,7 @@ const OrganizationSite = () => {
           deleteRow={deleteSite}
           editRow={getSiteDetailsAndEditModalController}
           searchKeys={searchTableBy}
+          dataLoading={sitesTableDataLoading}
         />
       </div>
 

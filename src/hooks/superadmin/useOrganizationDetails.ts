@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import toast from 'react-hot-toast';
-import { HospitalDetailsData, SuperadminSiteData } from '@typeSpec/superadmin';
+import { HospitalDetailsData, SitesDataKeyMap } from '@typeSpec/superadmin';
 import {
   axiosGetRequestUserService,
   axiosPostRequestUserService,
@@ -11,13 +11,18 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import { customPromiseRequest } from '@lib/requests';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export const useOrganizationDetails = () => {
+  const { totalDataCount, noOfPages } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
+
   const { hospitalId } = useParams();
   const [organization, setOrganization] = useState<HospitalDetailsData | null>(
     null
   );
-  const [sites, setSites] = useState<SuperadminSiteData[] | null>(null);
+  const [sites, setSites] = useState<SitesDataKeyMap[] | null>(null);
   const [activeTabs, setActiveTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
   >('ALL');
@@ -35,7 +40,7 @@ export const useOrganizationDetails = () => {
   });
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [noOfPages, setNoOfPages] = useState(0);
+  // const [noOfPages, setNoOfPages] = useState(0);
   const [resultFrom, setResultFrom] = useState(0);
   const [resultTo, setResultTo] = useState(0);
   const [totalData, setTotalData] = useState(0);
@@ -136,7 +141,7 @@ export const useOrganizationDetails = () => {
 
   // Table Data
   const { data: sitesTableData, isLoading: sitesTableDataLoading } = useQuery({
-    queryKey: ['getSiteTableData'],
+    queryKey: ['getSiteTableData', searchSitePayload],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(
@@ -154,11 +159,11 @@ export const useOrganizationDetails = () => {
   const setHospitalData = (responseData: AccountServiceApiResponse) => {
     setOrganization(responseData.data.hospital as HospitalDetailsData);
     setSites(responseData?.data?.sites);
-    setNoOfPages(
-      Math.ceil(
-        responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
-      )
-    );
+    // setNoOfPages(
+    //   Math.ceil(
+    //     responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
+    //   )
+    // );
     setTotalData(responseData.data.tableData.sites);
     setResultFrom(responseData?.data?.sites.length <= 0 ? 0 : 1);
     setResultTo(
@@ -236,57 +241,43 @@ export const useOrganizationDetails = () => {
 
     if (response.success) {
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 
+  // Handle Next Page
   const onClickNext = async (value: number) => {
+    console.log({
+      // resultFrom,
+      noOfPages,
+      totalDataCount,
+      // resultTo,
+    });
+
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
-      setCurrentPage(value);
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchSitePayload({
+        ...searchSitePayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
 
+      setCurrentPage(value);
       setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
       setResultTo(
         value + 1 === noOfPages
-          ? totalData
+          ? totalDataCount
           : value * (perPage !== 'All' ? perPage : 0) +
               (perPage !== 'All' ? perPage : 0)
       );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: dateFilterFrom,
-        to_date: dateFilterTo,
-        search: searchSite,
-        country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId,
-        state,
-      };
-
-      const response = await axiosGetRequestUserService(
-        '/site/organization/sites/filters',
-        params
-      );
-
-      if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
-        setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
     }
   };
 
@@ -321,14 +312,14 @@ export const useOrganizationDetails = () => {
       );
 
       if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
+        setSites(response?.data?.sites as SitesDataKeyMap[]);
         setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
+        // setNoOfPages(
+        //   Math.ceil(
+        //     response?.data?.count /
+        //       (perPage === 'All' ? response?.data?.count : perPage)
+        //   )
+        // );
       }
     }
   };
@@ -365,14 +356,14 @@ export const useOrganizationDetails = () => {
           : currentPage * (perPage !== 'All' ? perPage : 0) +
             (perPage !== 'All' ? perPage : 0)
       );
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 
@@ -408,14 +399,14 @@ export const useOrganizationDetails = () => {
           : currentPage * (perPage !== 'All' ? perPage : 0) +
             (perPage !== 'All' ? perPage : 0)
       );
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 
@@ -453,14 +444,14 @@ export const useOrganizationDetails = () => {
       );
 
       if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
+        setSites(response?.data?.sites as SitesDataKeyMap[]);
         setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
+        // setNoOfPages(
+        //   Math.ceil(
+        //     response?.data?.count /
+        //       (perPage === 'All' ? response?.data?.count : perPage)
+        //   )
+        // );
       }
     }
   };
@@ -489,14 +480,14 @@ export const useOrganizationDetails = () => {
 
     if (response.success) {
       setResultTo(value === 'All' ? response?.data?.count : value);
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (value === 'All' ? response?.data?.count : value)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (value === 'All' ? response?.data?.count : value)
+      //   )
+      // );
     }
   };
 
@@ -524,15 +515,15 @@ export const useOrganizationDetails = () => {
     );
 
     if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 
@@ -560,15 +551,15 @@ export const useOrganizationDetails = () => {
     );
 
     if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 
@@ -596,15 +587,15 @@ export const useOrganizationDetails = () => {
     );
 
     if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
+      setSites(response?.data?.sites as SitesDataKeyMap[]);
       setTotalData(response?.data?.count as number);
       setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+      // setNoOfPages(
+      //   Math.ceil(
+      //     response?.data?.count /
+      //       (perPage === 'All' ? response?.data?.count : perPage)
+      //   )
+      // );
     }
   };
 

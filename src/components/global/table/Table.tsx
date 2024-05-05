@@ -13,6 +13,7 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
+  Spinner,
   Tooltip,
   Typography,
 } from '@material-tailwind/react';
@@ -115,6 +116,7 @@ interface BasicTableProps {
   deleteRow?: (value: string) => void;
   editRow?: (value: string) => void;
   searchKeys: string[];
+  dataLoading: boolean;
 }
 
 export const BasicTable = ({
@@ -138,11 +140,8 @@ export const BasicTable = ({
   deleteRow,
   editRow,
   searchKeys,
+  dataLoading,
 }: BasicTableProps) => {
-  console.log({
-    columnLength: columns.length,
-  });
-
   return (
     <Card className={`w-full h-auto`}>
       <CardHeader
@@ -185,7 +184,7 @@ export const BasicTable = ({
       </CardHeader>
 
       <CardBody className={`overflow-scroll px-0`}>
-        {data && data?.length < 0 ? (
+        {data && data?.length > 0 ? (
           <table className={`mt-4 w-full min-w-max table-auto text-left`}>
             <thead>
               <tr>
@@ -377,22 +376,36 @@ export const BasicTable = ({
 
             <Fragment>
               <div
-                className={`flex items-center justify-center w-full p-4 lg:p-8`}>
-                <div className={`flex flex-col`}>
-                  <Typography
-                    variant={'h6'}
-                    color={'gray'}
-                    className={'font-normal text-center mb-4'}>
-                    No Sites
-                  </Typography>
+                className={`flex items-center justify-center w-full p-4 h-80 lg:p-8`}>
+                {dataLoading ? (
+                  <div
+                    className={`flex flex-col items-center justify-center gap-4`}>
+                    <Spinner className="h-16 w-16 text-gray-900/50" />
 
-                  <Button
-                    className={`rounded-full flex`}
-                    ripple={true}
-                    onClick={() => console.log('Create Site')}>
-                    <FaUserPlus className={`w-4 h-4 mr-2`} /> Add New Site
-                  </Button>
-                </div>
+                    <Typography
+                      variant={'h4'}
+                      color={'gray'}
+                      className={`font-bold text-center`}>
+                      Loading...
+                    </Typography>
+                  </div>
+                ) : (
+                  <div className={`flex flex-col`}>
+                    <Typography
+                      variant={'h6'}
+                      color={'gray'}
+                      className={'font-normal text-center mb-4'}>
+                      No Sites
+                    </Typography>
+
+                    <Button
+                      className={`rounded-full flex`}
+                      ripple={true}
+                      onClick={() => console.log('Create Site')}>
+                      <FaUserPlus className={`w-4 h-4 mr-2`} /> Add New Site
+                    </Button>
+                  </div>
+                )}
               </div>
             </Fragment>
           </div>

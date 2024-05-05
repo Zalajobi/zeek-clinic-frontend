@@ -7,7 +7,7 @@ import {
   GetHospitalResponseData,
   HospitalRowData,
   SiteRowData,
-  SuperadminSiteData,
+  SitesDataKeyMap,
 } from '@typeSpec/superadmin';
 import Status from '@components/global/Status';
 
@@ -465,7 +465,7 @@ export const SuperAdminSiteDataColumns = () => {
   ];
 };
 
-export const SuperAdminSiteDataRows = (data: SuperadminSiteData[]) => {
+export const SuperAdminSiteDataRows = (data: SitesDataKeyMap[]) => {
   const rowItems: any[] = [];
 
   data?.map((item) => {
@@ -490,12 +490,12 @@ export const SuperAdminSiteDataRows = (data: SuperadminSiteData[]) => {
 };
 
 export const SuperadminSiteDataRow = (
-  data: SuperadminSiteData[]
+  data: SitesDataKeyMap[]
   // onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void
 ) => {
   const rowItems: SiteRowData[] = [];
 
-  data?.map((item: SuperadminSiteData, idx: number) => {
+  data?.map((item: SitesDataKeyMap, idx: number) => {
     rowItems.push({
       checkbox: (
         <th
