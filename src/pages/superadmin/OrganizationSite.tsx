@@ -16,7 +16,6 @@ import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSite from '@components/modals/CreateSite';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
-import { CustomTabSelector } from '@components/global/MenuTabs';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100];
@@ -50,6 +49,8 @@ const OrganizationSite = () => {
     onUpdateFilterByCountry,
     onUpdateFilterByState,
     onUpdateDataRefresh,
+    deleteSite,
+    getSiteDetailsAndEditModalController,
   } = useOrganizationDetails();
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
@@ -103,15 +104,6 @@ const OrganizationSite = () => {
 
         <HospitalRoutes />
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <CustomTabSelector
-              onClick={onUpdateActiveTab}
-              tabItems={tabData}
-            />
-          </div>
-        </div>
-
         <BasicTable
           tabItems={tabData}
           onSelectTab={onUpdateActiveTab}
@@ -129,6 +121,8 @@ const OrganizationSite = () => {
           onPrevious={onClickPrevious}
           currentPage={currentPage}
           enterPageNumber={onEnterPageNumber}
+          deleteRow={deleteSite}
+          editRow={getSiteDetailsAndEditModalController}
         />
       </div>
 

@@ -9,14 +9,21 @@ import {
   CardHeader,
   IconButton,
   Input,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Tooltip,
   Typography,
 } from '@material-tailwind/react';
 import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { HiChevronUpDown } from 'react-icons/hi2';
+import { HiChevronUpDown, HiPencil } from 'react-icons/hi2';
 import Status from '@components/global/Status';
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { MdDelete } from 'react-icons/md';
 
 interface TableProps {
   columns: any[];
@@ -109,6 +116,8 @@ interface BasicTableProps {
   onNext: (value: number) => void;
   onPrevious: (value: number) => void;
   enterPageNumber?: (value: number | string) => void;
+  deleteRow?: (value: string) => void;
+  editRow?: (value: string) => void;
 }
 
 export const BasicTable = ({
@@ -134,6 +143,8 @@ export const BasicTable = ({
   onNext,
   onPrevious,
   enterPageNumber,
+  deleteRow,
+  editRow,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto ${cardClassName}`}>
@@ -263,6 +274,63 @@ export const BasicTable = ({
                           className={`hover:cursor-pointer hover:text-gray-400`}>
                           {item[column.key]}
                         </a>
+                      </td>
+                    ) : column.key === 'action' ? (
+                      <td key={index}>
+                        <Tooltip content="Action">
+                          <Menu
+                            animate={{
+                              mount: { y: 0 },
+                              unmount: { y: 25 },
+                            }}
+                            allowHover={false}>
+                            <MenuHandler>
+                              <IconButton variant="text">
+                                <BsThreeDotsVertical className="h-4 w-4" />
+                              </IconButton>
+                            </MenuHandler>
+
+                            <MenuList className={`min-w-[150px] p-2`}>
+                              {editRow && (
+                                <MenuItem
+                                  onClick={() => editRow(item.id)}
+                                  className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}>
+                                  <IconButton
+                                    variant="text"
+                                    className={
+                                      'hover:bg-transparent active:bg-transparent'
+                                    }>
+                                    <HiPencil
+                                      className="h-4 w-4"
+                                      color={`blue`}
+                                      size={15}
+                                    />
+                                  </IconButton>{' '}
+                                  Edit
+                                </MenuItem>
+                              )}
+
+                              {deleteRow && (
+                                <MenuItem
+                                  onClick={() => deleteRow(item.id)}
+                                  className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-red-900`}>
+                                  <IconButton
+                                    variant="text"
+                                    className={
+                                      'hover:bg-transparent active:bg-transparent'
+                                    }>
+                                    <MdDelete
+                                      className="h-4 w-4"
+                                      color={`red`}
+                                      size={15}
+                                    />
+                                  </IconButton>{' '}
+                                  Delete
+                                </MenuItem>
+                              )}
+                            </MenuList>
+                          </Menu>
+                        </Tooltip>
                       </td>
                     ) : (
                       <td

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import toast from 'react-hot-toast';
 import {
   HospitalOrganizationData,
@@ -36,6 +37,8 @@ export const useOrganizationDetails = () => {
     SelectInputFieldProps[]
   >([]);
   const [refreshData, setRefreshData] = useState(false);
+
+  const [editSiteModalController, setEditSiteModalController] = useState(false);
 
   const tabData = [
     {
@@ -105,6 +108,17 @@ export const useOrganizationDetails = () => {
         : currentPage * (perPage !== 'All' ? perPage : 0) +
           (perPage !== 'All' ? perPage : 0)
     );
+  };
+
+  // Request to Delete Site
+  const deleteSite = async (siteId: string) => {
+    console.log('Deleting SIte');
+  };
+
+  // Get Site Details for edit
+  const getSiteDetailsAndEditModalController = async (siteId: string) => {
+    setEditSiteModalController(!editSiteModalController);
+    console.log('Edit Site');
   };
 
   const setCountryAndStateSitesData = (
@@ -567,5 +581,7 @@ export const useOrganizationDetails = () => {
     onUpdateFilterByCountry,
     onUpdateFilterByState,
     onUpdateDataRefresh,
+    deleteSite,
+    getSiteDetailsAndEditModalController,
   };
 };

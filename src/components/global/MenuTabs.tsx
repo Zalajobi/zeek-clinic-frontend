@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactNode, useState } from 'react';
+import { createElement, Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -33,7 +33,6 @@ interface CustomTabSelectorProps {
     icon?: any;
   }[];
   onClick: (value: any) => void;
-  orientation?: 'vertical' | 'horizontal';
   className?: string;
 }
 
@@ -123,9 +122,27 @@ export const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
 export const CustomTabSelector = ({
   tabItems,
   onClick,
-  orientation = 'horizontal',
   className,
 }: CustomTabSelectorProps) => {
+  const [orientation, setOrientation] = useState('horizontal');
+
+  useEffect(() => {
+    // Function to check and update the orientation based on screen width
+    const checkOrientation = () => {
+      if (window.innerWidth >= 760) {
+        setOrientation('horizontal');
+      } else {
+        setOrientation('vertical');
+      }
+    };
+
+    // Check Orientation on load
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+
+    return () => window.removeEventListener('resize', checkOrientation);
+  }, []);
+
   return (
     <Fragment>
       <Tabs
