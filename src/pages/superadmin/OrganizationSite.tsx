@@ -6,6 +6,7 @@ import { AiFillEdit } from 'react-icons/ai';
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
 import {
+  SuperAdminSiteActionItem,
   SuperAdminSiteDataColumns,
   SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
@@ -79,6 +80,15 @@ const OrganizationSite = () => {
   }
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
+  const actionItems = useMemo(
+    () =>
+      SuperAdminSiteActionItem(
+        getSiteDetailsAndEditModalController,
+        deleteSite
+      ),
+    []
+  );
+
   const rowData = useMemo(
     () =>
       SuperAdminSiteDataRows(
@@ -160,14 +170,13 @@ const OrganizationSite = () => {
           onNext={onClickNext}
           onPrevious={onClickPrevious}
           currentPage={currentPage ?? -1}
-          deleteRow={deleteSite}
-          editRow={getSiteDetailsAndEditModalController}
           searchKeys={searchTableBy}
           dataLoading={sitesTableDataLoading}
           searchKey={searchKey}
           updateSearchKey={onUpdateSearchKey}
           onUpdateSearch={onUpdateSearchSite}
           createNew={onUpdateShowCreateSiteModal}
+          actionItems={actionItems}
         />
       </div>
 

@@ -79,7 +79,7 @@ const SidebarItems = ({ item, Icon, route, child }: SidebarItemProps) => {
               {child.length > 0 &&
                 child.map((childItem, idx) => {
                   return (
-                    <>
+                    <Fragment key={`${childItem}__${idx}`}>
                       <Link to={childItem?.route as string}>
                         <ListItem>
                           <ListItemPrefix>{childItem?.Icon}</ListItemPrefix>
@@ -93,7 +93,7 @@ const SidebarItems = ({ item, Icon, route, child }: SidebarItemProps) => {
                           />
                         </ListItem>
                       </Link>
-                    </>
+                    </Fragment>
                   );
                 })}
             </List>

@@ -1,5 +1,5 @@
 import { useTable } from 'react-table';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import {
   Avatar,
   Button,
@@ -46,10 +46,11 @@ const Table = ({ columns, data, containerClass = '' }: TableProps) => {
               className={`w-full min-w-max table-auto text-left border-none`}
               {...getTableProps()}>
               <thead className={`sticky bg-gray-100`}>
-                {headerGroups.map((headerGroup) => (
+                {headerGroups.map((headerGroup, index) => (
                   <tr
                     {...headerGroup.getHeaderGroupProps()}
-                    className={`border-y bg-ds-gray-100 dark:bg-ds-gray-900`}>
+                    className={`border-y bg-ds-gray-100 dark:bg-ds-gray-900`}
+                    key={`${headerGroup}_${index}`}>
                     {headerGroup.headers.map((column) => (
                       <th
                         colSpan={1}
@@ -67,10 +68,12 @@ const Table = ({ columns, data, containerClass = '' }: TableProps) => {
               <tbody
                 {...getTableBodyProps()}
                 className={`bg-white`}>
-                {rows.map((row) => {
+                {rows.map((row, index) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr
+                      {...row.getRowProps()}
+                      key={`${row}_${index}`}>
                       {row.cells.map((cell) => {
                         return (
                           <td
@@ -92,8 +95,6 @@ const Table = ({ columns, data, containerClass = '' }: TableProps) => {
 };
 
 interface BasicTableProps {
-  cardHeadFloat?: boolean;
-  cardHeadShadow?: boolean;
   onSelectTab: (value: any) => void;
   tabItems: {
     label: string;
@@ -113,19 +114,20 @@ interface BasicTableProps {
   currentPage: number;
   onNext: (value: number) => void;
   onPrevious: (value: number) => void;
-  deleteRow?: (value: string) => void;
-  editRow?: (value: string) => void;
   searchKeys: string[];
   dataLoading: boolean;
   searchKey: string;
   updateSearchKey: (value: string) => void;
   onUpdateSearch: (value: string) => void;
   createNew: () => void;
+  actionItems: {
+    onClick: (value: any) => void;
+    icon: ReactNode;
+    label: string;
+  }[];
 }
 
 export const BasicTable = ({
-  cardHeadFloat = false,
-  cardHeadShadow = false,
   onSelectTab,
   tabItems,
   perPageValue,
@@ -141,21 +143,20 @@ export const BasicTable = ({
   currentPage,
   onNext,
   onPrevious,
-  deleteRow,
-  editRow,
   searchKeys,
   dataLoading,
   searchKey,
   updateSearchKey,
   onUpdateSearch,
   createNew,
+  actionItems,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto`}>
       <CardHeader
-        floated={cardHeadFloat}
-        shadow={cardHeadShadow}
-        className={`rounded-none`}>
+        floated={true}
+        shadow={true}
+        className={`rounded-none m-0 mt-3 shadow-none bg-transparent px-3`}>
         <div
           className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
           <div className={`flex gap-4 items-center justify-center`}>
@@ -192,14 +193,14 @@ export const BasicTable = ({
         </div>
       </CardHeader>
 
-      <CardBody className={`overflow-scroll px-0`}>
+      <CardBody className={`overflow-scroll p-0`}>
         {data && data?.length > 0 ? (
           <table className={`mt-4 w-full min-w-max table-auto text-left`}>
             <thead>
               <tr>
                 {columns.map((item, index) => (
                   <th
-                    key={item.key}
+                    key={`${item}_${index}`}
                     className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
                     <Typography
                       variant={'small'}
@@ -222,14 +223,13 @@ export const BasicTable = ({
             <tbody>
               {data.map((item, index) => (
                 <tr
-                  key={index}
+                  key={`${index}__${index}`}
                   className={`border-y`}>
-                  {columns.map((column, index) => (
-                    <>
+                  {columns.map((column, indexNum) => (
+                    <Fragment key={`${column}_${indexNum}`}>
                       {/*For Status*/}
                       {column.key === 'status' ? (
                         <td
-                          key={index}
                           className={`p-4 border-y text-black font-inter text-sm font-medium mx-1`}>
                           <div className="w-max">
                             <Status status={item[column.key]} />
@@ -237,7 +237,7 @@ export const BasicTable = ({
                         </td>
                       ) : // Title or Name
                       column.key === 'name' || column.key === 'title' ? (
-                        <td key={index}>
+                        <td>
                           <Link
                             to={`/${url}/${item?.id}`}
                             className={`text-black decoration-0 pointer-cursor`}>
@@ -274,7 +274,6 @@ export const BasicTable = ({
                       ) : // Send Email
                       column.key === 'email' ? (
                         <td
-                          key={index}
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
                           <a
                             target={`_blank`}
@@ -284,7 +283,7 @@ export const BasicTable = ({
                           </a>
                         </td>
                       ) : column.key === 'action' ? (
-                        <td key={index}>
+                        <td>
                           <Tooltip content="Action">
                             <Menu
                               animate={{
@@ -299,55 +298,32 @@ export const BasicTable = ({
                               </MenuHandler>
 
                               <MenuList className={`min-w-[150px] p-2`}>
-                                {editRow && (
+                                {actionItems.map((action, index) => (
                                   <MenuItem
-                                    onClick={() => editRow(item.id)}
-                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}>
+                                    onClick={() => action.onClick(item.id)}
+                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}
+                                    key={`${action}_${index}`}>
                                     <IconButton
-                                      variant="text"
+                                      variant={'text'}
                                       className={
                                         'hover:bg-transparent active:bg-transparent'
                                       }>
-                                      <HiPencil
-                                        className="h-4 w-4"
-                                        color={`blue`}
-                                        size={15}
-                                      />
+                                      {action.icon}
                                     </IconButton>{' '}
-                                    Edit
+                                    {action.label}
                                   </MenuItem>
-                                )}
-
-                                {deleteRow && (
-                                  <MenuItem
-                                    onClick={() => deleteRow(item.id)}
-                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-red-900`}>
-                                    <IconButton
-                                      variant="text"
-                                      className={
-                                        'hover:bg-transparent active:bg-transparent'
-                                      }>
-                                      <MdDelete
-                                        className="h-4 w-4"
-                                        color={`red`}
-                                        size={15}
-                                      />
-                                    </IconButton>{' '}
-                                    Delete
-                                  </MenuItem>
-                                )}
+                                ))}
                               </MenuList>
                             </Menu>
                           </Tooltip>
                         </td>
                       ) : (
                         <td
-                          key={index}
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
                           {item[column.key]}
                         </td>
                       )}
-                    </>
+                    </Fragment>
                   ))}
                 </tr>
               ))}

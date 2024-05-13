@@ -58,15 +58,14 @@ const Sidebar = () => {
           {superAdminSidebar.length >= 1 &&
             superAdminSidebar.map((sidebar: SidebarItemProps, idx: number) => {
               return (
-                <>
+                <Fragment key={`${sidebar}_${idx}`}>
                   <SidebarItems
                     item={sidebar?.item}
                     route={sidebar?.route}
                     Icon={sidebar?.Icon}
-                    key={idx}
                     child={sidebar?.child ? sidebar?.child : null}
                   />
-                </>
+                </Fragment>
               );
             })}
         </List>
