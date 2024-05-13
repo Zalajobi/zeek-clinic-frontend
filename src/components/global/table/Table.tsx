@@ -120,6 +120,7 @@ interface BasicTableProps {
   searchKey: string;
   updateSearchKey: (value: string) => void;
   onUpdateSearch: (value: string) => void;
+  createNew: () => void;
 }
 
 export const BasicTable = ({
@@ -147,6 +148,7 @@ export const BasicTable = ({
   searchKey,
   updateSearchKey,
   onUpdateSearch,
+  createNew,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto`}>
@@ -402,14 +404,14 @@ export const BasicTable = ({
                       variant={'h6'}
                       color={'gray'}
                       className={'font-normal text-center mb-4'}>
-                      No Sites
+                      No Data
                     </Typography>
 
                     <Button
                       className={`rounded-full flex`}
                       ripple={true}
-                      onClick={() => console.log('Create Site')}>
-                      <FaUserPlus className={`w-4 h-4 mr-2`} /> Add New Site
+                      onClick={createNew}>
+                      <FaUserPlus className={`w-4 h-4 mr-2`} /> Create
                     </Button>
                   </div>
                 )}

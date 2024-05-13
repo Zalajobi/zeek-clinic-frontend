@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 import {
+  axiosDeleteRequestUserService,
   axiosGetRequestUserService,
   axiosPostRequestUserService,
 } from '@lib/axios';
@@ -12,11 +13,12 @@ import { SearchSitesRequestPayload } from '@typeSpec/index';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
 
 export const useOrganizationDetails = () => {
+  const queryClient = useQueryClient();
+  const { hospitalId } = useParams();
   const { totalDataCount, noOfPages } = useSelector(
     (state: any) => state.adminProviderTable
   );
 
-  const { hospitalId } = useParams();
   const [searchSitePayload, setSearchSitePayload] =
     useState<SearchSitesRequestPayload>({
       hospitalId,
@@ -25,10 +27,11 @@ export const useOrganizationDetails = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [resultFrom, setResultFrom] = useState<number | null>(null);
   const [resultTo, setResultTo] = useState<number | null>(null);
-  const [refreshData, setRefreshData] = useState(false);
   const [editSiteModalController, setEditSiteModalController] = useState(false);
   const [searchKey, setSearchKey] = useState('Search By');
   const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [siteId, setSiteId] = useState('');
 
   const tabData = [
     {
@@ -102,9 +105,40 @@ export const useOrganizationDetails = () => {
     },
   });
 
+  // Delete Site Mutation
+  const { mutate: deleteSiteMutation } = useMutation(
+    async () => {
+      try {
+        return await axiosDeleteRequestUserService(`/site/delete/${siteId}`);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Site', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) toast.success(result?.message);
+        else toast.error('Something Went Wrong');
+
+        queryClient.resetQueries('getSiteTableData');
+      },
+    }
+  );
+
   // Request to Delete Site
   const deleteSite = async (siteId: string) => {
-    console.log('Deleting SIte');
+    setSiteId(siteId);
+    setShowDeleteModal(!showDeleteModal);
+  };
+
+  // Confirm Delete Site - Send Delete Request
+  const confirmDeleteSite = () => {
+    setShowDeleteModal(!showDeleteModal);
+    deleteSiteMutation();
   };
 
   // Get Site Details for edit
@@ -195,8 +229,6 @@ export const useOrganizationDetails = () => {
     });
   };
 
-  const onUpdateDataRefresh = () => setRefreshData(!refreshData);
-
   const onUpdateShowCreateSiteModal = () => {
     setShowCreateSiteModal((cur) => !cur);
   };
@@ -218,6 +250,7 @@ export const useOrganizationDetails = () => {
     sitesTableDataLoading,
     searchKey,
     showCreateSiteModal,
+    showDeleteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -225,10 +258,11 @@ export const useOrganizationDetails = () => {
     onClickPrevious,
     onUpdatePerPageItem,
     onUpdateSearchSite,
-    onUpdateDataRefresh,
     deleteSite,
     getSiteDetailsAndEditModalController,
     onUpdateSearchKey,
     onUpdateShowCreateSiteModal,
+    setShowDeleteModal,
+    confirmDeleteSite,
   };
 };

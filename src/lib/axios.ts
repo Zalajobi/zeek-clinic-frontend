@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 
-const instance = axios.create({
+const userInstance = axios.create({
   baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
   timeout: 7500,
 });
 
 export const axiosPostRequestUserService = async (url: string, data: any) => {
   try {
-    const request = await instance.post(url, data, {
+    const request = await userInstance.post(url, data, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') as string}`,
       },
@@ -26,7 +26,7 @@ export const axiosPostRequestUserService = async (url: string, data: any) => {
 
 export const axiosPutRequestUserService = async (url: string, data: any) => {
   try {
-    const request = await instance.put(url, data, {
+    const request = await userInstance.put(url, data, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') as string}`,
       },
@@ -42,9 +42,9 @@ export const axiosPutRequestUserService = async (url: string, data: any) => {
   }
 };
 
-export const axiosDeleteRequest = async (url: string) => {
+export const axiosDeleteRequestUserService = async (url: string) => {
   try {
-    const request = await instance.delete(url, {
+    const request = await userInstance.delete(url, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') as string}`,
       },
@@ -62,7 +62,7 @@ export const axiosDeleteRequest = async (url: string) => {
 
 export const axiosGetRequestUserService = async (url: string, params?: any) => {
   try {
-    const request = await instance.get(url, {
+    const request = await userInstance.get(url, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token') as string}`,
       },

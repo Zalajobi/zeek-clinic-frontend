@@ -22,6 +22,7 @@ import {
   setNoOfPages,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
+import ConfirmationModal from '@components/modals/ConfirmationModal';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100],
@@ -45,6 +46,7 @@ const OrganizationSite = () => {
     sitesTableDataLoading,
     searchKey,
     showCreateSiteModal,
+    showDeleteModal,
 
     // Functions
     onUpdateActiveTab,
@@ -53,10 +55,11 @@ const OrganizationSite = () => {
     onUpdatePerPageItem,
     onUpdateSearchSite,
     deleteSite,
-    onUpdateDataRefresh,
     getSiteDetailsAndEditModalController,
     onUpdateSearchKey,
     onUpdateShowCreateSiteModal,
+    setShowDeleteModal,
+    confirmDeleteSite,
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
@@ -164,12 +167,20 @@ const OrganizationSite = () => {
           searchKey={searchKey}
           updateSearchKey={onUpdateSearchKey}
           onUpdateSearch={onUpdateSearchSite}
+          createNew={onUpdateShowCreateSiteModal}
         />
       </div>
 
       <CreateSiteModal
         open={showCreateSiteModal}
         handleOpen={onUpdateShowCreateSiteModal}
+      />
+
+      <ConfirmationModal
+        open={showDeleteModal}
+        message={'Are you sure you want to delete this item?'}
+        handleOpen={() => setShowDeleteModal((cur) => !cur)}
+        handleConfirm={confirmDeleteSite}
       />
     </SuperadminBaseTemplate>
   );
