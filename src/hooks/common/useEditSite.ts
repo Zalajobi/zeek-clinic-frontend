@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { SitePayload } from '@typeSpec/payloads';
-import { useQuery } from 'react-query';
-import { axiosGetRequestUserService } from '@lib/axios';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  axiosGetRequestUserService,
+  axiosPutRequestUserService,
+} from '@lib/axios';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { SelectInputFieldProps } from '@typeSpec/common';
 
-export const useEditSite = (siteId?: string) => {
-  const [contactDetails, setContactDetails] = useState<SitePayload>();
+export const useEditSite = (siteId?: string, handleOpen?: () => void) => {
+  const queryClient = useQueryClient();
+  const [site, setSite] = useState<SitePayload>();
   const [logoUrl, setLogoUrl] = useState('');
 
   const siteStatus: SelectInputFieldProps[] = [
@@ -45,157 +49,183 @@ export const useEditSite = (siteId?: string) => {
     },
   });
 
+  // Edit Site Mutation
+  const { mutate: editSiteMutation } = useMutation(
+    async () => {
+      try {
+        return await axiosPutRequestUserService(`/site/update/${siteId}`, site);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Site', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) {
+          setSite({});
+          toast.success(result?.message);
+        } else toast.error('Something Went Wrong');
+
+        queryClient.resetQueries('getSiteTableData');
+      },
+    }
+  );
+
   const onUpdateSiteName = (name: string) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       name,
     });
   };
 
   const onUpdateSiteLogo = (logo: string) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       logo,
     });
     setLogoUrl(logo);
   };
 
   const onUpdateSiteEmail = (email: string) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       email,
     });
   };
 
   const onUpdateSitePhone = (phone: string) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       phone,
     });
   };
 
   const isSitePrivate = (isPrivate: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       is_private: isPrivate,
     });
   };
 
   const hasAppointment = (hasAppointment: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_appointment: hasAppointment,
     });
   };
 
   const hasCareGiver = (hasCareGiver: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_caregiver: hasCareGiver,
     });
   };
 
   const hasClinical = (hasClinical: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_clinical: hasClinical,
     });
   };
 
   const hasDoctor = (hasDoctors: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_doctor: hasDoctors,
     });
   };
 
   const hasEmergency = (hasEmergency: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_emergency: hasEmergency,
     });
   };
 
   const hasLaboratory = (hasLaboratory: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_laboratory: hasLaboratory,
     });
   };
 
   const hasMedicalSupply = (hasMedicalSupply: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_medical_supply: hasMedicalSupply,
     });
   };
 
   const hasNursing = (hasNursing: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_nursing: hasNursing,
     });
   };
 
   const hasInPatient = (hasInPatient: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_inpatient: hasInPatient,
     });
   };
 
   const hasOutPatient = (hasOutPatient: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_outpatient: hasOutPatient,
     });
   };
 
   const hasPharmacy = (hasPharmacy: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_pharmacy: hasPharmacy,
     });
   };
 
   const hasPhysicalTherapy = (hasPhysicalTherapy: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_physical_therapy: hasPhysicalTherapy,
     });
   };
 
   const hasProcedure = (hasProcedure: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_procedure: hasProcedure,
     });
   };
 
   const hasRadiology = (hasRadiology: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_radiology: hasRadiology,
     });
   };
 
   const hasUnit = (hasUnit: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_unit: hasUnit,
     });
   };
 
   const hasVital = (hasVital: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_vital: hasVital,
     });
   };
 
   const hasWallet = (hasWallet: boolean) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       has_wallet: hasWallet,
     });
   };
@@ -203,10 +233,15 @@ export const useEditSite = (siteId?: string) => {
   const onUpdateSiteStatus = (
     status: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED'
   ) => {
-    setContactDetails({
-      ...contactDetails,
+    setSite({
+      ...site,
       status,
     });
+  };
+
+  const updateSite = () => {
+    if (handleOpen) handleOpen();
+    editSiteMutation();
   };
 
   return {
@@ -240,5 +275,6 @@ export const useEditSite = (siteId?: string) => {
     hasVital,
     hasWallet,
     onUpdateSiteStatus,
+    updateSite,
   };
 };

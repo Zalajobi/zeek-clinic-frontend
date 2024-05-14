@@ -48,7 +48,8 @@ const EditSiteModal = ({ open, handleOpen, siteId }: EditSiteModalProps) => {
     hasVital,
     hasWallet,
     onUpdateSiteStatus,
-  } = useEditSite(siteId);
+    updateSite,
+  } = useEditSite(siteId, handleOpen);
 
   return (
     <Fragment>
@@ -67,7 +68,7 @@ const EditSiteModal = ({ open, handleOpen, siteId }: EditSiteModalProps) => {
             />
 
             <OutlinedButton
-              click={() => console.log('Update Site')}
+              click={updateSite}
               text={`Update Site`}
               type={`secondary`}
               className={`min-w-[200px] mx-5`}
