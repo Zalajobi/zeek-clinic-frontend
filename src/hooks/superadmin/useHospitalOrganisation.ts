@@ -1,12 +1,43 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import toast from 'react-hot-toast';
-import { axiosGetRequestUserService } from '@lib/axios';
+import {
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
 import { GetHospitalResponseData } from '@typeSpec/superadmin';
-import { customPromiseRequest } from '@lib/requests';
 import { SelectInputFieldProps } from '@typeSpec/common';
+import { SearchRequestPayload } from '@typeSpec/index';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 
 export const useHospitalOrganisation = () => {
+  const [searchOrganizationPayload, setSearchOrganizationPayload] =
+    useState<SearchRequestPayload>({});
+  const [searchKey, setSearchKey] = useState('Search By');
+
+  const tabData = [
+    {
+      label: 'All',
+      value: 'ALL',
+    },
+    {
+      label: 'Active',
+      value: 'ACTIVE',
+    },
+    {
+      label: 'Archived',
+      value: 'ARCHIVED',
+    },
+    {
+      label: 'Pending',
+      value: 'PENDING',
+    },
+    {
+      label: 'Suspended',
+      value: 'DEACTIVATED',
+    },
+  ];
+
   const [hospitalTabs, setHospitalTabs] = useState<
     'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED'
   >('ALL');
@@ -30,78 +61,98 @@ export const useHospitalOrganisation = () => {
 
   let selectedHospitals: string[] = [];
 
-  useEffect(() => {
-    const getData = async () => {
-      const params = {
-        page: currentPage,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: hospitalFilterFrom,
-        to_date: hospitalFilterTo,
-        search: searchOrganisation,
-        country: countryFilter,
-        status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
-      };
-
-      // const [organization]
-
-      const [organization, distinctCountries] = await customPromiseRequest([
-        axiosGetRequestUserService(
-          '/hospital/organization/hospitals/filters',
-          params
-        ),
-        axiosGetRequestUserService('/hospital/distinct-countries'),
-      ]);
-
-      if (
-        distinctCountries?.status === 'fulfilled' &&
-        distinctCountries?.value?.success
-      ) {
-        let tempCountriesFilter: SelectInputFieldProps[] = [];
-
-        distinctCountries?.value?.data.map((item: { country: string }) => {
-          tempCountriesFilter.push({
-            value: item?.country,
-            placeholder: item?.country,
-          });
-
-          return;
-        });
-        setAllHospitalCountries(tempCountriesFilter);
-      } else {
-        toast.error('Something went wrong getting organization countries');
-      }
-
-      if (
-        organization?.status === 'fulfilled' &&
-        organization?.value?.success
-      ) {
-        setHospitalData(
-          organization?.value?.data?.hospitals as GetHospitalResponseData[]
-        );
-        setTotalHospitals(organization?.value?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            organization?.value?.data?.count /
-              (perPage === 'All' ? organization?.value?.data?.count : perPage)
-          )
-        );
-        setResultTo(
-          currentPage + 1 === noOfPages
-            ? organization?.value?.data?.count
-            : currentPage * (perPage !== 'All' ? perPage : 0) +
-                (perPage !== 'All' ? perPage : 0)
-        );
-        setResultFrom(1);
-      } else {
-        toast.error('Error getting list of organisation(s)');
-      }
-    };
-
-    getData().catch((err) => {
-      toast.error('Something went wrong');
-      // navigate('/superadmin/login');
+  // Table Data
+  const { data: hospitalTableData, isLoading: hospitalTableDataLoading } =
+    useQuery({
+      queryKey: ['getTableData', searchOrganizationPayload],
+      queryFn: async () => {
+        try {
+          return await axiosPostRequestUserService(
+            `/hospital/search`,
+            searchOrganizationPayload
+          );
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response) {
+            toast.error(error.response.data.error?.message);
+          }
+        }
+      },
     });
-  }, []);
+
+  // useEffect(() => {
+  //   // const getData = async () => {
+  //   //   const params = {
+  //   //     page: currentPage,
+  //   //     per_page: perPage === 'All' ? 0 : perPage,
+  //   //     from_date: hospitalFilterFrom,
+  //   //     to_date: hospitalFilterTo,
+  //   //     search: searchOrganisation,
+  //   //     country: countryFilter,
+  //   //     status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
+  //   //   };
+  //   //
+  //   //   // const [organization]
+  //   //
+  //   //   const [organization, distinctCountries] = await customPromiseRequest([
+  //   //     axiosGetRequestUserService(
+  //   //       '/hospital/organization/hospitals/filters',
+  //   //       params
+  //   //     ),
+  //   //     axiosGetRequestUserService('/hospital/distinct-countries'),
+  //   //   ]);
+  //   //
+  //   //   if (
+  //   //     distinctCountries?.status === 'fulfilled' &&
+  //   //     distinctCountries?.value?.success
+  //   //   ) {
+  //   //     let tempCountriesFilter: SelectInputFieldProps[] = [];
+  //   //
+  //   //     distinctCountries?.value?.data.map((item: { country: string }) => {
+  //   //       tempCountriesFilter.push({
+  //   //         value: item?.country,
+  //   //         placeholder: item?.country,
+  //   //       });
+  //   //
+  //   //       return;
+  //   //     });
+  //   //     setAllHospitalCountries(tempCountriesFilter);
+  //   //   } else {
+  //   //     toast.error('Something went wrong getting organization countries');
+  //   //   }
+  //   //
+  //   //   if (
+  //   //     organization?.status === 'fulfilled' &&
+  //   //     organization?.value?.success
+  //   //   ) {
+  //   //     setHospitalData(
+  //   //       organization?.value?.data?.hospitals as GetHospitalResponseData[]
+  //   //     );
+  //   //     setTotalHospitals(organization?.value?.data?.count as number);
+  //   //     setNoOfPages(
+  //   //       Math.ceil(
+  //   //         organization?.value?.data?.count /
+  //   //           (perPage === 'All' ? organization?.value?.data?.count : perPage)
+  //   //       )
+  //   //     );
+  //   //     setResultTo(
+  //   //       currentPage + 1 === noOfPages
+  //   //         ? organization?.value?.data?.count
+  //   //         : currentPage * (perPage !== 'All' ? perPage : 0) +
+  //   //             (perPage !== 'All' ? perPage : 0)
+  //   //     );
+  //   //     setResultFrom(1);
+  //   //   } else {
+  //   //     toast.error('Error getting list of organisation(s)');
+  //   //   }
+  //   // };
+  //
+  //   // getData().catch((err) => {
+  //   //   toast.error('Something went wrong');
+  //   //   // navigate('/superadmin/login');
+  //   // });
+  //
+  //   console.log("HELLO WORLD!")
+  // }, []);
 
   const onUpdateSelectFrom = async (value: Date | null) => {
     setHospitalFilterFrom(value);
@@ -178,40 +229,8 @@ export const useHospitalOrganisation = () => {
     }
   };
 
-  const onUpdateSearchOrganisation = async (value: string) => {
-    setSearchOrganisation(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: hospitalFilterFrom,
-      to_date: hospitalFilterTo,
-      search: value,
-      status: hospitalTabs === 'ALL' ? '' : hospitalTabs,
-    };
-
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const response = await axiosGetRequestUserService(
-      '/hospital/organization/hospitals/filters',
-      params
-    );
-
-    if (response.success) {
-      setHospitalData(response?.data?.hospitals as GetHospitalResponseData[]);
-      setTotalHospitals(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
-  };
-
   const onUpdateActiveTab = async (
-    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'ARCHIVED'
+    tab: 'ALL' | 'ACTIVE' | 'ARCHIVED' | 'PENDING' | 'DEACTIVATED'
   ) => {
     setHospitalTabs(tab);
     setResultFrom(1);
@@ -470,8 +489,45 @@ export const useHospitalOrganisation = () => {
     setSelectAllHospitals(event.target.checked);
   };
 
+  // Update Search Key
+  const onUpdateSearchKey = (value: string) => {
+    if (value !== 'Search By') setSearchKey(value);
+  };
+
+  // On Update Search Hospital
+  const onUpdateSearchOrganisation = async (value: string) => {
+    // setSearchOrganisation({
+    //   ...searchSitePayload,
+    //   search: value,
+    //   searchKey: revertDropdownOptionsToResponseKey(searchKey),
+    // });
+  };
+
+  // Show Create Hospital Modal
+  const onUpdateShowCreateHospitalModal = () => {
+    console.log('Create Hospital Modal');
+    // setShowCreateSiteModal((cur) => !cur);
+  };
+
+  // Sort By
+  const onHandleSortBy = async (key: string) => {
+    setSearchOrganizationPayload({
+      ...searchOrganizationPayload,
+      sortModel: {
+        colId: key,
+        sort:
+          searchOrganizationPayload?.sortModel?.sort === 'asc' ? 'desc' : 'asc',
+      },
+    });
+  };
+
   return {
     //Value
+    hospitalTableData,
+    hospitalTableDataLoading,
+    tabData,
+    searchKey,
+
     searchOrganisation,
     hospitalTabs,
     perPage,
@@ -487,7 +543,6 @@ export const useHospitalOrganisation = () => {
     hospitalFilterTo,
 
     // Function
-    onUpdateSearchOrganisation,
     onUpdateActiveTab,
     onUpdatePerPageItem,
     onUpdateSelectFrom,
@@ -499,5 +554,10 @@ export const useHospitalOrganisation = () => {
     filterByCountry,
     onUpdateSelectedRow,
     onUpdateSelectAllHospitals,
+
+    onUpdateSearchKey,
+    onUpdateSearchOrganisation,
+    onUpdateShowCreateHospitalModal,
+    onHandleSortBy,
   };
 };

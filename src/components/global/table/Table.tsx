@@ -102,7 +102,6 @@ interface BasicTableProps {
     icon?: any;
   }[];
   perPageValue: string | number;
-  perPageMenuItems: any[];
   perPageChange: (item: any) => void;
   columns: any[];
   data: any[];
@@ -132,7 +131,6 @@ export const BasicTable = ({
   onSelectTab,
   tabItems,
   perPageValue,
-  perPageMenuItems,
   perPageChange,
   columns,
   data,
@@ -153,6 +151,7 @@ export const BasicTable = ({
   actionItems,
   sortBy,
 }: BasicTableProps) => {
+  const perPageMenuItems = ['All', 10, 20, 50, 100];
   return (
     <Card className={`w-full h-auto`}>
       <CardHeader

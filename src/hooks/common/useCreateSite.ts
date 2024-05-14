@@ -49,7 +49,7 @@ export const useCreateSite = (handleOpen?: () => void) => {
         if (result?.success) toast.success(result?.message);
         else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('getSiteTableData');
+        queryClient.resetQueries('getTableData');
       },
     }
   );

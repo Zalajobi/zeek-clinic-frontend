@@ -70,7 +70,7 @@ export const useEditSite = (siteId?: string, handleOpen?: () => void) => {
           toast.success(result?.message);
         } else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('getSiteTableData');
+        queryClient.resetQueries('getTableData');
       },
     }
   );

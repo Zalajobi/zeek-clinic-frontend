@@ -79,38 +79,3 @@ export interface HospitalSiteCountData {
   pendingSites: number;
   totalSites: number;
 }
-
-export interface SitesDataKeyMap {
-  id: string;
-  address: string;
-  hospital_id: string;
-  name: string;
-  email: string;
-  city: string;
-  state: string;
-  country: string;
-  logo: string;
-  time_zone: string;
-  phone: string;
-  status: string;
-  is_private: boolean;
-  has_appointment: boolean;
-  has_caregiver: boolean;
-  has_clinical: boolean;
-  has_doctor: boolean;
-  has_emergency: boolean;
-  has_laboratory: boolean;
-  has_medical_supply: boolean;
-  has_nursing: boolean;
-  has_inpatient: boolean;
-  has_outpatient: boolean;
-  has_pharmacy: boolean;
-  has_physical_therapy: boolean;
-  has_procedure: boolean;
-  has_radiology: boolean;
-  has_unit: boolean;
-  has_vital: boolean;
-  has_wallet: boolean;
-  created_at: string;
-  updated_at: string;
-}

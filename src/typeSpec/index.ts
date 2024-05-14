@@ -56,7 +56,7 @@ export interface UserServiceUnitResponseData {
 }
 
 // PAYLOADS
-export type SearchSitesRequestPayload = {
+export type SearchRequestPayload = {
   id?: string | undefined;
   search?: string | undefined;
   searchKey?: string | undefined;
@@ -67,6 +67,8 @@ export type SearchSitesRequestPayload = {
   city?: string | undefined;
   name?: string | undefined;
   email?: string | undefined;
+  phone?: string | undefined;
+  address?: string | undefined;
   range?:
     | {
         from: Date | undefined;
@@ -80,7 +82,23 @@ export type SearchSitesRequestPayload = {
       }
     | undefined;
   greaterThan?: number | undefined;
-  status?: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED' | undefined;
+  status?:
+    | 'ALL'
+    | 'PENDING'
+    | 'ACTIVE'
+    | 'DEACTIVATED'
+    | 'CLOSED'
+    | 'ON_LEAVE'
+    | 'ON_BREAK'
+    | 'SUSPENDED'
+    | 'TERMINATED'
+    | 'UNAVAILABLE'
+    | 'ARCHIVED'
+    | 'DISCHARGED'
+    | 'DECEASED'
+    | 'INPATIENT'
+    | 'OUTPATIENT'
+    | undefined;
   startRow?: number | undefined;
   endRow?: number | undefined;
 };
