@@ -65,6 +65,7 @@ const OrganizationSite = () => {
     setShowDeleteModal,
     confirmDeleteSite,
     setEditSiteModalController,
+    onHandleSortBy,
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
@@ -177,6 +178,7 @@ const OrganizationSite = () => {
           onUpdateSearch={onUpdateSearchSite}
           createNew={onUpdateShowCreateSiteModal}
           actionItems={actionItems}
+          sortBy={onHandleSortBy}
         />
       </div>
 

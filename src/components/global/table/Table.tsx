@@ -114,6 +114,7 @@ interface BasicTableProps {
   currentPage: number;
   onNext: (value: number) => void;
   onPrevious: (value: number) => void;
+  sortBy: (value: string) => void;
   searchKeys: string[];
   dataLoading: boolean;
   searchKey: string;
@@ -150,6 +151,7 @@ export const BasicTable = ({
   onUpdateSearch,
   createNew,
   actionItems,
+  sortBy,
 }: BasicTableProps) => {
   return (
     <Card className={`w-full h-auto`}>
@@ -207,7 +209,8 @@ export const BasicTable = ({
                       color={'blue-gray'}
                       className={
                         'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
-                      }>
+                      }
+                      onClick={() => sortBy(item.key)}>
                       {item.value}{' '}
                       {item.sortable && (
                         <HiChevronUpDown

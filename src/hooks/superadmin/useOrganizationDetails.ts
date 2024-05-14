@@ -157,6 +157,17 @@ export const useOrganizationDetails = () => {
     });
   };
 
+  // Sort By
+  const onHandleSortBy = async (key: string) => {
+    setSearchSitePayload({
+      ...searchSitePayload,
+      sortModel: {
+        colId: key,
+        sort: searchSitePayload?.sortModel?.sort === 'asc' ? 'desc' : 'asc',
+      },
+    });
+  };
+
   // Handle Next Page
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
@@ -267,5 +278,6 @@ export const useOrganizationDetails = () => {
     setShowDeleteModal,
     confirmDeleteSite,
     setEditSiteModalController,
+    onHandleSortBy,
   };
 };
