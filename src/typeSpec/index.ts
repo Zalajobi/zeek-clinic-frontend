@@ -1,3 +1,9 @@
+import {
+  DepartmentPayload,
+  PersonalInfoPayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
+
 export interface UserServicePatientDetailsResponse {
   siteId: string;
   email: string;
@@ -5,16 +11,10 @@ export interface UserServicePatientDetailsResponse {
   id: string;
   created_at: Date;
   updated_at: Date;
-  personalInfo: UserServicePersonalInfoResponseData;
-  department: UserServiceDepartmentResponseData;
+  personalInfo: PersonalInfoPayload;
+  department: DepartmentPayload;
   unit: UserServiceUnitResponseData;
-  servicearea: UserServiceServiceAreaResponseData;
-}
-
-export interface UserServiceDepartmentResponseData {
-  id: string;
-  name: string;
-  description: string;
+  servicearea: ServiceAreaPayload;
 }
 
 export interface UserServiceUnitResponseData {
@@ -55,35 +55,32 @@ export interface UserServiceUnitResponseData {
   prescription: boolean;
 }
 
-export interface UserServiceRoleResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServiceServiceAreaResponseData {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface UserServicePersonalInfoResponseData {
-  phone: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  title: string;
-  gender: string;
-  dob: Date;
-  country: string;
-  state: string;
-  city: string;
-  address: string;
-  address_two?: string;
-  profile_pic: string;
-  id: string;
-  zip_code: string;
-  religion: string;
-  marital_status: string;
-  created_at: string;
-}
+// PAYLOADS
+export type SearchSitesRequestPayload = {
+  id?: string | undefined;
+  search?: string | undefined;
+  searchKey?: string | undefined;
+  zipCode?: string | undefined;
+  hospitalId?: string | undefined;
+  country?: string | undefined;
+  state?: string | undefined;
+  city?: string | undefined;
+  name?: string | undefined;
+  email?: string | undefined;
+  range?:
+    | {
+        from: Date | undefined;
+        to: Date | undefined;
+      }
+    | undefined;
+  sortModel?:
+    | {
+        sort: string;
+        colId: string;
+      }
+    | undefined;
+  greaterThan?: number | undefined;
+  status?: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED' | undefined;
+  startRow?: number | undefined;
+  endRow?: number | undefined;
+};

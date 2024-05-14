@@ -2,69 +2,107 @@ import { useMemo } from 'react';
 // import { Tab } from '@headlessui/react';
 import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
-import { CgArrowsH, CgExport } from 'react-icons/cg';
 
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
 import {
-  SuperadminSiteDataColumn,
-  SuperadminSiteDataRow,
+  SuperAdminSiteActionItem,
+  SuperAdminSiteDataColumns,
+  SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
-import { SuperadminSiteData } from '@typeSpec/superadmin';
-import Table from '@components/global/table/Table';
-import TableFooter from '@components/global/table/TableFooter';
+import { SitesDataKeyMap } from '@typeSpec/superadmin';
+import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
-import CreateSite from '@components/modals/CreateSite';
+import CreateSiteModal from '@components/modals/admins/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { formatResponseKeyForDropdown } from '@util/index';
+import { useDispatch } from 'react-redux';
 import {
-  DateInput,
-  SelectInput,
-} from '@components/global/formInput/CustomInput';
-import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
-import { CustomTabHeader, DropdownMenu } from '@components/global/MenuTabs';
+  setNoOfPages,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
+import ConfirmationModal from '@components/modals/ConfirmationModal';
+import EditSiteModal from '@components/modals/admins/EditSiteModal';
 
 const OrganizationSite = () => {
-  const itemsPerPage = ['All', 10, 20, 50, 100];
+  const itemsPerPage = ['All', 10, 20, 50, 100],
+    searchTableBy: string[] = [];
+  const dispatch = useDispatch();
+  let noOfPages = 0;
 
   const {
     // Values
-    organization,
-    sites,
+    // sites,
     perPage,
     currentPage,
-    noOfPages,
     resultFrom,
     resultTo,
-    totalData,
-    searchSite,
-    countryFilterList,
-    stateFilterList,
-    dateFilterFrom,
-    dateFilterTo,
     tabData,
+    hospitalData,
+    hospitalDataLoading,
+    siteCountData,
+    siteCountDataLoading,
+    sitesTableData,
+    sitesTableDataLoading,
+    searchKey,
+    showCreateSiteModal,
+    showDeleteModal,
+    editSiteModalController,
+    siteId,
 
     // Functions
     onUpdateActiveTab,
     onClickNext,
     onClickPrevious,
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
-    onEnterPageNumber,
     onUpdatePerPageItem,
     onUpdateSearchSite,
-    onUpdateFilterByCountry,
-    onUpdateFilterByState,
-    onUpdateDataRefresh,
+    deleteSite,
+    editSite,
+    onUpdateSearchKey,
+    onUpdateShowCreateSiteModal,
+    setShowDeleteModal,
+    confirmDeleteSite,
+    setEditSiteModalController,
+    onHandleSortBy,
   } = useOrganizationDetails();
 
-  const columns = useMemo(() => SuperadminSiteDataColumn(), []);
-  const data = useMemo(
-    () => SuperadminSiteDataRow(sites as SuperadminSiteData[]) ?? [],
-    [sites]
+  if (!sitesTableDataLoading) {
+    noOfPages =
+      typeof perPage === 'string'
+        ? 1
+        : Math.ceil(sitesTableData?.data?.totalRows / perPage);
+    dispatch(
+      setNoOfPages(
+        Math.ceil(
+          sitesTableData?.data?.totalRows /
+            (perPage === 'All' ? sitesTableData?.data?.totalRows : perPage)
+        )
+      )
+    );
+    dispatch(setTotalDataCount(sitesTableData?.data?.totalRows));
+  }
+
+  const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
+  const actionItems = useMemo(
+    () => SuperAdminSiteActionItem(editSite, deleteSite),
+    []
   );
+
+  const rowData = useMemo(
+    () =>
+      SuperAdminSiteDataRows(
+        sitesTableData?.data?.sites as SitesDataKeyMap[]
+      ) ?? [],
+    [sitesTableData?.data?.sites]
+  );
+
+  columnData.map((column) => {
+    if (column.key !== 'action') {
+      searchTableBy.push(formatResponseKeyForDropdown(column.key));
+    }
+  });
 
   return (
     <SuperadminBaseTemplate>
@@ -72,7 +110,7 @@ const OrganizationSite = () => {
         <div className={`flex flex-row gap-4`}>
           <div className={`mr-auto`}>
             <Typography
-              text={`Welcome To, ${organization?.name}`}
+              text={`Welcome To, ${hospitalData?.data?.name}`}
               size="4xl"
               weight={800}
               className="mb-8"
@@ -94,152 +132,72 @@ const OrganizationSite = () => {
             />
 
             <OutlinedButton
-              text={`Export Data`}
-              type={'secondary'}
-              className={`h-[38px] w-[150px]`}
-              iconBefore={
-                <CgExport
-                  size={20}
-                  className={`mr-2`}
-                />
-              }
-            />
-          </div>
-        </div>
-
-        <HospitalDetails data={organization ? organization : null} />
-
-        <HospitalRoutes />
-
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 my-10`}>
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <CustomTabHeader
-              onClick={onUpdateActiveTab}
-              tabItems={tabData}
-            />
-          </div>
-
-          <div
-            className={`w-full flex flex-row gap-4 items-center justify-end`}>
-            <OutlinedButton
               iconBefore={
                 <HiPlusSm
                   size={20}
                   className={`mr-2`}
                 />
               }
-              text={`Add New Site`}
+              text={`Add Site`}
               type={`primary`}
               className={`h-[38px] w-[180px]`}
-            />
-
-            <OutlinedButton
-              text={`Export Sites`}
-              click={() => {}}
-              type={'primary'}
-              className={`h-[38px] w-[150px]`}
-              iconBefore={
-                <CgExport
-                  size={20}
-                  className={`mr-2`}
-                />
-              }
+              click={onUpdateShowCreateSiteModal}
             />
           </div>
         </div>
 
-        <div
-          className="relative overflow-x-auto overflow-y-auto max-h-screen shadow-lg flex flex-col rounded-lg border
-         border-ds-gray-300 bg-white dark:border-ds-dark-400 dark:bg-ds-dark-700">
-          <div className="w-full relative my-4 sm:rounded-lg px-5">
-            <div className="w-[97%]] grid grid-cols-[22%_8%_45%_25%] gap-4">
-              <div className="w-full flex">
-                <BasicSearchInput
-                  placeholder={`Search...`}
-                  value={searchSite}
-                  change={(e) => onUpdateSearchSite(e.target.value)}
-                  className={`!mb-0 w-full`}
-                />
-              </div>
+        <HospitalDetails
+          data={hospitalData?.data ? hospitalData?.data : null}
+          siteData={siteCountData?.data ? siteCountData?.data : null}
+          siteDataLoading={siteCountDataLoading}
+          hospitalDataLoading={hospitalDataLoading}
+        />
 
-              <DropdownMenu
-                value={perPage}
-                menuItems={itemsPerPage}
-                change={onUpdatePerPageItem}
-                buttonClass={`border-[#E9ECEF] w-full h-[45px]`}
-              />
+        <HospitalRoutes />
 
-              <div
-                className="flex flex-col items-stretch justify-center flex-shrink-0 w-full space-y-2 pb-[10px] md:w-auto
-                  md:flex-row md:space-y-0 md:items-center md:space-x-3">
-                <div className="flex items-center w-full space-x-3 md:w-auto">
-                  <DateInput
-                    label={`From`}
-                    placeholder={`DD/MM/YYYY`}
-                    className={`my-3`}
-                    change={onUpdateSelectFrom}
-                    value={dateFilterFrom as Date}
-                    id={`from`}
-                    icon={<FaCalendarAlt size={20} />}
-                  />
-
-                  <CgArrowsH size={40} />
-
-                  <DateInput
-                    label={`To`}
-                    placeholder={`DD/MM/YYYY`}
-                    className={`my-3`}
-                    change={onUpdateSelectTo}
-                    value={dateFilterTo as Date}
-                    id={`to`}
-                    icon={<FaCalendarAlt size={20} />}
-                  />
-                </div>
-              </div>
-
-              <div
-                className={`flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 pb-[10px] md:w-auto 
-                  md:flex-row md:space-y-0 md:items-center md:space-x-3`}>
-                <SelectInput
-                  label={`Country`}
-                  options={countryFilterList}
-                  className={`w-full`}
-                  id={'country'}
-                  change={onUpdateFilterByCountry}
-                />
-
-                {/*<SelectInput*/}
-                {/*  label={`State`}*/}
-                {/*  options={stateFilterList}*/}
-                {/*  className={`w-full`}*/}
-                {/*  id={'state'}*/}
-                {/*  change={onUpdateFilterByState}*/}
-                {/*/>*/}
-              </div>
-            </div>
-          </div>
-
-          <Table
-            columns={columns}
-            data={data}
-          />
-
-          <TableFooter
-            noOfPages={noOfPages}
-            total={totalData}
-            from={resultFrom}
-            to={resultTo}
-            onNext={onClickNext}
-            onPrevious={onClickPrevious}
-            currentPage={currentPage}
-            enterPageNumber={onEnterPageNumber}
-          />
-        </div>
+        <BasicTable
+          tabItems={tabData}
+          onSelectTab={onUpdateActiveTab}
+          perPageValue={perPage}
+          perPageMenuItems={itemsPerPage}
+          perPageChange={onUpdatePerPageItem}
+          columns={columnData}
+          data={rowData ?? []}
+          url={'superadmin/site'}
+          noOfPages={noOfPages ?? 0}
+          total={sitesTableData?.data?.totalRows ?? 0}
+          from={resultFrom ?? 1}
+          to={resultTo ?? 10}
+          onNext={onClickNext}
+          onPrevious={onClickPrevious}
+          currentPage={currentPage ?? -1}
+          searchKeys={searchTableBy}
+          dataLoading={sitesTableDataLoading}
+          searchKey={searchKey}
+          updateSearchKey={onUpdateSearchKey}
+          onUpdateSearch={onUpdateSearchSite}
+          createNew={onUpdateShowCreateSiteModal}
+          actionItems={actionItems}
+          sortBy={onHandleSortBy}
+        />
       </div>
 
-      <CreateSite
-        reloadPage={onUpdateDataRefresh}
-        totalSites={organization?.site_count ?? (0 as number)}
+      <CreateSiteModal
+        open={showCreateSiteModal}
+        handleOpen={onUpdateShowCreateSiteModal}
+      />
+
+      <ConfirmationModal
+        open={showDeleteModal}
+        message={'Are you sure you want to delete this item?'}
+        handleOpen={() => setShowDeleteModal((cur) => !cur)}
+        handleConfirm={confirmDeleteSite}
+      />
+
+      <EditSiteModal
+        open={editSiteModalController}
+        handleOpen={() => setEditSiteModalController(!editSiteModalController)}
+        siteId={siteId}
       />
     </SuperadminBaseTemplate>
   );

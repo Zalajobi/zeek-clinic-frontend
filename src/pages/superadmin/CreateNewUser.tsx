@@ -272,7 +272,7 @@ const CreateNewUser = () => {
                 id={`phone`}
                 register={register}
                 type={`tel`}
-                prefix={`${phoneCode ? '+' + phoneCode : ''}`}
+                // prefix={`${phoneCode ? '+' + phoneCode : ''}`}
               />
             </div>
 

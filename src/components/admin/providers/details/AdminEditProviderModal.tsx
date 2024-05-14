@@ -15,22 +15,22 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAdminUpdateProviderInformationTabs } from '@hooks/admin/useAdminUpdateProviderInformationTabs';
 import { LoadingSpinner } from '@components/global/Toast';
-import {
-  UserServiceDepartmentResponseData,
-  UserServiceRoleResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
+import { UserServiceUnitResponseData } from '@typeSpec/index';
 import { OutlinedButton } from '@components/global/CustomButton';
+import {
+  DepartmentPayload,
+  RolePayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
 
 interface AdminEditProviderModalProps {
   name: string;
   fetchData: boolean;
   siteId: string;
   currentModal: 'Personal' | 'GeneratePassword' | 'MoveProvider';
-  department: UserServiceDepartmentResponseData[];
-  role: UserServiceRoleResponseData[];
-  serviceArea: UserServiceServiceAreaResponseData[];
+  department: DepartmentPayload[];
+  role: RolePayload[];
+  serviceArea: ServiceAreaPayload[];
   unit: UserServiceUnitResponseData[];
   updateCurrentModal: (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'

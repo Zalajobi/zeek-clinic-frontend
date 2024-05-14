@@ -45,7 +45,7 @@ const AdminLogin = () => {
                 <TextInput
                   label={`Email`}
                   id={`email`}
-                  change={(e) => setEmail(e.target.value)}
+                  change={setEmail}
                   placeholder={`JohnDoe@gmail.com`}
                   type={'email'}
                 />
@@ -53,7 +53,7 @@ const AdminLogin = () => {
                 <TextInput
                   label={`Password`}
                   id={`password`}
-                  change={(e) => setPassword(e.target.value)}
+                  change={setPassword}
                   placeholder={`********`}
                   type={'password'}
                 />

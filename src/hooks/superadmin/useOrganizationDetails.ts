@@ -1,41 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 import {
-  HospitalOrganizationData,
-  SuperadminSiteData,
-} from '@typeSpec/superadmin';
-import { axiosGetRequestUserService } from '@lib/axios';
-import { SelectInputFieldProps } from '@typeSpec/common';
-import { customPromiseRequest } from '@lib/requests';
-import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
+  axiosDeleteRequestUserService,
+  axiosGetRequestUserService,
+  axiosPostRequestUserService,
+} from '@lib/axios';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { SearchSitesRequestPayload } from '@typeSpec/index';
+import { revertDropdownOptionsToResponseKey } from '@util/index';
 
 export const useOrganizationDetails = () => {
+  const queryClient = useQueryClient();
   const { hospitalId } = useParams();
-  const [organization, setOrganization] =
-    useState<HospitalOrganizationData | null>(null);
-  const [sites, setSites] = useState<SuperadminSiteData[] | null>(null);
-  const [activeTabs, setActiveTabs] = useState<
-    'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
-  >('ALL');
+  const { totalDataCount, noOfPages } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
+
+  const [searchSitePayload, setSearchSitePayload] =
+    useState<SearchSitesRequestPayload>({
+      hospitalId,
+    });
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [noOfPages, setNoOfPages] = useState(0);
-  const [resultFrom, setResultFrom] = useState(0);
-  const [resultTo, setResultTo] = useState(0);
-  const [totalData, setTotalData] = useState(0);
-  const [searchSite, setSearchSite] = useState('');
-  const [dateFilterTo, setDateFilterTo] = useState<Date | null>();
-  const [dateFilterFrom, setDateFilterFrom] = useState<Date | null>();
-  const [country, setCountry] = useState('');
-  const [state, setState] = useState('');
-  const [countryFilterList, setCountryFilterList] = useState<
-    SelectInputFieldProps[]
-  >([]);
-  const [stateFilterList, setStateFilterList] = useState<
-    SelectInputFieldProps[]
-  >([]);
-  const [refreshData, setRefreshData] = useState(false);
+  const [resultFrom, setResultFrom] = useState<number | null>(null);
+  const [resultTo, setResultTo] = useState<number | null>(null);
+  const [editSiteModalController, setEditSiteModalController] = useState(false);
+  const [searchKey, setSearchKey] = useState('Search By');
+  const [showCreateSiteModal, setShowCreateSiteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [siteId, setSiteId] = useState('');
 
   const tabData = [
     {
@@ -43,529 +39,245 @@ export const useOrganizationDetails = () => {
       value: 'ALL',
     },
     {
-      label: 'Pending',
-      value: 'PENDING',
-    },
-    {
       label: 'Active',
       value: 'ACTIVE',
     },
     {
-      label: 'Deactivated',
+      label: 'Pending',
+      value: 'PENDING',
+    },
+    {
+      label: 'Closed',
+      value: 'CLOSED',
+    },
+    {
+      label: 'Suspended',
       value: 'DEACTIVATED',
     },
   ];
 
-  useEffect(() => {
-    const getData = async () => {
-      const [hospital, countryStates] = await customPromiseRequest([
-        axiosGetRequestUserService(`/hospital/details/${hospitalId}`),
-
-        axiosGetRequestUserService(`/site/${hospitalId}/locations/distinct`),
-      ]);
-
-      if (hospital?.status === 'fulfilled' && hospital?.value?.success) {
-        setHospitalData(hospital?.value as AccountServiceApiResponse);
-      } else {
-        toast.error('Something went wrong getting hospital list');
-      }
-
-      if (
-        countryStates.status === 'fulfilled' &&
-        countryStates?.value?.success
-      ) {
-        setCountryAndStateSitesData(
-          countryStates.value as AccountServiceApiResponse
+  // Get Hospital Details
+  const { data: hospitalData, isLoading: hospitalDataLoading } = useQuery({
+    queryKey: ['getHospitalDetails'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/hospital/details/${hospitalId}`
         );
-      } else {
-        toast.error('Something went wrong getting site countries and states');
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
       }
-    };
+    },
+  });
 
-    getData().catch((err) => {
-      toast.error('Response');
-    });
-  }, [hospitalId, refreshData]);
+  // Get Site Count Data
+  const { data: siteCountData, isLoading: siteCountDataLoading } = useQuery({
+    queryKey: ['getSiteCountData'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/site/status-counts/organization/${hospitalId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
 
-  const setHospitalData = (responseData: AccountServiceApiResponse) => {
-    setOrganization(responseData.data.hospital as HospitalOrganizationData);
-    setSites(responseData?.data?.sites);
-    setNoOfPages(
-      Math.ceil(
-        responseData.data.tableData.sites / (perPage !== 'All' ? perPage : 0)
-      )
-    );
-    setTotalData(responseData.data.tableData.sites);
-    setResultFrom(responseData?.data?.sites.length <= 0 ? 0 : 1);
-    setResultTo(
-      responseData?.data?.sites.length <= 0
-        ? 0
-        : currentPage + 1 === noOfPages
-        ? responseData.data.tableData.sites
-        : currentPage * (perPage !== 'All' ? perPage : 0) +
-          (perPage !== 'All' ? perPage : 0)
-    );
-  };
+  // Table Data
+  const { data: sitesTableData, isLoading: sitesTableDataLoading } = useQuery({
+    queryKey: ['getSiteTableData', searchSitePayload],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(
+          `/site/search`,
+          searchSitePayload
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
 
-  const setCountryAndStateSitesData = (
-    responseData: AccountServiceApiResponse
-  ) => {
-    let tempCountriesFilter: SelectInputFieldProps[] = [],
-      stateFilter: SelectInputFieldProps[] = [];
+  // Delete Site Mutation
+  const { mutate: deleteSiteMutation } = useMutation(
+    async () => {
+      try {
+        return await axiosDeleteRequestUserService(`/site/delete/${siteId}`);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Site', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) toast.success(result?.message);
+        else toast.error('Something Went Wrong');
 
-    responseData.data.countries.map((item: { country: string }) => {
-      tempCountriesFilter.push({
-        value: item?.country,
-        placeholder: item?.country,
-      });
-
-      return;
-    });
-
-    responseData.data.states.map((item: { state: string }) => {
-      stateFilter.push({
-        value: item?.state,
-        placeholder: item?.state,
-      });
-
-      return;
-    });
-
-    setCountryFilterList(tempCountriesFilter);
-    setStateFilterList(stateFilter);
-  };
-
-  const onUpdateActiveTab = async (
-    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED'
-  ) => {
-    setActiveTabs(tab);
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: tab === 'ALL' ? '' : tab,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
+        queryClient.resetQueries('getSiteTableData');
+      },
     }
+  );
+
+  // Request to Delete Site
+  const deleteSite = async (siteId: string) => {
+    setSiteId(siteId);
+    setShowDeleteModal(!showDeleteModal);
   };
 
+  // Confirm Delete Site - Send Delete Request
+  const confirmDeleteSite = () => {
+    setShowDeleteModal(!showDeleteModal);
+    deleteSiteMutation();
+  };
+
+  // Get Site Details for edit
+  const editSite = async (siteId: string) => {
+    setEditSiteModalController(!editSiteModalController);
+    setSiteId(siteId);
+  };
+
+  // Handle Change Tab
+  const onUpdateActiveTab = async (
+    tab: 'ALL' | 'PENDING' | 'ACTIVE' | 'DEACTIVATED' | 'CLOSED'
+  ) => {
+    setSearchSitePayload({
+      ...searchSitePayload,
+      status: tab,
+    });
+  };
+
+  // Sort By
+  const onHandleSortBy = async (key: string) => {
+    setSearchSitePayload({
+      ...searchSitePayload,
+      sortModel: {
+        colId: key,
+        sort: searchSitePayload?.sortModel?.sort === 'asc' ? 'desc' : 'asc',
+      },
+    });
+  };
+
+  // Handle Next Page
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
-      setCurrentPage(value);
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchSitePayload({
+        ...searchSitePayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
 
+      setCurrentPage(value);
       setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
       setResultTo(
         value + 1 === noOfPages
-          ? totalData
+          ? totalDataCount
           : value * (perPage !== 'All' ? perPage : 0) +
               (perPage !== 'All' ? perPage : 0)
       );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: dateFilterFrom,
-        to_date: dateFilterTo,
-        search: searchSite,
-        country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId,
-        state,
-      };
-
-      const response = await axiosGetRequestUserService(
-        '/site/organization/sites/filters',
-        params
-      );
-
-      if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
-        setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
     }
   };
 
+  // Handle Previous Page
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {
-      setCurrentPage(value);
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchSitePayload({
+        ...searchSitePayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
 
+      setCurrentPage(value);
       setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
       setResultTo(
         value + 1 === noOfPages
-          ? totalData
+          ? totalDataCount
           : value * (perPage !== 'All' ? perPage : 0) +
               (perPage !== 'All' ? perPage : 0)
       );
-
-      const params = {
-        page: value,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: dateFilterFrom,
-        to_date: dateFilterTo,
-        search: searchSite,
-        country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId,
-        state,
-      };
-
-      const response = await axiosGetRequestUserService(
-        '/site/organization/sites/filters',
-        params
-      );
-
-      if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
-        setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
     }
   };
 
-  const onUpdateSelectFrom = async (value: Date) => {
-    setDateFilterFrom(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: value,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    setCurrentPage(0);
-    setResultFrom((perPage !== 'All' ? perPage : 0) + 1);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(
-        response?.data?.count <=
-          (perPage !== 'All' ? perPage : response?.data?.count)
-          ? response?.data?.count
-          : currentPage + 1 === noOfPages
-          ? totalData
-          : currentPage * (perPage !== 'All' ? perPage : 0) +
-            (perPage !== 'All' ? perPage : 0)
-      );
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
-  };
-
-  const onUpdateSelectTo = async (value: Date) => {
-    setDateFilterTo(value);
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: value,
-      search: searchSite,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    setCurrentPage(0);
-    setResultFrom(currentPage * (perPage !== 'All' ? perPage : 0) + 1);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(
-        response?.data?.count <=
-          (perPage !== 'All' ? perPage : response?.data?.count)
-          ? response?.data?.count
-          : currentPage + 1 === noOfPages
-          ? totalData
-          : currentPage * (perPage !== 'All' ? perPage : 0) +
-            (perPage !== 'All' ? perPage : 0)
-      );
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
-  };
-
-  const onEnterPageNumber = async (value: number | string) => {
-    if (value <= 0) toast.error('You are on the first page');
-    else if (value > noOfPages)
-      toast.error('You Cannot go beyond the last page');
-    else {
-      const pageNumber = value ? Number(value) : 0;
-      setCurrentPage(pageNumber - 1);
-
-      setResultFrom((pageNumber - 1) * (perPage !== 'All' ? perPage : 0) + 1);
-      setResultTo(
-        pageNumber - 1 === noOfPages
-          ? totalData
-          : (pageNumber - 1) * (perPage !== 'All' ? perPage : 0) +
-              (perPage !== 'All' ? perPage : 0)
-      );
-
-      const params = {
-        page: pageNumber - 1,
-        per_page: perPage === 'All' ? 0 : perPage,
-        from_date: dateFilterFrom,
-        to_date: dateFilterTo,
-        search: searchSite,
-        country: country,
-        status: activeTabs === 'ALL' ? '' : activeTabs,
-        hospital_id: hospitalId,
-        state,
-      };
-
-      const response = await axiosGetRequestUserService(
-        '/site/organization/sites/filters',
-        params
-      );
-
-      if (response.success) {
-        setSites(response?.data?.sites as SuperadminSiteData[]);
-        setTotalData(response?.data?.count as number);
-        setNoOfPages(
-          Math.ceil(
-            response?.data?.count /
-              (perPage === 'All' ? response?.data?.count : perPage)
-          )
-        );
-      }
-    }
-  };
-
+  // On Change Items Per Page
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
+    const perPageItem = typeof value === 'string' ? 1000000 : value;
     setPerPage(value);
+
+    setSearchSitePayload({
+      ...searchSitePayload,
+      endRow: perPageItem,
+      startRow: 0,
+    });
     setResultFrom(1);
-    setCurrentPage(0);
-
-    const params = {
-      page: 0,
-      per_page: value === 'All' ? 0 : value,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setResultTo(value === 'All' ? response?.data?.count : value);
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (value === 'All' ? response?.data?.count : value)
-        )
-      );
-    }
+    setResultTo(perPageItem);
   };
 
+  // Update Search Key
+  const onUpdateSearchKey = (value: string) => {
+    if (value !== 'Search By') setSearchKey(value);
+  };
+
+  // On Update Search Site
   const onUpdateSearchSite = async (value: string) => {
-    setSearchSite(value);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
+    setSearchSitePayload({
+      ...searchSitePayload,
       search: value,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+      searchKey: revertDropdownOptionsToResponseKey(searchKey),
+    });
   };
 
-  const onUpdateFilterByCountry = async (value: string) => {
-    setCountry(value);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: value,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state,
-    };
-
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
+  const onUpdateShowCreateSiteModal = () => {
+    setShowCreateSiteModal((cur) => !cur);
   };
-
-  const onUpdateFilterByState = async (value: string) => {
-    setState(value);
-
-    const params = {
-      page: 0,
-      per_page: perPage === 'All' ? 0 : perPage,
-      from_date: dateFilterFrom,
-      to_date: dateFilterTo,
-      search: searchSite,
-      country: country,
-      status: activeTabs === 'ALL' ? '' : activeTabs,
-      hospital_id: hospitalId,
-      state: value,
-    };
-
-    setResultFrom(1);
-    setCurrentPage(0);
-
-    const response = await axiosGetRequestUserService(
-      '/site/organization/sites/filters',
-      params
-    );
-
-    if (response.success) {
-      setSites(response?.data?.sites as SuperadminSiteData[]);
-      setTotalData(response?.data?.count as number);
-      setResultTo(perPage === 'All' ? response?.data?.count : perPage);
-      setNoOfPages(
-        Math.ceil(
-          response?.data?.count /
-            (perPage === 'All' ? response?.data?.count : perPage)
-        )
-      );
-    }
-  };
-
-  const onUpdateDataRefresh = () => setRefreshData(!refreshData);
 
   return {
     // Values
     hospitalId,
-    organization,
-    activeTabs,
-    sites,
     perPage,
     currentPage,
     noOfPages,
     resultFrom,
     resultTo,
-    totalData,
-    searchSite,
-    country,
-    countryFilterList,
-    stateFilterList,
-    dateFilterFrom,
-    dateFilterTo,
     tabData,
+    hospitalData,
+    hospitalDataLoading,
+    siteCountData,
+    siteCountDataLoading,
+    sitesTableData,
+    sitesTableDataLoading,
+    searchKey,
+    showCreateSiteModal,
+    showDeleteModal,
+    editSiteModalController,
+    siteId,
 
     // Functions
     onUpdateActiveTab,
     onClickNext,
     onClickPrevious,
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
-    onEnterPageNumber,
     onUpdatePerPageItem,
     onUpdateSearchSite,
-    onUpdateFilterByCountry,
-    onUpdateFilterByState,
-    onUpdateDataRefresh,
+    deleteSite,
+    editSite,
+    onUpdateSearchKey,
+    onUpdateShowCreateSiteModal,
+    setShowDeleteModal,
+    confirmDeleteSite,
+    setEditSiteModalController,
+    onHandleSortBy,
   };
 };

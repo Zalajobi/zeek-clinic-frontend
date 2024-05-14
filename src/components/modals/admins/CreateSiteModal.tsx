@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ImageUpload from '@components/global/formInput/ImageUpload';
@@ -15,16 +15,14 @@ import {
 } from '@typeSpec/superadmin/forms';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
+import { Card } from '@material-tailwind/react';
 
 interface CreateSiteModalProps {
-  totalSites: number;
-  reloadPage: () => void;
+  open: boolean;
+  handleOpen: () => void;
 }
 
-const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(!open);
-
+const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
   const {
     register,
     handleSubmit,
@@ -43,36 +41,35 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
     onUpdateLogo,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite(reloadPage, totalSites);
+  } = useCreateSite(handleOpen);
 
   return (
     <Fragment>
       <CustomBasicModal
+        title={'Add New Site'}
+        handler={handleOpen}
+        size={'lg'}
+        open={open}
         footer={
           <Fragment>
             <OutlinedButton
-              click={handleSubmit(createNewSite)}
-              text={`Add Site`}
-              type={`secondary`}
-              className={`min-w-[200px] mx-5`}
+              text={`Cancel`}
+              type={`danger`}
+              click={handleOpen}
             />
 
             <OutlinedButton
-              text={`Decline`}
-              type={`danger`}
-              className={`min-w-[200px] mx-5`}
-              click={handleOpenModal}
+              click={handleSubmit(createNewSite)}
+              text={`Confirm`}
+              type={`secondary`}
             />
           </Fragment>
-        }
-        title={`Add New Site`}
-        handler={handleOpenModal}
-        open={open}
-        size={'lg'}>
+        }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%]`}>
+          {/*Image Upload*/}
           <CustomTransparentCard
-            className={`w-full h-full p-4 rounded-2xl max-h-[400px]`}>
+            className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
             <ImageUpload
               bucketFolder={`/site_image`}
               url={logo}
@@ -81,9 +78,9 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
             />
           </CustomTransparentCard>
 
-          <CustomTransparentCard className={`w-full h-full p-4 rounded-2xl`}>
+          <Card className={`w-full -h-full p-4 rounded-2xl overflow-scroll`}>
             <div
-              className={`w-full grid gap-6 grid-cols-1 mb-6 lg:grid-cols-2`}>
+              className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2`}>
               <TextInput
                 label={`Site Name`}
                 className={`my-3`}
@@ -159,138 +156,120 @@ const CreateSite = ({ reloadPage, totalSites }: CreateSiteModalProps) => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-2 my-2 lg:grid-cols-4`}>
+              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-4`}>
               <CheckboxInput
                 label={`Is Private`}
-                className={`my-3 w-full flex items-center`}
                 id={`is_private`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Appointment`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_appointment`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Care-Giver`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_caregiver`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Clinical`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_clinical`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Doctors`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_doctor`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Emergency`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_emergency`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Laboratory`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_laboratory`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Medical Supply`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_medical_supply`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Nursing`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_nursing`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has In-Patient`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_inpatient`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Out-Patient`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_outpatient`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Pharmacy`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_pharmacy`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Physical Therapy`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_physical_therapy`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Procedure`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_procedure`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Radiology`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_radiology`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Unit`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_unit`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Vital`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_vital`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Wallet`}
-                className={`my-3 w-full flex items-center`}
                 id={`has_wallet`}
                 register={register}
               />
             </div>
-          </CustomTransparentCard>
+          </Card>
         </div>
       </CustomBasicModal>
     </Fragment>
   );
 };
 
-export default CreateSite;
+export default CreateSiteModal;

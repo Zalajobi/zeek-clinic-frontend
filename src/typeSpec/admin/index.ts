@@ -1,16 +1,16 @@
 import { ReactNode } from 'react';
+import { UserServiceUnitResponseData } from '@typeSpec/index';
 import {
-  UserServiceDepartmentResponseData,
-  UserServicePersonalInfoResponseData,
-  UserServiceRoleResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
+  DepartmentPayload,
+  PersonalInfoPayload,
+  RolePayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
 
 export interface AdminHeaderBaseTemplateData {
   role: string;
   siteId: string;
-  personalInfo: UserServicePersonalInfoResponseData;
+  personalInfo: PersonalInfoPayload;
   email: string;
   username: string;
   staff_id: string;
@@ -59,9 +59,9 @@ export interface ProviderAndRelationAPIResponse {
   status: string;
   created_at: string;
   siteId: string;
-  personalInfo: UserServicePersonalInfoResponseData;
-  department: UserServiceDepartmentResponseData;
+  personalInfo: PersonalInfoPayload;
+  department: DepartmentPayload;
   unit: UserServiceUnitResponseData;
-  servicearea: UserServiceServiceAreaResponseData;
-  primary_role: UserServiceRoleResponseData;
+  servicearea: ServiceAreaPayload;
+  primary_role: RolePayload;
 }

@@ -1,14 +1,14 @@
+import { UserServiceUnitResponseData } from '@typeSpec/index';
 import {
-  UserServiceDepartmentResponseData,
-  UserServiceRoleResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
+  DepartmentPayload,
+  RolePayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
 
 export interface AdminCreateProviderResponseData {
-  departments: UserServiceDepartmentResponseData[];
-  roles: UserServiceRoleResponseData[];
-  serviceAreas: UserServiceServiceAreaResponseData[];
+  departments: DepartmentPayload[];
+  roles: RolePayload[];
+  serviceAreas: ServiceAreaPayload[];
   units: UserServiceUnitResponseData[];
 }
 

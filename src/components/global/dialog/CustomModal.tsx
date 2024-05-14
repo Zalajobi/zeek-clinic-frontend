@@ -41,7 +41,7 @@ export const CustomBasicModal = ({
         className={`h-full w-full overflow-x-hidden max-h-[800px] ${className}`}>
         {/*Modal Header*/}
         <DialogHeader
-          className={`sticky top-0 h-[100px] border border-b-gray-300`}>
+          className={`sticky top-0 h-[100px] border border-b-gray-300 bg-white z-50`}>
           <div className="flex w-full flex-shrink-0 items-center justify-between rounded-t-md p-4">
             {/*Modal Title*/}
             <Typography
@@ -77,7 +77,7 @@ export const CustomBasicModal = ({
         </DialogHeader>
 
         {/*Modal Body*/}
-        <DialogBody className={`h-[600px]`}>
+        <DialogBody className={`h-[600px] overflow-y-hidden`}>
           <div
             className={`relative p-4 h-full overflow-y-auto ${bodyClassName}`}>
             {children}

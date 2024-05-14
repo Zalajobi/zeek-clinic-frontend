@@ -7,9 +7,11 @@ import {
   GetHospitalResponseData,
   HospitalRowData,
   SiteRowData,
-  SuperadminSiteData,
+  SitesDataKeyMap,
 } from '@typeSpec/superadmin';
 import Status from '@components/global/Status';
+import { HiPencil } from 'react-icons/hi2';
+import { MdDelete } from 'react-icons/md';
 
 export const SuperadminHospitalDataColumn = (
   onClickSortParameters: (
@@ -251,231 +253,112 @@ export const SuperadminHospitalDataRow = (
   return rowItems;
 };
 
-export const SuperadminSiteDataColumn = () => {
-  const columnItem = [
+export const SuperAdminSiteDataColumns = () => {
+  return [
     {
-      Header: (
-        <div className="flex items-center gap-3 whitespace-nowrap w-[60px]">
-          <div className="group flex cursor-pointer select-none flex-row items-center gap-2 font-inter text-sm font-medium outline-none">
-            <input
-              className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-md border p-1 outline-none
-                      ring-offset-0 transition-[background-color,_border-color,_box-shadow] focus:ring-2
-                      focus:ring-offset-2 group-hover:ring-2 group-hover:ring-offset-2 border-custom-gray-100 bg-white
-                      ring-custom-primary-400"
-              type="checkbox"
-              // onChange={onUpdateSelectAllHospitals}
-            />
-          </div>
-        </div>
-      ),
-      accessor: 'checkbox',
+      key: 'name',
+      value: 'Name',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Name
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'name',
+      key: 'email',
+      value: 'Email',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Email
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'email',
+      key: 'phone',
+      value: 'Phone',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Phone
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'phone',
+      key: 'country',
+      value: 'Country',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Country
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'country',
+      key: 'state',
+      value: 'State',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            State
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'state',
+      key: 'city',
+      value: 'City',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            City
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'city',
+      key: 'address',
+      value: 'Address',
+      sortable: true,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Address
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'address',
+      key: 'status',
+      value: 'Status',
+      sortable: false,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Status
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'status',
+      key: 'created_at',
+      value: 'Created At',
+      sortable: false,
     },
-
     {
-      Header: (
-        <Fragment>
-          <span
-            className="flex shrink-0 flex-row gap-1"
-            onClick={() => {}}>
-            Registered On
-            <TbArrowsMoveVertical size={15} />
-          </span>
-        </Fragment>
-      ),
-      accessor: 'created_at',
-    },
-
-    {
-      Header: (
-        <Fragment>
-          <span className="flex shrink-0 flex-col gap-1">Status</span>
-        </Fragment>
-      ),
-      accessor: 'action',
+      key: 'action',
+      value: 'Action',
+      sortable: false,
     },
   ];
-
-  return columnItem;
 };
 
-export const SuperadminSiteDataRow = (
-  data: SuperadminSiteData[]
-  // onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void
-) => {
-  const rowItems: SiteRowData[] = [];
+export const SuperAdminSiteDataRows = (data: SitesDataKeyMap[]) => {
+  const rowItems: any[] = [];
 
-  data?.map((item: SuperadminSiteData, idx: number) => {
+  data?.map((item) => {
     rowItems.push({
-      checkbox: (
-        <th
-          colSpan={1}
-          scope="col"
-          className="font-inter text-xs font-medium">
-          <div className="flex items-center gap-3 whitespace-nowrap w-[60px]">
-            <div className="group flex cursor-pointer select-none flex-row items-center gap-2 font-inter text-sm font-medium outline-none">
-              <input
-                className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-md border p-1 outline-none
-                      ring-offset-0 transition-[background-color,_border-color,_box-shadow] focus:ring-2
-                      focus:ring-offset-2 group-hover:ring-2 group-hover:ring-offset-2 border-custom-gray-100 bg-white
-                      ring-custom-primary-400"
-                type="checkbox"
-                // checked={selected}
-                // onChange={(event) => onSelect(event, item?.id)}
-              />
-            </div>
-          </div>
-        </th>
-      ),
-
-      name: (
-        <Link
-          to={`/superadmin/site/${item?.id}`}
-          className={`text-black hover:text-gray-500 decoration-0`}>
-          <b className={`font-extrabold`}>{item?.name}</b>
-        </Link>
-      ),
-
-      email: <>{item?.email}</>,
-
-      phone: <>{item?.phone}</>,
-
-      country: <>{item?.country}</>,
-
-      state: <>{item?.state}</>,
-
-      city: <>{item?.city}</>,
-
-      address: <>{item?.address}</>,
-
-      status: (
-        <>
-          <Status status={item?.status} />
-        </>
-      ),
-
-      created_at: <>{moment(item?.created_at).format('MMM DD. YYYY')}</>,
-
-      action: (
-        <>
-          <p>Action</p>
-        </>
-      ),
+      name: item?.name,
+      id: item?.id,
+      email: item?.email,
+      phone: item?.phone,
+      country: item?.country,
+      state: item?.state,
+      city: item?.city,
+      address: item?.address,
+      status: item?.status,
+      created_at: moment(item?.created_at).format('MMM DD. YYYY'),
+      logo: item?.logo,
     });
 
     return;
   });
 
   return rowItems;
+};
+
+export const SuperAdminSiteActionItem = (
+  editSite: (siteId: string) => Promise<void>,
+  deleteSite: (siteId: string) => Promise<void>
+) => {
+  return [
+    {
+      icon: (
+        <HiPencil
+          className="h-4 w-4"
+          color={`blue`}
+          size={15}
+        />
+      ),
+      label: 'Edit',
+      onClick: (siteId: string) => editSite(siteId),
+    },
+
+    {
+      icon: (
+        <MdDelete
+          className="h-4 w-4"
+          color={`red`}
+          size={15}
+        />
+      ),
+      label: 'Delete',
+      onClick: (siteId: string) => deleteSite(siteId),
+    },
+  ];
 };

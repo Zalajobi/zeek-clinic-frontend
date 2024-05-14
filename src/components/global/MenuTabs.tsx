@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactNode, useState } from 'react';
+import { createElement, Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -26,14 +26,13 @@ interface ProfileMenuProps {
   profileImg?: string;
 }
 
-interface CustomTabHeaderProps {
+interface CustomTabSelectorProps {
   tabItems: {
     label: string;
     value: string;
     icon?: any;
   }[];
   onClick: (value: any) => void;
-  orientation?: 'vertical' | 'horizontal';
   className?: string;
 }
 
@@ -120,18 +119,38 @@ export const ProfileMenu = ({ menuItems, profileImg }: ProfileMenuProps) => {
   );
 };
 
-export const CustomTabHeader = ({
+export const CustomTabSelector = ({
   tabItems,
   onClick,
-  orientation = 'horizontal',
   className,
-}: CustomTabHeaderProps) => {
+}: CustomTabSelectorProps) => {
+  const [orientation, setOrientation] = useState('horizontal');
+
+  useEffect(() => {
+    // Function to check and update the orientation based on screen width
+    const checkOrientation = () => {
+      if (window.innerWidth >= 760) {
+        setOrientation('horizontal');
+      } else {
+        setOrientation('vertical');
+      }
+    };
+
+    // Check Orientation on load
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+
+    return () => window.removeEventListener('resize', checkOrientation);
+  }, []);
+
   return (
     <Fragment>
       <Tabs
         value={tabItems[0].value}
         orientation={orientation}
-        className={`w-full rounded-lg md:w-max bg-gray-300 ${className}`}>
+        className={`w-full md:w-max rounded-lg bg-gray-100 ${
+          className ? className : ''
+        }`}>
         <TabsHeader>
           {tabItems.map(({ label, value, icon }) => (
             <Tab

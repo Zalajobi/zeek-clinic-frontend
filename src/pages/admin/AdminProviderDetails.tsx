@@ -14,11 +14,10 @@ import ProviderRecentOrders from '@components/admin/providers/details/ProviderRe
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 import ProvidersPrimaryPatients from '@components/admin/providers/details/ProvidersPrimaryPatients';
 import {
-  UserServiceDepartmentResponseData,
   UserServicePatientDetailsResponse,
-  UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '@typeSpec/index';
+import { DepartmentPayload, ServiceAreaPayload } from '@typeSpec/payloads';
 
 const AdminProviderDetails = () => {
   const {
@@ -145,12 +144,10 @@ const AdminProviderDetails = () => {
                 className={`col-span-6`}
                 loading={primaryPatientsDataLoading}
                 department={
-                  unitDeptData?.data
-                    ?.department as UserServiceDepartmentResponseData[]
+                  unitDeptData?.data?.department as DepartmentPayload[]
                 }
                 serviceArea={
-                  unitDeptData?.data
-                    ?.serviceArea as UserServiceServiceAreaResponseData[]
+                  unitDeptData?.data?.serviceArea as ServiceAreaPayload[]
                 }
                 unit={unitDeptData?.data?.unit as UserServiceUnitResponseData[]}
                 data={

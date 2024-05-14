@@ -3,7 +3,6 @@ import { UseFormRegister } from 'react-hook-form';
 import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import { Typography } from '@components/global/dialog/Typography';
 import change = Simulate.change;
 import { SelectInputFieldProps } from '@typeSpec/common';
 import {
@@ -18,6 +17,8 @@ import {
   PopoverContent,
   Select,
   Option,
+  Typography as MaterialTypography,
+  Checkbox,
 } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -32,9 +33,9 @@ interface TextInputProps {
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
-  prefix?: string;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  change?: (event: string) => void;
+  size?: 'lg' | 'md';
+  showLabel?: boolean;
 }
 
 interface TextInputWithoutLabelProps {
@@ -55,7 +56,8 @@ interface SelectInputProps {
   label?: string;
   errorMsg?: string;
   className?: string;
-  change?: (event: string) => void;
+  change?: (event: any) => void;
+  size?: 'lg' | 'md';
 }
 
 interface DateInputProps {
@@ -73,8 +75,8 @@ interface DateInputProps {
 interface CheckboxInputProps {
   label: string;
   id: string;
-  register: UseFormRegister<any>;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  register?: UseFormRegister<any>;
+  change?: (value: boolean) => void;
   className?: string;
   disabled?: boolean;
 }
@@ -96,45 +98,49 @@ export const TextInput = ({
   className = '',
   register,
   type = 'text',
-  prefix,
   change,
-  value,
+  size,
+  showLabel = true,
 }: TextInputProps) => {
   return (
     <Fragment>
       <div className={`min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
-          <label
-            htmlFor={id}
-            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
-              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-            }`}>
-            {label}
-          </label>
+          {showLabel && (
+            <label
+              htmlFor={id}
+              className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+              }`}>
+              {label}
+            </label>
+          )}
 
-          <div className="relative h-[58px] w-full min-w-[200px]">
+          <div className="relative w-full min-w-[200px]">
             {register ? (
               <>
-                <input
+                <Input
                   type={type}
-                  className={`py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5 border-[#E5E7EB]`}
+                  className={`border-t divide-solid border-t-gray-400`}
                   placeholder={placeholder}
                   id={id}
+                  size={size ?? 'lg'}
+                  label={label}
                   {...register(id)}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
               </>
             ) : (
               <>
-                <input
+                <Input
                   type={type}
-                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  className={`border-t divide-solid border-t-gray-400`}
                   placeholder={placeholder}
                   id={id}
-                  onChange={change}
-                  value={value}
+                  size={size ?? 'lg'}
+                  onChange={(event) => {
+                    if (change) change(event.target.value);
+                  }}
+                  label={label}
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                   {icon}
@@ -143,15 +149,23 @@ export const TextInput = ({
             )}
           </div>
           {errorMsg && (
-            <div className="text-sm text-red-600 mt-2">
-              <Typography
-                Tag={`span`}
-                text={errorMsg}
-                className={`italic text-xs font-bold ${
-                  errorMsg ? 'text-red-500' : ''
-                }`}
-              />
-            </div>
+            <MaterialTypography
+              variant={'small'}
+              className="mt-2 flex items-center gap-1 font-normal"
+              color={'red'}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="-mt-px h-4 w-4">
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {errorMsg}
+            </MaterialTypography>
           )}
         </div>
       </div>
@@ -201,53 +215,61 @@ export const SelectInput = ({
   id,
   register,
   change,
+  size,
 }: SelectInputProps) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const onUpdateSelectInputValue = (value: string | undefined) => {};
-
   return (
     <Fragment>
-      <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
-        {register ? (
-          <select
-            {...register?.(id, {
-              onChange: (event) => {
-                if (change) {
-                  change(event);
-                }
-              },
-            })}
-            id={id}>
-            <option
-              selected
-              disabled>
-              Select {label}
-            </option>
-            {options.map((item, idx) => {
-              return (
-                <option value={item.value}>
-                  {item.placeholder.replaceAll('_', ' ')}
-                </option>
-              );
-            })}
-          </select>
-        ) : (
-          <>
+      <div className={`min-w-[100px] my-2 ${className}`}>
+        <div className="w-full">
+          <label
+            htmlFor={id}
+            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+            }`}>
+            {label}
+          </label>
+        </div>
+
+        <div className={`relative w-full min-w-[100px] my-2 ${className}`}>
+          {register ? (
             <Select
+              size={size ?? 'lg'}
+              onChange={(eventValue) => {
+                if (change) change(eventValue ?? '');
+                register?.(id, {
+                  value: eventValue,
+                });
+              }}
               label={`Select ${label}`}
-              value={inputValue}
-              onChange={onUpdateSelectInputValue}>
+              id={id}>
               {options.map((item, idx) => {
                 return (
-                  <Option value={item.value}>
+                  <Option
+                    value={item.value}
+                    key={`${item}-${idx}`}>
                     {item.placeholder.replaceAll('_', ' ')}
                   </Option>
                 );
               })}
             </Select>
-          </>
-        )}
+          ) : (
+            <>
+              <Select
+                label={`Select ${label}`}
+                onChange={(value) => {
+                  if (change) change(value ?? '');
+                }}>
+                {options.map((item, idx) => {
+                  return (
+                    <Option value={item.value}>
+                      {item.placeholder.replaceAll('_', ' ')}
+                    </Option>
+                  );
+                })}
+              </Select>
+            </>
+          )}
+        </div>
       </div>
     </Fragment>
   );
@@ -347,36 +369,19 @@ export const CheckboxInput = ({
   className = '',
   disabled = false,
   register,
+  change,
 }: CheckboxInputProps) => {
   return (
     <Fragment>
-      <div
-        className={`mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] ${className}`}>
-        <input
-          className={`relative float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none 
-            rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none
-            before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full
-            before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-['']
-            checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute
-            checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem]
-            checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0
-            checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent
-            checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04]
-            hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s]
-            focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)]
-            focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1]
-            focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem]
-            focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]
-            checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px
-            checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem]
-            checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem]
-            checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid
-            checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600
-            dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)]
-            dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]`}
-          type="checkbox"
-          value=""
+      {register ? (
+        <Checkbox
           id={id}
+          label={
+            <MaterialTypography className={`font-bold text-sm ${className}`}>
+              {label}
+            </MaterialTypography>
+          }
+          ripple={true}
           disabled={disabled}
           {...register(id, {
             onChange: (event) => {
@@ -386,13 +391,22 @@ export const CheckboxInput = ({
             },
           })}
         />
-
-        <label
-          className="inline-block pl-[0.15rem] hover:cursor-pointer"
-          htmlFor={id}>
-          {label}
-        </label>
-      </div>
+      ) : (
+        <Checkbox
+          id={id}
+          label={
+            <MaterialTypography className={`font-bold text-sm ${className}`}>
+              {label}
+            </MaterialTypography>
+          }
+          ripple={true}
+          disabled={disabled}
+          onChange={(event) => {
+            if (change) change(event.target.checked);
+            // console.log(event.target.checked)
+          }}
+        />
+      )}
     </Fragment>
   );
 };
