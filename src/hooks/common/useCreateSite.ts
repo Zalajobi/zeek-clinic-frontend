@@ -9,7 +9,7 @@ import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const useCreateSite = (handleOpen: () => void) => {
+export const useCreateSite = (handleOpen?: () => void) => {
   const queryClient = useQueryClient();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
@@ -91,7 +91,9 @@ export const useCreateSite = (handleOpen: () => void) => {
 
   const createNewSite = async (data: CreateSiteInput) => {
     createSiteMutation(data);
-    handleOpen();
+    if (handleOpen) {
+      handleOpen();
+    }
   };
 
   return {

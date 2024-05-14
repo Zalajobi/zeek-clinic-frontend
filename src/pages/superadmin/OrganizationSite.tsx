@@ -14,7 +14,7 @@ import { SitesDataKeyMap } from '@typeSpec/superadmin';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
-import CreateSiteModal from '@components/modals/superAdmin/CreateSiteModal';
+import CreateSiteModal from '@components/modals/admins/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { formatResponseKeyForDropdown } from '@util/index';
@@ -24,6 +24,7 @@ import {
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
 import ConfirmationModal from '@components/modals/ConfirmationModal';
+import EditSiteModal from '@components/modals/admins/EditSiteModal';
 
 const OrganizationSite = () => {
   const itemsPerPage = ['All', 10, 20, 50, 100],
@@ -48,6 +49,8 @@ const OrganizationSite = () => {
     searchKey,
     showCreateSiteModal,
     showDeleteModal,
+    editSiteModalController,
+    siteId,
 
     // Functions
     onUpdateActiveTab,
@@ -56,11 +59,12 @@ const OrganizationSite = () => {
     onUpdatePerPageItem,
     onUpdateSearchSite,
     deleteSite,
-    getSiteDetailsAndEditModalController,
+    editSite,
     onUpdateSearchKey,
     onUpdateShowCreateSiteModal,
     setShowDeleteModal,
     confirmDeleteSite,
+    setEditSiteModalController,
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
@@ -81,11 +85,7 @@ const OrganizationSite = () => {
 
   const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
   const actionItems = useMemo(
-    () =>
-      SuperAdminSiteActionItem(
-        getSiteDetailsAndEditModalController,
-        deleteSite
-      ),
+    () => SuperAdminSiteActionItem(editSite, deleteSite),
     []
   );
 
@@ -190,6 +190,12 @@ const OrganizationSite = () => {
         message={'Are you sure you want to delete this item?'}
         handleOpen={() => setShowDeleteModal((cur) => !cur)}
         handleConfirm={confirmDeleteSite}
+      />
+
+      <EditSiteModal
+        open={editSiteModalController}
+        handleOpen={() => setEditSiteModalController(!editSiteModalController)}
+        siteId={siteId}
       />
     </SuperadminBaseTemplate>
   );

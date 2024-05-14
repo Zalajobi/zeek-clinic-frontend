@@ -53,8 +53,8 @@ export const generateRandomCharacters = (min?: number): string => {
   return randomCharacters;
 };
 
-export const calculateAge = (givenDate: Date): string | number => {
-  const dob = new Date(givenDate);
+export const calculateAge = (givenDate: Date | undefined): string | number => {
+  const dob = new Date(givenDate ?? '');
   if (!givenDate) return '--';
 
   const monthDiff = Date.now() - dob.getTime();

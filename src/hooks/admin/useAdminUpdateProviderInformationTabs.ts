@@ -11,19 +11,19 @@ import { AdminEditProvidersInformation } from '@typeSpec/admin/provider';
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
 import { axiosPutRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
+import { UserServiceUnitResponseData } from '@typeSpec/index';
 import {
-  UserServiceDepartmentResponseData,
-  UserServiceRoleResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
+  DepartmentPayload,
+  RolePayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
 
 export const useAdminUpdateProviderInformationTabs = (
   fetchData: boolean,
   siteId: string,
-  departments: UserServiceDepartmentResponseData[],
-  roles: UserServiceRoleResponseData[],
-  serviceAreas: UserServiceServiceAreaResponseData[],
+  departments: DepartmentPayload[],
+  roles: RolePayload[],
+  serviceAreas: ServiceAreaPayload[],
   units: UserServiceUnitResponseData[]
 ) => {
   const { id } = useParams();

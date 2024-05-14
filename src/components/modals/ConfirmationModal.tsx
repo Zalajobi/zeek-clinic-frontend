@@ -1,12 +1,12 @@
 import { Fragment } from 'react';
 import {
-  Button,
   Dialog,
   DialogBody,
   DialogFooter,
   DialogHeader,
   Typography,
 } from '@material-tailwind/react';
+import { OutlinedButton } from '@components/global/CustomButton';
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -38,18 +38,17 @@ const ConfirmationModal = ({
           </Typography>
         </DialogBody>
         <DialogFooter className={`gap-4`}>
-          <Button
-            onClick={handleOpen}
-            className="btn btn-primary"
-            color={'red'}>
-            Cancel
-          </Button>
-          <Button
-            onClick={handleConfirm}
-            className="btn btn-primary"
-            color={`green`}>
-            Confirm
-          </Button>
+          <OutlinedButton
+            text={`Cancel`}
+            type={`danger`}
+            click={handleOpen}
+          />
+
+          <OutlinedButton
+            click={handleConfirm}
+            text={`Confirm`}
+            type={`secondary`}
+          />
         </DialogFooter>
       </Dialog>
     </Fragment>

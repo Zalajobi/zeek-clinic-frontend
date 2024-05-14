@@ -33,9 +33,9 @@ interface TextInputProps {
   errorMsg?: string;
   placeholder?: string;
   icon?: ReactNode;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  change?: (event: string) => void;
   size?: 'lg' | 'md';
+  showLabel?: boolean;
 }
 
 interface TextInputWithoutLabelProps {
@@ -56,7 +56,7 @@ interface SelectInputProps {
   label?: string;
   errorMsg?: string;
   className?: string;
-  change?: (event: string) => void;
+  change?: (event: any) => void;
   size?: 'lg' | 'md';
 }
 
@@ -75,8 +75,8 @@ interface DateInputProps {
 interface CheckboxInputProps {
   label: string;
   id: string;
-  register: UseFormRegister<any>;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
+  register?: UseFormRegister<any>;
+  change?: (value: boolean) => void;
   className?: string;
   disabled?: boolean;
 }
@@ -99,20 +99,22 @@ export const TextInput = ({
   register,
   type = 'text',
   change,
-  value,
   size,
+  showLabel = true,
 }: TextInputProps) => {
   return (
     <Fragment>
       <div className={`min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
-          <label
-            htmlFor={id}
-            className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
-              errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-            }`}>
-            {label}
-          </label>
+          {showLabel && (
+            <label
+              htmlFor={id}
+              className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+              }`}>
+              {label}
+            </label>
+          )}
 
           <div className="relative w-full min-w-[200px]">
             {register ? (
@@ -129,13 +131,16 @@ export const TextInput = ({
               </>
             ) : (
               <>
-                <input
+                <Input
                   type={type}
-                  className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 sm:p-5`}
+                  className={`border-t divide-solid border-t-gray-400`}
                   placeholder={placeholder}
                   id={id}
-                  onChange={change}
-                  value={value}
+                  size={size ?? 'lg'}
+                  onChange={(event) => {
+                    if (change) change(event.target.value);
+                  }}
+                  label={label}
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                   {icon}
@@ -364,26 +369,44 @@ export const CheckboxInput = ({
   className = '',
   disabled = false,
   register,
+  change,
 }: CheckboxInputProps) => {
   return (
     <Fragment>
-      <Checkbox
-        id={id}
-        label={
-          <MaterialTypography className={`font-bold text-sm ${className}`}>
-            {label}
-          </MaterialTypography>
-        }
-        ripple={true}
-        disabled={disabled}
-        {...register(id, {
-          onChange: (event) => {
-            if (change) {
-              change(event);
-            }
-          },
-        })}
-      />
+      {register ? (
+        <Checkbox
+          id={id}
+          label={
+            <MaterialTypography className={`font-bold text-sm ${className}`}>
+              {label}
+            </MaterialTypography>
+          }
+          ripple={true}
+          disabled={disabled}
+          {...register(id, {
+            onChange: (event) => {
+              if (change) {
+                change(event);
+              }
+            },
+          })}
+        />
+      ) : (
+        <Checkbox
+          id={id}
+          label={
+            <MaterialTypography className={`font-bold text-sm ${className}`}>
+              {label}
+            </MaterialTypography>
+          }
+          ripple={true}
+          disabled={disabled}
+          onChange={(event) => {
+            if (change) change(event.target.checked);
+            // console.log(event.target.checked)
+          }}
+        />
+      )}
     </Fragment>
   );
 };

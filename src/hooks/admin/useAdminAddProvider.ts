@@ -58,21 +58,21 @@ export const useAdminAddProvider = () => {
         const data = response.data as AdminCreateProviderResponseData;
 
         data.departments.map((item) => {
-          return temporaryDeptStore.push({
+          return temporaryDeptStore.push(<SelectInputFieldProps>{
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.roles.map((item) => {
-          return temporaryRoleStore.push({
+          return temporaryRoleStore.push(<SelectInputFieldProps>{
             value: item?.id,
             placeholder: item?.name,
           });
         });
 
         data.serviceAreas.map((item) => {
-          return temporaryServiceAreaStore.push({
+          return temporaryServiceAreaStore.push(<SelectInputFieldProps>{
             value: item?.id,
             placeholder: item?.name,
           });

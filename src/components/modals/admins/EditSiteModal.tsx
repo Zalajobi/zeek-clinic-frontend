@@ -1,81 +1,87 @@
 import { Fragment } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import ImageUpload from '@components/global/formInput/ImageUpload';
-import { useCreateSite } from '@hooks/common/useCreateSite';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import { OutlinedButton } from '@components/global/CustomButton';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import {
   CheckboxInput,
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
-import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import {
-  CreateSiteInput,
-  CreateSiteInputSchema,
-} from '@typeSpec/superadmin/forms';
-import { OutlinedButton } from '@components/global/CustomButton';
-import { CustomBasicModal } from '@components/global/dialog/CustomModal';
+import { useEditSite } from '@hooks/common/useEditSite';
+import ImageUpload from '@components/global/formInput/ImageUpload';
 import { Card } from '@material-tailwind/react';
 
-interface CreateSiteModalProps {
+interface EditSiteModalProps {
   open: boolean;
   handleOpen: () => void;
+  siteId: string;
 }
 
-const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
+const EditSiteModal = ({ open, handleOpen, siteId }: EditSiteModalProps) => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateSiteInput>({
-    resolver: yupResolver(CreateSiteInputSchema),
-  });
-
-  const {
-    // Values
-    logo,
-    allCountries,
-    allCountryStates,
+    siteData,
+    siteLoading,
+    logoUrl,
+    siteStatus,
 
     // Functions
-    onUpdateLogo,
-    createNewSite,
-    onUpdateCountry,
-  } = useCreateSite(handleOpen);
+    onUpdateSiteName,
+    onUpdateSiteLogo,
+    onUpdateSiteEmail,
+    onUpdateSitePhone,
+    isSitePrivate,
+    hasAppointment,
+    hasCareGiver,
+    hasClinical,
+    hasDoctor,
+    hasEmergency,
+    hasLaboratory,
+    hasMedicalSupply,
+    hasNursing,
+    hasInPatient,
+    hasOutPatient,
+    hasPharmacy,
+    hasPhysicalTherapy,
+    hasProcedure,
+    hasRadiology,
+    hasUnit,
+    hasVital,
+    hasWallet,
+    onUpdateSiteStatus,
+  } = useEditSite(siteId);
 
   return (
     <Fragment>
       <CustomBasicModal
-        title={'Add New Site'}
+        title={`Edit ${siteData?.data?.name ?? 'Site'}`}
         handler={handleOpen}
         size={'lg'}
         open={open}
         footer={
           <Fragment>
             <OutlinedButton
-              click={handleSubmit(createNewSite)}
-              text={`Add Site`}
-              type={`secondary`}
-              className={`min-w-[200px] mx-5`}
-            />
-
-            <OutlinedButton
               text={`Decline`}
               type={`danger`}
               className={`min-w-[200px] mx-5`}
               click={handleOpen}
             />
+
+            <OutlinedButton
+              click={() => console.log('Update Site')}
+              text={`Update Site`}
+              type={`secondary`}
+              className={`min-w-[200px] mx-5`}
+            />
           </Fragment>
         }>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%]`}>
-          {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
             <ImageUpload
               bucketFolder={`/site_image`}
-              url={logo}
-              updateImageUrl={onUpdateLogo}
+              url={logoUrl}
+              updateImageUrl={onUpdateSiteLogo}
               label={`Site Logo`}
             />
           </CustomTransparentCard>
@@ -84,76 +90,34 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2`}>
               <TextInput
-                label={`Site Name`}
+                label={`Name`}
                 className={`my-3`}
-                errorMsg={errors.name?.message ?? ''}
                 id={`name`}
-                register={register}
+                change={onUpdateSiteName}
               />
 
               <TextInput
                 label={`Email`}
                 className={`my-3`}
-                errorMsg={errors.email?.message ?? ''}
                 id={`email`}
                 type={`email`}
-                register={register}
-              />
-            </div>
-
-            <div
-              className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
-              <SelectInput
-                label={`Country`}
-                options={allCountries}
-                className={`w-full my-3`}
-                register={register}
-                id={'country'}
-                errorMsg={errors.country?.message ?? ''}
-                change={onUpdateCountry}
-              />
-
-              <SelectInput
-                label={`State`}
-                options={allCountryStates}
-                className={`w-full my-3`}
-                register={register}
-                id={'state'}
-                errorMsg={errors.state?.message ?? ''}
-              />
-
-              <TextInput
-                label={`City`}
-                className={`my-3`}
-                errorMsg={errors.city?.message ?? ''}
-                id={`city`}
-                register={register}
-              />
-
-              <TextInput
-                label={`Zip Code`}
-                className={`my-3`}
-                errorMsg={errors.zip_code?.message ?? ''}
-                type={'number'}
-                id={`zip_code`}
-                register={register}
-              />
-
-              <TextInput
-                label={`Address`}
-                className={`my-3`}
-                errorMsg={errors.address?.message ?? ''}
-                id={`address`}
-                register={register}
+                change={onUpdateSiteEmail}
               />
 
               <TextInput
                 label={`Phone`}
                 className={`my-3`}
-                errorMsg={errors.phone?.message ?? ''}
                 id={`phone`}
                 type={'tel'}
-                register={register}
+                change={onUpdateSitePhone}
+              />
+
+              <SelectInput
+                id={`Status`}
+                label={`Status`}
+                options={siteStatus}
+                size={'lg'}
+                change={onUpdateSiteStatus}
               />
             </div>
 
@@ -162,109 +126,109 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
               <CheckboxInput
                 label={`Is Private`}
                 id={`is_private`}
-                register={register}
+                change={isSitePrivate}
               />
 
               <CheckboxInput
                 label={`Has Appointment`}
                 id={`has_appointment`}
-                register={register}
+                change={hasAppointment}
               />
 
               <CheckboxInput
                 label={`Has Care-Giver`}
                 id={`has_caregiver`}
-                register={register}
+                change={hasCareGiver}
               />
 
               <CheckboxInput
                 label={`Has Clinical`}
                 id={`has_clinical`}
-                register={register}
+                change={hasClinical}
               />
 
               <CheckboxInput
                 label={`Has Doctors`}
                 id={`has_doctor`}
-                register={register}
+                change={hasDoctor}
               />
 
               <CheckboxInput
                 label={`Has Emergency`}
                 id={`has_emergency`}
-                register={register}
+                change={hasEmergency}
               />
 
               <CheckboxInput
                 label={`Has Laboratory`}
                 id={`has_laboratory`}
-                register={register}
+                change={hasLaboratory}
               />
 
               <CheckboxInput
                 label={`Has Medical Supply`}
                 id={`has_medical_supply`}
-                register={register}
+                change={hasMedicalSupply}
               />
 
               <CheckboxInput
                 label={`Has Nursing`}
                 id={`has_nursing`}
-                register={register}
+                change={hasNursing}
               />
 
               <CheckboxInput
                 label={`Has In-Patient`}
                 id={`has_inpatient`}
-                register={register}
+                change={hasInPatient}
               />
 
               <CheckboxInput
                 label={`Has Out-Patient`}
                 id={`has_outpatient`}
-                register={register}
+                change={hasOutPatient}
               />
 
               <CheckboxInput
                 label={`Has Pharmacy`}
                 id={`has_pharmacy`}
-                register={register}
+                change={hasPharmacy}
               />
 
               <CheckboxInput
                 label={`Has Physical Therapy`}
                 id={`has_physical_therapy`}
-                register={register}
+                change={hasPhysicalTherapy}
               />
 
               <CheckboxInput
                 label={`Has Procedure`}
                 id={`has_procedure`}
-                register={register}
+                change={hasProcedure}
               />
 
               <CheckboxInput
                 label={`Has Radiology`}
                 id={`has_radiology`}
-                register={register}
+                change={hasRadiology}
               />
 
               <CheckboxInput
                 label={`Has Unit`}
                 id={`has_unit`}
-                register={register}
+                change={hasUnit}
               />
 
               <CheckboxInput
                 label={`Has Vital`}
                 id={`has_vital`}
-                register={register}
+                change={hasVital}
               />
 
               <CheckboxInput
                 label={`Has Wallet`}
                 id={`has_wallet`}
-                register={register}
+                change={hasWallet}
               />
             </div>
           </Card>
@@ -274,4 +238,4 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
   );
 };
 
-export default CreateSiteModal;
+export default EditSiteModal;

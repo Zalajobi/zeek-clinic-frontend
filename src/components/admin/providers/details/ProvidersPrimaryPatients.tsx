@@ -2,9 +2,7 @@ import { CustomCard } from '@components/global/card/CustomCard';
 import { Fragment, useMemo } from 'react';
 import { Typography } from '@components/global/dialog/Typography';
 import {
-  UserServiceDepartmentResponseData,
   UserServicePatientDetailsResponse,
-  UserServiceServiceAreaResponseData,
   UserServiceUnitResponseData,
 } from '@typeSpec/index';
 import {
@@ -16,14 +14,15 @@ import { MovePatientActionModal } from '@components/modals/quickAction/MovePatie
 import { useProvidersPrimaryPatients } from '@hooks/patient/useProvidersPrimaryPatients';
 import { Button } from '@material-tailwind/react';
 import { LoadingSpinner } from '@components/global/Toast';
+import { DepartmentPayload, ServiceAreaPayload } from '@typeSpec/payloads';
 
 interface ProvidersPrimaryPatientProps {
   data: UserServicePatientDetailsResponse[];
   loading: boolean;
   siteId: string;
   className?: string;
-  department?: UserServiceDepartmentResponseData[];
-  serviceArea?: UserServiceServiceAreaResponseData[];
+  department?: DepartmentPayload[];
+  serviceArea?: ServiceAreaPayload[];
   unit?: UserServiceUnitResponseData[];
 }
 

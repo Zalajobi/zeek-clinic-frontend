@@ -142,9 +142,9 @@ export const useOrganizationDetails = () => {
   };
 
   // Get Site Details for edit
-  const getSiteDetailsAndEditModalController = async (siteId: string) => {
+  const editSite = async (siteId: string) => {
     setEditSiteModalController(!editSiteModalController);
-    console.log('Edit Site');
+    setSiteId(siteId);
   };
 
   // Handle Change Tab
@@ -251,6 +251,8 @@ export const useOrganizationDetails = () => {
     searchKey,
     showCreateSiteModal,
     showDeleteModal,
+    editSiteModalController,
+    siteId,
 
     // Functions
     onUpdateActiveTab,
@@ -259,10 +261,11 @@ export const useOrganizationDetails = () => {
     onUpdatePerPageItem,
     onUpdateSearchSite,
     deleteSite,
-    getSiteDetailsAndEditModalController,
+    editSite,
     onUpdateSearchKey,
     onUpdateShowCreateSiteModal,
     setShowDeleteModal,
     confirmDeleteSite,
+    setEditSiteModalController,
   };
 };

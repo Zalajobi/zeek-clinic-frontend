@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import {
-  UserServiceDepartmentResponseData,
-  UserServiceServiceAreaResponseData,
-  UserServiceUnitResponseData,
-} from '@typeSpec/index';
+import { UserServiceUnitResponseData } from '@typeSpec/index';
 import { convertObjectToGlobalSelectInputProps } from '@util/index';
 import { useMutation, useQueryClient } from 'react-query';
 import { axiosPutRequestUserService } from '@lib/axios';
 import toast from 'react-hot-toast';
+import { DepartmentPayload, ServiceAreaPayload } from '@typeSpec/payloads';
 
 const selectTimeframe = ['All', '1 Day(s)', '7 Day(s)', '2 Week(s)', '1 Month'];
 
 export const useProvidersPrimaryPatients = (
-  departments: UserServiceDepartmentResponseData[],
-  serviceAreas: UserServiceServiceAreaResponseData[],
+  departments: DepartmentPayload[],
+  serviceAreas: ServiceAreaPayload[],
   units: UserServiceUnitResponseData[]
 ) => {
   const navigate = useNavigate();

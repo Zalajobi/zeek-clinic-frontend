@@ -218,8 +218,7 @@ export const AdminEditGeneratePasswordTab = ({
             className={`w-full`}
             id={`password`}
             type={`text`}
-            value={password}
-            change={(event) => updatePassword(event.target.value)}
+            change={updatePassword}
           />
 
           <FilledButton
