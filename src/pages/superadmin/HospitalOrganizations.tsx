@@ -32,34 +32,16 @@ const HospitalOrganizations = () => {
     hospitalTableDataLoading,
     tabData,
     searchKey,
-
-    searchOrganisation,
-    hospitalTabs,
     perPage,
-    hospitalData,
     currentPage,
-    // noOfPages,
-    totalHospitals,
     resultFrom,
     resultTo,
-    allHospitalCountries,
-    selectAllHospitals,
-    hospitalFilterFrom,
-    hospitalFilterTo,
 
     // Function
     onUpdateActiveTab,
     onUpdatePerPageItem,
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
-    // onClickSortParameters,
     onClickNext,
     onClickPrevious,
-    onEnterPageNumber,
-    filterByCountry,
-    onUpdateSelectedRow,
-    // onUpdateSelectAllHospitals,
-
     onUpdateSearchKey,
     onUpdateSearchOrganisation,
     onUpdateShowCreateHospitalModal,
@@ -138,30 +120,6 @@ const HospitalOrganizations = () => {
             }
           />
         </div>
-
-        {/*<ApplicationTable*/}
-        {/*  tableColumns={columns}*/}
-        {/*  tableData={data}*/}
-        {/*  query={searchOrganisation}*/}
-        {/*  onUpdateQuery={(e) => onUpdateSearchOrganisation(e.target.value)}*/}
-        {/*  perPage={perPage}*/}
-        {/*  onUpdatePerPageItem={onUpdatePerPageItem}*/}
-        {/*  filterFromDate={hospitalFilterFrom as Date}*/}
-        {/*  onUpdateFilterFromDate={onUpdateSelectFrom}*/}
-        {/*  filterToDate={hospitalFilterTo as Date}*/}
-        {/*  onUpdateFilterToDate={onUpdateSelectTo}*/}
-        {/*  noOfPages={noOfPages}*/}
-        {/*  totalCount={totalHospitals}*/}
-        {/*  resultFrom={resultFrom}*/}
-        {/*  resultTo={resultTo}*/}
-        {/*  onClickNext={onClickNext}*/}
-        {/*  onClickPrevious={onClickPrevious}*/}
-        {/*  currentPage={currentPage}*/}
-        {/*  onEnterPageNumber={onEnterPageNumber}*/}
-        {/*  disableCountryFilter={true}*/}
-        {/*  countries={allHospitalCountries}*/}
-        {/*  onUpdateCountryFilter={filterByCountry}*/}
-        {/*/>*/}
 
         <BasicTable
           tabItems={tabData}

@@ -51,6 +51,11 @@ export const SuperAdminHospitalDataColumns = () => {
       sortable: true,
     },
     {
+      key: 'site_count',
+      value: 'Sites',
+      sortable: true,
+    },
+    {
       key: 'status',
       value: 'Status',
       sortable: false,
@@ -74,18 +79,19 @@ export const SuperAdminHospitalDataRows = (data: HospitalPayload[]) => {
   data?.map((item) => {
     rowItems.push({
       id: item?.id,
-      name: item?.name,
-      email: item?.email,
-      phone: item?.phone,
-      address: item?.address,
-      city: item?.city,
-      state: item?.state,
-      country: item?.country,
-      logo: item?.logo,
-      zip_code: item?.zip_code,
-      country_code: item?.country_code,
+      name: item?.name ?? '--',
+      email: item?.email ?? '--',
+      phone: item?.phone ?? '--',
+      address: item?.address ?? '--',
+      city: item?.city ?? '--',
+      state: item?.state ?? '--',
+      country: item?.country ?? '--',
+      logo: item?.logo ?? '--',
+      zip_code: item?.zip_code ?? '--',
+      country_code: item?.country_code ?? '--',
       updated_at: item?.updated_at,
       status: item?.status,
+      site_count: item?.site_count,
       created_at: moment(item?.created_at).format('MMM DD. YYYY'),
     });
 
