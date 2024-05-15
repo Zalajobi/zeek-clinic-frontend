@@ -11,6 +11,7 @@ export interface SitePayload {
   time_zone?: string;
   phone?: string;
   zip_code?: string;
+  country_code?: string;
   status?: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED';
   is_private?: boolean;
   has_appointment?: boolean;

@@ -33,7 +33,7 @@ export const useEditSite = (siteId?: string, handleOpen?: () => void) => {
     },
   ];
 
-  // Get Site Details
+  // Get SiteDetailsPage Details
   const { data: siteData, isLoading: siteLoading } = useQuery({
     queryKey: ['getSideDetails'],
     queryFn: async () => {
@@ -49,7 +49,7 @@ export const useEditSite = (siteId?: string, handleOpen?: () => void) => {
     },
   });
 
-  // Edit Site Mutation
+  // Edit SiteDetailsPage Mutation
   const { mutate: editSiteMutation } = useMutation(
     async () => {
       try {
@@ -62,7 +62,7 @@ export const useEditSite = (siteId?: string, handleOpen?: () => void) => {
     },
     {
       onMutate: () => {
-        toast.loading('Creating Site', { duration: 3 });
+        toast.loading('Creating SiteDetailsPage', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) {

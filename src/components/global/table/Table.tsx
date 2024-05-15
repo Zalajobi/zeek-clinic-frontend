@@ -26,6 +26,7 @@ import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 import { FaUserPlus } from 'react-icons/fa';
+import { formatPhoneNumber } from '@util/index';
 
 interface TableProps {
   columns: any[];
@@ -320,6 +321,14 @@ export const BasicTable = ({
                             </Menu>
                           </Tooltip>
                         </td>
+                      ) : column.key === 'phone' ? (
+                        <td
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          {formatPhoneNumber(
+                            item[column.key],
+                            item?.country_code
+                          ) ?? '--'}
+                        </td>
                       ) : (
                         <td
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
@@ -342,8 +351,7 @@ export const BasicTable = ({
               {columns.map((item, index) => (
                 <div
                   key={`${item.key}${index}`}
-                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}
-                  onClick={() => console.log(item.key)}>
+                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
                   <Typography
                     variant={'small'}
                     color={'blue-gray'}

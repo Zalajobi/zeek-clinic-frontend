@@ -24,7 +24,7 @@ import {
 import ConfirmationModal from '@components/modals/ConfirmationModal';
 import EditSiteModal from '@components/modals/admins/EditSiteModal';
 import { SitePayload } from '@typeSpec/payloads';
-import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
+import HospitalDetails from '@components/superadmin/HospitalDetails';
 
 const OrganizationSite = () => {
   const searchTableBy: string[] = [];

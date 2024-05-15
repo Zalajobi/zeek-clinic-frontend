@@ -115,7 +115,8 @@ const AdminProvider = () => {
     }
   }
 
-  if (siteDataError) toast.error('Something Went Wrong Getting Site Data');
+  if (siteDataError)
+    toast.error('Something Went Wrong Getting SiteDetailsPage Data');
 
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
