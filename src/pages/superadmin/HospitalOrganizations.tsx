@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Tab } from '@headlessui/react';
 import { TiExportOutline } from 'react-icons/ti';
 import { HiPlusSm } from 'react-icons/hi';
 
@@ -7,193 +6,150 @@ import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import Text from '@components/global/dialog/Text';
 import { useHospitalOrganisation } from '@hooks/superadmin/useHospitalOrganisation';
 import {
-  SuperadminHospitalDataColumn,
-  SuperadminHospitalDataRow,
+  SuperAdminHospitalActionItem,
+  SuperAdminHospitalDataColumns,
+  SuperAdminHospitalDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
 import CreateHospitalModal from '@components/modals/CreateHospitalModal';
 import { OutlinedButton } from '@components/global/CustomButton';
-import { ApplicationTable } from '@components/global/table/ApplicationTable';
+import {
+  setNoOfPages,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
+import { useDispatch } from 'react-redux';
+import { formatResponseKeyForDropdown } from '@util/index';
+import { HospitalPayload } from '@typeSpec/payloads';
+import { BasicTable } from '@components/global/table/Table';
 
 const HospitalOrganizations = () => {
+  const searchTableBy: string[] = [];
+  const dispatch = useDispatch();
+  let noOfPages = 0;
+
   const {
     //Value
-    searchOrganisation,
-    hospitalTabs,
+    hospitalTableData,
+    hospitalTableDataLoading,
+    tabData,
+    searchKey,
     perPage,
-    hospitalData,
     currentPage,
-    noOfPages,
-    totalHospitals,
     resultFrom,
     resultTo,
-    allHospitalCountries,
-    selectAllHospitals,
-    hospitalFilterFrom,
-    hospitalFilterTo,
+    createHospitalModal,
 
     // Function
-    onUpdateSearchOrganisation,
     onUpdateActiveTab,
     onUpdatePerPageItem,
-    onUpdateSelectFrom,
-    onUpdateSelectTo,
-    onClickSortParameters,
     onClickNext,
     onClickPrevious,
-    onEnterPageNumber,
-    filterByCountry,
-    onUpdateSelectedRow,
-    onUpdateSelectAllHospitals,
+    onUpdateSearchKey,
+    onUpdateSearchOrganisation,
+    onUpdateShowCreateHospitalModal,
+    onHandleSortBy,
   } = useHospitalOrganisation();
 
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(!open);
+  if (!hospitalTableDataLoading) {
+    noOfPages =
+      typeof perPage === 'string'
+        ? 1
+        : Math.ceil(hospitalTableData?.data?.totalRows / perPage);
+    dispatch(
+      setNoOfPages(
+        Math.ceil(
+          hospitalTableData?.data?.totalRows /
+            (perPage === 'All' ? hospitalTableData?.data?.totalRows : perPage)
+        )
+      )
+    );
+    dispatch(setTotalDataCount(hospitalTableData?.data?.totalRows));
+  }
 
-  const data = useMemo(
+  const rowData = useMemo(
     () =>
-      SuperadminHospitalDataRow(
-        hospitalData,
-        onUpdateSelectedRow,
-        selectAllHospitals
+      SuperAdminHospitalDataRows(
+        hospitalTableData?.data?.hospitals as HospitalPayload[]
       ) ?? [],
-    [hospitalData, onUpdateSelectedRow, selectAllHospitals]
+    [hospitalTableData?.data?.hospitals]
   );
 
-  const columns = useMemo(
-    () =>
-      SuperadminHospitalDataColumn(
-        onClickSortParameters,
-        onUpdateSelectAllHospitals
-      ),
-    [onClickSortParameters, onUpdateSelectAllHospitals]
-  );
+  const columnData = useMemo(() => SuperAdminHospitalDataColumns(), []);
+  columnData.map((column) => {
+    if (column.key !== 'action') {
+      searchTableBy.push(formatResponseKeyForDropdown(column.key));
+    }
+  });
+
+  const actionItems = useMemo(() => SuperAdminHospitalActionItem(), []);
 
   return (
     <SuperadminBaseTemplate>
       <div className={`w-full flex flex-col`}>
-        <Text
-          text={`Organisations`}
-          size="4xl"
-          weight={800}
-          className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
-        />
+        <div className={`grid gap-2 grid-cols-1 md:grid-cols-2 md:gap-4`}>
+          <Text
+            text={`Organisations`}
+            size="4xl"
+            weight={800}
+            className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
+          />
 
-        <div className={`grid grid-cols-6 gap-4 my-5`}>
-          <div className={`col-span-4 max-w-md`}>
-            <Tab.Group>
-              <Tab.List className={`flex space-x-1 rounded-xl bg-white p-1`}>
-                <Tab
-                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    hospitalTabs === 'ALL'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                  onClick={() => onUpdateActiveTab('ALL')}>
-                  All
-                </Tab>
+          <div className={`flex gap-4 justify-end`}>
+            <OutlinedButton
+              iconBefore={
+                <HiPlusSm
+                  size={20}
+                  className={`mr-2`}
+                />
+              }
+              text={`Add New Organization`}
+              type={`primary`}
+              className={`h-[38px] max-w-72 py-6`}
+              click={onUpdateShowCreateHospitalModal}
+            />
 
-                <Tab
-                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    hospitalTabs === 'ACTIVE'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                  onClick={() => onUpdateActiveTab('ACTIVE')}>
-                  Active
-                </Tab>
-
-                <Tab
-                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    hospitalTabs === 'ARCHIVED'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                  onClick={() => onUpdateActiveTab('ARCHIVED')}>
-                  Archived
-                </Tab>
-
-                <Tab
-                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    hospitalTabs === 'PENDING'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                  onClick={() => onUpdateActiveTab('PENDING')}>
-                  Pending
-                </Tab>
-
-                <Tab
-                  className={`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black ring-[#EEF7FF] focus:outline-none focus:ring-2
-                  ${
-                    hospitalTabs === 'DEACTIVATED'
-                      ? 'bg-[#EEF7FF] shadow'
-                      : 'text-black hover:bg-[#bfdbfe] hover:text-[#27272a]'
-                  }`}
-                  onClick={() => onUpdateActiveTab('DEACTIVATED')}>
-                  Deactivated
-                </Tab>
-              </Tab.List>
-            </Tab.Group>
+            <OutlinedButton
+              text={`Export Organization`}
+              type={'primary'}
+              className={`h-[38px] max-w-72 py-6`}
+              iconBefore={
+                <TiExportOutline
+                  size={20}
+                  className={`mr-2`}
+                />
+              }
+            />
           </div>
-
-          <OutlinedButton
-            iconBefore={
-              <HiPlusSm
-                size={20}
-                className={`mr-2`}
-              />
-            }
-            text={`Add New Organization`}
-            type={`primary`}
-            className={`h-[38px] w-full py-6`}
-            click={handleOpenModal}
-          />
-
-          <OutlinedButton
-            text={`Export Organization`}
-            type={'primary'}
-            className={`h-[38px] w-full py-6`}
-            iconBefore={
-              <TiExportOutline
-                size={20}
-                className={`mr-2`}
-              />
-            }
-          />
         </div>
 
-        <ApplicationTable
-          tableColumns={columns}
-          tableData={data}
-          query={searchOrganisation}
-          onUpdateQuery={(e) => onUpdateSearchOrganisation(e.target.value)}
-          perPage={perPage}
-          onUpdatePerPageItem={onUpdatePerPageItem}
-          filterFromDate={hospitalFilterFrom as Date}
-          onUpdateFilterFromDate={onUpdateSelectFrom}
-          filterToDate={hospitalFilterTo as Date}
-          onUpdateFilterToDate={onUpdateSelectTo}
-          noOfPages={noOfPages}
-          totalCount={totalHospitals}
-          resultFrom={resultFrom}
-          resultTo={resultTo}
-          onClickNext={onClickNext}
-          onClickPrevious={onClickPrevious}
-          currentPage={currentPage}
-          onEnterPageNumber={onEnterPageNumber}
-          disableCountryFilter={true}
-          countries={allHospitalCountries}
-          onUpdateCountryFilter={filterByCountry}
+        <BasicTable
+          tabItems={tabData}
+          onSelectTab={onUpdateActiveTab}
+          perPageValue={perPage}
+          perPageChange={onUpdatePerPageItem}
+          columns={columnData}
+          data={rowData ?? []}
+          url={'superadmin/site'}
+          noOfPages={noOfPages ?? 0}
+          total={hospitalTableData?.data?.totalRows ?? 0}
+          from={resultFrom ?? 1}
+          to={resultTo ?? 10}
+          onNext={onClickNext}
+          onPrevious={onClickPrevious}
+          currentPage={currentPage ?? -1}
+          searchKeys={searchTableBy}
+          dataLoading={hospitalTableDataLoading}
+          searchKey={searchKey}
+          updateSearchKey={onUpdateSearchKey}
+          onUpdateSearch={onUpdateSearchOrganisation}
+          createNew={onUpdateShowCreateHospitalModal}
+          actionItems={actionItems}
+          sortBy={onHandleSortBy}
         />
       </div>
 
       <CreateHospitalModal
-        open={open}
-        handler={handleOpenModal}
+        open={createHospitalModal}
+        handler={onUpdateShowCreateHospitalModal}
       />
     </SuperadminBaseTemplate>
   );

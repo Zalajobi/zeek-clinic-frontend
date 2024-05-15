@@ -15,6 +15,7 @@ import {
   CreateHospitalInput,
   CreateHospitalInputSchema,
 } from '@typeSpec/superadmin/forms';
+import text from '@components/global/dialog/Text';
 
 interface CreateHospitalModalProps {
   open: boolean;
@@ -81,12 +82,12 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
             <div
               className={`w-full grid gap-6 grid-cols-1 mb-6 lg:grid-cols-2`}>
               <TextInput
-                label={`Company Name`}
+                label={`Organization Name`}
                 className={`my-3`}
                 errorMsg={errors.name?.message ?? ''}
                 id={`name`}
                 register={register}
-                placeholder={`John Hopkins`}
+                type={'text'}
               />
 
               <TextInput
@@ -96,7 +97,6 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 id={`email`}
                 type={`email`}
                 register={register}
-                placeholder={`john@doe.com`}
               />
             </div>
 
@@ -122,12 +122,12 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
               />
 
               <TextInput
-                label={`city`}
+                label={`City`}
                 className={`my-3`}
                 errorMsg={errors.city?.message ?? ''}
                 id={`city`}
                 register={register}
-                placeholder={`Baltimore`}
+                type={'text'}
               />
 
               <TextInput
@@ -137,7 +137,6 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 id={`zip_code`}
                 type={'number'}
                 register={register}
-                placeholder={`101231`}
               />
 
               <TextInput
@@ -146,6 +145,7 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 errorMsg={errors.address?.message ?? ''}
                 id={`address`}
                 register={register}
+                type={'text'}
               />
 
               <TextInput
@@ -155,7 +155,6 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
                 type={'tel'}
                 id={`phone`}
                 register={register}
-                placeholder={`+170539802`}
               />
             </div>
           </CustomTransparentCard>

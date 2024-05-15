@@ -102,7 +102,6 @@ interface BasicTableProps {
     icon?: any;
   }[];
   perPageValue: string | number;
-  perPageMenuItems: any[];
   perPageChange: (item: any) => void;
   columns: any[];
   data: any[];
@@ -132,7 +131,6 @@ export const BasicTable = ({
   onSelectTab,
   tabItems,
   perPageValue,
-  perPageMenuItems,
   perPageChange,
   columns,
   data,
@@ -153,6 +151,7 @@ export const BasicTable = ({
   actionItems,
   sortBy,
 }: BasicTableProps) => {
+  const perPageMenuItems = ['All', 10, 20, 50, 100];
   return (
     <Card className={`w-full h-auto`}>
       <CardHeader
@@ -248,7 +247,8 @@ export const BasicTable = ({
                               className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
                               <Avatar
                                 className={`border-gray-300 border ml-1`}
-                                src={item?.logo ?? item?.avatar}
+                                // src={item?.logo ?? item?.avatar}
+                                src="https://docs.material-tailwind.com/img/face-2.jpg"
                                 alt={'Logo'}
                                 size={'sm'}
                               />

@@ -72,3 +72,21 @@ export interface RolePayload {
   name?: string;
   description?: string;
 }
+
+export interface HospitalPayload {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  logo?: string;
+  status?: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED';
+  zip_code?: string;
+  country_code?: string;
+  created_at?: string;
+  updated_at?: string;
+  site_count?: number;
+  id: string;
+}

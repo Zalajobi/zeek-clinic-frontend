@@ -9,7 +9,7 @@ import {
 } from '@lib/axios';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { SearchSitesRequestPayload } from '@typeSpec/index';
+import { SearchRequestPayload } from '@typeSpec/index';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
 
 export const useOrganizationDetails = () => {
@@ -20,7 +20,7 @@ export const useOrganizationDetails = () => {
   );
 
   const [searchSitePayload, setSearchSitePayload] =
-    useState<SearchSitesRequestPayload>({
+    useState<SearchRequestPayload>({
       hospitalId,
     });
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
@@ -90,7 +90,7 @@ export const useOrganizationDetails = () => {
 
   // Table Data
   const { data: sitesTableData, isLoading: sitesTableDataLoading } = useQuery({
-    queryKey: ['getSiteTableData', searchSitePayload],
+    queryKey: ['getTableData', searchSitePayload],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(
@@ -124,7 +124,7 @@ export const useOrganizationDetails = () => {
         if (result?.success) toast.success(result?.message);
         else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('getSiteTableData');
+        queryClient.resetQueries('getTableData');
       },
     }
   );

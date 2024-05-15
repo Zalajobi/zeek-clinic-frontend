@@ -10,7 +10,6 @@ import {
   SuperAdminSiteDataColumns,
   SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
-import { SitesDataKeyMap } from '@typeSpec/superadmin';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/hospital/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
@@ -25,10 +24,10 @@ import {
 } from '../../redux/reducers/tableReducer';
 import ConfirmationModal from '@components/modals/ConfirmationModal';
 import EditSiteModal from '@components/modals/admins/EditSiteModal';
+import { SitePayload } from '@typeSpec/payloads';
 
 const OrganizationSite = () => {
-  const itemsPerPage = ['All', 10, 20, 50, 100],
-    searchTableBy: string[] = [];
+  const searchTableBy: string[] = [];
   const dispatch = useDispatch();
   let noOfPages = 0;
 
@@ -92,9 +91,8 @@ const OrganizationSite = () => {
 
   const rowData = useMemo(
     () =>
-      SuperAdminSiteDataRows(
-        sitesTableData?.data?.sites as SitesDataKeyMap[]
-      ) ?? [],
+      SuperAdminSiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ??
+      [],
     [sitesTableData?.data?.sites]
   );
 
@@ -159,7 +157,6 @@ const OrganizationSite = () => {
           tabItems={tabData}
           onSelectTab={onUpdateActiveTab}
           perPageValue={perPage}
-          perPageMenuItems={itemsPerPage}
           perPageChange={onUpdatePerPageItem}
           columns={columnData}
           data={rowData ?? []}
