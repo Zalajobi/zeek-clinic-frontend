@@ -13,7 +13,7 @@ const SiteDetails = () => {
   return (
     <Fragment>
       <CustomCard
-        className={`w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 items-center gap-4 p-9`}>
+        className={`w-full flex flex-col items-center p-4 mb-4 md:grid md:grid-cols-2 md:p-9 lg:grid-cols-4`}>
         {/*Name*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography

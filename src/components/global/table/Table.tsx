@@ -351,8 +351,7 @@ export const BasicTable = ({
               {columns.map((item, index) => (
                 <div
                   key={`${item.key}${index}`}
-                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}
-                  onClick={() => console.log(item.key)}>
+                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
                   <Typography
                     variant={'small'}
                     color={'blue-gray'}
