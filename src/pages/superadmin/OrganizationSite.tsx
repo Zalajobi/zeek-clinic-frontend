@@ -11,7 +11,6 @@ import {
   SuperAdminSiteDataRows,
 } from '@components/tables/row-col-mapping/SuperadminTable';
 import { BasicTable } from '@components/global/table/Table';
-import HospitalDetails from '@components/superadmin/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSiteModal from '@components/modals/admins/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
@@ -25,6 +24,7 @@ import {
 import ConfirmationModal from '@components/modals/ConfirmationModal';
 import EditSiteModal from '@components/modals/admins/EditSiteModal';
 import { SitePayload } from '@typeSpec/payloads';
+import HospitalDetails from '@components/superadmin/HospitalDetails';
 
 const OrganizationSite = () => {
   const searchTableBy: string[] = [];

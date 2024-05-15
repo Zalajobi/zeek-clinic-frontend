@@ -28,6 +28,7 @@ import store from './redux/store';
 import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 import AdminServiceAreaPage from '@pages/admin/AdminServiceAreaPage';
 import AdminRolesPage from '@pages/admin/AdminRolesPage';
+import SiteProvidersPage from '@pages/SiteProvidersPage';
 import SiteDetailsPage from '@pages/superadmin/SiteDetailsPage';
 
 const root = ReactDOM.createRoot(
@@ -153,6 +154,11 @@ const router = createBrowserRouter([
       {
         path: '/superadmin/site/:siteId',
         element: <SiteDetailsPage />,
+      },
+
+      {
+        path: '/superadmin/site/provider/:siteId',
+        element: <SiteProvidersPage />,
       },
     ],
   },
