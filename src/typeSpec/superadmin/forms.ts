@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-// Create Site
+// Create SiteDetailsPage
 export type CreateSiteInput = {
   email: string;
   name: string;

@@ -72,7 +72,7 @@ export const useOrganizationDetails = () => {
     },
   });
 
-  // Get Site Count Data
+  // Get SiteDetailsPage Count Data
   const { data: siteCountData, isLoading: siteCountDataLoading } = useQuery({
     queryKey: ['getSiteCountData'],
     queryFn: async () => {
@@ -105,7 +105,7 @@ export const useOrganizationDetails = () => {
     },
   });
 
-  // Delete Site Mutation
+  // Delete SiteDetailsPage Mutation
   const { mutate: deleteSiteMutation } = useMutation(
     async () => {
       try {
@@ -118,7 +118,7 @@ export const useOrganizationDetails = () => {
     },
     {
       onMutate: () => {
-        toast.loading('Creating Site', { duration: 3 });
+        toast.loading('Creating SiteDetailsPage', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) toast.success(result?.message);
@@ -129,19 +129,19 @@ export const useOrganizationDetails = () => {
     }
   );
 
-  // Request to Delete Site
+  // Request to Delete SiteDetailsPage
   const deleteSite = async (siteId: string) => {
     setSiteId(siteId);
     setShowDeleteModal(!showDeleteModal);
   };
 
-  // Confirm Delete Site - Send Delete Request
+  // Confirm Delete SiteDetailsPage - Send Delete Request
   const confirmDeleteSite = () => {
     setShowDeleteModal(!showDeleteModal);
     deleteSiteMutation();
   };
 
-  // Get Site Details for edit
+  // Get SiteDetailsPage Details for edit
   const editSite = async (siteId: string) => {
     setEditSiteModalController(!editSiteModalController);
     setSiteId(siteId);
@@ -231,7 +231,7 @@ export const useOrganizationDetails = () => {
     if (value !== 'Search By') setSearchKey(value);
   };
 
-  // On Update Search Site
+  // On Update Search SiteDetailsPage
   const onUpdateSearchSite = async (value: string) => {
     setSearchSitePayload({
       ...searchSitePayload,

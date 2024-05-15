@@ -1,4 +1,5 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
+import { parsePhoneNumber } from 'awesome-phonenumber';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();
@@ -79,4 +80,8 @@ export const revertDropdownOptionsToResponseKey = (key: string) => {
     .split(' ')
     .map((word) => word.charAt(0).toLowerCase() + word.slice(1))
     .join('_');
+};
+
+export const formatPhoneNumber = (phone: number, countryCode: string) => {
+  return parsePhoneNumber(phone.toString(), {});
 };

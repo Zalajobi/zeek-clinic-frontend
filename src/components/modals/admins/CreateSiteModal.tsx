@@ -150,7 +150,7 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
                 className={`my-3`}
                 errorMsg={errors.phone?.message ?? ''}
                 id={`phone`}
-                type={'tel'}
+                type={'text'}
                 register={register}
               />
             </div>
