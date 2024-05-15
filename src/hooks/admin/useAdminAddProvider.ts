@@ -72,10 +72,10 @@ export const useAdminAddProvider = () => {
         });
 
         data.serviceAreas.map((item) => {
-          return temporaryServiceAreaStore.push(<SelectInputFieldProps>{
+          return temporaryServiceAreaStore.push({
             value: item?.id,
             placeholder: item?.name,
-          });
+          } as SelectInputFieldProps);
         });
 
         data.units.map((item) => {

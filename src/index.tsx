@@ -29,6 +29,7 @@ import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 import AdminServiceAreaPage from '@pages/admin/AdminServiceAreaPage';
 import AdminRolesPage from '@pages/admin/AdminRolesPage';
 import SiteDetailsPage from '@pages/superadmin/SiteDetailsPage';
+import SiteProvidersPage from '@pages/SiteProcidersPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -153,6 +154,12 @@ const router = createBrowserRouter([
       {
         path: '/superadmin/site/:siteId',
         element: <SiteDetailsPage />,
+      },
+
+      // Super Admin Site Providers
+      {
+        path: '/superadmin/site/provider/:siteId',
+        element: <SiteProvidersPage />,
       },
     ],
   },

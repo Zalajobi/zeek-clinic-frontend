@@ -1,6 +1,6 @@
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
-import SiteDetails from '@components/superadmin/SiteDetails';
 import { Typography } from '@components/global/dialog/Typography';
+import SiteDetails from '@components/common/SiteDetails';
 
 const SiteDetailsPage = () => {
   return (

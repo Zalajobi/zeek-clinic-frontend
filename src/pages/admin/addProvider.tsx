@@ -47,7 +47,6 @@ export const AddProvider = () => {
     departments,
     allCountries,
     allCountryStates,
-    phoneCode,
     roles,
     serviceArea,
     units,

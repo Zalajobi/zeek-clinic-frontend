@@ -35,7 +35,6 @@ const CreateNewUser = () => {
   const {
     // Values
     allCountries,
-    phoneCode,
     allCountryStates,
     allRoles,
     profileImgURL,
