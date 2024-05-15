@@ -106,41 +106,45 @@ export const TextInput = ({
     <Fragment>
       <div className={`min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
-          {showLabel && (
-            <label
-              htmlFor={id}
-              className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
-                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-              }`}>
-              {label}
-            </label>
-          )}
-
           <div className="relative w-full min-w-[200px]">
+            {showLabel && (
+              <label
+                htmlFor={id}
+                className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+                  errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+                }`}>
+                {label}
+              </label>
+            )}
+
             {register ? (
-              <>
+              <Fragment>
                 <Input
-                  type={type}
-                  className={`border-t divide-solid border-t-gray-400`}
-                  placeholder={placeholder}
-                  id={id}
-                  size={size ?? 'lg'}
+                  variant="outlined"
                   label={label}
+                  placeholder={placeholder}
+                  className={`border-t divide-solid border-t-gray-400`}
+                  size={size ?? 'lg'}
+                  type={type}
+                  color={errorMsg ? 'red' : 'teal'}
+                  id={id}
                   {...register(id)}
                 />
-              </>
+              </Fragment>
             ) : (
               <>
                 <Input
+                  variant="outlined"
+                  label={label}
                   type={type}
-                  className={`border-t divide-solid border-t-gray-400`}
                   placeholder={placeholder}
-                  id={id}
+                  className={`border-t divide-solid border-t-gray-400`}
                   size={size ?? 'lg'}
+                  color={errorMsg ? 'red' : 'teal'}
+                  id={id}
                   onChange={(event) => {
                     if (change) change(event.target.value);
                   }}
-                  label={label}
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
                   {icon}

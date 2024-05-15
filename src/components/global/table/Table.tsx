@@ -247,7 +247,8 @@ export const BasicTable = ({
                               className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
                               <Avatar
                                 className={`border-gray-300 border ml-1`}
-                                src={item?.logo ?? item?.avatar}
+                                // src={item?.logo ?? item?.avatar}
+                                src="https://docs.material-tailwind.com/img/face-2.jpg"
                                 alt={'Logo'}
                                 size={'sm'}
                               />

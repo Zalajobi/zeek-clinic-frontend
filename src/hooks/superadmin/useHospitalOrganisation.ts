@@ -8,12 +8,17 @@ import { revertDropdownOptionsToResponseKey } from '@util/index';
 import { useSelector } from 'react-redux';
 
 export const useHospitalOrganisation = () => {
-  const [searchOrganizationPayload, setSearchOrganizationPayload] =
-    useState<SearchRequestPayload>({});
-  const [searchKey, setSearchKey] = useState('Search By');
   const { totalDataCount, noOfPages } = useSelector(
     (state: any) => state.adminProviderTable
   );
+  const [searchOrganizationPayload, setSearchOrganizationPayload] =
+    useState<SearchRequestPayload>({});
+  const [searchKey, setSearchKey] = useState('Search By');
+  const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [resultFrom, setResultFrom] = useState<number | null>(null);
+  const [resultTo, setResultTo] = useState<number | null>(null);
+  const [createHospitalModal, setCreateHospitalModal] = useState(false);
 
   const tabData = [
     {
@@ -37,11 +42,6 @@ export const useHospitalOrganisation = () => {
       value: 'DEACTIVATED',
     },
   ];
-
-  const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [resultFrom, setResultFrom] = useState<number | null>(null);
-  const [resultTo, setResultTo] = useState<number | null>(null);
 
   // Table Data
   const { data: hospitalTableData, isLoading: hospitalTableDataLoading } =
@@ -143,8 +143,7 @@ export const useHospitalOrganisation = () => {
 
   // Show Create Hospital Modal
   const onUpdateShowCreateHospitalModal = () => {
-    console.log('Create Hospital Modal');
-    // setShowCreateSiteModal((cur) => !cur);
+    setCreateHospitalModal((cur) => !cur);
   };
 
   // Sort By
@@ -169,6 +168,7 @@ export const useHospitalOrganisation = () => {
     currentPage,
     resultFrom,
     resultTo,
+    createHospitalModal,
 
     // Function
     onUpdateActiveTab,

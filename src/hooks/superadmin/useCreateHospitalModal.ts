@@ -1,22 +1,63 @@
 import { useEffect, useState } from 'react';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { AllCountries } from '@typeSpec/superadmin/formTypes';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
+import axios from 'axios';
 
 export const useCreateHospitalModal = (handler: () => void) => {
+  const queryClient = useQueryClient();
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
-
   const [country, setCountry] = useState('');
   const [logo, setLogo] = useState('');
+
+  // Edit Site Mutation
+  const { mutate: createOrganizationMutation } = useMutation(
+    async (data: CreateHospitalInput) => {
+      try {
+        const hospitalData = {
+          ...data,
+          phone: `${data.phone}`,
+          country,
+          logo,
+          country_code: countryCode,
+        };
+
+        return await axiosPostRequestUserService(
+          '/hospital/create',
+          hospitalData
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Organization', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) {
+          handler();
+          toast.success(result?.message);
+        } else {
+          toast.error('Something Went Wrong');
+        }
+
+        queryClient.resetQueries('getTableData');
+      },
+    }
+  );
 
   useEffect(() => {
     let countriesUpdate: SelectInputFieldProps[] = [];
@@ -52,25 +93,7 @@ export const useCreateHospitalModal = (handler: () => void) => {
   };
 
   const createNewOrganization = async (data: CreateHospitalInput) => {
-    if (!logo) toast.error('Please Upload Organization Logo');
-    else {
-      const hospitalData = {
-        ...data,
-        phone: `${data.phone}`,
-        country,
-        logo,
-        country_code: countryCode,
-      };
-      const response = await axiosPostRequestUserService(
-        '/hospital/create',
-        hospitalData
-      );
-
-      if (response.success) {
-        handler();
-        toast.success(response.message);
-      } else toast.error(response.message);
-    }
+    createOrganizationMutation(data);
   };
 
   return {

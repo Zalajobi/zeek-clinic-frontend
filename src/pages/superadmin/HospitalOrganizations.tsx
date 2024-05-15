@@ -36,6 +36,7 @@ const HospitalOrganizations = () => {
     currentPage,
     resultFrom,
     resultTo,
+    createHospitalModal,
 
     // Function
     onUpdateActiveTab,
@@ -64,9 +65,6 @@ const HospitalOrganizations = () => {
     dispatch(setTotalDataCount(hospitalTableData?.data?.totalRows));
   }
 
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(!open);
-
   const rowData = useMemo(
     () =>
       SuperAdminHospitalDataRows(
@@ -87,38 +85,40 @@ const HospitalOrganizations = () => {
   return (
     <SuperadminBaseTemplate>
       <div className={`w-full flex flex-col`}>
-        <Text
-          text={`Organisations`}
-          size="4xl"
-          weight={800}
-          className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
-        />
-
-        <div className={`grid grid-cols-6 gap-4 my-5`}>
-          <OutlinedButton
-            iconBefore={
-              <HiPlusSm
-                size={20}
-                className={`mr-2`}
-              />
-            }
-            text={`Add New Organization`}
-            type={`primary`}
-            className={`h-[38px] w-full py-6`}
-            click={handleOpenModal}
+        <div className={`grid gap-2 grid-cols-1 md:grid-cols-2 md:gap-4`}>
+          <Text
+            text={`Organisations`}
+            size="4xl"
+            weight={800}
+            className="mb-8 text-ds-primary-700 dark:text-ds-primary-200 font-extrabold"
           />
 
-          <OutlinedButton
-            text={`Export Organization`}
-            type={'primary'}
-            className={`h-[38px] w-full py-6`}
-            iconBefore={
-              <TiExportOutline
-                size={20}
-                className={`mr-2`}
-              />
-            }
-          />
+          <div className={`flex gap-4 justify-end`}>
+            <OutlinedButton
+              iconBefore={
+                <HiPlusSm
+                  size={20}
+                  className={`mr-2`}
+                />
+              }
+              text={`Add New Organization`}
+              type={`primary`}
+              className={`h-[38px] max-w-72 py-6`}
+              click={onUpdateShowCreateHospitalModal}
+            />
+
+            <OutlinedButton
+              text={`Export Organization`}
+              type={'primary'}
+              className={`h-[38px] max-w-72 py-6`}
+              iconBefore={
+                <TiExportOutline
+                  size={20}
+                  className={`mr-2`}
+                />
+              }
+            />
+          </div>
         </div>
 
         <BasicTable
@@ -148,8 +148,8 @@ const HospitalOrganizations = () => {
       </div>
 
       <CreateHospitalModal
-        open={open}
-        handler={handleOpenModal}
+        open={createHospitalModal}
+        handler={onUpdateShowCreateHospitalModal}
       />
     </SuperadminBaseTemplate>
   );
