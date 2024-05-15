@@ -86,7 +86,7 @@ export const CustomBasicModal = ({
 
         {/*Modal Footer */}
         <DialogFooter className={`h-[100px] border border-t-gray-300`}>
-          <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+          <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50 gap-4">
             {footer}
           </div>
         </DialogFooter>

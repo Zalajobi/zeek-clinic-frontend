@@ -128,7 +128,7 @@ const HospitalOrganizations = () => {
           perPageChange={onUpdatePerPageItem}
           columns={columnData}
           data={rowData ?? []}
-          url={'superadmin/site'}
+          url={'superadmin/hospital'}
           noOfPages={noOfPages ?? 0}
           total={hospitalTableData?.data?.totalRows ?? 0}
           from={resultFrom ?? 1}

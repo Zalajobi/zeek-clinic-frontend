@@ -15,23 +15,25 @@ export const useCreateSite = (handleOpen?: () => void) => {
   const [logo, setLogo] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
+  const [timeZone, setTimeZone] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [country, setCountry] = useState('');
 
-  // Create Site
+  // Create SiteDetailsPage
   const { mutate: createSiteMutation } = useMutation(
     async (data: any) => {
       try {
         const siteData = {
           ...data,
-          phone: `${data.phone}`,
+          phone: `${Number(`${phoneCode}${data.phone}`)}`,
           country,
           logo,
           country_code: countryCode,
           hospital_id: hospitalId,
+          time_zone: timeZone,
         };
 
         return await axiosPostRequestUserService(`/site/create`, siteData);
@@ -43,7 +45,7 @@ export const useCreateSite = (handleOpen?: () => void) => {
     },
     {
       onMutate: () => {
-        toast.loading('Creating Site', { duration: 3 });
+        toast.loading('Creating SiteDetailsPage', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) toast.success(result?.message);
@@ -71,12 +73,11 @@ export const useCreateSite = (handleOpen?: () => void) => {
 
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
-
     let countryStates: SelectInputFieldProps[] = [];
 
     State.getStatesOfCountry(value).map((country) => {
       countryStates.push({
-        value: country.isoCode,
+        value: country.name,
         placeholder: country.name,
       });
 
@@ -85,8 +86,11 @@ export const useCreateSite = (handleOpen?: () => void) => {
 
     setAllCountryStates(countryStates);
     setCountryCode(countryInfo.isoCode);
-    setCountry(countryInfo?.name);
-    setPhoneCode(countryInfo?.phonecode);
+    setTimeZone(
+      countryInfo.timezones.map((data) => data.gmtOffsetName).join(', ')
+    );
+    setCountry(countryInfo.name);
+    setPhoneCode(countryInfo.phonecode);
   };
 
   const createNewSite = async (data: CreateSiteInput) => {

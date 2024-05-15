@@ -20,7 +20,7 @@ export const useCreateHospitalModal = (handler: () => void) => {
   const [country, setCountry] = useState('');
   const [logo, setLogo] = useState('');
 
-  // Edit Site Mutation
+  // Edit SiteDetailsPage Mutation
   const { mutate: createOrganizationMutation } = useMutation(
     async (data: CreateHospitalInput) => {
       try {
