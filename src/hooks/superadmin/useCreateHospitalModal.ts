@@ -3,10 +3,9 @@ import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { AllCountries } from '@typeSpec/forms/form.types';
+import { AllCountries, CreateHospitalInput } from '@typeSpec/forms/form.types';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { CreateHospitalInput } from '@typeSpec/forms';
 import axios from 'axios';
 
 export const useCreateHospitalModal = (handler: () => void) => {

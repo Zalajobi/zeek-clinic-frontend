@@ -93,7 +93,8 @@ export const CreateAdminUserInputSchema = yup
   .required();
 
 // Create Provider
-export const AdminAddProviderInputSchema = yup
+
+export const CreateProviderInputSchema = yup
   .object({
     title: yup.string().required('Title is Required'),
     first_name: yup
@@ -121,29 +122,30 @@ export const AdminAddProviderInputSchema = yup
       .required('Providers Service Area is not selected'),
     unit: yup.string().required('Providers Unit is not selected'),
     country: yup.string().required('Country is a required field'),
-    state: yup.string().required('State is a required field'),
+    state: yup.string().optional(),
+    city: yup.string().optional(),
     staff_id: yup
       .string()
       .min(7, 'Minimum of Seven(7) Characters')
       .max(20, 'Maximum of Twenty(20) characters')
       .required('Staff ID is a required field'),
-    city: yup.string().optional(),
     zip_code: yup.string().required('ZipCode is a required field'),
-    relationship_status: yup
-      .string()
-      .required('Relationship Status is a required field'),
+    marital_status: yup.string().required('Please Select One'),
     religion: yup.string().required('Religion is a required field'),
+    password: yup
+      .string()
+      .min(8, 'Must be at least Eight(8) characters long')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      )
+      .optional(),
+    username: yup.string().optional(),
     address: yup.string().required('Address is required'),
+    address_two: yup.string().optional(),
     is_consultant: yup.boolean().default(false),
     is_specialist: yup.boolean().default(false),
     appointments: yup.boolean().default(false),
-    // password: yup
-    //   .string()
-    //   .min(8, 'Must be at least Eight(8) characters long')
-    //   .matches(
-    //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    //     'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-    //   )
-    //   .required('Password is required'),
+    profile_pic: yup.string().optional(),
   })
   .required();

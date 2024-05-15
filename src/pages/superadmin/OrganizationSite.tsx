@@ -13,7 +13,7 @@ import {
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
-import CreateSiteModal from '@components/modals/admins/CreateSiteModal';
+import CreateSiteModal from '@components/modals/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { formatResponseKeyForDropdown } from '@util/index';

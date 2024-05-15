@@ -5,6 +5,15 @@ import { useAddProviderModal } from '@hooks/modals/useAddProviderModal';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
 import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
+import {
+  CheckboxInput,
+  SelectInput,
+  TextInput,
+} from '@components/global/formInput/CustomInput';
+import { useForm } from 'react-hook-form';
+import { CreateProviderInput } from '@typeSpec/forms/form.types';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CreateProviderInputSchema } from '@typeSpec/forms';
 
 interface AddProviderModalProps {
   open: boolean;
@@ -12,13 +21,30 @@ interface AddProviderModalProps {
 }
 
 const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
-  const { logo } = useAddProviderModal(handler);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateProviderInput>({
+    resolver: yupResolver(CreateProviderInputSchema),
+  });
+
+  const {
+    // Values
+    logo,
+    allCountries,
+    allCountryStates,
+
+    // Functions
+    onUpdateCountry,
+    setLogo,
+  } = useAddProviderModal(handler);
 
   return (
     <Fragment>
       <CustomBasicModal
         title={'Add New Site'}
-        handler={handleOpen}
+        handler={handler}
         size={'lg'}
         open={open}
         footer={
@@ -26,46 +52,47 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
             <OutlinedButton
               text={`Cancel`}
               type={`danger`}
-              click={handleOpen}
+              click={handler}
             />
 
             <OutlinedButton
-              click={handleSubmit(createNewSite)}
+              click={handler}
               text={`Confirm`}
               type={`secondary`}
             />
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[700px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
             <ImageUpload
               bucketFolder={`/site_image`}
               url={logo}
-              updateImageUrl={onUpdateLogo}
+              updateImageUrl={setLogo}
               label={`Site Logo`}
             />
           </CustomTransparentCard>
 
-          <Card className={`w-full -h-full p-4 rounded-2xl overflow-scroll`}>
+          <CustomTransparentCard
+            className={`w-full h-full p-4 rounded-2xl overflow-scroll`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2`}>
               <TextInput
-                label={`Site Name`}
+                label={`First Name`}
                 className={`my-3`}
-                errorMsg={errors.name?.message ?? ''}
+                errorMsg={errors.first_name?.message ?? ''}
                 id={`name`}
                 register={register}
               />
 
               <TextInput
-                label={`Email`}
+                label={`Last Name`}
                 className={`my-3`}
-                errorMsg={errors.email?.message ?? ''}
+                errorMsg={errors.last_name?.message ?? ''}
                 id={`email`}
-                type={`email`}
+                type={`text`}
                 register={register}
               />
             </div>
@@ -90,153 +117,29 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 id={'state'}
                 errorMsg={errors.state?.message ?? ''}
               />
-
-              <TextInput
-                label={`City`}
-                className={`my-3`}
-                errorMsg={errors.city?.message ?? ''}
-                id={`city`}
-                register={register}
-              />
-
-              <TextInput
-                label={`Zip Code`}
-                className={`my-3`}
-                errorMsg={errors.zip_code?.message ?? ''}
-                type={'number'}
-                id={`zip_code`}
-                register={register}
-              />
-
-              <TextInput
-                label={`Address`}
-                className={`my-3`}
-                errorMsg={errors.address?.message ?? ''}
-                id={`address`}
-                register={register}
-              />
-
-              <TextInput
-                label={`Phone`}
-                className={`my-3`}
-                errorMsg={errors.phone?.message ?? ''}
-                id={`phone`}
-                type={'text'}
-                register={register}
-              />
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-4`}>
+              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-3`}>
               <CheckboxInput
-                label={`Is Private`}
-                id={`is_private`}
+                label={`Is Consultant`}
+                id={`is_consultant`}
+                register={register}
+              />
+
+              <CheckboxInput
+                label={`Is Specialist`}
+                id={`is_specialist`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Has Appointment`}
-                id={`has_appointment`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Care-Giver`}
-                id={`has_caregiver`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Clinical`}
-                id={`has_clinical`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Doctors`}
-                id={`has_doctor`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Emergency`}
-                id={`has_emergency`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Laboratory`}
-                id={`has_laboratory`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Medical Supply`}
-                id={`has_medical_supply`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Nursing`}
-                id={`has_nursing`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has In-Patient`}
-                id={`has_inpatient`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Out-Patient`}
-                id={`has_outpatient`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Pharmacy`}
-                id={`has_pharmacy`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Physical Therapy`}
-                id={`has_physical_therapy`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Procedure`}
-                id={`has_procedure`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Radiology`}
-                id={`has_radiology`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Unit`}
-                id={`has_unit`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Vital`}
-                id={`has_vital`}
-                register={register}
-              />
-
-              <CheckboxInput
-                label={`Has Wallet`}
-                id={`has_wallet`}
+                id={`appointments`}
                 register={register}
               />
             </div>
-          </Card>
+          </CustomTransparentCard>
         </div>
       </CustomBasicModal>
     </Fragment>

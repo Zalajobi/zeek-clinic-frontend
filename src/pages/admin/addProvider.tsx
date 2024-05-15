@@ -22,13 +22,11 @@ import {
   relationshipStatus,
   religions,
 } from '@lib/constants/constants';
-import {
-  AdminAddProviderInputSchema,
-  CreateAdminUserInput,
-} from '@typeSpec/forms/form.types';
+import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
 import { FilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
+import { CreateProviderInputSchema } from '@typeSpec/forms';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -38,7 +36,7 @@ export const AddProvider = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateAdminUserInput>({
-    resolver: yupResolver(AdminAddProviderInputSchema),
+    resolver: yupResolver(CreateProviderInputSchema),
   });
 
   const {
@@ -232,7 +230,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'relationship_status'}
-                  errorMsg={errors.relationship_status?.message ?? ''}
+                  // errorMsg={errors.relationship_status?.message ?? ''}
                 />
 
                 <SelectInput
@@ -252,7 +250,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'department'}
-                  errorMsg={errors.department?.message ?? ''}
+                  // errorMsg={errors.department?.message ?? ''}
                 />
 
                 <SelectInput
@@ -270,7 +268,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'serviceArea'}
-                  errorMsg={errors.serviceArea?.message ?? ''}
+                  // errorMsg={errors.serviceArea?.message ?? ''}
                 />
 
                 <SelectInput
@@ -279,7 +277,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'unit'}
-                  errorMsg={errors.unit?.message ?? ''}
+                  // errorMsg={errors.unit?.message ?? ''}
                 />
               </div>
 
