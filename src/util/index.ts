@@ -82,6 +82,19 @@ export const revertDropdownOptionsToResponseKey = (key: string) => {
     .join('_');
 };
 
-export const formatPhoneNumber = (phone: number, countryCode: string) => {
-  return parsePhoneNumber(phone.toString(), {});
+export const formatPhoneNumber = (
+  phone: number,
+  regionCode: string,
+  type?:
+    | 'input'
+    | 'international'
+    | 'national'
+    | 'e164'
+    | 'rfc3966'
+    | 'significant'
+) => {
+  const phoneType = type ?? 'national';
+  return parsePhoneNumber(phone.toString(), {
+    regionCode,
+  }).number?.[phoneType];
 };

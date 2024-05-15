@@ -10,8 +10,6 @@ import { formatPhoneNumber } from '@util/index';
 const SiteDetails = () => {
   const { siteData, isLoading } = useSiteDetails();
 
-  console.log(formatPhoneNumber(siteData?.data?.phone, 'NG'));
-
   return (
     <Fragment>
       <CustomCard
@@ -82,7 +80,12 @@ const SiteDetails = () => {
           ) : (
             <Fragment>
               <Typography
-                text={siteData?.data?.phone ?? '--'}
+                text={
+                  formatPhoneNumber(
+                    siteData?.data?.phone,
+                    siteData?.data?.country_code
+                  ) ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
