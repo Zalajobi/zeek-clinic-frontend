@@ -8,7 +8,7 @@ import {
   generateRandomCharacters,
 } from '../../util';
 import { AdminEditProvidersInformation } from '@typeSpec/admin/provider';
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { AllCountries } from '@typeSpec/forms/form.types';
 import { axiosPutRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { UserServiceUnitResponseData } from '@typeSpec/index';

@@ -11,10 +11,7 @@ import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
 } from '@typeSpec/apiResponses';
-import {
-  AdminAddProviderInput,
-  AllCountries,
-} from '@typeSpec/superadmin/formTypes';
+import { AllCountries, CreateAdminUserInput } from '@typeSpec/forms/form.types';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -112,7 +109,7 @@ export const useAdminAddProvider = () => {
     setCountryCode(value);
   };
 
-  const onSubmit = async (data: AdminAddProviderInput) => {
+  const onSubmit = async (data: CreateAdminUserInput) => {
     const addAdminData = {
       ...data,
       country,

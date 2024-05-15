@@ -11,11 +11,8 @@ import {
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
-import {
-  CreateHospitalInput,
-  CreateHospitalInputSchema,
-} from '@typeSpec/superadmin/forms';
-import text from '@components/global/dialog/Text';
+import { CreateHospitalInputSchema } from '@typeSpec/forms';
+import { CreateHospitalInput } from '@typeSpec/forms/form.types';
 
 interface CreateHospitalModalProps {
   open: boolean;

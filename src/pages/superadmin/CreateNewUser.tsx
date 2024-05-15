@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
+import { useSuperadminCreateAdminUser } from '@hooks/superadmin/useSuperadminCreateAdminUser';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
 import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
 import {
@@ -9,19 +9,17 @@ import {
   genderSelectInput,
   relationshipStatus,
   religions,
-} from '../../lib/constants/constants';
-import { Typography } from '../../components/global/dialog/Typography';
-import { CustomCard } from '../../components/global/card/CustomCard';
+} from '@lib/constants/constants';
+import { Typography } from '@components/global/dialog/Typography';
+import { CustomCard } from '@components/global/card/CustomCard';
 import {
   DateInput,
   SelectInput,
   TextInput,
-} from '../../components/global/formInput/CustomInput';
-import {
-  CreateAdminUserInput,
-  CreateAdminUserInputSchema,
-} from '../../typeSpec/superadmin/forms';
-import { FilledButton } from '../../components/global/CustomButton';
+} from '@components/global/formInput/CustomInput';
+import { CreateAdminUserInputSchema } from '@typeSpec/forms';
+import { FilledButton } from '@components/global/CustomButton';
+import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
 
 const CreateNewUser = () => {
   const {

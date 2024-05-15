@@ -1,5 +1,5 @@
 import { Fragment, useMemo } from 'react';
-import { useAdminDepartmentUnitAndAreaTableEditAndCreate } from '@hooks/common/useAdminDepartmentUnitAndAreaTableEditAndCreate';
+import { useAdminDepartmentUnitAndAreaTableEditAndCreate } from '@hooks/modals/useAdminDepartmentUnitAndAreaTableEditAndCreate';
 import { ApplicationTable } from '@components/global/table/ApplicationTable';
 import {
   DepartmentsPatientAndDoctorCountDataColumn,

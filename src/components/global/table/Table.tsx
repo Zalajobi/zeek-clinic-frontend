@@ -19,12 +19,11 @@ import {
 } from '@material-tailwind/react';
 import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { HiChevronUpDown, HiPencil } from 'react-icons/hi2';
+import { HiChevronUpDown } from 'react-icons/hi2';
 import Status from '@components/global/Status';
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { MdDelete } from 'react-icons/md';
 import { FaUserPlus } from 'react-icons/fa';
 import { formatPhoneNumber } from '@util/index';
 

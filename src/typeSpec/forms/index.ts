@@ -1,35 +1,6 @@
 import * as yup from 'yup';
 
-// Create SiteDetailsPage
-export type CreateSiteInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code: string;
-  is_private: boolean;
-  has_appointment: boolean;
-  has_caregiver: boolean;
-  has_clinical: boolean;
-  has_doctor: boolean;
-  has_emergency: boolean;
-  has_laboratory: boolean;
-  has_medical_supply: boolean;
-  has_nursing: boolean;
-  has_inpatient: boolean;
-  has_outpatient: boolean;
-  has_pharmacy: boolean;
-  has_physical_therapy: boolean;
-  has_procedure: boolean;
-  has_radiology: boolean;
-  has_unit: boolean;
-  has_vital: boolean;
-  has_wallet: boolean;
-};
-
+// Create Site
 export const CreateSiteInputSchema = yup
   .object({
     email: yup.string().required('Email field is required'),
@@ -65,17 +36,6 @@ export const CreateSiteInputSchema = yup
   .required();
 
 // Create Organization
-export type CreateHospitalInput = {
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  zip_code?: string;
-};
-
 export const CreateHospitalInputSchema = yup
   .object({
     email: yup.string().required('Email field is required'),
@@ -92,33 +52,7 @@ export const CreateHospitalInputSchema = yup
   })
   .required();
 
-// Create Super Admin
-export type CreateAdminUserInput = {
-  email: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  username: string;
-  country: string;
-  state: string;
-  city: string;
-  phone: string;
-  country_code?: string;
-  zip_code: string;
-  role: string;
-  staff_id: string;
-  // department: string;
-  religion?: string;
-  gender: string;
-  dob: string;
-  title: string;
-  // bio?: string;
-  address: string;
-  address_two?: string;
-  profile_img?: string;
-  marital_status?: string;
-};
-
+// Create Admin
 export const CreateAdminUserInputSchema = yup
   .object({
     email: yup.string().required('Email field is required'),
@@ -155,5 +89,61 @@ export const CreateAdminUserInputSchema = yup
     address_two: yup.string().optional(),
     profile_img: yup.string().optional(),
     religion: yup.string().optional(),
+  })
+  .required();
+
+// Create Provider
+export const AdminAddProviderInputSchema = yup
+  .object({
+    title: yup.string().required('Title is Required'),
+    first_name: yup
+      .string()
+      .required('First Name is a required field')
+      .min(4, 'First Name must be at least four(4) character(s)')
+      .max(25, 'Exceeded the 25 character threshold'),
+    last_name: yup
+      .string()
+      .required('Last Name is a required field')
+      .min(4, 'Last Name must be at least four(4) character(s)')
+      .max(25, 'Exceeded the 25 character threshold'),
+    middle_name: yup.string().optional(),
+    gender: yup.string().required('Gender is Required'),
+    dob: yup.string().required('Date Of Birth is a required field'),
+    email: yup
+      .string()
+      .email('Email format is wrong')
+      .required('Email is a required field'),
+    phone: yup.string().required('Phone Number is a required field'),
+    department: yup.string().required('Providers Department is not selected'),
+    role: yup.string().required('Providers Role is not selected'),
+    serviceArea: yup
+      .string()
+      .required('Providers Service Area is not selected'),
+    unit: yup.string().required('Providers Unit is not selected'),
+    country: yup.string().required('Country is a required field'),
+    state: yup.string().required('State is a required field'),
+    staff_id: yup
+      .string()
+      .min(7, 'Minimum of Seven(7) Characters')
+      .max(20, 'Maximum of Twenty(20) characters')
+      .required('Staff ID is a required field'),
+    city: yup.string().optional(),
+    zip_code: yup.string().required('ZipCode is a required field'),
+    relationship_status: yup
+      .string()
+      .required('Relationship Status is a required field'),
+    religion: yup.string().required('Religion is a required field'),
+    address: yup.string().required('Address is required'),
+    is_consultant: yup.boolean().default(false),
+    is_specialist: yup.boolean().default(false),
+    appointments: yup.boolean().default(false),
+    // password: yup
+    //   .string()
+    //   .min(8, 'Must be at least Eight(8) characters long')
+    //   .matches(
+    //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    //     'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    //   )
+    //   .required('Password is required'),
   })
   .required();

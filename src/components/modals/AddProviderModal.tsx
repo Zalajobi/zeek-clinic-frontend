@@ -1,45 +1,18 @@
-import { Fragment } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import ImageUpload from '@components/global/formInput/ImageUpload';
-import { useCreateSite } from '@hooks/modals/useCreateSite';
-import {
-  CheckboxInput,
-  SelectInput,
-  TextInput,
-} from '@components/global/formInput/CustomInput';
-import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import { CreateSiteInputSchema } from '@typeSpec/forms';
-import { OutlinedButton } from '@components/global/CustomButton';
-import { CustomBasicModal } from '@components/global/dialog/CustomModal';
+import React, { Fragment } from 'react';
 import { Card } from '@material-tailwind/react';
-import { CreateSiteInput } from '@typeSpec/forms/form.types';
+import { OutlinedButton } from '@components/global/CustomButton';
+import { useAddProviderModal } from '@hooks/modals/useAddProviderModal';
+import { CustomTransparentCard } from '@components/global/card/CustomCard';
+import ImageUpload from '@components/global/formInput/ImageUpload';
+import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 
-interface CreateSiteModalProps {
+interface AddProviderModalProps {
   open: boolean;
-  handleOpen: () => void;
+  handler: () => void;
 }
 
-const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateSiteInput>({
-    resolver: yupResolver(CreateSiteInputSchema),
-  });
-
-  const {
-    // Values
-    logo,
-    allCountries,
-    allCountryStates,
-
-    // Functions
-    onUpdateLogo,
-    createNewSite,
-    onUpdateCountry,
-  } = useCreateSite(handleOpen);
+const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
+  const { logo } = useAddProviderModal(handler);
 
   return (
     <Fragment>
@@ -270,4 +243,4 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
   );
 };
 
-export default CreateSiteModal;
+export default AddProviderModal;

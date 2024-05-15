@@ -23,9 +23,9 @@ import {
   religions,
 } from '@lib/constants/constants';
 import {
-  AdminAddProviderInput,
   AdminAddProviderInputSchema,
-} from '@typeSpec/superadmin/formTypes';
+  CreateAdminUserInput,
+} from '@typeSpec/forms/form.types';
 import { FilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
@@ -37,7 +37,7 @@ export const AddProvider = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AdminAddProviderInput>({
+  } = useForm<CreateAdminUserInput>({
     resolver: yupResolver(AdminAddProviderInputSchema),
   });
 

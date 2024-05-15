@@ -29,7 +29,7 @@ import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 import AdminServiceAreaPage from '@pages/admin/AdminServiceAreaPage';
 import AdminRolesPage from '@pages/admin/AdminRolesPage';
 import SiteDetailsPage from '@pages/superadmin/SiteDetailsPage';
-import SiteProvidersPage from '@pages/SiteProcidersPage';
+import SiteProvidersPage from '@pages/SiteProvidersPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

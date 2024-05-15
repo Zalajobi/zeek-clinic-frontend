@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { AllCountries, CreateSiteInput } from '@typeSpec/forms/form.types';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { CreateSiteInput } from '@typeSpec/superadmin/forms';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
