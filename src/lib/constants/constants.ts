@@ -172,7 +172,7 @@ export const relationshipStatus: SelectInputFieldProps[] = [
   { value: 'OPEN_RELATIONSHIP', placeholder: 'Open Relationship' },
   { value: 'CIVIL_UNION', placeholder: 'Civil Union' },
   { value: 'DOMESTIC_PARTNERSHIP', placeholder: 'Domestic Partnership' },
-  { value: 'OTHER', placeholder: 'Other' },
+  { value: 'OTHERS', placeholder: 'Other' },
 ];
 
 export const religions: SelectInputFieldProps[] = [

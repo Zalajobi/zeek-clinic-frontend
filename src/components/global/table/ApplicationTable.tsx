@@ -1,5 +1,4 @@
 import { ChangeEvent, Fragment } from 'react';
-import { FaCalendarAlt } from 'react-icons/fa';
 import { CgArrowsH } from 'react-icons/cg';
 import { MdArrowDropDown } from 'react-icons/md';
 import { BasicSearchInput } from '@components/global/formInput/SearchInputs';
@@ -99,22 +98,18 @@ export const ApplicationTable = ({
                 <div className="flex items-center justify-center w-full space-x-3 md:w-auto">
                   <DateInput
                     label={`From`}
-                    placeholder={`DD/MM/YYYY`}
                     change={onUpdateFilterFromDate}
                     value={filterFromDate as Date}
                     id={`from`}
-                    icon={<FaCalendarAlt size={20} />}
                   />
 
                   <CgArrowsH size={40} />
 
                   <DateInput
                     label={`To`}
-                    placeholder={`DD/MM/YYYY`}
                     change={onUpdateFilterToDate}
                     value={filterToDate as Date}
                     id={`to`}
-                    icon={<FaCalendarAlt size={20} />}
                   />
                 </div>
               </div>

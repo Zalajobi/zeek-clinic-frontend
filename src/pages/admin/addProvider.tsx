@@ -154,17 +154,9 @@ export const AddProvider = () => {
                 className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
                 <DateInput
                   label={`Date Or Birth`}
-                  placeholder={`DD/MM/YYYY`}
-                  className={`my-3`}
                   errorMsg={errors.dob?.message ?? ''}
                   id={`dob`}
                   register={register}
-                  icon={
-                    <FaCalendarAlt
-                      size={20}
-                      className={`${errors.dob?.message ? 'text-red-500' : ''}`}
-                    />
-                  }
                 />
 
                 <TextInput

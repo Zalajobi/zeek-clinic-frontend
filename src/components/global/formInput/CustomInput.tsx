@@ -1,9 +1,7 @@
 import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import change = Simulate.change;
 import { SelectInputFieldProps } from '@typeSpec/common';
 import {
   Menu,
@@ -28,7 +26,15 @@ interface TextInputProps {
   label: string;
   id: string;
   register?: UseFormRegister<any>;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'tel'
+    | 'url'
+    | 'date'
+    | 'datetime-local';
   className?: string;
   errorMsg?: string;
   placeholder?: string;
@@ -63,13 +69,11 @@ interface SelectInputProps {
 interface DateInputProps {
   label: string;
   id: string;
-  placeholder: string;
   register?: UseFormRegister<any>;
-  className?: string;
   errorMsg?: string;
-  icon?: ReactNode;
   change?: (event: Date) => void;
   value?: Date;
+  showLabel?: boolean;
 }
 
 interface CheckboxInputProps {
@@ -281,14 +285,12 @@ export const SelectInput = ({
 
 export const DateInput = ({
   label,
-  placeholder,
-  className = '',
   errorMsg,
   id,
   register,
-  icon,
   change,
   value,
+  showLabel = false,
 }: DateInputProps) => {
   const [date, setDate] = useState<Date>();
 
@@ -325,45 +327,61 @@ export const DateInput = ({
   };
 
   return (
-    <Popover placement="bottom">
-      <PopoverHandler>
-        <Input
-          label={label}
-          onChange={() => null}
-          value={date ? format(date, 'PPP') : ''}
-        />
-      </PopoverHandler>
-      <PopoverContent>
-        <DayPicker
-          mode="single"
-          selected={value}
-          {...register?.(id, {
-            onChange: (event) => {
-              if (change) {
-                change(event);
-              }
-            },
-          })}
-          onSelect={updateDate}
-          showOutsideDays
-          classNames={dateClassNames}
-          components={{
-            IconLeft: ({ ...props }) => (
-              <BiChevronLeft
-                {...props}
-                className="h-4 w-4 stroke-2"
-              />
-            ),
-            IconRight: ({ ...props }) => (
-              <BiChevronRight
-                {...props}
-                className="h-4 w-4 stroke-2"
-              />
-            ),
-          }}
-        />
-      </PopoverContent>
-    </Popover>
+    <Fragment>
+      <div className={`min-w-[100px] my-2`}>
+        <div className="w-full">
+          {showLabel && (
+            <label
+              htmlFor={id}
+              className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+              }`}>
+              {label}
+            </label>
+          )}
+        </div>
+
+        <Popover placement="bottom">
+          <PopoverHandler>
+            <Input
+              label={label}
+              onChange={() => null}
+              value={date ? format(date, 'PPP') : ''}
+            />
+          </PopoverHandler>
+          <PopoverContent>
+            <DayPicker
+              mode="single"
+              selected={value}
+              {...register?.(id, {
+                onChange: (event) => {
+                  if (change) {
+                    change(event);
+                  }
+                },
+              })}
+              onSelect={updateDate}
+              showOutsideDays
+              classNames={dateClassNames}
+              components={{
+                IconLeft: ({ ...props }) => (
+                  <BiChevronLeft
+                    {...props}
+                    className="h-4 w-4 stroke-2"
+                  />
+                ),
+                IconRight: ({ ...props }) => (
+                  <BiChevronRight
+                    {...props}
+                    className="h-4 w-4 stroke-2"
+                  />
+                ),
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
+    </Fragment>
   );
 };
 

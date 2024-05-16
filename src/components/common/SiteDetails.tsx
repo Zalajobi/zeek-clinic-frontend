@@ -82,8 +82,8 @@ const SiteDetails = () => {
               <Typography
                 text={
                   formatPhoneNumber(
-                    siteData?.data?.phone,
-                    siteData?.data?.country_code
+                    siteData?.data?.phone ?? 0,
+                    siteData?.data?.country_code ?? 'NG'
                   ) ?? '--'
                 }
                 Tag={'p'}

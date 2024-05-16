@@ -3,6 +3,10 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import { Country, State } from 'country-state-city';
 import { useParams } from 'react-router-dom';
 import { AllCountries } from '@typeSpec/forms/form.types';
+import { useQuery } from 'react-query';
+import { axiosPostRequestUserService } from '@lib/axios';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export const useAddProviderModal = (handler: () => void) => {
   const { siteId } = useParams();
@@ -52,11 +56,35 @@ export const useAddProviderModal = (handler: () => void) => {
     setPhoneCode(countryInfo.phonecode);
   };
 
+  // Get Departments
+  const { data: departments, isLoading: departmentsLoading } = useQuery({
+    queryKey: ['getDepartments'],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(`/department/search`, {
+          siteId,
+          startRow: 0,
+          endRow: 1000000,
+          sortModel: {
+            colId: 'name',
+            sort: 'asc',
+          },
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
   return {
     // Values
     logo,
     allCountries,
     allCountryStates,
+    departments,
+    departmentsLoading,
 
     // Functions
     setLogo,

@@ -178,8 +178,6 @@ const CreateNewUser = () => {
               {/*DOB*/}
               <DateInput
                 label={`Date Or Birth`}
-                placeholder={`DD/MM/YYYY`}
-                className={`my-3`}
                 errorMsg={errors.dob?.message ?? ''}
                 id={`dob`}
                 register={register}
