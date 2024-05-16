@@ -21,6 +21,8 @@ const SiteDetails = () => {
     providersCountLoading,
     serviceAreaCount,
     serviceAreaCountLoading,
+    unitCount,
+    unitCountLoading,
   } = useSiteDetails();
 
   return (
@@ -234,6 +236,34 @@ const SiteDetails = () => {
           )}
         </div>
 
+        {/*ServiceArea Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Service Area:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {serviceAreaCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(serviceAreaCount?.data?.totalRows)?.toLocaleString() ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
         {/*Department Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
@@ -262,7 +292,7 @@ const SiteDetails = () => {
           )}
         </div>
 
-        {/*ServiceArea Count*/}
+        {/*Unit Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Service Area:`}
@@ -271,7 +301,7 @@ const SiteDetails = () => {
             className={`text-[color:var(--label-color)]`}
           />
 
-          {serviceAreaCountLoading ? (
+          {unitCountLoading ? (
             <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
             </Fragment>
@@ -279,8 +309,7 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(serviceAreaCount?.data?.totalRows)?.toLocaleString() ??
-                  '--'
+                  Number(unitCount?.data?.totalRows)?.toLocaleString() ?? '--'
                 }
                 Tag={'p'}
                 size={'sm'}

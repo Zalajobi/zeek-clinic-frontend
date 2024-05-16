@@ -84,7 +84,7 @@ export const useSiteDetails = () => {
   // Get ServiceArea Count
   const { data: serviceAreaCount, isLoading: serviceAreaCountLoading } =
     useQuery({
-      queryKey: ['getserviceAreaCount'],
+      queryKey: ['getServiceAreaCount'],
       queryFn: async () => {
         try {
           return await axiosGetRequestUserService(
@@ -97,6 +97,22 @@ export const useSiteDetails = () => {
         }
       },
     });
+
+  // Get Unit Count
+  const { data: unitCount, isLoading: unitCountLoading } = useQuery({
+    queryKey: ['getUnitCount'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/service-area/count/${siteId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
 
   return {
     siteData,
@@ -111,5 +127,7 @@ export const useSiteDetails = () => {
     providersCountLoading,
     serviceAreaCount,
     serviceAreaCountLoading,
+    unitCount,
+    unitCountLoading,
   };
 };
