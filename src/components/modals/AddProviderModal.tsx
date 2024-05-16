@@ -62,6 +62,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     // Functions
     onUpdateCountry,
     setLogo,
+    createProvider,
   } = useAddProviderModal(handler);
 
   if (!departmentsLoading) {
@@ -116,14 +117,14 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
             />
 
             <OutlinedButton
-              click={handler}
+              click={handleSubmit(createProvider)}
               text={`Confirm`}
               type={`secondary`}
             />
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1050px]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1130px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
@@ -136,7 +137,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
           </CustomTransparentCard>
 
           <CustomTransparentCard
-            className={`w-full h-full p-4 rounded-2xl overflow-scroll`}>
+            className={`w-full h-full p-4 rounded-2xl overflow-scroll overscroll-y-auto`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2 lg:grid-cols-3`}>
               {/*Title*/}
@@ -163,7 +164,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`Last Name`}
                 className={`my-3`}
                 errorMsg={errors.last_name?.message ?? ''}
-                id={`email`}
+                id={`last_name`}
                 type={`text`}
                 register={register}
               />
@@ -173,6 +174,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`Middle Name`}
                 className={`my-3`}
                 id={`middle_name`}
+                errorMsg={errors.middle_name?.message ?? ''}
                 type={`text`}
                 register={register}
               />
@@ -184,6 +186,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 id={`email`}
                 type={`email`}
                 register={register}
+                errorMsg={errors.email?.message ?? ''}
               />
 
               {/*Gender*/}
@@ -348,7 +351,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
             </div>
 
             <div
-              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-3`}>
+              className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-3 overscroll-y-auto`}>
               <CheckboxInput
                 label={`Is Consultant`}
                 id={`is_consultant`}

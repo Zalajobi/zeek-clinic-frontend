@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { Country, State } from 'country-state-city';
 import { useParams } from 'react-router-dom';
-import { AllCountries } from '@typeSpec/forms/form.types';
+import { AllCountries, CreateProviderInput } from '@typeSpec/forms/form.types';
 import { useQuery } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
@@ -133,6 +133,10 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   });
 
+  const createProvider = (data: CreateProviderInput) => {
+    console.log(data);
+  };
+
   return {
     // Values
     logo,
@@ -150,5 +154,6 @@ export const useAddProviderModal = (handler: () => void) => {
     // Functions
     setLogo,
     onUpdateCountry,
+    createProvider,
   };
 };
