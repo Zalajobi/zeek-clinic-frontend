@@ -19,6 +19,8 @@ const SiteDetails = () => {
     patientsCountLoading,
     providersCount,
     providersCountLoading,
+    serviceAreaCount,
+    serviceAreaCountLoading,
   } = useSiteDetails();
 
   return (
@@ -250,6 +252,34 @@ const SiteDetails = () => {
               <Typography
                 text={
                   Number(departmentCount?.data?.totalRows)?.toLocaleString() ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*ServiceArea Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Service Area:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {serviceAreaCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(serviceAreaCount?.data?.totalRows)?.toLocaleString() ??
                   '--'
                 }
                 Tag={'p'}

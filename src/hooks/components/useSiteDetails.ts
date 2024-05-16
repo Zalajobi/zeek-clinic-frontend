@@ -81,6 +81,23 @@ export const useSiteDetails = () => {
     },
   });
 
+  // Get ServiceArea Count
+  const { data: serviceAreaCount, isLoading: serviceAreaCountLoading } =
+    useQuery({
+      queryKey: ['getserviceAreaCount'],
+      queryFn: async () => {
+        try {
+          return await axiosGetRequestUserService(
+            `/service-area/count/${siteId}`
+          );
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response) {
+            toast.error(error.response.data.error?.message);
+          }
+        }
+      },
+    });
+
   return {
     siteData,
     isLoading,
@@ -92,5 +109,7 @@ export const useSiteDetails = () => {
     patientsCountLoading,
     providersCount,
     providersCountLoading,
+    serviceAreaCount,
+    serviceAreaCountLoading,
   };
 };
