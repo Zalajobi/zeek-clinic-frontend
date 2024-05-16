@@ -15,6 +15,10 @@ const SiteDetails = () => {
     roleCountLoading,
     departmentCount,
     departmentCountLoading,
+    patientsCount,
+    patientsCountLoading,
+    providersCount,
+    providersCountLoading,
   } = useSiteDetails();
 
   return (
@@ -246,6 +250,62 @@ const SiteDetails = () => {
               <Typography
                 text={
                   Number(departmentCount?.data?.totalRows)?.toLocaleString() ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Patients Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Patients:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {patientsCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(patientsCount?.data?.totalRows)?.toLocaleString() ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Patients Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Providers:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {providersCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(providersCount?.data?.totalRows)?.toLocaleString() ??
                   '--'
                 }
                 Tag={'p'}

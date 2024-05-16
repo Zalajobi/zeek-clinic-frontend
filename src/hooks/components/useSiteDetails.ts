@@ -35,7 +35,7 @@ export const useSiteDetails = () => {
     },
   });
 
-  // Get site Role Count
+  // Get Departments Count
   const { data: departmentCount, isLoading: departmentCountLoading } = useQuery(
     {
       queryKey: ['getDepartmentCount'],
@@ -53,6 +53,34 @@ export const useSiteDetails = () => {
     }
   );
 
+  // Get Patients Count
+  const { data: patientsCount, isLoading: patientsCountLoading } = useQuery({
+    queryKey: ['getPatientsCountCount'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(`/patient/count/${siteId}`);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Providers Count
+  const { data: providersCount, isLoading: providersCountLoading } = useQuery({
+    queryKey: ['getProvidersCountCount'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(`/provider/count/${siteId}`);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
   return {
     siteData,
     isLoading,
@@ -60,5 +88,9 @@ export const useSiteDetails = () => {
     roleCountLoading,
     departmentCount,
     departmentCountLoading,
+    patientsCount,
+    patientsCountLoading,
+    providersCount,
+    providersCountLoading,
   };
 };
