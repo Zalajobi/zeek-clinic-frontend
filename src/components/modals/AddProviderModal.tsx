@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Card } from '@material-tailwind/react';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { useAddProviderModal } from '@hooks/modals/useAddProviderModal';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
@@ -7,7 +6,6 @@ import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import {
   CheckboxInput,
-  DateInput,
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
@@ -29,7 +27,8 @@ interface AddProviderModalProps {
 }
 
 const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
-  const deptOptions: SelectInputFieldProps[] = [];
+  const deptOptions: SelectInputFieldProps[] = [],
+    unitOptions: SelectInputFieldProps[] = [];
   const {
     register,
     handleSubmit,
@@ -45,6 +44,8 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     allCountryStates,
     departments,
     departmentsLoading,
+    units,
+    unitsLoading,
 
     // Functions
     onUpdateCountry,
@@ -54,6 +55,15 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
   if (!departmentsLoading) {
     departments?.data?.depts?.map((data: DepartmentPayload) => {
       deptOptions.push({
+        value: data?.id ?? '',
+        placeholder: data?.name ?? '',
+      });
+    });
+  }
+
+  if (!unitsLoading) {
+    units?.data?.units?.map((data: DepartmentPayload) => {
+      unitOptions.push({
         value: data?.id ?? '',
         placeholder: data?.name ?? '',
       });
@@ -83,7 +93,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[700px]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[900px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
@@ -183,6 +193,16 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 register={register}
                 id={'department'}
                 errorMsg={errors.department?.message ?? ''}
+              />
+
+              {/*Unit*/}
+              <SelectInput
+                label={`Unit`}
+                options={unitOptions}
+                className={`w-full my-3`}
+                register={register}
+                id={'unit'}
+                errorMsg={errors.unit?.message ?? ''}
               />
 
               {/*Country*/}

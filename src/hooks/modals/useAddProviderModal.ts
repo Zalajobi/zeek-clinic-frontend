@@ -32,6 +32,15 @@ export const useAddProviderModal = (handler: () => void) => {
     });
     setAllCountries(countriesUpdate);
   }, []);
+  const selectApiPayload = {
+    siteId,
+    startRow: 0,
+    endRow: 1000000,
+    sortModel: {
+      colId: 'name',
+      sort: 'asc',
+    },
+  };
 
   // On Update Country
   const onUpdateCountry = (value: string) => {
@@ -61,15 +70,27 @@ export const useAddProviderModal = (handler: () => void) => {
     queryKey: ['getDepartments'],
     queryFn: async () => {
       try {
-        return await axiosPostRequestUserService(`/department/search`, {
-          siteId,
-          startRow: 0,
-          endRow: 1000000,
-          sortModel: {
-            colId: 'name',
-            sort: 'asc',
-          },
-        });
+        return await axiosPostRequestUserService(
+          `/department/search`,
+          selectApiPayload
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Units
+  const { data: units, isLoading: unitsLoading } = useQuery({
+    queryKey: ['getUnits'],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(
+          `/unit/search`,
+          selectApiPayload
+        );
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           toast.error(error.response.data.error?.message);
@@ -85,6 +106,8 @@ export const useAddProviderModal = (handler: () => void) => {
     allCountryStates,
     departments,
     departmentsLoading,
+    units,
+    unitsLoading,
 
     // Functions
     setLogo,
