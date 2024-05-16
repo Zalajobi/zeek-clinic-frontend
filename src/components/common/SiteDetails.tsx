@@ -28,7 +28,7 @@ const SiteDetails = () => {
   return (
     <Fragment>
       <CustomCard
-        className={`w-full flex flex-col items-center p-4 mb-4 md:grid md:grid-cols-2 md:p-9 lg:grid-cols-4`}>
+        className={`w-full flex flex-col items-center p-4 mb-4 md:grid md:grid-cols-3 md:p-9 lg:grid-cols-4`}>
         {/*Name*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
@@ -48,7 +48,7 @@ const SiteDetails = () => {
                 text={siteData?.data?.name ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -73,7 +73,7 @@ const SiteDetails = () => {
                 text={siteData?.data?.email ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -103,7 +103,7 @@ const SiteDetails = () => {
                 }
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -128,7 +128,7 @@ const SiteDetails = () => {
                 text={siteData?.data?.country ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -153,7 +153,7 @@ const SiteDetails = () => {
                 text={siteData?.data?.state ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -178,7 +178,7 @@ const SiteDetails = () => {
                 text={siteData?.data?.city ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -203,7 +203,32 @@ const SiteDetails = () => {
                 text={siteData?.data?.zip_code ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Address*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Address:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {isLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={siteData?.data?.address ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
             </Fragment>
           )}
@@ -226,7 +251,8 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(roleCount?.data?.totalRows)?.toLocaleString() ?? '--'
+                  Number(roleCount?.data?.totalRows ?? 0)?.toLocaleString() ??
+                  '--'
                 }
                 Tag={'p'}
                 size={'sm'}
@@ -253,8 +279,9 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(serviceAreaCount?.data?.totalRows)?.toLocaleString() ??
-                  '--'
+                  Number(
+                    serviceAreaCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
                 }
                 Tag={'p'}
                 size={'sm'}
@@ -281,8 +308,9 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(departmentCount?.data?.totalRows)?.toLocaleString() ??
-                  '--'
+                  Number(
+                    departmentCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
                 }
                 Tag={'p'}
                 size={'sm'}
@@ -309,7 +337,8 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(unitCount?.data?.totalRows)?.toLocaleString() ?? '--'
+                  Number(unitCount?.data?.totalRows ?? 0)?.toLocaleString() ??
+                  '--'
                 }
                 Tag={'p'}
                 size={'sm'}
@@ -336,8 +365,9 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(patientsCount?.data?.totalRows)?.toLocaleString() ??
-                  '--'
+                  Number(
+                    patientsCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
                 }
                 Tag={'p'}
                 size={'sm'}
@@ -364,8 +394,9 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  Number(providersCount?.data?.totalRows)?.toLocaleString() ??
-                  '--'
+                  Number(
+                    providersCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
                 }
                 Tag={'p'}
                 size={'sm'}
