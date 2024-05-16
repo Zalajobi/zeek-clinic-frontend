@@ -8,7 +8,14 @@ import Status from '@components/global/Status';
 import { formatPhoneNumber } from '@util/index';
 
 const SiteDetails = () => {
-  const { siteData, isLoading } = useSiteDetails();
+  const {
+    siteData,
+    isLoading,
+    roleCount,
+    roleCountLoading,
+    departmentCount,
+    departmentCountLoading,
+  } = useSiteDetails();
 
   return (
     <Fragment>
@@ -161,6 +168,86 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={siteData?.data?.city ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Zip Code*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`ZipCode:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {isLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={siteData?.data?.zip_code ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Roles Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Roles:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {roleCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(roleCount?.data?.totalRows)?.toLocaleString() ?? '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Department Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Departments:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {departmentCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(departmentCount?.data?.totalRows)?.toLocaleString() ??
+                  '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
