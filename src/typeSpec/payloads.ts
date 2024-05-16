@@ -41,6 +41,16 @@ export interface DepartmentPayload {
   description?: string;
 }
 
+export interface ServiceAreaPayload {
+  id?: string;
+  name?: string;
+  description?: string;
+  siteId?: string;
+  type?: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
 export interface PersonalInfoPayload {
   phone?: string;
   first_name?: string;

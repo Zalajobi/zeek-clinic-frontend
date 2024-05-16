@@ -123,7 +123,10 @@ export const CreateProviderInputSchema = yup
     unit: yup.string().required('Providers Unit is not selected'),
     country: yup.string().required('Country is a required field'),
     state: yup.string().optional(),
-    city: yup.string().optional(),
+    city: yup
+      .string()
+      .required('City is a required field')
+      .min(3, 'City is too short'),
     staff_id: yup
       .string()
       .min(7, 'Minimum of Seven(7) Characters')

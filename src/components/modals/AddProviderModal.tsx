@@ -17,9 +17,10 @@ import {
   genderSelectInput,
   titleSelectInput,
   relationshipStatus,
+  religions,
 } from '@lib/constants/constants';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { DepartmentPayload } from '@typeSpec/payloads';
+import { DepartmentPayload, ServiceAreaPayload } from '@typeSpec/payloads';
 
 interface AddProviderModalProps {
   open: boolean;
@@ -28,7 +29,8 @@ interface AddProviderModalProps {
 
 const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
   const deptOptions: SelectInputFieldProps[] = [],
-    unitOptions: SelectInputFieldProps[] = [];
+    unitOptions: SelectInputFieldProps[] = [],
+    serviceAreaOptions: SelectInputFieldProps[] = [];
   const {
     register,
     handleSubmit,
@@ -46,6 +48,8 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     departmentsLoading,
     units,
     unitsLoading,
+    serviceAreas,
+    serviceAreasLoading,
 
     // Functions
     onUpdateCountry,
@@ -66,6 +70,15 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
       unitOptions.push({
         value: data?.id ?? '',
         placeholder: data?.name ?? '',
+      });
+    });
+  }
+
+  if (!serviceAreasLoading) {
+    serviceAreas?.data?.serviceAreas?.map((data: ServiceAreaPayload) => {
+      serviceAreaOptions.push({
+        value: data?.id ?? '',
+        placeholder: `${data?.name} - ${data?.type}` ?? '',
       });
     });
   }
@@ -93,7 +106,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[900px]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1200px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
@@ -109,6 +122,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
             className={`w-full h-full p-4 rounded-2xl overflow-scroll`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2 lg:grid-cols-3`}>
+              {/*Title*/}
               <SelectInput
                 label={`Title`}
                 options={titleSelectInput}
@@ -165,6 +179,26 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 errorMsg={errors.gender?.message ?? ''}
               />
 
+              {/*DOB*/}
+              <TextInput
+                label={`Date Of Birth`}
+                errorMsg={errors.dob?.message ?? ''}
+                id={`dob`}
+                className={`my-3`}
+                register={register}
+                type={'date'}
+              />
+
+              {/*Religion*/}
+              <SelectInput
+                label={`Religion`}
+                options={religions}
+                className={`my-3`}
+                register={register}
+                id={`religion`}
+                errorMsg={errors.religion?.message ?? ''}
+              />
+
               {/*Marital Status*/}
               <SelectInput
                 label={`Relationship Status`}
@@ -175,14 +209,14 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 errorMsg={errors.marital_status?.message ?? ''}
               />
 
-              {/*DOB*/}
-              <TextInput
-                label={`Date Of Birth`}
-                errorMsg={errors.dob?.message ?? ''}
-                id={`dob`}
-                className={`my-3`}
+              {/*Service Area*/}
+              <SelectInput
+                label={`Service Area`}
+                options={serviceAreaOptions}
+                className={`w-full my-3`}
                 register={register}
-                type={'date'}
+                id={'serviceArea'}
+                errorMsg={errors.serviceArea?.message ?? ''}
               />
 
               {/*Department*/}
@@ -203,6 +237,16 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 register={register}
                 id={'unit'}
                 errorMsg={errors.unit?.message ?? ''}
+              />
+
+              {/*Staff ID*/}
+              <TextInput
+                label={`Staff ID`}
+                errorMsg={errors.staff_id?.message ?? ''}
+                id={`staff_id`}
+                className={`my-3`}
+                register={register}
+                type={'text'}
               />
 
               {/*Country*/}
@@ -231,6 +275,16 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`City`}
                 errorMsg={errors.city?.message ?? ''}
                 id={`city`}
+                className={`my-3`}
+                register={register}
+                type={'text'}
+              />
+
+              {/*Zip Code*/}
+              <TextInput
+                label={`Zip Code`}
+                errorMsg={errors.zip_code?.message ?? ''}
+                id={`zip_code`}
                 className={`my-3`}
                 register={register}
                 type={'text'}

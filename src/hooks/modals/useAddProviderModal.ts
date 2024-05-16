@@ -99,6 +99,23 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   });
 
+  // Get ServiceArea
+  const { data: serviceAreas, isLoading: serviceAreasLoading } = useQuery({
+    queryKey: ['getServiceArea'],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(
+          `/service-area/search`,
+          selectApiPayload
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
   return {
     // Values
     logo,
@@ -108,6 +125,8 @@ export const useAddProviderModal = (handler: () => void) => {
     departmentsLoading,
     units,
     unitsLoading,
+    serviceAreas,
+    serviceAreasLoading,
 
     // Functions
     setLogo,
