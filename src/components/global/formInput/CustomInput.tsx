@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
+import { Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
@@ -17,6 +17,7 @@ import {
   Option,
   Typography as MaterialTypography,
   Checkbox,
+  Typography,
 } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -42,17 +43,6 @@ interface TextInputProps {
   change?: (event: string) => void;
   size?: 'lg' | 'md';
   showLabel?: boolean;
-}
-
-interface TextInputWithoutLabelProps {
-  id: string;
-  register?: UseFormRegister<any>;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
-  className?: string;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number;
-  max?: string | number;
-  min?: string | number;
 }
 
 interface SelectInputProps {
@@ -112,48 +102,44 @@ export const TextInput = ({
         <div className="w-full">
           <div className="relative w-full min-w-[200px]">
             {showLabel && (
-              <label
-                htmlFor={id}
-                className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
-                  errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-                }`}>
+              <Typography
+                variant="small"
+                color={errorMsg ? 'blue-gray' : 'red'}
+                className="mb-2 font-medium">
                 {label}
-              </label>
+              </Typography>
             )}
 
             {register ? (
               <Fragment>
                 <Input
-                  variant="outlined"
-                  label={label}
-                  placeholder={placeholder}
-                  className={`border-t divide-solid border-t-gray-400`}
-                  size={size ?? 'lg'}
+                  icon={icon}
+                  className="!border-gray-200 focus:!border-black"
                   type={type}
-                  color={errorMsg ? 'red' : 'teal'}
+                  variant={'outlined'}
+                  size={size ?? 'lg'}
                   id={id}
+                  placeholder={placeholder}
+                  color={errorMsg ? 'red' : 'blue-gray'}
                   {...register(id)}
                 />
               </Fragment>
             ) : (
-              <>
+              <Fragment>
                 <Input
-                  variant="outlined"
-                  label={label}
+                  icon={icon}
+                  className="!border-gray-200 focus:!border-black"
                   type={type}
-                  placeholder={placeholder}
-                  className={`border-t divide-solid border-t-gray-400`}
+                  variant={'outlined'}
                   size={size ?? 'lg'}
-                  color={errorMsg ? 'red' : 'teal'}
                   id={id}
+                  placeholder={placeholder}
+                  color={errorMsg ? 'red' : 'blue-gray'}
                   onChange={(event) => {
                     if (change) change(event.target.value);
                   }}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
-              </>
+              </Fragment>
             )}
           </div>
           {errorMsg && (
@@ -177,40 +163,6 @@ export const TextInput = ({
           )}
         </div>
       </div>
-    </Fragment>
-  );
-};
-
-export const TextInputWithoutLabel = ({
-  id,
-  register,
-  type = 'text',
-  className,
-  change,
-  value,
-  max,
-  min,
-}: TextInputWithoutLabelProps) => {
-  return (
-    <Fragment>
-      {register ? (
-        <input
-          type={type}
-          {...register(id)}
-          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
-          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
-        />
-      ) : (
-        <input
-          type={type}
-          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
-          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
-          onChange={change}
-          value={value}
-          max={max}
-          min={min}
-        />
-      )}
     </Fragment>
   );
 };
