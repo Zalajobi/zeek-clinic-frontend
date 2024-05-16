@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaPhone, FaCity } from 'react-icons/fa';
+import { FaPhone, FaCity } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
@@ -18,7 +18,7 @@ import {
 } from '@components/global/formInput/CustomInput';
 import {
   genderSelectInput,
-  providersTitleSelectInput,
+  titleSelectInput,
   relationshipStatus,
   religions,
 } from '@lib/constants/constants';
@@ -83,7 +83,7 @@ export const AddProvider = () => {
                 className={`w-full grid gap-6 grid-cols-1 mb-2 lg:grid-cols-5`}>
                 <SelectInput
                   label={`Title`}
-                  options={providersTitleSelectInput}
+                  options={titleSelectInput}
                   className={`my-3`}
                   register={register}
                   id={'title'}

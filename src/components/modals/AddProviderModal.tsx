@@ -15,7 +15,11 @@ import { useForm } from 'react-hook-form';
 import { CreateProviderInput } from '@typeSpec/forms/form.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateProviderInputSchema } from '@typeSpec/forms';
-import { genderSelectInput } from '@lib/constants/constants';
+import {
+  genderSelectInput,
+  titleSelectInput,
+  relationshipStatus,
+} from '@lib/constants/constants';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { DepartmentPayload } from '@typeSpec/payloads';
 
@@ -95,6 +99,15 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
             className={`w-full h-full p-4 rounded-2xl overflow-scroll`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2 lg:grid-cols-3`}>
+              <SelectInput
+                label={`Title`}
+                options={titleSelectInput}
+                className={`my-3`}
+                register={register}
+                id={`title`}
+                errorMsg={errors.title?.message ?? ''}
+              />
+
               {/*First Name*/}
               <TextInput
                 label={`First Name`}
@@ -140,6 +153,16 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 register={register}
                 id={`gender`}
                 errorMsg={errors.gender?.message ?? ''}
+              />
+
+              {/*Marital Status*/}
+              <SelectInput
+                label={`Relationship Status`}
+                options={relationshipStatus}
+                className={`my-3`}
+                register={register}
+                id={`marital_status`}
+                errorMsg={errors.marital_status?.message ?? ''}
               />
 
               {/*DOB*/}

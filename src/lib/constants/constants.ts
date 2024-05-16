@@ -81,7 +81,7 @@ export const availableTitles: SelectInputFieldProps[] = [
   },
 ];
 
-export const providersTitleSelectInput: SelectInputFieldProps[] = [
+export const titleSelectInput: SelectInputFieldProps[] = [
   {
     value: 'Mr.',
     placeholder: 'Mr.',
