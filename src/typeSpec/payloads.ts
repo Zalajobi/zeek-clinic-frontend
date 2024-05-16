@@ -36,9 +36,12 @@ export interface SitePayload {
 }
 
 export interface DepartmentPayload {
+  created_at?: string;
+  description?: string;
   id?: string;
   name?: string;
-  description?: string;
+  siteId?: string;
+  updated_at?: string;
 }
 
 export interface RolesPayload {
