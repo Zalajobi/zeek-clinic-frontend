@@ -13,6 +13,7 @@ import { Fragment } from 'react';
 import { DepartmentPayload } from '@typeSpec/payloads';
 import moment from 'moment/moment';
 import { MdHouse } from 'react-icons/md';
+import AddDepartmentModal from '@components/modals/AddDepartmentModal';
 
 const LatestDepartments = () => {
   const {
@@ -50,6 +51,7 @@ const LatestDepartments = () => {
                     Tag={'p'}
                     size={'xs'}
                     weight={400}
+                    className="truncate"
                   />
                   <Typography
                     text={
@@ -77,7 +79,7 @@ const LatestDepartments = () => {
               <Button
                 className={`rounded-full flex`}
                 ripple={true}
-                onClick={() => console.log('create Department')}>
+                onClick={onUpdateCreateDepartmentModal}>
                 <MdHouse className={`w-4 h-4 mr-2`} /> Create Department
               </Button>
             </div>
@@ -88,6 +90,11 @@ const LatestDepartments = () => {
           <Spinner className="h-20 w-20" />
         </div>
       )}
+
+      <AddDepartmentModal
+        open={createDepartmentModal}
+        handler={onUpdateCreateDepartmentModal}
+      />
     </CustomCard>
   );
 };

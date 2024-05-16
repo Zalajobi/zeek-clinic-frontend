@@ -11,14 +11,14 @@ export const useLatestDepartment = () => {
 
   // Get the Latest Department
   const { data: departments, isLoading: departmentsLoading } = useQuery({
-    queryKey: ['getRoleCharts'],
+    queryKey: ['getLatestData'],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(`/department/search`, {
           siteId,
           sortModel: {
             colId: 'created_at',
-            sort: 'asc',
+            sort: 'desc',
           },
         });
       } catch (error) {

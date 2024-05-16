@@ -152,3 +152,11 @@ export const CreateProviderInputSchema = yup
     profile_pic: yup.string().optional(),
   })
   .required();
+
+export const CreateDepartmentInputSchema = yup.object({
+  name: yup.string().required('Department name is required'),
+  description: yup
+    .string()
+    .required('Department description is required')
+    .min(20, 'Description too short'),
+});

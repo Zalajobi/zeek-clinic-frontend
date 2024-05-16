@@ -107,6 +107,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
         title={'Add New Site'}
         handler={handler}
         size={'lg'}
+        className="h-full w-full"
         open={open}
         footer={
           <Fragment>
@@ -124,7 +125,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1130px]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[900px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>

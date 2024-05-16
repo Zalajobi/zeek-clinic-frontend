@@ -138,3 +138,10 @@ export type CreateSiteInput = {
   has_vital: boolean;
   has_wallet: boolean;
 };
+
+// Create Department
+export type CreateDepartmentInput = {
+  name: string;
+  description: string;
+  siteId: string;
+};

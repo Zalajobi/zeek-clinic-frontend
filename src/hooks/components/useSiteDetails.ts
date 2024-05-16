@@ -9,7 +9,7 @@ export const useSiteDetails = () => {
 
   // Get Site Details
   const { data: siteData, isLoading } = useQuery({
-    queryKey: ['getHospitalDetails'],
+    queryKey: ['getSiteDetails'],
     queryFn: async () => {
       try {
         return await axiosGetRequestUserService(`/site/details/${siteId}`);
@@ -38,7 +38,7 @@ export const useSiteDetails = () => {
   // Get Departments Count
   const { data: departmentCount, isLoading: departmentCountLoading } = useQuery(
     {
-      queryKey: ['getDepartmentCount'],
+      queryKey: ['getDeptCount'],
       queryFn: async () => {
         try {
           return await axiosGetRequestUserService(
@@ -55,7 +55,7 @@ export const useSiteDetails = () => {
 
   // Get Patients Count
   const { data: patientsCount, isLoading: patientsCountLoading } = useQuery({
-    queryKey: ['getPatientsCountCount'],
+    queryKey: ['getPatientsCount'],
     queryFn: async () => {
       try {
         return await axiosGetRequestUserService(`/patient/count/${siteId}`);
@@ -69,7 +69,7 @@ export const useSiteDetails = () => {
 
   // Get Providers Count
   const { data: providersCount, isLoading: providersCountLoading } = useQuery({
-    queryKey: ['getProvidersCountCount'],
+    queryKey: ['getProvidersCount'],
     queryFn: async () => {
       try {
         return await axiosGetRequestUserService(`/provider/count/${siteId}`);
@@ -84,7 +84,7 @@ export const useSiteDetails = () => {
   // Get ServiceArea Count
   const { data: serviceAreaCount, isLoading: serviceAreaCountLoading } =
     useQuery({
-      queryKey: ['getServiceAreaCount'],
+      queryKey: ['getAreaCount'],
       queryFn: async () => {
         try {
           return await axiosGetRequestUserService(
