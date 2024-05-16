@@ -99,13 +99,30 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   });
 
-  // Get ServiceArea
+  // Get ServiceAreas
   const { data: serviceAreas, isLoading: serviceAreasLoading } = useQuery({
     queryKey: ['getServiceArea'],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(
           `/service-area/search`,
+          selectApiPayload
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Roles
+  const { data: roles, isLoading: rolesLoading } = useQuery({
+    queryKey: ['getRoles'],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(
+          `/role/search`,
           selectApiPayload
         );
       } catch (error) {
@@ -127,6 +144,8 @@ export const useAddProviderModal = (handler: () => void) => {
     unitsLoading,
     serviceAreas,
     serviceAreasLoading,
+    roles,
+    rolesLoading,
 
     // Functions
     setLogo,

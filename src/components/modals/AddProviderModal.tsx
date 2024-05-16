@@ -20,7 +20,11 @@ import {
   religions,
 } from '@lib/constants/constants';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { DepartmentPayload, ServiceAreaPayload } from '@typeSpec/payloads';
+import {
+  DepartmentPayload,
+  RolesPayload,
+  ServiceAreaPayload,
+} from '@typeSpec/payloads';
 
 interface AddProviderModalProps {
   open: boolean;
@@ -30,7 +34,9 @@ interface AddProviderModalProps {
 const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
   const deptOptions: SelectInputFieldProps[] = [],
     unitOptions: SelectInputFieldProps[] = [],
-    serviceAreaOptions: SelectInputFieldProps[] = [];
+    serviceAreaOptions: SelectInputFieldProps[] = [],
+    roleOptions: SelectInputFieldProps[] = [];
+
   const {
     register,
     handleSubmit,
@@ -50,6 +56,8 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     unitsLoading,
     serviceAreas,
     serviceAreasLoading,
+    roles,
+    rolesLoading,
 
     // Functions
     onUpdateCountry,
@@ -83,6 +91,15 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     });
   }
 
+  if (!rolesLoading) {
+    roles?.data?.roles?.map((data: RolesPayload) => {
+      roleOptions.push({
+        value: data?.id ?? '',
+        placeholder: data?.name ?? '',
+      });
+    });
+  }
+
   return (
     <Fragment>
       <CustomBasicModal
@@ -106,7 +123,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
           </Fragment>
         }>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1200px]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 min-h-[1050px]`}>
           {/*Image Upload*/}
           <CustomTransparentCard
             className={`w-full h-full max-h- p-4 rounded-2xl max-h-[380px]`}>
@@ -237,6 +254,16 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 register={register}
                 id={'unit'}
                 errorMsg={errors.unit?.message ?? ''}
+              />
+
+              {/*Roles*/}
+              <SelectInput
+                label={`Role`}
+                options={roleOptions}
+                className={`w-full my-3`}
+                register={register}
+                id={'role'}
+                errorMsg={errors.role?.message ?? ''}
               />
 
               {/*Staff ID*/}
