@@ -22,12 +22,10 @@ export const useSuperadminLogin = () => {
     setResponseMessage(response?.message as string);
 
     if (response?.success) {
-      console.log(response?.message);
       toast.success(response?.message);
-      // localStorage.setItem('token', response.data.token);
-      // setTimeout(() => {
-      //   navigate('/superadmin');
-      // }, 3000);
+      setTimeout(() => {
+        navigate('/superadmin');
+      }, 3000);
     } else {
       toast.error(response?.message);
     }

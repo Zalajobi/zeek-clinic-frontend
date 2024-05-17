@@ -18,7 +18,6 @@
     "awesome-phonenumber": "^6.8.0",
     "aws-sdk": "^2.1379.0",
     "axios": "^1.6.8",
-    "axios-cookiejar-support": "^5.0.2",
     "chart.js": "^4.2.1",
     "country-state-city": "^3.1.4",
     "date-fns": "^3.6.0",
@@ -42,7 +41,6 @@
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
     "redux": "^4.2.1",
-    "tough-cookie": "^4.1.4",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
