@@ -7,21 +7,44 @@ import { HiPlusSm } from 'react-icons/hi';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import AddProviderModal from '@components/modals/AddProviderModal';
 import { useSiteProvidersPage } from '@hooks/useSiteProvidersPage';
+import { getTotalRowsAndPerPage } from '@util/index';
+import {
+  setNoOfPages,
+  setTotalDataCount,
+} from '../redux/reducers/tableReducer';
+import { useDispatch } from 'react-redux';
 
 const SiteProvidersPage = () => {
+  const dispatch = useDispatch();
+  const searchTableBy: string[] = [];
+  let noOfPages = 0;
+
   const {
     // Values
     addProviderModal,
-    roleCharts,
-    roleChartsLoading,
+    tableData,
+    tableDataLoading,
+    perPage,
 
     // Functions
     handleAddProviderModal,
   } = useSiteProvidersPage();
 
-  // console.log({
-  //   ...roleCharts?.data,
-  // })
+  console.log({
+    ...tableData?.data?.providers,
+    tableDataLoading,
+  });
+
+  if (!tableDataLoading) {
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      tableData?.data,
+      perPage
+    );
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
+  }
 
   return (
     <Fragment>

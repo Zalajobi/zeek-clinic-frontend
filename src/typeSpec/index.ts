@@ -62,6 +62,17 @@ export type SearchRequestPayload = {
   searchKey?: string | undefined;
   zipCode?: string | undefined;
   hospitalId?: string | undefined;
+  siteId?: string | undefined;
+  primaryRoleId?: string | undefined;
+  personalInfoId?: string | undefined;
+  departmentId?: string | undefined;
+  serviceareaId?: string | undefined;
+  unitId?: string | undefined;
+  username?: string | undefined;
+  staff_id?: string | undefined;
+  is_consultant?: string | undefined;
+  is_specialist?: string | undefined;
+  appointments?: string | undefined;
   country?: string | undefined;
   state?: string | undefined;
   city?: string | undefined;

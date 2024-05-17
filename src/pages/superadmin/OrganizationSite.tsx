@@ -5,18 +5,16 @@ import { AiFillEdit } from 'react-icons/ai';
 
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
-import {
-  SuperAdminSiteActionItem,
-  SuperAdminSiteDataColumns,
-  SuperAdminSiteDataRows,
-} from '@components/tables/row-col-mapping/SuperadminTable';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/superadmin/HospitalDetails';
 import HospitalRoutes from '@components/superadmin/HospitalRoutes';
 import CreateSiteModal from '@components/modals/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
-import { formatResponseKeyForDropdown } from '@util/index';
+import {
+  formatResponseKeyForDropdown,
+  getTotalRowsAndPerPage,
+} from '@util/index';
 import { useDispatch } from 'react-redux';
 import {
   setNoOfPages,
@@ -25,6 +23,11 @@ import {
 import ConfirmationModal from '@components/modals/ConfirmationModal';
 import EditSiteModal from '@components/modals/admins/EditSiteModal';
 import { SitePayload } from '@typeSpec/payloads';
+import {
+  SiteActionItem,
+  SiteDataColumns,
+  SiteDataRows,
+} from '@components/tables/row-col-mapping/RowColumnTableMaps';
 
 const OrganizationSite = () => {
   const searchTableBy: string[] = [];
@@ -68,31 +71,21 @@ const OrganizationSite = () => {
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
-    noOfPages =
-      typeof perPage === 'string'
-        ? 1
-        : Math.ceil(sitesTableData?.data?.totalRows / perPage);
-    dispatch(
-      setNoOfPages(
-        Math.ceil(
-          sitesTableData?.data?.totalRows /
-            (perPage === 'All' ? sitesTableData?.data?.totalRows : perPage)
-        )
-      )
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      sitesTableData?.data,
+      perPage
     );
-    dispatch(setTotalDataCount(sitesTableData?.data?.totalRows));
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
   }
 
-  const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
-  const actionItems = useMemo(
-    () => SuperAdminSiteActionItem(editSite, deleteSite),
-    []
-  );
+  const columnData = useMemo(() => SiteDataColumns(), []);
+  const actionItems = useMemo(() => SiteActionItem(editSite, deleteSite), []);
 
   const rowData = useMemo(
-    () =>
-      SuperAdminSiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ??
-      [],
+    () => SiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ?? [],
     [sitesTableData?.data?.sites]
   );
 

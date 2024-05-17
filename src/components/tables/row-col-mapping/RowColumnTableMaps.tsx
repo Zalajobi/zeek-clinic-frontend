@@ -1,14 +1,9 @@
-import moment from 'moment';
-import { ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
-
-import { GetHospitalResponseData, HospitalRowData } from '@typeSpec/superadmin';
-import Status from '@components/global/Status';
+import { SitePayload } from '@typeSpec/payloads';
+import moment from 'moment/moment';
 import { HiPencil } from 'react-icons/hi2';
 import { MdDelete } from 'react-icons/md';
-import { HospitalPayload, SitePayload } from '@typeSpec/payloads';
 
-export const SuperAdminHospitalDataColumns = () => {
+export const SiteDataColumns = () => {
   return [
     {
       key: 'name',
@@ -41,18 +36,8 @@ export const SuperAdminHospitalDataColumns = () => {
       sortable: true,
     },
     {
-      key: 'zip_code',
-      value: 'Zip Code',
-      sortable: true,
-    },
-    {
       key: 'address',
       value: 'Address',
-      sortable: true,
-    },
-    {
-      key: 'site_count',
-      value: 'Sites',
       sortable: true,
     },
     {
@@ -73,26 +58,23 @@ export const SuperAdminHospitalDataColumns = () => {
   ];
 };
 
-export const SuperAdminHospitalDataRows = (data: HospitalPayload[]) => {
+export const SiteDataRows = (data: SitePayload[]) => {
   const rowItems: any[] = [];
 
   data?.map((item) => {
     rowItems.push({
+      name: item?.name,
       id: item?.id,
-      name: item?.name ?? '--',
-      email: item?.email ?? '--',
-      phone: item?.phone ?? '--',
-      address: item?.address ?? '--',
-      city: item?.city ?? '--',
-      state: item?.state ?? '--',
-      country: item?.country ?? '--',
-      logo: item?.logo ?? '--',
-      zip_code: item?.zip_code ?? '--',
-      country_code: item?.country_code ?? '--',
-      updated_at: item?.updated_at,
+      email: item?.email,
+      phone: item?.phone,
+      country: item?.country,
+      state: item?.state,
+      city: item?.city,
+      address: item?.address,
       status: item?.status,
-      site_count: item?.site_count,
       created_at: moment(item?.created_at).format('MMM DD. YYYY'),
+      logo: item?.logo,
+      country_code: item?.country_code,
     });
 
     return;
@@ -101,7 +83,10 @@ export const SuperAdminHospitalDataRows = (data: HospitalPayload[]) => {
   return rowItems;
 };
 
-export const SuperAdminHospitalActionItem = () => {
+export const SiteActionItem = (
+  editSite: (siteId: string) => Promise<void>,
+  deleteSite: (siteId: string) => Promise<void>
+) => {
   return [
     {
       icon: (
@@ -112,7 +97,7 @@ export const SuperAdminHospitalActionItem = () => {
         />
       ),
       label: 'Edit',
-      onClick: (siteId: string) => console.log(siteId),
+      onClick: (siteId: string) => editSite(siteId),
     },
 
     {
@@ -124,7 +109,7 @@ export const SuperAdminHospitalActionItem = () => {
         />
       ),
       label: 'Delete',
-      onClick: (siteId: string) => console.log(siteId),
+      onClick: (siteId: string) => deleteSite(siteId),
     },
   ];
 };

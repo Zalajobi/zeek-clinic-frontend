@@ -1,5 +1,9 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { parsePhoneNumber } from 'awesome-phonenumber';
+import {
+  setNoOfPages,
+  setTotalDataCount,
+} from '../redux/reducers/tableReducer';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();
@@ -97,4 +101,17 @@ export const formatPhoneNumber = (
   return parsePhoneNumber(phone.toString(), {
     regionCode,
   }).number?.[phoneType];
+};
+
+export const getTotalRowsAndPerPage = (
+  data: { totalRows: number },
+  perPage: string | number
+) => {
+  const noOfPages =
+    typeof perPage === 'string' ? 1 : Math.ceil(data?.totalRows / perPage);
+
+  return {
+    noOfPages,
+    totalRows: data?.totalRows,
+  };
 };
