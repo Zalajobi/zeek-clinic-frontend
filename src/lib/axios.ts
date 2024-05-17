@@ -1,35 +1,43 @@
 import axios, { AxiosRequestHeaders, AxiosResponse } from 'axios';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
-import { wrapper } from 'axios-cookiejar-support';
 import { CookieJar } from 'tough-cookie';
+import { wrapper } from 'axios-cookiejar-support';
 
 const cookieJar = new CookieJar();
+// const userInstance = axios.create({
+//   baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
+//   timeout: 7500,
+// })
+
 const userInstance = wrapper(
   axios.create({
     baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
     timeout: 7500,
     jar: cookieJar,
+    withCredentials: true,
   })
 );
+// userInstance.defaults.jar = jar;
 
-userInstance.interceptors.request.use(async (config) => {
-  // const { data: auth } = await supabase.auth.getSession();
+// userInstance.interceptors.request.use(async (config) => {
+//   // const { data: auth } = await supabase.auth.getSession();
+//
+//   config.headers = {
+//     ...config.headers,
+//     test_authorization: `Bearer auth.session.access_token`,
+//     withCredentials: true,
+//   } as unknown as AxiosRequestHeaders; // Convert to 'unknown' first
+//   return config;
+// });
 
-  config.headers = {
-    ...config.headers,
-    test_authorization: `Bearer auth.session.access_token`,
-    withCredentials: true,
-  } as unknown as AxiosRequestHeaders; // Convert to 'unknown' first
-  return config;
-});
-
-userInstance.interceptors.response.use((response: AxiosResponse) => {
-  if (response.headers['set-cookie']) {
-    console.log(response.headers);
-    document.cookie = response.headers['set-cookie'][0];
-  }
-  return response;
-});
+// userInstance.interceptors.response.use((response: AxiosResponse) => {
+//   console.log(response);
+//
+//   if (response.headers['set-cookie']) {
+//     document.cookie = response.headers['set-cookie'][0];
+//   }
+//   return response;
+// });
 
 const baseURL = `${process.env.REACT_APP_DEV_BASE_URL}/account`;
 
