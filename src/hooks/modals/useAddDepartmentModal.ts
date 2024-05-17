@@ -25,7 +25,7 @@ export const useAddDepartmentModal = (handler: () => void) => {
     },
     {
       onMutate: () => {
-        toast.loading('Creating SiteDetailsPage', { duration: 3 });
+        toast.loading('Creating Department...', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) {

@@ -3,17 +3,17 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import { Country, State } from 'country-state-city';
 import { useParams } from 'react-router-dom';
 import { AllCountries, CreateProviderInput } from '@typeSpec/forms/form.types';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 export const useAddProviderModal = (handler: () => void) => {
   const { siteId } = useParams();
+  const queryClient = useQueryClient();
   const [logo, setLogo] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
-  const [timeZone, setTimeZone] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
@@ -58,9 +58,6 @@ export const useAddProviderModal = (handler: () => void) => {
 
     setAllCountryStates(countryStates);
     setCountryCode(countryInfo.isoCode);
-    setTimeZone(
-      countryInfo.timezones.map((data) => data.gmtOffsetName).join(', ')
-    );
     setCountry(countryInfo.name);
     setPhoneCode(countryInfo.phonecode);
   };
@@ -133,8 +130,49 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   });
 
+  // Create Provider
+  const { mutate: createProviderMutate } = useMutation(
+    async (data: CreateProviderInput) => {
+      try {
+        return await axiosPostRequestUserService(`/provider/create`, {
+          ...data,
+          siteId,
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Provider...', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) {
+          handler();
+          toast.success(result?.message);
+          queryClient.resetQueries('getTableData');
+          queryClient.resetQueries('getProvidersCount');
+        } else {
+          toast.error('Something Went Wrong');
+        }
+      },
+    }
+  );
+
   const createProvider = (data: CreateProviderInput) => {
-    console.log(data);
+    let phoneNumber = data.phone.startsWith('0')
+      ? data?.phone.slice(1)
+      : data?.phone;
+    const updatedData = {
+      ...data,
+      phone: `${phoneCode}${phoneNumber}`,
+      siteId: siteId ?? '',
+      country_code: countryCode,
+      country,
+    };
+    createProviderMutate(updatedData);
   };
 
   return {

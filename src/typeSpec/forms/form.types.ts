@@ -41,6 +41,7 @@ export type CreateProviderInput = {
   serviceArea: string;
   unit: string;
   country: string;
+  country_code?: string;
   state: string;
   city: string;
   staff_id: string;

@@ -7,7 +7,6 @@ import { HiPlusSm } from 'react-icons/hi';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import AddProviderModal from '@components/modals/AddProviderModal';
 import { useSiteProvidersPage } from '@hooks/useSiteProvidersPage';
-import LatestDepartments from '@components/LatestDepartments';
 
 const SiteProvidersPage = () => {
   const {
@@ -69,9 +68,7 @@ const SiteProvidersPage = () => {
 
           <SiteDetails />
 
-          <div className="flex flex-col gap-4 my-6 md:grid md:grid-cols-2 lg:grid-cols-4">
-            <LatestDepartments />
-          </div>
+          <div className="flex flex-col gap-4 my-6 md:grid md:grid-cols-2 lg:grid-cols-4"></div>
         </div>
       </SuperadminBaseTemplate>
 

@@ -8,7 +8,7 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const useCreateSite = (handleOpen?: () => void) => {
+export const useCreateSiteModal = (handleOpen?: () => void) => {
   const queryClient = useQueryClient();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
@@ -44,7 +44,7 @@ export const useCreateSite = (handleOpen?: () => void) => {
     },
     {
       onMutate: () => {
-        toast.loading('Creating SiteDetailsPage', { duration: 3 });
+        toast.loading('Creating Site...', { duration: 3 });
       },
       onSuccess: (result) => {
         if (result?.success) toast.success(result?.message);

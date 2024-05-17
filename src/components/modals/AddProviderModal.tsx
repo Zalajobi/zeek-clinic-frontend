@@ -106,7 +106,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
       <CustomBasicModal
         title={'Add New Site'}
         handler={handler}
-        size={'lg'}
+        size={'xl'}
         className="h-full w-full"
         open={open}
         footer={
@@ -156,7 +156,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`First Name`}
                 className={`my-3`}
                 errorMsg={errors.first_name?.message ?? ''}
-                id={`name`}
+                id={`first_name`}
                 register={register}
               />
 
@@ -347,6 +347,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`my-3`}
                 id={`phone`}
                 type={`tel`}
+                errorMsg={errors.phone?.message ?? ''}
                 register={register}
               />
             </div>

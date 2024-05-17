@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ImageUpload from '@components/global/formInput/ImageUpload';
-import { useCreateSite } from '@hooks/modals/useCreateSite';
+import { useCreateSiteModal } from '@hooks/modals/useCreateSiteModal';
 import {
   CheckboxInput,
   SelectInput,
@@ -39,7 +39,7 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
     onUpdateLogo,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite(handleOpen);
+  } = useCreateSiteModal(handleOpen);
 
   return (
     <Fragment>
