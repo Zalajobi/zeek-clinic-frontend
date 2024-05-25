@@ -153,11 +153,11 @@ export const BasicTable = ({
 }: BasicTableProps) => {
   const perPageMenuItems = ['All', 10, 20, 50, 100];
   return (
-    <Card className={`w-full h-auto`}>
+    <Card className={`w-full h-auto min-h-[500px] flex flex-col`}>
       <CardHeader
         floated={true}
         shadow={true}
-        className={`rounded-none m-0 mt-3 shadow-none bg-transparent px-3`}>
+        className={`rounded-none shadow-none bg-transparent p-3 m-0 min-h-[80px]`}>
         <div
           className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
           <div className={`flex gap-4 items-center justify-center`}>
@@ -194,9 +194,9 @@ export const BasicTable = ({
         </div>
       </CardHeader>
 
-      <CardBody className={`overflow-scroll p-0`}>
+      <CardBody className={`overflow-scroll p-0 min-h-[400px]`}>
         {data && data?.length > 0 ? (
-          <table className={`mt-4 w-full min-w-max table-auto text-left`}>
+          <table className={`w-full min-w-max table-auto text-left`}>
             <thead>
               <tr>
                 {columns.map((item, index) => (
@@ -410,7 +410,7 @@ export const BasicTable = ({
       </CardBody>
 
       <CardFooter
-        className={`flex items-center justify-between border-t border-blue-gray-50 p-4`}>
+        className={`flex items-center justify-between border-t border-blue-gray-50 p-4 h-[80px]`}>
         <div className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
           <p className="inline-block font-velasans-gx text-sm font-medium lg:flex-nowrap">
             <b className="font-extrabold">

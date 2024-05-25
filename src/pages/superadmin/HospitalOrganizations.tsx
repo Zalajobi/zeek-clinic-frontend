@@ -52,10 +52,6 @@ const HospitalOrganizations = () => {
     onHandleSortBy,
   } = useHospitalOrganisation();
 
-  console.log({
-    ...hospitalTableData?.data,
-  });
-
   if (!hospitalTableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
       hospitalTableData?.data,
