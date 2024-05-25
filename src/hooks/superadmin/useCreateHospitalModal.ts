@@ -89,9 +89,12 @@ export const useCreateHospitalModal = (handler: () => void) => {
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
+    console.log(countryInfo?.isoCode);
   };
 
   const createNewOrganization = async (data: CreateHospitalInput) => {
+    data.phone = `+${phoneCode}${data?.phone}`;
+    data.countryCode = countryCode;
     createOrganizationMutation(data);
   };
 

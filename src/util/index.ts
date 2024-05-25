@@ -74,16 +74,19 @@ export const calculateAge = (givenDate: Date | undefined): string | number => {
 
 export const formatResponseKeyForDropdown = (key: string) => {
   return key
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase and uppercase letters
+    .replace(/^./, function (str) {
+      return str.toUpperCase();
+    }); // Capitalize the first letter
 };
 
 export const revertDropdownOptionsToResponseKey = (key: string) => {
   return key
-    .split(' ')
-    .map((word) => word.charAt(0).toLowerCase() + word.slice(1))
-    .join('_');
+    .toLowerCase()
+    .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
+      if (+match === 0) return ''; // Remove spaces
+      return index === 0 ? match.toLowerCase() : match.toUpperCase();
+    });
 };
 
 export const formatPhoneNumber = (

@@ -100,14 +100,16 @@ export type CreateAdminUserInput = {
 
 // Create Organization
 export type CreateHospitalInput = {
-  email: string;
   name: string;
+  email: string;
   phone: string;
   address: string;
   city: string;
   state: string;
   country: string;
-  zip_code?: string;
+  countryCode: string;
+  // log: string;
+  zipCode: string;
 };
 
 // Create Site

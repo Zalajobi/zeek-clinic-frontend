@@ -11,13 +11,10 @@ export const useSuperadminLogin = () => {
   const [responseMessage, setResponseMessage] = useState('');
 
   const handleLogin = async () => {
-    const response = await axiosPostRequestUserService(
-      '/super-admin/auth/login',
-      {
-        email,
-        password,
-      }
-    );
+    const response = await axiosPostRequestUserService('/super-admin/login', {
+      email,
+      password,
+    });
 
     setResponseMessage(response?.message as string);
 

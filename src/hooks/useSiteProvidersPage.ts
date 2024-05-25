@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { SearchRequestPayload } from '@typeSpec/index';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
+import { useSelector } from 'react-redux';
 
 export const useSiteProvidersPage = () => {
   const queryClient = useQueryClient();
@@ -20,6 +21,10 @@ export const useSiteProvidersPage = () => {
     useState<SearchRequestPayload>({
       siteId,
     });
+
+  const { totalDataCount, noOfPages } = useSelector(
+    (state: any) => state.adminProviderTable
+  );
 
   // Get Table Data
   const { data: tableData, isLoading: tableDataLoading } = useQuery({
@@ -52,11 +57,11 @@ export const useSiteProvidersPage = () => {
       value: 'PENDING',
     },
     {
-      label: 'On Leave',
+      label: 'Leave',
       value: 'ON_LEAVE',
     },
     {
-      label: 'On Break',
+      label: 'Break',
       value: 'ON_BREAK',
     },
     {
@@ -70,7 +75,7 @@ export const useSiteProvidersPage = () => {
     },
 
     {
-      label: 'Not Unseat',
+      label: 'Closed',
       value: 'UNAVAILABLE',
     },
   ];
@@ -131,6 +136,55 @@ export const useSiteProvidersPage = () => {
     });
   };
 
+  // Handle Next Page
+  const onClickNext = async (value: number) => {
+    if (value >= noOfPages) toast.error('You are on the last page');
+    else {
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchProviderPayload({
+        ...searchProviderPayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
+
+      setCurrentPage(value);
+      setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
+      setResultTo(
+        value + 1 === noOfPages
+          ? totalDataCount
+          : value * (perPage !== 'All' ? perPage : 0) +
+              (perPage !== 'All' ? perPage : 0)
+      );
+    }
+  };
+
+  // Handle Previous Page
+  const onClickPrevious = async (value: number) => {
+    if (value === -1) toast.error('You are on the first page');
+    else {
+      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      setSearchProviderPayload({
+        ...searchProviderPayload,
+        startRow: value * perPageItem,
+        endRow: (value + 1) * perPageItem,
+      });
+
+      setCurrentPage(value);
+      setResultFrom(value * (perPage !== 'All' ? perPage : 0) + 1);
+      setResultTo(
+        value + 1 === noOfPages
+          ? totalDataCount
+          : value * (perPage !== 'All' ? perPage : 0) +
+              (perPage !== 'All' ? perPage : 0)
+      );
+    }
+  };
+
+  // Update Search Key
+  const onUpdateSearchKey = (value: string) => {
+    if (value !== 'Search By') setSearchKey(value);
+  };
+
   return {
     // Values
     addProviderModal,
@@ -141,6 +195,7 @@ export const useSiteProvidersPage = () => {
     resultFrom,
     resultTo,
     currentPage,
+    searchKey,
 
     // Functions
     handleAddProviderModal,
@@ -148,5 +203,8 @@ export const useSiteProvidersPage = () => {
     onUpdateSearchProvider,
     onUpdateActiveTab,
     onHandleSortBy,
+    onClickNext,
+    onClickPrevious,
+    onUpdateSearchKey,
   };
 };

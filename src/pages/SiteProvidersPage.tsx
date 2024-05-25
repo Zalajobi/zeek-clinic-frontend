@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
 import SiteDetails from '@components/common/SiteDetails';
@@ -7,12 +7,23 @@ import { HiPlusSm } from 'react-icons/hi';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import AddProviderModal from '@components/modals/AddProviderModal';
 import { useSiteProvidersPage } from '@hooks/useSiteProvidersPage';
-import { getTotalRowsAndPerPage } from '@util/index';
+import {
+  formatResponseKeyForDropdown,
+  getTotalRowsAndPerPage,
+} from '@util/index';
 import {
   setNoOfPages,
   setTotalDataCount,
 } from '../redux/reducers/tableReducer';
 import { useDispatch } from 'react-redux';
+import {
+  ProfileActionItem,
+  ProviderDataColumns,
+  ProviderDataRows,
+  SiteActionItem,
+} from '@components/tables/row-col-mapping/RowColumnTableMaps';
+import { ProviderPayload } from '@typeSpec/payloads';
+import { BasicTable } from '@components/global/table/Table';
 
 const SiteProvidersPage = () => {
   const dispatch = useDispatch();
@@ -25,15 +36,24 @@ const SiteProvidersPage = () => {
     tableData,
     tableDataLoading,
     perPage,
+    tabData,
+    resultFrom,
+    resultTo,
+    currentPage,
+    searchKey,
 
     // Functions
     handleAddProviderModal,
+    onUpdatePerPageItem,
+    onUpdateSearchProvider,
+    onUpdateActiveTab,
+    onHandleSortBy,
+    onClickNext,
+    onClickPrevious,
+    onUpdateSearchKey,
   } = useSiteProvidersPage();
 
-  console.log({
-    ...tableData?.data?.providers,
-    tableDataLoading,
-  });
+  console.log(noOfPages);
 
   if (!tableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
@@ -45,6 +65,32 @@ const SiteProvidersPage = () => {
     dispatch(setNoOfPages(pagesCount));
     dispatch(setTotalDataCount(totalRows));
   }
+
+  if (!tableDataLoading) {
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      tableData?.data,
+      perPage
+    );
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
+  }
+
+  const columnData = useMemo(() => ProviderDataColumns(), []);
+  const actionItems = useMemo(() => ProfileActionItem(), []);
+
+  const rowData = useMemo(
+    () =>
+      ProviderDataRows(tableData?.data?.providers as ProviderPayload[]) ?? [],
+    [tableData?.data?.providers]
+  );
+
+  columnData.map((column) => {
+    if (column.key === 'staff_id' || column.key === 'email') {
+      searchTableBy.push(formatResponseKeyForDropdown(column.key));
+    }
+  });
 
   return (
     <Fragment>
@@ -91,7 +137,30 @@ const SiteProvidersPage = () => {
 
           <SiteDetails />
 
-          <div className="flex flex-col gap-4 my-6 md:grid md:grid-cols-2 lg:grid-cols-4"></div>
+          <BasicTable
+            tabItems={tabData}
+            onSelectTab={onUpdateActiveTab}
+            perPageValue={perPage}
+            perPageChange={onUpdatePerPageItem}
+            columns={columnData}
+            data={rowData ?? []}
+            url={'superadmin/site'}
+            noOfPages={noOfPages ?? 0}
+            total={tableData?.data?.totalRows ?? 0}
+            from={resultFrom ?? 1}
+            to={resultTo ?? 10}
+            onNext={onClickNext}
+            onPrevious={onClickPrevious}
+            currentPage={currentPage ?? -1}
+            searchKeys={searchTableBy}
+            dataLoading={tableDataLoading}
+            searchKey={searchKey}
+            updateSearchKey={onUpdateSearchKey}
+            onUpdateSearch={onUpdateSearchProvider}
+            createNew={handleAddProviderModal}
+            actionItems={actionItems}
+            sortBy={onHandleSortBy}
+          />
         </div>
       </SuperadminBaseTemplate>
 

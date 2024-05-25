@@ -66,12 +66,11 @@ export type SearchRequestPayload = {
   primaryRoleId?: string | undefined;
   personalInfoId?: string | undefined;
   departmentId?: string | undefined;
-  serviceareaId?: string | undefined;
+  serviceAreaId?: string | undefined;
   unitId?: string | undefined;
-  username?: string | undefined;
-  staff_id?: string | undefined;
-  is_consultant?: string | undefined;
-  is_specialist?: string | undefined;
+  staffId?: string | undefined;
+  isConsultant?: string | undefined;
+  isSpecialist?: string | undefined;
   appointments?: string | undefined;
   country?: string | undefined;
   state?: string | undefined;

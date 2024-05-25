@@ -194,6 +194,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 root.render(
   <StrictMode>
     <QueryClientProviderWrapper>

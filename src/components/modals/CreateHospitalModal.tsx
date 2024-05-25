@@ -62,7 +62,8 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
         title={`Add New Organization`}
         handler={handler}
         open={open}
-        size={`lg`}>
+        size={`lg`}
+        className={`min-h-[500px]`}>
         <div
           className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
           <CustomTransparentCard
@@ -75,7 +76,8 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
             />
           </CustomTransparentCard>
 
-          <CustomTransparentCard className={`w-full h-full p-4 rounded-2xl`}>
+          <CustomTransparentCard
+            className={`w-full h-full min-h-[500px] p-4 rounded-2xl`}>
             <div
               className={`w-full grid gap-6 grid-cols-1 mb-6 lg:grid-cols-2`}>
               <TextInput
@@ -130,9 +132,9 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
               <TextInput
                 label={`Zip Code`}
                 className={`my-3`}
-                errorMsg={errors.zip_code?.message ?? ''}
-                id={`zip_code`}
-                type={'number'}
+                errorMsg={errors.zipCode?.message ?? ''}
+                id={`zipCode`}
+                type={'text'}
                 register={register}
               />
 

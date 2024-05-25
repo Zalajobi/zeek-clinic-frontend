@@ -52,6 +52,10 @@ const HospitalOrganizations = () => {
     onHandleSortBy,
   } = useHospitalOrganisation();
 
+  console.log({
+    ...hospitalTableData?.data,
+  });
+
   if (!hospitalTableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
       hospitalTableData?.data,
@@ -73,7 +77,11 @@ const HospitalOrganizations = () => {
 
   const columnData = useMemo(() => SuperAdminHospitalDataColumns(), []);
   columnData.map((column) => {
-    if (column.key !== 'action') {
+    if (
+      column.key !== 'action' &&
+      column.key !== 'createdAt' &&
+      column.key !== 'siteCount'
+    ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });

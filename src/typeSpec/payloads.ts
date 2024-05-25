@@ -1,3 +1,22 @@
+// API Request Payloads
+export interface HospitalPayload {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  countryCode: string;
+  logo: string;
+  zipCode: string;
+  id: string;
+  siteCount: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface SitePayload {
   id?: string;
   hospitalId?: string;
@@ -120,20 +139,39 @@ export interface RolePayload {
   description?: string;
 }
 
-export interface HospitalPayload {
-  name?: string;
+export interface ProviderPayload {
+  id?: string;
+  site_id?: string;
+  role_id?: string;
+  profile_id?: string;
+  dept_id?: string;
+  area_id?: string;
+  unit_id?: string;
   email?: string;
+  staff_id?: string;
+  is_consultant?: boolean;
+  is_specialist?: boolean;
+  appointments?: boolean;
+  status?: string;
+  created_at?: string;
+  role?: string;
+  dept?: string;
+  area?: string;
+  unit?: string;
   phone?: string;
+  first_name?: string;
+  last_name?: string;
+  middle_name?: string;
+  title?: string;
+  gender?: string;
+  dob?: string;
   address?: string;
+  address_two?: string;
   city?: string;
   state?: string;
   country?: string;
-  logo?: string;
-  status?: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED';
+  religion?: string;
+  marital_status?: string;
   zip_code?: string;
-  country_code?: string;
-  created_at?: string;
-  updated_at?: string;
-  site_count?: number;
-  id: string;
+  profile_pic?: string;
 }

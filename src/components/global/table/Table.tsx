@@ -247,8 +247,10 @@ export const BasicTable = ({
                               className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
                               <Avatar
                                 className={`border-gray-300 border ml-1`}
-                                // src={item?.logo ?? item?.avatar}
-                                src="https://docs.material-tailwind.com/img/face-2.jpg"
+                                src={
+                                  item?.logo ?? item?.avatar ?? item?.profilePic
+                                }
+                                // src="https://docs.material-tailwind.com/img/face-2.jpg"
                                 alt={'Logo'}
                                 size={'sm'}
                               />
@@ -325,7 +327,7 @@ export const BasicTable = ({
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
                           {formatPhoneNumber(
                             item[column.key],
-                            item?.country_code
+                            item?.countryCode
                           ) ?? '--'}
                         </td>
                       ) : (

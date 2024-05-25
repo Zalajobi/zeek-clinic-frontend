@@ -48,7 +48,7 @@ export const CreateHospitalInputSchema = yup
     city: yup.string().optional(),
     state: yup.string().required('Organization State is required'),
     country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
+    zipCode: yup.string().required('Zip Code is required'),
   })
   .required();
 
