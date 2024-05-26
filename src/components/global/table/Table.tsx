@@ -414,7 +414,8 @@ export const BasicTable = ({
         <div className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
           <p className="inline-block font-velasans-gx text-sm font-medium lg:flex-nowrap">
             <b className="font-extrabold">
-              Showing results from {from} - {to}
+              Showing results from {total >= 1 ? from : 0} -{' '}
+              {perPageValue > total ? total : to}
             </b>{' '}
             of {total}
           </p>
