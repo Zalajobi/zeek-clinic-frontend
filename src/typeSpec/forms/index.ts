@@ -11,9 +11,9 @@ export const CreateSiteInputSchema = yup
       .required('User address is required')
       .min(10, 'Address too short'),
     city: yup.string().optional(),
-    state: yup.string().required('Organization State is required'),
+    state: yup.string().optional(),
     country: yup.string().required('Organization Country is required'),
-    zip_code: yup.string().required('Zip Code is required'),
+    zipCode: yup.string().required('Zip Code is required'),
     is_private: yup.boolean().default(false),
     has_appointment: yup.boolean().default(false),
     has_caregiver: yup.boolean().default(false),

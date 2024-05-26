@@ -12,6 +12,7 @@ import {
 } from '@components/global/card/CustomCard';
 import { Spinner } from '@material-tailwind/react';
 import { useHospitalDetails } from '@hooks/components/useHospitalDetails';
+import { formatPhoneNumber } from '@util/index';
 
 const HospitalDetails = () => {
   const {
@@ -87,7 +88,12 @@ const HospitalDetails = () => {
           ) : (
             <>
               <Typography
-                text={hospitalData?.data?.phone ?? '--'}
+                text={
+                  formatPhoneNumber(
+                    hospitalData?.data?.phone,
+                    hospitalData?.data?.countryCode
+                  ) ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}

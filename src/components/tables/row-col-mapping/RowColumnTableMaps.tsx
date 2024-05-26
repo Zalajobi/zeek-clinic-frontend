@@ -47,7 +47,7 @@ export const SiteDataColumns = () => {
       sortable: false,
     },
     {
-      key: 'created_at',
+      key: 'createdAt',
       value: 'Created At',
       sortable: false,
     },
@@ -73,9 +73,9 @@ export const SiteDataRows = (data: SitePayload[]) => {
       city: item?.city,
       address: item?.address,
       status: item?.status,
-      created_at: moment(item?.created_at).format('MMM DD. YYYY'),
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
       logo: item?.logo,
-      country_code: item?.country_code,
+      countryCode: item?.countryCode,
     });
 
     return;

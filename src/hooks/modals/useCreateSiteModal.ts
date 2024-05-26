@@ -8,13 +8,12 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const useCreateSiteModal = (handleOpen?: () => void) => {
+export const useCreateSiteModal = (handleOpen: () => void) => {
   const queryClient = useQueryClient();
   const { hospitalId } = useParams();
   const [logo, setLogo] = useState('');
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
-  const [timeZone, setTimeZone] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
     SelectInputFieldProps[]
   >([]);
@@ -23,16 +22,10 @@ export const useCreateSiteModal = (handleOpen?: () => void) => {
 
   // Create SiteDetailsPage
   const { mutate: createSiteMutation } = useMutation(
-    async (data: any) => {
+    async (data: CreateSiteInput) => {
       try {
         const siteData = {
           ...data,
-          phone: `${Number(`${phoneCode}${data.phone}`)}`,
-          country,
-          logo,
-          country_code: countryCode,
-          hospital_id: hospitalId,
-          time_zone: timeZone,
         };
 
         return await axiosPostRequestUserService(`/site/create`, siteData);
@@ -51,6 +44,8 @@ export const useCreateSiteModal = (handleOpen?: () => void) => {
         else toast.error('Something Went Wrong');
 
         queryClient.resetQueries('getTableData');
+        queryClient.resetQueries('getHospitalDetails');
+        queryClient.resetQueries('getSiteCountData');
       },
     }
   );
@@ -85,18 +80,19 @@ export const useCreateSiteModal = (handleOpen?: () => void) => {
 
     setAllCountryStates(countryStates);
     setCountryCode(countryInfo.isoCode);
-    setTimeZone(
-      countryInfo.timezones.map((data) => data.gmtOffsetName).join(', ')
-    );
     setCountry(countryInfo.name);
     setPhoneCode(countryInfo.phonecode);
   };
 
   const createNewSite = async (data: CreateSiteInput) => {
     createSiteMutation(data);
-    if (handleOpen) {
-      handleOpen();
-    }
+    data.phone = `${Number(`${phoneCode}${data.phone}`)}`;
+    data.country = country;
+    data.logo = logo;
+    data.countryCode = countryCode;
+    data.hospital_id = hospitalId ?? '';
+
+    handleOpen();
   };
 
   return {

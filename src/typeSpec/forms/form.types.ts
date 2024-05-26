@@ -121,7 +121,10 @@ export type CreateSiteInput = {
   city: string;
   state: string;
   country: string;
-  zip_code: string;
+  countryCode: string;
+  hospital_id: string;
+  zipCode: string;
+  logo: string;
   is_private: boolean;
   has_appointment: boolean;
   has_caregiver: boolean;

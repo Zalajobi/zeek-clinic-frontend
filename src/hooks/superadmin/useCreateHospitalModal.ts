@@ -93,7 +93,7 @@ export const useCreateHospitalModal = (handler: () => void) => {
   };
 
   const createNewOrganization = async (data: CreateHospitalInput) => {
-    data.phone = `+${phoneCode}${data?.phone}`;
+    data.phone = `${Number(`${phoneCode}${data.phone}`)}`;
     data.countryCode = countryCode;
     createOrganizationMutation(data);
   };

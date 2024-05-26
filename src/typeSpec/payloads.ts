@@ -18,8 +18,6 @@ export interface HospitalPayload {
 }
 
 export interface SitePayload {
-  id?: string;
-  hospitalId?: string;
   address?: string;
   name?: string;
   email?: string;
@@ -27,11 +25,9 @@ export interface SitePayload {
   state?: string;
   country?: string;
   logo?: string;
-  time_zone?: string;
   phone?: string;
-  zip_code?: string;
-  country_code?: string;
-  status?: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED';
+  countryCode?: string;
+  zipCode?: string;
   is_private?: boolean;
   has_appointment?: boolean;
   has_caregiver?: boolean;
@@ -50,8 +46,11 @@ export interface SitePayload {
   has_unit?: boolean;
   has_vital?: boolean;
   has_wallet?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
+  hospitalId?: string;
+  id?: string;
+  status?: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED';
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface DepartmentPayload {
