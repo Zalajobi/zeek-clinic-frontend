@@ -11,20 +11,16 @@ import {
   CustomTransparentCard,
 } from '@components/global/card/CustomCard';
 import { Spinner } from '@material-tailwind/react';
+import { useHospitalDetails } from '@hooks/components/useHospitalDetails';
 
-interface HospitalDetailsProps {
-  data: HospitalDetailsData | null;
-  hospitalDataLoading: boolean;
-  siteData: HospitalSiteCountData | null;
-  siteDataLoading: boolean;
-}
+const HospitalDetails = () => {
+  const {
+    hospitalData,
+    hospitalDataLoading,
+    siteCountData,
+    siteCountDataLoading,
+  } = useHospitalDetails();
 
-const HospitalDetails = ({
-  data,
-  hospitalDataLoading,
-  siteData,
-  siteDataLoading,
-}: HospitalDetailsProps) => {
   return (
     <Fragment>
       <CustomCard className={`w-full grid grid-cols-4 items-center gap-4 p-9`}>
@@ -43,7 +39,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.name ?? '--'}
+                text={hospitalData?.data?.name ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -67,7 +63,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.email ?? '--'}
+                text={hospitalData?.data?.email ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -91,7 +87,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.phone ?? '--'}
+                text={hospitalData?.data?.phone ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -115,7 +111,9 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={moment(data?.created_at).format('MMM DD. YYYY')}
+                text={moment(hospitalData?.data?.createdAt).format(
+                  'MMM DD. YYYY'
+                )}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -139,7 +137,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.country ?? '--'}
+                text={hospitalData?.data?.country ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -163,7 +161,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.state ?? '--'}
+                text={hospitalData?.data?.state ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -187,7 +185,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.city ?? '--'}
+                text={hospitalData?.data?.city ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -211,7 +209,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.address ?? '--'}
+                text={hospitalData?.data?.address ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -235,7 +233,7 @@ const HospitalDetails = ({
           ) : (
             <>
               <Typography
-                text={data?.zip_code ?? '--'}
+                text={hospitalData?.data?.zipCode ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -252,14 +250,14 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
+          {siteCountDataLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <>
               <Typography
-                text={siteData?.totalSites ?? '--'}
+                text={siteCountData?.data?.totalSites ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -276,14 +274,14 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
+          {siteCountDataLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <>
               <Typography
-                text={siteData?.activeSites ?? '--'}
+                text={siteCountData?.data?.activeSites ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -300,14 +298,14 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
+          {siteCountDataLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <>
               <Typography
-                text={siteData?.pendingSites ?? '--'}
+                text={siteCountData?.data?.pendingSites ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -324,14 +322,14 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
+          {siteCountDataLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <>
               <Typography
-                text={siteData?.closedSites ?? '--'}
+                text={siteCountData?.data?.closedSites ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -348,14 +346,14 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
+          {siteCountDataLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <>
               <Typography
-                text={siteData?.deactivatedSites ?? '--'}
+                text={siteCountData?.data?.deactivatedSites ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
@@ -378,7 +376,7 @@ const HospitalDetails = ({
             </>
           ) : (
             <div className={`ml-3`}>
-              <Status status={data?.status ?? '--'} />
+              <Status status={hospitalData?.data?.status ?? '--'} />
             </div>
           )}
         </div>

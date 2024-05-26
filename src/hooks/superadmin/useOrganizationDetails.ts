@@ -56,38 +56,6 @@ export const useOrganizationDetails = () => {
     },
   ];
 
-  // Get Hospital Details
-  const { data: hospitalData, isLoading: hospitalDataLoading } = useQuery({
-    queryKey: ['getHospitalDetails'],
-    queryFn: async () => {
-      try {
-        return await axiosGetRequestUserService(
-          `/hospital/details/${hospitalId}`
-        );
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.error?.message);
-        }
-      }
-    },
-  });
-
-  // Get SiteDetailsPage Count Data
-  const { data: siteCountData, isLoading: siteCountDataLoading } = useQuery({
-    queryKey: ['getSiteCountData'],
-    queryFn: async () => {
-      try {
-        return await axiosGetRequestUserService(
-          `/site/status-counts/organization/${hospitalId}`
-        );
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.error?.message);
-        }
-      }
-    },
-  });
-
   // Table Data
   const { data: sitesTableData, isLoading: sitesTableDataLoading } = useQuery({
     queryKey: ['getTableData', searchSitePayload],
@@ -253,10 +221,6 @@ export const useOrganizationDetails = () => {
     resultFrom,
     resultTo,
     tabData,
-    hospitalData,
-    hospitalDataLoading,
-    siteCountData,
-    siteCountDataLoading,
     sitesTableData,
     sitesTableDataLoading,
     searchKey,

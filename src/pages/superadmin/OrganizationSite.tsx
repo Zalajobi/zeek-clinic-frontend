@@ -36,16 +36,11 @@ const OrganizationSite = () => {
 
   const {
     // Values
-    // sites,
     perPage,
     currentPage,
     resultFrom,
     resultTo,
     tabData,
-    hospitalData,
-    hospitalDataLoading,
-    siteCountData,
-    siteCountDataLoading,
     sitesTableData,
     sitesTableDataLoading,
     searchKey,
@@ -98,13 +93,12 @@ const OrganizationSite = () => {
   return (
     <SuperadminBaseTemplate>
       <div className={`w-full flex flex-col`}>
-        <div className={`flex flex-row gap-4`}>
+        <div className={`flex flex-row gap-4 mb-8`}>
           <div className={`mr-auto`}>
             <Typography
-              text={`Welcome To, ${hospitalData?.data?.name}`}
+              text={`Welcome`}
               size="4xl"
               weight={800}
-              className="mb-8"
               Tag={'h1'}
             />
           </div>
@@ -137,12 +131,7 @@ const OrganizationSite = () => {
           </div>
         </div>
 
-        <HospitalDetails
-          data={hospitalData?.data ? hospitalData?.data : null}
-          siteData={siteCountData?.data ? siteCountData?.data : null}
-          siteDataLoading={siteCountDataLoading}
-          hospitalDataLoading={hospitalDataLoading}
-        />
+        <HospitalDetails />
 
         <HospitalRoutes />
 

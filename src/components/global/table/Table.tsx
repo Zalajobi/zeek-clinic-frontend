@@ -157,9 +157,9 @@ export const BasicTable = ({
       <CardHeader
         floated={true}
         shadow={true}
-        className={`rounded-none shadow-none bg-transparent p-3 m-0 min-h-[80px]`}>
+        className={`rounded-none shadow-none bg-transparent p-3 m-0 flex min-h-[90px]`}>
         <div
-          className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
+          className={`flex flex-col items-center justify-between gap-4 w-full md:flex-row`}>
           <div className={`flex gap-4 items-center justify-center`}>
             <CustomTabSelector
               onClick={onSelectTab}
