@@ -1,20 +1,20 @@
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
 
-export const useLatestDepartment = () => {
+export const useLatestUnit = () => {
   const { siteId } = useParams();
-  const [createDepartmentModal, setCreateDepartmentModal] = useState(false);
+  const [createUnitModal, setCreateUnitModal] = useState(false);
 
   // Get the Latest Department
-  const { data: departments, isLoading: departmentsLoading } = useQuery({
+  const { data: units, isLoading: unitsLoading } = useQuery({
     queryKey: ['getLatestData'],
     queryFn: async () => {
       try {
-        return await axiosPostRequestUserService(`/department/search`, {
+        return await axiosPostRequestUserService(`/unit/search`, {
           siteId,
           sortModel: {
             colId: 'createdAt',
@@ -29,15 +29,13 @@ export const useLatestDepartment = () => {
     },
   });
 
-  const onUpdateCreateDepartmentModal = () =>
-    setCreateDepartmentModal((cur) => !cur);
+  const onUpdateCreateUnitModal = () => setCreateUnitModal((cur) => !cur);
 
   return {
     siteId,
-    departments,
-    departmentsLoading,
-    createDepartmentModal,
+    unitsLoading,
+    units,
 
-    onUpdateCreateDepartmentModal,
+    onUpdateCreateUnitModal,
   };
 };

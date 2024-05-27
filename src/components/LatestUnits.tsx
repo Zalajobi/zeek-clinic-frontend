@@ -3,48 +3,41 @@ import {
   Typography,
   TypographyWithLink,
 } from '@components/global/dialog/Typography';
-import { useLatestDepartment } from '@hooks/components/useLatestDepartment';
-import {
-  Button,
-  Spinner,
-  Typography as MaterialTypography,
-} from '@material-tailwind/react';
-import { Fragment } from 'react';
+import { useLatestUnit } from '@hooks/components/useLatestUnit';
 import { DepartmentPayload } from '@typeSpec/payloads';
-import moment from 'moment/moment';
+import moment from 'moment';
+import { Typography as MaterialTypography } from '@material-tailwind/react/components/Typography';
+import { Button, Spinner } from '@material-tailwind/react';
 import { MdHouse } from 'react-icons/md';
-import AddDepartmentModal from '@components/modals/AddDepartmentModal';
 
-const LatestDepartments = () => {
+const LatestDepartment = () => {
   const {
     siteId,
-    departments,
-    departmentsLoading,
-    createDepartmentModal,
+    unitsLoading,
+    units,
 
-    onUpdateCreateDepartmentModal,
-  } = useLatestDepartment();
-
+    onUpdateCreateUnitModal,
+  } = useLatestUnit();
   return (
     <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}
-          text="Latest Department"
+          text="Latest Unit"
           className="text-left mr-auto"
         />
 
         <TypographyWithLink
           text="All"
-          to={`/department/${siteId}`}
+          to={`/unit/${siteId}`}
           className="text-right ml-auto px-5"
         />
       </div>
 
-      {!departmentsLoading ? (
+      {!unitsLoading ? (
         <div className="flex flex-col gap-2 w-full h-full my-4  overscroll-y-auto lg:gap-4">
-          {departments?.data?.depts?.length > 0 ? (
-            departments?.data?.depts?.map(
+          {units?.data?.units?.length > 0 ? (
+            units?.data?.units?.map(
               (item: DepartmentPayload, index: number) => (
                 <div
                   className="grid grid-cols-2 gap-2"
@@ -83,8 +76,8 @@ const LatestDepartments = () => {
               <Button
                 className={`rounded-full flex`}
                 ripple={true}
-                onClick={onUpdateCreateDepartmentModal}>
-                <MdHouse className={`w-4 h-4 mr-2`} /> Create Department
+                onClick={onUpdateCreateUnitModal}>
+                <MdHouse className={`w-4 h-4 mr-2`} /> Create Unit
               </Button>
             </div>
           )}
@@ -94,13 +87,8 @@ const LatestDepartments = () => {
           <Spinner className="h-20 w-20" />
         </div>
       )}
-
-      <AddDepartmentModal
-        open={createDepartmentModal}
-        handler={onUpdateCreateDepartmentModal}
-      />
     </CustomCard>
   );
 };
 
-export default LatestDepartments;
+export default LatestDepartment;

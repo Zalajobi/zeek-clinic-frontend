@@ -2,6 +2,7 @@ import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
 import SiteDetails from '@components/common/SiteDetails';
 import LatestDepartments from '@components/LatestDepartments';
+import LatestDepartment from '@components/LatestUnits';
 
 const SiteDetailsPage = () => {
   return (
@@ -17,10 +18,10 @@ const SiteDetailsPage = () => {
 
         <SiteDetails />
 
-        <div className="flex flex-col gap-4 my-6 md:grid md:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-4">
           <LatestDepartments />
 
-          <h1>Site Details</h1>
+          <LatestDepartment />
 
           <h1>Site Details</h1>
 
