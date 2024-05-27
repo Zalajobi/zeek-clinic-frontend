@@ -1,10 +1,13 @@
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { Typography } from '@components/global/dialog/Typography';
 import SiteDetails from '@components/common/SiteDetails';
-import LatestDepartments from '@components/LatestDepartments';
-import LatestUnit from '@components/LatestUnits';
 import SiteRoutes from '@components/common/SiteRoutes';
-import LatestServiceArea from '@components/LatestServiceArea';
+import {
+  LatestDepartments,
+  LatestUnit,
+  LatestServiceArea,
+  LatestRole,
+} from '@components/LatestUpdatesSiteDashboard';
 
 const SiteDetailsPage = () => {
   return (
@@ -29,7 +32,7 @@ const SiteDetailsPage = () => {
 
           <LatestServiceArea />
 
-          <h1>Site Details</h1>
+          <LatestRole />
         </div>
       </div>
     </SuperadminBaseTemplate>
