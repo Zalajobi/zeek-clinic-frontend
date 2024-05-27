@@ -8,7 +8,7 @@ const HospitalRoutes = () => {
   return (
     <Fragment>
       <div
-        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 gap-4 md:grid-cols-8`}>
+        className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold mt-10 md:grid-cols-8`}>
         <BeautifulLink
           icon={
             <TbActivityHeartbeat

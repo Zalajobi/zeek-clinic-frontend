@@ -3,6 +3,7 @@ import { Typography } from '@components/global/dialog/Typography';
 import SiteDetails from '@components/common/SiteDetails';
 import LatestDepartments from '@components/LatestDepartments';
 import LatestDepartment from '@components/LatestUnits';
+import SiteRoutes from '@components/common/SiteRoutes';
 
 const SiteDetailsPage = () => {
   return (
@@ -18,7 +19,9 @@ const SiteDetailsPage = () => {
 
         <SiteDetails />
 
-        <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-4">
+        <SiteRoutes />
+
+        <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-3">
           <LatestDepartments />
 
           <LatestDepartment />

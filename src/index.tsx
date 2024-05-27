@@ -120,6 +120,12 @@ const router = createBrowserRouter([
     ],
   },
 
+  // Site Providers
+  {
+    path: '/site/provider/:siteId',
+    element: <SiteProvidersPage />,
+  },
+
   {
     path: '/superadmin',
     children: [
@@ -154,12 +160,6 @@ const router = createBrowserRouter([
       {
         path: '/superadmin/site/:siteId',
         element: <SiteDetailsPage />,
-      },
-
-      // Super Admin Site Providers
-      {
-        path: '/superadmin/site/provider/:siteId',
-        element: <SiteProvidersPage />,
       },
     ],
   },
