@@ -92,7 +92,8 @@ const SiteProvidersPage = () => {
       column.key !== 'unit' &&
       column.key !== 'dept' &&
       column.key !== 'role' &&
-      column.key !== 'status'
+      column.key !== 'status' &&
+      column.key !== 'name'
     ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }

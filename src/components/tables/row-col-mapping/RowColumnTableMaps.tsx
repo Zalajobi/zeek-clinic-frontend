@@ -129,7 +129,7 @@ export const ProviderDataColumns = () => {
     {
       key: 'email',
       value: 'Email',
-      sortable: false,
+      sortable: true,
     },
     {
       key: 'role',
@@ -139,7 +139,7 @@ export const ProviderDataColumns = () => {
     {
       key: 'gender',
       value: 'Gender',
-      sortable: false,
+      sortable: true,
     },
     {
       key: 'age',
@@ -149,17 +149,22 @@ export const ProviderDataColumns = () => {
     {
       key: 'country',
       value: 'Country',
-      sortable: false,
+      sortable: true,
     },
     {
       key: 'state',
       value: 'State',
-      sortable: false,
+      sortable: true,
     },
     {
       key: 'city',
       value: 'City',
-      sortable: false,
+      sortable: true,
+    },
+    {
+      key: 'zipCode',
+      value: 'ZipCode',
+      sortable: true,
     },
     {
       key: 'unit',
@@ -184,7 +189,7 @@ export const ProviderDataColumns = () => {
     {
       key: 'createdAt',
       value: 'Created At',
-      sortable: false,
+      sortable: true,
     },
     {
       key: 'action',
@@ -211,6 +216,7 @@ export const ProviderDataRows = (data: ProviderPayload[]) => {
       country: item?.country,
       state: item?.state,
       city: item?.city,
+      zipCode: item?.zipCode,
       unit: item?.unit,
       unitId: item?.unitId,
       dept: item?.dept,
