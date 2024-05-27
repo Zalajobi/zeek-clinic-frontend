@@ -28,7 +28,7 @@ export const useSiteProvidersPage = () => {
 
   // Get Table Data
   const { data: tableData, isLoading: tableDataLoading } = useQuery({
-    queryKey: ['getRoleCharts'],
+    queryKey: ['getTableData'],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(

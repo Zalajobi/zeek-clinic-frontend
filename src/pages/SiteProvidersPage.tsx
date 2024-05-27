@@ -54,8 +54,6 @@ const SiteProvidersPage = () => {
     onUpdateSearchKey,
   } = useSiteProvidersPage();
 
-  console.log(noOfPages);
-
   if (!tableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
       tableData?.data,
@@ -87,8 +85,15 @@ const SiteProvidersPage = () => {
     [tableData?.data?.providers]
   );
 
-  columnData.map((column) => {
-    if (column.key === 'staff_id' || column.key === 'email') {
+  columnData?.map((column) => {
+    if (
+      column.key !== 'action' &&
+      column.key !== 'area' &&
+      column.key !== 'unit' &&
+      column.key !== 'dept' &&
+      column.key !== 'role' &&
+      column.key !== 'status'
+    ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });

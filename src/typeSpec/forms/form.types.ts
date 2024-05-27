@@ -36,7 +36,7 @@ export type CreateProviderInput = {
   email: string;
   phone: string;
   gender: string;
-  dob: Date;
+  dob: Date | string;
   address: string;
   alternateAddress?: string;
   city: string;

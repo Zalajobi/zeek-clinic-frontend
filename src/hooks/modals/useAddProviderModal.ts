@@ -162,15 +162,15 @@ export const useAddProviderModal = (handler: () => void) => {
   );
 
   const createProvider = (data: CreateProviderInput) => {
-    let phoneNumber = data.phone.startsWith('0')
-      ? data?.phone.slice(1)
-      : data?.phone;
+    const dateOfBirth = new Date(data.dob).toISOString();
     const updatedData = {
       ...data,
-      phone: `${phoneCode}${phoneNumber}`,
+      phone: `${Number(`${phoneCode}${data.phone}`)}`,
       siteId: siteId ?? '',
-      country_code: countryCode,
+      countryCode,
       country,
+      profilePic: logo,
+      dob: dateOfBirth,
     };
     createProviderMutate(updatedData);
   };

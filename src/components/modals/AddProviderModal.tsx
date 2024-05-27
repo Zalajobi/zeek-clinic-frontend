@@ -101,10 +101,6 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     });
   }
 
-  console.log({
-    ...serviceAreas?.data,
-  });
-
   return (
     <Fragment>
       <CustomBasicModal
@@ -160,7 +156,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`First Name`}
                 className={`my-3`}
                 errorMsg={errors.firstName?.message ?? ''}
-                id={`first_name`}
+                id={`firstName`}
                 register={register}
               />
 
@@ -169,7 +165,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`Last Name`}
                 className={`my-3`}
                 errorMsg={errors.lastName?.message ?? ''}
-                id={`last_name`}
+                id={`lastName`}
                 type={`text`}
                 register={register}
               />
@@ -178,7 +174,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`Middle Name`}
                 className={`my-3`}
-                id={`middle_name`}
+                id={`middleName`}
                 errorMsg={errors.middleName?.message ?? ''}
                 type={`text`}
                 register={register}
@@ -230,7 +226,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 options={relationshipStatus}
                 className={`my-3`}
                 register={register}
-                id={`marital_status`}
+                id={`maritalStatus`}
                 errorMsg={errors.maritalStatus?.message ?? ''}
               />
 
@@ -240,7 +236,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 options={serviceAreaOptions}
                 className={`w-full my-3`}
                 register={register}
-                id={'serviceArea'}
+                id={'serviceAreaId'}
                 errorMsg={errors.serviceAreaId?.message ?? ''}
               />
 
@@ -250,7 +246,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 options={deptOptions}
                 className={`w-full my-3`}
                 register={register}
-                id={'department'}
+                id={'departmentId'}
                 errorMsg={errors.departmentId?.message ?? ''}
               />
 
@@ -260,7 +256,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 options={unitOptions}
                 className={`w-full my-3`}
                 register={register}
-                id={'unit'}
+                id={'unitId'}
                 errorMsg={errors.unitId?.message ?? ''}
               />
 
@@ -270,7 +266,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 options={roleOptions}
                 className={`w-full my-3`}
                 register={register}
-                id={'role'}
+                id={'roleId'}
                 errorMsg={errors.roleId?.message ?? ''}
               />
 
@@ -278,7 +274,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`Staff ID`}
                 errorMsg={errors.staffId?.message ?? ''}
-                id={`staff_id`}
+                id={`staffId`}
                 className={`my-3`}
                 register={register}
                 type={'text'}
@@ -319,7 +315,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`Zip Code`}
                 errorMsg={errors.zipCode?.message ?? ''}
-                id={`zip_code`}
+                id={`zipCode`}
                 className={`my-3`}
                 register={register}
                 type={'text'}
@@ -339,7 +335,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`Alternate Address`}
                 errorMsg={errors.alternateAddress?.message ?? ''}
-                id={`address_two`}
+                id={`alternateAddress`}
                 className={`my-3`}
                 register={register}
                 type={'text'}

@@ -200,27 +200,31 @@ export const ProviderDataRows = (data: ProviderPayload[]) => {
   data?.map((item) => {
     rowItems.push({
       id: item?.id,
-      name: `${item?.first_name} ${
-        item?.middle_name
-      } ${item?.last_name?.toUpperCase()}`,
+      name: `${item?.firstName} ${
+        item?.middleName
+      } ${item?.lastName?.toUpperCase()}`,
       email: item?.email,
       role: item?.role,
-      roleId: item?.role_id,
+      roleId: item?.primaryRoleId,
       gender: item?.gender?.toUpperCase(),
       age: ageFromTimeStamp(item?.dob ?? ''),
       country: item?.country,
       state: item?.state,
       city: item?.city,
       unit: item?.unit,
-      unitId: item?.unit_id,
+      unitId: item?.unitId,
       dept: item?.dept,
-      deptId: item?.dept_id,
+      deptId: item?.departmentId,
       area: item?.area,
-      areaId: item?.area_id,
-      profileId: item?.profile_id,
+      areaId: item?.serviceAreaId,
       status: item?.status,
       createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
-      profile_pic: item?.profile_pic,
+      profilePic: item?.profilePic,
+      isSpecialist: item?.isSpecialist,
+      isConsultant: item?.isConsultant,
+      appointments: item?.appointments,
+      staffId: item?.staffId,
+      maritalStatus: item?.maritalStatus,
     });
 
     return;
