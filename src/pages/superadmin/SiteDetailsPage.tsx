@@ -4,6 +4,7 @@ import SiteDetails from '@components/common/SiteDetails';
 import LatestDepartments from '@components/LatestDepartments';
 import LatestUnit from '@components/LatestUnits';
 import SiteRoutes from '@components/common/SiteRoutes';
+import LatestServiceArea from '@components/LatestServiceArea';
 
 const SiteDetailsPage = () => {
   return (
@@ -26,7 +27,7 @@ const SiteDetailsPage = () => {
 
           <LatestUnit />
 
-          <h1>Site Details</h1>
+          <LatestServiceArea />
 
           <h1>Site Details</h1>
         </div>
