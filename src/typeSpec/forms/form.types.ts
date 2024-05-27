@@ -165,3 +165,34 @@ export type CreateServiceAreaInput = {
   type: 'OUTPATIENT' | 'INPATIENT' | 'PROCEDURE' | 'EMERGENCY' | 'OTHERS';
   description: string;
 };
+
+// Create Role
+export type CreateRoleInput = {
+  description: string;
+  name: string;
+  siteId: string;
+  prescription: boolean;
+  note: boolean;
+  procedure: boolean;
+  lab_test: boolean;
+  appointment: boolean;
+  vitals: boolean;
+  med_supply: boolean;
+  admit_patient: boolean;
+  transfer_patient: boolean;
+  move_patient: boolean;
+  discharge: boolean;
+  time_of_death: boolean;
+  review: boolean;
+  logs: boolean;
+  dental: boolean;
+  clerking: boolean;
+  radiology: boolean;
+  consult: boolean;
+  referral: boolean;
+  refer_outpx: boolean;
+  upload: boolean;
+  charts: boolean;
+  nursing: boolean;
+  plan: boolean;
+};

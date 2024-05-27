@@ -179,3 +179,36 @@ export const CreateServiceAreaInputSchema = yup.object({
     .required('Department description is required')
     .min(20, 'Description too short'),
 });
+
+// Create Role
+export const CreateRoleInputSchema = yup.object({
+  name: yup.string().required('Department name is required'),
+  description: yup
+    .string()
+    .required('Department description is required')
+    .min(20, 'Description too short'),
+  prescription: yup.boolean().default(false),
+  note: yup.boolean().default(false),
+  procedure: yup.boolean().default(false),
+  lab_test: yup.boolean().default(false),
+  appointment: yup.boolean().default(false),
+  vitals: yup.boolean().default(false),
+  med_supply: yup.boolean().default(false),
+  admit_patient: yup.boolean().default(false),
+  transfer_patient: yup.boolean().default(false),
+  move_patient: yup.boolean().default(false),
+  discharge: yup.boolean().default(false),
+  time_of_death: yup.boolean().default(false),
+  review: yup.boolean().default(false),
+  logs: yup.boolean().default(false),
+  dental: yup.boolean().default(false),
+  clerking: yup.boolean().default(false),
+  radiology: yup.boolean().default(false),
+  consult: yup.boolean().default(false),
+  referral: yup.boolean().default(false),
+  refer_outpx: yup.boolean().default(false),
+  upload: yup.boolean().default(false),
+  charts: yup.boolean().default(false),
+  nursing: yup.boolean().default(false),
+  plan: yup.boolean().default(false),
+});

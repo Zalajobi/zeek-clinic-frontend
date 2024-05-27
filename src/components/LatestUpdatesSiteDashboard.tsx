@@ -7,7 +7,6 @@ import { DepartmentPayload } from '@typeSpec/payloads';
 import moment from 'moment';
 import { Typography as MaterialTypography } from '@material-tailwind/react/components/Typography';
 import { Button, Spinner } from '@material-tailwind/react';
-import { MdHouse } from 'react-icons/md';
 import AddDepartmentModal from '@components/modals/AddDepartmentModal';
 import AddUnitModal from '@components/modals/AddUnitModal';
 import CreateServiceAreaModal from '@components/modals/CreateServiceAreaModal';
@@ -23,6 +22,7 @@ import {
   ServiceAreaIcon,
   UnitIcon,
 } from '@components/global/GlobalIcons';
+import AddRoleModal from '@components/modals/AddRoleModal';
 
 export const LatestDepartments = () => {
   const {
@@ -382,6 +382,11 @@ export const LatestRole = () => {
           <Spinner className="h-20 w-20" />
         </div>
       )}
+
+      <AddRoleModal
+        handler={onUpdateCreateRoleModal}
+        open={createRoleModal}
+      />
     </CustomCard>
   );
 };
