@@ -112,7 +112,7 @@ const AdminProviderDetails = () => {
                 serviceArea={
                   providerData?.data?.provider?.servicearea.name ?? ''
                 }
-                createdAt={providerData?.data?.provider?.created_at ?? ''}
+                createdAt={providerData?.data?.provider?.createdAt ?? ''}
                 patientCount={providerData?.data?.patientCount?.toString()}
                 country={
                   providerData?.data?.provider?.personalInfo.country ?? ''

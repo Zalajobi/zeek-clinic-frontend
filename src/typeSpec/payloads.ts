@@ -54,7 +54,7 @@ export interface SitePayload {
 }
 
 export interface DepartmentPayload {
-  created_at?: string;
+  createdAt?: string;
   description?: string;
   id?: string;
   name?: string;
@@ -91,7 +91,7 @@ export interface RolesPayload {
   nursing?: boolean;
   plan?: boolean;
   id?: string;
-  created_at?: Date;
+  createdAt?: Date;
   updated_at?: Date;
 }
 
@@ -101,7 +101,7 @@ export interface ServiceAreaPayload {
   description?: string;
   siteId?: string;
   type?: string;
-  created_at?: Date;
+  createdAt?: Date;
   updated_at?: Date;
 }
 
@@ -123,7 +123,7 @@ export interface PersonalInfoPayload {
   zip_code?: string;
   religion?: string;
   marital_status?: string;
-  created_at?: string;
+  createdAt?: string;
 }
 
 export interface ServiceAreaPayload {
@@ -152,7 +152,7 @@ export interface ProviderPayload {
   is_specialist?: boolean;
   appointments?: boolean;
   status?: string;
-  created_at?: string;
+  createdAt?: string;
   role?: string;
   dept?: string;
   area?: string;

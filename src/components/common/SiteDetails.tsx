@@ -98,7 +98,7 @@ const SiteDetails = () => {
                 text={
                   formatPhoneNumber(
                     siteData?.data?.phone ?? 0,
-                    siteData?.data?.country_code ?? 'NG'
+                    siteData?.data?.countryCode ?? 'NG'
                   ) ?? '--'
                 }
                 Tag={'p'}
@@ -200,7 +200,7 @@ const SiteDetails = () => {
           ) : (
             <Fragment>
               <Typography
-                text={siteData?.data?.zip_code ?? '--'}
+                text={siteData?.data?.zipCode ?? '--'}
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
@@ -443,7 +443,7 @@ const SiteDetails = () => {
             <Fragment>
               <Typography
                 text={
-                  moment(siteData?.data?.created_at).format('MMM DD. YYYY') ??
+                  moment(siteData?.data?.createdAt).format('MMM DD. YYYY') ??
                   '--'
                 }
                 Tag={'p'}

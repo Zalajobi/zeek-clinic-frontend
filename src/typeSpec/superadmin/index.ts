@@ -21,7 +21,7 @@ export interface GetHospitalResponseData {
   state: string;
   country: string;
   logo: string;
-  created_at: string;
+  createdAt: string;
   updated_at: string;
   status: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED';
 }
@@ -36,7 +36,7 @@ export interface HospitalRowData {
   city: ReactNode;
   state: ReactNode;
   country: ReactNode;
-  created_at: ReactNode;
+  createdAt: ReactNode;
   action: ReactNode;
 }
 
@@ -50,7 +50,7 @@ export interface SiteRowData {
   city: ReactNode;
   address: ReactNode;
   status: ReactNode;
-  created_at: ReactNode;
+  createdAt: ReactNode;
   action: ReactNode;
 }
 
@@ -68,7 +68,7 @@ export interface HospitalDetailsData {
   status: string;
   zip_code?: string;
   country_code: string;
-  created_at: string;
+  createdAt: string;
   updated_at: string;
 }
 

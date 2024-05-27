@@ -9,7 +9,7 @@ export interface UserServicePatientDetailsResponse {
   email: string;
   status: string;
   id: string;
-  created_at: Date;
+  createdAt: Date;
   updated_at: Date;
   personalInfo: PersonalInfoPayload;
   department: DepartmentPayload;
@@ -18,7 +18,7 @@ export interface UserServicePatientDetailsResponse {
 }
 
 export interface UserServiceUnitResponseData {
-  created_at: Date;
+  createdAt: Date;
   description: string;
   id: string;
   name: string;

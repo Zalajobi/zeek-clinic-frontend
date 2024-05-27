@@ -178,7 +178,7 @@ export const AdminProviderDataColumn = (
           </span>
         </Fragment>
       ),
-      accessor: 'created_at',
+      accessor: 'createdAt',
     },
 
     {
@@ -272,7 +272,7 @@ export const AdminProviderDataRow = (
         </>
       ),
 
-      created_at: <>{moment(item?.created_at).format('MMM DD. YYYY')}</>,
+      createdAt: <>{moment(item?.createdAt).format('MMM DD. YYYY')}</>,
 
       action: (
         <>

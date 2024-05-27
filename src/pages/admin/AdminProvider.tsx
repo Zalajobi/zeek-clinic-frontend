@@ -156,7 +156,7 @@ const AdminProvider = () => {
             phone={siteData?.data?.phone ?? ''}
             state={siteData?.data?.state ?? ''}
             city={siteData?.data?.city ?? ''}
-            created_at={siteData?.data?.city ?? ''}
+            createdAt={siteData?.data?.city ?? ''}
           />
 
           <AdminRoutes

@@ -17,7 +17,7 @@ export const useLatestDepartment = () => {
         return await axiosPostRequestUserService(`/department/search`, {
           siteId,
           sortModel: {
-            colId: 'created_at',
+            colId: 'createdAt',
             sort: 'desc',
           },
         });

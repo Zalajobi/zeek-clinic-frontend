@@ -12,7 +12,7 @@ interface AdminSiteInfoProps {
   id: string;
   state: string;
   city: string;
-  created_at: string;
+  createdAt: string;
   dataLoading: boolean;
 }
 const AdminSiteInfo = ({
@@ -24,7 +24,7 @@ const AdminSiteInfo = ({
   id,
   state,
   city,
-  created_at,
+  createdAt,
   dataLoading,
 }: AdminSiteInfoProps) => {
   return (
@@ -100,7 +100,7 @@ const AdminSiteInfo = ({
           />
 
           <Typography
-            text={moment(created_at).format('MMM DD. YYYY')}
+            text={moment(createdAt).format('MMM DD. YYYY')}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}

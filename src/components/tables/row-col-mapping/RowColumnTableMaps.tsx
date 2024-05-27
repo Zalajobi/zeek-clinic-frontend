@@ -182,7 +182,7 @@ export const ProviderDataColumns = () => {
       sortable: false,
     },
     {
-      key: 'created_at',
+      key: 'createdAt',
       value: 'Created At',
       sortable: false,
     },
@@ -219,7 +219,7 @@ export const ProviderDataRows = (data: ProviderPayload[]) => {
       areaId: item?.area_id,
       profileId: item?.profile_id,
       status: item?.status,
-      created_at: moment(item?.created_at).format('MMM DD. YYYY'),
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
       profile_pic: item?.profile_pic,
     });
 

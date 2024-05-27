@@ -41,29 +41,32 @@ const LatestDepartments = () => {
       </div>
 
       {!departmentsLoading ? (
-        <div className="grid grid-cols-2 gap-2 w-full h-full my-4  overscroll-y-auto lg:gap-4">
+        <div className="flex flex-col gap-2 w-full h-full my-4  overscroll-y-auto lg:gap-4">
           {departments?.data?.depts?.length > 0 ? (
             departments?.data?.depts?.map(
               (item: DepartmentPayload, index: number) => (
-                <Fragment key={`${item}_${index}`}>
+                <div
+                  className="grid grid-cols-2 gap-2"
+                  key={`${item}_${index}`}>
                   <Typography
                     text={item?.name ?? ''}
                     Tag={'p'}
                     size={'xs'}
                     weight={400}
-                    className="truncate"
+                    className="truncate mr-auto w-full"
                   />
                   <Typography
                     text={
-                      moment(item?.created_at).format(
+                      moment(item?.createdAt).format(
                         'MMM DD. YYYY, hh:mm:ss A'
                       ) ?? '--'
                     }
                     Tag={'p'}
                     size={'xs'}
                     weight={400}
+                    className="ml-auto truncate"
                   />
-                </Fragment>
+                </div>
               )
             )
           ) : (
