@@ -103,9 +103,7 @@ export const useSiteDetails = () => {
     queryKey: ['getUnitCount'],
     queryFn: async () => {
       try {
-        return await axiosGetRequestUserService(
-          `/service-area/count/${siteId}`
-        );
+        return await axiosGetRequestUserService(`/unit/count/${siteId}`);
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           toast.error(error.response.data.error?.message);

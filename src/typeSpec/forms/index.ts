@@ -160,3 +160,11 @@ export const CreateDepartmentInputSchema = yup.object({
     .required('Department description is required')
     .min(20, 'Description too short'),
 });
+
+export const CreateUnitInputSchema = yup.object({
+  name: yup.string().required('Department name is required'),
+  description: yup
+    .string()
+    .required('Department description is required')
+    .min(20, 'Description too short'),
+});

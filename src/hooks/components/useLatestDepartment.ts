@@ -11,7 +11,7 @@ export const useLatestDepartment = () => {
 
   // Get the Latest Department
   const { data: departments, isLoading: departmentsLoading } = useQuery({
-    queryKey: ['getLatestData'],
+    queryKey: ['getLatestDepartmentData'],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(`/department/search`, {

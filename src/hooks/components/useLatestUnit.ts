@@ -11,7 +11,7 @@ export const useLatestUnit = () => {
 
   // Get the Latest Department
   const { data: units, isLoading: unitsLoading } = useQuery({
-    queryKey: ['getLatestData'],
+    queryKey: ['getLatestUnitData'],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(`/unit/search`, {
@@ -35,6 +35,7 @@ export const useLatestUnit = () => {
     siteId,
     unitsLoading,
     units,
+    createUnitModal,
 
     onUpdateCreateUnitModal,
   };

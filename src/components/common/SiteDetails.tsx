@@ -323,7 +323,7 @@ const SiteDetails = () => {
         {/*Unit Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Service Area:`}
+            text={`Units:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}

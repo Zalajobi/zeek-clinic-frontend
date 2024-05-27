@@ -9,15 +9,18 @@ import moment from 'moment';
 import { Typography as MaterialTypography } from '@material-tailwind/react/components/Typography';
 import { Button, Spinner } from '@material-tailwind/react';
 import { MdHouse } from 'react-icons/md';
+import AddUnitModal from '@components/modals/AddUnitModal';
 
 const LatestDepartment = () => {
   const {
     siteId,
     unitsLoading,
     units,
+    createUnitModal,
 
     onUpdateCreateUnitModal,
   } = useLatestUnit();
+
   return (
     <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
       <div className="grid grid-cols-2 gap-4 w-full my-4">
@@ -87,6 +90,11 @@ const LatestDepartment = () => {
           <Spinner className="h-20 w-20" />
         </div>
       )}
+
+      <AddUnitModal
+        handler={onUpdateCreateUnitModal}
+        open={createUnitModal}
+      />
     </CustomCard>
   );
 };

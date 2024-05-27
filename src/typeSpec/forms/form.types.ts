@@ -151,3 +151,10 @@ export type CreateDepartmentInput = {
   description: string;
   siteId: string;
 };
+
+// Create Unit
+export type CreateUnitInput = {
+  name: string;
+  description: string;
+  siteId: string;
+};
