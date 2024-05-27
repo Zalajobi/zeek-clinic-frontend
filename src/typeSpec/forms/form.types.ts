@@ -157,3 +157,11 @@ export type CreateUnitInput = {
   totalBeds: number;
   siteId: string;
 };
+
+// Create Service Area
+export type CreateServiceAreaInput = {
+  siteId: string;
+  name: string;
+  type: 'OUTPATIENT' | 'INPATIENT' | 'PROCEDURE' | 'EMERGENCY' | 'OTHERS';
+  description: string;
+};

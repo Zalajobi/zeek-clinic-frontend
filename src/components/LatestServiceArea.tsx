@@ -9,6 +9,7 @@ import moment from 'moment/moment';
 import { Typography as MaterialTypography } from '@material-tailwind/react/components/Typography';
 import { Button, Spinner } from '@material-tailwind/react';
 import { MdHouse } from 'react-icons/md';
+import CreateServiceAreaModal from '@components/modals/CreateServiceAreaModal';
 
 const LatestServiceArea = () => {
   const {
@@ -25,7 +26,7 @@ const LatestServiceArea = () => {
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}
-          text="Latest Service-Area"
+          text="Latest Service Area"
           className="text-left mr-auto"
         />
 
@@ -38,8 +39,8 @@ const LatestServiceArea = () => {
 
       {!serviceAreasLoading ? (
         <div className="flex flex-col gap-2 w-full h-full my-4  overscroll-y-auto lg:gap-4">
-          {serviceAreas?.data?.units?.length > 0 ? (
-            serviceAreas?.data?.units?.map(
+          {serviceAreas?.data?.serviceAreas?.length > 0 ? (
+            serviceAreas?.data?.serviceAreas?.map(
               (item: DepartmentPayload, index: number) => (
                 <div
                   className="grid grid-cols-2 gap-2"
@@ -79,7 +80,7 @@ const LatestServiceArea = () => {
                 className={`rounded-full flex`}
                 ripple={true}
                 onClick={onUpdateCreateServiceAreaModal}>
-                <MdHouse className={`w-4 h-4 mr-2`} /> Create Service-Area
+                <MdHouse className={`w-4 h-4 mr-2`} /> Create Service Area
               </Button>
             </div>
           )}
@@ -89,6 +90,11 @@ const LatestServiceArea = () => {
           <Spinner className="h-20 w-20" />
         </div>
       )}
+
+      <CreateServiceAreaModal
+        open={createServiceAreaModal}
+        handler={onUpdateCreateServiceAreaModal}
+      />
     </CustomCard>
   );
 };

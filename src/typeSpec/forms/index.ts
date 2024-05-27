@@ -93,7 +93,6 @@ export const CreateAdminUserInputSchema = yup
   .required();
 
 // Create Provider
-
 export const CreateProviderInputSchema = yup
   .object({
     title: yup.string().required('Title is Required'),
@@ -152,6 +151,7 @@ export const CreateProviderInputSchema = yup
   })
   .required();
 
+// Create Department
 export const CreateDepartmentInputSchema = yup.object({
   name: yup.string().required('Department name is required'),
   description: yup
@@ -160,9 +160,20 @@ export const CreateDepartmentInputSchema = yup.object({
     .min(20, 'Description too short'),
 });
 
+// Create Unit
 export const CreateUnitInputSchema = yup.object({
   name: yup.string().required('Department name is required'),
   totalBeds: yup.number().default(0),
+  description: yup
+    .string()
+    .required('Department description is required')
+    .min(20, 'Description too short'),
+});
+
+// Create ServiceArea
+export const CreateServiceAreaInputSchema = yup.object({
+  name: yup.string().required('Department name is required'),
+  type: yup.string().required('Department type is required'),
   description: yup
     .string()
     .required('Department description is required')
