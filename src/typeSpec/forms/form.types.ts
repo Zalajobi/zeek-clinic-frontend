@@ -154,5 +154,6 @@ export type CreateDepartmentInput = {
 export type CreateUnitInput = {
   name: string;
   description: string;
+  totalBeds: number;
   siteId: string;
 };

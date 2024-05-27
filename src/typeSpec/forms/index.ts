@@ -162,6 +162,7 @@ export const CreateDepartmentInputSchema = yup.object({
 
 export const CreateUnitInputSchema = yup.object({
   name: yup.string().required('Department name is required'),
+  totalBeds: yup.number().default(0),
   description: yup
     .string()
     .required('Department description is required')

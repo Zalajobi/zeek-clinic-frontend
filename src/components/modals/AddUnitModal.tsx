@@ -49,8 +49,7 @@ const AddUnitModal = ({ open, handler }: AddUnitModalProps) => {
             />
           </Fragment>
         }>
-        <div
-          className={`p-6 grid grid-cols-1 gap-4 md:grid-cols-[30%_70%] mb-4 `}>
+        <div className={`p-6 grid grid-cols-1 gap-4 md:grid-cols-2`}>
           {/*Unit Name*/}
           <TextInput
             label={`Unit Name`}
@@ -61,10 +60,20 @@ const AddUnitModal = ({ open, handler }: AddUnitModalProps) => {
             register={register}
           />
 
+          {/*Total Beds*/}
+          <TextInput
+            label={`Total Beds`}
+            className={`my-3`}
+            id={'totalBeds'}
+            errorMsg={errors.totalBeds?.message ?? ''}
+            type={'number'}
+            register={register}
+          />
+
           {/*Unit Description*/}
           <CustomTextAreaInput
             label={`Description`}
-            className={`my-3`}
+            className={`my-3 col-span-2`}
             id={'description'}
             errorMsg={errors.description?.message ?? ''}
             register={register}

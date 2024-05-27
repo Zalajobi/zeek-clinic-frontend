@@ -11,7 +11,7 @@ import { Button, Spinner } from '@material-tailwind/react';
 import { MdHouse } from 'react-icons/md';
 import AddUnitModal from '@components/modals/AddUnitModal';
 
-const LatestDepartment = () => {
+const LatestUnit = () => {
   const {
     siteId,
     unitsLoading,
@@ -99,4 +99,4 @@ const LatestDepartment = () => {
   );
 };
 
-export default LatestDepartment;
+export default LatestUnit;
