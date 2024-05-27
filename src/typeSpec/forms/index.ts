@@ -97,17 +97,17 @@ export const CreateAdminUserInputSchema = yup
 export const CreateProviderInputSchema = yup
   .object({
     title: yup.string().required('Title is Required'),
-    first_name: yup
+    firstName: yup
       .string()
       .required('First Name is a required field')
       .min(4, 'First Name must be at least four(4) character(s)')
       .max(25, 'Exceeded the 25 character threshold'),
-    last_name: yup
+    lastName: yup
       .string()
       .required('Last Name is a required field')
       .min(4, 'Last Name must be at least four(4) character(s)')
       .max(25, 'Exceeded the 25 character threshold'),
-    middle_name: yup.string().optional(),
+    middleName: yup.string().optional(),
     gender: yup.string().required('Gender is Required'),
     dob: yup.string().required('Date Of Birth is a required field'),
     email: yup
@@ -115,25 +115,25 @@ export const CreateProviderInputSchema = yup
       .email('Email format is wrong')
       .required('Email is a required field'),
     phone: yup.string().required('Phone Number is a required field'),
-    department: yup.string().required('Providers Department is not selected'),
-    role: yup.string().required('Providers Role is not selected'),
-    serviceArea: yup
+    departmentId: yup.string().required('Providers Department is not selected'),
+    roleId: yup.string().required('Providers Role is not selected'),
+    serviceAreaId: yup
       .string()
       .required('Providers Service Area is not selected'),
-    unit: yup.string().required('Providers Unit is not selected'),
+    unitId: yup.string().required('Providers Unit is not selected'),
     country: yup.string().required('Country is a required field'),
     state: yup.string().optional(),
     city: yup
       .string()
       .required('City is a required field')
       .min(3, 'City is too short'),
-    staff_id: yup
+    staffId: yup
       .string()
       .min(7, 'Minimum of Seven(7) Characters')
       .max(20, 'Maximum of Twenty(20) characters')
       .required('Staff ID is a required field'),
-    zip_code: yup.string().required('ZipCode is a required field'),
-    marital_status: yup.string().required('Please Select One'),
+    zipCode: yup.string().required('ZipCode is a required field'),
+    maritalStatus: yup.string().required('Please Select One'),
     religion: yup.string().required('Religion is a required field'),
     password: yup
       .string()
@@ -143,13 +143,12 @@ export const CreateProviderInputSchema = yup
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
       )
       .optional(),
-    username: yup.string().optional(),
     address: yup.string().required('Address is required'),
-    address_two: yup.string().optional(),
-    is_consultant: yup.boolean().default(false),
-    is_specialist: yup.boolean().default(false),
+    alternateAddress: yup.string().optional(),
+    isConsultant: yup.boolean().default(false),
+    isSpecialist: yup.boolean().default(false),
     appointments: yup.boolean().default(false),
-    profile_pic: yup.string().optional(),
+    profilePic: yup.string().optional(),
   })
   .required();
 

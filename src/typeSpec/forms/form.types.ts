@@ -29,24 +29,25 @@ export type TimeZones = {
 // Create Provider
 export type CreateProviderInput = {
   title: string;
-  first_name: string;
-  last_name: string;
-  middle_name?: string;
-  gender: string;
-  dob?: Date;
+  siteId: string;
+  firstName: string;
+  lastName: string;
+  middleName?: string;
   email: string;
   phone: string;
-  department: string;
-  role: string;
-  serviceArea: string;
-  unit: string;
-  country: string;
-  country_code?: string;
-  state: string;
+  gender: string;
+  dob: Date;
+  address: string;
+  alternateAddress?: string;
   city: string;
-  staff_id: string;
-  zip_code: string;
-  marital_status:
+  state: string;
+  country: string;
+  countryCode: string;
+  zipCode: string;
+  profilePic?: string;
+  religion: string;
+  staffId: string;
+  maritalStatus:
     | 'SINGLE'
     | 'IN_A_RELATIONSHIP'
     | 'ENGAGED'
@@ -59,16 +60,13 @@ export type CreateProviderInput = {
     | 'CIVIL_UNION'
     | 'DOMESTIC_PARTNERSHIP'
     | 'OTHERS';
-  religion: string;
-  password?: string;
-  username?: string;
-  address: string;
-  address_two: string;
-  siteId: string;
-  is_consultant: boolean;
-  is_specialist: boolean;
+  departmentId: string;
+  roleId: string;
+  serviceAreaId: string;
+  unitId: string;
+  isConsultant: boolean;
+  isSpecialist: boolean;
   appointments: boolean;
-  profile_pic?: string;
 };
 
 // Create Admin

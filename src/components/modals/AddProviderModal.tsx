@@ -101,6 +101,10 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
     });
   }
 
+  console.log({
+    ...serviceAreas?.data,
+  });
+
   return (
     <Fragment>
       <CustomBasicModal
@@ -155,7 +159,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`First Name`}
                 className={`my-3`}
-                errorMsg={errors.first_name?.message ?? ''}
+                errorMsg={errors.firstName?.message ?? ''}
                 id={`first_name`}
                 register={register}
               />
@@ -164,7 +168,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               <TextInput
                 label={`Last Name`}
                 className={`my-3`}
-                errorMsg={errors.last_name?.message ?? ''}
+                errorMsg={errors.lastName?.message ?? ''}
                 id={`last_name`}
                 type={`text`}
                 register={register}
@@ -175,7 +179,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 label={`Middle Name`}
                 className={`my-3`}
                 id={`middle_name`}
-                errorMsg={errors.middle_name?.message ?? ''}
+                errorMsg={errors.middleName?.message ?? ''}
                 type={`text`}
                 register={register}
               />
@@ -227,7 +231,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`my-3`}
                 register={register}
                 id={`marital_status`}
-                errorMsg={errors.marital_status?.message ?? ''}
+                errorMsg={errors.maritalStatus?.message ?? ''}
               />
 
               {/*Service Area*/}
@@ -237,7 +241,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`w-full my-3`}
                 register={register}
                 id={'serviceArea'}
-                errorMsg={errors.serviceArea?.message ?? ''}
+                errorMsg={errors.serviceAreaId?.message ?? ''}
               />
 
               {/*Department*/}
@@ -247,7 +251,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`w-full my-3`}
                 register={register}
                 id={'department'}
-                errorMsg={errors.department?.message ?? ''}
+                errorMsg={errors.departmentId?.message ?? ''}
               />
 
               {/*Unit*/}
@@ -257,7 +261,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`w-full my-3`}
                 register={register}
                 id={'unit'}
-                errorMsg={errors.unit?.message ?? ''}
+                errorMsg={errors.unitId?.message ?? ''}
               />
 
               {/*Roles*/}
@@ -267,13 +271,13 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
                 className={`w-full my-3`}
                 register={register}
                 id={'role'}
-                errorMsg={errors.role?.message ?? ''}
+                errorMsg={errors.roleId?.message ?? ''}
               />
 
               {/*Staff ID*/}
               <TextInput
                 label={`Staff ID`}
-                errorMsg={errors.staff_id?.message ?? ''}
+                errorMsg={errors.staffId?.message ?? ''}
                 id={`staff_id`}
                 className={`my-3`}
                 register={register}
@@ -314,7 +318,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               {/*Zip Code*/}
               <TextInput
                 label={`Zip Code`}
-                errorMsg={errors.zip_code?.message ?? ''}
+                errorMsg={errors.zipCode?.message ?? ''}
                 id={`zip_code`}
                 className={`my-3`}
                 register={register}
@@ -334,7 +338,7 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               {/*address*/}
               <TextInput
                 label={`Alternate Address`}
-                errorMsg={errors.address_two?.message ?? ''}
+                errorMsg={errors.alternateAddress?.message ?? ''}
                 id={`address_two`}
                 className={`my-3`}
                 register={register}
@@ -356,13 +360,13 @@ const AddProviderModal = ({ open, handler }: AddProviderModalProps) => {
               className={`w-full grid gap-6 grid-cols-2 my-2 md:grid-cols-3 overscroll-y-auto`}>
               <CheckboxInput
                 label={`Is Consultant`}
-                id={`is_consultant`}
+                id={`isConsultant`}
                 register={register}
               />
 
               <CheckboxInput
                 label={`Is Specialist`}
-                id={`is_specialist`}
+                id={`isSpecialist`}
                 register={register}
               />
 

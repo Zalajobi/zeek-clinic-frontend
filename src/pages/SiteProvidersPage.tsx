@@ -24,6 +24,7 @@ import {
 } from '@components/tables/row-col-mapping/RowColumnTableMaps';
 import { ProviderPayload } from '@typeSpec/payloads';
 import { BasicTable } from '@components/global/table/Table';
+import SiteRoutes from '@components/common/SiteRoutes';
 
 const SiteProvidersPage = () => {
   const dispatch = useDispatch();
@@ -136,6 +137,8 @@ const SiteProvidersPage = () => {
           </div>
 
           <SiteDetails />
+
+          <SiteRoutes />
 
           <BasicTable
             tabItems={tabData}
