@@ -8,7 +8,7 @@ import { SearchRequestPayload } from '@typeSpec/index';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
 import { useSelector } from 'react-redux';
 
-export const useSiteProvidersPage = () => {
+export const useSiteProviders = () => {
   const { siteId } = useParams();
   const [addProviderModal, setAddProviderModal] = useState(false);
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
