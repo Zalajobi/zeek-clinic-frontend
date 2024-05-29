@@ -110,7 +110,7 @@ export const useAdminUpdateProviderInformationTabs = (
       );
     },
 
-    onError: (error) => {
+    onError: () => {
       toast.error('Unable To Update Provider Information');
       setShowLoading(false);
     },
@@ -120,7 +120,7 @@ export const useAdminUpdateProviderInformationTabs = (
       else toast.error('Something Went Wrong');
 
       setShowLoading(false);
-      queryClient.resetQueries('providerDetails');
+      queryClient.resetQueries('providerDetails').then(() => {});
     },
 
     onMutate: () => {

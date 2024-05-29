@@ -43,9 +43,13 @@ export const useCreateSiteModal = (handleOpen: () => void) => {
         if (result?.success) toast.success(result?.message);
         else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('getTableData');
-        queryClient.resetQueries('getHospitalDetails');
-        queryClient.resetQueries('getSiteCountData');
+        queryClient
+          .resetQueries([
+            'getHospitalDetails',
+            'getTableData',
+            'getSiteCountData',
+          ])
+          .then(() => {});
       },
     }
   );

@@ -20,7 +20,7 @@ const HospitalReport = ({ data }: HospitalReportProps) => {
       <div className="w-full h-full flex flex-col space-y-1 -mx-2 overflow-y-auto">
         {data.map((item, index) => {
           return (
-            <>
+            <Fragment key={`${index}_${item}`}>
               <ListView Tag={`button`}>
                 <div className={`w-full flex flex-row items-center`}>
                   {item?.read ? (
@@ -60,7 +60,7 @@ const HospitalReport = ({ data }: HospitalReportProps) => {
                   </div>
                 </div>
               </ListView>
-            </>
+            </Fragment>
           );
         })}
       </div>

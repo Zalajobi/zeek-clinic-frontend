@@ -164,7 +164,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       if (result?.success) toast.success(result?.message);
       else toast.error('Something Went Wrong');
 
-      queryClient.resetQueries('fetchTableData');
+      queryClient.resetQueries('fetchTableData').then(() => {});
     },
   });
 
@@ -190,7 +190,7 @@ export const useAdminDepartmentUnitAndAreaTableEditAndCreate = (
       if (result?.success) toast.success(result?.message);
       else toast.error(result?.message);
 
-      queryClient.resetQueries('fetchTableData');
+      queryClient.resetQueries('fetchTableData').then(() => {});
     },
   });
 

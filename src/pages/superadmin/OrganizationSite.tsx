@@ -77,7 +77,10 @@ const OrganizationSite = () => {
   }
 
   const columnData = useMemo(() => SiteDataColumns(), []);
-  const actionItems = useMemo(() => SiteActionItem(editSite, deleteSite), []);
+  const actionItems = useMemo(
+    () => SiteActionItem(editSite, deleteSite),
+    [editSite, deleteSite]
+  );
 
   const rowData = useMemo(
     () => SiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ?? [],

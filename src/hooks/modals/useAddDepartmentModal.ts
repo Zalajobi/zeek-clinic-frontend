@@ -31,9 +31,13 @@ export const useAddDepartmentModal = (handler: () => void) => {
         if (result?.success) {
           handler();
           toast.success(result?.message);
-          // queryClient.resetQueries('getTableData');
-          queryClient.resetQueries('getLatestDepartmentData');
-          queryClient.resetQueries('getDeptCount');
+          queryClient
+            .resetQueries([
+              'getLatestDepartmentData',
+              'getDeptCount',
+              'getTableData',
+            ])
+            .then(() => {});
         } else {
           toast.error('Something Went Wrong');
         }

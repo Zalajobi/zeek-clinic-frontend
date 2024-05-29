@@ -57,11 +57,15 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
       },
       onSuccess: (result) => {
         if (result?.success) {
-          // handler();
+          handler();
           toast.success(result?.message);
-          // queryClient.resetQueries('getTableData');
-          queryClient.resetQueries('getLatestServiceAreaData');
-          queryClient.resetQueries('getAreaCount');
+          queryClient
+            .resetQueries([
+              'getLatestServiceAreaData',
+              'getTableData',
+              'getAreaCount',
+            ])
+            .then(() => {});
         } else {
           toast.error('Something Went Wrong');
         }

@@ -50,7 +50,6 @@ const AdminProvider = () => {
     onClickPrevious,
     onEnterPageNumber,
     onUpdateSelectedRow,
-    onUpdateSelectAllProviders,
   } = useAdminProviderPage();
 
   if (!providerDataLoading) {
@@ -120,10 +119,7 @@ const AdminProvider = () => {
 
   const adminData = JSON.parse(localStorage.getItem('adminData') as string);
 
-  const columns = useMemo(
-    () => AdminProviderDataColumn(onUpdateSelectAllProviders),
-    [onUpdateSelectAllProviders]
-  );
+  const columns = useMemo(() => AdminProviderDataColumn(), []);
 
   const data = useMemo(
     () =>

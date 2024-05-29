@@ -551,6 +551,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
       rowItems.push({
         name: (
           <Link
+            key={`$${idx}_${item?.id}`}
             to={`/admin/department/details/${item?.id}`}
             className={`text-black hover:text-gray-500 decoration-0`}>
             <b className={`font-extrabold`}>{item?.name ?? ''}</b>

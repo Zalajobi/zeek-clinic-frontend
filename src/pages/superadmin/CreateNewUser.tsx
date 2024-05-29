@@ -167,7 +167,7 @@ const CreateNewUser = () => {
               {/*Staff ID*/}
               <TextInput
                 label={`Staff ID`}
-                placeholder={`IODANJK89IK`}
+                placeholder={`Staff Id`}
                 className={`my-3 w-full`}
                 errorMsg={errors.staff_id?.message ?? ''}
                 id={`staff_id`}

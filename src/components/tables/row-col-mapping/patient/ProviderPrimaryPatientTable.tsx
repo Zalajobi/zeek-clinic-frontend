@@ -16,7 +16,7 @@ import { calculateAge } from '@util/index';
 import moment from 'moment';
 
 export const ProviderPrimaryPatientColumnData = () => {
-  const columnItem = [
+  return [
     {
       Header: (
         <Fragment>
@@ -148,8 +148,6 @@ export const ProviderPrimaryPatientColumnData = () => {
       accessor: 'action',
     },
   ];
-
-  return columnItem;
 };
 
 export const ProviderPrimaryPatientRowData = (

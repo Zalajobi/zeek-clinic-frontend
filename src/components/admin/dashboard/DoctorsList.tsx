@@ -32,7 +32,7 @@ const DoctorsList = () => {
       title: 'Dr',
       first_name: 'Robert',
       last_name: 'Nune',
-      role: 'Orthopedicologist',
+      role: 'Histopathologic',
       profile_img: '',
     },
 
@@ -50,7 +50,7 @@ const DoctorsList = () => {
       title: 'Dr',
       first_name: 'Zhikrullah',
       last_name: 'Igbalajobi',
-      role: 'NeuroSurgeon',
+      role: 'NeuronSurgeon',
       profile_img:
         'https://www.voxco.com/wp-content/uploads/2021/04/pasted-image-0-46.png',
     },
@@ -58,7 +58,7 @@ const DoctorsList = () => {
     {
       id: 6,
       title: 'Dr',
-      first_name: 'Faruq',
+      first_name: 'Faruk',
       last_name: 'Igbalajobi',
       role: 'Trauma Surgeon',
       profile_img:
@@ -87,7 +87,7 @@ const DoctorsList = () => {
         <div className="w-full h-full flex flex-col space-y-1 -mx-2 overflow-y-auto">
           {dummyDoctorsListData.map((item, index) => {
             return (
-              <>
+              <Fragment key={`${index}_${item}`}>
                 <ListView Tag={`button`}>
                   <div className={`w-full flex flex-row items-center`}>
                     <div
@@ -123,7 +123,7 @@ const DoctorsList = () => {
                     </div>
                   </div>
                 </ListView>
-              </>
+              </Fragment>
             );
           })}
         </div>

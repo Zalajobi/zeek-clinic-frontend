@@ -53,7 +53,7 @@ export const useCreateHospitalModal = (handler: () => void) => {
           toast.error('Something Went Wrong');
         }
 
-        queryClient.resetQueries('getTableData');
+        queryClient.resetQueries('getTableData').then(() => {});
       },
     }
   );

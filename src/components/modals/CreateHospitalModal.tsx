@@ -65,7 +65,7 @@ const CreateHospitalModal = ({ open, handler }: CreateHospitalModalProps) => {
         size={`lg`}
         className={`min-h-[500px]`}>
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-6 md:grid-cols-[30%_70%]`}>
           <CustomTransparentCard
             className={`w-full h-full p-4 rounded-2xl max-h-[400px]`}>
             <ImageUpload

@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 import {
   axiosDeleteRequestUserService,
-  axiosGetRequestUserService,
   axiosPostRequestUserService,
 } from '@lib/axios';
 import axios from 'axios';
@@ -92,7 +91,7 @@ export const useOrganizationDetails = () => {
         if (result?.success) toast.success(result?.message);
         else toast.error('Something Went Wrong');
 
-        queryClient.resetQueries('getTableData');
+        queryClient.resetQueries('getTableData').then(() => {});
       },
     }
   );
@@ -136,7 +135,7 @@ export const useOrganizationDetails = () => {
     });
   };
 
-  // Handle Next Page
+  // Handle Click Next Page
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
@@ -158,7 +157,7 @@ export const useOrganizationDetails = () => {
     }
   };
 
-  // Handle Previous Page
+  // Handle Click Previous Page
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {

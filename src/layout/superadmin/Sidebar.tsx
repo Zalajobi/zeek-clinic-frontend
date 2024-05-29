@@ -21,7 +21,7 @@ const Sidebar = () => {
       }
     };
 
-    // Check Orientation on load
+    // Check Orientation
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
 

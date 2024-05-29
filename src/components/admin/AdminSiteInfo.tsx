@@ -21,7 +21,7 @@ const AdminSiteInfo = ({
   email,
   country,
   phone,
-  id,
+  // id,
   state,
   city,
   createdAt,

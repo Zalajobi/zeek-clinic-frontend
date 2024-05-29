@@ -152,8 +152,9 @@ export const useAddProviderModal = (handler: () => void) => {
         if (result?.success) {
           handler();
           toast.success(result?.message);
-          queryClient.resetQueries('getTableData');
-          queryClient.resetQueries('getProvidersCount');
+          queryClient
+            .resetQueries(['getProvidersCount', 'getTableData'])
+            .then(() => {});
         } else {
           toast.error('Something Went Wrong');
         }

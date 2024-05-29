@@ -89,7 +89,7 @@ export const useAdminAddProvider = () => {
       }
     };
 
-    getAddProviderData().catch((err) => {});
+    getAddProviderData().catch(() => {});
   }, [siteId]);
 
   const onUpdateCountry = (value: string) => {

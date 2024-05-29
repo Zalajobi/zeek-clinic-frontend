@@ -31,9 +31,9 @@ export const useAddUnitModal = (handler: () => void) => {
         if (result?.success) {
           handler();
           toast.success(result?.message);
-          // queryClient.resetQueries('getTableData');
-          queryClient.resetQueries('getLatestUnitData');
-          queryClient.resetQueries('getUnitCount');
+          queryClient
+            .resetQueries(['getLatestUnitData', 'getTableData', 'getUnitCount'])
+            .then(() => {});
         } else {
           toast.error('Something Went Wrong');
         }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppointmentTableData, AppointmentTableRowData } from '@typeSpec/admin';
 
 export const AppointmentAndEventsTableColumn = () => {
-  const columnItem = [
+  return [
     {
       Header: (
         <Fragment>
@@ -69,8 +69,6 @@ export const AppointmentAndEventsTableColumn = () => {
       accessor: 'for',
     },
   ];
-
-  return columnItem;
 };
 
 export const AppointmentAndEventsTableRowData = (
@@ -83,6 +81,7 @@ export const AppointmentAndEventsTableRowData = (
       name: (
         <Link
           to={`#`}
+          key={`${idx}_${item.title}+${item.first_name}+${item.last_name}`}
           className={`text-black hover:text-gray-500 decoration-0`}>
           <b className={`font-extrabold`}>
             {item?.title} {item.first_name} {item?.last_name}

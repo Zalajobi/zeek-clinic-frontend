@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -9,7 +9,6 @@ import { revertDropdownOptionsToResponseKey } from '@util/index';
 import { useSelector } from 'react-redux';
 
 export const useSiteProvidersPage = () => {
-  const queryClient = useQueryClient();
   const { siteId } = useParams();
   const [addProviderModal, setAddProviderModal] = useState(false);
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
@@ -136,7 +135,7 @@ export const useSiteProvidersPage = () => {
     });
   };
 
-  // Handle Next Page
+  // Handle Click Next Page
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
@@ -158,7 +157,7 @@ export const useSiteProvidersPage = () => {
     }
   };
 
-  // Handle Previous Page
+  // Handle Click Previous Page
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {

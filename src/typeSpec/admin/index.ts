@@ -40,18 +40,6 @@ export interface AppointmentTableRowData {
   action: ReactNode;
 }
 
-export interface ProviderPageSiteResponseData {
-  address: string;
-  name: string;
-  email: string;
-  country: string;
-  phone: string;
-  id: string;
-  state: string;
-  city: string;
-  createdAt: string;
-}
-
 export interface ProviderAndRelationAPIResponse {
   img?: string;
   email: string;

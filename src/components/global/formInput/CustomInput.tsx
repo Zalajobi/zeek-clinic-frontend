@@ -233,7 +233,9 @@ export const SelectInput = ({
                 }}>
                 {options.map((item, idx) => {
                   return (
-                    <Option value={item.value}>
+                    <Option
+                      value={item.value}
+                      key={`${idx}_${item}`}>
                       {item.placeholder.replaceAll('_', ' ')}
                     </Option>
                   );
@@ -290,6 +292,21 @@ export const DateInput = ({
     day_hidden: 'invisible',
   };
 
+  const dateComponent = {
+    IconLeft: ({ ...props }) => (
+      <BiChevronLeft
+        {...props}
+        className="h-4 w-4 stroke-2"
+      />
+    ),
+    IconRight: ({ ...props }) => (
+      <BiChevronRight
+        {...props}
+        className="h-4 w-4 stroke-2"
+      />
+    ),
+  };
+
   return (
     <Fragment>
       <div className={`min-w-[100px] my-2`}>
@@ -327,20 +344,7 @@ export const DateInput = ({
               onSelect={updateDate}
               showOutsideDays
               classNames={dateClassNames}
-              components={{
-                IconLeft: ({ ...props }) => (
-                  <BiChevronLeft
-                    {...props}
-                    className="h-4 w-4 stroke-2"
-                  />
-                ),
-                IconRight: ({ ...props }) => (
-                  <BiChevronRight
-                    {...props}
-                    className="h-4 w-4 stroke-2"
-                  />
-                ),
-              }}
+              components={dateComponent}
             />
           </PopoverContent>
         </Popover>
@@ -397,7 +401,6 @@ export const CheckboxInput = ({
 };
 
 export const PhoneNumberInput = ({
-  country,
   change,
   label,
   className = '',

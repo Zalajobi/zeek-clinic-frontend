@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700;800;900&display=swap');
 
 .App {
   text-align: center;
@@ -65,31 +65,4 @@
   border-radius: 15px;
   overflow: hidden;
   backdrop-filter: blur(4px);
-}
-
-.PhoneInput {
-  border: 1px solid #e5e7eb;
-  border-radius: 5px;
-  min-height: 60px;
-  padding: 5px 10px;
-}
-.PhoneInputInput {
-  min-height: 50px;
-  border: none;
-}
-
-.PhoneInput:focus,
-.PhoneInputInput--focus {
-  border: none;
-}
-
-.PhoneInputInput {
-  display: block !important;
-  min-height: auto !important;
-  width: 100%;
-  border-radius: 4px !important;
-  background-color: transparent !important;
-  border-width: 0 !important;
-  cursor: pointer;
-  padding: 0.32rem 14px !important;
 }

@@ -9,15 +9,6 @@ export type AllCountries = {
   timezones: TimeZones[];
 };
 
-export type AllStatesAndCities = {
-  name: string;
-  isoCode: string;
-  country_code: string;
-  stateCode: string;
-  latitude: string;
-  longitude: string;
-};
-
 export type TimeZones = {
   abbreviation: string;
   gmtOffset: number;

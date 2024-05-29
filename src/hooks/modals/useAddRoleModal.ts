@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { CreateRoleInput, CreateUnitInput } from '@typeSpec/forms/form.types';
+import { CreateRoleInput } from '@typeSpec/forms/form.types';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { axiosPostRequestUserService } from '@lib/axios';
@@ -31,9 +31,9 @@ export const useAddRoleModal = (handler: () => void) => {
         if (result?.success) {
           handler();
           toast.success(result?.message);
-          // queryClient.resetQueries('getTableData');
-          queryClient.resetQueries('getLatestRoleData');
-          queryClient.resetQueries('getRoleCount');
+          queryClient
+            .resetQueries(['getLatestRoleData', 'getTableData', 'getRoleCount'])
+            .then(() => {});
         } else {
           toast.error('Something Went Wrong');
         }

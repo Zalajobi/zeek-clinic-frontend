@@ -1,9 +1,5 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { parsePhoneNumber } from 'awesome-phonenumber';
-import {
-  setNoOfPages,
-  setTotalDataCount,
-} from '../redux/reducers/tableReducer';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();

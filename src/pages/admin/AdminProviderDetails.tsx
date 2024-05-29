@@ -9,7 +9,7 @@ import ProviderDetailsCard from '@components/admin/providers/details/ProviderDet
 import { OutlinedButton } from '@components/global/CustomButton';
 import AdminEditProviderModal from '@components/admin/providers/details/AdminEditProviderModal';
 import { LoadingSpinner } from '@components/global/Toast';
-import UpcomingAppontments from '@components/admin/providers/details/UpcomingAppontments';
+import UpcomingAppointments from '@components/admin/providers/details/UpcomingAppointments';
 import ProviderRecentOrders from '@components/admin/providers/details/ProviderRecentOrders';
 import ProviderPersonalHealthRecords from '@components/admin/providers/details/ProviderPersonalHealthRecords';
 import ProvidersPrimaryPatients from '@components/admin/providers/details/ProvidersPrimaryPatients';
@@ -163,7 +163,7 @@ const AdminProviderDetails = () => {
               {/*  orders={632}*/}
               {/*/>*/}
 
-              <UpcomingAppontments />
+              <UpcomingAppointments />
 
               <ProviderRecentOrders />
             </div>

@@ -1,12 +1,7 @@
 import moment from 'moment';
-import { ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
-
-import { GetHospitalResponseData, HospitalRowData } from '@typeSpec/superadmin';
-import Status from '@components/global/Status';
 import { HiPencil } from 'react-icons/hi2';
 import { MdDelete } from 'react-icons/md';
-import { HospitalPayload, SitePayload } from '@typeSpec/payloads';
+import { HospitalPayload } from '@typeSpec/payloads';
 
 export const SuperAdminHospitalDataColumns = () => {
   return [

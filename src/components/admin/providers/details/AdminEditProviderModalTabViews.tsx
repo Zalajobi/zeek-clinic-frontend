@@ -199,9 +199,9 @@ export const AdminEditMoveProviderTab = ({
 };
 
 export const AdminEditGeneratePasswordTab = ({
-  register,
-  errors,
-  password,
+  // register,
+  // errors,
+  // password,
   generatePassword,
   updatePassword,
 }: AdminEditGeneratePasswordTabProps) => {

@@ -1,15 +1,8 @@
 import { Fragment } from 'react';
 import moment from 'moment/moment';
-import {
-  HospitalDetailsData,
-  HospitalSiteCountData,
-} from '@typeSpec/superadmin';
 import Status from '@components/global/Status';
 import { Typography } from '@components/global/dialog/Typography';
-import {
-  CustomCard,
-  CustomTransparentCard,
-} from '@components/global/card/CustomCard';
+import { CustomCard } from '@components/global/card/CustomCard';
 import { Spinner } from '@material-tailwind/react';
 import { useHospitalDetails } from '@hooks/components/useHospitalDetails';
 import { formatPhoneNumber } from '@util/index';

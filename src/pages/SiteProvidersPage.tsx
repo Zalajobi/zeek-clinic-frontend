@@ -20,7 +20,6 @@ import {
   ProfileActionItem,
   ProviderDataColumns,
   ProviderDataRows,
-  SiteActionItem,
 } from '@components/tables/row-col-mapping/RowColumnTableMaps';
 import { ProviderPayload } from '@typeSpec/payloads';
 import { BasicTable } from '@components/global/table/Table';

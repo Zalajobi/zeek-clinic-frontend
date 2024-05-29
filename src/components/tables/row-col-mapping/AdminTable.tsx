@@ -7,10 +7,8 @@ import { ProviderAndRelationAPIResponse } from '@typeSpec/admin';
 import { ProvidersPageRowData } from '@typeSpec/admin/table';
 import { Avatar } from '@material-tailwind/react';
 
-export const AdminProviderDataColumn = (
-  onUpdateSelectAllProviders: (event: ChangeEvent<HTMLInputElement>) => void
-) => {
-  const columnItem = [
+export const AdminProviderDataColumn = () => {
+  return [
     // {
     //   Header: (
     //     <div className="flex items-center gap-3 whitespace-nowrap w-[60px]">
@@ -190,14 +188,12 @@ export const AdminProviderDataColumn = (
       accessor: 'action',
     },
   ];
-
-  return columnItem;
 };
 
 export const AdminProviderDataRow = (
   data: ProviderAndRelationAPIResponse[],
-  onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void,
-  selected: boolean
+  _onSelect: (event: ChangeEvent<HTMLInputElement>, id: string) => void,
+  _selected: boolean
 ) => {
   const rowItems: ProvidersPageRowData[] = [];
 
@@ -229,6 +225,7 @@ export const AdminProviderDataRow = (
           <Avatar
             src={item?.personalInfo?.profile_pic ?? ''}
             alt={item.personalInfo?.first_name ?? ''}
+            key={idx}
             size={`md`}
             className={`border border-blue-50 bg-blue-gray-50/50 object-contain p-1`}
             loading={`lazy`}
