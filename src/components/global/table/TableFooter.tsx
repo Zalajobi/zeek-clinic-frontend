@@ -21,7 +21,6 @@ const TableFooter = ({
   onNext,
   to,
   onPrevious,
-  enterPageNumber,
 }: TableFooterProps) => {
   return (
     <Fragment>

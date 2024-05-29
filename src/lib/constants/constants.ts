@@ -81,7 +81,7 @@ export const availableTitles: SelectInputFieldProps[] = [
   },
 ];
 
-export const providersTitleSelectInput: SelectInputFieldProps[] = [
+export const titleSelectInput: SelectInputFieldProps[] = [
   {
     value: 'Mr.',
     placeholder: 'Mr.',
@@ -172,7 +172,7 @@ export const relationshipStatus: SelectInputFieldProps[] = [
   { value: 'OPEN_RELATIONSHIP', placeholder: 'Open Relationship' },
   { value: 'CIVIL_UNION', placeholder: 'Civil Union' },
   { value: 'DOMESTIC_PARTNERSHIP', placeholder: 'Domestic Partnership' },
-  { value: 'OTHER', placeholder: 'Other' },
+  { value: 'OTHERS', placeholder: 'Other' },
 ];
 
 export const religions: SelectInputFieldProps[] = [
@@ -369,4 +369,4 @@ export const religions: SelectInputFieldProps[] = [
   { value: 'zoroastrianism', placeholder: 'Zoroastrianism' },
 ];
 
-export const USER_SERVICE_EXCHANGE = 'zeek-clinic-user-service';
+// export const USER_SERVICE_EXCHANGE = 'zeek-clinic-user-service';

@@ -1,6 +1,23 @@
+// API Request Payloads
+export interface HospitalPayload {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  countryCode: string;
+  logo: string;
+  zipCode: string;
+  id: string;
+  siteCount: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface SitePayload {
-  id?: string;
-  hospitalId?: string;
   address?: string;
   name?: string;
   email?: string;
@@ -8,11 +25,9 @@ export interface SitePayload {
   state?: string;
   country?: string;
   logo?: string;
-  time_zone?: string;
   phone?: string;
-  zip_code?: string;
-  country_code?: string;
-  status?: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED';
+  countryCode?: string;
+  zipCode?: string;
   is_private?: boolean;
   has_appointment?: boolean;
   has_caregiver?: boolean;
@@ -31,14 +46,63 @@ export interface SitePayload {
   has_unit?: boolean;
   has_vital?: boolean;
   has_wallet?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
+  hospitalId?: string;
+  id?: string;
+  status?: 'ACTIVE' | 'CLOSED' | 'PENDING' | 'DEACTIVATED';
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface DepartmentPayload {
+  createdAt?: string;
+  description?: string;
+  id?: string;
+  name?: string;
+  siteId?: string;
+  updated_at?: string;
+}
+
+export interface RolesPayload {
+  description: string;
+  name?: string;
+  siteId?: string;
+  prescription?: boolean;
+  note?: boolean;
+  procedure?: boolean;
+  lab_test?: boolean;
+  appointment?: boolean;
+  vitals?: boolean;
+  med_supply?: boolean;
+  admit_patient?: boolean;
+  transfer_patient?: boolean;
+  move_patient?: boolean;
+  discharge?: boolean;
+  time_of_death?: boolean;
+  review?: boolean;
+  logs?: boolean;
+  dental?: boolean;
+  clerking?: boolean;
+  radiology?: boolean;
+  consult?: boolean;
+  referral?: boolean;
+  refer_outpx?: boolean;
+  upload?: boolean;
+  charts?: boolean;
+  nursing?: boolean;
+  plan?: boolean;
+  id?: string;
+  createdAt?: Date;
+  updated_at?: Date;
+}
+
+export interface ServiceAreaPayload {
   id?: string;
   name?: string;
   description?: string;
+  siteId?: string;
+  type?: string;
+  createdAt?: Date;
+  updated_at?: Date;
 }
 
 export interface PersonalInfoPayload {
@@ -59,7 +123,7 @@ export interface PersonalInfoPayload {
   zip_code?: string;
   religion?: string;
   marital_status?: string;
-  created_at?: string;
+  createdAt?: string;
 }
 
 export interface ServiceAreaPayload {
@@ -74,20 +138,57 @@ export interface RolePayload {
   description?: string;
 }
 
-export interface HospitalPayload {
-  name?: string;
-  email?: string;
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  logo?: string;
-  status?: 'PENDING' | 'ACTIVE' | 'ARCHIVED' | 'DEACTIVATED';
-  zip_code?: string;
-  country_code?: string;
-  created_at?: string;
-  updated_at?: string;
-  site_count?: number;
+export interface ProviderPayload {
   id: string;
+  siteId: string;
+  primaryRoleId: string;
+  departmentId: string;
+  serviceAreaId: string;
+  unitId: string;
+  appointments: boolean;
+  status:
+    | 'ACTIVE'
+    | 'PENDING'
+    | 'ON_LEAVE'
+    | 'ON_BREAK'
+    | 'SUSPENDED'
+    | 'TERMINATED'
+    | 'UNAVAILABLE';
+  staffId: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  title: string;
+  gender: string;
+  dob: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  countryCode: string;
+  zipCode: string;
+  religion: string;
+  maritalStatus:
+    | 'SINGLE'
+    | 'IN_A_RELATIONSHIP'
+    | 'ENGAGED'
+    | 'MARRIED'
+    | 'DIVORCED'
+    | 'WIDOWED'
+    | 'SEPARATED'
+    | 'COMPLICATED'
+    | 'OPEN_RELATIONSHIP'
+    | 'CIVIL_UNION'
+    | 'DOMESTIC_PARTNERSHIP'
+    | 'OTHERS';
+  profilePic: string;
+  isConsultant: string;
+  isSpecialist: string;
+  email: string;
+  role: string;
+  dept: string;
+  area: string;
+  unit: string;
+  createdAt: string;
 }

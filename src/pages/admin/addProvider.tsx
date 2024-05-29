@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { FaCalendarAlt, FaPhone, FaCity } from 'react-icons/fa';
+import { FaPhone, FaCity } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { HiIdentification } from 'react-icons/hi';
 import { TbZoomInAreaFilled } from 'react-icons/tb';
@@ -18,17 +18,15 @@ import {
 } from '@components/global/formInput/CustomInput';
 import {
   genderSelectInput,
-  providersTitleSelectInput,
+  titleSelectInput,
   relationshipStatus,
   religions,
 } from '@lib/constants/constants';
-import {
-  AdminAddProviderInput,
-  AdminAddProviderInputSchema,
-} from '@typeSpec/superadmin/formTypes';
+import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
 import { FilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
+import { CreateProviderInputSchema } from '@typeSpec/forms';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()
@@ -37,8 +35,8 @@ export const AddProvider = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AdminAddProviderInput>({
-    resolver: yupResolver(AdminAddProviderInputSchema),
+  } = useForm<CreateAdminUserInput>({
+    resolver: yupResolver(CreateProviderInputSchema),
   });
 
   const {
@@ -47,7 +45,6 @@ export const AddProvider = () => {
     departments,
     allCountries,
     allCountryStates,
-    phoneCode,
     roles,
     serviceArea,
     units,
@@ -86,7 +83,7 @@ export const AddProvider = () => {
                 className={`w-full grid gap-6 grid-cols-1 mb-2 lg:grid-cols-5`}>
                 <SelectInput
                   label={`Title`}
-                  options={providersTitleSelectInput}
+                  options={titleSelectInput}
                   className={`my-3`}
                   register={register}
                   id={'title'}
@@ -157,17 +154,9 @@ export const AddProvider = () => {
                 className={`w-full grid gap-6 grid-cols-1 my-2 lg:grid-cols-3`}>
                 <DateInput
                   label={`Date Or Birth`}
-                  placeholder={`DD/MM/YYYY`}
-                  className={`my-3`}
                   errorMsg={errors.dob?.message ?? ''}
                   id={`dob`}
                   register={register}
-                  icon={
-                    <FaCalendarAlt
-                      size={20}
-                      className={`${errors.dob?.message ? 'text-red-500' : ''}`}
-                    />
-                  }
                 />
 
                 <TextInput
@@ -233,7 +222,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'relationship_status'}
-                  errorMsg={errors.relationship_status?.message ?? ''}
+                  // errorMsg={errors.relationship_status?.message ?? ''}
                 />
 
                 <SelectInput
@@ -253,7 +242,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'department'}
-                  errorMsg={errors.department?.message ?? ''}
+                  // errorMsg={errors.department?.message ?? ''}
                 />
 
                 <SelectInput
@@ -271,7 +260,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'serviceArea'}
-                  errorMsg={errors.serviceArea?.message ?? ''}
+                  // errorMsg={errors.serviceArea?.message ?? ''}
                 />
 
                 <SelectInput
@@ -280,7 +269,7 @@ export const AddProvider = () => {
                   className={`w-full my-3`}
                   register={register}
                   id={'unit'}
-                  errorMsg={errors.unit?.message ?? ''}
+                  // errorMsg={errors.unit?.message ?? ''}
                 />
               </div>
 

@@ -81,7 +81,7 @@ export const DepartmentsPatientAndDoctorCountDataColumn = (
             <span className="flex shrink-0 flex-row gap-1">Created On</span>
           </Fragment>
         ),
-        accessor: 'created_at',
+        accessor: 'createdAt',
       },
 
       {
@@ -150,7 +150,7 @@ export const DepartmentsPatientAndDoctorCountDataColumn = (
             <span className="flex shrink-0 flex-row gap-1">Created On</span>
           </Fragment>
         ),
-        accessor: 'created_at',
+        accessor: 'createdAt',
       },
 
       {
@@ -228,7 +228,7 @@ export const DepartmentsPatientAndDoctorCountDataColumn = (
             <span className="flex shrink-0 flex-row gap-1">Created On</span>
           </Fragment>
         ),
-        accessor: 'created_at',
+        accessor: 'createdAt',
       },
 
       {
@@ -508,7 +508,7 @@ export const DepartmentsPatientAndDoctorCountDataColumn = (
             <span className="flex shrink-0 flex-row gap-1">Created On</span>
           </Fragment>
         ),
-        accessor: 'created_at',
+        accessor: 'createdAt',
       },
 
       {
@@ -551,6 +551,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
       rowItems.push({
         name: (
           <Link
+            key={`$${idx}_${item?.id}`}
             to={`/admin/department/details/${item?.id}`}
             className={`text-black hover:text-gray-500 decoration-0`}>
             <b className={`font-extrabold`}>{item?.name ?? ''}</b>
@@ -612,10 +613,10 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
           </>
         ),
 
-        created_at: (
+        createdAt: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -626,7 +627,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         updated_at: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -736,10 +737,10 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
           </>
         ),
 
-        created_at: (
+        createdAt: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -750,7 +751,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         updated_at: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -871,10 +872,10 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
           </>
         ),
 
-        created_at: (
+        createdAt: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -885,7 +886,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         updated_at: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -1259,10 +1260,10 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
           </>
         ),
 
-        created_at: (
+        createdAt: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}
@@ -1273,7 +1274,7 @@ export const DepartmentsPatientAndDoctorCountTableRowData = (
         updated_at: (
           <>
             <Typography
-              text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+              text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
               Tag={`p`}
               isLoading={isLoading}
               className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}

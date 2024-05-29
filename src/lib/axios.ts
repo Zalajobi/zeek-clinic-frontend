@@ -1,18 +1,22 @@
-import axios from 'axios';
+import axios, { AxiosRequestHeaders } from 'axios';
 import { AccountServiceApiResponse } from '@typeSpec/apiResponses';
 
 const userInstance = axios.create({
   baseURL: `${process.env.REACT_APP_DEV_BASE_URL}/account`,
   timeout: 7500,
+  withCredentials: true,
+});
+
+userInstance.interceptors.request.use(async (config) => {
+  config.headers = {
+    ...config.headers,
+  } as unknown as AxiosRequestHeaders; // Convert to 'unknown' first
+  return config;
 });
 
 export const axiosPostRequestUserService = async (url: string, data: any) => {
   try {
-    const request = await userInstance.post(url, data, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') as string}`,
-      },
-    });
+    const request = await userInstance.post(url, data);
 
     return request.data as AccountServiceApiResponse;
   } catch (error) {
@@ -26,11 +30,7 @@ export const axiosPostRequestUserService = async (url: string, data: any) => {
 
 export const axiosPutRequestUserService = async (url: string, data: any) => {
   try {
-    const request = await userInstance.put(url, data, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') as string}`,
-      },
-    });
+    const request = await userInstance.put(url, data);
 
     return request.data as AccountServiceApiResponse;
   } catch (error) {
@@ -44,11 +44,7 @@ export const axiosPutRequestUserService = async (url: string, data: any) => {
 
 export const axiosDeleteRequestUserService = async (url: string) => {
   try {
-    const request = await userInstance.delete(url, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') as string}`,
-      },
-    });
+    const request = await userInstance.delete(url);
 
     return request.data as AccountServiceApiResponse;
   } catch (error) {
@@ -63,9 +59,6 @@ export const axiosDeleteRequestUserService = async (url: string) => {
 export const axiosGetRequestUserService = async (url: string, params?: any) => {
   try {
     const request = await userInstance.get(url, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token') as string}`,
-      },
       params,
     });
 

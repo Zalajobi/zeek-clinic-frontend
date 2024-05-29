@@ -24,7 +24,7 @@ export const useAdminBaseTemplate = () => {
     const adminData = localStorage.getItem('adminData');
 
     if (!adminData) {
-      getHeaderData().catch((err) => {
+      getHeaderData().catch(() => {
         navigate('/admin/login');
       });
     } else {

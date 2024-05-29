@@ -48,7 +48,7 @@ export const useAdminProviderDetails = () => {
   const onUpdateProviderModalSection = (
     value: 'Personal' | 'GeneratePassword' | 'MoveProvider'
   ) => {
-    setEditProviderModalSection((editProviderModalSection) => value);
+    setEditProviderModalSection(value);
   };
 
   return {

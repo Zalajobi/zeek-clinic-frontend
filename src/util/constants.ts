@@ -59,7 +59,7 @@ export const testAppointmentData: AppointmentTableData[] = [
   {
     id: '1',
     title: 'Mr.',
-    first_name: 'Soham',
+    first_name: 'Sham',
     last_name: 'Pratt',
     date: '20, May 2023, 6:30pm',
     age: 3,

@@ -3,10 +3,9 @@ import { Country, State } from 'country-state-city';
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { AllCountries, CreateHospitalInput } from '@typeSpec/forms/form.types';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
-import { CreateHospitalInput } from '@typeSpec/superadmin/forms';
 import axios from 'axios';
 
 export const useCreateHospitalModal = (handler: () => void) => {
@@ -54,7 +53,7 @@ export const useCreateHospitalModal = (handler: () => void) => {
           toast.error('Something Went Wrong');
         }
 
-        queryClient.resetQueries('getTableData');
+        queryClient.resetQueries('getTableData').then(() => {});
       },
     }
   );
@@ -90,9 +89,12 @@ export const useCreateHospitalModal = (handler: () => void) => {
     setCountry(countryInfo?.name);
     setPhoneCode(countryInfo?.phonecode);
     setCountryCode(countryInfo?.isoCode);
+    console.log(countryInfo?.isoCode);
   };
 
   const createNewOrganization = async (data: CreateHospitalInput) => {
+    data.phone = `${Number(`${phoneCode}${data.phone}`)}`;
+    data.countryCode = countryCode;
     createOrganizationMutation(data);
   };
 

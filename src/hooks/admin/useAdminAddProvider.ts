@@ -11,10 +11,7 @@ import {
   AdminCreateProviderResponseData,
   AccountServiceApiResponse,
 } from '@typeSpec/apiResponses';
-import {
-  AdminAddProviderInput,
-  AllCountries,
-} from '@typeSpec/superadmin/formTypes';
+import { AllCountries, CreateAdminUserInput } from '@typeSpec/forms/form.types';
 
 export const useAdminAddProvider = () => {
   const { siteId } = useParams();
@@ -72,10 +69,10 @@ export const useAdminAddProvider = () => {
         });
 
         data.serviceAreas.map((item) => {
-          return temporaryServiceAreaStore.push(<SelectInputFieldProps>{
+          return temporaryServiceAreaStore.push({
             value: item?.id,
             placeholder: item?.name,
-          });
+          } as SelectInputFieldProps);
         });
 
         data.units.map((item) => {
@@ -92,7 +89,7 @@ export const useAdminAddProvider = () => {
       }
     };
 
-    getAddProviderData().catch((err) => {});
+    getAddProviderData().catch(() => {});
   }, [siteId]);
 
   const onUpdateCountry = (value: string) => {
@@ -112,7 +109,7 @@ export const useAdminAddProvider = () => {
     setCountryCode(value);
   };
 
-  const onSubmit = async (data: AdminAddProviderInput) => {
+  const onSubmit = async (data: CreateAdminUserInput) => {
     const addAdminData = {
       ...data,
       country,

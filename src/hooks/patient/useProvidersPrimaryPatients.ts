@@ -44,7 +44,7 @@ export const useProvidersPrimaryPatients = (
       return axiosPutRequestUserService(`/patients/update/${patientId}`, data);
     },
 
-    onError: (error) => {
+    onError: () => {
       toast.error(`Unable To Move ${patientName}`);
       setMovePatientLoading(!movePatientLoading);
     },
@@ -54,7 +54,7 @@ export const useProvidersPrimaryPatients = (
       else toast.error('Something Went Wrong');
 
       setMovePatientLoading(!movePatientLoading);
-      queryClient.resetQueries('providerPrimaryPatients');
+      queryClient.resetQueries('providerPrimaryPatients').then(() => {});
     },
 
     onMutate: () => {

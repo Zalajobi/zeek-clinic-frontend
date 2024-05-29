@@ -5,18 +5,16 @@ import { AiFillEdit } from 'react-icons/ai';
 
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
-import {
-  SuperAdminSiteActionItem,
-  SuperAdminSiteDataColumns,
-  SuperAdminSiteDataRows,
-} from '@components/tables/row-col-mapping/SuperadminTable';
 import { BasicTable } from '@components/global/table/Table';
-import HospitalDetails from '@components/superadmin/HospitalDetails';
-import HospitalRoutes from '@components/superadmin/HospitalRoutes';
-import CreateSiteModal from '@components/modals/admins/CreateSiteModal';
+import HospitalDetails from '@components/hospital/HospitalDetails';
+import HospitalRoutes from '@components/hospital/HospitalRoutes';
+import CreateSiteModal from '@components/modals/CreateSiteModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
-import { formatResponseKeyForDropdown } from '@util/index';
+import {
+  formatResponseKeyForDropdown,
+  getTotalRowsAndPerPage,
+} from '@util/index';
 import { useDispatch } from 'react-redux';
 import {
   setNoOfPages,
@@ -25,6 +23,11 @@ import {
 import ConfirmationModal from '@components/modals/ConfirmationModal';
 import EditSiteModal from '@components/modals/admins/EditSiteModal';
 import { SitePayload } from '@typeSpec/payloads';
+import {
+  SiteActionItem,
+  SiteDataColumns,
+  SiteDataRows,
+} from '@components/tables/row-col-mapping/RowColumnTableMaps';
 
 const OrganizationSite = () => {
   const searchTableBy: string[] = [];
@@ -33,16 +36,11 @@ const OrganizationSite = () => {
 
   const {
     // Values
-    // sites,
     perPage,
     currentPage,
     resultFrom,
     resultTo,
     tabData,
-    hospitalData,
-    hospitalDataLoading,
-    siteCountData,
-    siteCountDataLoading,
     sitesTableData,
     sitesTableDataLoading,
     searchKey,
@@ -68,31 +66,24 @@ const OrganizationSite = () => {
   } = useOrganizationDetails();
 
   if (!sitesTableDataLoading) {
-    noOfPages =
-      typeof perPage === 'string'
-        ? 1
-        : Math.ceil(sitesTableData?.data?.totalRows / perPage);
-    dispatch(
-      setNoOfPages(
-        Math.ceil(
-          sitesTableData?.data?.totalRows /
-            (perPage === 'All' ? sitesTableData?.data?.totalRows : perPage)
-        )
-      )
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      sitesTableData?.data,
+      perPage
     );
-    dispatch(setTotalDataCount(sitesTableData?.data?.totalRows));
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
   }
 
-  const columnData = useMemo(() => SuperAdminSiteDataColumns(), []);
+  const columnData = useMemo(() => SiteDataColumns(), []);
   const actionItems = useMemo(
-    () => SuperAdminSiteActionItem(editSite, deleteSite),
-    []
+    () => SiteActionItem(editSite, deleteSite),
+    [editSite, deleteSite]
   );
 
   const rowData = useMemo(
-    () =>
-      SuperAdminSiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ??
-      [],
+    () => SiteDataRows(sitesTableData?.data?.sites as SitePayload[]) ?? [],
     [sitesTableData?.data?.sites]
   );
 
@@ -105,13 +96,12 @@ const OrganizationSite = () => {
   return (
     <SuperadminBaseTemplate>
       <div className={`w-full flex flex-col`}>
-        <div className={`flex flex-row gap-4`}>
+        <div className={`flex flex-row gap-4 mb-8`}>
           <div className={`mr-auto`}>
             <Typography
-              text={`Welcome To, ${hospitalData?.data?.name}`}
+              text={`Welcome`}
               size="4xl"
               weight={800}
-              className="mb-8"
               Tag={'h1'}
             />
           </div>
@@ -144,12 +134,7 @@ const OrganizationSite = () => {
           </div>
         </div>
 
-        <HospitalDetails
-          data={hospitalData?.data ? hospitalData?.data : null}
-          siteData={siteCountData?.data ? siteCountData?.data : null}
-          siteDataLoading={siteCountDataLoading}
-          hospitalDataLoading={hospitalDataLoading}
-        />
+        <HospitalDetails />
 
         <HospitalRoutes />
 

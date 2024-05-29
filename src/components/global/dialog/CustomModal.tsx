@@ -38,7 +38,7 @@ export const CustomBasicModal = ({
           unmount: { scale: 0.9, y: -100 },
         }}
         size={size ?? 'lg'}
-        className={`h-full w-full overflow-x-hidden max-h-[800px] ${className}`}>
+        className={`overflow-x-hidden overflow-y-scroll ${className}`}>
         {/*Modal Header*/}
         <DialogHeader
           className={`sticky top-0 h-[100px] border border-b-gray-300 bg-white z-50`}>
@@ -77,9 +77,9 @@ export const CustomBasicModal = ({
         </DialogHeader>
 
         {/*Modal Body*/}
-        <DialogBody className={`h-[600px] overflow-y-hidden`}>
+        <DialogBody className={`overflow-y-scroll`}>
           <div
-            className={`relative p-4 h-full overflow-y-auto ${bodyClassName}`}>
+            className={`relative p-4 h-full overflow-y-scroll ${bodyClassName}`}>
             {children}
           </div>
         </DialogBody>

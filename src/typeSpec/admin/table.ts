@@ -12,12 +12,12 @@ export interface ProvidersPageRowData {
   gender: ReactNode;
   country: ReactNode;
   status: ReactNode;
-  created_at: ReactNode;
+  createdAt: ReactNode;
   action: ReactNode;
 }
 
 export interface DepartmentsPatientAndProviderCountRowData {
-  created_at: ReactNode;
+  createdAt: ReactNode;
   description: ReactNode;
   name: ReactNode;
   patients: ReactNode;

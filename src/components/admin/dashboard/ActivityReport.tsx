@@ -56,7 +56,7 @@ const ActivityReport = () => {
 
     {
       title:
-        'The Male Ward 1 will be closed during the holiday for routine maintaiance',
+        'The Male Ward 1 will be closed during the holiday for routine maintenance',
       hospital: 'Korede Hospital',
       reportedBy: 'John Anderson',
       read: false,
@@ -110,7 +110,7 @@ const ActivityReport = () => {
 
     {
       title:
-        'The plumbing in the staff breakroom has a leak that is causing water damage',
+        'The plumbing in the staff break-room has a leak that is causing water damage',
       hospital: 'Korede Hospital',
       reportedBy: 'Emma Collins',
       read: true,

@@ -1,33 +1,35 @@
 import { Fragment } from 'react';
-import moment from 'moment/moment';
-import {
-  HospitalDetailsData,
-  HospitalSiteCountData,
-} from '@typeSpec/superadmin';
-import Status from '@components/global/Status';
+import { CustomCard } from '@components/global/card/CustomCard';
 import { Typography } from '@components/global/dialog/Typography';
-import {
-  CustomCard,
-  CustomTransparentCard,
-} from '@components/global/card/CustomCard';
 import { Spinner } from '@material-tailwind/react';
+import { useSiteDetails } from '@hooks/components/useSiteDetails';
+import moment from 'moment';
+import Status from '@components/global/Status';
+import { formatPhoneNumber } from '@util/index';
 
-interface HospitalDetailsProps {
-  data: HospitalDetailsData | null;
-  hospitalDataLoading: boolean;
-  siteData: HospitalSiteCountData | null;
-  siteDataLoading: boolean;
-}
+const SiteDetails = () => {
+  const {
+    siteData,
+    isLoading,
+    roleCount,
+    roleCountLoading,
+    departmentCount,
+    departmentCountLoading,
+    patientsCount,
+    patientsCountLoading,
+    providersCount,
+    providersCountLoading,
+    serviceAreaCount,
+    serviceAreaCountLoading,
+    unitCount,
+    unitCountLoading,
+  } = useSiteDetails();
 
-const HospitalDetails = ({
-  data,
-  hospitalDataLoading,
-  siteData,
-  siteDataLoading,
-}: HospitalDetailsProps) => {
   return (
     <Fragment>
-      <CustomCard className={`w-full grid grid-cols-4 items-center gap-4 p-9`}>
+      <CustomCard
+        className={`w-full flex flex-col items-center p-4 mb-4 md:grid md:grid-cols-3 md:p-9 lg:grid-cols-4`}>
+        {/*Name*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Name:`}
@@ -36,22 +38,23 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.name ?? '--'}
+                text={siteData?.data?.name ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Email*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Email:`}
@@ -60,22 +63,23 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.email ?? '--'}
+                text={siteData?.data?.email ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Phone*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Phone:`}
@@ -84,46 +88,28 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.phone ?? '--'}
+                text={
+                  formatPhoneNumber(
+                    siteData?.data?.phone ?? 0,
+                    siteData?.data?.countryCode ?? 'NG'
+                  ) ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
-        <div className={`flex flex-row items-center py-3`}>
-          <Typography
-            text={`Created On:`}
-            Tag={'p'}
-            size={'sm'}
-            className={`text-[color:var(--label-color)]`}
-          />
-
-          {hospitalDataLoading ? (
-            <>
-              <Spinner className="h-4 w-4 ml-3" />
-            </>
-          ) : (
-            <>
-              <Typography
-                text={moment(data?.created_at).format('MMM DD. YYYY')}
-                Tag={'p'}
-                size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
-              />
-            </>
-          )}
-        </div>
-
+        {/*Country*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Country:`}
@@ -132,22 +118,23 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.country ?? '--'}
+                text={siteData?.data?.country ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*State*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`State:`}
@@ -156,22 +143,23 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.state ?? '--'}
+                text={siteData?.data?.state ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*City*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`City:`}
@@ -180,22 +168,48 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.city ?? '--'}
+                text={siteData?.data?.city ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Zip Code*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`ZipCode:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {isLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={siteData?.data?.zipCode ?? '--'}
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Address*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Address:`}
@@ -204,166 +218,195 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {isLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.address ?? '--'}
+                text={siteData?.data?.address ?? '--'}
                 Tag={'p'}
                 size={'sm'}
-                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3 truncate`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Roles Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Zip Code:`}
+            text={`Roles:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
-            <>
+          {roleCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={data?.zip_code ?? '--'}
+                text={
+                  Number(roleCount?.data?.totalRows ?? 0)?.toLocaleString() ??
+                  '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*ServiceArea Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Total Sites:`}
+            text={`Service Area:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
-            <>
+          {serviceAreaCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={siteData?.totalSites ?? '--'}
+                text={
+                  Number(
+                    serviceAreaCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Department Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Active Sites:`}
+            text={`Departments:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
-            <>
+          {departmentCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={siteData?.activeSites ?? '--'}
+                text={
+                  Number(
+                    departmentCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Unit Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Pending Sites:`}
+            text={`Units:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
-            <>
+          {unitCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={siteData?.pendingSites ?? '--'}
+                text={
+                  Number(unitCount?.data?.totalRows ?? 0)?.toLocaleString() ??
+                  '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Patients Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Closed Sites:`}
+            text={`Patients:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
-            <>
+          {patientsCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={siteData?.closedSites ?? '--'}
+                text={
+                  Number(
+                    patientsCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Patients Count*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
-            text={`Suspended Operation Sites:`}
+            text={`Providers:`}
             Tag={'p'}
             size={'sm'}
             className={`text-[color:var(--label-color)]`}
           />
 
-          {siteDataLoading ? (
-            <>
+          {providersCountLoading ? (
+            <Fragment>
               <Spinner className="h-4 w-4 ml-3" />
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Typography
-                text={siteData?.deactivatedSites ?? '--'}
+                text={
+                  Number(
+                    providersCount?.data?.totalRows ?? 0
+                  )?.toLocaleString() ?? '--'
+                }
                 Tag={'p'}
                 size={'sm'}
                 className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
               />
-            </>
+            </Fragment>
           )}
         </div>
 
+        {/*Status*/}
         <div className={`flex flex-row items-center py-3`}>
           <Typography
             text={`Status:`}
@@ -372,14 +415,42 @@ const HospitalDetails = ({
             className={`text-[color:var(--label-color)]`}
           />
 
-          {hospitalDataLoading ? (
+          {isLoading ? (
             <>
               <Spinner className="h-4 w-4 ml-3" />
             </>
           ) : (
             <div className={`ml-3`}>
-              <Status status={data?.status ?? '--'} />
+              <Status status={siteData?.data?.status ?? '--'} />
             </div>
+          )}
+        </div>
+
+        {/*Created At*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Created On:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {isLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  moment(siteData?.data?.createdAt).format('MMM DD. YYYY') ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
           )}
         </div>
       </CustomCard>
@@ -387,4 +458,4 @@ const HospitalDetails = ({
   );
 };
 
-export default HospitalDetails;
+export default SiteDetails;

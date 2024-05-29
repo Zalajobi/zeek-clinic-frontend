@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosGetRequestUserService } from '@lib/axios';
-import { SuperadminBaseData } from '@typeSpec/superadmin';
 
 export const useSuperadminBaseTemplate = () => {
   const navigate = useNavigate();
-  const [requestData, setRequestData] = useState<SuperadminBaseData | null>();
+  const [requestData, setRequestData] = useState<any>();
   const [querySearch, setQuerySearch] = useState<string>('');
 
   useEffect(() => {
@@ -14,11 +13,10 @@ export const useSuperadminBaseTemplate = () => {
         '/super-admin/profile/get-data'
       );
 
-      if (response.success)
-        setRequestData(response?.data as SuperadminBaseData);
+      if (response.success) setRequestData(response?.data);
     };
 
-    getHeaderData().catch((err) => {
+    getHeaderData().catch(() => {
       navigate('/superadmin/login');
     });
   }, [navigate]);

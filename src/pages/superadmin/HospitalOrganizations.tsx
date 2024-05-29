@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { TiExportOutline } from 'react-icons/ti';
 import { HiPlusSm } from 'react-icons/hi';
 
@@ -17,7 +17,10 @@ import {
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
 import { useDispatch } from 'react-redux';
-import { formatResponseKeyForDropdown } from '@util/index';
+import {
+  formatResponseKeyForDropdown,
+  getTotalRowsAndPerPage,
+} from '@util/index';
 import { HospitalPayload } from '@typeSpec/payloads';
 import { BasicTable } from '@components/global/table/Table';
 
@@ -50,19 +53,14 @@ const HospitalOrganizations = () => {
   } = useHospitalOrganisation();
 
   if (!hospitalTableDataLoading) {
-    noOfPages =
-      typeof perPage === 'string'
-        ? 1
-        : Math.ceil(hospitalTableData?.data?.totalRows / perPage);
-    dispatch(
-      setNoOfPages(
-        Math.ceil(
-          hospitalTableData?.data?.totalRows /
-            (perPage === 'All' ? hospitalTableData?.data?.totalRows : perPage)
-        )
-      )
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      hospitalTableData?.data,
+      perPage
     );
-    dispatch(setTotalDataCount(hospitalTableData?.data?.totalRows));
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
   }
 
   const rowData = useMemo(
@@ -75,7 +73,11 @@ const HospitalOrganizations = () => {
 
   const columnData = useMemo(() => SuperAdminHospitalDataColumns(), []);
   columnData.map((column) => {
-    if (column.key !== 'action') {
+    if (
+      column.key !== 'action' &&
+      column.key !== 'createdAt' &&
+      column.key !== 'siteCount'
+    ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });

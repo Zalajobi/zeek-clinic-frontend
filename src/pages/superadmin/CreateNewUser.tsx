@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
-import { useSuperadminCreateAdminUser } from '../../hooks/superadmin/useSuperadminCreateAdminUser';
+import { useSuperadminCreateAdminUser } from '@hooks/superadmin/useSuperadminCreateAdminUser';
 import ImageUpload from '../../components/global/formInput/ImageUpload';
 import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
 import {
@@ -9,19 +9,17 @@ import {
   genderSelectInput,
   relationshipStatus,
   religions,
-} from '../../lib/constants/constants';
-import { Typography } from '../../components/global/dialog/Typography';
-import { CustomCard } from '../../components/global/card/CustomCard';
+} from '@lib/constants/constants';
+import { Typography } from '@components/global/dialog/Typography';
+import { CustomCard } from '@components/global/card/CustomCard';
 import {
   DateInput,
   SelectInput,
   TextInput,
-} from '../../components/global/formInput/CustomInput';
-import {
-  CreateAdminUserInput,
-  CreateAdminUserInputSchema,
-} from '../../typeSpec/superadmin/forms';
-import { FilledButton } from '../../components/global/CustomButton';
+} from '@components/global/formInput/CustomInput';
+import { CreateAdminUserInputSchema } from '@typeSpec/forms';
+import { FilledButton } from '@components/global/CustomButton';
+import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
 
 const CreateNewUser = () => {
   const {
@@ -35,7 +33,6 @@ const CreateNewUser = () => {
   const {
     // Values
     allCountries,
-    phoneCode,
     allCountryStates,
     allRoles,
     profileImgURL,
@@ -170,7 +167,7 @@ const CreateNewUser = () => {
               {/*Staff ID*/}
               <TextInput
                 label={`Staff ID`}
-                placeholder={`IODANJK89IK`}
+                placeholder={`Staff Id`}
                 className={`my-3 w-full`}
                 errorMsg={errors.staff_id?.message ?? ''}
                 id={`staff_id`}
@@ -181,8 +178,6 @@ const CreateNewUser = () => {
               {/*DOB*/}
               <DateInput
                 label={`Date Or Birth`}
-                placeholder={`DD/MM/YYYY`}
-                className={`my-3`}
                 errorMsg={errors.dob?.message ?? ''}
                 id={`dob`}
                 register={register}

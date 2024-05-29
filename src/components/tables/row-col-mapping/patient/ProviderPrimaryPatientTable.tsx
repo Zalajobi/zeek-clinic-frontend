@@ -16,7 +16,7 @@ import { calculateAge } from '@util/index';
 import moment from 'moment';
 
 export const ProviderPrimaryPatientColumnData = () => {
-  const columnItem = [
+  return [
     {
       Header: (
         <Fragment>
@@ -134,7 +134,7 @@ export const ProviderPrimaryPatientColumnData = () => {
           </span>
         </Fragment>
       ),
-      accessor: 'created_at',
+      accessor: 'createdAt',
     },
 
     {
@@ -148,8 +148,6 @@ export const ProviderPrimaryPatientColumnData = () => {
       accessor: 'action',
     },
   ];
-
-  return columnItem;
 };
 
 export const ProviderPrimaryPatientRowData = (
@@ -281,7 +279,7 @@ export const ProviderPrimaryPatientRowData = (
       createdAt: (
         <>
           <Typography
-            text={moment(item?.created_at).format('MMM DD. YYYY') ?? '--'}
+            text={moment(item?.createdAt).format('MMM DD. YYYY') ?? '--'}
             Tag={`p`}
             isLoading={isLoading}
             className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[300px] overflow-hidden truncate`}

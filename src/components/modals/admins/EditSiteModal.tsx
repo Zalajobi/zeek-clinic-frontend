@@ -7,7 +7,7 @@ import {
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
-import { useEditSite } from '@hooks/common/useEditSite';
+import { useEditSite } from '@hooks/modals/useEditSite';
 import ImageUpload from '@components/global/formInput/ImageUpload';
 import { Card } from '@material-tailwind/react';
 
@@ -20,7 +20,6 @@ interface EditSiteModalProps {
 const EditSiteModal = ({ open, handleOpen, siteId }: EditSiteModalProps) => {
   const {
     siteData,
-    siteLoading,
     logoUrl,
     siteStatus,
 

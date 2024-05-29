@@ -8,7 +8,7 @@ import {
   generateRandomCharacters,
 } from '../../util';
 import { AdminEditProvidersInformation } from '@typeSpec/admin/provider';
-import { AllCountries } from '@typeSpec/superadmin/formTypes';
+import { AllCountries } from '@typeSpec/forms/form.types';
 import { axiosPutRequestUserService } from '@lib/axios';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { UserServiceUnitResponseData } from '@typeSpec/index';
@@ -110,7 +110,7 @@ export const useAdminUpdateProviderInformationTabs = (
       );
     },
 
-    onError: (error) => {
+    onError: () => {
       toast.error('Unable To Update Provider Information');
       setShowLoading(false);
     },
@@ -120,7 +120,7 @@ export const useAdminUpdateProviderInformationTabs = (
       else toast.error('Something Went Wrong');
 
       setShowLoading(false);
-      queryClient.resetQueries('providerDetails');
+      queryClient.resetQueries('providerDetails').then(() => {});
     },
 
     onMutate: () => {

@@ -26,7 +26,7 @@ const SidebarItems = ({ item, Icon, route, child }: SidebarItemProps) => {
       }
     };
 
-    // Check Orientation on load
+    // Check Orientation on a load
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
 

@@ -2,20 +2,18 @@ import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ImageUpload from '@components/global/formInput/ImageUpload';
-import { useCreateSite } from '@hooks/common/useCreateSite';
+import { useCreateSiteModal } from '@hooks/modals/useCreateSiteModal';
 import {
   CheckboxInput,
   SelectInput,
   TextInput,
 } from '@components/global/formInput/CustomInput';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import {
-  CreateSiteInput,
-  CreateSiteInputSchema,
-} from '@typeSpec/superadmin/forms';
+import { CreateSiteInputSchema } from '@typeSpec/forms';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { Card } from '@material-tailwind/react';
+import { CreateSiteInput } from '@typeSpec/forms/form.types';
 
 interface CreateSiteModalProps {
   open: boolean;
@@ -41,7 +39,7 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
     onUpdateLogo,
     createNewSite,
     onUpdateCountry,
-  } = useCreateSite(handleOpen);
+  } = useCreateSiteModal(handleOpen);
 
   return (
     <Fragment>
@@ -78,7 +76,7 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
             />
           </CustomTransparentCard>
 
-          <Card className={`w-full -h-full p-4 rounded-2xl overflow-scroll`}>
+          <Card className={`w-full p-4 rounded-2xl h-[500px] overflow-scroll`}>
             <div
               className={`w-full grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-2`}>
               <TextInput
@@ -131,9 +129,9 @@ const CreateSiteModal = ({ open, handleOpen }: CreateSiteModalProps) => {
               <TextInput
                 label={`Zip Code`}
                 className={`my-3`}
-                errorMsg={errors.zip_code?.message ?? ''}
-                type={'number'}
-                id={`zip_code`}
+                errorMsg={errors.zipCode?.message ?? ''}
+                type={'text'}
+                id={`zipCode`}
                 register={register}
               />
 

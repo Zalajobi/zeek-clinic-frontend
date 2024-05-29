@@ -1,9 +1,7 @@
-import { ChangeEvent, Fragment, ReactNode, useState } from 'react';
+import { Fragment, ReactNode, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { Simulate } from 'react-dom/test-utils';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import change = Simulate.change;
 import { SelectInputFieldProps } from '@typeSpec/common';
 import {
   Menu,
@@ -19,6 +17,8 @@ import {
   Option,
   Typography as MaterialTypography,
   Checkbox,
+  Typography,
+  Textarea,
 } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -28,7 +28,15 @@ interface TextInputProps {
   label: string;
   id: string;
   register?: UseFormRegister<any>;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'tel'
+    | 'url'
+    | 'date'
+    | 'datetime-local';
   className?: string;
   errorMsg?: string;
   placeholder?: string;
@@ -36,17 +44,6 @@ interface TextInputProps {
   change?: (event: string) => void;
   size?: 'lg' | 'md';
   showLabel?: boolean;
-}
-
-interface TextInputWithoutLabelProps {
-  id: string;
-  register?: UseFormRegister<any>;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
-  className?: string;
-  change?: (event: ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number;
-  max?: string | number;
-  min?: string | number;
 }
 
 interface SelectInputProps {
@@ -63,13 +60,11 @@ interface SelectInputProps {
 interface DateInputProps {
   label: string;
   id: string;
-  placeholder: string;
   register?: UseFormRegister<any>;
-  className?: string;
   errorMsg?: string;
-  icon?: ReactNode;
   change?: (event: Date) => void;
   value?: Date;
+  showLabel?: boolean;
 }
 
 interface CheckboxInputProps {
@@ -89,6 +84,17 @@ interface CustomDropDownMenuSelectProps {
   prefixIcon?: ReactNode;
 }
 
+interface CustomTextAreaInputProps {
+  label: string;
+  id: string;
+  register?: UseFormRegister<any>;
+  className?: string;
+  errorMsg?: string;
+  placeholder?: string;
+  change?: (event: string) => void;
+  size?: 'lg' | 'md';
+}
+
 export const TextInput = ({
   label,
   id,
@@ -106,50 +112,46 @@ export const TextInput = ({
     <Fragment>
       <div className={`min-w-[100px] my-2 ${className}`}>
         <div className="w-full">
-          <div className="relative w-full min-w-[200px]">
+          <div className="relative w-full">
             {showLabel && (
-              <label
-                htmlFor={id}
-                className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
-                  errorMsg ? '!text-red-500' : '!text-blue-gray-200'
-                }`}>
+              <Typography
+                variant="small"
+                color={errorMsg === '' ? 'blue-gray' : 'red'}
+                className="mb-2 font-medium">
                 {label}
-              </label>
+              </Typography>
             )}
 
             {register ? (
               <Fragment>
                 <Input
-                  variant="outlined"
-                  label={label}
-                  placeholder={placeholder}
-                  className={`border-t divide-solid border-t-gray-400`}
-                  size={size ?? 'lg'}
+                  icon={icon}
+                  className="!border-gray-200 focus:!border-black"
                   type={type}
-                  color={errorMsg ? 'red' : 'teal'}
+                  variant={'outlined'}
+                  size={size ?? 'lg'}
                   id={id}
+                  placeholder={placeholder}
+                  color={errorMsg === '' ? 'blue-gray' : 'red'}
                   {...register(id)}
                 />
               </Fragment>
             ) : (
-              <>
+              <Fragment>
                 <Input
-                  variant="outlined"
-                  label={label}
+                  icon={icon}
+                  className="!border-gray-200 focus:!border-black"
                   type={type}
-                  placeholder={placeholder}
-                  className={`border-t divide-solid border-t-gray-400`}
+                  variant={'outlined'}
                   size={size ?? 'lg'}
-                  color={errorMsg ? 'red' : 'teal'}
                   id={id}
+                  placeholder={placeholder}
+                  color={errorMsg === '' ? 'blue-gray' : 'red'}
                   onChange={(event) => {
                     if (change) change(event.target.value);
                   }}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
-                  {icon}
-                </div>
-              </>
+              </Fragment>
             )}
           </div>
           {errorMsg && (
@@ -173,40 +175,6 @@ export const TextInput = ({
           )}
         </div>
       </div>
-    </Fragment>
-  );
-};
-
-export const TextInputWithoutLabel = ({
-  id,
-  register,
-  type = 'text',
-  className,
-  change,
-  value,
-  max,
-  min,
-}: TextInputWithoutLabelProps) => {
-  return (
-    <Fragment>
-      {register ? (
-        <input
-          type={type}
-          {...register(id)}
-          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
-          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
-        />
-      ) : (
-        <input
-          type={type}
-          className={`py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 
-          focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 ${className}`}
-          onChange={change}
-          value={value}
-          max={max}
-          min={min}
-        />
-      )}
     </Fragment>
   );
 };
@@ -265,7 +233,9 @@ export const SelectInput = ({
                 }}>
                 {options.map((item, idx) => {
                   return (
-                    <Option value={item.value}>
+                    <Option
+                      value={item.value}
+                      key={`${idx}_${item}`}>
                       {item.placeholder.replaceAll('_', ' ')}
                     </Option>
                   );
@@ -281,14 +251,12 @@ export const SelectInput = ({
 
 export const DateInput = ({
   label,
-  placeholder,
-  className = '',
   errorMsg,
   id,
   register,
-  icon,
   change,
   value,
+  showLabel = false,
 }: DateInputProps) => {
   const [date, setDate] = useState<Date>();
 
@@ -324,46 +292,64 @@ export const DateInput = ({
     day_hidden: 'invisible',
   };
 
+  const dateComponent = {
+    IconLeft: ({ ...props }) => (
+      <BiChevronLeft
+        {...props}
+        className="h-4 w-4 stroke-2"
+      />
+    ),
+    IconRight: ({ ...props }) => (
+      <BiChevronRight
+        {...props}
+        className="h-4 w-4 stroke-2"
+      />
+    ),
+  };
+
   return (
-    <Popover placement="bottom">
-      <PopoverHandler>
-        <Input
-          label={label}
-          onChange={() => null}
-          value={date ? format(date, 'PPP') : ''}
-        />
-      </PopoverHandler>
-      <PopoverContent>
-        <DayPicker
-          mode="single"
-          selected={value}
-          {...register?.(id, {
-            onChange: (event) => {
-              if (change) {
-                change(event);
-              }
-            },
-          })}
-          onSelect={updateDate}
-          showOutsideDays
-          classNames={dateClassNames}
-          components={{
-            IconLeft: ({ ...props }) => (
-              <BiChevronLeft
-                {...props}
-                className="h-4 w-4 stroke-2"
-              />
-            ),
-            IconRight: ({ ...props }) => (
-              <BiChevronRight
-                {...props}
-                className="h-4 w-4 stroke-2"
-              />
-            ),
-          }}
-        />
-      </PopoverContent>
-    </Popover>
+    <Fragment>
+      <div className={`min-w-[100px] my-2`}>
+        <div className="w-full">
+          {showLabel && (
+            <label
+              htmlFor={id}
+              className={`block text-sm !text-[#464e5a] font-medium mb-2 dark:text-white ${
+                errorMsg ? '!text-red-500' : '!text-blue-gray-200'
+              }`}>
+              {label}
+            </label>
+          )}
+        </div>
+
+        <Popover placement="bottom">
+          <PopoverHandler>
+            <Input
+              label={label}
+              onChange={() => null}
+              value={date ? format(date, 'PPP') : ''}
+            />
+          </PopoverHandler>
+          <PopoverContent>
+            <DayPicker
+              mode="single"
+              selected={value}
+              {...register?.(id, {
+                onChange: (event) => {
+                  if (change) {
+                    change(event);
+                  }
+                },
+              })}
+              onSelect={updateDate}
+              showOutsideDays
+              classNames={dateClassNames}
+              components={dateComponent}
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
+    </Fragment>
   );
 };
 
@@ -407,7 +393,6 @@ export const CheckboxInput = ({
           disabled={disabled}
           onChange={(event) => {
             if (change) change(event.target.checked);
-            // console.log(event.target.checked)
           }}
         />
       )}
@@ -415,26 +400,7 @@ export const CheckboxInput = ({
   );
 };
 
-export const CustomInputLabel = ({
-  forItem,
-  label,
-  className = '',
-}: {
-  forItem: string;
-  label: string;
-  className?: string;
-}) => {
-  return (
-    <label
-      className={`text-sm font-medium text-gray-900 dark:text-gray-300 ${className}`}
-      htmlFor={forItem}>
-      {label}
-    </label>
-  );
-};
-
 export const PhoneNumberInput = ({
-  country,
   change,
   label,
   className = '',
@@ -498,6 +464,81 @@ export const CustomDropDownMenuSelect = ({
           </MenuList>
         )}
       </Menu>
+    </Fragment>
+  );
+};
+
+export const CustomTextAreaInput = ({
+  className = '',
+  id,
+  errorMsg,
+  label,
+  change,
+  size,
+  register,
+  placeholder,
+}: CustomTextAreaInputProps) => {
+  return (
+    <Fragment>
+      <div className={`min-w-[100px] my-2 ${className}`}>
+        <div className="w-full">
+          <div className="relative w-full">
+            <Typography
+              variant="small"
+              color={errorMsg === '' ? 'blue-gray' : 'red'}
+              className="mb-2 font-medium">
+              {label}
+            </Typography>
+
+            {register ? (
+              <Fragment>
+                <Textarea
+                  className="!border-gray-200 focus:!border-black"
+                  variant={'outlined'}
+                  size={size ?? 'lg'}
+                  id={id}
+                  placeholder={placeholder}
+                  color={errorMsg === '' ? 'blue-gray' : 'red'}
+                  {...register(id)}
+                />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Textarea
+                  className="!border-gray-200 focus:!border-black"
+                  variant={'outlined'}
+                  size={size ?? 'lg'}
+                  id={id}
+                  placeholder={placeholder}
+                  color={errorMsg === '' ? 'blue-gray' : 'red'}
+                  onChange={(event) => {
+                    if (change) change(event.target.value);
+                  }}
+                />
+              </Fragment>
+            )}
+          </div>
+          {errorMsg && (
+            <MaterialTypography
+              variant={'small'}
+              className="mt-2 flex items-center gap-1 font-normal"
+              color={'red'}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="-mt-px h-4 w-4">
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {errorMsg}
+            </MaterialTypography>
+          )}
+        </div>
+      </div>
     </Fragment>
   );
 };

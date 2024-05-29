@@ -102,8 +102,6 @@ export const AdminEditProvidersInformationModalTab = ({
           {/*DOB*/}
           <DateInput
             label={`Date Or Birth`}
-            placeholder={`DD/MM/YYYY`}
-            className={`my-3`}
             errorMsg={errors.dob?.message ?? ''}
             id={`dob`}
             register={register}
@@ -201,9 +199,9 @@ export const AdminEditMoveProviderTab = ({
 };
 
 export const AdminEditGeneratePasswordTab = ({
-  register,
-  errors,
-  password,
+  // register,
+  // errors,
+  // password,
   generatePassword,
   updatePassword,
 }: AdminEditGeneratePasswordTabProps) => {

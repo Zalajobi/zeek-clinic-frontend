@@ -29,6 +29,7 @@ import AdminUnitsPage from '@pages/admin/AdminUnitsPage';
 import AdminServiceAreaPage from '@pages/admin/AdminServiceAreaPage';
 import AdminRolesPage from '@pages/admin/AdminRolesPage';
 import SiteDetailsPage from '@pages/superadmin/SiteDetailsPage';
+import SiteProvidersPage from '@pages/SiteProvidersPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -119,6 +120,12 @@ const router = createBrowserRouter([
     ],
   },
 
+  // Site Providers
+  {
+    path: '/site/provider/:siteId',
+    element: <SiteProvidersPage />,
+  },
+
   {
     path: '/superadmin',
     children: [
@@ -187,6 +194,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 root.render(
   <StrictMode>
     <QueryClientProviderWrapper>
@@ -198,6 +206,6 @@ root.render(
 );
 
 // If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
+// to log results (for example, reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

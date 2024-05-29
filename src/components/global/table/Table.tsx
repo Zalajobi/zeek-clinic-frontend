@@ -19,12 +19,11 @@ import {
 } from '@material-tailwind/react';
 import { CustomTabSelector, DropdownMenu } from '@components/global/MenuTabs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { HiChevronUpDown, HiPencil } from 'react-icons/hi2';
+import { HiChevronUpDown } from 'react-icons/hi2';
 import Status from '@components/global/Status';
 import { Link } from 'react-router-dom';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { MdDelete } from 'react-icons/md';
 import { FaUserPlus } from 'react-icons/fa';
 import { formatPhoneNumber } from '@util/index';
 
@@ -154,13 +153,13 @@ export const BasicTable = ({
 }: BasicTableProps) => {
   const perPageMenuItems = ['All', 10, 20, 50, 100];
   return (
-    <Card className={`w-full h-auto`}>
+    <Card className={`w-full h-auto min-h-[500px] flex flex-col`}>
       <CardHeader
         floated={true}
         shadow={true}
-        className={`rounded-none m-0 mt-3 shadow-none bg-transparent px-3`}>
+        className={`rounded-none shadow-none bg-transparent p-3 m-0 flex min-h-[90px]`}>
         <div
-          className={`flex flex-col items-center justify-between gap-4 md:flex-row`}>
+          className={`flex flex-col items-center justify-between gap-4 w-full md:flex-row`}>
           <div className={`flex gap-4 items-center justify-center`}>
             <CustomTabSelector
               onClick={onSelectTab}
@@ -195,9 +194,9 @@ export const BasicTable = ({
         </div>
       </CardHeader>
 
-      <CardBody className={`overflow-scroll p-0`}>
+      <CardBody className={`overflow-scroll p-0 min-h-[400px]`}>
         {data && data?.length > 0 ? (
-          <table className={`mt-4 w-full min-w-max table-auto text-left`}>
+          <table className={`w-full min-w-max table-auto text-left`}>
             <thead>
               <tr>
                 {columns.map((item, index) => (
@@ -248,8 +247,10 @@ export const BasicTable = ({
                               className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
                               <Avatar
                                 className={`border-gray-300 border ml-1`}
-                                // src={item?.logo ?? item?.avatar}
-                                src="https://docs.material-tailwind.com/img/face-2.jpg"
+                                src={
+                                  item?.logo ?? item?.avatar ?? item?.profilePic
+                                }
+                                // src="https://docs.material-tailwind.com/img/face-2.jpg"
                                 alt={'Logo'}
                                 size={'sm'}
                               />
@@ -326,7 +327,7 @@ export const BasicTable = ({
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
                           {formatPhoneNumber(
                             item[column.key],
-                            item?.country_code
+                            item?.countryCode
                           ) ?? '--'}
                         </td>
                       ) : (
@@ -409,11 +410,12 @@ export const BasicTable = ({
       </CardBody>
 
       <CardFooter
-        className={`flex items-center justify-between border-t border-blue-gray-50 p-4`}>
+        className={`flex items-center justify-between border-t border-blue-gray-50 p-4 h-[80px]`}>
         <div className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
           <p className="inline-block font-velasans-gx text-sm font-medium lg:flex-nowrap">
             <b className="font-extrabold">
-              Showing results from {from} - {to}
+              Showing results from {total >= 1 ? from : 0} -{' '}
+              {perPageValue > total ? total : to}
             </b>{' '}
             of {total}
           </p>

@@ -16,7 +16,7 @@ export interface AdminHeaderBaseTemplateData {
   staff_id: string;
   password_reset_request_timestamp: string;
   id: string;
-  created_at: string;
+  createdAt: string;
 }
 
 export interface AppointmentTableData {
@@ -40,24 +40,12 @@ export interface AppointmentTableRowData {
   action: ReactNode;
 }
 
-export interface ProviderPageSiteResponseData {
-  address: string;
-  name: string;
-  email: string;
-  country: string;
-  phone: string;
-  id: string;
-  state: string;
-  city: string;
-  created_at: string;
-}
-
 export interface ProviderAndRelationAPIResponse {
   img?: string;
   email: string;
   id: string;
   status: string;
-  created_at: string;
+  createdAt: string;
   siteId: string;
   personalInfo: PersonalInfoPayload;
   department: DepartmentPayload;
