@@ -209,7 +209,9 @@ export const BasicTable = ({
                       className={
                         'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
                       }
-                      onClick={() => sortBy(item.key)}>
+                      onClick={() => {
+                        if (item.sortable) sortBy(item.key);
+                      }}>
                       {item.value}{' '}
                       {item.sortable && (
                         <HiChevronUpDown

@@ -23,7 +23,7 @@ const SiteDetailsPage = () => {
 
         <SiteDetails />
 
-        <SiteRoutes />
+        <SiteRoutes platform={'SUPERADMIN'} />
 
         <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-3">
           <LatestDepartments />

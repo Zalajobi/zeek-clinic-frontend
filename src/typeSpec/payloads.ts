@@ -192,3 +192,30 @@ export interface ProviderPayload {
   unit: string;
   createdAt: string;
 }
+
+export interface AdminPayload {
+  siteId: string;
+  role: string;
+  email: string;
+  staffId: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phone: string;
+  gender: string;
+  dob: string;
+  address: string;
+  alternateAddress: string;
+  city: string;
+  state: string;
+  country: string;
+  countryCode: string;
+  zipCode: string;
+  profilePic?: string;
+  religion: string;
+  maritalStatus: string;
+  id: string;
+  createdAt: string | Date;
+  updatedAt?: string | Date;
+}

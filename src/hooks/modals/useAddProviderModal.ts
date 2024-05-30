@@ -166,7 +166,7 @@ export const useAddProviderModal = (handler: () => void) => {
     const dateOfBirth = new Date(data.dob).toISOString();
     const updatedData = {
       ...data,
-      phone: `${Number(`${phoneCode}${data.phone}`)}`,
+      phone: `+${Number(`${phoneCode}${data.phone}`)}`,
       siteId: siteId ?? '',
       countryCode,
       country,

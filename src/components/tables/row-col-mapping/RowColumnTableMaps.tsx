@@ -1,4 +1,4 @@
-import { ProviderPayload, SitePayload } from '@typeSpec/payloads';
+import { AdminPayload, ProviderPayload, SitePayload } from '@typeSpec/payloads';
 import moment from 'moment/moment';
 import { HiPencil } from 'react-icons/hi2';
 import { MdDelete } from 'react-icons/md';
@@ -118,7 +118,6 @@ export const SiteActionItem = (
 // Site End
 
 // Provider Start
-
 export const ProviderDataColumns = () => {
   return [
     {
@@ -268,6 +267,131 @@ export const ProfileActionItem = () => {
 };
 
 // Provider End
+
+// Admin Start
+export const AdminDataColumns = () => {
+  return [
+    {
+      key: 'name',
+      value: 'Name',
+      sortable: false,
+    },
+    {
+      key: 'email',
+      value: 'Email',
+      sortable: true,
+    },
+    {
+      key: 'role',
+      value: 'Role',
+      sortable: false,
+    },
+    {
+      key: 'gender',
+      value: 'Gender',
+      sortable: true,
+    },
+    {
+      key: 'age',
+      value: 'Age',
+      sortable: false,
+    },
+    {
+      key: 'country',
+      value: 'Country',
+      sortable: true,
+    },
+    {
+      key: 'state',
+      value: 'State',
+      sortable: true,
+    },
+    {
+      key: 'city',
+      value: 'City',
+      sortable: true,
+    },
+    {
+      key: 'phone',
+      value: 'Phone',
+      sortable: true,
+    },
+    {
+      key: 'zipCode',
+      value: 'ZipCode',
+      sortable: true,
+    },
+    {
+      key: 'createdAt',
+      value: 'Created At',
+      sortable: true,
+    },
+    {
+      key: 'action',
+      value: 'Action',
+      sortable: false,
+    },
+  ];
+};
+
+export const AdminActionItem = () => {
+  return [
+    {
+      icon: (
+        <HiPencil
+          className="h-4 w-4"
+          color={`blue`}
+          size={15}
+        />
+      ),
+      label: 'View',
+      onClick: (id: string) => console.log(id),
+    },
+
+    {
+      icon: (
+        <MdDelete
+          className="h-4 w-4"
+          color={`red`}
+          size={15}
+        />
+      ),
+      label: 'Delete',
+      onClick: (id: string) => console.log(`Delete Provider: ${id}`),
+    },
+  ];
+};
+
+export const AdminDataRows = (data: AdminPayload[]) => {
+  const rowItems: any[] = [];
+
+  data?.map((item) => {
+    rowItems.push({
+      id: item?.id,
+      name: `${item?.firstName} ${
+        item?.middleName
+      } ${item?.lastName?.toUpperCase()}`,
+      email: item?.email,
+      role: item?.role?.replace('_', ' '),
+      gender: item?.gender?.toUpperCase(),
+      age: ageFromTimeStamp(item?.dob ?? ''),
+      country: item?.country,
+      phone: item?.phone,
+      state: item?.state,
+      city: item?.city,
+      zipCode: item?.zipCode,
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
+      profilePic: item?.profilePic,
+      staffId: item?.staffId,
+      maritalStatus: item?.maritalStatus,
+    });
+    return;
+  });
+
+  return rowItems;
+};
+
+// Admin End
 
 const ageFromTimeStamp = (timestamp: string) => {
   const birthDay = moment(timestamp);

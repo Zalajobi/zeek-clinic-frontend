@@ -11,8 +11,28 @@ import {
   UnitIcon,
 } from '@components/global/GlobalIcons';
 
-const SiteRoutes = () => {
+interface SiteRoutesProps {
+  platform: 'SUPERADMIN' | 'PROVIDER' | 'PATIENT' | 'ADMIN';
+}
+
+const SiteRoutes = ({ platform }: SiteRoutesProps) => {
   const { siteId } = useParams();
+  let prefixURL = '';
+
+  switch (platform) {
+    case 'SUPERADMIN':
+      prefixURL = '/superadmin';
+      break;
+    case 'PROVIDER':
+      prefixURL = '/care';
+      break;
+    case 'ADMIN':
+      prefixURL = '/admin';
+      break;
+    case 'PATIENT':
+      prefixURL = '/patient';
+      break;
+  }
 
   return (
     <Fragment>
@@ -21,43 +41,43 @@ const SiteRoutes = () => {
         <BeautifulLink
           icon={<ProviderIcon className={`mr-2`} />}
           text={`Providers`}
-          to={`/site/provider/${siteId}`}
+          to={`${prefixURL}/site/provider/${siteId}`}
         />
 
         <BeautifulLink
           icon={<PatientIcon className={`mr-2`} />}
           text={`Patients`}
-          to={`/site/patient/${siteId}`}
+          to={`${prefixURL}/site/patient/${siteId}`}
         />
 
         <BeautifulLink
           icon={<UnitIcon className={`mr-2`} />}
           text={`Units`}
-          to={`/site/unit/${siteId}`}
+          to={`${prefixURL}/site/unit/${siteId}`}
         />
 
         <BeautifulLink
           icon={<DepartmentIcon className={`mr-2`} />}
           text={`Departments`}
-          to={`/site/department/${siteId}`}
+          to={`${prefixURL}/site/department/${siteId}`}
         />
 
         <BeautifulLink
           icon={<ServiceAreaIcon className={`mr-2`} />}
           text={`Service Area`}
-          to={`/site/service-area/${siteId}`}
+          to={`${prefixURL}/site/service-area/${siteId}`}
         />
 
         <BeautifulLink
           icon={<RolesIcon className={`mr-2`} />}
           text={`Roles`}
-          to={`/site/role/${siteId}`}
+          to={`${prefixURL}/site/role/${siteId}`}
         />
 
         <BeautifulLink
           icon={<AdminIcon className={`mr-2`} />}
           text={`Admin`}
-          to={`/site/admin/${siteId}`}
+          to={`${prefixURL}/site/admin/${siteId}`}
         />
       </div>
     </Fragment>

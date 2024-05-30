@@ -23,6 +23,8 @@ const SiteDetails = () => {
     serviceAreaCountLoading,
     unitCount,
     unitCountLoading,
+    adminCount,
+    adminCountLoading,
   } = useSiteDetails();
 
   return (
@@ -338,6 +340,34 @@ const SiteDetails = () => {
               <Typography
                 text={
                   Number(unitCount?.data?.totalRows ?? 0)?.toLocaleString() ??
+                  '--'
+                }
+                Tag={'p'}
+                size={'sm'}
+                className={`text-[color:var(--text-color)] dark:text-white mt-0 ml-3`}
+              />
+            </Fragment>
+          )}
+        </div>
+
+        {/*Admin Count*/}
+        <div className={`flex flex-row items-center py-3`}>
+          <Typography
+            text={`Admins:`}
+            Tag={'p'}
+            size={'sm'}
+            className={`text-[color:var(--label-color)]`}
+          />
+
+          {adminCountLoading ? (
+            <Fragment>
+              <Spinner className="h-4 w-4 ml-3" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Typography
+                text={
+                  Number(adminCount?.data?.totalRows ?? 0)?.toLocaleString() ??
                   '--'
                 }
                 Tag={'p'}

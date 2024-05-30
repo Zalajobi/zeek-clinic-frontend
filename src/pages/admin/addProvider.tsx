@@ -93,14 +93,14 @@ export const AddProvider = () => {
                 <TextInput
                   label={`First Name`}
                   className={`my-3 lg:col-span-2`}
-                  errorMsg={errors.first_name?.message ?? ''}
-                  id={`first_name`}
+                  errorMsg={errors.firstName?.message ?? ''}
+                  id={`firstName`}
                   register={register}
                   icon={
                     <BiRename
                       size={20}
                       className={`${
-                        errors.first_name?.message ? 'text-red-500' : ''
+                        errors.firstName?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }
@@ -109,14 +109,14 @@ export const AddProvider = () => {
                 <TextInput
                   label={`Last Name`}
                   className={`my-3 lg:col-span-2`}
-                  errorMsg={errors.last_name?.message ?? ''}
-                  id={`last_name`}
+                  errorMsg={errors.lastName?.message ?? ''}
+                  id={`lastName`}
                   register={register}
                   icon={
                     <BiRename
                       size={20}
                       className={`${
-                        errors.last_name?.message ? 'text-red-500' : ''
+                        errors.lastName?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }
@@ -128,13 +128,13 @@ export const AddProvider = () => {
                 <TextInput
                   label={`Middle Name`}
                   className={`my-3`}
-                  id={`middle_name`}
+                  id={`middleName`}
                   register={register}
                   icon={
                     <BiRename
                       size={20}
                       className={`${
-                        errors.middle_name?.message ? 'text-red-500' : ''
+                        errors.middleName?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }
@@ -199,15 +199,15 @@ export const AddProvider = () => {
                   label={`Staff ID`}
                   placeholder={`NA92NS90D2KNS`}
                   className={`my-3 w-full`}
-                  errorMsg={errors.staff_id?.message ?? ''}
-                  id={`staff_id`}
+                  errorMsg={errors.staffId?.message ?? ''}
+                  id={`staffId`}
                   register={register}
                   type={`text`}
                   icon={
                     <HiIdentification
                       size={20}
                       className={`${
-                        errors.staff_id?.message ? 'text-red-500' : ''
+                        errors.staffId?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }
@@ -331,14 +331,14 @@ export const AddProvider = () => {
                 <TextInput
                   label={`Zip Code`}
                   className={`my-3 w-full`}
-                  errorMsg={errors.zip_code?.message ?? ''}
+                  errorMsg={errors.zipCode?.message ?? ''}
                   id={`zip_code`}
                   register={register}
                   icon={
                     <TbZoomInAreaFilled
                       size={20}
                       className={`${
-                        errors.zip_code?.message ? 'text-red-500' : ''
+                        errors.zipCode?.message ? 'text-red-500' : ''
                       }`}
                     />
                   }

@@ -90,7 +90,7 @@ export const useCreateSiteModal = (handleOpen: () => void) => {
 
   const createNewSite = async (data: CreateSiteInput) => {
     createSiteMutation(data);
-    data.phone = `${Number(`${phoneCode}${data.phone}`)}`;
+    data.phone = `+${Number(`${phoneCode}${data.phone}`)}`;
     data.country = country;
     data.logo = logo;
     data.countryCode = countryCode;

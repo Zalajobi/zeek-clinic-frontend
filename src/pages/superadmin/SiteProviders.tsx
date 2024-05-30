@@ -11,10 +11,6 @@ import {
   formatResponseKeyForDropdown,
   getTotalRowsAndPerPage,
 } from '@util/index';
-import {
-  setNoOfPages,
-  setTotalDataCount,
-} from '../redux/reducers/tableReducer';
 import { useDispatch } from 'react-redux';
 import {
   ProfileActionItem,
@@ -24,8 +20,12 @@ import {
 import { ProviderPayload } from '@typeSpec/payloads';
 import { BasicTable } from '@components/global/table/Table';
 import SiteRoutes from '@components/common/SiteRoutes';
+import {
+  setNoOfPages,
+  setTotalDataCount,
+} from '../../redux/reducers/tableReducer';
 
-const SiteProvidersPage = () => {
+const SiteProviders = () => {
   const dispatch = useDispatch();
   const searchTableBy: string[] = [];
   let noOfPages = 0;
@@ -52,6 +52,17 @@ const SiteProvidersPage = () => {
     onClickPrevious,
     onUpdateSearchKey,
   } = useSiteProviders();
+
+  if (!tableDataLoading) {
+    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
+      tableData?.data,
+      perPage
+    );
+
+    noOfPages = pagesCount;
+    dispatch(setNoOfPages(pagesCount));
+    dispatch(setTotalDataCount(totalRows));
+  }
 
   if (!tableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
@@ -132,7 +143,7 @@ const SiteProvidersPage = () => {
 
           <SiteDetails />
 
-          <SiteRoutes platform={'ADMIN'} />
+          <SiteRoutes platform={'SUPERADMIN'} />
 
           <BasicTable
             tabItems={tabData}
@@ -169,4 +180,4 @@ const SiteProvidersPage = () => {
   );
 };
 
-export default SiteProvidersPage;
+export default SiteProviders;

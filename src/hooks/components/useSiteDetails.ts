@@ -35,6 +35,20 @@ export const useSiteDetails = () => {
     },
   });
 
+  // Get site Admin Count
+  const { data: adminCount, isLoading: adminCountLoading } = useQuery({
+    queryKey: ['getAdminCount'],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(`/admin/count/${siteId}`);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
   // Get Departments Count
   const { data: departmentCount, isLoading: departmentCountLoading } = useQuery(
     {
@@ -127,5 +141,7 @@ export const useSiteDetails = () => {
     serviceAreaCountLoading,
     unitCount,
     unitCountLoading,
+    adminCount,
+    adminCountLoading,
   };
 };
