@@ -33,6 +33,7 @@ export type CreatePatientInput = {
   gender: string;
   dob: string;
   address: string;
+  alternateAddress?: string;
   city: string;
   state: string;
   religion: string;
@@ -40,6 +41,7 @@ export type CreatePatientInput = {
   countryCode: string;
   cardNumber: string;
   zipCode: string;
+  profilePic: string;
   maritalStatus:
     | 'SINGLE'
     | 'IN_A_RELATIONSHIP'
