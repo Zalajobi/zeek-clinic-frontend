@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { ONE_MILLION } from '@lib/constants/constants';
 
 export const useAddProviderModal = (handler: () => void) => {
   const { siteId } = useParams();
@@ -35,7 +36,7 @@ export const useAddProviderModal = (handler: () => void) => {
   const selectApiPayload = {
     siteId,
     startRow: 0,
-    endRow: 1000000,
+    endRow: ONE_MILLION,
     sortModel: {
       colId: 'name',
       sort: 'asc',

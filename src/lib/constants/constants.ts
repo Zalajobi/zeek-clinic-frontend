@@ -406,4 +406,6 @@ export const religions: SelectInputFieldProps[] = [
   { value: 'zoroastrianism', placeholder: 'Zoroastrianism' },
 ];
 
+export const ONE_MILLION = 1000000;
+
 // export const USER_SERVICE_EXCHANGE = 'zeek-clinic-user-service';
