@@ -88,7 +88,7 @@ export const useAddAdminModal = (handler: () => void) => {
   // Handle Create Admin
   const handleCreateAdmin = (data: CreateAdminUserInput) => {
     data.dob = new Date(data.dob).toISOString();
-    data.phone = `${Number(`${phoneCode}${data.phone}`)}`;
+    data.phone = `+${Number(`${phoneCode}${data.phone}`)}`;
     data.siteId = siteId ?? '';
     data.countryCode = countryCode;
     data.country = country;

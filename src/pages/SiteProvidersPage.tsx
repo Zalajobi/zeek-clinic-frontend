@@ -64,17 +64,6 @@ const SiteProvidersPage = () => {
     dispatch(setTotalDataCount(totalRows));
   }
 
-  if (!tableDataLoading) {
-    const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
-      tableData?.data,
-      perPage
-    );
-
-    noOfPages = pagesCount;
-    dispatch(setNoOfPages(pagesCount));
-    dispatch(setTotalDataCount(totalRows));
-  }
-
   const columnData = useMemo(() => ProviderDataColumns(), []);
   const actionItems = useMemo(() => ProfileActionItem(), []);
 
