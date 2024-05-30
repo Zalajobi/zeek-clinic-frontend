@@ -4,7 +4,7 @@ import { HiPlusSm } from 'react-icons/hi';
 
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import Text from '@components/global/dialog/Text';
-import { useHospitalOrganisation } from '@hooks/superadmin/useHospitalOrganisation';
+import { useHospitalOrganisation } from '@hooks/pages/useHospitalOrganisation';
 import {
   SuperAdminHospitalActionItem,
   SuperAdminHospitalDataColumns,

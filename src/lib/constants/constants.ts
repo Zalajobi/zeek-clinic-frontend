@@ -4,6 +4,43 @@ export const matchLowerCaseRegex = /[a-z]/g;
 export const matchUpperCaseRegex = /[A-Z]/g;
 export const matchNumbersRegex = /[0-9]/g;
 
+export const adminRoles: SelectInputFieldProps[] = [
+  {
+    value: 'ADMIN',
+    placeholder: 'Admin',
+  },
+
+  {
+    value: 'RECORDS',
+    placeholder: 'Records',
+  },
+
+  {
+    value: 'CASHIER',
+    placeholder: 'Cashier',
+  },
+
+  {
+    value: 'HOSPITAL_ADMIN',
+    placeholder: 'Hospital Admin',
+  },
+
+  {
+    value: 'SITE_ADMIN',
+    placeholder: 'Site Admin',
+  },
+
+  {
+    value: 'HUMAN_RESOURCES',
+    placeholder: 'Human Resources',
+  },
+
+  {
+    value: 'HMO_ADMIN',
+    placeholder: 'HMO Admin',
+  },
+];
+
 export const availableTitles: SelectInputFieldProps[] = [
   {
     value: 'Dr.',

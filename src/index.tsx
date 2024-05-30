@@ -31,6 +31,7 @@ import AdminRolesPage from '@pages/admin/AdminRolesPage';
 import SiteDetailsPage from '@pages/superadmin/SiteDetailsPage';
 import SiteProvidersPage from '@pages/SiteProvidersPage';
 import SiteProviders from '@pages/superadmin/SiteProviders';
+import SiteAdmins from '@pages/superadmin/SiteAdmins';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -165,8 +166,14 @@ const router = createBrowserRouter([
 
       // Site Providers Details
       {
-        path: '/superadmin/site/:siteId',
+        path: '/superadmin/site/provider/:siteId',
         element: <SiteProviders />,
+      },
+
+      // Site Admin Details
+      {
+        path: '/superadmin/site/admin/:siteId',
+        element: <SiteAdmins />,
       },
     ],
   },

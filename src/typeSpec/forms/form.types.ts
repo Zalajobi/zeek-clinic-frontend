@@ -62,29 +62,28 @@ export type CreateProviderInput = {
 
 // Create Admin
 export type CreateAdminUserInput = {
+  siteId: string;
   email: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
   username: string;
   country: string;
   state: string;
   city: string;
   phone: string;
-  country_code?: string;
-  zip_code: string;
+  countryCode?: string;
+  zipCode: string;
   role: string;
-  staff_id: string;
-  // department: string;
-  religion?: string;
+  staffId: string;
+  religion: string;
   gender: string;
   dob: string;
   title: string;
-  // bio?: string;
   address: string;
-  address_two?: string;
-  profile_img?: string;
-  marital_status?: string;
+  alternateAddress?: string;
+  profilePic?: string;
+  maritalStatus: string;
 };
 
 // Create Organization

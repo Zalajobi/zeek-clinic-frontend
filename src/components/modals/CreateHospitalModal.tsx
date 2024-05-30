@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useCreateHospitalModal } from '@hooks/superadmin/useCreateHospitalModal';
+import { useCreateHospitalModal } from '@hooks/modals/useCreateHospitalModal';
 import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { OutlinedButton } from '@components/global/CustomButton';

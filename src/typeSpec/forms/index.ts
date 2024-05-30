@@ -55,40 +55,34 @@ export const CreateHospitalInputSchema = yup
 // Create Admin
 export const CreateAdminUserInputSchema = yup
   .object({
-    email: yup.string().required('Email field is required'),
-    first_name: yup.string().required('First name is required'),
-    last_name: yup.string().required('Last name is required'),
-    middle_name: yup.string().optional(),
-    username: yup
-      .string()
-      .required()
-      .min(8, 'Username must be at least 8 characters long'),
-    country: yup.string().required('Choose the country you reside in'),
-    state: yup.string().required('State is required'),
-    city: yup.string().required('Choose the city you reside in'),
-    phone: yup.number().required('Phone number is required'),
-    country_code: yup.string().optional(),
-    zip_code: yup.string().required('Zip code is required'),
-    role: yup.string().required('User role must be selected'),
-    // department: yup.string().required('Department must be selected'),
-    gender: yup.string().required('Please choose a valid gender'),
-    dob: yup.string().required('Date of birth is required'),
     title: yup.string().required('User title is required'),
-    staff_id: yup
+    firstName: yup.string().required('First name is required'),
+    lastName: yup.string().required('Last name is required'),
+    middleName: yup.string().optional(),
+    email: yup.string().required('Email field is required'),
+    gender: yup.string().required('Please choose a valid gender'),
+    staffId: yup
       .string()
       .min(7, 'Minimum of Seven(7) Characters')
       .max(20, 'Maximum of Twenty(20) characters')
       .required('Staff ID is a required field'),
-    marital_status: yup
+    dob: yup.string().required('Date of birth is required'),
+    religion: yup.string().optional(),
+    maritalStatus: yup
       .string()
       .required('Relationship Status is a required field'),
+    country: yup.string().required('Choose the country you reside in'),
+    state: yup.string().optional(),
+    city: yup.string().required('Choose the city you reside in'),
+    zipCode: yup.string().required('Zip code is required'),
     address: yup
       .string()
       .required('User address is required')
       .min(10, 'Address too short'),
-    address_two: yup.string().optional(),
-    profile_img: yup.string().optional(),
-    religion: yup.string().optional(),
+    alternateAddress: yup.string().optional(),
+    phone: yup.number().required('Phone number is required'),
+    role: yup.string().required('User role must be selected'),
+    profilePic: yup.string().optional(),
   })
   .required();
 

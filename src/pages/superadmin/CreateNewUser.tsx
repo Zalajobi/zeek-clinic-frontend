@@ -56,7 +56,7 @@ const CreateNewUser = () => {
         </div>
 
         <div
-          className={`w-full h-full p-6 grid grid-cols-1 gap-6 grid-cols-[30%_70%]`}>
+          className={`w-full h-full p-6 grid grid-cols-1 gap-6 md:grid-cols-[30%_70%]`}>
           <CustomCard
             className={`w-full h-full p-4 rounded-2xl shadow-2xl shadow-[#52525b] max-h-[400px]`}>
             <ImageUpload
@@ -83,8 +83,8 @@ const CreateNewUser = () => {
               <TextInput
                 label={`First Name`}
                 className={`my-3 lg:col-span-2`}
-                errorMsg={errors.first_name?.message ?? ''}
-                id={`first_name`}
+                errorMsg={errors.firstName?.message ?? ''}
+                id={`firstName`}
                 register={register}
               />
 
@@ -92,8 +92,8 @@ const CreateNewUser = () => {
               <TextInput
                 label={`Last Name`}
                 className={`my-3 lg:col-span-2`}
-                errorMsg={errors.last_name?.message ?? ''}
-                id={`last_name`}
+                errorMsg={errors.lastName?.message ?? ''}
+                id={`lastName`}
                 register={register}
               />
             </div>
@@ -104,7 +104,7 @@ const CreateNewUser = () => {
               <TextInput
                 label={`Other Name`}
                 className={`my-3`}
-                id={`middle_name`}
+                id={`middleName`}
                 register={register}
               />
 
@@ -148,8 +148,8 @@ const CreateNewUser = () => {
                 options={relationshipStatus}
                 className={`w-full my-3`}
                 register={register}
-                id={'marital_status'}
-                errorMsg={errors.marital_status?.message ?? ''}
+                id={'maritalStatus'}
+                errorMsg={errors.maritalStatus?.message ?? ''}
               />
 
               {/*Religion*/}
@@ -169,8 +169,8 @@ const CreateNewUser = () => {
                 label={`Staff ID`}
                 placeholder={`Staff Id`}
                 className={`my-3 w-full`}
-                errorMsg={errors.staff_id?.message ?? ''}
-                id={`staff_id`}
+                errorMsg={errors.staffId?.message ?? ''}
+                id={`staffId`}
                 register={register}
                 type={`text`}
               />
@@ -233,9 +233,9 @@ const CreateNewUser = () => {
               <TextInput
                 label={`Zip Code`}
                 className={`my-3`}
-                id={`zip_code`}
+                id={`zipCode`}
                 register={register}
-                errorMsg={errors.zip_code?.message ?? ''}
+                errorMsg={errors.zipCode?.message ?? ''}
               />
 
               {/*Address*/}
@@ -251,9 +251,9 @@ const CreateNewUser = () => {
               <TextInput
                 label={`Alternative Address`}
                 className={`my-3`}
-                id={`address_two`}
+                id={`alternateAddress`}
                 register={register}
-                errorMsg={errors.address_two?.message ?? ''}
+                errorMsg={errors.alternateAddress?.message ?? ''}
               />
             </div>
 

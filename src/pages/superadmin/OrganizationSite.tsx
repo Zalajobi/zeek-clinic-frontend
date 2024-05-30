@@ -4,7 +4,7 @@ import { HiPlusSm } from 'react-icons/hi';
 import { AiFillEdit } from 'react-icons/ai';
 
 import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
-import { useOrganizationDetails } from '@hooks/superadmin/useOrganizationDetails';
+import { useOrganizationDetails } from '@hooks/pages/useOrganizationDetails';
 import { BasicTable } from '@components/global/table/Table';
 import HospitalDetails from '@components/hospital/HospitalDetails';
 import HospitalRoutes from '@components/hospital/HospitalRoutes';
