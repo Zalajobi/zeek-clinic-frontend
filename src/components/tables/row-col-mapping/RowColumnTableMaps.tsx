@@ -372,7 +372,7 @@ export const AdminDataRows = (data: AdminPayload[]) => {
         item?.middleName
       } ${item?.lastName?.toUpperCase()}`,
       email: item?.email,
-      role: item?.role,
+      role: item?.role?.replace('_', ' '),
       gender: item?.gender?.toUpperCase(),
       age: ageFromTimeStamp(item?.dob ?? ''),
       country: item?.country,
