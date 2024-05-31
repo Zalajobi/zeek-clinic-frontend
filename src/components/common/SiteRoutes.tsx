@@ -8,6 +8,7 @@ import {
   ProviderIcon,
   RolesIcon,
   ServiceAreaIcon,
+  SiteIcon,
   UnitIcon,
 } from '@components/global/GlobalIcons';
 
@@ -38,6 +39,12 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
     <Fragment>
       <div
         className={`w-full grid grid-cols-3 items-center gap-4 py-9 text-sm font-extrabold md:grid-cols-4 lg:grid-cols-6`}>
+        <BeautifulLink
+          icon={<SiteIcon className={`mr-2`} />}
+          text={`Site`}
+          to={`${prefixURL}/site/${siteId}`}
+        />
+
         <BeautifulLink
           icon={<ProviderIcon className={`mr-2`} />}
           text={`Providers`}
