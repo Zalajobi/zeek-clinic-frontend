@@ -219,3 +219,42 @@ export interface AdminPayload {
   createdAt: string | Date;
   updatedAt?: string | Date;
 }
+
+export interface PatientPayload {
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+  siteId: string;
+  status: string;
+  phone: string;
+  dob: string;
+  city: string;
+  state: string;
+  countryCode: string;
+  religion: string;
+  maritalStatus: string;
+  zipCode: string;
+  cardNumber: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  gender: string;
+  address: string;
+  alternateAddress: string;
+  country: string;
+  profilePic: string;
+  employerId: string;
+  companyName: string;
+  departmentId: string;
+  departmentName: string;
+  serviceAreaId: string;
+  serviceAreaName: string;
+  unitId: string;
+  unitName: string;
+  providerId: string;
+  providerTitle: string;
+  providerFirstName: string;
+  providerLastName: string;
+}

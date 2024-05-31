@@ -9,7 +9,10 @@ import { useSiteAdmins } from '@hooks/pages/useSiteAdmins';
 import AddAdminModal from '@components/modals/AddAdminModal';
 import { BasicTable } from '@components/global/table/Table';
 import { useDispatch } from 'react-redux';
-import { getTotalRowsAndPerPage } from '@util/index';
+import {
+  formatResponseKeyForDropdown,
+  getTotalRowsAndPerPage,
+} from '@util/index';
 import {
   setNoOfPages,
   setTotalDataCount,
@@ -65,6 +68,18 @@ const SiteAdmins = () => {
   }
 
   const columnData = useMemo(() => AdminDataColumns(), []);
+  columnData?.map((column) => {
+    if (
+      column.key !== 'action' &&
+      column.key !== 'gender' &&
+      column.key !== 'createdAt' &&
+      column.key !== 'status' &&
+      column.key !== 'name'
+    ) {
+      searchTableBy.push(formatResponseKeyForDropdown(column.key));
+    }
+  });
+
   const actionItems = useMemo(() => AdminActionItem(), []);
   const rowData = useMemo(
     () => AdminDataRows(tableData?.data?.admins as AdminPayload[]) ?? [],
