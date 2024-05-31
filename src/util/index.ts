@@ -17,6 +17,12 @@ export const formatTimeOrDays = (timestamp: string): string => {
   }
 };
 
+export const getISODateWithOffset = (days?: number): string => {
+  const date = new Date();
+  date.setDate(date.getDate() + (days ?? 0));
+  return date.toISOString();
+};
+
 export const convertObjectToGlobalSelectInputProps = (
   data: any,
   valueKey: string,

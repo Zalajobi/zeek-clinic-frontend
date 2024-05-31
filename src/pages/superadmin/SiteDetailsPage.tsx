@@ -8,8 +8,21 @@ import {
   LatestServiceArea,
   LatestRole,
 } from '@components/LatestUpdatesSiteDashboard';
+import { useSiteDetails } from '@hooks/pages/useSiteDetails';
+import { ActivityLineChart, LineChart } from '@components/global/Charts';
 
 const SiteDetailsPage = () => {
+  const {
+    siteId,
+    patientChartData,
+    patientChartLoading,
+    tabData,
+    tabValue,
+
+    // Functions
+    onUpdateChart,
+  } = useSiteDetails();
+
   return (
     <SuperadminBaseTemplate>
       <div className={`w-full flex flex-col`}>
@@ -26,6 +39,14 @@ const SiteDetailsPage = () => {
         <SiteRoutes platform={'SUPERADMIN'} />
 
         <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+          <ActivityLineChart
+            menuData={tabData}
+            label="Patient(s)"
+            updateChartTimeline={onUpdateChart}
+            timeLine={tabValue}
+            type="line"
+          />
+
           <LatestDepartments />
 
           <LatestUnit />

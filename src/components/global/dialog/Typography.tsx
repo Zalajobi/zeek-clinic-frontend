@@ -31,6 +31,7 @@ interface BeautifulLinkProps {
   text: string;
   icon: ReactNode;
   className?: string;
+  textClassName?: string;
 }
 
 export const Typography = ({
@@ -95,6 +96,7 @@ export const BeautifulLink = ({
   icon,
   text,
   className = '',
+  textClassName,
 }: BeautifulLinkProps) => {
   return (
     <Link
@@ -105,7 +107,7 @@ export const BeautifulLink = ({
       <Text
         text={text}
         weight={900}
-        className={`!text-[#3975ae] ml-1`}
+        className={`text-[#3975ae] ml-1 ${textClassName}`}
       />
     </Link>
   );
