@@ -5,9 +5,8 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import { HiPlusSm } from 'react-icons/hi';
 import SiteDetails from '@components/common/SiteDetails';
 import SiteRoutes from '@components/common/SiteRoutes';
-import { useSiteAdmins } from '@hooks/pages/useSiteAdmins';
-import AddAdminModal from '@components/modals/AddAdminModal';
-import { BasicTable } from '@components/global/table/Table';
+import { useSitePatients } from '@hooks/pages/useSitePatients';
+import AddPatientModal from '@components/modals/AddPatientModal';
 import { useDispatch } from 'react-redux';
 import {
   formatResponseKeyForDropdown,
@@ -19,23 +18,21 @@ import {
 } from '../../redux/reducers/tableReducer';
 import { useMemo } from 'react';
 import {
-  AdminActionItem,
-  AdminDataColumns,
-  AdminDataRows,
-  ProfileActionItem,
-  ProviderDataColumns,
-  ProviderDataRows,
+  PatientActionItem,
+  PatientDataColumns,
+  PatientDataRows,
 } from '@components/tables/row-col-mapping/RowColumnTableMaps';
-import { AdminPayload, ProviderPayload } from '@typeSpec/payloads';
+import { PatientPayload } from '@typeSpec/payloads';
+import { BasicTable } from '@components/global/table/Table';
 
-const SiteAdmins = () => {
+const SitePatientPage = () => {
   const dispatch = useDispatch();
   const searchTableBy: string[] = [];
   let noOfPages = 0;
 
   const {
     // Values
-    addAdminModal,
+    addPatientModal,
     tableData,
     tableDataLoading,
     perPage,
@@ -46,15 +43,15 @@ const SiteAdmins = () => {
     tabData,
 
     // Functions
-    handleAddAdminModal,
+    onUpdateAddPatientModal,
     onUpdatePerPageItem,
-    onUpdateSearchAdmin,
     onUpdateActiveTab,
     onHandleSortBy,
     onClickNext,
     onClickPrevious,
     onUpdateSearchKey,
-  } = useSiteAdmins();
+    onUpdateSearchPatient,
+  } = useSitePatients();
 
   if (!tableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
@@ -67,23 +64,28 @@ const SiteAdmins = () => {
     dispatch(setTotalDataCount(totalRows));
   }
 
-  const columnData = useMemo(() => AdminDataColumns(), []);
+  const columnData = useMemo(() => PatientDataColumns(), []);
   columnData?.map((column) => {
     if (
       column.key !== 'action' &&
       column.key !== 'gender' &&
       column.key !== 'createdAt' &&
       column.key !== 'status' &&
+      column.key !== 'area' &&
+      column.key !== 'unit' &&
+      column.key !== 'dept' &&
+      column.key !== 'provider' &&
+      column.key !== 'employer' &&
       column.key !== 'name'
     ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });
 
-  const actionItems = useMemo(() => AdminActionItem(), []);
+  const actionItems = useMemo(() => PatientActionItem(), []);
   const rowData = useMemo(
-    () => AdminDataRows(tableData?.data?.admins as AdminPayload[]) ?? [],
-    [tableData?.data?.admins]
+    () => PatientDataRows(tableData?.data?.patients as PatientPayload[]) ?? [],
+    [tableData?.data?.patients]
   );
 
   return (
@@ -123,7 +125,7 @@ const SiteAdmins = () => {
               text={`Add Admin`}
               type={`primary`}
               className={`h-[38px] max-w-4xl`}
-              click={handleAddAdminModal}
+              click={onUpdateAddPatientModal}
             />
           </div>
         </div>
@@ -151,19 +153,19 @@ const SiteAdmins = () => {
           dataLoading={tableDataLoading}
           searchKey={searchKey}
           updateSearchKey={onUpdateSearchKey}
-          onUpdateSearch={onUpdateSearchAdmin}
-          createNew={handleAddAdminModal}
+          onUpdateSearch={onUpdateSearchPatient}
+          createNew={onUpdateAddPatientModal}
           actionItems={actionItems}
           sortBy={onHandleSortBy}
         />
       </div>
 
-      <AddAdminModal
-        handler={handleAddAdminModal}
-        open={addAdminModal}
+      <AddPatientModal
+        open={addPatientModal}
+        handler={onUpdateAddPatientModal}
       />
     </SuperadminBaseTemplate>
   );
 };
 
-export default SiteAdmins;
+export default SitePatientPage;

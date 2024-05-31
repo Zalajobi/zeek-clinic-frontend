@@ -17,6 +17,46 @@ export type TimeZones = {
   zoneName: string;
 };
 
+// Create Patient
+export type CreatePatientInput = {
+  email: string;
+  siteId: string;
+  departmentId: string;
+  serviceAreaId: string;
+  unitId: string;
+  providerId: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  title: string;
+  gender: string;
+  dob: string;
+  address: string;
+  alternateAddress?: string;
+  city: string;
+  state: string;
+  religion: string;
+  country: string;
+  countryCode: string;
+  cardNumber: string;
+  zipCode: string;
+  profilePic: string;
+  maritalStatus:
+    | 'SINGLE'
+    | 'IN_A_RELATIONSHIP'
+    | 'ENGAGED'
+    | 'MARRIED'
+    | 'DIVORCED'
+    | 'WIDOWED'
+    | 'SEPARATED'
+    | 'COMPLICATED'
+    | 'OPEN_RELATIONSHIP'
+    | 'CIVIL_UNION'
+    | 'DOMESTIC_PARTNERSHIP'
+    | 'OTHERS';
+};
+
 // Create Provider
 export type CreateProviderInput = {
   title: string;

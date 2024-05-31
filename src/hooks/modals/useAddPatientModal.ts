@@ -1,18 +1,17 @@
+import { useParams } from 'react-router-dom';
+import { axiosPostRequestUserService } from '@lib/axios';
+import axios from 'axios';
+import { ONE_MILLION } from '@lib/constants/constants';
+import toast from 'react-hot-toast';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useEffect, useState } from 'react';
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { Country, State } from 'country-state-city';
-import { useParams } from 'react-router-dom';
-import { AllCountries, CreateProviderInput } from '@typeSpec/forms/form.types';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { axiosPostRequestUserService } from '@lib/axios';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { ONE_MILLION } from '@lib/constants/constants';
+import { AllCountries, CreatePatientInput } from '@typeSpec/forms/form.types';
 
-export const useAddProviderModal = (handler: () => void) => {
-  const { siteId } = useParams();
+export const useAddPatientModal = (handler: () => void) => {
   const queryClient = useQueryClient();
-  const [logo, setLogo] = useState('');
+  const { siteId } = useParams();
   const [phoneCode, setPhoneCode] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [allCountryStates, setAllCountryStates] = useState<
@@ -20,6 +19,7 @@ export const useAddProviderModal = (handler: () => void) => {
   >([]);
   const [allCountries, setAllCountries] = useState<SelectInputFieldProps[]>([]);
   const [country, setCountry] = useState('');
+  const [profilePic, setProfilePic] = useState('');
 
   useEffect(() => {
     let countriesUpdate: SelectInputFieldProps[] = [];
@@ -43,6 +43,38 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   };
 
+  // Create Patient
+  const { mutate: createPatientMutate } = useMutation(
+    async (data: CreatePatientInput) => {
+      try {
+        return await axiosPostRequestUserService(`/patient/create`, {
+          ...data,
+          siteId,
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Patient...', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) {
+          handler();
+          toast.success(result?.message);
+          queryClient
+            .resetQueries(['getPatientsCount', 'getTableData'])
+            .then(() => {});
+        } else {
+          toast.error('Something Went Wrong');
+        }
+      },
+    }
+  );
+
   // On Update Country
   const onUpdateCountry = (value: string) => {
     const countryInfo = Country.getCountryByCode(value) as AllCountries;
@@ -62,6 +94,28 @@ export const useAddProviderModal = (handler: () => void) => {
     setCountry(countryInfo.name);
     setPhoneCode(countryInfo.phonecode);
   };
+
+  // Get Providers
+  const { data: providerData, isLoading: providerDataLoading } = useQuery({
+    queryKey: ['getProviders', siteId],
+    queryFn: async () => {
+      try {
+        return await axiosPostRequestUserService(`/provider/search`, {
+          siteId,
+          startRow: 0,
+          endRow: ONE_MILLION,
+          sortModel: {
+            sort: 'asc',
+            colId: 'firstName',
+          },
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
 
   // Get Departments
   const { data: departments, isLoading: departmentsLoading } = useQuery({
@@ -114,86 +168,34 @@ export const useAddProviderModal = (handler: () => void) => {
     },
   });
 
-  // Get Roles
-  const { data: roles, isLoading: rolesLoading } = useQuery({
-    queryKey: ['getRoles'],
-    queryFn: async () => {
-      try {
-        return await axiosPostRequestUserService(
-          `/role/search`,
-          selectApiPayload
-        );
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.error?.message);
-        }
-      }
-    },
-  });
+  const handleCreateProvider = (data: CreatePatientInput) => {
+    data.dob = new Date(data.dob).toISOString();
+    data.phone = `+${Number(`${phoneCode}${data.phone}`)}`;
+    data.siteId = siteId ?? '';
+    data.countryCode = countryCode;
+    data.country = country;
+    data.profilePic = profilePic;
 
-  // Create Provider
-  const { mutate: createProviderMutate } = useMutation(
-    async (data: CreateProviderInput) => {
-      try {
-        return await axiosPostRequestUserService(`/provider/create`, {
-          ...data,
-          siteId,
-        });
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.error?.message);
-        }
-      }
-    },
-    {
-      onMutate: () => {
-        toast.loading('Creating Provider...', { duration: 3 });
-      },
-      onSuccess: (result) => {
-        if (result?.success) {
-          handler();
-          toast.success(result?.message);
-          queryClient
-            .resetQueries(['getProvidersCount', 'getTableData'])
-            .then(() => {});
-        } else {
-          toast.error('Something Went Wrong');
-        }
-      },
-    }
-  );
-
-  const createProvider = (data: CreateProviderInput) => {
-    const dateOfBirth = new Date(data.dob).toISOString();
-    const updatedData = {
-      ...data,
-      phone: `+${Number(`${phoneCode}${data.phone}`)}`,
-      siteId: siteId ?? '',
-      countryCode,
-      country,
-      profilePic: logo,
-      dob: dateOfBirth,
-    };
-    createProviderMutate(updatedData);
+    createPatientMutate(data);
   };
 
   return {
     // Values
-    logo,
-    allCountries,
-    allCountryStates,
+    providerData,
+    providerDataLoading,
     departments,
     departmentsLoading,
     units,
     unitsLoading,
     serviceAreas,
     serviceAreasLoading,
-    roles,
-    rolesLoading,
+    allCountries,
+    profilePic,
+    allCountryStates,
 
     // Functions
-    setLogo,
+    setProfilePic,
     onUpdateCountry,
-    createProvider,
+    handleCreateProvider,
   };
 };

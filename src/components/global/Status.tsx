@@ -14,13 +14,13 @@ const Status = ({ status, className }: StatusProps) => {
 
     if (status === 'ARCHIVED') return 'cyan';
 
-    if (status === 'DECEASED') return 'red';
+    if (status === 'DECEASED' || status === 'TERMINATED') return 'red';
 
-    if (status === 'DISCHARGED') return 'orange';
+    if (status === 'DISCHARGED' || status === 'SUSPENDED') return 'orange';
 
-    if (status === 'INPATIENT') return 'purple';
+    if (status === 'INPATIENT' || status === 'ON_LEAVE') return 'purple';
 
-    if (status === 'OUTPATIENT') return 'blue';
+    if (status === 'OUTPATIENT' || status === 'UNAVAILABLE') return 'blue';
 
     return 'red';
   };

@@ -206,3 +206,40 @@ export const CreateRoleInputSchema = yup.object({
   nursing: yup.boolean().default(false),
   plan: yup.boolean().default(false),
 });
+
+// Create Patient
+export const CreatePatientInputSchema = yup.object({
+  email: yup
+    .string()
+    .email('Email is badly formatted')
+    .required('Email field is required'),
+  departmentId: yup.string().required('Department is not selected'),
+  serviceAreaId: yup.string().required('Service Area is not selected'),
+  unitId: yup.string().required('Unit is not selected'),
+  providerId: yup.string().required('Primary Care Giver not selected'),
+  phone: yup.number().required('Phone number is required'),
+  firstName: yup.string().required('First name is required'),
+  lastName: yup.string().required('Last name is required'),
+  middleName: yup.string().optional(),
+  title: yup.string().required('User title is required'),
+  gender: yup.string().required('Please choose a valid gender'),
+  dob: yup.string().required('Date of birth is required'),
+  address: yup
+    .string()
+    .required('User address is required')
+    .min(10, 'Address too short'),
+  alternateAddress: yup.string().optional(),
+  city: yup.string().required('Choose the city you reside in'),
+  state: yup.string().optional(),
+  country: yup.string().required('Choose the country you reside in'),
+  cardNumber: yup
+    .string()
+    .min(10, 'Patient card number is too short')
+    .required('Input Patient Card Number'),
+  zipCode: yup.string().required('Zip code is required'),
+  maritalStatus: yup
+    .string()
+    .required('Relationship Status is a required field'),
+  religion: yup.string().optional(),
+  profilePic: yup.string().optional(),
+});
