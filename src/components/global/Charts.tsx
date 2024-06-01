@@ -53,7 +53,7 @@ export const LineAndBarChart = ({
   yAxis,
   chartLabel = '',
   curve = 'smooth',
-  height = '350',
+  height,
 }: LineAndBarChartProps) => {
   const chartConfig = {
     type: type,
@@ -171,7 +171,7 @@ export const PieAndDonutChart = ({
   loading,
   type = 'pie',
   chartLabel = '',
-  height = '350',
+  height,
 }: PieAndDonutChartProps) => {
   const chartConfig = {
     type: type,

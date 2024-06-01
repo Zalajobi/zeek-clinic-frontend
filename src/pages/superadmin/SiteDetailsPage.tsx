@@ -66,7 +66,7 @@ const SiteDetailsPage = () => {
             loading={patientChartLoading}
             xAxis={patientChartXAxis}
             yAxis={patientChartYAxis}
-            className={`col-span-2`}
+            className={`col-span-2 min-h-[470px]`}
           />
 
           <PatientDistributionChart
@@ -75,7 +75,7 @@ const SiteDetailsPage = () => {
             loading={patientDistributionChartLoading}
             labels={distributionLabel}
             series={distributionCount}
-            className={`col-span-2`}
+            className={`col-span-2 min-h-[470px]`}
             updateDistribution={onUpdateSiteDistributionChart}
             title={'Patient Distribution'}
           />

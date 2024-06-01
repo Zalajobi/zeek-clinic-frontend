@@ -57,6 +57,7 @@ export const PatientChart = ({
           xAxis={xAxis}
           yAxis={yAxis}
           curve={curve}
+          height={'380'}
         />
       </div>
     </CustomCard>
