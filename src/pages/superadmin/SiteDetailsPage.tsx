@@ -9,7 +9,9 @@ import {
   LatestRole,
 } from '@components/LatestUpdatesSiteDashboard';
 import { useSiteDetails } from '@hooks/pages/useSiteDetails';
-import { ActivityLineChart, LineChart } from '@components/global/Charts';
+import { LineAndBarChart } from '@components/global/Charts';
+import { processChartData } from '@util/index';
+import { ChartDataPayload } from '@typeSpec/payloads';
 
 const SiteDetailsPage = () => {
   const {
@@ -22,6 +24,16 @@ const SiteDetailsPage = () => {
     // Functions
     onUpdateChart,
   } = useSiteDetails();
+
+  const [xAxis, yAxis] = processChartData(
+    patientChartData?.data as ChartDataPayload[],
+    tabValue
+  );
+
+  // console.log({
+  //   xAxis,
+  //   yAxis
+  // })
 
   return (
     <SuperadminBaseTemplate>
@@ -39,12 +51,16 @@ const SiteDetailsPage = () => {
         <SiteRoutes platform={'SUPERADMIN'} />
 
         <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-3">
-          <ActivityLineChart
+          <LineAndBarChart
             menuData={tabData}
             label="Patient(s)"
             updateChartTimeline={onUpdateChart}
             timeLine={tabValue}
             type="line"
+            loading={patientChartLoading}
+            xAxis={xAxis}
+            yAxis={yAxis}
+            chartLabel="Patient"
           />
 
           <LatestDepartments />

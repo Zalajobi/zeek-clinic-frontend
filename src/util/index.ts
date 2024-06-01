@@ -1,5 +1,7 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { parsePhoneNumber } from 'awesome-phonenumber';
+import { ChartDataPayload } from '@typeSpec/payloads';
+import moment from 'moment/moment';
 
 export const formatTimeOrDays = (timestamp: string): string => {
   const currentTime = new Date();
@@ -119,4 +121,54 @@ export const getTotalRowsAndPerPage = (
     noOfPages,
     totalRows: data?.totalRows,
   };
+};
+
+export const processChartData = (
+  data: ChartDataPayload[],
+  timeLine:
+    | 'All'
+    | 'Last Day'
+    | 'Last Week'
+    | 'Last 30 Days'
+    | 'Last 180 Days'
+    | 'Last 360 Days'
+) => {
+  const xAxis: string[] = [],
+    yAxis: number[] = [];
+
+  data?.map((item) => {
+    switch (timeLine) {
+      case 'All':
+        xAxis.push(moment(item.date).format('MMM YYYY'));
+        yAxis.push(Number(item.count));
+        break;
+
+      case 'Last Day':
+        xAxis.push(moment(item.date).format('HH A'));
+        yAxis.push(Number(item.count));
+        break;
+
+      case 'Last Week':
+        xAxis.push(moment(item.date).format('D ddd'));
+        yAxis.push(Number(item.count));
+        break;
+
+      case 'Last 30 Days':
+        xAxis.push(moment(item.date).format('DD MMM'));
+        yAxis.push(Number(item.count));
+        break;
+
+      case 'Last 180 Days':
+        xAxis.push(moment(item.date).format('DD MMM YYYY'));
+        yAxis.push(Number(item.count));
+        break;
+
+      case 'Last 360 Days':
+        xAxis.push(moment(item.date).format('MMM'));
+        yAxis.push(Number(item.count));
+        break;
+    }
+  });
+
+  return [xAxis, yAxis];
 };

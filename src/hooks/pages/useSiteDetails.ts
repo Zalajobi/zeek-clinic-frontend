@@ -5,6 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { getISODateWithOffset } from '@util/index';
+import { ONE_MILLION } from '@lib/constants/constants';
 
 export const useSiteDetails = () => {
   const { siteId } = useParams();
@@ -59,8 +60,62 @@ export const useSiteDetails = () => {
       | 'Last 180 Days'
       | 'Last 360 Days'
   ) => {
-    console.log(value);
     setTabValue(value);
+    switch (value) {
+      case 'All':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-ONE_MILLION),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'month',
+          siteId,
+        });
+        break;
+
+      case 'Last Day':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-1),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'hour',
+          siteId,
+        });
+        break;
+
+      case 'Last Week':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-7),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'day',
+          siteId,
+        });
+        break;
+
+      case 'Last 30 Days':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-30),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'day',
+          siteId,
+        });
+        break;
+
+      case 'Last 180 Days':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-180),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'week',
+          siteId,
+        });
+        break;
+
+      case 'Last 360 Days':
+        setPatientChartPayload({
+          fromDate: getISODateWithOffset(-360),
+          toDate: getISODateWithOffset(1),
+          groupBy: 'month',
+          siteId,
+        });
+        break;
+    }
   };
 
   return {

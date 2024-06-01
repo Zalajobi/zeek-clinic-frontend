@@ -101,12 +101,6 @@ export const pieChard3dOptions = {
 };
 
 export const materialLineChartConfig = {
-  series: [
-    {
-      name: 'Sales',
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-    },
-  ],
   options: {
     chart: {
       toolbar: {
@@ -129,33 +123,6 @@ export const materialLineChartConfig = {
     },
     markers: {
       size: 0,
-    },
-    xaxis: {
-      axisTicks: {
-        show: false,
-      },
-      axisBorder: {
-        show: true,
-      },
-      labels: {
-        style: {
-          colors: '#616161',
-          fontSize: '12px',
-          fontFamily: 'inherit',
-          fontWeight: 400,
-        },
-      },
-      categories: [
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
     },
     yaxis: {
       labels: {
