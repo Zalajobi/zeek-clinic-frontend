@@ -17,11 +17,14 @@ export const useSiteDetails = () => {
     | 'Last 180 Days'
     | 'Last 360 Days'
   >('Last Week');
+  const [siteDistributionValue, setSiteDistributionValue] = useState<
+    'Department' | 'Service Area' | 'Unit'
+  >('Department');
 
   const [patientChartPayload, setPatientChartPayload] = useState({
-    fromDate: getISODateWithOffset(-365),
+    fromDate: getISODateWithOffset(-7),
     toDate: getISODateWithOffset(1),
-    groupBy: 'week',
+    groupBy: 'day',
     siteId,
   });
 
@@ -34,6 +37,8 @@ export const useSiteDetails = () => {
     'Last 360 Days',
   ];
 
+  const siteDistributionData = ['department', 'Service Area', 'unit'];
+
   // Get Patient Chart Data
   const { data: patientChartData, isLoading: patientChartLoading } = useQuery({
     queryKey: ['getTableData', patientChartPayload],
@@ -42,6 +47,25 @@ export const useSiteDetails = () => {
         return await axiosGetRequestUserService(
           `/patient/chart`,
           patientChartPayload
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Site Distribution Chart Data
+  const {
+    data: patientDistributionChartData,
+    isLoading: patientDistributionChartLoading,
+  } = useQuery({
+    queryKey: ['siteDistributionData', siteDistributionValue],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/patient/distribution/${siteDistributionValue}/${siteId}`
         );
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -118,14 +142,25 @@ export const useSiteDetails = () => {
     }
   };
 
+  const onUpdateSiteDistributionChart = (
+    value: 'Department' | 'Service Area' | 'Unit'
+  ) => {
+    setSiteDistributionValue(value);
+  };
+
   return {
     siteId,
     patientChartData,
     patientChartLoading,
     tabData,
     tabValue,
+    siteDistributionData,
+    siteDistributionValue,
+    patientDistributionChartData,
+    patientDistributionChartLoading,
 
     // Functions
     onUpdateChart,
+    onUpdateSiteDistributionChart,
   };
 };

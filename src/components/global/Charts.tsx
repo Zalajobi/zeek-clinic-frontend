@@ -5,6 +5,7 @@ import Chart from 'react-apexcharts';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
 import { DropdownMenu } from '@components/global/MenuTabs';
+import { Fragment } from 'react';
 
 interface CustomChartProps {
   data: any;
@@ -21,11 +22,6 @@ export const PieChart3D = ({
   height = '400px',
   className = '',
 }: CustomChartProps) => {
-  const options = {
-    ...pieChard3dOptions,
-    title,
-  };
-
   return (
     <div className={className}>
       <h1>React Google Chart</h1>
@@ -41,27 +37,23 @@ export const PieChart3D = ({
 };
 
 interface LineAndBarChartProps {
-  menuData: any[];
-  label: string;
-  updateChartTimeline: (value: any) => void;
-  timeLine: string;
   type: 'line' | 'bar';
   loading: boolean;
   xAxis: string[] | number[];
   yAxis: string[] | number[];
-  chartLabel: string;
+  chartLabel?: string;
+  curve?: 'smooth' | 'straight' | 'stepline';
+  height?: string;
 }
 
 export const LineAndBarChart = ({
-  menuData,
-  label,
-  updateChartTimeline,
-  timeLine,
   type,
   loading,
   xAxis,
   yAxis,
-  chartLabel,
+  chartLabel = '',
+  curve = 'smooth',
+  height = '350',
 }: LineAndBarChartProps) => {
   const chartConfig = {
     type: type,
@@ -74,19 +66,24 @@ export const LineAndBarChart = ({
     options: {
       chart: {
         toolbar: {
-          show: false,
+          show: true,
         },
       },
       title: {
-        show: '',
+        text: chartLabel,
+        align: 'center',
+        style: {
+          fontSize: '16px',
+          color: '#263238',
+        },
       },
       dataLabels: {
-        enabled: false,
+        enabled: true,
       },
       colors: ['#020617', '#F44336', '#E91E63', '#9C27B0', '#3975AE'],
       stroke: {
         lineCap: 'round',
-        curve: 'smooth',
+        curve: curve,
       },
       markers: {
         size: 0,
@@ -142,37 +139,99 @@ export const LineAndBarChart = ({
   };
 
   return (
-    <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
-      <div
-        className={`grid grid-cols-2 gap-4 w-full my-4 h-10 'md:grid-cols-2`}>
-        <Typography
-          Tag={'h4'}
-          text={label}
-          className="text-left mr-auto"
-        />
-
-        <DropdownMenu
-          value={timeLine}
-          menuItems={menuData}
-          change={updateChartTimeline}
-          buttonClass={`border-gray-100 h-[42px]`}
-        />
-      </div>
-
+    <Fragment>
       {!loading ? (
-        <div className="w-full">
-          {/*// @ts-ignore*/}
-          <Chart
-            {...chartConfig}
-            type={type}
-            height="350"
-          />
-        </div>
+        // @ts-ignore
+        <Chart
+          {...chartConfig}
+          type={type}
+          height={height}
+        />
       ) : (
         <div className="flex items-center justify-center h-full w-full">
           <Spinner className="h-20 w-20" />
         </div>
       )}
-    </CustomCard>
+    </Fragment>
+  );
+};
+
+interface PieAndDonutChartProps {
+  labels: string[] | number[];
+  series: string[] | number[];
+  loading: boolean;
+  type?: 'pie' | 'donut';
+  chartLabel?: string;
+  height?: string;
+}
+
+export const PieAndDonutChart = ({
+  labels,
+  series,
+  loading,
+  type = 'pie',
+  chartLabel = '',
+  height = '350',
+}: PieAndDonutChartProps) => {
+  const chartConfig = {
+    type: type,
+    series: series,
+    options: {
+      pie: {
+        expandOnClick: true,
+      },
+      labels: labels,
+      title: {
+        text: chartLabel,
+        align: 'center',
+        style: {
+          fontSize: '16px',
+          color: '#263238',
+        },
+      },
+      chart: {
+        toolbar: {
+          show: true,
+        },
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      colors: ['#020617', '#ff8f00', '#00897b', '#1e88e5', '#d81b60'],
+      legend: {
+        show: true,
+        position: 'bottom',
+        horizontalAlign: 'left',
+        floating: false,
+        labels: {
+          useSeriesColors: true,
+        },
+        onItemClick: {
+          toggleDataSeries: true,
+        },
+        onItemHover: {
+          highlightDataSeries: true,
+        },
+        formatter: function (seriesName: any) {
+          return seriesName;
+        },
+      },
+    },
+  };
+
+  return (
+    <Fragment>
+      {!loading ? (
+        // @ts-ignore
+        <Chart
+          {...chartConfig}
+          height={height}
+        />
+      ) : (
+        <div className="flex items-center justify-center h-full w-full">
+          <Spinner className="h-20 w-20" />
+        </div>
+      )}
+    </Fragment>
   );
 };

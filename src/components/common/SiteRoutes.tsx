@@ -59,8 +59,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/${siteId}`)
@@ -84,8 +84,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/provider/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/provider/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/provider/${siteId}`)
@@ -109,8 +109,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/patient/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/patient/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/patient/${siteId}`)
@@ -134,8 +134,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/unit/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/unit/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/unit/${siteId}`)
@@ -159,8 +159,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/department/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/department/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/department/${siteId}`)
@@ -184,8 +184,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/service-area/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/service-area/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/service-area/${siteId}`)
@@ -209,8 +209,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/role/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/role/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/role/${siteId}`)
@@ -234,8 +234,8 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
           to={`${prefixURL}/site/admin/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/admin/${siteId}`)
-              ? 'bg-[#3975AE]'
-              : 'bg-white'
+              ? '!bg-[#3975AE]'
+              : '!bg-white'
           }`}
           textClassName={`${
             isCurrentPath(`${prefixURL}/site/admin/${siteId}`)

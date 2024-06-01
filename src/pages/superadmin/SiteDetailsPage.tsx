@@ -9,31 +9,37 @@ import {
   LatestRole,
 } from '@components/LatestUpdatesSiteDashboard';
 import { useSiteDetails } from '@hooks/pages/useSiteDetails';
-import { LineAndBarChart } from '@components/global/Charts';
-import { processChartData } from '@util/index';
-import { ChartDataPayload } from '@typeSpec/payloads';
+import { processCountAndChartData } from '@util/index';
+import { CountDataPayload } from '@typeSpec/payloads';
+import {
+  PatientChart,
+  PatientDistributionChart,
+} from '@components/SiteAnalytics';
 
 const SiteDetailsPage = () => {
   const {
-    siteId,
     patientChartData,
     patientChartLoading,
     tabData,
     tabValue,
+    siteDistributionData,
+    siteDistributionValue,
+    patientDistributionChartData,
+    patientDistributionChartLoading,
 
     // Functions
     onUpdateChart,
+    onUpdateSiteDistributionChart,
   } = useSiteDetails();
 
-  const [xAxis, yAxis] = processChartData(
-    patientChartData?.data as ChartDataPayload[],
+  const [patientChartXAxis, patientChartYAxis] = processCountAndChartData(
+    patientChartData?.data as CountDataPayload[],
     tabValue
   );
 
-  // console.log({
-  //   xAxis,
-  //   yAxis
-  // })
+  const [distributionLabel, distributionCount] = processCountAndChartData(
+    patientDistributionChartData?.data as CountDataPayload[]
+  );
 
   return (
     <SuperadminBaseTemplate>
@@ -50,26 +56,37 @@ const SiteDetailsPage = () => {
 
         <SiteRoutes platform={'SUPERADMIN'} />
 
-        <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-3">
-          <LineAndBarChart
+        <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+          <PatientChart
             menuData={tabData}
             label="Patient(s)"
             updateChartTimeline={onUpdateChart}
             timeLine={tabValue}
             type="line"
             loading={patientChartLoading}
-            xAxis={xAxis}
-            yAxis={yAxis}
-            chartLabel="Patient"
+            xAxis={patientChartXAxis}
+            yAxis={patientChartYAxis}
+            className={`col-span-2`}
           />
 
-          <LatestDepartments />
+          <PatientDistributionChart
+            distribution={siteDistributionValue}
+            distributionData={siteDistributionData}
+            loading={patientDistributionChartLoading}
+            labels={distributionLabel}
+            series={distributionCount}
+            className={`col-span-2`}
+            updateDistribution={onUpdateSiteDistributionChart}
+            title={'Patient Distribution'}
+          />
 
-          <LatestUnit />
+          <LatestDepartments className={`col-span-2`} />
 
-          <LatestServiceArea />
+          <LatestUnit className={`col-span-2`} />
 
-          <LatestRole />
+          <LatestServiceArea className={`col-span-2`} />
+
+          <LatestRole className={`col-span-2`} />
         </div>
       </div>
     </SuperadminBaseTemplate>

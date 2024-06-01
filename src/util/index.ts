@@ -1,6 +1,6 @@
 import { SelectInputFieldProps } from '@typeSpec/common';
 import { parsePhoneNumber } from 'awesome-phonenumber';
-import { ChartDataPayload } from '@typeSpec/payloads';
+import { CountDataPayload } from '@typeSpec/payloads';
 import moment from 'moment/moment';
 
 export const formatTimeOrDays = (timestamp: string): string => {
@@ -123,9 +123,9 @@ export const getTotalRowsAndPerPage = (
   };
 };
 
-export const processChartData = (
-  data: ChartDataPayload[],
-  timeLine:
+export const processCountAndChartData = (
+  data: CountDataPayload[],
+  timeLine?:
     | 'All'
     | 'Last Day'
     | 'Last Week'
@@ -136,39 +136,45 @@ export const processChartData = (
   const xAxis: string[] = [],
     yAxis: number[] = [];
 
-  data?.map((item) => {
-    switch (timeLine) {
-      case 'All':
-        xAxis.push(moment(item.date).format('MMM YYYY'));
-        yAxis.push(Number(item.count));
-        break;
+  if (timeLine)
+    data?.map((item) => {
+      switch (timeLine) {
+        case 'All':
+          xAxis.push(moment(item.date).format('MMM YYYY'));
+          yAxis.push(Number(item.count));
+          break;
 
-      case 'Last Day':
-        xAxis.push(moment(item.date).format('HH A'));
-        yAxis.push(Number(item.count));
-        break;
+        case 'Last Day':
+          xAxis.push(moment(item.date).format('HH A'));
+          yAxis.push(Number(item.count));
+          break;
 
-      case 'Last Week':
-        xAxis.push(moment(item.date).format('D ddd'));
-        yAxis.push(Number(item.count));
-        break;
+        case 'Last Week':
+          xAxis.push(moment(item.date).format('D ddd'));
+          yAxis.push(Number(item.count));
+          break;
 
-      case 'Last 30 Days':
-        xAxis.push(moment(item.date).format('DD MMM'));
-        yAxis.push(Number(item.count));
-        break;
+        case 'Last 30 Days':
+          xAxis.push(moment(item.date).format('DD MMM'));
+          yAxis.push(Number(item.count));
+          break;
 
-      case 'Last 180 Days':
-        xAxis.push(moment(item.date).format('DD MMM YYYY'));
-        yAxis.push(Number(item.count));
-        break;
+        case 'Last 180 Days':
+          xAxis.push(moment(item.date).format('DD MMM YYYY'));
+          yAxis.push(Number(item.count));
+          break;
 
-      case 'Last 360 Days':
-        xAxis.push(moment(item.date).format('MMM'));
-        yAxis.push(Number(item.count));
-        break;
-    }
-  });
+        case 'Last 360 Days':
+          xAxis.push(moment(item.date).format('MMM'));
+          yAxis.push(Number(item.count));
+          break;
+      }
+    });
+  else
+    data?.map((item) => {
+      xAxis.push(item?.name ?? '');
+      yAxis.push(Number(item?.count ?? 0));
+    });
 
   return [xAxis, yAxis];
 };
