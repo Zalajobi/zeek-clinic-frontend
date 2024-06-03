@@ -24,7 +24,11 @@ import {
 } from '@components/global/GlobalIcons';
 import AddRoleModal from '@components/modals/AddRoleModal';
 
-export const LatestDepartments = () => {
+interface LatestProps {
+  className?: string;
+}
+
+export const LatestDepartments = ({ className = '' }: LatestProps) => {
   const {
     siteId,
     departments,
@@ -35,7 +39,8 @@ export const LatestDepartments = () => {
   } = useLatestDepartment();
 
   return (
-    <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
+    <CustomCard
+      className={`flex flex-col items-baseline justify-start w-full min-h-[400px] ${className}`}>
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}
@@ -116,7 +121,7 @@ export const LatestDepartments = () => {
   );
 };
 
-export const LatestUnit = () => {
+export const LatestUnit = ({ className = '' }: LatestProps) => {
   const {
     siteId,
     unitsLoading,
@@ -127,7 +132,8 @@ export const LatestUnit = () => {
   } = useLatestUnit();
 
   return (
-    <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
+    <CustomCard
+      className={`flex flex-col items-baseline justify-start w-full min-h-[400px] ${className}`}>
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}
@@ -208,7 +214,7 @@ export const LatestUnit = () => {
   );
 };
 
-export const LatestServiceArea = () => {
+export const LatestServiceArea = ({ className = '' }: LatestProps) => {
   const {
     siteId,
     createServiceAreaModal,
@@ -219,7 +225,8 @@ export const LatestServiceArea = () => {
   } = useLatestServiceArea();
 
   return (
-    <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
+    <CustomCard
+      className={`flex flex-col items-baseline justify-start w-full min-h-[400px] ${className}`}>
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}
@@ -300,7 +307,7 @@ export const LatestServiceArea = () => {
   );
 };
 
-export const LatestRole = () => {
+export const LatestRole = ({ className = '' }: LatestProps) => {
   const {
     siteId,
     createRoleModal,
@@ -310,7 +317,8 @@ export const LatestRole = () => {
     onUpdateCreateRoleModal,
   } = useLatestRole();
   return (
-    <CustomCard className="flex flex-col items-baseline justify-start w-full min-h-[400px]">
+    <CustomCard
+      className={`flex flex-col items-baseline justify-start w-full min-h-[400px] ${className}`}>
       <div className="grid grid-cols-2 gap-4 w-full my-4">
         <Typography
           Tag={'h4'}

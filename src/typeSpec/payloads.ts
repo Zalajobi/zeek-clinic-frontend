@@ -258,3 +258,9 @@ export interface PatientPayload {
   providerFirstName: string;
   providerLastName: string;
 }
+
+export interface CountDataPayload {
+  date?: string;
+  name?: string;
+  count: string | number;
+}

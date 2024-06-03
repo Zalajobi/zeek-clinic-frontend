@@ -45,7 +45,7 @@ const Text = ({
   textIndent = '0',
   textBreak = 'normal',
   style = 'normal',
-  color = 'black',
+  color = '',
 }: TextProps) => {
   return (
     <p

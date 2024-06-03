@@ -6,6 +6,7 @@ import {
   FaBuilding,
   FaUsers,
   FaUserLock,
+  FaBuildingColumns,
 } from 'react-icons/fa6';
 import { Fragment } from 'react';
 
@@ -119,6 +120,22 @@ export const AdminIcon = ({
   return (
     <Fragment>
       <FaUserLock
+        size={size}
+        className={className}
+        color={color}
+      />
+    </Fragment>
+  );
+};
+
+export const SiteIcon = ({
+  className = '',
+  size = 20,
+  color = '#3975ae',
+}: IconProps) => {
+  return (
+    <Fragment>
+      <FaBuildingColumns
         size={size}
         className={className}
         color={color}

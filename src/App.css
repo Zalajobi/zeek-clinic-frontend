@@ -3,6 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.apexcharts-legend {
+  display: flex !important;
+  overflow-x: scroll !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  max-height: 20px !important;
+}
+.apexcharts-legend-series {
+  display: inline-block !important;
+  margin-right: 10px !important;
+  white-space: nowrap !important;
+}
+.apexcharts-legend-text {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
 .App {
   text-align: center;
 }

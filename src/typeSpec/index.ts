@@ -113,3 +113,10 @@ export type SearchRequestPayload = {
   startRow?: number | undefined;
   endRow?: number | undefined;
 };
+
+export type ChartRequestPayload = {
+  siteId?: string | undefined;
+  fromDate?: Date | string | undefined;
+  toDate?: Date | string | undefined;
+  groupBy?: 'hour' | 'day' | 'week' | 'month' | 'year' | undefined;
+};
