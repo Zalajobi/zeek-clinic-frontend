@@ -64,7 +64,7 @@ export const PatientChart = ({
   );
 };
 
-interface PatientDistributionChartProps {
+interface DistributionChartProps {
   labels: string[] | number[];
   series: string[] | number[];
   loading: boolean;
@@ -76,7 +76,7 @@ interface PatientDistributionChartProps {
   type?: 'pie' | 'donut';
 }
 
-export const PatientDistributionChart = ({
+export const DistributionChart = ({
   labels,
   series,
   loading,
@@ -86,7 +86,7 @@ export const PatientDistributionChart = ({
   distributionData,
   className,
   type = 'pie',
-}: PatientDistributionChartProps) => {
+}: DistributionChartProps) => {
   return (
     <CustomCard
       className={`flex flex-col items-baseline justify-start w-full min-h-[400px] ${className}`}>

@@ -11,10 +11,7 @@ import {
 import { useSiteDetails } from '@hooks/pages/useSiteDetails';
 import { processCountAndChartData } from '@util/index';
 import { CountDataPayload } from '@typeSpec/payloads';
-import {
-  PatientChart,
-  PatientDistributionChart,
-} from '@components/SiteAnalytics';
+import { PatientChart, DistributionChart } from '@components/SiteAnalytics';
 
 const SiteDetailsPage = () => {
   const {
@@ -26,20 +23,33 @@ const SiteDetailsPage = () => {
     siteDistributionValue,
     patientDistributionChartData,
     patientDistributionChartLoading,
+    providerDistributionChartData,
+    providerDistributionChartLoading,
+    providerSiteDistributionValue,
+    providerSiteDistributionData,
 
     // Functions
     onUpdateChart,
     onUpdateSiteDistributionChart,
+    onUpdateProviderSiteDistributionChart,
   } = useSiteDetails();
 
+  // Patient Graph Data
   const [patientChartXAxis, patientChartYAxis] = processCountAndChartData(
     patientChartData?.data as CountDataPayload[],
     tabValue
   );
 
+  // Patient Distribution Chart Data
   const [distributionLabel, distributionCount] = processCountAndChartData(
     patientDistributionChartData?.data as CountDataPayload[]
   );
+
+  // Provider Distribution Chart Data
+  const [providerDistributionLabel, providerDistributionCount] =
+    processCountAndChartData(
+      providerDistributionChartData?.data as CountDataPayload[]
+    );
 
   return (
     <SuperadminBaseTemplate>
@@ -59,7 +69,7 @@ const SiteDetailsPage = () => {
         <div className="flex flex-col gap-6 my-6 md:grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
           <PatientChart
             menuData={tabData}
-            label="Patient(s)"
+            label="New Patient(s)"
             updateChartTimeline={onUpdateChart}
             timeLine={tabValue}
             type="line"
@@ -69,7 +79,8 @@ const SiteDetailsPage = () => {
             className={`col-span-2 min-h-[470px]`}
           />
 
-          <PatientDistributionChart
+          {/*Patient Distribution Chart*/}
+          <DistributionChart
             distribution={siteDistributionValue}
             distributionData={siteDistributionData}
             loading={patientDistributionChartLoading}
@@ -78,6 +89,18 @@ const SiteDetailsPage = () => {
             className={`col-span-2 min-h-[470px]`}
             updateDistribution={onUpdateSiteDistributionChart}
             title={'Patient Distribution'}
+          />
+
+          {/*Provider Distribution Chart*/}
+          <DistributionChart
+            distribution={providerSiteDistributionValue}
+            distributionData={providerSiteDistributionData}
+            loading={providerDistributionChartLoading}
+            labels={providerDistributionLabel}
+            series={providerDistributionCount}
+            className={`col-span-2 min-h-[470px]`}
+            updateDistribution={onUpdateProviderSiteDistributionChart}
+            title={'Provider Distribution'}
           />
 
           <LatestDepartments className={`col-span-2`} />

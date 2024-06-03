@@ -20,6 +20,8 @@ export const useSiteDetails = () => {
   const [siteDistributionValue, setSiteDistributionValue] = useState<
     'Department' | 'Service Area' | 'Unit'
   >('Department');
+  const [providerSiteDistributionValue, setProviderSiteDistributionValue] =
+    useState<'Department' | 'Service Area' | 'Unit' | 'Role'>('Department');
 
   const [patientChartPayload, setPatientChartPayload] = useState({
     fromDate: getISODateWithOffset(-7),
@@ -39,6 +41,13 @@ export const useSiteDetails = () => {
 
   const siteDistributionData = ['department', 'Service Area', 'unit'];
 
+  const providerSiteDistributionData = [
+    'department',
+    'Service Area',
+    'unit',
+    'Role',
+  ];
+
   // Get Patient Chart Data
   const { data: patientChartData, isLoading: patientChartLoading } = useQuery({
     queryKey: ['getTableData', patientChartPayload],
@@ -56,16 +65,35 @@ export const useSiteDetails = () => {
     },
   });
 
-  // Get Site Distribution Chart Data
+  // Get Site Patient Distribution Chart Data
   const {
     data: patientDistributionChartData,
     isLoading: patientDistributionChartLoading,
   } = useQuery({
-    queryKey: ['siteDistributionData', siteDistributionValue],
+    queryKey: ['patientSiteDistributionData', siteDistributionValue],
     queryFn: async () => {
       try {
         return await axiosGetRequestUserService(
           `/patient/distribution/${siteDistributionValue}/${siteId}`
+        );
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+  });
+
+  // Get Site Provider Distribution Chart Data
+  const {
+    data: providerDistributionChartData,
+    isLoading: providerDistributionChartLoading,
+  } = useQuery({
+    queryKey: ['providerSiteDistributionData', providerSiteDistributionValue],
+    queryFn: async () => {
+      try {
+        return await axiosGetRequestUserService(
+          `/provider/distribution/${providerSiteDistributionValue}/${siteId}`
         );
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -148,8 +176,13 @@ export const useSiteDetails = () => {
     setSiteDistributionValue(value);
   };
 
+  const onUpdateProviderSiteDistributionChart = (
+    value: 'Department' | 'Service Area' | 'Unit' | 'Role'
+  ) => {
+    setProviderSiteDistributionValue(value);
+  };
+
   return {
-    siteId,
     patientChartData,
     patientChartLoading,
     tabData,
@@ -158,9 +191,14 @@ export const useSiteDetails = () => {
     siteDistributionValue,
     patientDistributionChartData,
     patientDistributionChartLoading,
+    providerDistributionChartData,
+    providerDistributionChartLoading,
+    providerSiteDistributionValue,
+    providerSiteDistributionData,
 
     // Functions
     onUpdateChart,
     onUpdateSiteDistributionChart,
+    onUpdateProviderSiteDistributionChart,
   };
 };
