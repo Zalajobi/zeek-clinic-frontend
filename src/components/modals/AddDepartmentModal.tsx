@@ -112,10 +112,10 @@ export const CreateBulkDepartmentModal = ({
         <ExcelFileUpload processedData={processedExcelFile} />
 
         {fileUploaded && (
-          <div className="flex flex-col gap-4 md:grid md:grid-cols-3 mt-10">
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-2 mt-10">
             {/*Name*/}
             <SelectInput
-              label={`Service-Area Name`}
+              label={`Name`}
               options={headers}
               className={`my-3`}
               change={setDepartmentName}
@@ -124,7 +124,7 @@ export const CreateBulkDepartmentModal = ({
 
             {/*Description*/}
             <SelectInput
-              label={`Service-Area Description`}
+              label={`Description`}
               options={headers}
               className={`my-3`}
               change={setDepartmentDescription}

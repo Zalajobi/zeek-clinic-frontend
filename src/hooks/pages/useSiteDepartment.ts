@@ -12,6 +12,7 @@ import { ONE_MILLION } from '@lib/constants/constants';
 export const useSiteDepartment = () => {
   const { siteId } = useParams();
   const [addDepartmentModal, setAddDepartmentModal] = useState(false);
+  const [addBulkDepartmentModal, setAddBulkDepartmentModal] = useState(false);
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [resultFrom, setResultFrom] = useState<number | null>(null);
@@ -135,6 +136,11 @@ export const useSiteDepartment = () => {
     setAddDepartmentModal((cur) => !cur);
   };
 
+  // Handler Add Department Modal
+  const handleBulkCreateDepartmentModal = () => {
+    setAddBulkDepartmentModal((cur) => !cur);
+  };
+
   return {
     // Values
     addDepartmentModal,
@@ -145,6 +151,7 @@ export const useSiteDepartment = () => {
     resultTo,
     currentPage,
     searchKey,
+    addBulkDepartmentModal,
 
     // Functions
     handleAddDepartmentModal,
@@ -154,5 +161,6 @@ export const useSiteDepartment = () => {
     onUpdateSearchKey,
     onUpdatePerPageItem,
     onUpdateSearchDepartment,
+    handleBulkCreateDepartmentModal,
   };
 };
