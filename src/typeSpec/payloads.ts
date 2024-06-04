@@ -114,13 +114,15 @@ export interface RolesPayload {
 }
 
 export interface ServiceAreaPayload {
-  id?: string;
-  name?: string;
-  description?: string;
-  siteId?: string;
-  type?: string;
-  createdAt?: Date;
-  updated_at?: Date;
+  id: string;
+  name: string;
+  description: string;
+  siteId: string;
+  createdAt: string;
+  updatedAt: string;
+  providerCount: string;
+  patientCount: string;
+  type: string;
 }
 
 export interface PersonalInfoPayload {
@@ -142,12 +144,6 @@ export interface PersonalInfoPayload {
   religion?: string;
   marital_status?: string;
   createdAt?: string;
-}
-
-export interface ServiceAreaPayload {
-  id?: string;
-  name?: string;
-  description?: string;
 }
 
 export interface RolePayload {

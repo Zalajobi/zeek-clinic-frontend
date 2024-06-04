@@ -35,6 +35,7 @@ import SiteAdmins from '@pages/superadmin/SiteAdmins';
 import SitePatientPage from '@pages/superadmin/SitePatientPage';
 import SiteDepartment from '@pages/superadmin/SiteDepartment';
 import SiteUnit from '@pages/superadmin/SiteUnit';
+import SiteServiceArea from '@pages/superadmin/SiteServiceArea';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -195,6 +196,12 @@ const router = createBrowserRouter([
       {
         path: '/superadmin/site/unit/:siteId',
         element: <SiteUnit />,
+      },
+
+      // Site ServiceArea Details Page
+      {
+        path: '/superadmin/site/service-area/:siteId',
+        element: <SiteServiceArea />,
       },
     ],
   },

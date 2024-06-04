@@ -3,6 +3,7 @@ import {
   DepartmentPayload,
   PatientPayload,
   ProviderPayload,
+  ServiceAreaPayload,
   SitePayload,
   UnitPayload,
 } from '@typeSpec/payloads';
@@ -732,6 +733,95 @@ export const UnitDataRows = (data: UnitPayload[]) => {
   return rowItems;
 };
 // Unit End
+
+// Service-Area Start
+export const ServiceAreaDataColumns = () => {
+  return [
+    {
+      key: 'name',
+      value: 'Name',
+      sortable: true,
+    },
+    {
+      key: 'description',
+      value: 'Description',
+      sortable: true,
+    },
+    {
+      key: 'type',
+      value: 'Type',
+      sortable: true,
+    },
+    {
+      key: 'providerCount',
+      value: 'Providers',
+      sortable: false,
+    },
+    {
+      key: 'patientCount',
+      value: 'Patients',
+      sortable: false,
+    },
+    {
+      key: 'createdAt',
+      value: 'Created At',
+      sortable: true,
+    },
+    {
+      key: 'action',
+      value: 'Action',
+      sortable: false,
+    },
+  ];
+};
+
+export const ServiceAreaActionItem = () => {
+  return [
+    {
+      icon: (
+        <HiPencil
+          className="h-4 w-4"
+          color={`blue`}
+          size={15}
+        />
+      ),
+      label: 'View',
+      onClick: (id: string) => console.log(id),
+    },
+
+    {
+      icon: (
+        <MdDelete
+          className="h-4 w-4"
+          color={`red`}
+          size={15}
+        />
+      ),
+      label: 'Delete',
+      onClick: (id: string) => console.log(`Delete Provider: ${id}`),
+    },
+  ];
+};
+
+export const ServiceAreaDataRows = (data: ServiceAreaPayload[]) => {
+  const rowItems: any[] = [];
+
+  data?.map((item) => {
+    rowItems.push({
+      id: item.id,
+      name: item.name,
+      description: item?.description,
+      type: item?.type,
+      providerCount: Number(item?.providerCount ?? 0),
+      patientCount: Number(item.patientCount ?? 0),
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
+    });
+    return;
+  });
+
+  return rowItems;
+};
+// Service-Area End
 
 const ageFromTimeStamp = (timestamp: string) => {
   const birthDay = moment(timestamp);
