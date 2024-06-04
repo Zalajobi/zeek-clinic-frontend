@@ -47,12 +47,48 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
     },
   ];
 
-  // Create Service-Area
+  // Create a Single Service Area
   const { mutate: createServiceAreaMutation } = useMutation(
     async (data: CreateServiceAreaInput) => {
       try {
         return await axiosPostRequestUserService(`/service-area/create`, {
           ...data,
+          siteId,
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Service-Area...', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        if (result?.success) {
+          handler();
+          toast.success(result?.message);
+          queryClient
+            .resetQueries([
+              'getLatestServiceAreaData',
+              'getTableData',
+              'getAreaCount',
+            ])
+            .then(() => {});
+        } else {
+          toast.error('Something Went Wrong');
+        }
+      },
+    }
+  );
+
+  // Create Bulk Service-Area
+  const { mutate: createBulkServiceAreaMutation } = useMutation(
+    async (data: CreateServiceAreaInput[]) => {
+      try {
+        return await axiosPostRequestUserService(`/service-area/create/batch`, {
+          data,
           siteId,
         });
       } catch (error) {
@@ -103,13 +139,16 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
   };
 
   const handleCreateBulkServiceArea = () => {
-    const serviceAreaData = bulkUploadJSONData.map((data) => {
-      return {
-        name: data[serviceAreaName],
-        type: data[serviceAreaType],
-        description: data[serviceAreaDescription],
-      };
-    });
+    const serviceAreaData: CreateServiceAreaInput[] = bulkUploadJSONData.map(
+      (data) => {
+        return {
+          name: data[serviceAreaName],
+          type: data[serviceAreaType],
+          description: data[serviceAreaDescription],
+          siteId: siteId ?? '',
+        };
+      }
+    );
 
     const invalidServiceAreaData = serviceAreaData.filter((data) => {
       return !validServiceAreaKeys.every((key) =>
@@ -120,7 +159,7 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
     if (invalidServiceAreaData.length) {
       toast.error('Invalid Service Area Data');
     } else {
-      console.log(serviceAreaData);
+      createBulkServiceAreaMutation(serviceAreaData);
       toast.success('Uploaded Successfully');
     }
   };
