@@ -10,9 +10,6 @@ import { useSiteUnit } from '@hooks/pages/useSiteUnit';
 import AddUnitModal from '@components/modals/AddUnitModal';
 import { useMemo } from 'react';
 import {
-  DepartmentActionItem,
-  DepartmentDataColumns,
-  DepartmentDataRows,
   UnitActionItem,
   UnitDataColumns,
   UnitDataRows,
@@ -21,7 +18,7 @@ import {
   formatResponseKeyForDropdown,
   getTotalRowsAndPerPage,
 } from '@util/index';
-import { DepartmentPayload, UnitPayload } from '@typeSpec/payloads';
+import { UnitPayload } from '@typeSpec/payloads';
 import { TableWithoutTabAndLogo } from '@components/global/table/Table';
 import {
   setNoOfPages,

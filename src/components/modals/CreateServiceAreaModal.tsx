@@ -11,6 +11,8 @@ import { CreateServiceAreaInput } from '@typeSpec/forms/form.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateServiceAreaInputSchema } from '@typeSpec/forms';
 import { useCreateServiceAreaModal } from '@hooks/modals/useCreateServiceAreaModal';
+import { Dialog, DialogBody, DialogHeader } from '@material-tailwind/react';
+import { ExcelFileUpload } from '@components/global/formInput/FileUpload';
 
 interface CreateServiceAreaModalProps {
   open: boolean;
@@ -94,5 +96,21 @@ export const CreateBulkServiceArea = ({
   open,
   handler,
 }: CreateServiceAreaModalProps) => {
-  return <h1>Create Bulk Service-Area</h1>;
+  const { processedExcelFile } = useCreateServiceAreaModal(handler);
+
+  return (
+    <Dialog
+      open={open}
+      size="lg"
+      handler={handler}
+      animate={{
+        mount: { scale: 1, y: 0 },
+        unmount: { scale: 0.9, y: -100 },
+      }}
+      className="overflow-x-hidden overflow-y-scroll p-6 min-h-[500px]">
+      <DialogBody>
+        <ExcelFileUpload processedData={processedExcelFile} />
+      </DialogBody>
+    </Dialog>
+  );
 };

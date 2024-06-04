@@ -15,7 +15,10 @@ import {
   setNoOfPages,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
-import { CreateServiceAreaModal } from '@components/modals/CreateServiceAreaModal';
+import {
+  CreateBulkServiceArea,
+  CreateServiceAreaModal,
+} from '@components/modals/CreateServiceAreaModal';
 import { useMemo } from 'react';
 import {
   ServiceAreaActionItem,
@@ -109,6 +112,7 @@ const SiteServiceArea = () => {
                   className={`mr-2`}
                 />
               }
+              click={handleBulkCreateServiceAreaModal}
             />
 
             <OutlinedButton
@@ -157,6 +161,11 @@ const SiteServiceArea = () => {
       <CreateServiceAreaModal
         open={addServiceAreaModal}
         handler={handleAddServiceAreaModal}
+      />
+
+      <CreateBulkServiceArea
+        open={bulkCreateServiceAreaModal}
+        handler={handleBulkCreateServiceAreaModal}
       />
     </SuperadminBaseTemplate>
   );

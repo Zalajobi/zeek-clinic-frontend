@@ -9,6 +9,7 @@ import {
   FaBuildingColumns,
 } from 'react-icons/fa6';
 import { Fragment } from 'react';
+import { ImUpload } from 'react-icons/im';
 
 interface IconProps {
   className?: string;
@@ -136,6 +137,22 @@ export const SiteIcon = ({
   return (
     <Fragment>
       <FaBuildingColumns
+        size={size}
+        className={className}
+        color={color}
+      />
+    </Fragment>
+  );
+};
+
+export const UploadIcon = ({
+  className = '',
+  size = 20,
+  color = '#3975ae',
+}: IconProps) => {
+  return (
+    <Fragment>
+      <ImUpload
         size={size}
         className={className}
         color={color}

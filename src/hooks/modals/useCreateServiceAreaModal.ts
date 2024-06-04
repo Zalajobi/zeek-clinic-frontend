@@ -77,8 +77,17 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
     createServiceAreaMutation(data);
   };
 
+  // Received Processed Excel File
+  const processedExcelFile = (data: any[]) => {
+    console.log(data);
+  };
+
   return {
+    // Values
     serviceAreaInputs,
+
+    // Functions
     createServiceArea,
+    processedExcelFile,
   };
 };

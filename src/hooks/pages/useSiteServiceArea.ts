@@ -139,6 +139,7 @@ export const useSiteServiceArea = () => {
 
   // Handler Bulk Create ServiceArea Modal
   const handleBulkCreateServiceAreaModal = () => {
+    console.log('Create Service Area');
     setBulkCreateServiceAreaModal((cur) => !cur);
   };
 
