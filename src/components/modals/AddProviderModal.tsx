@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { useAddProviderModal } from '@hooks/modals/useAddProviderModal';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import ImageUpload from '@components/global/formInput/ImageUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import {
   CheckboxInput,
@@ -25,6 +24,7 @@ import {
   RolesPayload,
   ServiceAreaPayload,
 } from '@typeSpec/payloads';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 
 interface AddProviderModalProps {
   open: boolean;

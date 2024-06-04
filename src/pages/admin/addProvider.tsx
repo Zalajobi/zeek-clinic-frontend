@@ -9,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import useAdminAddProvider from '@hooks/admin/useAdminAddProvider';
 import AdminBaseTemplate from '@layout/admin/AdminBaseTemplate';
-import ImageUpload from '@components/global/formInput/ImageUpload';
 import {
   CheckboxInput,
   DateInput,
@@ -27,6 +26,7 @@ import { FilledButton } from '@components/global/CustomButton';
 import { Typography } from '@components/global/dialog/Typography';
 import { CustomCard } from '@components/global/card/CustomCard';
 import { CreateProviderInputSchema } from '@typeSpec/forms';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 
 export const AddProvider = () => {
   // tailwindElementsConfig()

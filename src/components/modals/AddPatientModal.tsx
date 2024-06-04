@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { useAddPatientModal } from '@hooks/modals/useAddPatientModal';
 import { SelectInputFieldProps } from '@typeSpec/common';

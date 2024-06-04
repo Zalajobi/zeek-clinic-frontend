@@ -8,7 +8,7 @@ import {
   TextInput,
 } from '@components/global/formInput/CustomInput';
 import { useEditSite } from '@hooks/modals/useEditSite';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 import { Card } from '@material-tailwind/react';
 
 interface EditSiteModalProps {

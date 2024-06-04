@@ -6,7 +6,7 @@ import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateAdminUserInputSchema } from '@typeSpec/forms';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 import { useAddAdminModal } from '@hooks/modals/useAddAdminModal';
 import {
   SelectInput,

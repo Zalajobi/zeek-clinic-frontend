@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 import { useCreateSiteModal } from '@hooks/modals/useCreateSiteModal';
 import {
   CheckboxInput,
