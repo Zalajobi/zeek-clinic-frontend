@@ -7,6 +7,7 @@ import { useQuery } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
+import { ONE_MILLION } from '@lib/constants/constants';
 
 export const useSitePatients = () => {
   const { siteId } = useParams();
@@ -89,7 +90,7 @@ export const useSitePatients = () => {
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
-      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      const perPageItem = typeof perPage === 'string' ? ONE_MILLION : perPage;
       setSearchPatientPayload({
         ...searchPatientPayload,
         startRow: value * perPageItem,
@@ -111,7 +112,7 @@ export const useSitePatients = () => {
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {
-      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      const perPageItem = typeof perPage === 'string' ? ONE_MILLION : perPage;
       setSearchPatientPayload({
         ...searchPatientPayload,
         startRow: value * perPageItem,
@@ -136,7 +137,7 @@ export const useSitePatients = () => {
 
   // On Change Items Per Page
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
-    const perPageItem = typeof value === 'string' ? 1000000 : value;
+    const perPageItem = typeof value === 'string' ? ONE_MILLION : value;
     setPerPage(value);
 
     setSearchPatientPayload({

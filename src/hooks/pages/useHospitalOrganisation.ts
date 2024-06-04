@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
 import { useSelector } from 'react-redux';
+import { ONE_MILLION } from '@lib/constants/constants';
 
 export const useHospitalOrganisation = () => {
   const { totalDataCount, noOfPages } = useSelector(
@@ -73,7 +74,7 @@ export const useHospitalOrganisation = () => {
 
   // Update Per Page Item
   const onUpdatePerPageItem = async (value: 'All' | 10 | 20 | 50 | 100) => {
-    const perPageItem = typeof value === 'string' ? 1000000 : value;
+    const perPageItem = typeof value === 'string' ? ONE_MILLION : value;
     setPerPage(value);
 
     setSearchOrganizationPayload({
@@ -88,7 +89,7 @@ export const useHospitalOrganisation = () => {
   const onClickNext = async (value: number) => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
-      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      const perPageItem = typeof perPage === 'string' ? ONE_MILLION : perPage;
       setSearchOrganizationPayload({
         ...searchOrganizationPayload,
         startRow: value * perPageItem,
@@ -109,7 +110,7 @@ export const useHospitalOrganisation = () => {
   const onClickPrevious = async (value: number) => {
     if (value === -1) toast.error('You are on the first page');
     else {
-      const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
+      const perPageItem = typeof perPage === 'string' ? ONE_MILLION : perPage;
       setSearchOrganizationPayload({
         ...searchOrganizationPayload,
         startRow: value * perPageItem,

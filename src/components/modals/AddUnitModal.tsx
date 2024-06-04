@@ -32,7 +32,7 @@ const AddUnitModal = ({ open, handler }: AddUnitModalProps) => {
       <CustomBasicModal
         title={'Add Unit'}
         handler={handler}
-        size={'md'}
+        size={'lg'}
         open={open}
         footer={
           <Fragment>

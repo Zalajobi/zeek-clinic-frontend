@@ -4,6 +4,7 @@ import {
   PatientPayload,
   ProviderPayload,
   SitePayload,
+  UnitPayload,
 } from '@typeSpec/payloads';
 import moment from 'moment/moment';
 import { HiPencil } from 'react-icons/hi2';
@@ -635,6 +636,102 @@ export const DepartmentDataRows = (data: DepartmentPayload[]) => {
   return rowItems;
 };
 // Department End
+
+// Unit Start
+export const UnitDataColumns = () => {
+  return [
+    {
+      key: 'name',
+      value: 'Name',
+      sortable: true,
+    },
+    {
+      key: 'description',
+      value: 'Description',
+      sortable: true,
+    },
+    {
+      key: 'providerCount',
+      value: 'Providers',
+      sortable: false,
+    },
+    {
+      key: 'patientCount',
+      value: 'Patients',
+      sortable: false,
+    },
+    {
+      key: 'totalBeds',
+      value: 'Total Beds',
+      sortable: true,
+    },
+
+    {
+      key: 'occupiedBeds',
+      value: 'Occupied Beds',
+      sortable: true,
+    },
+    {
+      key: 'createdAt',
+      value: 'Created At',
+      sortable: true,
+    },
+    {
+      key: 'action',
+      value: 'Action',
+      sortable: false,
+    },
+  ];
+};
+
+export const UnitActionItem = () => {
+  return [
+    {
+      icon: (
+        <HiPencil
+          className="h-4 w-4"
+          color={`blue`}
+          size={15}
+        />
+      ),
+      label: 'View',
+      onClick: (id: string) => console.log(id),
+    },
+
+    {
+      icon: (
+        <MdDelete
+          className="h-4 w-4"
+          color={`red`}
+          size={15}
+        />
+      ),
+      label: 'Delete',
+      onClick: (id: string) => console.log(`Delete Provider: ${id}`),
+    },
+  ];
+};
+
+export const UnitDataRows = (data: UnitPayload[]) => {
+  const rowItems: any[] = [];
+
+  data?.map((item) => {
+    rowItems.push({
+      id: item.id,
+      name: item.name,
+      description: item?.description,
+      providerCount: Number(item?.providerCount ?? 0),
+      patientCount: Number(item.patientCount ?? 0),
+      totalBeds: Number(item.totalBeds ?? 0),
+      occupiedBeds: Number(item.occupiedBeds ?? 0),
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
+    });
+    return;
+  });
+
+  return rowItems;
+};
+// Unit End
 
 const ageFromTimeStamp = (timestamp: string) => {
   const birthDay = moment(timestamp);
