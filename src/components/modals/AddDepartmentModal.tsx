@@ -32,7 +32,7 @@ const AddDepartmentModal = ({ open, handler }: AddProviderModalProps) => {
       <CustomBasicModal
         title={'Add Department'}
         handler={handler}
-        size={'md'}
+        size={'lg'}
         open={open}
         footer={
           <Fragment>

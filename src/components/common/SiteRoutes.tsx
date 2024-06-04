@@ -180,7 +180,7 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
               }
             />
           }
-          text={`Service Area`}
+          text={`Service Areas`}
           to={`${prefixURL}/site/service-area/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/service-area/${siteId}`)
@@ -230,7 +230,7 @@ const SiteRoutes = ({ platform }: SiteRoutesProps) => {
               }
             />
           }
-          text={`Admin`}
+          text={`Admins`}
           to={`${prefixURL}/site/admin/${siteId}`}
           className={`${
             isCurrentPath(`${prefixURL}/site/admin/${siteId}`)

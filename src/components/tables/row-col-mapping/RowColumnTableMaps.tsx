@@ -1,5 +1,6 @@
 import {
   AdminPayload,
+  DepartmentPayload,
   PatientPayload,
   ProviderPayload,
   SitePayload,
@@ -7,6 +8,7 @@ import {
 import moment from 'moment/moment';
 import { HiPencil } from 'react-icons/hi2';
 import { MdDelete } from 'react-icons/md';
+import { useMemo } from 'react';
 
 // Site Start
 export const SiteDataColumns = () => {
@@ -550,6 +552,89 @@ export const PatientDataRows = (data: PatientPayload[]) => {
   return rowItems;
 };
 // Admin End
+
+// Department Start
+export const DepartmentDataColumns = () => {
+  return [
+    {
+      key: 'name',
+      value: 'Name',
+      sortable: true,
+    },
+    {
+      key: 'description',
+      value: 'Description',
+      sortable: true,
+    },
+    {
+      key: 'providerCount',
+      value: 'Providers',
+      sortable: false,
+    },
+    {
+      key: 'patientCount',
+      value: 'Patients',
+      sortable: false,
+    },
+    {
+      key: 'createdAt',
+      value: 'Created At',
+      sortable: true,
+    },
+    {
+      key: 'action',
+      value: 'Action',
+      sortable: false,
+    },
+  ];
+};
+
+export const DepartmentActionItem = () => {
+  return [
+    {
+      icon: (
+        <HiPencil
+          className="h-4 w-4"
+          color={`blue`}
+          size={15}
+        />
+      ),
+      label: 'View',
+      onClick: (id: string) => console.log(id),
+    },
+
+    {
+      icon: (
+        <MdDelete
+          className="h-4 w-4"
+          color={`red`}
+          size={15}
+        />
+      ),
+      label: 'Delete',
+      onClick: (id: string) => console.log(`Delete Provider: ${id}`),
+    },
+  ];
+};
+
+export const DepartmentDataRows = (data: DepartmentPayload[]) => {
+  const rowItems: any[] = [];
+
+  data?.map((item) => {
+    rowItems.push({
+      id: item.id,
+      name: item.name,
+      description: item?.description,
+      providerCount: Number(item?.providerCount ?? 0),
+      patientCount: Number(item.patientCount ?? 0),
+      createdAt: moment(item?.createdAt).format('MMM DD. YYYY'),
+    });
+    return;
+  });
+
+  return rowItems;
+};
+// Department End
 
 const ageFromTimeStamp = (timestamp: string) => {
   const birthDay = moment(timestamp);

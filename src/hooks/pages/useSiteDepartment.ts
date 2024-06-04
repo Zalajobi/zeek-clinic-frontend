@@ -1,22 +1,22 @@
-import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { SearchRequestPayload } from '@typeSpec/index';
 import { useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
 
-export const useSitePatients = () => {
+export const useSiteDepartment = () => {
   const { siteId } = useParams();
-  const [addPatientModal, setAddPatientModal] = useState(false);
+  const [addDepartmentModal, setAddDepartmentModal] = useState(false);
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [resultFrom, setResultFrom] = useState<number | null>(null);
   const [resultTo, setResultTo] = useState<number | null>(null);
   const [searchKey, setSearchKey] = useState('Search By');
-  const [searchPatientPayload, setSearchPatientPayload] =
+  const [searchDepartmentPayload, setSearchDepartmentPayload] =
     useState<SearchRequestPayload>({
       siteId,
     });
@@ -25,46 +25,14 @@ export const useSitePatients = () => {
     (state: any) => state.adminProviderTable
   );
 
-  const tabData = [
-    {
-      label: 'All',
-      value: 'ALL',
-    },
-    {
-      label: 'Active',
-      value: 'ACTIVE',
-    },
-    {
-      label: 'Pending',
-      value: 'PENDING',
-    },
-    {
-      label: 'Discharged',
-      value: 'DISCHARGED',
-    },
-    {
-      label: 'Deceased',
-      value: 'DECEASED',
-    },
-    {
-      label: 'Inpatient',
-      value: 'INPATIENT',
-    },
-
-    {
-      label: 'Outpatient',
-      value: 'OUTPATIENT',
-    },
-  ];
-
   // Get Table Data
   const { data: tableData, isLoading: tableDataLoading } = useQuery({
-    queryKey: ['getTableData', searchPatientPayload],
+    queryKey: ['getTableData', searchDepartmentPayload],
     queryFn: async () => {
       try {
         return await axiosPostRequestUserService(
-          `/patient/search`,
-          searchPatientPayload
+          `/department/search`,
+          searchDepartmentPayload
         );
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -76,11 +44,12 @@ export const useSitePatients = () => {
 
   // Sort By
   const onHandleSortBy = async (key: string) => {
-    setSearchPatientPayload({
-      ...searchPatientPayload,
+    setSearchDepartmentPayload({
+      ...searchDepartmentPayload,
       sortModel: {
         colId: key,
-        sort: searchPatientPayload?.sortModel?.sort === 'asc' ? 'desc' : 'asc',
+        sort:
+          searchDepartmentPayload?.sortModel?.sort === 'asc' ? 'desc' : 'asc',
       },
     });
   };
@@ -90,8 +59,8 @@ export const useSitePatients = () => {
     if (value >= noOfPages) toast.error('You are on the last page');
     else {
       const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
-      setSearchPatientPayload({
-        ...searchPatientPayload,
+      setSearchDepartmentPayload({
+        ...searchDepartmentPayload,
         startRow: value * perPageItem,
         endRow: (value + 1) * perPageItem,
       });
@@ -112,8 +81,8 @@ export const useSitePatients = () => {
     if (value === -1) toast.error('You are on the first page');
     else {
       const perPageItem = typeof perPage === 'string' ? 1000000 : perPage;
-      setSearchPatientPayload({
-        ...searchPatientPayload,
+      setSearchDepartmentPayload({
+        ...searchDepartmentPayload,
         startRow: value * perPageItem,
         endRow: (value + 1) * perPageItem,
       });
@@ -139,8 +108,8 @@ export const useSitePatients = () => {
     const perPageItem = typeof value === 'string' ? 1000000 : value;
     setPerPage(value);
 
-    setSearchPatientPayload({
-      ...searchPatientPayload,
+    setSearchDepartmentPayload({
+      ...searchDepartmentPayload,
       endRow: perPageItem,
       startRow: 0,
     });
@@ -149,42 +118,25 @@ export const useSitePatients = () => {
   };
 
   // On Update Search Admin
-  const onUpdateSearchPatient = async (value: string) => {
+  const onUpdateSearchDepartment = async (value: string) => {
     if (searchKey === 'Search By')
       return toast.error('Please select a valid search key');
     else
-      setSearchPatientPayload({
-        ...searchPatientPayload,
+      setSearchDepartmentPayload({
+        ...searchDepartmentPayload,
         search: value,
         searchKey: revertDropdownOptionsToResponseKey(searchKey),
       });
   };
 
-  // Handle Change Tab
-  const onUpdateActiveTab = async (
-    tab:
-      | 'ALL'
-      | 'ACTIVE'
-      | 'PENDING'
-      | 'DISCHARGED'
-      | 'DECEASED'
-      | 'INPATIENT'
-      | 'OUTPATIENT'
-  ) => {
-    setSearchPatientPayload({
-      ...searchPatientPayload,
-      role: tab,
-    });
-  };
-
-  // Update Create Patient Modal
-  const onUpdateAddPatientModal = () => {
-    setAddPatientModal((cur) => !cur);
+  // Handler Add Department Modal
+  const handleAddDepartmentModal = () => {
+    setAddDepartmentModal((cur) => !cur);
   };
 
   return {
     // Values
-    addPatientModal,
+    addDepartmentModal,
     tableData,
     tableDataLoading,
     perPage,
@@ -192,16 +144,14 @@ export const useSitePatients = () => {
     resultTo,
     currentPage,
     searchKey,
-    tabData,
 
     // Functions
-    onUpdateAddPatientModal,
-    onUpdatePerPageItem,
-    onUpdateActiveTab,
+    handleAddDepartmentModal,
     onHandleSortBy,
     onClickNext,
     onClickPrevious,
     onUpdateSearchKey,
-    onUpdateSearchPatient,
+    onUpdatePerPageItem,
+    onUpdateSearchDepartment,
   };
 };

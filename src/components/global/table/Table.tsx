@@ -419,7 +419,328 @@ export const BasicTable = ({
               Showing results from {total >= 1 ? from : 0} -{' '}
               {perPageValue > total ? total : to}
             </b>{' '}
-            of {total}
+            of {total >= 1 ? total : 0}
+          </p>
+
+          <div className="mt-3 flex flex-col items-center gap-6 divide-ds-gray-300 dark:divide-ds-dark-400 lg:mt-0 lg:flex-row lg:divide-x">
+            <div className="flex flex-col items-center gap-2 font-velasans-gx text-sm font-medium text-custom-description dark:text-ds-dark-300 sm:flex-row lg:whitespace-nowrap">
+              <div className="flex items-center gap-8">
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  onClick={() => onPrevious(currentPage - 1)}
+                  disabled={currentPage === 0}>
+                  <IoMdArrowDropleft size={20} />
+                </Button>
+
+                <Typography
+                  color="gray"
+                  className="font-normal">
+                  Page{' '}
+                  <strong className="text-gray-900">{currentPage + 1}</strong>{' '}
+                  of <strong className="text-gray-900">{noOfPages}</strong>
+                </Typography>
+
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  onClick={() => onNext(currentPage + 1)}
+                  disabled={currentPage + 1 === noOfPages}>
+                  <IoMdArrowDropright size={20} />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};
+
+interface BasicTableWithoutTableProps {
+  perPageValue: string | number;
+  perPageChange: (item: any) => void;
+  searchKeys: string[];
+  dataLoading: boolean;
+  searchKey: string;
+  updateSearchKey: (value: string) => void;
+  onUpdateSearch: (value: string) => void;
+  sortBy: (value: string) => void;
+  columns: any[];
+  data: any[];
+  actionItems: {
+    onClick: (value: any) => void;
+    icon: ReactNode;
+    label: string;
+  }[];
+  createNew: () => void;
+  onNext: (value: number) => void;
+  onPrevious: (value: number) => void;
+  noOfPages: number;
+  total: number;
+  from: number;
+  to: number;
+  currentPage: number;
+}
+
+export const TableWithoutTabAndLogo = ({
+  perPageValue,
+  perPageChange,
+  searchKeys,
+  dataLoading,
+  searchKey,
+  updateSearchKey,
+  onUpdateSearch,
+  sortBy,
+  data,
+  columns,
+  actionItems,
+  createNew,
+  onNext,
+  onPrevious,
+  noOfPages,
+  total,
+  from,
+  to,
+  currentPage,
+}: BasicTableWithoutTableProps) => {
+  const perPageMenuItems = ['All', 10, 20, 50, 100];
+
+  return (
+    <Card className={`w-full h-auto min-h-[500px] flex flex-col`}>
+      <CardHeader
+        floated={true}
+        shadow={true}
+        className={`rounded-none shadow-none bg-transparent p-3 m-0 flex min-h-[90px]`}>
+        <div
+          className={`flex flex-col items-center justify-between gap-4 w-full md:flex-row`}>
+          <div className={`flex gap-4 items-center justify-center`}>
+            <DropdownMenu
+              value={perPageValue}
+              menuItems={perPageMenuItems}
+              change={perPageChange}
+              buttonClass={`border-gray-100 w-44 h-[42px]`}
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 items-center md:flex-row">
+            <DropdownMenu
+              value={searchKey}
+              menuItems={searchKeys}
+              change={updateSearchKey}
+              buttonClass={`border-gray-100 w-44 h-[42px] w-full md:w-40`}
+            />
+
+            <div className={`w-full md:w-72`}>
+              <Input
+                label="Search..."
+                icon={<FaMagnifyingGlass className="h-5 w-5" />}
+                className={`border-t-[aliceblue]`}
+                onChange={(event) => onUpdateSearch(event.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </CardHeader>
+
+      <CardBody className={`overflow-scroll p-0 min-h-[400px]`}>
+        {data && data?.length > 0 ? (
+          <table className={`w-full min-w-max table-auto text-left`}>
+            <thead>
+              <tr>
+                {columns.map((item, index) => (
+                  <th
+                    key={`${item}_${index}`}
+                    className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
+                    <Typography
+                      variant={'small'}
+                      color={'blue-gray'}
+                      className={
+                        'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
+                      }
+                      onClick={() => {
+                        if (item.sortable) sortBy(item.key);
+                      }}>
+                      {item.value}{' '}
+                      {item.sortable && (
+                        <HiChevronUpDown
+                          strokeWidth={2}
+                          className={'h-4 w-4'}
+                        />
+                      )}
+                    </Typography>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr
+                  key={`${index}__${index}`}
+                  className={`border-y`}>
+                  {columns.map((column, indexNum) => (
+                    <Fragment key={`${column}_${indexNum}`}>
+                      {/*For Status*/}
+                      {column.key === 'status' ? (
+                        <td
+                          className={`p-4 border-y text-black font-inter text-sm font-medium mx-1`}>
+                          <div className="w-max">
+                            <Status status={item[column.key]} />
+                          </div>
+                        </td>
+                      ) : // Title or Name
+                      column.key === 'name' || column.key === 'title' ? (
+                        <td
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          <Link
+                            // to={`/${url}/${item?.id}`}
+                            to={`#`}
+                            className={`hover:cursor-pointer hover:text-gray-400`}>
+                            {item[column.key]}
+                          </Link>
+                        </td>
+                      ) : // Send Email
+                      column.key === 'email' ? (
+                        <td
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          <a
+                            target={`_blank`}
+                            href={`mailto:${item[column.key]}`}
+                            className={`hover:cursor-pointer hover:text-gray-400`}>
+                            {item[column.key]}
+                          </a>
+                        </td>
+                      ) : column.key === 'action' ? (
+                        <td>
+                          <Tooltip content="Action">
+                            <Menu
+                              animate={{
+                                mount: { y: 0 },
+                                unmount: { y: 25 },
+                              }}
+                              allowHover={false}>
+                              <MenuHandler>
+                                <IconButton variant="text">
+                                  <BsThreeDotsVertical className="h-4 w-4" />
+                                </IconButton>
+                              </MenuHandler>
+
+                              <MenuList className={`min-w-[150px] p-2`}>
+                                {actionItems.map((action, index) => (
+                                  <MenuItem
+                                    onClick={() => action.onClick(item.id)}
+                                    className={`hover:bg-gray-100 py-1 px-0 text-sm font-bold h-10 flex items-center text-blue-900`}
+                                    key={`${action}_${index}`}>
+                                    <IconButton
+                                      variant={'text'}
+                                      className={
+                                        'hover:bg-transparent active:bg-transparent'
+                                      }>
+                                      {action.icon}
+                                    </IconButton>{' '}
+                                    {action.label}
+                                  </MenuItem>
+                                ))}
+                              </MenuList>
+                            </Menu>
+                          </Tooltip>
+                        </td>
+                      ) : column.key === 'phone' ? (
+                        <td
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          {formatPhoneNumber(
+                            item[column.key],
+                            item?.countryCode
+                          ) ?? '--'}
+                        </td>
+                      ) : (
+                        <td
+                          className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
+                          {item[column.key]}
+                        </td>
+                      )}
+                    </Fragment>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className={`flex flex-col w-full`}>
+            <div
+              className={`overflow-x-scroll grid`}
+              style={{
+                gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`,
+              }}>
+              {columns.map((item, index) => (
+                <div
+                  key={`${item.key}${index}`}
+                  className={`cursor-pointer border-y bg-ds-gray-100 p-4 transition-colors hover:bg-blue-gray-50`}>
+                  <Typography
+                    variant={'small'}
+                    color={'blue-gray'}
+                    className={
+                      'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
+                    }>
+                    {item.value}{' '}
+                    {item.sortable && (
+                      <HiChevronUpDown
+                        strokeWidth={2}
+                        className={'h-4 w-4'}
+                      />
+                    )}
+                  </Typography>
+                </div>
+              ))}
+            </div>
+
+            <Fragment>
+              <div
+                className={`flex items-center justify-center w-full p-4 h-80 lg:p-8`}>
+                {dataLoading ? (
+                  <div
+                    className={`flex flex-col items-center justify-center gap-4`}>
+                    <Spinner className="h-16 w-16 text-gray-900/50" />
+
+                    <Typography
+                      variant={'h4'}
+                      color={'gray'}
+                      className={`font-bold text-center`}>
+                      Loading...
+                    </Typography>
+                  </div>
+                ) : (
+                  <div className={`flex flex-col`}>
+                    <Typography
+                      variant={'h6'}
+                      color={'gray'}
+                      className={'font-normal text-center mb-4'}>
+                      No Data
+                    </Typography>
+
+                    <Button
+                      className={`rounded-full flex`}
+                      ripple={true}
+                      onClick={createNew}>
+                      <FaUserPlus className={`w-4 h-4 mr-2`} /> Create
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </Fragment>
+          </div>
+        )}
+      </CardBody>
+
+      <CardFooter
+        className={`flex items-center justify-between border-t border-blue-gray-50 p-4 h-[80px]`}>
+        <div className="flex w-full flex-col items-center justify-between p-6 text-custom-primary-800 dark:text-white lg:flex-row px-7 py-5">
+          <p className="inline-block font-velasans-gx text-sm font-medium lg:flex-nowrap">
+            <b className="font-extrabold">
+              Showing results from {total >= 1 ? from : 0} -{' '}
+              {perPageValue > total ? total : to}
+            </b>{' '}
+            of {total >= 1 ? total : 0}
           </p>
 
           <div className="mt-3 flex flex-col items-center gap-6 divide-ds-gray-300 dark:divide-ds-dark-400 lg:mt-0 lg:flex-row lg:divide-x">
