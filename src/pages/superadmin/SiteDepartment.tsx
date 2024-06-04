@@ -147,6 +147,7 @@ const SiteDepartment = () => {
           onPrevious={onClickPrevious}
           sortBy={onHandleSortBy}
           total={tableData?.data?.totalRows ?? 0}
+          url={`superadmin/site/department/details`}
         />
       </div>
 
