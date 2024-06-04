@@ -37,7 +37,7 @@ const CreateServiceAreaModal = ({
       <CustomBasicModal
         title={'Add Service Area'}
         handler={handler}
-        size={'md'}
+        size={'lg'}
         open={open}
         footer={
           <Fragment>
