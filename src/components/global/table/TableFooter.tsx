@@ -29,7 +29,7 @@ const TableFooter = ({
           <b className="font-extrabold">
             Showing results from {from} - {to}
           </b>{' '}
-          of {total}
+          of {total >= 1 ? total : 0}
         </p>
 
         <div className="mt-3 flex flex-col items-center gap-6 divide-ds-gray-300 dark:divide-ds-dark-400 lg:mt-0 lg:flex-row lg:divide-x">

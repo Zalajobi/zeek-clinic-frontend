@@ -54,12 +54,14 @@ export interface SitePayload {
 }
 
 export interface DepartmentPayload {
-  createdAt?: string;
-  description?: string;
-  id?: string;
-  name?: string;
-  siteId?: string;
-  updated_at?: string;
+  createdAt: string;
+  description: string;
+  id: string;
+  name: string;
+  siteId: string;
+  updatedAt: string;
+  providerCount: string;
+  patientCount: string;
 }
 
 export interface RolesPayload {
