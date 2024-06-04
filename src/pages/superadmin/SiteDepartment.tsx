@@ -19,7 +19,7 @@ import {
   formatResponseKeyForDropdown,
   getTotalRowsAndPerPage,
 } from '@util/index';
-import { DepartmentPayload, PatientPayload } from '@typeSpec/payloads';
+import { DepartmentPayload } from '@typeSpec/payloads';
 import {
   setNoOfPages,
   setTotalDataCount,
