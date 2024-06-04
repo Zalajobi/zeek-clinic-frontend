@@ -15,17 +15,14 @@ import {
   setNoOfPages,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
-import CreateServiceAreaModal from '@components/modals/CreateServiceAreaModal';
+import { CreateServiceAreaModal } from '@components/modals/CreateServiceAreaModal';
 import { useMemo } from 'react';
 import {
   ServiceAreaActionItem,
   ServiceAreaDataColumns,
   ServiceAreaDataRows,
-  UnitActionItem,
-  UnitDataColumns,
-  UnitDataRows,
 } from '@components/tables/row-col-mapping/RowColumnTableMaps';
-import { ServiceAreaPayload, UnitPayload } from '@typeSpec/payloads';
+import { ServiceAreaPayload } from '@typeSpec/payloads';
 import { TableWithoutTabAndLogo } from '@components/global/table/Table';
 
 const SiteServiceArea = () => {
@@ -42,6 +39,7 @@ const SiteServiceArea = () => {
     resultTo,
     currentPage,
     searchKey,
+    bulkCreateServiceAreaModal,
 
     // Functions
     handleAddServiceAreaModal,
@@ -51,6 +49,7 @@ const SiteServiceArea = () => {
     onUpdateSearchKey,
     onUpdatePerPageItem,
     onUpdateSearchServiceArea,
+    handleBulkCreateServiceAreaModal,
   } = useSiteServiceArea();
 
   if (!tableDataLoading) {

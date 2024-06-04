@@ -9,7 +9,7 @@ import { Typography as MaterialTypography } from '@material-tailwind/react/compo
 import { Button, Spinner } from '@material-tailwind/react';
 import AddDepartmentModal from '@components/modals/AddDepartmentModal';
 import AddUnitModal from '@components/modals/AddUnitModal';
-import CreateServiceAreaModal from '@components/modals/CreateServiceAreaModal';
+import { CreateServiceAreaModal } from '@components/modals/CreateServiceAreaModal';
 import {
   useLatestDepartment,
   useLatestRole,

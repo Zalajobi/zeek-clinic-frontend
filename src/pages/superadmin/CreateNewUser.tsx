@@ -2,8 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import { useSuperadminCreateAdminUser } from '@hooks/superadmin/useSuperadminCreateAdminUser';
-import ImageUpload from '../../components/global/formInput/ImageUpload';
-import SuperadminBaseTemplate from '../../layout/superadmin/SuperadminBaseTemplate';
 import {
   availableTitles,
   genderSelectInput,
@@ -20,6 +18,8 @@ import {
 import { CreateAdminUserInputSchema } from '@typeSpec/forms';
 import { FilledButton } from '@components/global/CustomButton';
 import { CreateAdminUserInput } from '@typeSpec/forms/form.types';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 
 const CreateNewUser = () => {
   const {

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useCreateHospitalModal } from '@hooks/modals/useCreateHospitalModal';
-import ImageUpload from '@components/global/formInput/ImageUpload';
+import { ImageUpload } from '@components/global/formInput/FileUpload';
 import { CustomBasicModal } from '@components/global/dialog/CustomModal';
 import { OutlinedButton } from '@components/global/CustomButton';
 import { CustomTransparentCard } from '@components/global/card/CustomCard';

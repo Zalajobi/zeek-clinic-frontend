@@ -17,7 +17,7 @@ interface CreateServiceAreaModalProps {
   handler: () => void;
 }
 
-const CreateServiceAreaModal = ({
+export const CreateServiceAreaModal = ({
   open,
   handler,
 }: CreateServiceAreaModalProps) => {
@@ -90,4 +90,9 @@ const CreateServiceAreaModal = ({
   );
 };
 
-export default CreateServiceAreaModal;
+export const CreateBulkServiceArea = ({
+  open,
+  handler,
+}: CreateServiceAreaModalProps) => {
+  return <h1>Create Bulk Service-Area</h1>;
+};

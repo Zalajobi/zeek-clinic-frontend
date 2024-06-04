@@ -10,7 +10,6 @@ import {
 import moment from 'moment/moment';
 import { HiPencil } from 'react-icons/hi2';
 import { MdDelete } from 'react-icons/md';
-import { useMemo } from 'react';
 
 // Site Start
 export const SiteDataColumns = () => {

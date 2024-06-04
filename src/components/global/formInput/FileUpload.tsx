@@ -1,6 +1,6 @@
-import { ImUpload } from 'react-icons/im';
-import Dropzone from 'react-dropzone';
 import { uploadProfileImage } from '@util/useS3Upload';
+import Dropzone from 'react-dropzone';
+import { ImUpload } from 'react-icons/im';
 import { FilledButton } from '@components/global/CustomButton';
 
 interface ImageUploadProps {
@@ -10,7 +10,7 @@ interface ImageUploadProps {
   label?: string;
 }
 
-const ImageUpload = ({
+export const ImageUpload = ({
   bucketFolder,
   url,
   updateImageUrl,
@@ -98,5 +98,3 @@ const ImageUpload = ({
     </Dropzone>
   );
 };
-
-export default ImageUpload;

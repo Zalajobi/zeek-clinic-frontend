@@ -12,6 +12,8 @@ import { useQuery } from 'react-query';
 export const useSiteServiceArea = () => {
   const { siteId } = useParams();
   const [addServiceAreaModal, setAddServiceAreaModal] = useState(false);
+  const [bulkCreateServiceAreaModal, setBulkCreateServiceAreaModal] =
+    useState(false);
   const [perPage, setPerPage] = useState<'All' | 10 | 20 | 50 | 100>(10);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [resultFrom, setResultFrom] = useState<number | null>(null);
@@ -130,9 +132,14 @@ export const useSiteServiceArea = () => {
       });
   };
 
-  // Handler Add Unit Modal
+  // Handler Add ServiceArea Modal
   const handleAddServiceAreaModal = () => {
     setAddServiceAreaModal((cur) => !cur);
+  };
+
+  // Handler Bulk Create ServiceArea Modal
+  const handleBulkCreateServiceAreaModal = () => {
+    setBulkCreateServiceAreaModal((cur) => !cur);
   };
 
   return {
@@ -145,6 +152,7 @@ export const useSiteServiceArea = () => {
     resultTo,
     currentPage,
     searchKey,
+    bulkCreateServiceAreaModal,
 
     // Functions
     handleAddServiceAreaModal,
@@ -154,5 +162,6 @@ export const useSiteServiceArea = () => {
     onUpdateSearchKey,
     onUpdatePerPageItem,
     onUpdateSearchServiceArea,
+    handleBulkCreateServiceAreaModal,
   };
 };
