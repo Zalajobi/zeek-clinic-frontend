@@ -5,10 +5,20 @@ import { axiosPostRequestUserService } from '@lib/axios';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { SelectInputFieldProps } from '@typeSpec/common';
+import { useState } from 'react';
 
 export const useCreateServiceAreaModal = (handler: () => void) => {
   const queryClient = useQueryClient();
+  const [headers, setHeaders] = useState<SelectInputFieldProps[]>([]);
+  const [serviceAreaName, setServiceAreaName] = useState('name');
+  const [serviceAreaDescription, setServiceAreaDescription] =
+    useState('description');
+  const [serviceAreaType, setServiceAreaType] = useState('');
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [bulkUploadJSONData, setBulkUploadJSONData] = useState<any[]>([]);
   const { siteId } = useParams();
+
+  const validServiceAreaKeys = ['name', 'type', 'description'];
 
   const serviceAreaInputs: SelectInputFieldProps[] = [
     {
@@ -79,15 +89,54 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
 
   // Received Processed Excel File
   const processedExcelFile = (data: any[]) => {
-    console.log(data);
+    setBulkUploadJSONData(data);
+    const fileHeaders = Object.keys(data[0]);
+    setFileUploaded(true);
+    setHeaders(
+      fileHeaders.map((header) => {
+        return {
+          value: header,
+          placeholder: header,
+        };
+      })
+    );
+  };
+
+  const handleCreateBulkServiceArea = () => {
+    const serviceAreaData = bulkUploadJSONData.map((data) => {
+      return {
+        name: data[serviceAreaName],
+        type: data[serviceAreaType],
+        description: data[serviceAreaDescription],
+      };
+    });
+
+    const invalidServiceAreaData = serviceAreaData.filter((data) => {
+      return !validServiceAreaKeys.every((key) =>
+        Object.keys(data).includes(key)
+      );
+    });
+
+    if (invalidServiceAreaData.length) {
+      toast.error('Invalid Service Area Data');
+    } else {
+      console.log(serviceAreaData);
+      toast.success('Uploaded Successfully');
+    }
   };
 
   return {
     // Values
     serviceAreaInputs,
+    headers,
+    fileUploaded,
 
     // Functions
     createServiceArea,
     processedExcelFile,
+    setServiceAreaName,
+    setServiceAreaDescription,
+    setServiceAreaType,
+    handleCreateBulkServiceArea,
   };
 };
