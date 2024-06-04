@@ -1,4 +1,3 @@
-import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
 import { useDispatch } from 'react-redux';
 import { Typography } from '@components/global/dialog/Typography';
 import { OutlinedButton } from '@components/global/CustomButton';
@@ -6,33 +5,37 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import { HiPlusSm } from 'react-icons/hi';
 import SiteDetails from '@components/common/SiteDetails';
 import SiteRoutes from '@components/common/SiteRoutes';
-import { useSiteDepartment } from '@hooks/pages/useSiteDepartment';
-import AddDepartmentModal from '@components/modals/AddDepartmentModal';
-import { TableWithoutTabAndLogo } from '@components/global/table/Table';
+import SuperadminBaseTemplate from '@layout/superadmin/SuperadminBaseTemplate';
+import { useSiteUnit } from '@hooks/pages/useSiteUnit';
+import AddUnitModal from '@components/modals/AddUnitModal';
 import { useMemo } from 'react';
 import {
   DepartmentActionItem,
   DepartmentDataColumns,
   DepartmentDataRows,
+  UnitActionItem,
+  UnitDataColumns,
+  UnitDataRows,
 } from '@components/tables/row-col-mapping/RowColumnTableMaps';
 import {
   formatResponseKeyForDropdown,
   getTotalRowsAndPerPage,
 } from '@util/index';
-import { DepartmentPayload } from '@typeSpec/payloads';
+import { DepartmentPayload, UnitPayload } from '@typeSpec/payloads';
+import { TableWithoutTabAndLogo } from '@components/global/table/Table';
 import {
   setNoOfPages,
   setTotalDataCount,
 } from '../../redux/reducers/tableReducer';
 
-const SiteDepartment = () => {
+const SiteUnit = () => {
   const dispatch = useDispatch();
   const searchTableBy: string[] = [];
   let noOfPages = 0;
 
   const {
     // Values
-    addDepartmentModal,
+    addUnitModal,
     tableData,
     tableDataLoading,
     perPage,
@@ -42,14 +45,14 @@ const SiteDepartment = () => {
     searchKey,
 
     // Functions
-    handleAddDepartmentModal,
+    handleAddUnitModal,
     onHandleSortBy,
     onClickNext,
     onClickPrevious,
     onUpdateSearchKey,
     onUpdatePerPageItem,
-    onUpdateSearchDepartment,
-  } = useSiteDepartment();
+    onUpdateSearchUnit,
+  } = useSiteUnit();
 
   if (!tableDataLoading) {
     const { noOfPages: pagesCount, totalRows } = getTotalRowsAndPerPage(
@@ -62,23 +65,24 @@ const SiteDepartment = () => {
     dispatch(setTotalDataCount(totalRows));
   }
 
-  const columnData = useMemo(() => DepartmentDataColumns(), []);
+  const columnData = useMemo(() => UnitDataColumns(), []);
   columnData?.map((column) => {
     if (
       column.key !== 'action' &&
       column.key !== 'createdAt' &&
       column.key !== 'providerCount' &&
-      column.key !== 'patientCount'
+      column.key !== 'patientCount' &&
+      column.key !== 'occupiedBeds' &&
+      column.key !== 'totalBeds'
     ) {
       searchTableBy.push(formatResponseKeyForDropdown(column.key));
     }
   });
 
-  const actionItems = useMemo(() => DepartmentActionItem(), []);
+  const actionItems = useMemo(() => UnitActionItem(), []);
   const rowData = useMemo(
-    () =>
-      DepartmentDataRows(tableData?.data?.depts as DepartmentPayload[]) ?? [],
-    [tableData?.data?.depts]
+    () => UnitDataRows(tableData?.data?.units as UnitPayload[]) ?? [],
+    [tableData?.data?.units]
   );
 
   return (
@@ -118,7 +122,7 @@ const SiteDepartment = () => {
               text={`Add Department`}
               type={`primary`}
               className={`h-[38px] max-w-4xl`}
-              click={handleAddDepartmentModal}
+              click={handleAddUnitModal}
             />
           </div>
         </div>
@@ -129,7 +133,7 @@ const SiteDepartment = () => {
 
         <TableWithoutTabAndLogo
           dataLoading={tableDataLoading}
-          onUpdateSearch={onUpdateSearchDepartment}
+          onUpdateSearch={onUpdateSearchUnit}
           perPageChange={onUpdatePerPageItem}
           perPageValue={perPage}
           updateSearchKey={onUpdateSearchKey}
@@ -138,7 +142,7 @@ const SiteDepartment = () => {
           actionItems={actionItems}
           columns={columnData}
           data={rowData}
-          createNew={handleAddDepartmentModal}
+          createNew={handleAddUnitModal}
           currentPage={currentPage}
           from={resultFrom ?? 1}
           to={resultTo ?? 10}
@@ -147,16 +151,16 @@ const SiteDepartment = () => {
           onPrevious={onClickPrevious}
           sortBy={onHandleSortBy}
           total={tableData?.data?.totalRows ?? 0}
-          url={`superadmin/site/department/details`}
+          url={`superadmin/site/unit/details`}
         />
       </div>
 
-      <AddDepartmentModal
-        open={addDepartmentModal}
-        handler={handleAddDepartmentModal}
+      <AddUnitModal
+        handler={handleAddUnitModal}
+        open={addUnitModal}
       />
     </SuperadminBaseTemplate>
   );
 };
 
-export default SiteDepartment;
+export default SiteUnit;

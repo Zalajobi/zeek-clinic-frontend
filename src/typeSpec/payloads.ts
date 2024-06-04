@@ -53,6 +53,7 @@ export interface SitePayload {
   updatedAt?: string;
 }
 
+// Department Payload
 export interface DepartmentPayload {
   createdAt: string;
   description: string;
@@ -64,6 +65,21 @@ export interface DepartmentPayload {
   patientCount: string;
 }
 
+// Unit Payload
+export interface UnitPayload {
+  id: string;
+  name: string;
+  description: string;
+  siteId: string;
+  totalBeds: number;
+  occupiedBeds: number;
+  createdAt: string;
+  updatedAt: string;
+  providerCount: string;
+  patientCount: string;
+}
+
+// Role Payload
 export interface RolesPayload {
   description: string;
   name?: string;
@@ -94,7 +110,7 @@ export interface RolesPayload {
   plan?: boolean;
   id?: string;
   createdAt?: Date;
-  updated_at?: Date;
+  updatedAt?: Date;
 }
 
 export interface ServiceAreaPayload {

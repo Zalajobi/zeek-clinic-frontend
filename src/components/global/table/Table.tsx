@@ -481,6 +481,7 @@ interface BasicTableWithoutTableProps {
   from: number;
   to: number;
   currentPage: number;
+  url: string;
 }
 
 export const TableWithoutTabAndLogo = ({
@@ -503,6 +504,7 @@ export const TableWithoutTabAndLogo = ({
   from,
   to,
   currentPage,
+  url,
 }: BasicTableWithoutTableProps) => {
   const perPageMenuItems = ['All', 10, 20, 50, 100];
 
@@ -593,8 +595,7 @@ export const TableWithoutTabAndLogo = ({
                         <td
                           className={`whitespace-nowrap p-6 font-inter text-sm font-medium text-custom-primary-800 first:!pr-0 [&:nth-child(1)>*]:pr-0 [&:nth-child(2)]:pl-4 text-black max-w-[200px] overflow-hidden truncate mx-2`}>
                           <Link
-                            // to={`/${url}/${item?.id}`}
-                            to={`#`}
+                            to={`/${url}/${item?.id}`}
                             className={`hover:cursor-pointer hover:text-gray-400`}>
                             {item[column.key]}
                           </Link>
