@@ -4,10 +4,10 @@ import { SearchRequestPayload } from '@typeSpec/index';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { revertDropdownOptionsToResponseKey } from '@util/index';
-import { ONE_MILLION } from '@lib/constants/constants';
 import axios from 'axios';
 import { axiosPostRequestUserService } from '@lib/axios';
 import { useQuery } from 'react-query';
+import { ONE_MILLION } from '@lib/constants/constants';
 
 export const useSiteServiceArea = () => {
   const { siteId } = useParams();
@@ -139,7 +139,6 @@ export const useSiteServiceArea = () => {
 
   // Handler Bulk Create ServiceArea Modal
   const handleBulkCreateServiceAreaModal = () => {
-    console.log('Create Service Area');
     setBulkCreateServiceAreaModal((cur) => !cur);
   };
 
