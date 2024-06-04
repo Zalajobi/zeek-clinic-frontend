@@ -7,7 +7,7 @@ import { HiPlusSm } from 'react-icons/hi';
 import SiteDetails from '@components/common/SiteDetails';
 import SiteRoutes from '@components/common/SiteRoutes';
 import { useSiteDepartment } from '@hooks/pages/useSiteDepartment';
-import AddDepartmentModal from '@components/modals/AddDepartmentModal';
+import { AddDepartmentModal } from '@components/modals/AddDepartmentModal';
 import { TableWithoutTabAndLogo } from '@components/global/table/Table';
 import { useMemo } from 'react';
 import {

@@ -7,7 +7,7 @@ import { DepartmentPayload } from '@typeSpec/payloads';
 import moment from 'moment';
 import { Typography as MaterialTypography } from '@material-tailwind/react/components/Typography';
 import { Button, Spinner } from '@material-tailwind/react';
-import AddDepartmentModal from '@components/modals/AddDepartmentModal';
+import { AddDepartmentModal } from '@components/modals/AddDepartmentModal';
 import AddUnitModal from '@components/modals/AddUnitModal';
 import { CreateServiceAreaModal } from '@components/modals/CreateServiceAreaModal';
 import {
