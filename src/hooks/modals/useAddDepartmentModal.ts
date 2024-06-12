@@ -55,6 +55,42 @@ export const useAddDepartmentModal = (handler: () => void) => {
     }
   );
 
+  // Create Bulk Department
+  const { mutate: createBulkDepartmentMutation } = useMutation(
+    async (data: CreateDepartmentInput[]) => {
+      try {
+        return await axiosPostRequestUserService(`/department/create/batch`, {
+          data,
+          siteId,
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.error?.message);
+        }
+      }
+    },
+    {
+      onMutate: () => {
+        toast.loading('Creating Department...', { duration: 3 });
+      },
+      onSuccess: (result) => {
+        handler();
+        if (result?.success) {
+          toast.success(result?.message);
+          queryClient
+            .resetQueries([
+              'getLatestDepartmentData',
+              'getTableData',
+              'getDeptCount',
+            ])
+            .then(() => {});
+        } else {
+          toast.error('Something Went Wrong');
+        }
+      },
+    }
+  );
+
   const createDepartment = (data: CreateDepartmentInput) => {
     createDepartmentMutation(data);
   };
@@ -94,8 +130,8 @@ export const useAddDepartmentModal = (handler: () => void) => {
     if (invalidDepartmentData.length) {
       toast.error('Invalid Department Data');
     } else {
-      // createBulkServiceAreaMutation(departmentData);
-      console.log(departmentData);
+      console.log('Create Department');
+      createBulkDepartmentMutation(departmentData);
       toast.success('Uploaded Successfully');
     }
   };
@@ -104,6 +140,7 @@ export const useAddDepartmentModal = (handler: () => void) => {
     // Values
     headers,
     fileUploaded,
+    validDepartmentKeys,
 
     // Functions
     createDepartment,

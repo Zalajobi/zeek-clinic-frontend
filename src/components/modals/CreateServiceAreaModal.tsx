@@ -11,12 +11,7 @@ import { CreateServiceAreaInput } from '@typeSpec/forms/form.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateServiceAreaInputSchema } from '@typeSpec/forms';
 import { useCreateServiceAreaModal } from '@hooks/modals/useCreateServiceAreaModal';
-import {
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-} from '@material-tailwind/react';
+import { Dialog, DialogBody, DialogFooter } from '@material-tailwind/react';
 import { ExcelFileUpload } from '@components/global/formInput/FileUpload';
 
 interface CreateServiceAreaModalProps {

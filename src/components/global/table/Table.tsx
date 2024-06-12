@@ -207,7 +207,7 @@ export const BasicTable = ({
                       variant={'small'}
                       color={'blue-gray'}
                       className={
-                        'flex items-center font-inter text-xs font-bold text-description justify-between gap-2 leading-none opacity-70'
+                        'flex items-center justify-center font-inter text-center text-xs font-bold text-description gap-2 leading-none opacity-70'
                       }
                       onClick={() => {
                         if (item.sortable) sortBy(item.key);
@@ -248,7 +248,7 @@ export const BasicTable = ({
                             <div
                               className={`flex items-center gap-3 max-w-[300px] overflow-hidden`}>
                               <Avatar
-                                className={`border-gray-300 border ml-1`}
+                                className={`border-gray-300 border ml-4`}
                                 src={
                                   item?.logo ?? item?.avatar ?? item?.profilePic
                                 }
