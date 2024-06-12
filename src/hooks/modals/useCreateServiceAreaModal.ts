@@ -8,6 +8,7 @@ import { SelectInputFieldProps } from '@typeSpec/common';
 import { useState } from 'react';
 
 export const useCreateServiceAreaModal = (handler: () => void) => {
+  const { siteId } = useParams();
   const queryClient = useQueryClient();
   const [headers, setHeaders] = useState<SelectInputFieldProps[]>([]);
   const [serviceAreaName, setServiceAreaName] = useState('name');
@@ -16,7 +17,6 @@ export const useCreateServiceAreaModal = (handler: () => void) => {
   const [serviceAreaType, setServiceAreaType] = useState('');
   const [fileUploaded, setFileUploaded] = useState(false);
   const [bulkUploadJSONData, setBulkUploadJSONData] = useState<any[]>([]);
-  const { siteId } = useParams();
 
   const validServiceAreaKeys = ['name', 'type', 'description'];
 

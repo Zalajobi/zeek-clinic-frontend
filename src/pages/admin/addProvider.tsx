@@ -29,8 +29,6 @@ import { CreateProviderInputSchema } from '@typeSpec/forms';
 import { ImageUpload } from '@components/global/formInput/FileUpload';
 
 export const AddProvider = () => {
-  // tailwindElementsConfig()
-
   const {
     register,
     handleSubmit,

@@ -7,7 +7,10 @@ import { HiPlusSm } from 'react-icons/hi';
 import SiteDetails from '@components/common/SiteDetails';
 import SiteRoutes from '@components/common/SiteRoutes';
 import { useSiteDepartment } from '@hooks/pages/useSiteDepartment';
-import AddDepartmentModal from '@components/modals/AddDepartmentModal';
+import {
+  AddDepartmentModal,
+  CreateBulkDepartmentModal,
+} from '@components/modals/AddDepartmentModal';
 import { TableWithoutTabAndLogo } from '@components/global/table/Table';
 import { useMemo } from 'react';
 import {
@@ -40,6 +43,7 @@ const SiteDepartment = () => {
     resultTo,
     currentPage,
     searchKey,
+    addBulkDepartmentModal,
 
     // Functions
     handleAddDepartmentModal,
@@ -49,6 +53,7 @@ const SiteDepartment = () => {
     onUpdateSearchKey,
     onUpdatePerPageItem,
     onUpdateSearchDepartment,
+    handleBulkCreateDepartmentModal,
   } = useSiteDepartment();
 
   if (!tableDataLoading) {
@@ -106,6 +111,7 @@ const SiteDepartment = () => {
                   className={`mr-2`}
                 />
               }
+              click={handleBulkCreateDepartmentModal}
             />
 
             <OutlinedButton
@@ -154,6 +160,11 @@ const SiteDepartment = () => {
       <AddDepartmentModal
         open={addDepartmentModal}
         handler={handleAddDepartmentModal}
+      />
+
+      <CreateBulkDepartmentModal
+        open={addBulkDepartmentModal}
+        handler={handleBulkCreateDepartmentModal}
       />
     </SuperadminBaseTemplate>
   );
